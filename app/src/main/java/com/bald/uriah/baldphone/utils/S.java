@@ -59,7 +59,7 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.activities.contacts.ShareActivity;
 import com.bald.uriah.baldphone.content_providers.BaldFileProvider;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+import androidx.recyclerview.widget.DividerItemDecoration;
 
 import org.joda.time.DateTime;
 
@@ -305,11 +305,9 @@ public class S {
         });
         final PopupWindow popupWindow = new PopupWindow(dropDownContainer, (int) (windowsWidth / 1.3),
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 82 * dropDownListener.size(), baldActivity.getResources().getDisplayMetrics()), true);
-        recyclerView.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(baldActivity)
-                        .drawable(R.drawable.settings_divider)
-                        .build()
-        );
+        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(baldActivity, DividerItemDecoration.VERTICAL);
+        dividerItemDecoration.setDrawable(baldActivity.getDrawable(R.drawable.settings_divider));
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         recyclerView.setAdapter(new DropDownRecyclerViewAdapter(baldActivity, popupWindow, dropDownListener));
 

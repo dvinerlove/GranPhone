@@ -79,8 +79,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import github.nisrulz.lantern.Lantern;
-
 import static com.bald.uriah.baldphone.services.NotificationListenerService.ACTION_REGISTER_ACTIVITY;
 import static com.bald.uriah.baldphone.services.NotificationListenerService.ACTIVITY_NONE;
 import static com.bald.uriah.baldphone.services.NotificationListenerService.KEY_EXTRA_ACTIVITY;
@@ -109,7 +107,8 @@ public class HomeScreenActivity extends BaldActivity {
     public BaldPagerAdapter baldPagerAdapter;
 
     private Point screenSize;
-    private Lantern lantern;
+    private android.hardware.camera2.CameraManager cameraManager;
+    private String torchCameraId;
     private SharedPreferences sharedPreferences;
     private BaldPrefsUtils baldPrefsUtils;
     private ViewPagerHolder viewPagerHolder;
@@ -219,11 +218,15 @@ public class HomeScreenActivity extends BaldActivity {
         }
 
         attachToXml();
-        lantern = new Lantern(this)
-                .observeLifecycle(this);
+        cameraManager = (android.hardware.camera2.CameraManager) getSystemService(Context.CAMERA_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            flashInited = lantern.initTorch();
+            try {
+                torchCameraId = cameraManager.getCameraIdList()[0];
+                flashInited = true;
+            } catch (Exception e) {
+                flashInited = false;
+            }
         }
 
         if (sharedPreferences.getBoolean(BPrefs.EMERGENCY_BUTTON_VISIBLE_KEY, BPrefs.EMERGENCY_BUTTON_VISIBLE_DEFAULT_VALUE))
@@ -322,9 +325,10 @@ public class HomeScreenActivity extends BaldActivity {
         if (flashInited) {
             flashButton.setOnClickListener((v) -> {
                 flashState = !flashState;
-                lantern.enableTorchMode(true);
-                if (!flashState) // looks weird (it is) but necessary. otherwise it wont turn off after device rotation...
-                    lantern.enableTorchMode(false);
+                try {
+                    cameraManager.setTorchMode(torchCameraId, flashState);
+                } catch (Exception ignored) {
+                }
                 flashButton.setImageResource(flashState ?
                         R.drawable.flashlight_on_background :
                         R.drawable.flashlight_off_on_background);

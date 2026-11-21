@@ -64,7 +64,7 @@ import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 import com.bumptech.glide.Glide;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+import androidx.recyclerview.widget.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,11 +125,9 @@ public class SettingsActivity extends BaldActivity {
         final TypedValue typedValue = new TypedValue();
         final Resources.Theme theme = getTheme();
         theme.resolveAttribute(R.attr.bald_stroke_color, typedValue, true);
-        recyclerView.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(this)
-                        .drawable(R.drawable.settings_divider)
-                        .build()
-        );
+        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        dividerItemDecoration.setDrawable(getDrawable(R.drawable.settings_divider));
+        recyclerView.addItemDecoration(dividerItemDecoration);
         populateSettingsList();
         recyclerView.setAdapter(new SettingsRecyclerViewAdapter());
     }
