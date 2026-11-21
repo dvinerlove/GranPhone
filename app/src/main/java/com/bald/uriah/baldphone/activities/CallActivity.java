@@ -28,6 +28,9 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.ContactsContract;
 import android.telecom.Call;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -40,9 +43,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bald.uriah.baldphone.R;
+import com.bald.uriah.baldphone.utils.BDB;
+import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.S;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -63,6 +70,8 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     @Nullable
     private String shownNumber;
     private boolean finishScheduled;
+    @Nullable
+    private Call simChooserShownFor;
     private final Runnable ticker = new Runnable() {
         @Override
         public void run() {
@@ -171,6 +180,12 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
                 showButtons(false, true);
                 setProximityScreenOff(true);
                 break;
+            case Call.STATE_SELECT_PHONE_ACCOUNT:
+                // dual SIM without a default SIM: the phone app has to ask which SIM to use
+                tv_status.setText(R.string.choose_sim);
+                showButtons(false, true);
+                askForSim(call);
+                break;
             case Call.STATE_DISCONNECTING:
             case Call.STATE_DISCONNECTED:
                 tv_status.setText(R.string.call_ended);
@@ -192,6 +207,54 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         final boolean speakerOn = CallManager.isSpeakerOn();
         bt_speaker.setText(speakerOn ? R.string.speaker_turn_off : R.string.speaker_turn_on);
         bt_speaker.setBackgroundResource(speakerOn ? R.drawable.call_button_blue : R.drawable.call_button_gray);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void askForSim(Call call) {
+        if (simChooserShownFor == call)
+            return;
+        simChooserShownFor = call;
+        final TelecomManager telecomManager = (TelecomManager) getSystemService(TELECOM_SERVICE);
+        List<PhoneAccountHandle> handles = null;
+        final Bundle extras = call.getDetails().getIntentExtras();
+        if (extras != null)
+            handles = extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
+        if ((handles == null || handles.isEmpty()) && telecomManager != null) {
+            try {
+                handles = telecomManager.getCallCapablePhoneAccounts();
+            } catch (SecurityException e) {
+                Log.e(TAG, "no permission to list SIMs", e);
+            }
+        }
+        if (handles == null || handles.isEmpty()) {
+            BaldToast.error(this);
+            call.disconnect();
+            return;
+        }
+        if (handles.size() == 1) {
+            call.phoneAccountSelected(handles.get(0), false);
+            return;
+        }
+        final List<PhoneAccountHandle> finalHandles = handles;
+        final CharSequence[] names = new CharSequence[handles.size()];
+        for (int i = 0; i < handles.size(); i++) {
+            final PhoneAccount account = telecomManager == null ? null : telecomManager.getPhoneAccount(handles.get(i));
+            names[i] = account != null && !TextUtils.isEmpty(account.getLabel()) ? account.getLabel() : "SIM " + (i + 1);
+        }
+        BDB.from(this)
+                .setTitle(R.string.choose_sim)
+                .setSubText(R.string.choose_sim_subtext)
+                .setOptions(names)
+                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL | BDialog.FLAG_NOT_CANCELABLE)
+                .setPositiveButtonListener(params -> {
+                    call.phoneAccountSelected(finalHandles.get((Integer) params[0]), false);
+                    return true;
+                })
+                .setNegativeButtonListener(params -> {
+                    call.disconnect();
+                    return true;
+                })
+                .show();
     }
 
     private void showButtons(boolean incoming, boolean ongoing) {

@@ -172,6 +172,8 @@ public class BDialog extends Dialog {
             if (containFlag(FLAG_INPUT)) {
                 editText = ll.findViewById(R.id.edit_text);
                 editText.setVisibility(View.VISIBLE);
+                if (inputType != 0)
+                    editText.setInputType(inputType);
                 bt_positive.setOnClickListener(v -> {
                     if (positive == null)
                         cancel();

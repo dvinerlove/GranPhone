@@ -1,3 +1,14 @@
+# vophone
+
+Fork do [BaldPhone](https://github.com/UriahShaulMandel/BaldPhone) adaptado para o Brasil e para usar o celular inteiro:
+tela inicial simples, tela de ligação com botões grandes, SOS ligando para o 192 e modo quiosque.
+
+**Como instalar no celular: [docs/INSTALACAO.md](docs/INSTALACAO.md)**
+
+Compilar: `./gradlew assembleFDroidDebug` (JDK 11, Android SDK 31).
+
+---
+
 [![BaldPhone](logo/rectangle.png)](https://www.youtube.com/watch?v=G33E4XQp_Xw)
  
 A platform which replaces the phone's interface to a bigger, simpler and friendlier one.

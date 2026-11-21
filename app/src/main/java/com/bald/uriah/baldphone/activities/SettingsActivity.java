@@ -60,6 +60,7 @@ import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.CallManager;
+import com.bald.uriah.baldphone.utils.KioskManager;
 import com.bald.uriah.baldphone.utils.D;
 import com.bald.uriah.baldphone.utils.S;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
@@ -148,6 +149,52 @@ public class SettingsActivity extends BaldActivity {
             ringtone.stop();
     }
 
+    private void showKioskDialog() {
+        final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+        if (!KioskManager.isDeviceOwner(this)) {
+            BDB.from(this)
+                    .setTitle(R.string.kiosk_mode)
+                    .setSubText(R.string.kiosk_not_device_owner_subtext)
+                    .addFlag(BDialog.FLAG_OK)
+                    .show();
+        } else if (!KioskManager.isEnabled(this)) {
+            BDB.from(this)
+                    .setTitle(R.string.kiosk_mode)
+                    .setSubText(R.string.kiosk_enable_subtext)
+                    .setInputType(pinInputType)
+                    .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                    .setPositiveButtonListener(params -> {
+                        final String pin = String.valueOf(params[0]).trim();
+                        if (pin.length() < KioskManager.MIN_PIN_LENGTH || !android.text.TextUtils.isDigitsOnly(pin)) {
+                            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_pin_too_short).show();
+                            return false;
+                        }
+                        if (KioskManager.enable(this, pin))
+                            BaldToast.from(this).setText(R.string.kiosk_enabled).show();
+                        this.recreate();
+                        return true;
+                    })
+                    .show();
+        } else {
+            BDB.from(this)
+                    .setTitle(R.string.kiosk_mode)
+                    .setSubText(R.string.kiosk_disable_subtext)
+                    .setInputType(pinInputType)
+                    .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                    .setPositiveButtonListener(params -> {
+                        if (!KioskManager.checkPin(this, String.valueOf(params[0]).trim())) {
+                            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();
+                            return false;
+                        }
+                        KioskManager.disable(this, this);
+                        BaldToast.from(this).setText(R.string.kiosk_disabled).show();
+                        this.recreate();
+                        return true;
+                    })
+                    .show();
+        }
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -180,6 +227,19 @@ public class SettingsActivity extends BaldActivity {
                             v -> CallManager.requestDefaultDialer(this)
                             , R.drawable.phone_on_button)
             );
+
+        mainCategory.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));
+        if (KioskManager.isDeviceOwner(this) && !KioskManager.isEnabled(this))
+            mainCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> BDB.from(this)
+                    .setTitle(R.string.remove_device_owner)
+                    .setSubText(R.string.remove_device_owner_subtext)
+                    .addFlag(BDialog.FLAG_YES | BDialog.FLAG_NO)
+                    .setPositiveButtonListener(params -> {
+                        KioskManager.removeDeviceOwner(this);
+                        this.recreate();
+                        return true;
+                    })
+                    .show(), R.drawable.blocked_on_button));
 
         mainCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
 

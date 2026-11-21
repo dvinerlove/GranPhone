@@ -416,4 +416,14 @@
     <string name="calls_channel">Ligações</string>
     <string name="already_default_dialer">O vophone já é o aplicativo de telefone!</string>
     <string name="use_vophone_for_calls">Tela de ligação com botões grandes</string>
+    <string name="kiosk_mode">Modo quiosque (travar o celular)</string>
+    <string name="kiosk_not_device_owner_subtext">Para usar o modo quiosque, o vophone precisa ser o administrador do celular. Isso é feito uma única vez pelo computador (veja docs/INSTALACAO.md):\n\nadb shell dpm set-device-owner com.bald.uriah.baldphone/.broadcast_receivers.BaldDeviceAdminReceiver</string>
+    <string name="kiosk_enable_subtext">O celular vai ficar preso no vophone: sem barra de notificações, sem as Configurações do Android e sem desinstalar aplicativos.\nCrie uma senha de pelo menos 4 números para poder desativar depois.</string>
+    <string name="kiosk_disable_subtext">Digite a senha para desativar o modo quiosque.</string>
+    <string name="kiosk_pin_too_short">A senha precisa ter pelo menos 4 números.</string>
+    <string name="kiosk_wrong_pin">Senha errada.</string>
+    <string name="kiosk_enabled">Modo quiosque ativado.</string>
+    <string name="kiosk_disabled">Modo quiosque desativado.</string>
+    <string name="remove_device_owner">Remover o vophone como administrador</string>
+    <string name="remove_device_owner_subtext">O modo quiosque deixa de funcionar e o vophone pode ser desinstalado. Para voltar, é preciso rodar o comando no computador de novo.</string>
 </resources>
