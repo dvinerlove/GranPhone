@@ -657,6 +657,7 @@
         android:id="@+id/speech_to_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         android:layout_marginStart="?bald_key_margin"
         android:layout_marginLeft="?bald_key_margin"
         android:background="@drawable/key_background"

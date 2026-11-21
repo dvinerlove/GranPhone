@@ -110,7 +110,7 @@
     <string name="done">Готово</string>
     <string name="down">Вниз</string>
     <string name="edit">Изменить</string>
-    <string name="email">Email:</string>
+    <string name="email">Эл. почта:</string>
     <string name="enable_notification_access">Включить Доступ к Уведомлениям</string>
     <string name="enable_notification_access_subtext">Пожалуйста, предоставьте BaldPhone доступ к уведомлениям.</string>
     <string name="enter">Ввод</string>
@@ -340,7 +340,7 @@
 
     <string name="search">Поиск</string>
     <string name="next">Дальше</string>
-    <string name="go">Go</string>
+    <string name="go">Перейти</string>
 
 
     <string name="dialer_sounds">Звуки Номеронабирателя</string>
@@ -358,26 +358,26 @@
     <string name="donate">Пожертвовать</string>
     <string name="emergency_button">Аварийная кнопка</string>
     <string name="emergency_settings_subtext">Выберите, хотите ли вы, чтобы на главном экране была аварийная кнопка.</string>
-    <string name="private_number">Private Number</string>
-    <string name="swipe_left_or_right">Swipe left or right</string>
-    <string name="press_next_or_back_buton">Press next or back arrow</string>
-    <string name="click_delay">Click Delay</string>
-    <string name="no_delay">No Delay</string>
-    <string name="scrolling">Scrolling</string>
-    <string name="arrows">Arrows</string>
-    <string name="swipe">Touch</string>
-    <string name="_long">Long</string>
-    <string name="_short">Short</string>
-    <string name="do_you_want_to_save_your_changes">Do you want to save your changes?</string>
-    <string name="discard">Discard</string>
-    <string name="no_recent_calls">No Recent Calls</string>
-    <string name="apps_sort_method">Apps Sort Method</string>
-    <string name="apps_sort_method_subtext">Choose whether you want to sort the apps in one grid or to have them divided into different groups via letters</string>
-    <string name="groups">Groups</string>
-    <string name="one_grid">One Grid</string>
-    <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make BaldPhone more colorful?</string>
-    <string name="edit_home_screen">Edit Home Screen</string>
+    <string name="private_number">Скрытый номер</string>
+    <string name="swipe_left_or_right">Проведите влево или вправо</string>
+    <string name="press_next_or_back_buton">Нажмите стрелку вперёд или назад</string>
+    <string name="click_delay">Задержка нажатия</string>
+    <string name="no_delay">Без задержки</string>
+    <string name="scrolling">Прокрутка</string>
+    <string name="arrows">Стрелки</string>
+    <string name="swipe">Свайп</string>
+    <string name="_long">Долгое</string>
+    <string name="_short">Короткое</string>
+    <string name="do_you_want_to_save_your_changes">Сохранить изменения?</string>
+    <string name="discard">Сбросить</string>
+    <string name="no_recent_calls">Нет недавних вызовов</string>
+    <string name="apps_sort_method">Сортировка приложений</string>
+    <string name="apps_sort_method_subtext">Выберите: приложения одной сеткой или по группам по буквам</string>
+    <string name="groups">Группы</string>
+    <string name="one_grid">Одна сетка</string>
+    <string name="colorful">Цветной интерфейс</string>
+    <string name="colorful_subtext">Сделать BaldPhone более цветным?</string>
+    <string name="edit_home_screen">Изменить главный экран</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>
         <item>Abraham Lincoln</item>
@@ -389,4 +389,18 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="dual_sim">Две SIM-карты</string>
+    <string name="dual_sim_subtext">Выберите, как управлять двумя SIM-картами
+Примечание: при выборе «Показывать варианты» потребуется ещё одно разрешение</string>
+    <string name="use_default">По умолчанию</string>
+    <string name="show_options">Показывать варианты</string>
+    <string name="read_phone_state">Состояние телефона</string>
+    <string name="read_phone_state_subtext">Это разрешение нужно для звонков со второй SIM-карты</string>
+    <string name="choose_sim">Выбор SIM-карты</string>
+    <string name="choose_sim_subtext">Выберите SIM-карту для звонка</string>
+    <string name="website">Сайт</string>
+    <string name="appear_on_top">Поверх других окон</string>
+    <string name="appear_on_top_subtext">Это разрешение нужно, чтобы показывать будильники и напоминания поверх экрана блокировки</string>
+    <string name="mail_application_not_found">Приложение для почты не найдено!</string>
+    <string name="get_involved">Помочь проекту</string>
 </resources>
