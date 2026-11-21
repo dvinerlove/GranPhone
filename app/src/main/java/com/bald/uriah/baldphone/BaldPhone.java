@@ -30,12 +30,6 @@ import com.bald.uriah.baldphone.utils.S;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
-import org.acra.ACRA;
-import org.acra.config.CoreConfigurationBuilder;
-import org.acra.config.HttpSenderConfigurationBuilder;
-import org.acra.data.StringFormat;
-import org.acra.sender.HttpSender;
-
 public class BaldPhone extends Application {
     private static final String TAG = BaldPhone.class.getSimpleName();
     // Application class should not have any fields, http://www.developerphil.com/dont-store-data-in-the-application-object/
@@ -56,21 +50,11 @@ public class BaldPhone extends Application {
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
-        S.sendVersionInfo(this);
     }
 
     @Override
     protected void attachBaseContext(final Context base) {
         super.attachBaseContext(base);
-        final CoreConfigurationBuilder builder =
-                new CoreConfigurationBuilder(this)
-                        .setBuildConfigClass(BuildConfig.class)
-                        .setReportFormat(StringFormat.JSON);
-        builder.getPluginConfigurationBuilder(HttpSenderConfigurationBuilder.class)
-                .setUri(getString(R.string.tt_url))
-                .setHttpMethod(HttpSender.Method.POST)
-                .setEnabled(true);
-        ACRA.init(this, builder);
 
         Thread.setDefaultUncaughtExceptionHandler(
                 new BaldUncaughtExceptionHandler(this, Thread.getDefaultUncaughtExceptionHandler())

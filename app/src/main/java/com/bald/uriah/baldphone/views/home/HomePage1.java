@@ -46,6 +46,7 @@ import com.bald.uriah.baldphone.activities.DialerActivity;
 import com.bald.uriah.baldphone.activities.HomeScreenActivity;
 import com.bald.uriah.baldphone.activities.Page1EditorActivity;
 import com.bald.uriah.baldphone.activities.RecentActivity;
+import com.bald.uriah.baldphone.activities.SOSActivity;
 import com.bald.uriah.baldphone.activities.alarms.AlarmsActivity;
 import com.bald.uriah.baldphone.activities.contacts.ContactsActivity;
 import com.bald.uriah.baldphone.activities.media.PhotosActivity;
@@ -185,23 +186,8 @@ public class HomePage1 extends HomeView {
         setupButton(BPrefs.CUSTOM_RECENTS_KEY, bt_recent, v -> homeScreen.startActivity(new Intent(homeScreen, RecentActivity.class)));
         setupButton(BPrefs.CUSTOM_DIALER_KEY, bt_dialer, v -> homeScreen.startActivity(new Intent(homeScreen, DialerActivity.class)));
         setupButton(BPrefs.CUSTOM_CONTACTS_KEY, bt_contacts, v -> homeScreen.startActivity(new Intent(homeScreen, ContactsActivity.class)));
-        setupButton(BPrefs.CUSTOM_APP_KEY, bt_whatsapp, v -> {
-            if (S.isPackageInstalled(homeScreen, WHATSAPP_PACKAGE_NAME))
-                S.startComponentName(homeScreen, WHATSAPP_COMPONENT_NAME);
-            else
-                try {
-                    homeScreen.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + WHATSAPP_PACKAGE_NAME)));
-                } catch (android.content.ActivityNotFoundException e) {
-                    homeScreen.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + WHATSAPP_PACKAGE_NAME)));
-                }
-        });
-        setupButton(BPrefs.CUSTOM_ASSISTANT_KEY, bt_assistant, v -> {
-            try {
-                homeScreen.startActivity(new Intent(Intent.ACTION_VOICE_COMMAND).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            } catch (Exception e) {
-                BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.your_phone_doesnt_have_assistant_installed).show();
-            }
-        });
+        setupButton(BPrefs.CUSTOM_APP_KEY, bt_whatsapp, v -> homeScreen.startActivity(new Intent(homeScreen, SOSActivity.class)));
+        setupButton(BPrefs.CUSTOM_ASSISTANT_KEY, bt_assistant, v -> homeScreen.toggleTorch());
         setupButton(BPrefs.CUSTOM_MESSAGES_KEY, bt_messages, v -> {
             try {
                 final ResolveInfo resolveInfo =

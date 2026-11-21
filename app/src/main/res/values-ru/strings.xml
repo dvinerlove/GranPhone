@@ -56,6 +56,7 @@
     <string name="apps">Приложения</string>
     <string name="are_you_sure_you_want_to_delete___">Вы уверенны что хотите удалить %s?</string>
     <string name="assistant">Ассистент</string>
+    <string name="flashlight">Фонарик</string>
     <string name="at_least_one_day_must_be_selected">Не меньше одного дня должно быть выбранно!</string>
     <string name="auto_brightness">Автоматическая\nЯркость</string>
     <string name="backspace">удалить</string>

@@ -323,16 +323,7 @@ public class HomeScreenActivity extends BaldActivity {
                 R.drawable.flashlight_on_background :
                 R.drawable.flashlight_off_on_background);
         if (flashInited) {
-            flashButton.setOnClickListener((v) -> {
-                flashState = !flashState;
-                try {
-                    cameraManager.setTorchMode(torchCameraId, flashState);
-                } catch (Exception ignored) {
-                }
-                flashButton.setImageResource(flashState ?
-                        R.drawable.flashlight_on_background :
-                        R.drawable.flashlight_off_on_background);
-            });
+            flashButton.setOnClickListener((v) -> toggleTorch());
         } else if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             flashButton.setOnClickListener(v -> startActivity(new Intent(this, PermissionActivity.class)
                     .putExtra(PermissionActivity.EXTRA_REQUIRED_PERMISSIONS, PERMISSION_CAMERA)
@@ -352,6 +343,19 @@ public class HomeScreenActivity extends BaldActivity {
                                 .putExtra(KEY_EXTRA_ACTIVITY, NOTIFICATIONS_HOME_SCREEN)), 200 * D.MILLISECOND);
 
         registerReceiver(batteryReceiver, BATTERY_FILTER);
+    }
+
+    public void toggleTorch() {
+        if (!flashInited)
+            return;
+        flashState = !flashState;
+        try {
+            cameraManager.setTorchMode(torchCameraId, flashState);
+        } catch (Exception ignored) {
+        }
+        flashButton.setImageResource(flashState ?
+                R.drawable.flashlight_on_background :
+                R.drawable.flashlight_off_on_background);
     }
 
     @Override

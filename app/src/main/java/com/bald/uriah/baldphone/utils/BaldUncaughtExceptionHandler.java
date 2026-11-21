@@ -25,8 +25,6 @@ import android.content.SharedPreferences;
 
 import com.bald.uriah.baldphone.activities.CrashActivity;
 
-import org.acra.ACRA;
-
 public class BaldUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
     private final Context context;
     private final Thread.UncaughtExceptionHandler defaultUEH;
@@ -47,8 +45,6 @@ public class BaldUncaughtExceptionHandler implements Thread.UncaughtExceptionHan
         }
         baldPrefs.edit().putLong(BPrefs.LAST_CRASH_KEY, currentTime).commit(); // commit and not apply because of System.exit(2)
         S.logImportant("BaldPhone CRASHED!");
-        if (baldPrefs.getBoolean(BPrefs.CRASH_REPORTS_KEY, BPrefs.CRASH_REPORTS_DEFAULT_VALUE))
-            ACRA.getErrorReporter().handleException(e);
 
         final PendingIntent pendingIntent =
                 PendingIntent.getActivity(

@@ -62,10 +62,10 @@ public final class BPrefs {
     public static final boolean VIBRATION_FEEDBACK_DEFAULT_VALUE = true;
 
     public static final String THEME_KEY = "THEME_KEY";
-    public static final int THEME_DEFAULT_VALUE = Themes.ADAPTIVE;
+    public static final int THEME_DEFAULT_VALUE = Themes.LIGHT;
 
     public static final String NOTE_VISIBLE_KEY = "NOTE_VISIBLE_KEY";
-    public static final boolean NOTE_VISIBLE_DEFAULT_VALUE = true;
+    public static final boolean NOTE_VISIBLE_DEFAULT_VALUE = false;
 
     public static final String EMERGENCY_BUTTON_VISIBLE_KEY = "EMERGENCY_BUTTON_VISIBLE_KEY";
     public static final boolean EMERGENCY_BUTTON_VISIBLE_DEFAULT_VALUE = true;

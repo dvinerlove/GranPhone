@@ -90,7 +90,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'net.danlew:android.joda:2.10.6'
     implementation 'com.android.volley:volley:1.2.0'
-    implementation "ch.acra:acra-http:5.6.1"
     implementation 'androidx.exifinterface:exifinterface:1.2.0'
     implementation 'com.github.PierfrancescoSoffritti.android-youtube-player:core:10.0.5'
     // Only for tests
