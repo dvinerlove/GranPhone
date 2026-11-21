@@ -425,4 +425,5 @@
     <string name="notification_service">BaldPhone notification service</string>
     <string name="notification_service_fail">Could not start notification service!</string>
     <string name="battery">Battery</string>
+    <string name="calculator">Calculator</string>
 </resources>

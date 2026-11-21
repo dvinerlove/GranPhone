@@ -84,7 +84,14 @@ public class HomePage2 extends HomeView {
                 homeScreen.startActivity(new Intent(getContext(), SettingsActivity.class)));
 
         clickListenerForAbstractOpener(Uri.parse("http://www.google.com"), bt_internet, iv_internet, tv_internet);
-        clickListenerForAbstractOpener(Uri.parse("geo:0,0"), bt_maps, iv_maps, tv_maps);
+
+        bt_maps.setOnClickListener(v -> {
+            final Intent launchIntent = packageManager.getLaunchIntentForPackage("com.android.calculator2");
+            if (launchIntent != null)
+                homeScreen.startActivity(launchIntent);
+            else
+                BaldToast.from(getContext()).setType(BaldToast.TYPE_ERROR).show();
+        });
 
         bt_help.setOnClickListener(v ->
                 homeScreen.startActivity(new Intent(getContext(), VideoTutorialsActivity.class)));

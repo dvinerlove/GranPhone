@@ -27,7 +27,7 @@
     <string name="accidental_touches_subtext">Обнаруженно случайное нажатие\nнажмите OK чтобы продолжить пользоваться телефоном, если это сообщение продолжает появляться, вы можете его отключить в специальных возможностях.
     </string>
     <string name="acknowledgments">Благодарность</string>
-    <string name="adaptive">Адаптивный</string>
+    <string name="adaptive">Авто</string>
     <string name="add_alarm">Добавить будильник</string>
     <string name="add_alarm_quickly">Добавить таймер</string>
     <string name="add_contact">Добавить контакт</string>
@@ -414,4 +414,5 @@
     <string name="notification_service">BaldPhone: сервис уведомлений</string>
     <string name="notification_service_fail">Не удалось запустить сервис уведомлений!</string>
     <string name="battery">Батарея</string>
+    <string name="calculator">Калькулятор</string>
 </resources>

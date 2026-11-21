@@ -176,7 +176,6 @@ public class SettingsActivity extends BaldActivity {
 
         final SettingsItem keyboard = new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button);
         accessibilityCategory.add(keyboard);
-        personalizationCategory.add(keyboard);
 
         personalizationCategory.add(new RunnableSettingsItem(R.string.language_settings, v -> startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS)), R.drawable.translate_on_button));
 
@@ -237,7 +236,6 @@ public class SettingsActivity extends BaldActivity {
 
         );
         displayCategory.add(themeSettingsItem);
-        personalizationCategory.add(themeSettingsItem);
 
         personalizationCategory.add(new BDBSettingsItem(R.string.status_bar_settings,
                 BDB.from(this)
@@ -338,12 +336,10 @@ public class SettingsActivity extends BaldActivity {
                         .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE) ? 0 : 1),
                 R.drawable.low_battery_alert_on_button
         ));
-        SettingsItem fontSettingsItem = new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button);
-        personalizationCategory.add(fontSettingsItem);
-        displayCategory.add(fontSettingsItem);
-        accessibilityCategory.add(fontSettingsItem);
+        accessibilityCategory.add(new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button));
 
-        setupBrightness();
+        displayCategory.add(new RunnableSettingsItem(R.string.brightness,
+                v -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)), R.drawable.brightness_on_button));
         setupAlarmVolume();
 
         //connections
@@ -502,69 +498,6 @@ public class SettingsActivity extends BaldActivity {
         );
         personalizationCategory.add(alarmVolumeSettingsItem);
 
-    }
-
-    private void setupBrightness() {
-        final LinearLayout brightnessSeekBarHolder = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.brightness_seek_bar, null, false);
-        final SeekBar brightnessSeekBar = brightnessSeekBarHolder.findViewById(R.id.brightness_seek_bar);
-        final CheckBox checkBoxAutoBrightness = brightnessSeekBarHolder.findViewById(R.id.auto_brightness_check_box);
-        final int[] brightness = new int[1];
-        brightnessSeekBar.setKeyProgressIncrement(1);
-        try {
-            if (Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE) == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                brightness[0] = -1;
-                checkBoxAutoBrightness.setChecked(true);
-                brightnessSeekBar.setEnabled(false);
-
-            } else {
-                brightnessSeekBar.setProgress(Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS));
-            }
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-            e.printStackTrace();
-        }
-        brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (progress <= 20)
-                    brightness[0] = 20;
-                else
-                    brightness[0] = progress;
-                WindowManager.LayoutParams layoutpars = getWindow().getAttributes();
-                layoutpars.screenBrightness = brightness[0] / 255f;
-                getWindow().setAttributes(layoutpars);
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightness[0]);
-                final WindowManager.LayoutParams params = getWindow().getAttributes();
-                params.screenBrightness = brightness[0] / 255f;
-                getWindow().setAttributes(params);
-            }
-        });
-
-        checkBoxAutoBrightness.setOnLongClickListener((v) -> {
-            checkBoxAutoBrightness.setChecked(!checkBoxAutoBrightness.isChecked());
-            return true;
-        });
-        checkBoxAutoBrightness.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            brightnessSeekBar.setEnabled(!isChecked);
-            Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, (isChecked ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL));
-            brightness[0] = 50;
-        });
-
-        final SettingsItem brightnessSettingsItem = new BDBSettingsItem(R.string.brightness,
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK)
-                        .setTitle(R.string.brightness)
-                        .setSubText(R.string.brightness_subtext)
-                        .setPositiveButtonListener(params -> true)
-                        .setExtraView(brightnessSeekBarHolder), R.drawable.brightness_on_button
-        );
-        displayCategory.add(brightnessSettingsItem);
     }
 
     @Override

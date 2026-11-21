@@ -89,7 +89,6 @@
 
     <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
         android:id="@+id/bt_maps"
-        android:visibility="gone"
         style="@android:style/Widget.Button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -106,7 +105,7 @@
             android:layout_weight="1"
             android:paddingLeft="22dp"
             android:paddingRight="22dp"
-            app:srcCompat="@drawable/map_on_button" />
+            app:srcCompat="@drawable/calculator_on_button" />
 
         <TextView
             android:id="@+id/tv_maps"
@@ -115,7 +114,7 @@
             android:layout_weight="2"
             android:gravity="center_vertical"
             android:paddingEnd="20dp"
-            android:text="@string/maps"
+            android:text="@string/calculator"
             android:textColor="?bald_text_on_button"
             android:textSize="@dimen/huge" />
     </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
