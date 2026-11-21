@@ -25,7 +25,7 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_4"
+        android:backgroundTint="@color/color_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -82,7 +82,7 @@
                 android:src="@drawable/alarm_on_background" />
 
             <TextView
-                style="@style/BackgroundText"
+                style="@style/ButtonsText.Auto"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -107,7 +107,7 @@
                 android:src="@drawable/timer_on_background" />
 
             <TextView
-                style="@style/BackgroundText"
+                style="@style/ButtonsText.Auto"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -134,7 +134,7 @@
                 android:src="@drawable/alarm_off_on_button" />
 
             <TextView
-                style="@style/BackgroundText"
+                style="@style/ButtonsText.Auto"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

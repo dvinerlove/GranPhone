@@ -24,7 +24,7 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_3" />
+        android:backgroundTint="@color/color_1" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="match_parent"

@@ -28,17 +28,17 @@
     </string>
     <string name="acknowledgments">Благодарность</string>
     <string name="adaptive">Адаптивный</string>
-    <string name="add_alarm">Добавить Будильник</string>
-    <string name="add_alarm_quickly">Добавить Таймер</string>
-    <string name="add_contact">Добавить Контакт</string>
-    <string name="add_emergency_contact">Добавить</string>
-    <string name="add_pill">Добавить Таблетку</string>
+    <string name="add_alarm">Добавить будильник</string>
+    <string name="add_alarm_quickly">Добавить таймер</string>
+    <string name="add_contact">Добавить контакт</string>
+    <string name="add_emergency_contact">Добавить контакт</string>
+    <string name="add_pill">Добавить таблетку</string>
     <string name="add_shortcut">Добавить Ярлык</string>
     <string name="add_to_favorite">Добавить в Избранное</string>
     <string name="add_to_home">Добавить на Главный Экран</string>
     <string name="add_to_sos">Добавить в SOS</string>
     <string name="address">Адрес</string>
-    <string name="advanced_options">Дополнительные Параметры</string>
+    <string name="advanced_options">Дополнительные параметры</string>
     <string name="afternoon">После полудня</string>
     <string name="airplane_mode">Режим Полета</string>
     <string name="alarm_name">Название Будильника</string>
@@ -74,7 +74,7 @@
     <string name="camera">Камера</string>
     <string name="camera_subtext">Это разрешение требуется для включения фонарика.</string>
     <string name="cancel">Отмена</string>
-    <string name="change_pills_time">Изменить время Приема Таблеток</string>
+    <string name="change_pills_time">Изменить время приёма</string>
     <string name="change_system_settings_subtext">Пожалуйста, разрешите BaldPhone изменять настройки, такие как увеличение размера шрифта и изменение яркости.
     </string>
     <string name="choose_friday">Пт</string>
@@ -92,7 +92,7 @@
     <string name="clear_data_subtext3">точно?\nнажатие кнопки да удалит все данне!</string>
     <string name="clock">Часы</string>
     <string name="coming_soon">Скоро!</string>
-    <string name="connection_settings">Поключение</string>
+    <string name="connection_settings">Подключение</string>
     <string name="contact_must_has_name">Контакт должен иметь Имя!</string>
     <string name="contact_not_created">Контакт не создан!</string>
     <string name="contacts">Контакты</string>
@@ -145,7 +145,7 @@
     <string name="left_handed">Левша</string>
     <string name="light">Светлый</string>
     <string name="location">Место нахождения</string>
-    <string name="emergency_services">Аварийные Службы</string>
+    <string name="emergency_services">Аварийные службы</string>
     <string name="mail">Почта</string>
     <string name="maps">Карты</string>
 
@@ -214,7 +214,7 @@
     <string name="send">Отправить</string>
     <string name="set_default_dialer">Установить приложение для вызова по умолчанию</string>
     <string name="set_default_dialer_subtext">BaldPhone должен быть отмечен как приложение для вызова по умолчанию.</string>
-    <string name="set_home_screen">Установить Домашний Экран</string>
+    <string name="set_home_screen">Установить домашний экран</string>
     <string name="set_home_screen_subtext">Чтобы использовать BaldPhone, вы должны установить его в качестве домашнего экрана.\nЭто обратимо и может быть изменено в настройках.
     </string>
     <string name="set_keyboard">Установить клавиатуру</string>
@@ -248,7 +248,7 @@
     <string name="theme_settings_subtext">Выберите тему</string>
 
     <string name="thursday">Четверг</string>
-    <string name="time_changer">Изменение времени приема таблеток</string>
+    <string name="time_changer">Изменение времени приёма</string>
     <string name="tiny">Крошечный</string>
     <string name="to___days_and___hours_from_now">%d дней и %d час(ов) с текущего момента</string>
     <string name="to___hours_and___minutes_from_now">%d час(ов) и %d минут с текущего момента</string>
@@ -274,9 +274,14 @@
     <string name="yes">Да</string>
     <string name="yesterday">Вчера</string>
     <string name="nothing">Пусто</string>
-    <string name="no_contacts_found">Контакты не найденны!</string>
-    <string name="no_alarms">Нет Будильника\nСоздайте его нажав на\n\"Добавить Будильник\"\nИли\n\"Добавить Таймер\"</string>
-    <string name="no_pills">Нет Таблеток\nСоздайте ее нажав на\n\"Добавить Таблетку\"</string>
+    <string name="no_contacts_found">Контакты не найдены!</string>
+    <string name="no_alarms">Нет будильника.
+Создайте его, нажав
+«Добавить будильник»
+или «Добавить таймер»</string>
+    <string name="no_pills">Нет таблеток.
+Создайте её, нажав
+«Добавить таблетку»</string>
     <string name="clear_all_notifications">Очистить Все Оповещения</string>
     <string name="clear_cache_subtext">Вы уверенны что хотите очистить кэш?\nЯрлык программы будет удален тоже!
     </string>
@@ -403,4 +408,10 @@
     <string name="appear_on_top_subtext">Это разрешение нужно, чтобы показывать будильники и напоминания поверх экрана блокировки</string>
     <string name="mail_application_not_found">Приложение для почты не найдено!</string>
     <string name="get_involved">Помочь проекту</string>
+    <string name="add_emergency_contact_2">Добавить второй</string>
+    <string name="close">Закрыть</string>
+    <string name="back">Назад</string>
+    <string name="notification_service">BaldPhone: сервис уведомлений</string>
+    <string name="notification_service_fail">Не удалось запустить сервис уведомлений!</string>
+    <string name="battery">Батарея</string>
 </resources>

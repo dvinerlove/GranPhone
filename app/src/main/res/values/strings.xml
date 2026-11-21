@@ -34,7 +34,7 @@
     <string name="add_alarm">Add Alarm</string>
     <string name="add_alarm_quickly">Add Timer</string>
     <string name="add_contact">Add Contact</string>
-    <string name="add_emergency_contact">Add</string>
+    <string name="add_emergency_contact">Add Contact</string>
     <string name="add_pill">Add Pill</string>
     <string name="add_shortcut">Add Shortcut</string>
     <string name="add_to_favorite">Add to Favorite</string>
@@ -419,4 +419,10 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="add_emergency_contact_2">Add 2nd contact</string>
+    <string name="close">Close</string>
+    <string name="back">Back</string>
+    <string name="notification_service">BaldPhone notification service</string>
+    <string name="notification_service_fail">Could not start notification service!</string>
+    <string name="battery">Battery</string>
 </resources>

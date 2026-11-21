@@ -21,6 +21,7 @@
     android:background="?bald_background">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
+        android:backgroundTint="@color/color_1"
         android:id="@+id/bald_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,7 +120,7 @@
             android:gravity="start|center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="@string/add_emergency_contact"
+            android:text="@string/add_emergency_contact_2"
             android:textColor="?bald_text_on_background"
             android:textSize="@dimen/huge" />
     </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>

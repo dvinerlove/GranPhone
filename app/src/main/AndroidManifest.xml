@@ -275,7 +275,7 @@
         <service
             android:name=".services.NotificationListenerService"
             android:enabled="${fullApp}"
-            android:label="Bald Notification Service"
+            android:label="@string/notification_service"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />

@@ -198,7 +198,7 @@ public class HomeScreenActivity extends BaldActivity {
         } catch (Exception e) {
             Log.e(TAG, S.str(e.getMessage()));
             e.printStackTrace();
-            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText("Could not start Notification Listener Service!").show();
+            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(getString(R.string.notification_service_fail)).show();
         }
         new UpdateApps(this).execute(this.getApplicationContext());
         lowBatteryAlert = sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE);
