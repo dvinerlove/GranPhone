@@ -47,6 +47,7 @@ import com.bald.uriah.baldphone.utils.BDB;
 import com.bald.uriah.baldphone.utils.BDialog;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.CallManager;
+import com.bald.uriah.baldphone.utils.FirstRunDefaults;
 import com.bald.uriah.baldphone.utils.S;
 
 import java.util.List;
@@ -72,6 +73,8 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     private boolean finishScheduled;
     @Nullable
     private Call simChooserShownFor;
+    @Nullable
+    private Call volumeRaisedFor;
     private final Runnable ticker = new Runnable() {
         @Override
         public void run() {
@@ -168,6 +171,10 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
                 keepScreenOn = true;
                 break;
             case Call.STATE_ACTIVE:
+                if (volumeRaisedFor != call) {
+                    volumeRaisedFor = call;
+                    FirstRunDefaults.setCallVolumeToMax(this);
+                }
                 final long connectTime = call.getDetails().getConnectTimeMillis();
                 tv_status.setText(connectTime > 0
                         ? getString(R.string.in_call) + "  " + formatDuration(System.currentTimeMillis() - connectTime)

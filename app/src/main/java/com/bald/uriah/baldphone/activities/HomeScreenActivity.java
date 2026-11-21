@@ -64,6 +64,7 @@ import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldHomeWatcher;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
 import com.bald.uriah.baldphone.utils.CallManager;
+import com.bald.uriah.baldphone.utils.FirstRunDefaults;
 import com.bald.uriah.baldphone.utils.KioskManager;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.D;
@@ -319,6 +320,7 @@ public class HomeScreenActivity extends BaldActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && CallManager.hasOngoingCall())
             startActivity(CallActivity.newIntent(this));
         KioskManager.enterIfNeeded(this);
+        FirstRunDefaults.apply(this);
         if (baldPrefsUtils.hasChanged(this)) {
             viewPagerHolder.getViewPager().removeAllViews();//android auto saves fragments, not good for us in this case
             this.recreate();

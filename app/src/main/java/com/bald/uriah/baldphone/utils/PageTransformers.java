@@ -65,5 +65,12 @@ public class PageTransformers {
         }
     };
 
-    public static ViewPager.PageTransformer[] pageTransformers = new ViewPager.PageTransformer[]{OPTION_A, OPTION_B, OPTION_C};
+    /**
+     * No effect: the plain, fast ViewPager slide.
+     */
+    private static final ViewPager.PageTransformer OPTION_PLAIN = (page, position) -> {
+    };
+    public static final int PLAIN = 3;
+
+    public static ViewPager.PageTransformer[] pageTransformers = new ViewPager.PageTransformer[]{OPTION_A, OPTION_B, OPTION_C, OPTION_PLAIN};
 }
