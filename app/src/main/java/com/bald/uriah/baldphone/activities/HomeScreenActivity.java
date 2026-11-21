@@ -63,6 +63,7 @@ import com.bald.uriah.baldphone.utils.BDialog;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldHomeWatcher;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
+import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.D;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
@@ -313,6 +314,9 @@ public class HomeScreenActivity extends BaldActivity {
     @SuppressLint("InlinedApi")
     protected void onResume() { // remember to change in Page1EditorActivity.java too!
         super.onResume();
+        // While on a call, the home button brings the user back to the big call screen.
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && CallManager.hasOngoingCall())
+            startActivity(CallActivity.newIntent(this));
         if (baldPrefsUtils.hasChanged(this)) {
             viewPagerHolder.getViewPager().removeAllViews();//android auto saves fragments, not good for us in this case
             this.recreate();

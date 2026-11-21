@@ -26,6 +26,7 @@ import android.media.Ringtone;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -58,6 +59,7 @@ import com.bald.uriah.baldphone.utils.BDialog;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
 import com.bald.uriah.baldphone.utils.BaldToast;
+import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.D;
 import com.bald.uriah.baldphone.utils.S;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
@@ -171,6 +173,13 @@ public class SettingsActivity extends BaldActivity {
                         v -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this)
                         , R.drawable.home_on_button)
         );
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            mainCategory.add(
+                    new RunnableSettingsItem(R.string.use_vophone_for_calls,
+                            v -> CallManager.requestDefaultDialer(this)
+                            , R.drawable.phone_on_button)
+            );
 
         mainCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
 

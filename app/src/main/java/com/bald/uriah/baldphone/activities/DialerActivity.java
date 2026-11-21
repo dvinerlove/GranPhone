@@ -154,6 +154,10 @@ public class DialerActivity extends BaldActivity {
         setOnClickListeners();
         setupYoutube(2);
         searchForContact();
+        // "tel:" links, e.g. emergency numbers redirected here by the system when vophone is the default phone app
+        final Uri data = getIntent() == null ? null : getIntent().getData();
+        if (savedInstanceState == null && data != null && "tel".equals(data.getScheme()) && data.getSchemeSpecificPart() != null)
+            setNumber(data.getSchemeSpecificPart());
     }
 
     @Override

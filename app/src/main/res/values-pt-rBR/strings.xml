@@ -392,4 +392,28 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="mail_application_not_found">Nenhum aplicativo de e-mail encontrado!</string>
+    <string name="get_involved">Participe</string>
+    <string name="emergency_number">Número de Emergência</string>
+    <string name="emergency_number_subtext">Escolha para qual número o botão de emergência da tela SOS vai ligar.</string>
+    <string name="emergency_samu">SAMU (ambulância) - 192</string>
+    <string name="emergency_firefighters">Bombeiros - 193</string>
+    <string name="emergency_police">Polícia - 190</string>
+    <string name="emergency_international">Emergência internacional - 112</string>
+    <string name="answer_call">ATENDER</string>
+    <string name="decline_call">RECUSAR</string>
+    <string name="hang_up">DESLIGAR</string>
+    <string name="speaker_turn_on">Viva-voz</string>
+    <string name="speaker_turn_off">Viva-voz LIGADO</string>
+    <string name="incoming_call">Está te ligando</string>
+    <string name="call_status_calling">Chamando…</string>
+    <string name="in_call">Em ligação</string>
+    <string name="on_hold">Em espera</string>
+    <string name="call_ended">Ligação encerrada</string>
+    <string name="unknown_number">Número desconhecido</string>
+    <string name="ongoing_call">Ligação em andamento</string>
+    <string name="tap_to_return_to_call">Toque para voltar para a ligação</string>
+    <string name="calls_channel">Ligações</string>
+    <string name="already_default_dialer">O vophone já é o aplicativo de telefone!</string>
+    <string name="use_vophone_for_calls">Tela de ligação com botões grandes</string>
 </resources>

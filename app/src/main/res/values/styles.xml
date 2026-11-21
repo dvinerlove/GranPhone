@@ -177,4 +177,17 @@
     <style name="BaldActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">?attr/bald_background</item>
     </style>
+
+    <!-- Very large buttons used on the call screen (activity_call.xml) -->
+    <style name="CallButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">32dp</item>
+        <item name="android:paddingEnd">32dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
