@@ -30,7 +30,7 @@ android {
         targetSdkVersion 29
         versionCode 103
         versionName "14.0.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.bald.uriah.baldphone.AccessibilityChecksTestRunner"
         manifestPlaceholders = [fullApp: "true", notFullApp: "false", recentCalls: "true", notRecentCalls: "false"]
         javaCompileOptions {
             annotationProcessorOptions {
@@ -118,6 +118,11 @@ dependencies {
     androidTestImplementation 'com.tomash:androidcontacts:1.14.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    // brief asked for 3.2.0, but that artifact's bytecode calls
+    // checkAndReturnResults(...)ImmutableList -- a signature in NO published ATF
+    // (2.0/2.1/3.1.x/4.x all return List) so every check throws NoSuchMethodError.
+    // 3.1.0 calls the real List signature; deviation documented in the task report.
+    androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.1.0'
     testImplementation 'junit:junit:4.13'
 
     //Problematic library

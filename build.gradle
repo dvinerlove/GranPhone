@@ -34,6 +34,8 @@ allprojects {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        // com.tomash:androidcontacts (androidTest-only) was on JCenter; now only mirrored here
+        maven { url 'https://verve.jfrog.io/artifactory/verve-gradle-release/' }
     }
 }
 
