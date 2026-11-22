@@ -26,32 +26,38 @@
     android:visibility="visible"
     tools:ignore="NestedWeights">
 
-    <TextClock
-        android:id="@+id/clock"
-        style="@style/ButtonsText.Huge"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.0"
+        android:layout_weight="1.4"
         android:background="@drawable/style_for_buttons"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        android:textSize="70sp"
-        android:visibility="visible" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp">
 
-    <TextClock
-        android:id="@+id/date"
-        style="@style/ButtonsText"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4"
-        android:background="@drawable/style_for_buttons"
-        android:format12Hour="@string/date_format"
-        android:format24Hour="@string/date_format"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        android:textSize="22sp"
-        android:visibility="visible" />
+        <TextClock
+            android:id="@+id/clock"
+            style="@style/ButtonsText.Huge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textSize="68sp"
+            android:visibility="visible" />
+
+        <TextClock
+            android:id="@+id/date"
+            style="@style/ButtonsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format12Hour="@string/date_format"
+            android:format24Hour="@string/date_format"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textSize="22sp"
+            android:visibility="visible" />
+    </LinearLayout>
 
     <android.widget.Space
         android:layout_width="0dp"
