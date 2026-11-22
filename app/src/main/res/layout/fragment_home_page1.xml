@@ -111,10 +111,12 @@
     <android.widget.Space
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/messages_container"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -161,10 +163,12 @@
     <android.widget.Space
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/media_container"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -211,10 +215,12 @@
     <android.widget.Space
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/time_container"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
