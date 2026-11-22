@@ -47,12 +47,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.activities.DialerActivity;
-import com.bald.uriah.baldphone.activities.SOSActivity;
 import com.bald.uriah.baldphone.adapters.CallsRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.calls.Call;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
-import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
 import com.bald.uriah.baldphone.utils.BDB;
 import com.bald.uriah.baldphone.utils.BDialog;
 import com.bald.uriah.baldphone.utils.BaldToast;
@@ -223,7 +221,6 @@ public class SingleContactActivity extends BaldActivity {
             final TextView tv_type = layout.findViewById(R.id.tv_type);
             final TextView tv_value = layout.findViewById(R.id.tv_value);
             final BaldPictureTextButton call = layout.findViewById(R.id.call);
-            final BaldPictureTextButton message = layout.findViewById(R.id.message);
 
             tv_type.setText(ContactsContract.CommonDataKinds.Phone.getTypeLabel(
                     getResources(),
@@ -234,7 +231,6 @@ public class SingleContactActivity extends BaldActivity {
             call.getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
             call.getTextView().setTypeface(Typeface.DEFAULT_BOLD);
             call.setOnClickListener(v -> DialerActivity.call(pair.second, this, false));
-            message.setOnClickListener(v -> S.sendMessage(pair.second, this));
 
             ll.addView(layout);
         }
@@ -292,80 +288,29 @@ public class SingleContactActivity extends BaldActivity {
 
     private void inflateAdders() {
         final View view = layoutInflater.inflate(R.layout.contact_add_to, ll, false);
-        final BaldPictureTextButton
-                home = view.findViewById(R.id.home),
-                favorite = view.findViewById(R.id.favorite),
-                sos = view.findViewById(R.id.sos);
-
-        Toggeler.newTextImageToggeler(
-                home,
-                home.getImageView(),
-                home.getTextView(),
-                new int[]{R.drawable.home_on_button, R.drawable.remove_on_button},
-                new int[]{R.string.add_to_home, R.string.remove_from_home},
-                new View.OnClickListener[]{
-                        (v) -> HomeScreenPinHelper.removeContact(v.getContext(), contact.getLookupKey()),
-                        (v) -> HomeScreenPinHelper.pinContact(v.getContext(), contact.getLookupKey())
-                },
-                HomeScreenPinHelper.isPinned(this, contact.getLookupKey()) ? 1 : 0
-        );
-
-        Toggeler.newTextImageToggeler(
-                sos,
-                sos.getImageView(),
-                sos.getTextView(),
-                new int[]{R.drawable.emergency, R.drawable.remove_on_button},
-                new int[]{R.string.add_to_sos, R.string.remove_from_sos},
-                new View.OnClickListener[]{
-                        (v) -> SOSActivity.PinHelper.removeContact(v.getContext(), contact.getLookupKey()),
-                        (v) -> {
-                            if (!SOSActivity.PinHelper.pinContact(v.getContext(), contact.getLookupKey())) {
-                                BDB.from(v.getContext())
-                                        .setTitle(R.string.sos_is_full)
-                                        .setSubText(R.string.sos_is_full_subtext)
-                                        .addFlag(BDialog.FLAG_OK)
-                                        .show();
-                                v.setVisibility(View.GONE);
-                            }
-                        }
-                },
-                SOSActivity.PinHelper.isPinned(this, contact.getLookupKey()) ? 1 : 0
-        );
+        final ImageView favorite = view.findViewById(R.id.favorite);
 
         final ContentValues STAR = new ContentValues();
         STAR.put(ContactsContract.Contacts.STARRED, 1);
         final ContentValues UNSTAR = new ContentValues();
         UNSTAR.put(ContactsContract.Contacts.STARRED, 0);
         baldTitleBar.setGold(contact.isFavorite());
-        Toggeler.newTextImageToggeler(
+        Toggeler.newAdvancedImageToggeler(
                 favorite,
-                favorite.getImageView(),
-                favorite.getTextView(),
+                favorite,
                 new int[]{R.drawable.star_on_button, R.drawable.star_remove_on_button},
-                new int[]{R.string.add_to_favorite, R.string.remove_from_favorite},
-                new View.OnClickListener[]{
-                        (v) -> {
-                            contentResolver.update(
-                                    ContactsContract.Contacts.CONTENT_URI,
-                                    UNSTAR,
-                                    ContactsContract.Contacts.LOOKUP_KEY + "=?",
-                                    new String[]{contact.getLookupKey()});
-                            baldTitleBar.setGold(false);
-                            changed = true;
-                        },
-                        (v) -> {
-                            contentResolver.update(
-                                    ContactsContract.Contacts.CONTENT_URI,
-                                    STAR,
-                                    ContactsContract.Contacts.LOOKUP_KEY + "=?",
-                                    new String[]{contact.getLookupKey()});
-                            baldTitleBar.setGold(true);
-                            changed = true;
-                        }
+                index -> {
+                    final boolean fav = index == 1;
+                    contentResolver.update(
+                            ContactsContract.Contacts.CONTENT_URI,
+                            fav ? STAR : UNSTAR,
+                            ContactsContract.Contacts.LOOKUP_KEY + "=?",
+                            new String[]{contact.getLookupKey()});
+                    baldTitleBar.setGold(fav);
+                    changed = true;
                 },
-                contact.isFavorite() ? 1 : 0
-
-        );
+                contact.isFavorite() ? 1 : 0,
+                1);
         ll.addView(view);
     }
 
