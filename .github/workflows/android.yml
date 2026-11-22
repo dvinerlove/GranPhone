@@ -16,4 +16,4 @@ jobs:
     - name: Build with Gradle
       run: |
         sudo chmod +x ./gradlew
-        ./gradlew build
+        ./gradlew assembleFDroidDebug
