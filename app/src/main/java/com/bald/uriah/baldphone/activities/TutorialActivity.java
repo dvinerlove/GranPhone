@@ -26,8 +26,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragment1;
-import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragment2;
 import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragment4;
+import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragmentBattery;
+import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragmentHelper;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.views.ViewPagerHolder;
 
@@ -54,8 +55,10 @@ public class TutorialActivity extends BaldActivity {
                 case 0:
                     return new TutorialFragment1();
                 case 1:
-                    return new TutorialFragment2();
+                    return new TutorialFragmentHelper();
                 case 2:
+                    return new TutorialFragmentBattery();
+                case 3:
                     return new TutorialFragment4();
                 default:
                     return null;
@@ -64,7 +67,7 @@ public class TutorialActivity extends BaldActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
     }
