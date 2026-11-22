@@ -144,7 +144,7 @@ public class HomeScreenActivity extends BaldActivity {
     private final android.telephony.PhoneStateListener signalListener = new android.telephony.PhoneStateListener() {
         @Override
         public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
-            if (signalStrength == null)
+            if (signalStrength == null || signalView == null)
                 return;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
                 signalView.setImageLevel(signalStrength.getLevel());
