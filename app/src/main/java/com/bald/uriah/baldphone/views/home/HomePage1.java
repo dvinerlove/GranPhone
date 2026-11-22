@@ -123,6 +123,11 @@ public class HomePage1 extends HomeView {
         view = inflater.inflate(R.layout.fragment_home_page1, container, false);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             view.findViewById(R.id.clock).setVisibility(View.GONE);
+        if (homeScreen == null) {
+            view.findViewById(R.id.messages_container).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.media_container).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.time_container).setVisibility(View.VISIBLE);
+        }
 
         attachXml();
         genOnClickListeners();
@@ -236,6 +241,8 @@ public class HomePage1 extends HomeView {
     }
 
     private void updateFlashIcon() {
+        if (homeScreen == null)
+            return;
         bt_assistant.setImageResource(homeScreen.isFlashOn()
                 ? R.drawable.flashlight_on_background
                 : R.drawable.flashlight_off_on_background);
