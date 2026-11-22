@@ -5,9 +5,11 @@ A simple, offline-first Android launcher + dialer for elderly users — big butt
 Forked from [BaldPhone](https://github.com/UriahShaulMandel/BaldPhone) (Apache 2.0) via [vophone](https://github.com/dhqdev/vophone). BaldPhone was pulled from Google Play in 2024 and abandoned upstream; this fork keeps it alive for low-end devices.
 
 <p float="left">
-  <img src="docs/screenshots/home.png" width="240" />
-  <img src="docs/screenshots/dialer.png" width="240" />
-  <img src="docs/screenshots/sos.png" width="240" />
+  <img src="docs/screenshots/home.png" width="200" />
+  <img src="docs/screenshots/dialer.png" width="200" />
+  <img src="docs/screenshots/sos.png" width="200" />
+  <img src="docs/screenshots/call_incoming.png" width="200" />
+  <img src="docs/screenshots/call_active.png" width="200" />
 </p>
 
 ## What it does

@@ -4,18 +4,19 @@
   Shown by BaldInCallService when vophone is the default phone app.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?bald_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="12dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_photo"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="12dp"
         android:importantForAccessibility="no"
         android:src="@drawable/face_on_button" />
 
@@ -23,19 +24,22 @@
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="2"
+        android:maxLines="1"
         android:textColor="?bald_text_on_background"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="40sp"
+        app:autoSizeMinTextSize="22sp"
+        app:autoSizeTextType="uniform" />
 
     <TextView
         android:id="@+id/tv_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:maxLines="1"
         android:textColor="?bald_text_on_background"
         android:textSize="28sp" />
 
@@ -43,7 +47,7 @@
         android:id="@+id/tv_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:textColor="?bald_text_on_background"
         android:textSize="30sp" />
@@ -62,7 +66,7 @@
         <Button
             android:id="@+id/bt_answer"
             style="@style/CallButton"
-            android:layout_height="140dp"
+            android:layout_height="120dp"
             android:background="@drawable/call_button_green"
             android:drawableStart="@drawable/ic_call_white"
             android:text="@string/answer_call" />
@@ -70,8 +74,8 @@
         <Button
             android:id="@+id/bt_decline"
             style="@style/CallButton"
-            android:layout_height="110dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/call_button_red"
             android:drawableStart="@drawable/ic_call_end_white"
             android:text="@string/decline_call" />
@@ -87,7 +91,7 @@
         <Button
             android:id="@+id/bt_speaker"
             style="@style/CallButton"
-            android:layout_height="100dp"
+            android:layout_height="88dp"
             android:background="@drawable/call_button_gray"
             android:drawableStart="@drawable/ic_volume_up_white"
             android:text="@string/speaker_turn_on"
@@ -96,8 +100,8 @@
         <Button
             android:id="@+id/bt_hangup"
             style="@style/CallButton"
-            android:layout_height="140dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/call_button_red"
             android:drawableStart="@drawable/ic_call_end_white"
             android:text="@string/hang_up" />
