@@ -62,7 +62,7 @@ public class DialerActivity extends BaldActivity {
     public static final String SORT_ORDER =
             "upper(" + ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + ") ASC";
     private final static String[] PROJECTION =
-            {ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.PHOTO_URI, ContactsContract.Data.LOOKUP_KEY, ContactsContract.Data.STARRED};
+            {ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.PHOTO_URI, ContactsContract.Data.LOOKUP_KEY, ContactsContract.Data.STARRED, ContactsContract.CommonDataKinds.Phone.NUMBER};
     private static final String NUMBER_STATE = "NUMBER_STATE";
     private static final int TONE_DURATION = 300 * Const.MILLISECOND;
     private static final int TONE_VOLUME = 75; // 0-100
@@ -71,7 +71,7 @@ public class DialerActivity extends BaldActivity {
     private ContentResolver contentResolver;
     private ContactRecyclerViewAdapter contactRecyclerViewAdapter;
     private RecyclerView recyclerView;
-    private TextView tv_number;
+    private TextView tv_number, t9_chip;
     private View b_call, b_clear, b_hash, b_sulamit, b_backspace;
     private View[] numpad;
     private StringBuilder number = new StringBuilder();
@@ -200,11 +200,24 @@ public class DialerActivity extends BaldActivity {
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI :
                 Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(number.toString()));
         final Cursor contactsCursor = contentResolver.query(uri, PROJECTION, null, null, SORT_ORDER);
+        updateT9Chip(contactsCursor);
         if (contactRecyclerViewAdapter != null) {
             contactRecyclerViewAdapter.changeCursor(contactsCursor);
         } else {
             contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(this, contactsCursor, recyclerView, ContactRecyclerViewAdapter.MODE_DEFAULT);
             recyclerView.setAdapter(contactRecyclerViewAdapter);
+        }
+    }
+
+    // surfaces the first contact match as an «Имя — номер» chip under the number field
+    private void updateT9Chip(final Cursor contactsCursor) {
+        if (number.length() > 0 && contactsCursor != null && contactsCursor.moveToFirst()) {
+            final String name = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
+            final String contactNumber = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            t9_chip.setText(contactNumber == null ? name : name + " — " + contactNumber);
+            t9_chip.setVisibility(View.VISIBLE);
+        } else {
+            t9_chip.setVisibility(View.GONE);
         }
     }
 
@@ -215,6 +228,7 @@ public class DialerActivity extends BaldActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         tv_number = findViewById(R.id.tv_number);
+        t9_chip = findViewById(R.id.t9_chip);
         numpad = new View[]{
                 findViewById(R.id.b_0),
                 findViewById(R.id.b_1),

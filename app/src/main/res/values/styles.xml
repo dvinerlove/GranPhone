@@ -165,6 +165,18 @@
         <item name="autoSizeTextType">uniform</item>
     </style>
 
+    <!-- Card-style dialer keys (dial_pad.xml): bald_card fill, 16dp corners, 28sp digit -->
+    <style name="DialerKey">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:background">@drawable/dialer_key_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">?attr/bald_text_primary</item>
+        <item name="android:textSize">@dimen/huge</item>
+    </style>
+
     <style name="BaldActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">?attr/bald_background</item>
     </style>
