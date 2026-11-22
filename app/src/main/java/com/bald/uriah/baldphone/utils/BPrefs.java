@@ -45,6 +45,7 @@ public final class BPrefs {
     public static final String CUSTOM_PILLS_KEY = "CUSTOM_PILLS_KEY";
     public static final String CUSTOM_APPS_KEY = "CUSTOM_APPS_KEY";
     public static final String CUSTOM_ALARMS_KEY = "CUSTOM_ALARMS_KEY";
+    public static final String CUSTOM_SETTINGS_KEY = "CUSTOM_SETTINGS_KEY";
 
     public static final String LONG_PRESSES_KEY = "LONG_PRESSES_KEY";
     public static final boolean LONG_PRESSES_DEFAULT_VALUE = false; // GranPhone: a simple tap opens things (the accidental-touch guard stays on)

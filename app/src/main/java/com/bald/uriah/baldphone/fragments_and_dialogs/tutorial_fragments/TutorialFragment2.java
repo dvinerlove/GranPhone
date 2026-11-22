@@ -44,6 +44,7 @@ public class TutorialFragment2 extends TutorialFragment {
 
     @Override
     protected void actualSetup() {
+        setupNavButtons();
         sharedPreferences = BPrefs.get(getContext());
         longPressesFlag = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE) ? sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE) ? 1 : 2 : 0;
         applyDuoToFlag();

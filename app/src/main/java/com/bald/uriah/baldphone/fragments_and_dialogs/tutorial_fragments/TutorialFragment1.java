@@ -73,6 +73,7 @@ public class TutorialFragment1 extends TutorialFragment {
 
     @Override
     protected void actualSetup() {
+        setupNavButtons();
         firstAnimation(hello, () -> and_welcome_to_granphone.setVisibility(View.VISIBLE), 2000);
     }
 

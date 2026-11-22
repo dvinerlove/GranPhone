@@ -42,4 +42,14 @@
         android:text="@string/and_welcome_to_GranPhone"
         android:textSize="40sp"
         android:visibility="gone" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/bt_next"
+        style="@style/ButtonsText.Large"
+        android:layout_width="220dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="24dp"
+        android:background="@drawable/style_for_buttons"
+        android:text="@string/next" />
 </LinearLayout>
