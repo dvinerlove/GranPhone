@@ -448,4 +448,8 @@ adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.b
     <string name="device_memory_subtext">Свободное место и оперативная память устройства</string>
     <string name="free_of_total">Свободно %1$s из %2$s</string>
     <string name="fake_launcher_label">GranPhone — настройка</string>
+    <string name="helper_settings">Настройки помощника</string>
+    <string name="helper_pin_create_subtext">Придумайте пароль минимум из 4 цифр. Он защищает настройки помощника.</string>
+    <string name="helper_pin_enter_subtext">Введите пароль помощника.</string>
+    <string name="vibration_feedback_subtext">Вибрация при нажатии кнопок.</string>
 </resources>

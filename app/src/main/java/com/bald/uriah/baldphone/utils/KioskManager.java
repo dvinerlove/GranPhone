@@ -88,8 +88,13 @@ public final class KioskManager {
         return isDeviceOwner(context) && BPrefs.get(context).getBoolean(KIOSK_KEY, false);
     }
 
+    @Nullable
+    public static String savedPin(Context context) {
+        return BPrefs.get(context).getString(KIOSK_PIN_KEY, null);
+    }
+
     public static boolean checkPin(Context context, CharSequence pin) {
-        final String saved = BPrefs.get(context).getString(KIOSK_PIN_KEY, null);
+        final String saved = savedPin(context);
         return saved != null && saved.equals(String.valueOf(pin));
     }
 

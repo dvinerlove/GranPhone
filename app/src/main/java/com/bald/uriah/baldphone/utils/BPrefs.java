@@ -112,6 +112,8 @@ public final class BPrefs {
     public static final String LAST_DOWNLOAD_MANAGER_REQUEST_ID = "LAST_DOWNLOAD_MANAGER_REQUEST_ID";
     public static final String LAST_DOWNLOAD_MANAGER_REQUEST_VERSION_NUMBER = "LAST_DOWNLOAD_MANAGER_REQUEST_VERSION_NUMBER";
 
+    public static final String HELPER_PIN_KEY = "HELPER_PIN_KEY";
+
     public static final String HOUR_KEY_ = "HOUR_KEY_";
     public static final String MINUTE_KEY_ = "MINUTE_KEY_";
 

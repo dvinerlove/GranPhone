@@ -92,8 +92,14 @@ public class SettingsActivity extends BaldActivity {
             connectionCategory = new Category(R.string.connection_settings, R.drawable.wifi_on_button, 0),
             accessibilityCategory = new Category(R.string.accessibility_settings, R.drawable.accessibility_on_button, 1),
             displayCategory = new Category(R.string.display_settings, R.drawable.screen_on_button, 2),
-            personalizationCategory = new Category(R.string.personalization_settings, R.drawable.brush_on_button, 3);
-    private final Category[] categoriesArray = new Category[]{mainCategory, connectionCategory, accessibilityCategory, displayCategory, displayCategory, personalizationCategory};
+            personalizationCategory = new Category(R.string.personalization_settings, R.drawable.brush_on_button, 3),
+            helperCategory = new Category(R.string.helper_settings, R.drawable.settings_on_button, 4) {
+                @Override
+                public void onClick(View v) {
+                    showHelperPinDialog();
+                }
+            };
+    private final Category[] categoriesArray = new Category[]{mainCategory, connectionCategory, accessibilityCategory, displayCategory, displayCategory, personalizationCategory, helperCategory};
     private final SparseArray<Category> categorySparseArray;
     private Category currentCategory = mainCategory;
 
@@ -153,6 +159,39 @@ public class SettingsActivity extends BaldActivity {
             ringtone.stop();
     }
 
+    /** The kiosk PIN when one exists, else the helper PIN the helper set on first entry. */
+    @Nullable
+    private String helperPin() {
+        final String kioskPin = KioskManager.savedPin(this);
+        return kioskPin != null ? kioskPin : sharedPreferences.getString(BPrefs.HELPER_PIN_KEY, null);
+    }
+
+    private void showHelperPinDialog() {
+        final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+        final String saved = helperPin();
+        DialogBuilder.from(this)
+                .setTitle(R.string.helper_settings)
+                .setSubText(saved == null ? R.string.helper_pin_create_subtext : R.string.helper_pin_enter_subtext)
+                .setInputType(pinInputType)
+                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                .setPositiveButtonListener(params -> {
+                    final String pin = String.valueOf(params[0]).trim();
+                    if (saved == null) {
+                        if (pin.length() < KioskManager.MIN_PIN_LENGTH || !android.text.TextUtils.isDigitsOnly(pin)) {
+                            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_pin_too_short).show();
+                            return false;
+                        }
+                        editor.putString(BPrefs.HELPER_PIN_KEY, pin).apply();
+                    } else if (!pin.equals(saved)) {
+                        BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();
+                        return false;
+                    }
+                    newCategory(helperCategory);
+                    return true;
+                })
+                .show();
+    }
+
     private void showKioskDialog() {
         final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
         if (!KioskManager.isDeviceOwner(this)) {
@@ -210,27 +249,66 @@ public class SettingsActivity extends BaldActivity {
     }
 
     private void populateSettingsList() {
-        mainCategory.add(connectionCategory);
-        mainCategory.add(accessibilityCategory);
-        mainCategory.add(displayCategory);
-        mainCategory.add(personalizationCategory);
-
+        // User layer: the safe rows an elderly user can change directly.
+        setupAlarmVolume();
+        mainCategory.add(new RunnableSettingsItem(R.string.brightness,
+                v -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)), R.drawable.brightness_on_button));
+        mainCategory.add(new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button));
+        mainCategory.add(new RunnableSettingsItem(R.string.accessibility_level, v -> startActivity(new Intent(this, AccessibilityLevelChangerActivity.class)), R.drawable.accessibility_on_button));
         mainCategory.add(
+                new BDBSettingsItem(R.string.vibrate,
+                        DialogBuilder.from(this)
+                                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                                .setTitle(R.string.vibrate)
+                                .setSubText(R.string.vibration_feedback_subtext)
+                                .setOptions(R.string.yes, R.string.no)
+                                .setPositiveButtonListener(params -> {
+                                    editor.putBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, params[0].equals(0)).apply();
+                                    this.recreate();
+                                    return true;
+                                })
+                                .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE) ? 0 : 1),
+                        R.drawable.vibration_on_background));
+        mainCategory.add(new BDBSettingsItem(R.string.theme_settings,
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                        .setTitle(R.string.theme_settings)
+                        .setSubText(R.string.theme_settings_subtext)
+                        .setOptions(R.string.light, R.string.dark)
+                        .setPositiveButtonListener(params -> {
+                            editor.putInt(BPrefs.THEME_KEY, (Integer) params[0] == 1 ? BPrefs.Themes.DARK : BPrefs.Themes.LIGHT).apply();
+                            this.recreate();
+                            return true;
+                        })
+                        .setOptionsStartingIndex(() -> {
+                            final int stored = sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE);
+                            final int clamped = Math.max(0, Math.min(stored, BPrefs.Themes.THEMES.length - 1));
+                            return clamped == BPrefs.Themes.DARK ? 1 : 0;
+                        }), R.drawable.brush_on_button
+        ));
+        mainCategory.add(helperCategory);
+
+        // Helper layer: everything operational or dangerous stays behind the PIN gate.
+        helperCategory.add(connectionCategory);
+        helperCategory.add(accessibilityCategory);
+        helperCategory.add(personalizationCategory);
+
+        helperCategory.add(
                 new RunnableSettingsItem(R.string.set_home_screen,
                         v -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this)
                         , R.drawable.home_on_button)
         );
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            mainCategory.add(
+            helperCategory.add(
                     new RunnableSettingsItem(R.string.use_granphone_for_calls,
                             v -> CallManager.requestDefaultDialer(this)
                             , R.drawable.phone_on_button)
             );
 
-        mainCategory.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));
+        helperCategory.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));
         if (KioskManager.isDeviceOwner(this) && !KioskManager.isEnabled(this))
-            mainCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogBuilder.from(this)
+            helperCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogBuilder.from(this)
                     .setTitle(R.string.remove_device_owner)
                     .setSubText(R.string.remove_device_owner_subtext)
                     .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_NO)
@@ -241,7 +319,7 @@ public class SettingsActivity extends BaldActivity {
                     })
                     .show(), R.drawable.blocked_on_button));
 
-        mainCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
+        helperCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
 
         final SettingsItem keyboard = new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button);
         accessibilityCategory.add(keyboard);
@@ -251,7 +329,6 @@ public class SettingsActivity extends BaldActivity {
         personalizationCategory.add(new RunnableSettingsItem(R.string.time_changer, v -> startActivity(new Intent(this, PillTimeSetterActivity.class)), R.drawable.pill));
         personalizationCategory.add(new RunnableSettingsItem(R.string.edit_home_screen, v -> startActivity(new Intent(this, Page1EditorActivity.class)), R.drawable.edit_on_button));
 
-        accessibilityCategory.add(new RunnableSettingsItem(R.string.accessibility_level, v -> startActivity(new Intent(this, AccessibilityLevelChangerActivity.class)), R.drawable.accessibility_on_button));
         accessibilityCategory.add(
                 new BDBSettingsItem(R.string.accidental_touches, DialogBuilder.from(this)
                         .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL).setTitle(R.string.accidental_touches)
@@ -278,22 +355,6 @@ public class SettingsActivity extends BaldActivity {
                                 .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE) ? 1 : 0), R.drawable.hand_on_button
                 )
         );
-        final SettingsItem themeSettingsItem = new BDBSettingsItem(R.string.theme_settings,
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                        .setTitle(R.string.theme_settings)
-                        .setSubText(R.string.theme_settings_subtext)
-                        .setOptions(R.string.light, R.string.adaptive, R.string.dark)
-                        .setPositiveButtonListener(params -> {
-                            editor.putInt(BPrefs.THEME_KEY, (Integer) params[0]).apply();
-                            this.recreate();
-                            return true;
-                        })
-                        .setOptionsStartingIndex(() -> sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE)), R.drawable.brush_on_button
-
-        );
-        displayCategory.add(themeSettingsItem);
-
         personalizationCategory.add(new BDBSettingsItem(R.string.status_bar_settings,
                 DialogBuilder.from(this)
                         .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
@@ -379,12 +440,6 @@ public class SettingsActivity extends BaldActivity {
                         .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE) ? 0 : 1),
                 R.drawable.low_battery_alert_on_button
         ));
-        accessibilityCategory.add(new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button));
-
-        displayCategory.add(new RunnableSettingsItem(R.string.brightness,
-                v -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)), R.drawable.brightness_on_button));
-        setupAlarmVolume();
-
         //connections
         connectionCategory.add(new RunnableSettingsItem(R.string.airplane_mode, v -> startActivity(new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS)), R.drawable.airplane_mode_on_button));
         connectionCategory.add(new RunnableSettingsItem(R.string.wifi, v -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)), R.drawable.wifi_on_button));
@@ -405,7 +460,7 @@ public class SettingsActivity extends BaldActivity {
             }, R.drawable.nfc_on_button));
         connectionCategory.add(new RunnableSettingsItem(R.string.location, v -> startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)), R.drawable.location_on_button));
 
-        mainCategory.add(
+        helperCategory.add(
                 new BDBSettingsItem(R.string.device_memory,
                         DialogBuilder.from(this)
                                 .addFlag(DialogFlags.FLAG_OK)
@@ -415,19 +470,19 @@ public class SettingsActivity extends BaldActivity {
                                 .setExtraView(buildMemoryStatusView())
                         , R.drawable.tech_info_on_button)
         );
-        mainCategory.add(
+        helperCategory.add(
                 new RunnableSettingsItem(R.string.technical_information,
                         v -> startActivity(new Intent(this, TechnicalInfoActivity.class)),
                         R.drawable.tech_info_on_button)
         );
         if (!checkPermissions(this, -1))
-            mainCategory.add(
+            helperCategory.add(
                     new RunnableSettingsItem(R.string.grant_all_permissions,
                             v -> startActivity(new Intent(this, PermissionActivity.class)),
                             R.drawable.grant_all_permissions_on_button)
             );
         if (BuildConfig.FLAVOR.equals("baldUpdates"))
-            mainCategory.add(
+            helperCategory.add(
                     new RunnableSettingsItem(R.string.check_for_updates,
                             v -> UpdatingUtil.checkForUpdates(this, true),
                             R.drawable.updates_on_button)
@@ -524,7 +579,7 @@ public class SettingsActivity extends BaldActivity {
                         .setExtraView(volumeSeekBar), R.drawable.clock_on_background
 
         );
-        personalizationCategory.add(alarmVolumeSettingsItem);
+        mainCategory.add(alarmVolumeSettingsItem);
 
     }
 
