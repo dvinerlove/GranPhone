@@ -129,7 +129,6 @@ abstract class BaseContactsActivity extends BaldActivity {
         favorite = savedInstanceState.getBoolean(FAVORITE_STATE);
         et_filter_input.setText(filter);
         et_filter_input.setSelection(et_filter_input.getText().length());
-        applyFilter();
     }
 
     @LayoutRes
@@ -254,10 +253,12 @@ abstract class BaseContactsActivity extends BaldActivity {
     private void onClick(View v) {
         if (v.getId() == R.id.bt_speak)
             displaySpeechRecognizer();
-        favorite = false;
-        if (baldTitleBar != null)
-            baldTitleBar.setGold(false);
-        applyFilter();
+        if (favorite) {
+            favorite = false;
+            if (baldTitleBar != null)
+                baldTitleBar.setGold(false);
+            applyFilter();
+        }
         bt_type.setVisibility(GONE);
         bt_favorite.setVisibility(GONE);
         et_filter_input.setVisibility(View.VISIBLE);
