@@ -48,6 +48,7 @@
     <attr name="bald_info" format="reference|color" />
     <attr name="bald_text_primary" format="reference|color" />
     <attr name="bald_text_secondary" format="reference|color" />
+    <attr name="bald_text_on_variant" format="reference|color" />
 
 
     <declare-styleable name="BaldPictureTextButton">

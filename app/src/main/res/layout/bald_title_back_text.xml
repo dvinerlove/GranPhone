@@ -24,6 +24,8 @@
     android:alpha="0.75"
     android:background="@drawable/style_for_buttons_transparent"
     android:clickable="true"
+    android:ellipsize="end"
     android:focusable="true"
     android:gravity="center"
+    android:maxLines="1"
     android:text="@string/back" />

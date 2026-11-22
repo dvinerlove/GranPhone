@@ -51,6 +51,7 @@
     <color name="bald_info_light">#1565C0</color>
     <color name="bald_text_primary_light">#14171A</color>
     <color name="bald_text_secondary_light">#4A5560</color>
+    <color name="bald_text_on_variant_light">#FFFFFF</color>
     <!--/Light Theme-->
 
 
@@ -84,6 +85,7 @@
     <color name="bald_info_dark">#64B5F6</color>
     <color name="bald_text_primary_dark">#F2F4F7</color>
     <color name="bald_text_secondary_dark">#B0B8C0</color>
+    <color name="bald_text_on_variant_dark">#14171A</color>
     <!--/dark Theme-->
 
 </resources>

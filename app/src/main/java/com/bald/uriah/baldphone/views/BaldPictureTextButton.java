@@ -92,11 +92,11 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
 
     /**
      * Tints the stateful background solid with the variant color and the icon/text with
-     * {@code bald_text_on_button}. variant: 1=brand, 2=danger, 3=info (0=neutral never gets here).
+     * {@code bald_text_on_variant}. variant: 1=brand, 2=danger, 3=info (0=neutral never gets here).
      */
     private void applyVariant(int variant) {
         final int variantAttr = variant == 1 ? R.attr.bald_brand : variant == 2 ? R.attr.bald_danger : R.attr.bald_info;
-        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_clicked, R.attr.bald_button_disabled, R.attr.bald_text_on_button});
+        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_clicked, R.attr.bald_button_disabled, R.attr.bald_text_on_variant});
         final int color = themeColors.getColor(0, 0);
         final int clickedColor = themeColors.getColor(1, color);
         final int disabledColor = themeColors.getColor(2, color);

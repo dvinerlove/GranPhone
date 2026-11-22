@@ -64,6 +64,7 @@
         <item name="bald_info">@color/bald_info_light</item>
         <item name="bald_text_primary">@color/bald_text_primary_light</item>
         <item name="bald_text_secondary">@color/bald_text_secondary_light</item>
+        <item name="bald_text_on_variant">@color/bald_text_on_variant_light</item>
     </style>
 
     <style name="bald_dark" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -100,6 +101,7 @@
         <item name="bald_info">@color/bald_info_dark</item>
         <item name="bald_text_primary">@color/bald_text_primary_dark</item>
         <item name="bald_text_secondary">@color/bald_text_secondary_dark</item>
+        <item name="bald_text_on_variant">@color/bald_text_on_variant_dark</item>
     </style>
 
 
