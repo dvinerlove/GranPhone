@@ -249,18 +249,10 @@
             android:name=".activities.pills.PillTimeSetterActivity"
             android:enabled="${fullApp}" />
         <activity
-            android:name=".activities.PhoneActivity"
-
-            android:enabled="${fullApp}"
-            android:label="@string/phone" />
-        <activity
             android:name=".activities.TechnicalInfoActivity"
 
             android:enabled="${fullApp}"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.FeedbackActivity"
-            android:enabled="${fullApp}" />
         <activity
             android:name=".activities.UpdatesActivity"
             android:enabled="${fullApp}" />

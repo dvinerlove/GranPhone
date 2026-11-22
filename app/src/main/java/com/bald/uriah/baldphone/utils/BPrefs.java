@@ -160,6 +160,6 @@ public final class BPrefs {
         public static final int ADAPTIVE = 1;
         public static final int DARK = 2;
         @StyleRes
-        public static final int[] THEMES = new int[]{R.style.bald_light, -1, R.style.bald_dark, R.style.bald_skin};
+        public static final int[] THEMES = new int[]{R.style.bald_light, R.style.bald_light, R.style.bald_dark};
     }
 }
