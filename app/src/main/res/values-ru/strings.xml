@@ -111,6 +111,7 @@
     <string name="enable_notification_access_subtext">Пожалуйста, предоставьте GranPhone доступ к уведомлениям.</string>
     <string name="enter">Ввод</string>
     <string name="enter_contact_or_phone_number">Введите имя контакта:</string>
+    <string name="enter_phone_number">Введите номер телефона</string>
     <string name="evening">Вечер</string>
     <string name="example_of_different_text_sizes">Пример текста разных размеров\nДолжен быть читаемым и не слишком большим.
     </string>

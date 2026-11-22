@@ -48,6 +48,7 @@ import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
 import com.bald.uriah.baldphone.utils.DialogBuilder;
 import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
@@ -103,6 +104,10 @@ public class DialerActivity extends BaldActivity {
     }
 
     public static void call(final CharSequence number, final Context context, final boolean directly) {
+        if (!isDialable(number)) {
+            DialogScreen.info(context, R.string.phone, R.string.enter_phone_number);
+            return;
+        }
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1 && !directly && BPrefs.get(context).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)) {
                 final SubscriptionManager subscriptionManager = (SubscriptionManager) context
@@ -129,6 +134,21 @@ public class DialerActivity extends BaldActivity {
         } else
             BaldToast.error(context);
 
+    }
+
+    // blocks empty/too-short input and MMI codes ('#', '*') that would surface a foreign system dialog
+    private static boolean isDialable(final CharSequence number) {
+        if (number == null)
+            return false;
+        int digits = 0;
+        for (int i = 0; i < number.length(); i++) {
+            final char c = number.charAt(i);
+            if (c == '#' || c == '*')
+                return false;
+            if (Character.isDigit(c))
+                digits++;
+        }
+        return digits >= 2;
     }
 
     public static void call(final MiniContact miniContact, final Context context) {
