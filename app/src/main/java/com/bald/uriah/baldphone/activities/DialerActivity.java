@@ -78,7 +78,7 @@ public class DialerActivity extends BaldActivity {
     private boolean playDialSounds;
 
     @SuppressLint("NewApi")
-    public static void call(final CharSequence number, final Context context, SubscriptionInfo subscriptionInfo) {
+    private static void call(final CharSequence number, final Context context, SubscriptionInfo subscriptionInfo) {
         try {
             if (subscriptionInfo == null) {
                 context.startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(("tel:" + number).replace("#", Uri.encode("#")))));

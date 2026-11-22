@@ -51,8 +51,16 @@ public abstract class TutorialFragment extends Fragment {
         if (activity == null)
             return;
         final ViewPagerHolder holder = activity.findViewById(R.id.view_pager_holder);
-        if (holder == null)
+        if (holder == null) {
+            // embedded outside the tutorial pager (AccessibilityLevelChangerActivity)
+            final View next = root.findViewById(R.id.bt_next);
+            if (next != null)
+                next.setVisibility(View.GONE);
+            final View back = root.findViewById(R.id.bt_back);
+            if (back != null)
+                back.setVisibility(View.GONE);
             return;
+        }
         final View next = root.findViewById(R.id.bt_next);
         if (next != null)
             next.setOnClickListener(v -> {
