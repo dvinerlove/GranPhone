@@ -56,6 +56,7 @@ public class ViewPagerHolder extends LinearLayout {
     private View circles;
 
     private boolean noArrows = false;
+    private boolean hideIndicator = false;
     private boolean useCircle = false;
     private boolean showHints = false;
 
@@ -91,6 +92,7 @@ public class ViewPagerHolder extends LinearLayout {
         if (itemType == null)
             itemType = context.getString(R.string.page);
         useCircle = typedArray.getBoolean(R.styleable.ViewPagerHolder_use_circles, false);
+        hideIndicator = typedArray.getBoolean(R.styleable.ViewPagerHolder_hide_indicator, false);
         showHints = typedArray.getBoolean(R.styleable.ViewPagerHolder_show_hints, false);
 
         typedArray.recycle();
@@ -159,7 +161,8 @@ public class ViewPagerHolder extends LinearLayout {
         } else {
             page_of_ = (TextView) layoutInflater.inflate(R.layout.page_of_, this, false);
         }
-        addView(useCircle ? circles : page_of_);
+        if (!hideIndicator)
+            addView(useCircle ? circles : page_of_);
 
     }
 

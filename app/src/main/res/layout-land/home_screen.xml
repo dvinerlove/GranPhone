@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/top_bar"
         app:layout_constraintTop_toTopOf="parent"
-        app:use_circles="true" />
+        app:hide_indicator="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
