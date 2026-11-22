@@ -22,7 +22,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {App.class}, version = 1, exportSchema = false)
+@Database(entities = {App.class}, version = 1, exportSchema = true)
 public abstract class AppsDatabase extends RoomDatabase {
     private static final Object LOCK = new Object();
     private static AppsDatabase appsDatabase = null;
