@@ -445,4 +445,11 @@
     <string name="kiosk_disabled">Kiosk mode is off.</string>
     <string name="remove_device_owner">Remove vophone as administrator</string>
     <string name="remove_device_owner_subtext">Kiosk mode will no longer be available and vophone can be uninstalled. To undo this, the computer command has to be run again.</string>
+    <string name="add_emergency_contact_2">Add 2nd contact</string>
+    <string name="close">Close</string>
+    <string name="back">Back</string>
+    <string name="notification_service">BaldPhone notification service</string>
+    <string name="notification_service_fail">Could not start notification service!</string>
+    <string name="battery">Battery</string>
+    <string name="calculator">Calculator</string>
 </resources>

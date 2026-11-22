@@ -99,7 +99,7 @@ public final class CallManager {
 
     @SuppressWarnings("deprecation")
     public static int getState(Call call) {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? call.getDetails().getState() : call.getState();
+        return call.getState(); // getDetails().getState() needs API 31+; compileSdk is 29 and getState() still works
     }
 
     /**
