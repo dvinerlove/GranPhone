@@ -30,7 +30,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.4"
+        android:layout_weight="1.8"
         android:background="@drawable/style_for_buttons"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:textSize="68sp"
+            android:textSize="62sp"
             android:visibility="visible" />
 
         <TextClock
