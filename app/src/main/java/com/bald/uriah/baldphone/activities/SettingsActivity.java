@@ -44,7 +44,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -71,7 +70,6 @@ import com.bald.uriah.baldphone.utils.S;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
-import com.bumptech.glide.Glide;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -424,25 +422,6 @@ public class SettingsActivity extends BaldActivity {
             }, R.drawable.nfc_on_button));
         connectionCategory.add(new RunnableSettingsItem(R.string.location, v -> startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)), R.drawable.location_on_button));
 
-        final LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        LayoutInflater.from(this).inflate(R.layout.credits_button, linearLayout, true);
-        linearLayout.findViewById(R.id.credits_button).setOnClickListener(v -> startActivity(new Intent(this, CreditsActivity.class)));
-        final ImageView pic = new ImageView(this);
-        linearLayout.addView(pic);
-        Glide.with(pic).load(R.drawable.me).into(pic);
-
-        mainCategory.add(
-                new BDBSettingsItem(R.string.about,
-                        BDB.from(this)
-                                .addFlag(BDialog.FLAG_OK)
-                                .setTitle(R.string.about)
-                                .setSubText(R.string.about_subtext)
-                                .setPositiveButtonListener(params -> true)
-                                .setExtraView(linearLayout)
-
-                        , R.drawable.info_on_button)
-        );
         mainCategory.add(
                 new BDBSettingsItem(R.string.device_memory,
                         BDB.from(this)

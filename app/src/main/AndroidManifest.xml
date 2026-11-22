@@ -231,9 +231,6 @@
             android:enabled="${fullApp}"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activities.CreditsActivity"
-            android:enabled="${fullApp}" />
-        <activity
             android:name=".activities.YoutubeActivity"
             android:screenOrientation="portrait" />
         <activity
