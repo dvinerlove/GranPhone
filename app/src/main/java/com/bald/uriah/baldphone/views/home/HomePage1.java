@@ -78,6 +78,8 @@ import static com.bald.uriah.baldphone.services.NotificationListenerService.NOTI
 public class HomePage1 extends HomeView {
     public static final String TAG = HomePage1.class.getSimpleName();
     private final static String WHATSAPP_PACKAGE_NAME = "com.whatsapp";
+    private final static String HIDDEN_TILE = "__HIDDEN__";
+    private final static String TILES_SEEDED_KEY = "HOME_TILES_SEEDED";
     private final static ComponentName WHATSAPP_COMPONENT_NAME =
             new ComponentName(WHATSAPP_PACKAGE_NAME, WHATSAPP_PACKAGE_NAME + ".Main");
     public Map<App, FirstPageAppIcon> viewsToApps;
@@ -123,11 +125,6 @@ public class HomePage1 extends HomeView {
         view = inflater.inflate(R.layout.fragment_home_page1, container, false);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             view.findViewById(R.id.clock).setVisibility(View.GONE);
-        if (homeScreen == null) {
-            view.findViewById(R.id.messages_container).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.media_container).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.time_container).setVisibility(View.VISIBLE);
-        }
 
         attachXml();
         genOnClickListeners();
@@ -189,8 +186,21 @@ public class HomePage1 extends HomeView {
 
     }
 
+    private void seedHiddenTiles() {
+        if (sharedPreferences.getBoolean(TILES_SEEDED_KEY, false))
+            return;
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        for (String key : new String[]{BPrefs.CUSTOM_APP_KEY, BPrefs.CUSTOM_ASSISTANT_KEY, BPrefs.CUSTOM_MESSAGES_KEY,
+                BPrefs.CUSTOM_PHOTOS_KEY, BPrefs.CUSTOM_CAMERA_KEY, BPrefs.CUSTOM_VIDEOS_KEY,
+                BPrefs.CUSTOM_PILLS_KEY, BPrefs.CUSTOM_APPS_KEY, BPrefs.CUSTOM_ALARMS_KEY})
+            if (!sharedPreferences.contains(key))
+                editor.putString(key, HIDDEN_TILE);
+        editor.putBoolean(TILES_SEEDED_KEY, true).apply();
+    }
+
     private void genOnClickListeners() {
         sharedPreferences = BPrefs.get(activity);
+        seedHiddenTiles();
         setupButton(BPrefs.CUSTOM_RECENTS_KEY, bt_recent, v -> homeScreen.startActivity(new Intent(homeScreen, RecentActivity.class)));
         setupButton(BPrefs.CUSTOM_DIALER_KEY, bt_dialer, v -> homeScreen.startActivity(new Intent(homeScreen, DialerActivity.class)));
         setupButton(BPrefs.CUSTOM_CONTACTS_KEY, bt_contacts, v -> homeScreen.startActivity(new Intent(homeScreen, ContactsActivity.class)));
@@ -238,6 +248,19 @@ public class HomePage1 extends HomeView {
                 homeScreen.startActivity(new Intent(HomePage1.this.homeScreen, AppsActivity.class));
         });
         setupButton(BPrefs.CUSTOM_ALARMS_KEY, bt_clock, v -> homeScreen.startActivity(new Intent(homeScreen, AlarmsActivity.class)));
+        if (homeScreen != null)
+            for (int id : new int[]{R.id.phone_container, R.id.messages_container, R.id.media_container, R.id.time_container})
+                hideRowIfEmpty(id);
+    }
+
+    private void hideRowIfEmpty(int id) {
+        final ViewGroup row = view.findViewById(id);
+        for (int i = 0; i < row.getChildCount(); i++) {
+            final View child = row.getChildAt(i);
+            if (child instanceof FirstPageAppIcon && child.getVisibility() == View.VISIBLE)
+                return;
+        }
+        row.setVisibility(View.GONE);
     }
 
     private void updateFlashIcon() {
@@ -249,6 +272,15 @@ public class HomePage1 extends HomeView {
     }
 
     private void setupButton(String bPrefsKey, FirstPageAppIcon bt, View.OnClickListener onClickListener) {
+        final String prefValue = sharedPreferences.getString(bPrefsKey, null);
+        final boolean hidden = HIDDEN_TILE.equals(prefValue);
+        if (hidden) {
+            if (homeScreen != null) {
+                bt.setVisibility(View.GONE);
+                return;
+            }
+            bt.setAlpha(0.3f);
+        }
         final App app;
         boolean phone = false;
         if (bt == bt_whatsapp && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(bPrefsKey)) {
@@ -256,8 +288,8 @@ public class HomePage1 extends HomeView {
         } else if (bt == bt_recent && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(bPrefsKey)) {
             app = null;
             phone = true;
-        } else if (sharedPreferences.contains(bPrefsKey)) {
-            app = AppsDatabase.getInstance(homeScreen).appsDatabaseDao().findByFlattenComponentName(sharedPreferences.getString(bPrefsKey, null));
+        } else if (prefValue != null && !hidden) {
+            app = AppsDatabase.getInstance(homeScreen).appsDatabaseDao().findByFlattenComponentName(prefValue);
             if (app == null)
                 sharedPreferences.edit().remove(bPrefsKey).apply();
         } else app = null;
@@ -292,13 +324,15 @@ public class HomePage1 extends HomeView {
                     .setTitle(R.string.custom_app)
                     .setSubText(R.string.custom_app_subtext)
                     .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
-                    .setOptions(initialAppName, activity.getText(R.string.custom))
-                    .setOptionsStartingIndex(() -> sharedPreferences.contains(bPrefsKey) ? 1 : 0)
+                    .setOptions(initialAppName, activity.getText(R.string.custom), activity.getText(R.string.hide))
+                    .setOptionsStartingIndex(() -> hidden ? 2 : (sharedPreferences.contains(bPrefsKey) ? 1 : 0))
                     .setPositiveButtonListener(params -> {
                         if (params[0].equals(0)) {
                             sharedPreferences.edit().remove(bPrefsKey).apply();
-                        } else
+                        } else if (params[0].equals(1))
                             activity.startActivityForResult(new Intent(activity, AppsActivity.class).putExtra(AppsActivity.CHOOSE_MODE, bPrefsKey), AppsActivity.REQUEST_SELECT_CUSTOM_APP);
+                        else
+                            sharedPreferences.edit().putString(bPrefsKey, HIDDEN_TILE).apply();
                         return true;
                     });
 
