@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve BaldPhone
+about: Create a report to help us improve GranPhone
 title: ''
 labels: ''
 assignees: ''
