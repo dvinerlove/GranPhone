@@ -1,0 +1,542 @@
+Title: TF_Template_Word_Windows_2016
+
+URL Source: http://ira.lib.polyu.edu.hk/bitstream/10397/105044/1/Li_Older_Adults_Use.pdf
+
+Final URL: https://ira.lib.polyu.edu.hk/bitstream/10397/105044/1/Li_Older_Adults_Use.pdf
+
+Published Time: Mon, 15 Apr 2024 07:38:20 GMT
+
+Number of Pages: 54
+
+Markdown Content:
+Older adults’ use of mobile device: Usability challenges while navigating various interfaces 
+
+# Qingchuan Li a and Yan Luximon a*
+
+> a
+
+School of Design, The Hong Kong Polytechnic University, Hong Kong SAR 
+
+Mobile devices are becoming ubiquitous among older adults, but have also caused unprecedented challenges due to the high demands of interaction techniques and changeable design patterns found across various applications. This paper aims to investigate how older adults navigate with mobile interfaces and identify their potential usability challenges while navigating. To do so, we summarised six state-of-the-art mobile interface design patterns and conducted individual usability test and in-depth interview with 22 older adults. Participants were asked to perform 19 navigation tasks that containing these design patterns under realistic usage scenarios. Follow-up interviews were held to collect their detailed comments on usability issues regarding visual design, ease of understanding, and interaction and navigation of the design patterns, as well as their personal experience. The results found that overall older adults were able to navigate using contents more effectively than menus and buttons. Participants experienced great challenges in directing their attention to the menus and buttons, understanding the meaning of icons, and interacting with these menu components. In contrast, the content-oriented navigation design performed better in understanding, navigation, and interaction, which could be a promising direction for elderly-friendly mobile application design. Design implications are further discussed for creating an elderly-friendly mobile interface. 
+
+Keywords: mobile design patterns; navigation; older adults; activity analysis 
+
+Introduction 
+
+Mobile technology is becoming ubiquitous among older adults, who are increasingly using diverse functions of these platforms to serve various purposes, including social communication, entertainment, information gathering and learning, and maintaining health (Plaza et al. 2011). However, due to generally declining perceptual, cognitive, and motor capabilities, older adults may face increasing challenges when interacting This is the Pre-Published Version. This is an Accepted Manuscript of an article published by Taylor & Francis in Behaviour & Information Technology on 03 Jun 2019 (published online), available at: http://www.tandfonline.com/10.1080/0144929X.2019.1622786. with these systems to different extent. Thus, they may become more sensitive to design defects in comparison to younger adults (Vines et al. 2015; Chin and Fu 2012; Zhou, Rau, and Salvendy 2012). In order to design mobile applications that are simple and intuitive for older adults to use, a considerate amount of laboratory research has been conducted to create a theoretical foundation for usability guidelines, and heuristic evaluation has been widely applied to evaluate realistic usability issues (Dumas and Salzman 2006). However, previous studies on senior users have dealt primarily with usability problems related to visual and haptic issues, such as the size, space, and colour of each interface element. Certain vital aspects that require more cognitive and perceptual processing, such as navigation and menus, have been explored much less thoroughly (Petrovčič et al. 2017). With digitized data increasing in accessibility, mobile interface navigation has become an essential way for designers and developers to guide and assist users in accessing various content and accomplishing tasks (Garrett 2010; Strong 2009), as well as a crucial ergonomic factor that may influence users’ purchasing decision (Maguire and Osman 2003). 
+
+Among the limited amount of usability studies on interface navigation, most of them were mainly focused on traditional feature phones. Menu disorientation was stressed as one of the most frequently reported usability issues for older adults due to the deep and complex menu structure (Gao et al. 2015; Kim et al. 2007; Mi et al. 2014; Wagner, Hassanein, and Head 2014; Ziefle et al. 2007). Later, with the emergency of touchscreens, the mobile user interface and the style of interactions were entirely changed. For example, the disorientation caused by hierarchical menus was largely reduced. Nevertheless, the usability issues of mobile interface navigation became salient in new ways. Older adults reported significant difficulty in situations such as browsing broad menus, sliding between interfaces, switching between functions, and returning to previous screens, which are still unexplored in usability research (Zhou, Rau, and Salvendy 2012; Li and Luximon 2017). Moreover, the intense evolution cycle of a user interface generally introduces distinct design styles for menu presentation, content organization, and interaction techniques. These frequently changing and diverse design patterns for navigation tend to be confounded by various usability issues (Cecere, Corrocher, and Battaglia 2015), inevitably producing greater cognitive load and increased difficulty for users, the extent of which is unknown among older adults. 
+
+On the other hand, practitioners and designers also face great challenges when attempting to balance the high-level general principles and low-level user interface details such as text, graphics, and buttons (Duyne, Landay, and Hong 2002; Tidwell 2010). They must deal very carefully with these guidelines, derived from prior usability research, and apply them to different design scenarios to make sure their designs fit into the specified use context and follow the style guides of the current mobile industry (von Wangenheim et al. 2016). In this way, various mobile interface design patterns have repeatedly been proposed and used as solutions for specific user interface problems, such as navigation patterns, forms, search, sort and filter, feedback and affordance, as well as help and tutorials (Neil 2014). However, a lack of usability standards and guidelines for mobile interface design patterns, especially navigation patterns, does still exist. As reported, navigation patterns, which include link navigation, content navigation, and menu navigation, were the least explored categories in mobile user interface studies, followed by the information control, icons, and input and selection patterns (Punchoojit and Hongwarittorrn 2017). Practitioners and designers are faced with a number of choices for design solutions (Tidwell 2010), but may have no idea about the characteristics of each pattern in terms of which navigation pattern is easy and intuitive to use for older adults. Thus, there does exist a necessity to deeply understand older adults’ navigation behaviour and usability challenges with mobile interfaces. 
+
+Related Works 
+
+In the field of HCI, the word ‘navigation’ has historically been generalized from the image of navigation in geographical space. It is a process of understanding various meaningful chunks of information based on their relations to each other: neighbourhood, crossway, proximity, distance, connectedness, and reachability (Strong 2009). Specifically, this research mainly focuses on two major aspects that related to mobile interface navigation, namely menu navigation and content navigation (Punchoojit and Hongwarittorrn, 2007). From the two perspectives, this section reviews prior studies that investigated usability issues of mobile interface navigation, and analyses the possible factors that influence the navigation behaviour. In the end, it accordingly extracts six of the most widely used design patterns for further usability testing and interviews. 
+
+Menu-oriented Navigation 
+
+Menu navigation is a typical way of information retrieving (Garrett, 2010). The menu design plays an important role in providing functions and representing information structures for the websites or applications (dos Santos et al. 2011). Many topics on menu navigation have been studied in previous studies, such as panel position, menu structure, item organization, menu patterns, as well as the possible effects of task complexity and individual characteristics. 
+
+For example, panel position and menu structure were primarily studied in desktop context. As indicated by previous studies, a suitable menu position, such as left panel design (Torun and Altun 2014) and placement of well-designed intra-article navigation schemes (Cuddihy and Spyridakis 2012), could help in improving web navigation performance in terms of recall and retention. Besides, menu structure also matters. It was reported that a vertical menu that displays the full context of menu items at once are better than a dynamic menu that demands additional action to access more menu items each time, especially for users with decreased perception and cognitive capabilities (Puerta Melguizo, Vidya, and van Oostendorp 2012; Leuthold et al. 2011). Later, with the prevalence of feature phones, the usability problems of menu structure become even salient because system navigation was considerably hampered due to restricted screen size and expanded information. Older adults could not easily understand how menu items were spatially structured or how the functions, nodes, and information were arranged due to declining memory, spatial ability, and perceptual capability; thus these users easily experienced disorientation within deep menus and nested functions (Ziefle et al. 2007; Kim et al. 2007; Ziefle and Bay 2006; Downing, Moore, and Brown 2005). Simple, flat menu structures become the major recommendation for improving older adults’ navigation behaviour (Ziefle and Bay 2006). In addition, text labels for icons and buttons can also help older adults memorize functions, locations, and navigation paths (Chen, Chan, and Tsang 2013; Hassan and Md Nasir 2008; Kim et al. 2007; Ziefle and Bay 2005, 2006). 
+
+With the launch of touchscreen-based mobile technologies, vendors such as Apple and Microsoft have provided specific application guidelines for mobile interface navigation based on menu hierarchies. For example, the iOS human interface guidelines derive three styles of navigation: hierarchical navigation (starting from a home page and following linked child pages that allow users to make one choice each time), flat navigation (switching between disparate pages or categories) and content-driven or experience-driven navigation (moving freely through content) (Apple Inc 2007). Microsoft follows similar navigation models, making use of a hierarchical navigation scheme and a flat navigation scheme (Basu 2013). Overall, the drill-down views have been widely employed in menu navigation, in which the menu hierarchies are commonly kept at two levels [Hoehle, Aljafari, Venkatesh 2016]. In this way, the disorientation caused by hierarchical menus of feature phones may decrease thanks to the flat and broad menu patterns (Zhou, Rau, and Salvendy 2012, 2013; Boulos et al. 2011). 
+
+Nevertheless, touchscreen mobile devices also introduced more types of menu patterns and design solutions, whose effectiveness were still unexplored. A few early studies have ever examined these menu patterns among younger adults. Kim and his colleagues (2011) conducted a study to compare the difference of navigation performance and preference between several types of 3D menus (i.e., revolving stage, 3D carousel and collapsible cylindrical tree) and a 2D overview menu under the conditions of different menu breadth and task complexity. The results suggested that the 3D menu of revolving stage outperformed other patterns when the breadth level was high; while, a 2D overview menu had superior performance when the task required lower memory load. In spite of this, most of the menu patterns have not been examined yet, of which the effectiveness was unknown especially for older adults. The current usability standards for mobile UI menu navigation are still based on the paradigm of desktop and feature phones. Further study is necessary to examine the effectiveness and usability issues of more menu patterns in mobile interface navigation (Punchoojit and Hongwarittorrn 2018; Petrovčič et al. 2017). Content-oriented navigation 
+
+In addition to menus, the content itself also creates focus and hierarchy to inform users about the inherent logic of websites and mobile applications (Hoehle and Venkatesh 2015). A useful content display pattern could reflect users’ mental model and help users in information filtering and processing (Punchoojit and Hongwarittorrn 2017). For instance, older adults tend to apply a linear mode of visual exploration and follow a linear path when navigating on the desktops (Castilla et al. 2016). In addition, older adults perform better at content-oriented searching than navigation-oriented searching generally. Specifically, the use of hypertext and links may disadvantage the navigation performance of older adults compared to younger users due to the increased demand for prior technological knowledge, as well as decision-making, visual processing, and working memory (DeStefana and LeFevre 2007). Nonetheless, older adults still maintain strong performance in content searching thanks to their stable crystallized intelligence and reading comprehension (Etcheverry et al. 2012; Etcheverry, Terrier, and Marquié 2012). 
+
+Different content display patterns have been proposed as solutions in order to optimize the web navigation chain, examples including several types of lists, such as vertical list, thumbnail list, and cascading list (Tidwell 2010). Nevertheless, due to the limited screen size of mobile devices, early findings from web navigation may be problematic in different ways (Petrovčič et al. 2017). Firstly, the effectiveness of different content display patterns needs to be investigated. Previous studies have examined some of the widely used design patterns for mobile navigation. In a study by (Osman, Ismail, and Wahab 2009), researchers compared task efficiency, user satisfaction and learnability between the fisheye list and vertical list among younger adults. The results showed that fisheye list outperformed vertical list regarding comprehension and acceptance, but the vertical list was better concerning task execution time. Yu and Kong (2016) compared three types of list pattern design in terms of reading performance and subjective evaluations among younger adults, namely progressive list design, list-view design, and thumbnail design. They found that the thumbnail design provided the most efficient way of locating target information and the progressive list design performed as the worst in terms of reading performance and subjective evaluations. Nevertheless, few studies have been investigated the usability issues regarding content display patterns for older adults. 
+
+Besides, interactions with the various content display patterns could also cause usability challenges for older adults. On the one hand, even a simple gesture like tapping, swiping, scrolling, or flipping can be very difficult for them (Harada et al. 2013; Motti, Vigouroux, and Gorce; Sundar et al. 2014), because these interaction techniques require high motor ability and visual synchronization between target pressing and the display response (Zhou, Rau, and Salvendy 2012). Older adults thus experience significant difficulties in distinguishing between different gestures (e.g., swipe, scroll, pinch, tap, double tap or multi-press), recognizing whether a button has been pressed, or deciding how long the target should be tapped (Harada et al. 2013; Motti, Vigouroux, and Gorce 2013; Furuki and Kikuchi 2013). On the other hand, due to the generally increased complexity of mobile user interface, older adults also encounter problems in differentiating which areas could be touched and which could not (Harada et al. 2013; Zhou, Rau, and Salvendy 2012). 
+
+The present study 
+
+In summary, previous studies do not provide sufficient evidence for the benefits and challenges of using various design patterns for mobile navigation among older adults. This study aims to investigate the mobile navigation behaviour of older adults regarding different design patterns and identify their potential usability challenges while navigating. Specifically, it seeks to address three research questions: (a) Could the current mobile interface design patterns well support older adults’ navigation behaviour and usage habit? (b) If not, what are the potential usability challenges for older adults, e.g., visual design, ease of understanding, interaction, and navigation? (c) How do older adults feel and evaluate each of the mobile UI design patterns? 
+
+After reviewing the guidelines and principles proposed by iOS and Android platforms (Apple Inc, 2017a; Google Inc, 2017a) and analysing various navigation patterns used for the current mobile applications (Apple Inc, 2017b; Google Inc, 2017b), we summarised six of the most widely used mobile navigation patterns to conduct usability testing and in-depth interviews among older adults, namely tab menu, side drawer, springboard, lists, gallery and grids, and cards. Based on the amount of content attached to each menu item, these patterns can be categorized into two groups of menu-oriented and content-oriented design patterns (Neil 2014; Tidwell 2010). For each pattern, two representative examples are shown in Figure 1 and Figure 2. Menu-oriented design patterns include simple menu structures such as tab menu, side drawer, and springboard (Figure 1). Tab menus are mainly used as persistent navigation for flat hierarchies. These menus can immediately show three to five top-level destinations and allow users to switch between them. Side drawers are pop-up menus that can only be revealed by tapping. Normally, the side drawer is used for more than five categories with two or more levels of hierarchy. The springboard generally works as a launch point into different applications or functions and provides a number of categories with more than two levels of hierarchy. In general, these menus do not contain a great deal of content and act more like hyper-buttons or links, often resulting in dispersed visual exploration. When navigation patterns involve more contents, such as explanatory information and graphic elements, a repeated pattern of lists or cells arrayed in a vertical or horizontal layout, such as grids or a gallery, may work better. Finally, card patterns have recently emerged as an elegant way to display additional content for browsing, using swiping, flipping, and stacking gestures. They can easily create a visual hierarchy, generally facilitating attention along with a linear means of exploration. These are categorized into content-oriented design patterns (Figure 2). 
+
+-----------------------------------
+
+Insert Figure 1 here 
+
+-----------------------------------
+
+-----------------------------------
+
+Insert Figure 2 here 
+
+-----------------------------------
+
+Methodology 
+
+Participants 
+
+Mobile technologies are widely used among older adults in Hong Kong. According to statistics released by the Hong Kong Census and Statistics Department in 2017, 64.9% of adults over 55 years old reported smartphone usage (Census and Statistics Department 2017). However, the age-related capability declines may influence the older adults’ use of mobile technologies. Although the timing of these changes differ between capabilities and individuals, most of the perceptual, cognitive, and motor capabilities are reported to be quickly decreased since the age of 60 or 70, such as the processing speed, attention, memory and executive ability, and fine motor and gross motor skills (Leversen et al. 2012; Drag and Bieliauskas 2010; Salthouse 2009). Therefore, in order to gain an in-depth and valid understanding of the post-adoption behaviour of mobile application use among the older adults with varying degrees of capability declines, this study recruited a group of Hong Kong Chinese older adults, who aged above 60 years old and had previous use experience of mobile technologies and relevant applications. In total, 22 Hong Kong Chinese older adults who resided in domestic households were recruited through the local community elderly centres, by leaflet and verbal advertisement. The average age of participants was 71.05 years old (age range: 60 to 84 years old; SD= 7.09 years). 13.6% were aged between 60 and 64 years old; 31.8% were aged between 65 and 69 years old; 18.2% were aged between 70 and 74 years old; 22.7% were aged between 75 and 79 years old; and 13.6% were aged between 80 and 84 years old. All participants reported being in good physical and cognitive health without any impairment. Participants averaged a formal education experience of 8.5 years. Specifically, the majority (63.6%) had a secondary school education, followed by those who had a primary school education (27.3%), below primary school (4.5%), and above college (4.5%). Participants had adopted advanced mobile technologies such as smartphones and tablets for 3.67 years and reported usage of 2.04 hours per day on average. 
+
+Experiment Design 
+
+A Samsung smartphone (Galaxy C7 Pro) with a resolution of 1080×1920 pixels was used to conduct the usability testing in a separate and quiet meeting room at a local elderly centre. Three mobile applications that include the six navigation patterns mentioned above were utilized in the usability testing. Before the experiment, we provided all participants with detailed instructions to ensure that they were familiar with all interfaces and operations. Participants were then given sufficient time to familiarize themselves with the three applications. In the experiment, participants were first asked to carry out 19 tasks using all three applications. Then, an in-depth interview was conducted when participants finished using each application in order to maintain flow. We asked participants to describe the challenges and problems they encountered when interacting with these interfaces. The whole process lasted approximately 1.5 hours for each participant. All interactions observed in the tasks and discussions from the interviews were video and voice recorded, supplemented with field notes taken by the researchers. 
+
+Mobile navigation patterns 
+
+To our knowledge, this study is a pioneering work in the investigation of how older adults navigate different design patterns and possible usability issues. Instead of comparing navigation performance between design patterns and mobile applications, we chose to explore specific interaction details to better understand the key usability challenges senior users face in naturalistic usage scenarios. There were two standards when we were selecting the testing applications. Firstly, we aimed to employ the widely used mobile applications among Hong Kong elderlies, such as social networking and information sharing (Li and Luximon 2016). Secondly, we intended to cover more abovementioned navigation patterns of menus and content patterns. Three mobile applications were selected: a social networking smartphone application called ‘WhatsApp’, a Hong Kong local media and entertainment application called ‘myTV SUPER’, and a news and magazines application called ‘Flipboard’. WhatsApp contains two design patterns we would like to investigate: tabs and lists; myTV SUPER uses a number of design patterns: tabs, springboard, side drawers, lists, a gallery and grids; and Flipboard primarily uses two design patterns: tabs and cards. 
+
+The design patterns for these applications are marked and analysed from pattern [1] to [18], as shown in Figures 3-5. Each application contains at least two levels of information hierarchy, employing both a primary and secondary pattern. WhatsApp uses tab menus as primary navigation and lists as secondary navigation. The tabs are fixed on the top of the screen and contain three text buttons. Lists present a summary of the contacts in a vertical fashion. Several assisted navigation buttons are arranged in the upper and lower parts of the screen for searching, starting a new dialogue, and additional functions, as shown in Figure 3. For myTV SUPER, its primary navigation pattern comprises scrolling tabs and a side drawer, while the secondary navigation patterns include the springboard, gallery, and lists, as shown in Figure 4. The tabs may be scrolled horizontally, while the side drawer, springboard, lists, and galleries may be scrolled vertically in either direction. Assisted navigation buttons for keyword searching and adding favourites, as well as hamburger menus are located at the top of the interface. For Flipboard, its primary navigation pattern involves scrolling tabs that users can slide, while the secondary navigation pattern primarily involves card flipping. Assisted navigation buttons are placed at the bottom corner along card content and lists are also used as another secondary navigation pattern, as shown in Figure 5. 
+
+-----------------------------------
+
+Insert Figure 3 here 
+
+-----------------------------------
+
+-----------------------------------
+
+Insert Figure 4 here 
+
+-----------------------------------
+
+-----------------------------------
+
+Insert Figure 5 here 
+
+-----------------------------------Tasks 
+
+Participants were asked to complete 19 tasks. These tasks were all related to the routine usage of each application. For example, the 5 navigation tasks for WhatsApp included dialogue browsing, voice chatting, keyword searching, call log searching, and initiating contact with a new friend. The 7 navigation tasks for myTV SUPER included TV station searching, TV show searching, program searching, movie searching, keyword searching, playlist searching, and adding favourites. Flipboard involved 7 navigation tasks, including travel article searching, design article searching, food article searching, adding favourites, cover story browsing, article sharing, and adding a new category. Participants were allowed to finish all tasks without time limitations. Table 1 shows the details of each task and the design patterns involved in the task completion. 
+
+-----------------------------------
+
+Insert Table 1 here 
+
+-----------------------------------
+
+Interviews 
+
+After completing the set of tasks of each mobile application, we asked participants to describe the challenges and problems they encountered when interacting with these interfaces to further identify the possible usability issues related to each design pattern. Considering the possibility of lacking details by self-reporting, we developed a usability checklist based on the established usability guidelines. These usability principles were primarily collected from previous literature on mobile user interface guidelines for older adults (Hoehle, Aljafari and Venkatesh 2016; de Barros, Leitão, and Ribeiro 2014; Mi et al. 2014; Al-Razgan et al. 2012; Ji et al. 2006) and were then supplemented by some crucial principles from web usability guidelines for older adults (Patsoule and Koutsabasis 2014; Zaphiris, Kurniawan, and Ghiawadwala 2007). We selected these principles mainly based on whether they have practical impacts on mobile navigation performance. Then, the redundant principles were removed, and the similar ones were combined. After summarising and extracting, 25 usability principles from three aspects that related to interface navigation were covered in the checklist, including visual design, ease of understanding, and navigation and interaction, as shown in Table 2. 
+
+Specifically, visual design means that all the navigation components and content display should be clearly visible through the interface navigation. Ease of understanding refers to that the presentation of navigation components and content should be understandable and effective regardless of users’ experience, knowledge and reading ability. The navigation and interaction means that all the navigation components should provide clear path and cue to keep users realizing their current position, and provide straightforward interaction techniques as well as appropriate feedbacks. During the interview, we elaborated on the questions in terms of each usability principle by showing them the relevant design patterns and reminding them of the tasks they performed. In the end, participants were also asked to compare elements of navigation design across different design patterns and express their personal preferences. 
+
+-----------------------------------
+
+Insert Table 2 here 
+
+-----------------------------------
+
+Data processing and analysis 
+
+Around 30 hours of video data were collected from the usability testing and interviews in total. The video data, voice data, and transcripts were compiled chronologically, then transcribed and analysed. Video data were processed using the method of activity analysis, and interview transcripts were analysed using atlas.ti software based on the usability principles outlined in the checklist of Table 2. By the activity analysis, the completion level of each task was analysed at an action level, with relevant usability challenges identified. Then, the usability challenges were analysed and ascribed to the established usability principles one by one and further interpreted by the results of the interview. For those usability issues that cannot ascribe to present principles, we summarised and developed a set of additional usability principles in the section of results. 
+
+Activity analysis 
+
+Activity theory was one of the most influential theoretical frameworks in HCI studies. It emphasizes the emergence and development of human mind within the context of an activity that combined by prespecified and situated components (Leontiev 1978; Kaptelinin and Nardi 2006). In particular, an activity is comprised by an intentional actor (‘subject’), the objective reality (‘object’), and mediating artifacts, through which the activity is carried out (Baumer and Tomlinson 2011). Activity theory has been widely applied in technology design and evaluation (Clemmensen, Kaptelinin, and Nardi 2016). As a tool for empirical analysis, activity theory provides with a set of concepts in understanding technologies. For instance, the concept of tool mediation was extensively studied to understand artifacts, such as collaborative writing tools (Pargman and Waern 2003), surgical tools (Bardram 1998), and user interfaces for higher learning activities (Oviatt et al. 2012). The concept of context was mainly utilized when discussing meaningful human activity, such as collaborative activity (Barthelmess and Anderson 2002) and workplace learning (Owen 2001). Additionally, the concept of contradiction and breakdown was also frequently employed in the empirical analysis of technologies and systems, such as network systems (Miettinen and Hasu 2002) and video gaming (Law and Sun 2012). Hence, the activity theory works effectively in helping to understand technologies usage in various contexts. In 1996, Bødker firstly attempted to systematically apply the activity theory to video analysis in HCI research. Then, activity theory-based video analysis was frequently employed to support usability testing in HCI research (Harris 2004; Bødker 1996). In this study, we employed a structural activity analysis method to analyse the navigation tasks using video data. The video data of the 19 tasks are analysed by classifying discrete actions and identifying the goal, object, and tools comprising each action (Harris 2004; Bedny and Karwowski 2004). In this study, each action was characterized by a motor action such as swiping the interface or clicking a navigation button. Participants were able to freely navigate the applications while keeping the task objectives in their minds. Each task could be carried out using different actions or in different sequences. Figure 6 describes one example of activity analysis of task 13 for one participant. We can see that two actions were conducted in order to complete the task goal. Each action involved an internal goal (e.g., searching for the category), an object on the interface (e.g. text button) and a tool that mediated the action (e.g., tab button). 
+
+This study also draws on Bødker’s (1996) method for applying activity theory to video data analysis, which proposes two important concepts: breakdown and focus shift. Breakdown occurs when an action is disrupted or changed by an unanticipated divergence between the actual results and projected goals, while focus shift occurs whenever the user changes the objective of an action or activity. Since breakdowns can be easily identified using video data and are highly indicative of interface design issues (Harris 2004), we employed this concept in our study to further detect usability challenges, as shown in Figure 6. Instead of measuring specific performance data such as success rate or completion time, we analysed participants’ general action performance according to whether we detected usability challenges in the process. For each action, we examined the participants’ action performance in three completion levels: (a) Successful action without usability challenges; (b) Action with usability challenges that users managed to overcome; (c) Action with usability challenges that users failed to overcome. 
+
+Interview analysis 
+
+In the end, transcripts for the in-depth interviews were analysed based on the 25 usability principles outlined in Table 2, using the Atalas.it software, for mentions of visual design, ease of understanding, navigation and interaction in terms of buttons, menus, and contents. These results were analysed and integrated with the results of the activity analysis, as shown in Figure 6. In particular, the cause of problems of detected usability challenges was ascribed to the failure of applying corresponding usability principles from the checklist. Those usability challenges that were not mentioned by the established guidelines were also analysed and marked as ‘others’. Then, the reason behind these usability challenges was further analysed according to the interview contents, as quoted in the rightmost column in Figure 6. In the end, those additional principles were summarised and added to the initial checklist, which are named following the category of visual design, ease of understanding, navigation and interaction or others. 
+
+-----------------------------------
+
+Insert Figure 6 here 
+
+-----------------------------------Results 
+
+Summary of usability testing 
+
+1002 actions were recorded across the entire field experiment for 19 tasks from 22 participants. We clustered all actions into groups of similar action types based on their interaction techniques (e.g., clicking, scrolling, flipping), tools that mediated the actions (e.g., tabs, lists, springboards, side menus, gallery, cards, assisted navigation buttons), and type of mobile application. 30 distinct action categories were identified in total, which is marked as action ID from 1 to 30. The annotation schema is shown in Table 3, with the patterns that are involved in each action listed. Specifically, for actions of level B and level C that happened with breakdowns, we analysed the reason behind these usability challenges and compared them with the usability principles mentioned above. Also, the other usability issues that could not be ascribed to existing checklists were also collected and analysed. Summarising, four principles were abstracted, with one principle for visual design, one principle for ease of understanding, and two principles for navigation and interaction, as shown in Table 4. In the end, comments from participant were further analysed to understand the results of our activity analysis. 
+
+-----------------------------------
+
+Insert Table 3 here 
+
+-----------------------------------
+
+-----------------------------------
+
+Insert Table 4 here 
+
+-----------------------------------Menu-oriented design patterns 
+
+Results of activity analysis 
+
+The usage of menu-oriented patterns shown in Table 5, including the number of actions collected, the frequency of three levels of action performance, and the associated principles behind usability challenges. When using WhatsApp (Action 1, Pattern [1]), 58.6% of actions occurred with usability challenges that users managed to overcome, and 10.3% of actions happened with usability issues that users failed to overcome. Results of the activity analysis showed that these challenges and failures occurred primarily when participants were searching for text tab ‘calls’. Problems were most frequently resulted from not complying with the N1 principle, for that the tab menus were not noticeable enough. 8 participants first saw and scrolled through the list contents (under the ‘chats’ tab), instead of noticing the upper tabs. Another reason was due to participants’ old habits (H1). For example, 2 participants tried to find the ‘calls’ tab by using some shortcut buttons such as ‘finding more’ or ‘searching’ instead, because they were more familiar with these buttons. When using myTV SUPER (Action 2, Pattern [7]), 23.0% of actions occurred with usability challenges, and 1.4% of actions failed. Usability issues occurred due to the same major reason as Action 1 (N1), when 9 participants scrolled through the gallery contents first. Difficulties were also frequently reported when participants needed to click tab buttons. Two of them could not precisely tap the button and mistakenly touched a nearby one. As for Flipboard (Action 3, Pattern [15]), nearly all actions (94.3%) were conducted successfully in selecting the target tab buttons. Only 2 participants had problems when finding the tab menus for some habit reasons (H1), e.g., using ‘searching’ shortcut buttons. 
+
+However, when the actions required tab scrolling, complete failures and breakdowns were reported at varying degrees for myTV SUPER (44.0% and 44.0%) and Flipboard (4.0% and 10.5%). Tab scrolling using myTV SUPER (Action 4, Pattern [7]) was especially difficult for participants. Failures and breakdowns occurred both when participants attempted to find the tab menus as well as when scrolling the tab bars. The primary reason was found because that the tab bar was not indicative enough to show its scrollable characteristic, which was against the N10 principle. 21 participants didn’t realize the tab menus could be scrolled horizontally. Even with reminders from the researchers, 8 participants still encountered significant difficulties with the fine movement of scrolling the bottom tab bars (N6). In addition, the position of tab menu also caused a number of problems (N1). 6 participants didn’t notice the tabs in the lower position and first attempted to scroll the contents instead. By comparison, scrolling and searching of the tab menus were much easier using Flipboard (Action 5, Pattern [15]). Most of the participants could understand how to scroll the tabs on their own. Only three of them met some usability challenges that resulted from the inadequate indication of interaction techniques (N10). Nevertheless, the major problem was due to the confusion caused by the simultaneous interaction areas, which was against with N12 principle. Because the tab menus and card content could be scrolled in the horizontal and vertical direction respectively, 4 participants were confused and first flipped the content area instead. In addition, high demands for precise interaction techniques were also problematic (N6), with 3 participants who could not control the scrolling gestures very well and mistakenly touching other interfaces. 
+
+For springboard menus, all participants successfully selected the menu buttons (Action 7, Pattern [12]), but reported usability issues (18.2%) when scrolling the menu panel (Action 6, Pattern [12]). Breakdowns occurred primarily when 2 participants could not realize the springboard area could be scrolled due to the lack of interaction indication (N10). In comparison, the actions involving the side drawer revealed interesting results. Participants faced additional challenges when finding the entry point for the side drawer (Action 8, Pattern [9]), namely the hamburger button, with 29.0% of breakdowns and 29.0% of complete failures. Problems were caused by various aspects. Primary reasons lied at the comprehensibility of the icons (E1) and placed positions of hamburger button (N1). In particular, 11 participants could not understand the meaning of hamburger icon. 9 participants could not find the entry point of side drawer at first, and 2 participants could not precisely tap the hamburger button science it was too close to the edge of the screen. Other issues were also reported. For instance, 3 users could not correctly distinguish between the touchable and non-touchable text (V8); and 3 participants were confused by the simultaneous menus in the same interface (N11). When scrolling the side drawer menu lists (Action 9, Pattern [13]), 77.8% of actions were successful without usability issues, and 28.6% of actions were successful after overcoming usability challenges, as participants did not realize that the menu lists could be scrolled (N10). Nevertheless, once participants found the entry point for the side drawer, they were able to search and select the target menus effectively and efficiently. For simply searching and tapping the side drawer menu lists (Action 10, Pattern [13]), 96.4% of actions were completed successfully, with the 3.6% usability issues occurring due to accidental touches. 
+
+Comments from in-depth interviews 
+
+As indicated by activity analysis, whether the menu was noticeable enough was the major usability issue (N1) that influenced the action of tab switching for WhatsApp and myTV SUPER (Action 1, 2). According to the interview comments, the reason why participants regularly focused on the content areas shown on the default pages and seldom switched between tabs when using mobile applications could be due to two aspects. First, participants thought the functions showed on the default page were already enough for them. Second, participants did not like to switch to other tabs because they were afraid of making mistakes and felt it would be hard to recover from them. In addition, scrolling the tabs, springboard or side drawer of myTV SUPER (Action 4, 6, 9) was especially difficult for participants due to the poor indication of the scrolling gesture as well as the high requirement of fine motor skills. Most of the participants reported that they didn’t know whether the menus should be scrolled or not. 
+
+However, these issues related to tab switching and tab scrolling become less pronounced during Flipboard use (Action 3, 5). Possible reasons may be due to the position and font size of the tab menus, as well as the spaces between each tab. Participants stated that the tabs located on the upper screen were much easier to notice and use. They also expressed their preference for the larger font used in the Flipboard menus. When comparing the space between tabs in terms of these three applications, participants expressed differing considerations. On the one hand, they preferred the wider spaces between tabs in Flipboard, as they would not touch the wrong spot. However, they did not like to use scrolling or swiping gestures on the tabs when the space became wider or the dynamic width increased. In the end, when the participants were asked to compare tab menus, side drawers and springboard generally, most participants preferred the use of side drawers, followed by springboard and tabs. Typical answers included ‘I would like to glance at all of the choices at one time’ and ‘I would like to avoid the scrolling and swiping gestures.’ 
+
+-----------------------------------
+
+Insert Table 5 here 
+
+-----------------------------------Content-oriented design patterns 
+
+Results of activity analysis 
+
+Overall, it was much easier for participants to navigate using content rather than menus, as shown in Table 6. Using the example of lists, the list selection action in Flipboard (Action 15, Pattern [18]) and list scrolling action in WhatsApp (Action 11, Pattern [2]) achieved the best action performances, with 5.0% actions completed after overcoming usability challenges. Next was the action of list selection (Action 13, Pattern [2]: 5.0% occurred with breakdowns and 5.0% complete failures) in WhatsApp, in which only one breakdown occurred because 1 participant didn’t know how to select the target list and tapped the headshot area instead. The actions for list selection (Action 14, Pattern [11]: 9.0% occurred with breakdowns) and list scrolling (Action 12, Pattern [11]: 18.2% occurred with breakdowns) in myTV SUPER performed the worst for list patterns. Two breakdowns in Action 14 occurred because participants could not precisely tap the list area, which is related to N6 principle. While one breakdown happened due to the same reason (N6) and one breakdown occurred because the user did not realize the list could be scrolled (N10) in Action 12. 
+
+The actions for gallery selection in myTV SUPER (Action 17, Pattern [12]) also achieved a strong performance with 10.6% actions finished after overcoming usability issues. The major difficulty for participants was that the titles of the gallery content were not noticeable enough (V3). Two of them missed the targets when searching for the content. Gallery scrolling (Action 16, Pattern [12]), on the other hand, seemed to be more difficult for participants, with 27.3% actions completed after overcoming usability challenges. Activity analysis showed that these usability issues occurred for several reasons. Firstly, the interfaces did not provide sufficient cue to inform the user of the way to interact with (N10). 6 participants scrolled the gallery contents in the wrong direction, such as swiping vertically or dragging the interface downward. Secondly, 5 participants could not easily distinguish the target gallery name from others shown on the same page, leading them to choose incorrectly (E9). Thirdly, the breakdown occurred when 2 participants found the target gallery but mistakenly tapped an un-clickable text title (V8), and 2 participants missed the target content because of the unobvious titles (V3). 
+
+As for card flipping (Action 18, Pattern [16]) in Flipboard, 20.9% of actions occurred with breakdowns, and 4.7% of actions failed. The major usability challenges happened when users forgot how to initiate the interaction with card content due to in-adequate cues (N10). Specifically, 7 participants first attempted to swipe the content left and right. 3 participants did not know how to flip the pages at first and tried to click the assisted navigation buttons around the corners instead. Some of the other issues were resulted from imprecise touching, inappropriate feedback, unclear indication of location, and confusing exists of horizontal and vertical interaction areas. In particular, 5 participants met difficulties when performing the gesture of card flipping. They could not smoothly flip the pages, with many accidental touches happening (N6). Also, 5 participants could not instantly realize the interface changing, thus missed the target contents (N7). The unclear indication of location also caused certain challenges (N8). Our activity analysis revealed that 5 participants flipped forward and backward several times. Additionally, 5 participants were confused between the tab area, which is scrolled horizontally, and the content area, which is flipped vertically (N12). 
+
+Comments from in-depth interviews 
+
+At the same time, the comments collected from the interview also complemented some possible reasons for the most frequently reported usability issues by the activity analysis, such as the gallery scrolling (Action 16) and the card flipping (Action 18). For instance, some participants indicated that they did not realize the gallery could be scrolled vertically at first. Some of them also reported that it was very difficult to distinguish between the touchable text and the non-touchable text, or they could not find the targets when the gallery titles were not clear and distinctive enough. As for the difficulties of the card flipping, participants explained that they were more familiar with the taping and clicking gesture rather than flipping gesture. Participants also explained that they were afraid of losing their current position thus they were hesitated to flip through too much content. 
+
+Participants reported that the majority of the content was clear and visible, and the spaces between the content were appropriate for participants to navigate in the applications of WhatsApp and myTV SUPER. One exception was the font for the card content in Flipboard, which was slightly too small for the older adults to read. When they were asked to compare the three design patterns (lists, galleries, and cards), 14 participants preferred the lists or gallery designs. They stated that lists or galleries allowed them to take in more content at a glance and that it was too easy to lose previous content and too hard to compare between each page of content when using Flipboard. On the other hand, 5 participants preferred card flipping like Flipboard, as they thought it was much clearer, easier and more interesting to flip cards when navigating. 
+
+-----------------------------------
+
+Insert Table 6 here 
+
+-----------------------------------Use of assisted navigation buttons 
+
+Results of activity analysis 
+
+In addition to design patterns related to menu-oriented and content-oriented navigation, we also identified the frequent use of assisted navigation buttons, such as keyword searching, adding to favourites, sharing with friends, returning to previous interfaces, and so on. As shown in Table 7, the activity analysis revealed significant challenges in the use of assisted navigation buttons. 
+
+The most difficult actions were related to the button of starting a new dialogue (Action 22, Pattern [3]) in WhatsApp, which was located at the lower right corner of the interface and floating over the content. 13 participants met with usability issues when locating the button (N1). For instance, some of them searched the area at the upper right corner and tried buttons such as ‘find more’ or ‘search keywords’. Some others switched tab menus to complete the task. Besides, 10 participants came across with usability problems in understanding icons (E1), and 2 participants mistakenly tapped other areas because they could not distinguish between touchable and non-touchable icons (V8). When searching for keywords using WhatsApp (Action 20, Pattern [4]), we detected 45.5% of actions completed after overcoming usability issues and 22.7% of actions with complete failures. Breakdowns and failures also frequently occurred for 6 participants who had problems finding the locations of the buttons (N1), 9 participants who did not understand the icon of keyword searching (E1), and 2 participants who met difficulties with distinguishing the touchable and non-touchable icons (V8). For the second usability issue, it was found that two participants had difficulties when connecting the meaning of icons and its executed function. Even though they did refer the button as ‘magnifying glass’, the participants could not comprehend its metaphor meaning of ‘searching’. 
+
+We also identified relevant usability challenges for keyword searching in myTV SUPER (Action 21, Pattern [10]), article sharing in Flipboard (Action 26, Pattern [17]), and video chatting (Action 19, Pattern [5]) and adding new friends (Action 23, Pattern [6]) in WhatsApp. Usability challenges in Action 21 occurred primarily because of the difficulty in understanding icons of ‘keyword searching’ (E1). Thus participants sometimes selected incorrect buttons, such as clicking the hamburger button (3 participants), swiping the content (2 participants), and switching the tab menus (2 participants). One participant mistakenly touched the edge of the target button (N6). For Action 26, participants met with significant problems in distinguishing the icon of ‘sharing’ with several other icons (E1). 8 participants mistakenly selected buttons such as ‘returning’, ‘adding comments’, and ‘finding more’ instead. Due to the similar reasons (E1), 6 participants mistakenly used the button for ‘voice messaging’, located near the text entry area, instead of ‘video chatting’ for Action 19, and 8 participants mistakenly selected the button for ‘start group chat’ for Action 23, which looks similar to the target button of ‘add new friends’. 
+
+Out of the above actions, adding favourites in myTV SUPER (Action 24, Pattern [14]) and Flipboard (Action 25, Pattern [17]) were relatively easy for participants to complete. Based on participants’ comments, this was because the ‘add favourite’ icon is shaped like a heart, which made it easy for them to understand. 
+
+Comments from in-depth interviews 
+
+Overall, the activity analysis showed that the placement of buttons, understanding and distinguishing of icons, as well as making the connection between icon meaning and icon function were three major usability principles related to assisted navigation button usage. The interview analysis could help to uncover the reasons behind. In general, participants indicated that they tended to focus more on the content and did not notice or use the assisted buttons around the corners. The majority of participants complained that they could not understand the meaning of various icons and distinguish them from neighbouring icons or those of similar shape easily, even when they knew that each button carried a specific function or had previous experience with icons of a similar design. As a result, participants reported that they tried to avoid using these buttons as much as possible due to their fear of making irrevocable mistakes. Furthermore, they also faced difficulties with connecting the aimed functions to the target buttons. When we provided potential solutions for icon usage during the interview, all participants asserted that a button with text would be better to explain the meanings and functions of icons. 
+
+-----------------------------------
+
+Insert Table 7 here 
+
+-----------------------------------
+
+Discussion 
+
+In this study, we conducted a usability study on the mobile navigation behaviour regarding various design patterns among older adults. Data were captured through multiple channels including activity analysis of video data and interview content analysis. By examining several state-of-the-art mobile UI navigation patterns, this field investigation provided insights into whether the current interface design could support older adults’ navigation behaviour and what are the possible usability challenges. The results provided a variety of perspectives and design suggestions for designing mobile navigation interfaces for older adults. It is particularly crucial for improving the accessibility of touchscreen-based mobile devices among older adults. 
+
+In response to the first research question, we found that overall older adults were able to navigate using content more effectively than menus and buttons. For menu and button oriented navigations, it was found that participants experienced great challenges in directing their attentions to the menus and buttons, understanding the meaning of icons, and interacting with these menu components. In contrast, the content-oriented navigation design performed better in understanding, navigation, and interaction, which could be a promising direction for elderly-friendly mobile application design. Additionally, to respond to the second and third research questions, we summarised the most frequently reported usability challenges from activity analysis and compared them to existing guidelines to suggest for further design considerations in the following sections. 
+
+Designing for menu-oriented navigation 
+
+Horizontal scrolling navigation: tab menu 
+
+Tab menus are recommended as one of the major navigation patterns for flat applications. Within the flat information structure, users can directly access all primary categories by merely switching the tabs (Neil 2014). Nevertheless, the current study showed that the use of tab menus could cause significant usability challenges for older adults generally. Participants were found to be experienced great challenges in directing their attention to the tab menus, understanding the interaction mode of tab menus and precisely interacting with the tab menus. Despite this, this study revealed several vital aspects that designers need to consider to lessen the usability issues brought by tab menus. 
+
+Firstly, we found that participants experienced great challenges in directing attention to tab menus that appeared alongside the primary content, especially for Action 1 and 2. The activity analysis and interview analysis showed that participants focused more on the content in the middle of the screen, performing poorly in menu-oriented navigation. These results agreed with several previous studies on web navigation, which showed that older adults had more difficulty than younger users in directing their attention toward surface information characteristics, such as navigation links and menus (Etcheverry et al. 2012; Etcheverry, Terrier, and Marquié 2012). However, the usability issues were largely reduced in Action 3, which may due to the improved noticeability of tabs in Flipboard. Results of some previous studies on feature phones and desktops may explain this result. On the one hand, consistent with the results of some previous studies on physical buttons of feature phones (Caprani, O’Connor, and Gurrin, 2012; Olwal et al. 2011; Kurniawan 2008), large buttons also work for touchscreen interfaces when helping with directing attention. On the other hand, the placement of tab menus on the top can facilitate menu navigation to some extent. According to previous studies on websites, it was reported that the top and left placed menus can elicit higher correctness rate, fewer mouse clicks and higher preferences among users (Murano and Oenga 2012; Burrell and Sodan 2006). Summarising, we recommend that: 
+
+Use top-tabbed menus and larger tab buttons to facilitate older adults’ navigation behaviour with tab menus 
+
+In addition, the tangible user interface introduced by touchscreen mobile technologies is one of the most salient differences with the traditional web navigation and feature phones. With direct manipulation, even a very simple gesture can create significant difficulties for older adults due to their decreased motor capabilities, which could also lead to increased chances of unintentional taps (Harada et al. 2013; Motti, Vigouroux, and Gorce 2013). As a result, scrolling gestures with tab menus were extremely difficult for participants in the current study (Action 4). Furthermore, the lack of sufficient visual cues made it even more difficult for older adults to understand the scrollable characteristics of the tab menus. For instance, the tab scrolling using myTV SUPER (Action 4) was much more difficult for participants to understand than that using Flipboard (Action 5). This may be because the latter pattern provided more obvious visual cues: a half-present menu bar. Adding to established guidelines, this study suggests that: 
+
+Avoid using scrollable tab menus; if not, provide sufficient visual cues such as a half-presented menu bar for elderly users 
+
+Interestingly, we also found that participants were able to scroll and tap tab menus more easily when using Flipboard (Action 5). Success in the use of scrolling tabs depended on menu position, target size, and the space between target buttons, which can be explained in part by previous research (Hwangbo et al.2013). For instance, it showed that pointing performance increased when targets were located in the upper right part of the interface, like Flipboard tabs. In addition, older adults’ pointing performance was significantly influenced by the size and spaces between tabs, but these effects were eliminated once the size was large enough. In this way, we also suggest that: 
+
+Use lager tabs when designing scrolling tab menus with narrower spaces between each button 
+
+Vertical scrolling menus: springboard and side drawer 
+
+Generally, the use of vertical scrolling menus, including the side drawer and springboard (Action 6, 7, 9, 10), was preferred than the use of tabs. Most of the participants explained that they would like to glance at all the menu choices at one time and avoid doing scrolling or swiping gestures. In particular, the latter explanation has been illustrated in the section above about difficulties in interactive gestures. The former explanation is consistent with some previous research on websites, which also reported that vertical menus that display all menu items at once fit better to perception and cognition than those need additional actions to access more options (Leuthold et al. 2011; Puerta Melguizo, Vidya, and van Oostendorp 2012). Specifically, vertical menus can provide a cognitive-cost-efficient way for information navigation (Ware 2010; Pirolli 2007). Users can process a number of menu items at once, rather than spending more time on considering about which menu entry they should choose or what action they should take in order to access to more categories. 
+
+Although the use of vertical menus such as side drawer and springboard proposed fewer usability challenges that tab menus, it caused difficulties in different ways. Firstly, because older adults tend to be quite cautious about the operation and interaction with interfaces (Li and Luximon 2018), some of the participants still met problems in recognizing the scrollable mode of side drawer and springboard. Thus as also mentioned in the section of tab menu use, we suggest that the visual cues that can indicate the interaction direction should be further enhanced. Besides the vertical menu usage, sider drawer also required additional interactions with its entry button (Action 8), which is known as hamburger button. The use of hamburger button has also caused some other usability issues such as locating buttons, icon understanding and some other problems, which is discussed in the following section related to the icon and button usage. In general, this study recommends that: 
+
+Use vertical menus instead of tab menus if possible, and provide sufficient visual cues to indicate the interaction direction of menus 
+
+Assisted navigation buttons 
+
+Using assisted navigation buttons are especially difficult for older adults. According to the activity analysis, the reasons lied at that older adults have significant difficulties in searching the possible buttons, understanding the icons, and distinguishing the target button with others. 
+
+Consistent with previous studies, this study confirmed that older adults have a major problem with using semantically distant or complex icons due to difficulties in building and applying accurate mental models between the graphical item and its operational meaning (Action 8, 19- 23) (Leung, McGrenere, and Graf 2011; Remington, Yuen, and Pashler 2016). Specifically, most of the difficulties occurred when participants did not understand the graphical meaning of icons. Furthermore, even after understanding the graphical meaning of icons, participants still had problems when connecting the graphic representation with their operational meaning. For instance, when doing keywords searching (Action 20, 21), three participants could verbally recognize the icon’s graphic representation as ‘magnifying glass’, but with problems in connecting with its functional meaning of ‘keyword searching’. Overall, older adults reported that they tried to avoid the use of assisted navigation buttons; whereas, they said that the buttons with texts could help in explaining the function of icons. Therefore, we suggest that: 
+
+Reduce the use of assisted navigation buttons when designing navigation system for elderly users; if possible, use simple and semantically closed icons with text explanations 
+
+Older adults also faced challenges distinguishing between neighbouring or similar-appearing icons and buttons (Bruder, Blessing, and Wandke 2007; Caprani, O’Connor, and Gurrin 2012; Hassan and Md Nasir 2008). Thus, adding to the established principles, designers should use simple, meaningful and distinctive icons to promote users’ recognition and comprehension of assisted navigation buttons. In addition, designers should carefully deal with the placements of navigation buttons. As mentioned in the previous section, older adults are found to hardly direct attention to the buttons that along with the main content when searching, especially when the buttons are placed at the bottom part of interfaces, such as Action 22. As a result, we suggest that, 
+
+Locate the important assisted navigation buttons at the top of interface and use distinctive graphic representations for icons in the same interface 
+
+Differentiating between touchable and non-touchable text and icons also caused great usability challenges for older adults, which is also addressed in some previous studies (Harada et al. 2013; Zhou, Rau, and Salvendy 2012). Older adults were found to be easily confused when distinguishing between the areas of screens that can be and cannot be touched. Thus visual differences and feedbacks between the touchable and the non-touchable text and icons should be further enhanced to facilitate older adults’ process of distinguishing. Although some previous studies indicated that older adults preferred the use of raised buttons, which provide visual highlighting and immediate tactile feedback (Zhou, Rau, and Salvendy 2012; Sulaiman and Sohaimi 2010; Olwal, Lachanas, and Zacharouli 2011; Kim et al. 2007), our results suggest that designers should be careful with the use of floating action buttons. Participants reported that they seldom noticed or tapped this button though the floating action button provides an obvious visual cue through the use of shadows. The reason may lie at the decreased visual perception influenced older adults’ ability to understand the depth cues of 3D shapes, which is also worthy of future study (McAvinue et al. 2012). To summarise, we suggest that: 
+
+Enhance the visual differences between touchable and non-touchable buttons and provide sufficient feedbacks for those touchable buttons 
+
+Our study also revealed some interesting personal strategies among participants for using buttons. Nevertheless, these operation habits are found to easily influence their performance when using new applications. For example, four participants were found only using the ‘search keyword’ button even when they were asked to complete other kinds of tasks. They explained that they only used this shortcut function in their regular mobile application use and this strategy works quite well especially for entertainment applications such as myTV SUPER and YouTube. It greatly reduces cognitive load for senior users. In this way, we believe that with practice, icons and buttons could become an easier and faster way of using the shortcut for older adults, which has also been reported in computer use (Remington, Yuen, and Pashler 2016). Therefore, we recommend that: 
+
+Support older adults’ existing operation habits to facilitate more intuitive way of mobile navigation 
+
+Designing for content-oriented navigation 
+
+Overall, older adults were able to effectively navigate using content, such as lists, galleries, or cards. The reason for this may be explained by previous studies on web navigation (Etcheverry et al. 2012; Etcheverry, Terrier, and Marquié 2012). Although older adults show decreased fluid abilities such as working memory, attention, and procedural speed when locating buttons or menus (Li and Luximon 2017), they have maintained or even increased their crystallized intelligence, which is required for reading comprehension. Accordingly, we suggest that content-oriented navigation design could be a promising direction for elderly-friendly mobile application design. However, unlike menu-oriented design patterns, researchers know little about how these content-oriented design patterns work for older adults. To fill that gap, this study provided interesting insights into the mobile navigation behaviour of older adults’ using state-of-the-art design patterns. We investigated different usability challenges and compared them to existing guidelines for average adults in different navigation scenarios, such as getting overviews, browsing content, and searching items. Various design considerations were proposed accordingly. 
+
+Lists and galleries 
+
+Lists and galleries are among the most commonly used patterns for mobile navigation (Tidwell 2010), but they are suitable for various situations. Agreed with previous study, this study reported that lists and galleries were preferred by a majority of participants because they allow for more content items to be presented on the screen at one time than cards, providing an easier review of information that requires little or no scrolling (Harley 2014). 
+
+Furthermore, results indicated that lists outperformed than the other two patterns of galleries and cards, with fewer breakdowns and failures (Action 11-15). On the one hand, lists are generally arranged with visual priority to help create a hierarchy of information, making it easier to scan and browse their contents (Flaherty 2016). Therefore, it particularly works for older adults, who tend to apply a linear mode of visual exploration (Etcheyerry et al. 2012). In addition, lists could also provide clearer interaction indications than galleries or cards. Since information items were stacked vertically, participants could easily understand the direction they needed to scroll in order to read the contents. They reported that navigating lists made them feel secure, as they did not lose any previous content when scrolling. 
+
+However, we found that lists with limited height could easily lead to mistaken touches and imprecise tapping, as interaction gestures were especially difficult for older adults (Harada et al. 2013). This issue worsened when one list contained two touch-enabled areas with different actions, or when the lists must be scrolled vertically (Action 12, 14). Thus, designers should be careful about the list size and apply simple interaction techniques for each list when designing for older adults. Nonetheless, there exists a trade-off between the list size and requirement for additional interactions. Future studies could further investigate the balance between using a larger list and limiting the use of vertical scrolling gestures. In general, this study suggests that: 
+
+Use larger list items and reduce the number of interaction gestures attached to each list area 
+
+Furthermore, lists are reported to be more suitable for showing broad and diverse categories of information; but repeatedly scrolling lists to review all available options is tiring (Harley 2014). It is difficult to compare details using lists especially when items are similar to each other. In general, previous studies suggest that the pattern of gallery works better for distinguishing details (Harley 2014). Nevertheless, participants tended to skip or lose targets more easily in the arrangement like a gallery when the titles were not distinctive or large enough (Action 16, 17). Additionally, they also had significant difficulties with interacting the galleries due to the lack of visual cues. To conclude, the current study suggests that: 
+
+Use the pattern of list to show broad and diverse categories of information, use the pattern of gallery when comparing details of information, and provide obvious interaction indication cues and large and distinctive titles for the gallery content 
+
+Cards 
+
+Card pattern is a recent user interface component that works well both for the desktop and mobile platforms. Previous studies on cards have mainly focused on the web design. For example, research states that cards are good at grouping heterogeneous content, providing additional details, and enabling quick actions (Laubheimer 2016). The results of this study found that the pattern of card flipping was clear and easy for older adults to navigate. This may be because it is a metaphor design taken from the physical world, which may facilitate older adults’ mental model through previous experience (Zhou, Chourasia, and Vanderheiden 2017). In addition, the cards pattern enables simple interaction techniques and allows for a large interactive area, which is easy and convenient for older adults to learn and execute. 
+
+At the same time, we also found a number of interesting insights regarding the cards design for older adults. Firstly, while difficulties with flipping or scrolling did decline, novice users could not easily understand the interaction technique in the first place. In this way, as also emphasized in aforementioned sections, we propose that designers should provide obvious cues and indicators for interaction gestures. Secondly, although it provides a larger interactive area, flipping with cards has a longer gesture distance than others, which requires a better controlling force from older adults. Thus a simpler interaction gesture for cards pattern is still needed for older adults. Another major problem brought by cards design is that this pattern did not provide users with previous content or with next page overviews, which led participants to feel easily lost. Designers should provide more obvious cues and indicators for the user’s current position during navigation. In summary, this study recommends that: 
+
+Design the card flipping gestures with shorter gestural distance and provide sufficient visual cues to inform elderly users about how to initiate the interaction with cards and about their current navigation location 
+
+We also found that older adults could not immediately realize the changing of interfaces, thus easily missed the target contents. More clear and visible feedbacks are needed in order to indicate any immediate change, including interface switching and button pressing. Multimodal feedback such as voice and vibration may work better for older adults (Hwangbo et al. 2013). In addition, it was also found that older adults experienced significant difficulty when multiple areas of each card could be interacted with using different gestures. This worsened when these interaction gestures occurred in different directions, such as scrolling horizontally and swiping vertically. As a result, we suggest that: 
+
+Provide clear visible, tactile or multimodal feedbacks to indicate the immediate changes of card flipping and reduce the number of simultaneous existing interactive area within the same card 
+
+Limitations and future work 
+
+This study should also be considered in terms of limitations. First, considering the role of technology experience played in distinguishing different ways of interacting with technologies (Langdon et al. 2007; Hurtienne et al. 2013), we purposely recruited participants who had post-adoption behaviour of mobile technologies and applications, who comprise a larger proportion of the population of older adults in Hong Kong (Census and Statistics Department 2017). Our participants therefore comprise a group of older adults with a high education level and high digital literacy. Researchers should be careful when applying the results of the current study to novice users or low-literacy seniors in other areas. Future research should further investigate the role of individual differences such as cultural background, educational levels and technology experience. 
+
+Second, this study provides a starting point for studying older adults’ challenges and difficulties when navigating with various interface design patterns. As there were very limited studies focusing on older adults’ mobile navigation behaviour, the method of usability testing seems to be more suitable as the first step to capture a whole picture and collect richer data from older adults’ real-use situations. Thus, we recruited the participants with a wider range of ages to cover more usability issues that may be caused by varying types and extents of capability decline in perception, vision and motion. In addition, we investigated the usability challenges of the six most widely used design patterns using existing applications. There is a lack of more details regarding each of the design patterns. 
+
+Therefore, future study such as control experiments are still needed to further address the influences of individual differences such as education background, technology experience, and various age-related capability declines (e.g. memory, attention, processing speed, spatial visualization and motor skills) and design features of each navigation pattern (e.g. amounts and types of content, interaction techniques, and layout) on older adults’ mobile navigation behaviour. 
+
+Conclusion 
+
+Older adults navigate and use mobile applications differently. In this paper, we conducted a usability testing to examine various navigation tasks and employed activity analysis as our major data analysis method in order to understand older adults’ navigation behaviour with different design patterns at the action level. In-depth interviews helped us interpret the performance data by obtaining authentic user perspectives in their own words. This study compared two different navigation patterns: menu-oriented and content-oriented design patterns. Common navigation behaviours and usability issues were identified, and the advantages and disadvantages of each design pattern were analysed. Our study highlights the benefits of content-based design patterns as a navigation method and proposes several design considerations. We believe the results and design suggestions proposed in this research can contribute to a more elderly-friendly mobile interface design. Acknowledgement 
+
+The authors would like to thank the Hong Kong Polytechnic University for providing funding through the University Grants Commission funding scheme. 
+
+References 
+
+Al-Razgan, M. S., Al-Khalifa, H. S., Al-Shahrani, M. D., and AlAjmi, H. H. 2012. “Touch-based mobile phone interface guidelines and design recommendations for elderly people: A survey of the literature.” In International Conference on Neural Information Processing , edited by Huang, T., Zeng, Z., Li, C., and Leung, C.S.: 568-574. Berlin, Heidelberg: Springer. 
+
+Apple Inc. 2017a. “Human Interface Guidelines.” Retrieved April 20, 2017 from 
+
+https://developer.apple.com/design/human-interface-guidelines/ 
+
+Apple Inc, 2017b. “Browse the top free apps on the App Store.” Retrieved April 2, 2017 from https://www.apple.com/itunes/charts/free-apps/ 
+
+Bardram, J. 1998. “Designing for the dynamics of cooperative work activities.” In 
+
+Proceedings of the 1998 ACM conference on Computer supported cooperative work ,edited by Poltrock, S., and Grudin, J.: 89–98. New York: ACM. 
+
+Barthelmess, P., and Anderson, K. M. 2002. “A view of software development environments based on activity theory.” Computer Supported Cooperative Work (CSCW) , 11 (1–2):13–37. 
+
+Basu, S. 2013. “Content Structuring and Navigation.” In Real World Windows 8 Development : 87-106. Berkeley, CA: Apress. 
+
+Baumer, E. P., and Tomlinson, B. 2011. “Comparing activity theory with distributed cognition for video analysis: beyond kicking the tires.” In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems : 133-142. New York: ACM. 
+
+Bedny, G. Z., and Karwowski, W. 2004. “Activity theory as a basis for the study of work.” Ergonomics , 47(2), 134-153. doi: 10.1080/00140130310001617921 Boulos, M. N. K., Wheeler, S., Tavares, C., and Jones, R. 2011. “How smartphones are changing the face of mobile and participatory healthcare: An overview, with example from eCAALYX.” Biomedical Engineering Online , 10 (1), 24. doi:10.1186/1475-925X-10-24 
+
+Bødker, S. 1996. “Applying activity theory to video analysis: how to make sense of video data in human-computer interaction.” In Context and consciousness: activity theory and human-computer interaction , edited by Nardi, B.A.: 147-174. Cambridge, London: The MIT Press. 
+
+Bruder, C., Blessing, L., and Wandke, H. 2007. “Training the elderly in the use of electronic devices.” In International Conference on Universal Access in Human-Computer Interaction , edited by Stephanidis, C.: 637-646. Berlin, Heidelberg: Springer. 
+
+Burrell, A., and Sodan, A.C.2006. “Web interface navigation design: which style of navigation-link menus do users prefer?” In Proceedings of the 22nd International Conference on Data Engineering Workshops, ICDEW 2006 : 42-42. Los Alamitos: IEEE Computer Society. 
+
+Caprani, N., O’Connor, N. E., and Gurrin, C. 2012. “Touch screens for the older user.” 
+
+Assistive Technologies , edited by Ferreira, A.: 95-118. London: InTech. 
+
+Castilla, D., Garcia-Palacios, A., Miralles, I., Breton-Lopez, J., Parra, E., Rodriguez-Berges, S., and Botella, C. 2016. “Effect of Web navigation style in elderly users.” 
+
+Computers in Human Behavior , 55: 909-920. doi: 10.1016/j.chb.2015.10.034. 
+
+Cecere, G., Corrocher, N., and Battaglia, R. D. 2015. “Innovation and competition in the smartphone industry: Is there a dominant design?” Telecommunications Policy ,39(3–4): 162–175. doi: 10.1016/j.telpol.2014.07.002 
+
+Census and Statistics Department. 2017. “Thematic Household Survey Report No. 62: Information technology usage and penetration.” Retrieved December 22, 2017 from http://www.censtatd.gov.hk/hkstat/sub/sp140.jsp?productCode=B1130201 
+
+Chen, K., Chan, A. H. S., and Tsang, S. N. H. 2013. “Usage of mobile phones amongst elderly people in Hong Kong.” In Proceedings of the International MultiConference of Engineering and Computer Scientists , edited by Ao, S.I., Castillo, O., Douglas, C., Feng, D.D., and Lee, J.A.: 1016–1019. Hong Kong: Newswood Limited. 
+
+Chin, J., and Fu, W. T. 2012. “Age differences in exploratory learning from a health information website.” In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems : 3031-3040. New York: ACM. doi:10.1145/2207676.2208715 
+
+Clemmensen, T., Kaptelinin, V., and Nardi, B. 2016. “Making HCI theory work: an analysis of the use of activity theory in HCI research.” Behaviour & Information Technology , 35(8): 608-627. doi: 10.1080/0144929X.2016.1175507 
+
+Cuddihy, E., and Spyridakis, J. H. 2012. “The effect of visual design and placement of intra-article navigation schemes on reading comprehension and website user perceptions.: Computers in Human Behavior, 28(4): 1399-1409. doi: 10.1016/j.chb.2012.03.002. 
+
+de Barros, A. C., Leitão, R., and Ribeiro, J. 2014. “Design and evaluation of a mobile user interface for older adults: navigation, interaction and visual design recommendations.” Procedia Computer Science , 27: 369-378. 
+
+DeStefano, D., and LeFevre, J. A. 2007. “Cognitive load in hypertext reading: A review.” Computers in human behavior , 23(3): 1616-1641. doi:10.1016/j.chb.2005.08.012. 
+
+dos Santos, E. P., de Lara, S., Watanabe, W. M., & Fortes, R. P. 2011. “Usability evaluation of horizontal navigation bar with drop-down menus by middle aged adults.” In Proceedings of the 29th ACM international conference on Design of communication :145-150. New York: ACM. doi:10.1145/2038476.2038504 
+
+Downing, R. E., Moore, J. L., and Brown, S. W. 2005. “The effects and interaction of spatial visualization and domain expertise on information seeking.” Computers in Human Behavior , 21(2): 195-209. doi: 10.1016/j.chb.2004.03.040. 
+
+Drag, L. L., and Bieliauskas, L. A. 2010. “Contemporary review 2009: cognitive aging.” 
+
+Journal of geriatric psychiatry and neurology , 23(2), 75-93. Dumas, J. S., and Salzman, M. C. 2006. “Usability assessment methods.” Reviews of Human Factors and Ergonomics , 2(1): 109–140. doi: 10.1177/1557234X0600200105 
+
+Duyne, D. K. V., Landay, J., and Hong, J. I. 2002. The design of sites: patterns, principles, and processes for crafting a customer-centered Web experience . Boston: Addison-Wesley Longman Publishing Co., Inc. 
+
+Etcheverry, I., Baccino, T., Terrier, P., Marquié, J. C., and Mojahid, M. 2012. “Age differences in information finding tasks: Performance and visual exploration strategy with different web page layouts.” Computers in Human Behavior , 28(5), 1670-1680. doi: 10.1016/j.chb.2012.04.005. 
+
+Etcheverry, I., Terrier, P., and Marquié, J. C. 2012. “Are older adults less efficient in making attributions about the origin of memories for web interaction?.” Revue Européenne de Psychologie Appliquée/European Review of Applied Psychology , 62(2): 93-102. doi: 10.1016/j.erap.2010.11.002. 
+
+Flaherty, K. 2016. “The Anatomy of a List Entry.” Retrieved November 15, 2017 from https://www.nngroup.com/articles/list-entries/ 
+
+Furuki, K., and Kikuchi, Y. 2013. “Approach to commercialization of Raku–Raku smartphone.” FUJITSU Scientific & Technical Journal , 49(2), 196–201. 
+
+Gao, Q., Ebert, D., Chen, X., and Ding, Y. 2015. “Design of a mobile social community platform for older Chinese people in Urban Areas.” Human Factors and Ergonomics in Manufacturing and Service Industries , 25(1): 66–89. doi: 10.1002/hfm.20523. 
+
+Garrett, J. J. 2010. Elements of user experience: user-centered design for the web and beyond . Berkeley: Pearson Education. 
+
+Google Inc. 2017a. “Material Design.” Retrieved April 22, 2017 from 
+
+https://material.io/design/ 
+
+Google, Inc. 2017b. “Top Charts – Android Apps on Google Play.” Retrieved April 2, 2017 from https://play.google.com/store/apps/top 
+
+Harada, S., Sato, D., Takagi, H., and Asakawa, C. 2013. “Characteristics of elderly user behavior on mobile multi-touch devices.” In Human-computer interaction – INTERACT 2013 , edited by Kotzé, P., Marsden, G., Lindgaard, G., Wesson, J., and Winckler, M.: 323–341. Berlin, Germany: Springer. 
+
+Harley, A. 2014. “Mobile Navigation: Image Grids or Text List?.” Retrieved November 20, 2017 from https://www.nngroup.com/articles/image-vs-list-mobile-navigation/ 
+
+Harris, S. R. 2004. “Systemic-structural activity analysis of HCI video data.” In 
+
+Proceedings of ATIT04: 1st International Workshop on Activity Theory Based Practical Methods for IT-Design , edited by Bertelsen, O.W., Korpela, M., and Mursu, A.: 48-63. 
+
+Hassan, H., and Md Nasir, M. H. N. 2008. “The use of mobile phones by older adults: a Malaysian study.” ACM SIGACCESS Accessibility and Computing , (92), 11-16. doi:10.1145/1452562.1452564. 
+
+Hoehle, H., Aljafari, R., and Venkatesh, V. 2016. “Leveraging Microsoft ׳ s mobile usability guidelines: Conceptualizing and developing scales for mobile application usability.” International Journal of Human-Computer Studies , 89: 35-53. doi: 10.1016/j.ijhcs.2016.02.001 
+
+Hoehle, H., and Venkatesh, V. 2015. “Mobile Application Usability: Conceptualization and Instrument Development.” Mis Quarterly , 39(2). 
+
+Hurtienne, J., Horn, A. M., Langdon, P. M., and Clarkson, P. J. 2013. “Facets of prior experience and the effectiveness of inclusive design.” Universal access in the information society , 12(3), 297-308. 
+
+Hwangbo, H., Yoon, S. H., Jin, B. S., Han, Y. S., and Ji, Y. G. 2013. “A study of pointing performance of elderly users on smartphones.” International Journal of Human-Computer Interaction , 29(9), 604-618. doi: 10.1080/10447318.2012.729996. 
+
+Ji, Y. G., Park, J. H., Lee, C., and Yun, M. H. 2006. “A usability checklist for the usability evaluation of mobile phone user interface.” International journal of human-computer interaction , 20(3): 207-231. doi: 10.1207/s15327590ijhc2003_3. 
+
+Kaptelinin, V. and Nardi, B.A. 2006. Acting with Technology: Activity Theory and Interaction Design . Cambridge, MA: MIT Press. Kim, H., Heo, J., Shim, J., Kim, M., Park, S., and Park, S. 2007. “Contextual research on elderly users’ needs for developing universal design mobile phone.” In Proceedings of the 4th International Conference on Universal Access in Human Computer Interaction: Coping with Diversity , edited by Stephanidis, C.: 950–959. Berlin: Springer. 
+
+Kim, K., Proctor, R. W., and Salvendy, G. 2011. “Comparison of 3D and 2D menus for cell phones.” Computers in Human Behavior , 27(5):2056-2066. doi: 10.1016/j.chb.2011.04.014. 
+
+Kurniawan, S. 2008. “Older people and mobile phones: A multi-method investigation.” 
+
+International Journal of Human-Computer Studies , 66(12), 889-901. doi: 10.1016/j.ijhcs.2008.03.002 
+
+Langdon, P., Lewis, T., and Clarkson, J. 2007. “The effects of prior experience on the use of consumer products.” Universal Access in the Information Society , 6(2), 179-191. 
+
+Laubheimer, P. 2016. “The Anatomy of a List Entry.” Retrieved October 10, 2017 from https://www.nngroup.com/articles/cards-component/ 
+
+Law, E. L., and Sun, X. 2012. “Evaluating user experience of adaptive digital educational games with activity theory.” International Journal of Human Computer Studies , 70 (7): 478–497. doi: 10.1016/j.ijhcs.2012.01.007 
+
+Leont’ev, A. N. 1978. Activity, consciousness, and personality . Englewood Cliffs, N.J.: Prentice-Hall. 
+
+Leversen, J. S., Haga, M., and Sigmundsson, H. 2012. “From children to adults: motor performance across the life-span”. PloS one, 7(6), e38830. 
+
+Leung, R., McGrenere, J., and Graf, P. 2011. “Age-related differences in the initial usability of mobile device icons.” Behaviour & Information Technology , 30(5), 629-642. doi: 10.1080/01449290903171308. 
+
+Leuthold, S., Schmutz, P., Bargas-Avila, J. A., Tuch, A. N., and Opwis, K. 2011. “Vertical versus dynamic menus on the world wide web: Eye tracking study measuring the influence of menu design and task complexity on user performance and subjective preference.” Computers in human behavior , 27(1): 459-472. doi: 10.1016/j.chb.2010.09.009. 
+
+Li, Q., and Luximon, Y. 2018. “Understanding older adults’ post-adoption usage behavior and perceptions of mobile technology.” Accepted by International Journal of Design. 
+
+Li, Q., and Luximon, Y. 2017. “A Field Experiment on Capabilities Involved in Mobile Navigation Task.” In International Conference on Human Aspects of IT for the Aged Population Springer , edited by Zhou J., and Salvendy G.: 68-78. Cham, Switzerland: Springer. 
+
+Li, Q., and Luximon, Y. 2016. “Older adults and digital technology: a study of user perception and usage behavior.” In Advances in Physical Ergonomics and Human Factors , edited by Goonetilleke, R., and Karwowski, W.:155-163. Cham, Switzerland: Springer. 
+
+Maguire, M., and Osman, Z. 2003. Designing for older and inexperienced mobile phone users. In Proceedings of HCI International , edited by Stephanidis, C.: 22-27. New Jersey: CRC Press. 
+
+McAvinue, L. P., Habekost, T., Johnson, K. A., Kyllingsbæk, S., Vangkilde, S., Bundesen, C., and Robertson, I. H. 2012. “Sustained attention, attentional selectivity, and attentional capacity across the lifespan.” Attention, Perception, & Psychophysics ,74(8), 1570-1582. 
+
+Mi, N., Cavuoto, L. A., Benson, K., Smith-Jackson, T., and Nussbaum, M. A. 2014. “A heuristic checklist for an accessible smartphone interface design.” Universal Access in the Information Society , 13(4): 351–365. 
+
+Miettinen, R., and Hasu, M. 2002. “Articulating user needs in collaborative design: Towards an activity theoretical approach.” Computer Supported Cooperative Work (CSCW) , 11 (1–2): 129–151. 
+
+Motti, L. G., Vigouroux, N., and Gorce, P. 2013. “Interaction techniques for older adults using touchscreen devices: A literature review.” In Proceedings of the 25th IEME Conference Francophone on L’Interaction Homme-Machine : 125–134. New York: ACM. doi:10.1145/2534903.2534920. 
+
+Murano, P., and Oenga, K.K.2012. “The impact on effectiveness and user satisfaction of menu positioning on web pages”, International Journal of Advanced Computer Science and Applications , 3(9). 
+
+Neil, T. (2014). Mobile design pattern gallery: UI patterns for smartphone apps .Sebastopol: O'Reilly Media, Inc. 
+
+Olwal, A., Lachanas, D., and Zacharouli, E. 2011. “OldGen: Mobile phone personalization for older adults.” In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems : 3393-3396. New York: ACM. 
+
+Osman, A., Ismail, M. H. B., and Wahab, N. A. 2009. “Combinging Fisheye with List: Evaluating the Learnability and User Satisfaction.” In Proceedings of the 2009 International Conference on Computer Technology and Development -Volume 01 : 49-52. Los Alamitos: IEEE Computer Society. 
+
+Oviatt, S., Cohen, A., Miller, A., Hodge, K., and Mann, A. 2012. “The impact of interface affordances on human ideation, problem solving, and inferential reasoning.” 
+
+ACM Transactions on Computer-Human Interaction (TOCHI) , 19 (3): 22. doi:10.1145/2362364.2362370. 
+
+Owen, C. A. 2001. “The role of organisational context in mediating workplace learning and performance.” Computers in Human Behavior, 17 (5–6): 597–614. doi: 10.1016/S0747-5632(01)00024-3. 
+
+Pargman, T. C., and Wærn, Y. 2003. “Appropriating the use of a Moo for collaborative learning.” Interacting with Computers , 15 (6): 759–781. doi:10.1016/j.intcom.2003.09.007 
+
+Patsoule, E., and Koutsabasis, P. 2014. “Redesigning websites for older adults: a case study.” Behaviour & Information Technology , 33(6): 561-573. doi: 10.1080/0144929X.2013.810777. Petrovčič, A., Taipale, S., Rogelj, A., and Dolničar, V. 2017. “Design of mobile phones for older adults: An empirical analysis of design guidelines and checklists for feature phones and smartphones.” International Journal of Human–Computer Interaction ,34(3): 251-264. doi:10.1080/10447318.2017.1345142 
+
+Pirolli, P. (2007). Information foraging theory: Adaptive interaction with information .New York: Oxford University Press. 
+
+Plaza, I., MartíN, L., Martin, S., and Medrano, C. 2011. “ Mobile applications in an aging society: Status and trends.” Journal of Systems and Software 84(11): 1977-1988. doi:10.1016/j.jss.2011.05.035. 
+
+Puerta Melguizo, M. C., Vidya, U., & van Oostendorp, H. 2012. “Seeking information online: the influence of menu type, navigation path complexity and spatial ability on information gathering tasks.” Behaviour & Information Technology , 31(1): 59-70. doi: 10.1080/0144929X.2011.602425. 
+
+Punchoojit, L., and Hongwarittorrn, N. 2017. “Usability Studies on Mobile User Interface Design Patterns: A Systematic Literature Review.” Advances in Human-Computer Interaction , 2017. doi: 10.1155/2017/6787504 
+
+Remington, R. W., Yuen, H. W. H., and Pashler, H. 2016. “With practice, keyboard shortcuts become faster than menu selection: A crossover interaction.” Journal of Experimental Psychology: Applied , 22(1), 95. doi:10.1037/xap0000069. 
+
+Salthouse, T. A. 2009. “When does age-related cognitive decline begin?” Neurobiology of aging , 30(4), 507-514. 
+
+Strong, D. M. 2009. “Information Quality: Managing Information as a Product.” In 
+
+Encyclopedia of Database Systems , edited by Liu, L., and Özsu, M. T.: 1502-1508. New York, USA: Springer. 
+
+Sulaiman, S., and Sohaimi, I. S. 2010. “An investigation to obtain a simple mobile phone interface for older adults.” In 2010 International Conference on Intelligent and Advanced Systems : 1-4. Los Alamitos: IEEE Computer Society. doi: 10.1109/ICIAS.2010.5716254 Sundar, S. S., Bellur, S., Oh, J., Xu, Q., and Jia, H. 2014. “User experience of on-screen interaction techniques: An experimental investigation of clicking, sliding, zooming, hovering, dragging, and flipping.” Human–Computer Interaction , 29(2), 109-152. doi:10.1080/07370024.2013.789347 
+
+Tidwell, J. 2010. Designing interfaces: Patterns for effective interaction design .Sebastopol: O'Reilly Media, Inc. 
+
+Torun, E. D., and Altun, A. 2014. “The effect of levels of processing with navigation design types on recall and retention in e-learning environments.” Behaviour & Information Technology , 33(10): 1039-1047. doi:10.1080/0144929X.2014.945963. 
+
+Vines, J., Pritchard, G., Wright, P., Olivier, P., & Brittain, K. 2015. “An age-old problem: Examining the discourses of ageing in HCI and strategies for future research.” 
+
+ACM Transactions on Computer-Human Interaction (TOCHI) , 22(1): 2. doi:10.1145/2696867. 
+
+von Wangenheim, C. G., Witt, T. A., Borgatto, A. F., Nunes, J. V., Lacerda, T. C., Krone, C., and de Souza, L. O. 2016. “A usability score for mobile phone applications based on heuristics.” International Journal of Mobile Human Computer Interaction (IJMHCI) , 8(1): 23–58. 
+
+Wagner, N., Hassanein, K., and Head, M. 2014. “The impact of age on website usability.” Computers in Human Behavior , 37: 270-282. doi: 10.1016/j.chb.2014.05.003. 
+
+Ware, C. (2010). Visual thinking: For design . Burlington, USA: Morgan Kaufmann. 
+
+Yu, N., and Kong, J. 2016. “User experience with web browsing on small screens: Experimental investigations of mobile-page interface design and homepage design for news websites.” Information Sciences , 330: 427-443. doi:10.1016/j.ins.2015.06.004. 
+
+Zaphiris, P., Kurniawan, S., and Ghiawadwala, M. 2007. “A systematic approach to the development of research-based web design guidelines for older people.” Universal Access in the information Society , 6(1): 59-75. Ziefle, M., and Bay, S. 2005. “How older adults meet complexity: aging effects on the usability of different mobile phones.” Behaviour & Information Technology, 24(5), 375-389. doi: 10.1080/0144929042000320009. 
+
+Ziefle, M., and Bay, S. 2006. “How to overcome disorientation in mobile phone menus: A comparison of two different types of navigation aids.” Human-Computer Interaction ,21(4): 393-433. doi: 10.1207/s15327051hci2104_2. 
+
+Ziefle, M., Schroeder, U., Strenk, J., and Michel, T. 2007. “How younger and older adults master the usage of hyperlinks in small screen devices.” In Proceedings of the SIGCHI conference on Human factors in computing systems , edited by Jacko, J., and Sears, A.: 307-316. New York: ACM. doi: 10.1145/1240624.1240676. 
+
+Zhou, J., Chourasia, A., and Vanderheiden, G. 2017. “Interface Adaptation to Novice Older Adults’ Mental Models through Concrete Metaphors.” International Journal of Human–Computer Interaction , 33(7), 592-606. doi:10.1080/10447318.2016.1265827 
+
+Zhou, J., Rau, P. L. P., and Salvendy, G. 2012. “Use and design of handheld computers for older adults: A review and appraisal.” International Journal of Human-Computer Interaction , 28(12): 799-826. doi:10.1080/10447318.2012.668129 
+
+Zhou, J., Rau, P. L. P., and Salvendy, G. 2013. “A qualitative study of older adults’ acceptance of new functions on smart phones and tablets.” In International Conference on Cross-Cultural Design , edited by Rau P.L.P.: 525-534. Berlin, Heidelberg: Springer. List of Tables 
+
+Table 1 . Task scenarios for usability testing. 
+
+Table 2 . Checklist for usability testing. 
+
+Table 3. Activity analysis annotation schema for actions in navigation activities. 
+
+Table 4. Additional usability principles based on activity analysis. 
+
+Table 5. Frequency of actions observed with different completion levels and associated usability principles for menu-oriented design patterns. 
+
+Table 6. Frequency of actions observed with different completion levels and associated usability principles for content-oriented design patterns. 
+
+Table 7. Frequency of actions observed with different completion levels and associated usability principles for assisted navigation buttons. List of Figures 
+
+Figure 1 . Examples of menu-oriented design patterns. 
+
+Figure 2 . Examples of content-oriented design patterns. 
+
+Figure 3 . Design patterns of WhatsApp: [1] Tab menu; [2] lists; [3] [4] [5] [6] assisted navigation buttons. 
+
+Figure 4 . Design patterns of myTV SUPER: [7] tab menu; [8] gallery; [9] Entry-point of side drawer; [10] [14] assisted navigation buttons; [11] lists; [12] springboard; [13] side drawer. 
+
+Figure 5 . Design patterns of Flipboard: [15] tab menu; [16] cards; [17] assisted navigation buttons; [18] lists. 
+
+Figure 6 . An example of activity analysis for task 13.

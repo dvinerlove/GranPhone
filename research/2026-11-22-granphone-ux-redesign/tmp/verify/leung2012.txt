@@ -1,0 +1,882 @@
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+ROCK LEUNG, CHARLOTTE TANG, SHATHEL HADDAD, JOANNA MCGRENERE, PETER GRAF, and VILIA INGRIANY, University of British Columbia
+11
+Mobile computing devices, such as smart phones, offer benefits that may be especially valuable to older adults (age 65+). Yet, older adults have been shown to have difficulty learning to use these devices. In the research presented in this article, we sought to better understand how older adults learn to use mobile devices, their preferences and barriers, in order to find new ways to support them in their learning process. We conducted two complementary studies: a survey study with 131 respondents from three age groups (20­ 49, 50­64, 65+) and an in-depth field study with 6 older adults aged 50+. The results showed, among other things, that the preference for trial-and-error decreases with age, and while over half of older respondents and participants preferred using the instruction manual, many reported difficulties using it. We discuss implications for design and illustrate these implications with an example help system, Help Kiosk, designed to support older adults' learning to use mobile devices.
+Categories and Subject Descriptors: H.5.m [Information Interfaces and Presentation (e.g., HCI)]: Miscellaneous General Terms: Design
+Additional Key Words and Phrases: Older adults, mobile device, learning
+ACM Reference Format: Leung, R., Tang, C., Haddad, S., McGrenere, J., Graf, P., and Ingriany, V. 2012. How older adults learn to use mobile devices: Survey and field investigations. ACM Trans. Access. Comput. 4, 3, Article 11 (December 2012), 33 pages. DOI = 10.1145/2399193.2399195 http://doi.acm.org/10.1145/2399193.2399195
+1. INTRODUCTION Mobile computing devices, such as smart phones, digital cameras, and digital media players, are increasingly pervasive, computationally powerful, and feature-rich. They offer benefits that may be especially valuable to older adults (considered here to be people age 65+), a growing segment of the population in most countries. For example, smart phones can provide tools to older adults that users of all ages benefit from, such as software applications for connecting with loved ones, accessing contact information, browsing Internet content, and playing games. Further, mobile devices can help older adults remain more independent and maintain their quality of life as they experience declines in perceptual, motor, and cognitive abilities due to natural aging. For example, blood glucose meters help many older adults manage their diabetes, and innovative
+R. Leung and C. Tang contributed equally to this work. The authors would like to thank the GRAND NCE, UBC's MUX group and MAGIC lab, and Google for supporting this research. Authors' address: R. Leung, C. Tang (corresponding author), S. Haddad, J. McGrenere, P. Graf, and V. Ingriany, University of British Columbia; email: char.tang@gmail.com. Permission to make digital or hard copies of part or all of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies show this notice on the first page or initial screen of a display along with the full citation. Copyrights for components of this work owned by others than ACM must be honored. Abstracting with credit is permitted. To copy otherwise, to republish, to post on servers, to redistribute to lists, or to use any component of this work in other works requires prior specific permission and/or a fee. Permission may be requested from Publications Dept., ACM, Inc., 2 Penn Plaza, Suite 701, New York, NY 10121-0701, USA, fax +1 (212) 869-0481, or permissions@acm.org. c 2012 ACM 1936-7228/2012/12-ART11 $15.00 DOI 10.1145/2399193.2399195 http://doi.acm.org/10.1145/2399193.2399195
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:2
+
+R. Leung et al.
+
+memory aids may help older adults remember important information [Inglis et al. 2003].
+While many older adults want to learn to use existing mobile technologies, most of them have difficulty doing so [Kurniawan et al. 2006; Massimi et al. 2007]. For example, in a 2009 UK survey of 2905 people age 16+, respondents who owned mobile phones were asked how confident they felt about performing a range of typical mobile phone tasks [Ofcom 2009]. The survey found that a relatively large percentage of mobile phone owners age 60+ wanted to perform common tasks on their phone but could not confidently do so (e.g., 47% could not take a photo, 22% could not send a text message). In addition, the proportion of these older mobile phone users (age 60+) who could perform these common tasks was much lower than the proportion of all surveyed mobile phone owners (17% could take a photo and 40% could send a text message compared to 56% and 81%, respectively). The difficulties that older adults experience in learning to use existing mobile phones may have contributed in part to the lower adoption of mobile phones by this population. Only 49% of the surveyed older adults (age 60+) reported owning a mobile phone, compared to 82% of all surveyed adults.
+While learning difficulties experienced by older adults have been attributed to many factors (e.g., natural declines in cognitive abilities [Fisk et al. 2009], lack of computer experience, problems with devices' user interface [Kurniawan 2006]), one factor that has received relatively less attention is related to which learning methods older adults choose and whether these methods work well for them. The fact that older adults use different methods to learn to use mobile devices than younger adults could be attributed to older adults' different social networks or the natural decline in cognitive abilities that occurs with aging.
+It is not clear from the literature how older adults learn to use mobile computing devices, and whether these learning methods are effective for today's complex devices. The literature offers some principles for the design of online help, manuals, and other resources (e.g., Rieman [1996], Carroll et al. [1987], Duffy et al. [1992]), but it is unclear whether these principles are relevant to today's mobile phones, particularly smart phones, or whether they address the unique needs of older adults. Past studies have generally focused on learning to use desktop computer applications and only involved university students and office workers, and not older adults [Carroll et al. 1987; Rieman 1996]. Further, of those studies that did involve older adults, many did not include younger adults, and consequently the findings do not provide insight into the unique needs of older adults [Kurniawan 2006; Mitzner et al. 2008; Selwyn et al. 2003]. If currently used and available resources are not adequate for helping older adults learn to use mobile devices, then it is important to understand how to improve the design of these resources. This may include improving the design of the mobile device itself.
+
+1.1 Research Approach
+The research presented in this article sought to uncover how older adults learn to use mobile devices, what they prefer, and reasons for these preferences. The goal is to identify ways to improve learning resources and to support older adults during the learning process.
+1.1.1 Two Complementary Studies. We chose to conduct two complementary studies so that we could better understand how older adults learn to use mobile devices. We first conducted a survey study to rapidly gather responses from many older adults. Surveys have been a common method to investigate older adults' self-reported learning preferences, which in turn have uncovered important implications for designing and deploying help/learning resources (e.g., Rogers et al. [1996] and Selwyn et al. [2003]).
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:3
+
+In order to acquire a deeper understanding of how older adults learn to use mobile devices, we conducted a follow-up field study with six older adults to investigate their learning experience with a smart phone. The field study employed triangulated methods to capture both reported and actual behavior and preferences of older adults' learning.
+1.1.2 Including Younger Adults to Uncover Age-Related Differences. Our two studies focused on older adults who we define according to APA's definition as adults age 65+. This age 65 threshold is commonly used in aging and technology research (e.g., Czaja and Lee [2007], Kurniawan [2008], Ofcom [2008], Rogers et al. [1996]) because the majority of adults start experiencing appreciable declines in cognitive, sensory, and/or motor abilities by this age [Fisk et al. 2009]. In addition, 65 is a useful age delimiter because it has been, at least at the time of writing, the standard retirement age in many countries. Thus this delimiter can be useful in separating older adults from middle-aged adults who live two different lifestyles: those who are retired and those who are still employed. We also report other user characteristics, in addition to age, to better characterize the groups we studied and to help the interpretation of our findings. Further, we recognize that some aging research uses a different age threshold in their definition of older adults (e.g., Ofcom [2009]), so we report the age when we refer to research that uses a different age threshold.
+We recruited younger adults (ages 20­49), middle-aged adults (ages 50­64), and older adults (65+) for our survey study to ground the older participants' data and to uncover age-related differences. Without the data from the younger and the middleaged groups, it would not have been possible to determine whether findings from our studies were actually the result of age-related factors, and not other factors such as culture, socio-economic status, or computer experience.
+While we use the phrase age-related differences in this article to refer to differences in findings between older and younger participants, we are actually referring to differences related to age groups (e.g., group of adults between ages 20­49, group of adults of age 65+), rather than age itself. The differences we found between age groups reflect differences in age-related factors (e.g., cognitive abilities, accessibility of technical expertise in one's social circle) that we did not explicitly control for.
+We targeted older adults who generally did not have pathological declines in cognitive abilities (e.g., dementia) or in physical abilities. Compared to older adults with pathological declines in abilities, older adults without these declines are more similar to younger adults and are more homogenous as a group, and thus were more suitable for helping us find age-related differences.
+
+1.2 Contributions
+The research we report in this article makes three key contributions. The primary contribution of this research is the convergent findings from two com-
+plementary studies, a survey study (N = 131) and a field study (N = 6), on how older adults learn to use mobile devices. A key finding of both studies was that older adults have a stronger preference for using the device's instruction manual over trial-anderror, despite identified difficulties with using the manual. In addition, both studies revealed that older adults generally prefer learning alone.
+Our contributions also include design implications, supported by findings from both studies and past research, to improve support for older adults' learning to use mobile devices. For example, we suggest adding a short list of tasks sorted by difficulty to the instructional materials, as this was found to increase our field study participants' motivation to learn. We further contribute the design of a novel help system, Help Kiosk, as an illustration of our implications.
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:4
+
+R. Leung et al.
+
+Finally, our research makes two methodological contributions. To our knowledge, our survey study is the first to analyze data from both younger and older adults to identify age-related differences in learning preferences related to mobile devices. For example, older survey respondents' preference for trial-and-error was found significantly lower than that of younger respondents. Our field study is also the first that used triangulated longitudinal methods that include Eureka reporting [Rieman 1996] with older adults in their home to identify both actual and reported learning experience.
+
+2. RELATED WORK
+Given our goal to better support older adults to learn to use mobile devices, we first look at the challenges older adults face when learning to use new computer technology. This knowledge can help explain why older adults' learning needs and preferences might be different from younger adults'. We next present past research on helping older adults learn to use computers, which can also help us understand older adults' learning resource preferences. We last summarize recent research on how older adults learn to use everyday technologies, including mobile devices. This knowledge can help inform the design of mobile devices for this population.
+
+2.1 Challenges Faced by Older Adults in Learning to Use New Technology
+It is well established in the literature that older adults generally have more difficulty than younger ones in learning new skills, particularly in learning to use new technology [Fisk et al. 2009; Kelley and Charness 1995]. Researchers have attributed older adults' difficulty with learning to use technology to a number of user characteristics, including declines in spatial working memory, lower perceptual speed (i.e., information processing speed), lack of relevant technology experience, and a higher negative reaction to errors. We summarize research on the effects of these characteristics.
+Researchers have found that cognitive declines in spatial working memory, as well as perceptual speed, make it more difficult for older adults to learn to use computers [Echt et al. 1998]. Spatial working memory is the mental capacity for processing and storing visual spatial information, and has been found to decline with age [Echt et al. 1998; Hawthorn 2000]. Perceptual speed is how quickly mental operations are performed. This ability has also been found to decline with age and to decrease more for older adults than younger adults as task complexity increases [Fisk et al. 2009]. Morrell et al. [2000] found that spatial working memory capacity and perceptual speed were closely related to task performance and number of help requests, and were significant predictors of computer skill acquisition in certain instances [Echt et al. 1998; Morrell et al. 2000].
+Older adults generally have less experience with today's computers than younger adults, which means they have more to learn. In addition, it has been argued that older adults have difficulty learning current UIs because they learned to use different types of UIs from older technologies in their formative years [Docampo et al. 2001]. For example, today's older adults generally learned during their formative years how to use electro-mechanical UIs in which most if not all of the system's functionality is accessible simultaneously through mechanical controls (e.g., push buttons, switches, and dials) [Docampo et al. 2001]. In contrast, current mobile device UIs and those of other interactive computing technologies only show a subset of functions at once and often incorporate a navigational hierarchy to access specific task functions. Thus, unlike electro-mechanical UIs, mobile device UIs often have buttons (physical or onscreen) that perform different context-dependent tasks. As a result, the knowledge older adults gained by using electro-mechanical UIs may not positively transfer to
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:5
+
+using existing computer UIs and may make it harder for them to learn these UIs [Docampo et al. 2001]. As some researchers have put it, older adults can be thought of as digital immigrants and younger adults who grew up using computers can be thought of as digital natives [Fozard et al. 2009]. Thus, older adults may have to unlearn the user interactions they have learned to operate older dissimilar interfaces. In addition, they may have to relearn words that have taken on new definitions (e.g., "mouse", "Web") and learn new terms and metaphors (e.g., wrench or gears for "settings"), essentially to gain literacy in a somewhat foreign language.
+A further challenge in learning to perform mobile device tasks is low self-efficacy. In addition to having less experience using mobile devices, older adults are not likely to have watched many other older adults successfully perform these tasks, which both contribute to low self-efficacy in this domain [Barry and West 1993]. Lower self-efficacy has been found to decrease one's persistence during the learning process and motivation to learn [Maurer 2001]. Related to this, older adults, compared to younger ones, have been found to be more negatively affected by errors, which are bound to occur when learning to use new computer technology, and have also been found less likely to try solving the problem that led to the error on their own [Birdi and Zapf 1997].
+
+2.2 Helping Older Adults Learn to Use Computer Technology
+Given the unique needs of older adults in learning to use technology, much research has been carried out to identify effective ways to help them in the learning process. That wealth of research has largely focused on designing better training programs and instructional resources for the purposes of learning to use traditional desktop computers. For example, researchers have studied what guidance [Hickman et al. 2007], how much guidance [Morrell et al. 2000], and what media formats [Echt et al. 1998] were most suitable for older adults. A classic study by Rogers et al. [1996] researched the effectiveness of four learning resources (description, step-by-step text instructions, step-by-step pictorial instructions, and interactive tutorial) on training older adults (ages 61­81) to use Automatic Teller Machines and found that the interactive tutorial was the most effective. Although much research has looked at how to improve instructional resources for helping older adults learn to use computers, it is not clear if older adults actually use these resources when learning to use mobile devices.
+In addition to designing better instructional materials, researchers have identified many ways to improve the usability of computer technology (e.g., Fisk et al. [2009] and Gregor et al. [2002]) and more recently, researchers have explored ways to improve the learnability of desktop software (e.g., Hawthorn [2005], Dickinson et al. [2007]) and mobile devices (e.g., Leung et al. [2009, 2010], Massimi et al. [2007]).
+Despite the lack of research on helping older adults learn to use mobile devices, past research on developing better computer training programs and learning resources for older adults offers a wealth of recommendations that are useful for understanding older adults' preferences of learning methods. Fisk et al. [2009] summarized many of these recommendations, including the following.
+-- Provide self-paced learning, which is preferred by older adults. -- Include support to help build the user's confidence, immediate feedback, and moti-
+vating exercises that lead to an attainment of mastery within a reasonable period of time, because older adults experience greater frustration and anxiety than do younger adults when learning complex tasks. -- Provide multiple exposures of learning material over time, which is found more effective than exposure to all learning material in one session. -- Minimize working memory demands. -- Provide cues and aids.
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:6
+
+R. Leung et al.
+
+-- Avoid overloading learners with too much information. -- Avoid requiring learners to make complex inferences or fill in gaps of missing
+information.
+
+2.3 How Older Adults Learn to Use Mobile Devices and Other Technologies
+Three research teams have recently investigated which resources older adults prefer when learning to use technology. Selwyn et al. [2003] conducted a survey study that examined older adults' access to Information and Communications Technology (ICT) such as computers, video game machines, and televisions, and analyzed data from 352 adults (age 60+). Mitzner et al. [2008] conducted a focus group study with 113 older adults (ages 65­85) to investigate their training needs and preferences for technologies used in the home (but did not specify which technologies). Kurniawan [2006] conducted a focus group with seven older women (median age: 67.5) to explore the means by which they learned to use a new mobile phone.
+Findings from these studies have been mixed on which learning methods older adults prefer. Selwyn et al. [2003] found a strong preference for trial-and-error and that friends, family, and work colleagues were rarely consulted for ICT support. One limitation of this study is that it did not include use of manuals. Mitzner et al. [2008], however, found that older adults had a stronger preference for using manuals over trial-and-error. Kurniawan [2006] found that older women generally learn to use mobile devices with their friends or children, and not alone as reported by the other two studies. She also found that manuals were used most but only after trial-and-error was unsuccessful.
+The mixed findings are likely explained by a number of differences between the studies. Although each study focused on the means by which older adults learned to use technology, each focused on a different type of technology (i.e., ICT, general technologies found in the home, mobile phones). Each study also used a different research method and sample sizes, which likely influenced its findings. Although examining findings from several similar studies can help find common themes, triangulating results from these three studies is challenging. Thus additional studies, such as our survey and field study, that focus on how older adults learn to use mobile devices, are needed to help answer our research question. These studies can also help make sense of the related work and offer additional insights.
+Further, a limitation of this body of work [Kurniawan 2006; Mitzner et al. 2008; Selwyn et al. 2003] is that the researchers did not compare their older participants' responses with those from younger adults, making it difficult to determine whether preferences were due to age or perhaps to other factors, such as social support, that differ by age. Our survey study, by contrast, included younger adults to allow us to better identify age-related preferences. Our field study also included middle-aged adults to provide more in-depth understanding of the age-related differences.
+
+3. SURVEY STUDY
+The primary objective of our survey study was to better understand older adults' existing needs and preferences in learning to use mobile devices, in order to identify ways to design more suitable and effective learning support resources for older adults. We begin by describing our participants. We then briefly present the questionnaire used in this research, followed by the procedure and data analysis.
+
+3.1 Methods
+We recruited adults of age 20+ and formed three age groups: younger adults (ages 20­49), middle-aged adults (ages 50­64), and older adults (ages 65+). We recruited
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:7
+
+Table I. Definitions Used in Questionnaire for Different Levels of Expertise in Using Mobile Devices and Desktop Computers
+
+Expertise level
+Beginner Novice user Intermediate user Advanced user
+
+Definition
+Starting to use and have no or very little experience. Can use one to three programs or features on device/computer with help. Can use several programs or features on device/computer without help. Can use "advanced" features on device/computer and/or install new programs.
+
+participants from local senior homes, community centers, and libraries, as well as by means of online classifieds and a provincial aging research program. We recruited older and younger participants from similar neighborhoods to minimize differences in cultural background and socio-economic status between our age groups. We sought current mobile device users and individuals who had used mobile devices in the past. Participants were offered an opportunity to enroll in a draw for one of ten gift cards.
+To increase the accessibility of our questionnaire, we created both a paper version and an online version that were exactly the same except the manner in which they were presented and filled out (see Section 3.1.1 for more details). Potential participants were informed, through our call-for-participation paper posters and electronic postings, that they could complete either version. Paper posters displayed at community centers and libraries indicated that paper questionnaires (and envelopes addressed to the research team with prepaid postage) were available at the front desk. Electronic postings indicated that people interested in filling a paper questionnaire could email the researchers to request that a paper questionnaire be mailed to them. Both the paper posters and electronic postings also included the URL to the online version. Both the paper and online versions of the questionnaire allowed participants to complete it at a location of their choice, and at their own pace. One hundred and thirty eight completed surveys were returned, but seven had to be discarded because the respondent's age was less than 20 (two surveys) or because they included mostly incoherent responses (five surveys).
+Our goal was to discover age-related differences. Thus, we controlled as best as possible for mobile device expertise (see Table I for definitions), because this expertise was not distributed evenly across the three age groups and could represent a potential confound. For example, a mobile device expert, regardless of age, might rely more than a beginner on trial-and-error to learn to use a new feature. Participants were asked to indicate their perceived mobile device expertise. Our younger respondents generally reported having a higher level of mobile device expertise than our older respondents. Almost all self-reported "beginners" were either older or middle-aged adults (14 out of all 15 beginners). Further, 12 out of the 22 self-reported "advanced" mobile device users were from the younger age group. Given the very uneven distribution of age groups at the beginner and advanced levels of mobile device expertise, we focused primarily on the data from the respondents who reported being "novice" and "intermediate" mobile device users (N = 94), where the distribution was closer to being even. Most of the findings reported in the survey study section are based on data of these individuals (Sections 3.2.1 and 3.2.2). However, we were also interested in the responses from older respondents who self-reported to be "beginners" and hence analyzed their data to see how their responses compared to our findings (see Section 3.2.3).
+After the exclusion of the beginners and advanced mobile device users, the three age groups were similar on many levels (see Table II). We ran Kruskal-Wallis tests on the demographic data and found no significant group differences with respect to gender, education, housing status, reported computer expertise, or years of experience with mobile devices. There was a significant difference with respect to employment status
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:8
+
+R. Leung et al.
+
+Table II. Respondent Characteristics of the Three Age Groups (N = 94)
+
+Age* Gender
+Employment status*
+Computer expertise
+Mobile expertise*
+Mobile Mobile experience
+
+N
+M (SD)
+# male # female
+# student # working # retired
+# "novice" # "intermediate" # "advanced"
+# "novice" # "intermediate"
+# 0­5 years # 6­10 years # 10+ years
+
+Younger respondents
+28
+27.7 (7.7)
+8 20
+11 17
+0
+2 18
+8
+7 21
+7 18
+3
+
+Middle-aged respondents
+34
+57.1 (3.9)
+11 23
+0 23 11
+4 23
+7
+19 15
+11 13 10
+
+Older respondents
+32
+73.1 (5.5)
+15 17
+0 2 30
+3 26
+3
+16 16
+25 11
+6
+
+*: significant difference between age groups
+
+( 2 = 16, df = 2, p < .001); as expected, younger respondents were either students or working, while most of the older respondents were retirees.
+Even after our attempt to minimize differences, there was still a significant difference in reported mobile device expertise between the three groups ( 2 = 6.4, df = 2, p = .041). The older and middle-aged respondents were evenly divided between being "novice" and "intermediate" users, while most younger respondents reported being "intermediate" users. Thus our analysis included tests to factor out the effects of mobile device expertise (see Section 3.1.3 for more details).
+3.1.1 Materials. This study primarily used the Learning Methods for Mobile Devices Questionnaire (Appendix A) that we created to assess older adults' needs and preferences in learning to use mobile devices. The questionnaire includes closed and also open-ended questions to gather both quantitative and qualitative data. It focuses on respondents' experience in learning to use a range of mobile devices (e.g., digital cameras, cell phones, electronic organizers) to obtain results that are generalizable across mobile devices and that might apply to future mobile devices.
+The questionnaire focuses on five areas: demographics; current and past mobile device experiences and needs when learning to use mobile devices; perceived importance of qualities/features in a learning resource; motivations for using particular learning methods; and feedback on a proposed help system.
+A key focus of the questionnaire is on respondents' motivations for using or not using particular learning methods. Respondents are given a list of 11 learning methods (Table III), which includes all learning methods identified by Mitzner et al. [2008] and all learning resources listed by Selwyn et al. [2003], except talking to "neighbours" or "other member of household" [Selwyn et al. 2003, page 574] which were found to be almost never used by older respondents. Respondents were asked four related questions: rate one's likelihood of using each of the 11 learning methods and briefly state reason for rating; list three learning methods they would most prefer using if they had easy access to all methods; list three learning methods that best help them retain what they learned; and rate how helpful each of the 11 learning methods is.
+The questionnaire also includes a question on the use of hand-written notes for learning to use mobile devices as well as desktop computers. We looked at note-taking
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+Table III. Learning Methods Listed in Learning Methods Questionnaire
+Learning methods
+I try working it out for myself by trial and error I use the device's help feature I use the device's instruction manual I phone customer or IT support I search the Internet for help I take a class (e.g., at library, community centre) I talk to my partner/spouse I talk to my children I talk to family/friends from my generation I talk to family/friends from younger generation I talk to my work colleagues
+
+11:9
+
+separately from the other 11 learning methods as notes can be self-authored and used as reminders when performing learned tasks.
+We created both a paper version and an online version, as stated earlier, which had the same questions. In the paper version, questions were presented in a readable text size (13-point Arial font). The paper questionnaire consisted of 13 pages, including two-page consent information pages, each page printed single-sided on paper. The online questionnaire was delivered through the authors' affiliated university's officially supported survey system and consisted of a total of nine Web pages.
+Of the 94 questionnaires we analyzed, 74 were completed online (16 by older adults, 30 by middle-aged adults, and 28 by younger adults) and 20 were completed on paper (16 by older adults and four by middle-aged adults).
+3.1.2 Procedure. All participants were given the choice to complete either an online version or a paper version of the questionnaire, and could do so at a location of their choice. We estimated, based on pilot studies, that participants required approximately 20­40 minutes to complete either questionnaire version.
+3.1.3 Data Analysis. We analyzed our quantitative data using nonparametric tests (i.e., Kruskal-Wallis, Mann-Whitney U, and Wilcoxon signed-rank) and report the results of those tests in this article. The alpha was set to .05. Survey questions were analyzed using age group (20­49, 50­64, 65+) as the independent variable to find agerelated differences unless specified otherwise.
+As noted earlier, mobile device expertise was significantly different in the three age groups. To account for this potentially confounding variable, we used the Aligned Rank Transform (ART) procedure with ANOVA, a nonparametric factorial analysis technique recently introduced by Wobbrock et al. [2011]. Whenever a significant difference on a dependent measure was found between our three groups, we reanalyzed the data using ART with ANOVA technique with both age group and mobile device expertise as factors. We confirmed that this difference was indeed due to a significant main effect of age group when the effect of mobile device expertise was accounted for.
+We also examined respondents' qualitative responses. A coding scheme was created based primarily on salient concepts identified in the literature, such as learning styles, which have been found to differ across age groups [Truluck and Courtenay 1999]. The coding scheme was also based on reoccurring concepts found in the data (e.g., control over learning). Each text response was given a single code to represent the dominant idea expressed in the response. Responses that were ambiguous, blank, or incoherent were coded as not answering the question. The coding instructions and scheme were found reliable: two researchers coded the responses from a random 20% sample of
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:10
+
+R. Leung et al.
+
+Fig. 1. Median rating scores on the importance of learning exact task steps vs. gaining general understanding (N = 93, top), and importance of having learning resources provide step-by-step instructions vs. explain how device and programs work (N = 94, bottom). (One respondent did not answer the first question, which is why the Ns differ by one.)
+the surveys, and a substantial degree of interrater agreement was found (K = .80, p < .001). After this reliability check, one of these two researchers coded all of the remaining text responses.
+3.2 Results
+We present key survey findings here, focusing primarily on older adults' learning needs and preferences and how these needs and preferences differ from those of younger adults. We highlight differences and similarities between older and younger respondents. We show data from middle-aged respondents alongside the data from the other two groups (e.g., in charts), but we only discuss our middle-aged respondents' data in cases when something interesting was found.
+We first present whether respondents want to learn to perform task steps or just gain a general understanding of how to use a device. We then present results on which learning methods our participants preferred to use, and their reasons behind their preferences. We continue by presenting what learning resource features and qualities older respondents generally perceive as being important. Finally, we present results of older respondents who reported being beginners and show that their results are generally consistent with novice and intermediate users.
+3.2.1 Learning Need: Older Respondents Most Want to Learn to Perform Task Steps. When asked about the importance of learning task steps versus gaining a general understanding, respondents from older and middle-aged adult groups reported that figuring out how to complete the task steps was very important and significantly more important than gaining a general understanding (Wilcoxon signed ranks test; 65+: Z = -3.8, p < .001; 50­64: Z = -3.6, p < .001). In contrast, younger adults reported that both options were similarly important (Z = -0.18, p = .86). The top chart in Figure 1 highlights this pattern of preferences across the age groups. This finding is consistent with findings from Mitzner et al. [2008].
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:11
+
+Respondents were asked how important it was for learning resources to provide step-by-step instructions and explanations on how the device and software work. Consistent with the preceding results, older and middle-aged respondents felt it was very important for learning resources to provide step-by-step instructions, and that it was significantly less (but still) important for learning resources to explain how the device and programs work (Wilcoxon signed ranks test; 65+: Z = -2.9, p = .004; 50­64: Z = -2.0, p = .0495). Younger respondents, by contrast, rated these two learning resource qualities as being equally important (Z = -0.12, p = .22). As shown in the bottom chart in Figure 1, younger respondents, compared to older respondents, also placed less importance on having the learning resource provide step-by-step instructions or explanations on how the device works.
+Gaining a general understanding of how the software works was rated as somewhat important by all respondents as shown in Figure 1, though less important than learning task steps. Relying only on step-by-step instructions, without gaining an understanding of how the software works, is useful as long as the UI does not significantly change (e.g., due to a software update) or the user does not switch to a different device. However, it is likely that some older adults will try to develop a more comprehensive and useful mental model once they have learned to perform tasks step-by-step. More research is needed to understand why and how older adults would want to go beyond step-by-step instructions and gain a deeper understanding of how the software works.
+
+3.2.2 Learning Method Preferences. We assessed respondents' learning method preferences through four questions which involved rating learning methods, choosing a set of preferred methods, and entering a reason (free-form) for their ratings/choices. We calculated the correlation between the quantitative responses to the four questions and found significant correlations for almost all 11 learning methods suggesting a general agreement between responses to each of the questions. Only four of the 66 correlation pairs were not significantly correlated (Appendix B). Instead of presenting the results from each of the four questions, we only present the quantitative results for question "choose three most preferred learning methods from our list of 11 methods" in detail here because these results best illustrate the age-related differences in preference.
+We also include our qualitative analysis of the reasons respondents gave for using or not using a particular learning method assuming they had access to it, which shed some light into the age-related differences in learning method preferences. To filter out infrequently given reasons, we only list reasons that were captured by at least a third of the responses and given by at least three respondents. We include the number of respondents who gave a particular reason for using (or not using) a particular method. We also state the total number of respondents who gave reasons for using (or not using) a particular method. We show these numbers as a ratio: "(<# of respondents who gave a particular reason>/<total # of respondents who gave reasons>)." The greater the ratio, the more important a particular reason was for explaining why a method was or was not used. Approximately half of the qualitative responses did not offer an answer or a clear enough reason for using or not using a learning method, and thus were not included in our analysis. Although the survey did not allow us to follow up on responses, the subsequent field study built on these results by probing deeper into learning preferences.
+
+Respondents in all age groups generally preferred learning alone. Respondents, regardless of age group, generally listed methods that allowed them to learn alone as one of their top three learning method choices (Figure 2, top chart) over methods that involved learning with others (Figure 2, bottom chart). An exception to this finding
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:12
+
+R. Leung et al.
+
+Fig. 2. Percentage of respondents who listed the method as one of their top three choices (N = 94). The top chart shows methods for learning alone. The bottom chart shows methods for learning with others: domain experts (two methods on the left) and friends and family (five methods on the right).
+is middle-aged and older respondents' preference for IT support, which appears to be stronger than their preference for searching the Internet for help.
+Looking specifically at the four methods that support learning alone (Figure 2, top chart), older adults clearly reported different preferences than those reported by younger adults. Younger respondents reported a much stronger preference for trialand-error and using the Internet over the other learning methods. Older respondents' preferences spread somewhat more evenly over more learning methods.
+Younger respondents prefer trial-and-error much more than older respondents do. A key finding from the survey was that 86%, a vast majority, of younger respondents chose trial-and-error as one of their three preferred learning methods, but only 33% of older adults reported this preference. In fact, a significant effect of age on trialand-error preference was found ( 2 = 16, df = 2, p < .001); significantly fewer older respondents chose trial-and-error as one of their three preferred learning methods compared to younger respondents (Mann-Whitney U; 20­49 versus 50­64: Z = -2.7, p = .006; 50­64 versus 65+: Z = -1.6, p = .117).
+Of all the reasons why younger respondents use trial-and-error, a strong majority (12/16) of the responses were related to learning style. One respondent, age 25, expressed, "I like to test things out for myself", and another, age 26, wrote, "You learn better from failure than success." A strong majority (14/16) of middle-aged respondents' reasons for using trial-and-error were also related to learning style.
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:13
+
+Of all the reasons older respondents gave for why they did not use trial-and-error, half of the responses (4/8) were related to negative past experiences, including frustration ("I get frustrated when it `doesn't work' at once!", respondent, age 72) and unwanted changes ("I . . . think I could `mess [the device] up"', respondent, age 74).
+Over half of older respondents preferred using the instruction manual, but many reported difficulties using it. While older respondents' preferences for a particular learning method were not as strong as younger respondents', older respondents most frequently chose the device's instruction manual as one of their three preferred learning methods (Figure 2, top chart). Specifically, 63% of older respondents expressed this preference compared to less than 36% of younger respondents. However, no statistically significant age-related differences were found on manual help preferences.
+Of all the reasons why older and middle-aged respondents use the device's manual, almost half of the responses (65+:3/6, 50­64:5/12) were related to learning style. One older respondent, age 72, wrote "I'm print oriented ­ [I] like to read to understand" and one middle-aged respondent, age 59, explained, "If I have directions I can usually figure it out." The survey revealed limited insights regarding older adults' preference for the manual, so one of the objectives of the subsequent field study was to better understand the reasons behind this preference.
+While using the manual was the overall preferred learning method by older respondents, many respondents from all three age groups (18/31) indicated that the manual's key shortcoming was unhelpful content (e.g., not enough detail to address specific issues, not written clearly). One older respondent, age 67, wrote, "lack of detail is [the] biggest problem . . . too much left out . . . [very] frustrating." Older adults' preference for manuals over trial-and-error is consistent with findings by Mitzner et al. [2008] and helps to clarify the mixed findings from Selwyn et al. [2003] and Kurniawan [2006].
+Younger respondents also prefer using the Internet to help them learn, while fewer older respondents reported this preference. Over half, 54%, of younger respondents expressed a preference for using the Internet to help them learn to use mobile devices, while 23% of older respondents expressed this preference. A trend result was found in the data suggesting a possible age-effect on respondents' preference ( 2 = 6.0, df = 2, p = .0503) where older adults have a lower preference than do younger adults for searching the Internet for help.
+The main reason why respondents from all age groups (15/32) searched the Internet for help on learning to use mobile devices was not surprising, namely because they believed the Internet would contain useful information on how to use their device.
+Of the reasons why the Internet was not used, almost half (3/7) of older respondents' reasons for not using this learning method was related to not being able to find the information they needed ("I lose patience, there are so many wrong turns to take", respondent, age 71). Similarly, almost half (4/9) of middle-aged respondents' reasons for not using this learning method was related to taking too much time to find desired information ("usually too time consuming", respondent, age 58).
+Half of older respondents preferred using the device's help feature. After the manual, older respondents most frequently chose the device's help feature as one of their three preferred learning methods. While we did not give a definition for device help to respondents, we considered this term to mean any instruction provided by a device (e.g., text description, interactive tutorial, video) to help the user operate the device. Specifically, 50% of older respondents expressed a preference for the device's help feature. No significant age-related differences were found on device help preferences.
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:14
+
+R. Leung et al.
+
+The main reason older respondents (4/6) gave for using the device's help feature was that it provided adequate guidance when help was needed ("Usually it points me in the right direction", respondent, age 77). Many middle-aged adults (5/9) reported using the help feature because they found it convenient to access. In contrast, the main reason why respondents from all three age groups (14/24) did not use the help feature was because its content was difficult to understand ("Often too complex and hard to follow", respondent, age 60).
+
+Barriers to learning with others. Analyzing the seven learning methods that involved meeting with someone to get help (Figure 2, bottom chart), a number of older respondents reported a preference for getting help from the younger generation (i.e., their children, family/friends), while no younger respondents expressed this preference, which is not surprising as younger respondents' children (if they had any) would likely be too young to be knowledgeable about mobile devices to help. In contrast, fewer older respondents, compared to younger ones, reported a preference for getting help from their partner/spouse and friends/family from their generation. Although this difference was not significant, we suspected that older adults' lower preference for getting help from peers was because their peers are likely to be no more informed about technology than they are. Our field study aimed to explore this preference in more depth.
+Cost was the reason most frequently given by the three age groups for not contacting IT support (30/41) and taking a class (26/35). Regarding IT support, one younger respondent, age 28, wrote, "This [method] is a last resort for me. I hate waiting on hold" and an older respondent, age 77, wrote similarly, "[this method is] a last resort. Many IT telephones put the customer on hold for several minutes when I'm looking for an immediate answer." In a similar way, respondents from all age groups expressed that taking a class required too much time and money, and that classes were often not available.
+Almost all of the reasons (9/10) older respondents gave for preferring to seek help from younger adults was because they were considered to be knowledgeable. However, the main reason older respondents (3/6) gave for not seeking this help was because they felt younger people were not able to explain their knowledge in a helpful way. One respondent, age 71, wrote, "[family/friends from the younger generation] are most knowledgeable but sometimes a bit too into it to relate to my needs." Conversely, the most popular reason (4/8) middle-aged respondents gave for not seeking help from younger people is because these respondents reported not knowing many younger people and the ones they did know were often not easily accessible. One middle-aged respondent, age 63, indicated that "finding [people from a younger generation is] not so easy." Younger respondents did not have these problems, which helped to explain their relatively strong preferences for asking their partners/spouses and people from their generation for help.
+
+A number of older respondents make notes to use mobile devices. Over a third of older respondents (12/32) and middle-aged respondents (13/34) reported using handwritten notes to perform tasks on their mobile devices. A smaller proportion of younger respondents (6/28) reported using handwritten notes, but this difference between age groups was not significant.
+Looking at the use of notes to support computer tasks, a trend result in the data suggests that a larger proportion of older respondents reported using handwritten notes to perform tasks on their computers than younger respondents did (Kruskal-Wallis test,  2 = 5.9, df = 2, p = .052). Inspection of the data showed that nearly two thirds of older
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:15
+
+Fig. 3. Median rating scores on the importance of having learning resources be interactive, demonstrate task, provide practice opportunities, and support group learning (N = 94).
+respondents (20/32) used handwritten notes, whereas around a third of middle-aged respondents (14/34) and younger respondents (9/28) used notes.
+We initially suspected that some older adults used notes created by another person, but almost all notes were written by the respondent (43/48). Consistent with the preceding findings, almost all notes included step-by-step text instructions (42/48). No age-related difference was found in the author of the notes (i.e., self versus others) and inclusion of step-by-step instructions.
+Older respondents want demonstrations, opportunities to practice, and the option to learn individually. Respondents were asked to indicate how important it was for learning resources to have a number of other qualities and features (beyond providing step-by-step instructions and explanations on how the device works). The results generally showed that older adults, relative to younger adults, placed a greater importance on a variety of learning resource qualities and features. As shown in Figure 3, older respondents, compared to younger ones, placed significantly more importance on having learning resources demonstrate how to perform tasks (Kruskal-Wallis test,  2 = 17, df = 2, p < .001), and provide opportunities for practicing tasks ( 2 = 29, df = 2, p < .001), which is consistent with past research findings [Fisk et al. 2009]. Older respondents also placed significantly more importance than did younger adults on the interactive nature of a learning resource ( 2 = 19, df = 2, p < .001).
+We found that our older respondents, as well as younger ones, placed a greater importance on support for individual learning (median scores: 5 out of 6; no significant effect of age) but little importance on support for learning in a group (2 out of 6; no significant effect of age). This finding supports findings by Selwyn et al. [2003] and Mitzner et al. [2008] that older adults prefer learning by themselves rather than with family or friends. This preference is consistent with an earlier finding that respondents place much importance on learning independently.
+Our survey also revealed that respondents from all age groups felt that it was important for a learning resource to be accessible (median score: 6 out of 6), understandable (6 out of 6), friendly and patient (5 out of 6), affordable (5 out of 6), and provide detailed information (5 out of 6). These findings are consistent with the literature [Fisk et al. 2009]. No significant effects of age on these measures were found.
+3.2.3 Survey Findings Appear to Generalize to Older "Beginner" Mobile Device Users. As mentioned earlier, much of our analysis focused on data from the respondents who reported being "novice" or "intermediate" mobile device users so that we could focus on finding age-related differences. However, we were also interested in the responses from older respondents who reported being "beginner" mobile device users as they are
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:16
+
+R. Leung et al.
+
+Fig. 4. Median rating scores on the importance of learning exact task steps vs. gaining a general understanding, by older novice (N = 16), intermediate (N = 16), and beginner mobile device users (N = 6).
+more representative of the users we want to support (we refer to these respondents hereafter as older beginners). It was not practical to run statistical tests on responses from these beginners as the sample was relatively small (six respondents). However, we inspected the older beginners' quantitative and qualitative responses to see how consistent these responses were with our findings from older novice and intermediate mobile device users.
+Inspection of the responses by older beginner mobile device users revealed that these beginners generally had similar learning needs and preferences to those of the older novice and intermediate mobile device users in our study. Older beginners felt it was very important for a learning resource to be interactive (median score: 6/6), provide demonstrations (6/6), and provide opportunities to practice (5/6). Furthermore, older beginners' preferences for the manual over trial-and-error were very similar to older novice and intermediate mobile device users'. Older beginners also reported a similar lack in preference for IT support due to high access and time cost. One older beginner (and three middle-aged beginners) also reported that they did not phone customer or IT support because of "vocabulary challenges" (respondent, age 69), an issue not raised by older novice and intermediate mobile device users.
+We did find a few differences between responses from older beginners, novices, and intermediate users that suggest that older beginners may need more support as they learn to perform new mobile device tasks. Older beginners, compared with older novices and intermediates, reported that understanding how the software works was much less important than figuring out the exact steps required to perform a task, as shown in Figure 4. In addition, these older beginners felt it was just as important for learning resources to support individual learning (4/6) as group learning (4/6).
+Our survey findings appear to generalize well to older beginner mobile device users. In some cases, our findings apply better to these older beginners than to other older adults. Older beginners appear to have less desire to learn how the technology works compared to learning how to perform tasks. The challenges older beginners have with technical terminology also underscore the need for learning resources to use familiar terms or provide better help for understanding unfamiliar terms.
+The survey study provided useful insights into how older adults learn to use mobile devices and how they learn differently from younger adults. Yet, the results reflect the respondents' recollection of their previous learning experiences. We know, however, that what people report based on their memory may not always reflect their true behavior in practice. We thus conducted a field study to more thoroughly understand how older adults learn in real life.
+4. FIELD STUDY
+To complement what we learned from the survey study, we designed our field study to use triangulated methods to more accurately reflect older adults' learning behavior
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+Table IV. Demographics of Field Study Participants
+
+Age Gender Co-inhabitants
+
+Mobile phone
+
+P1 57
+
+F
+
+­
+
+Basic
+
+P2 69
+
+F
+
+Husband
+
+Basic
+
+P3 60
+
+F
+
+­
+
+Basic
+
+P4 67
+
+F
+
+Husband & 2 adolescent daughters Basic
+
+P5 76
+
+M
+
+Wife
+
+Basic
+
+P6 66
+
+M
+
+Wife
+
+Smart phone
+
+11:17
+
+in practice. We included middle-aged adults to provide additional insights into the learning experience of the aging population.
+4.1 Methodology
+Our field study primarily used qualitative methods for our data collection. We captured the participants' experiences of learning to use a smart phone in a real-life setting where they typically learned to use technology and where they could use their preferred learning methods and style at their own pace.
+4.1.1 Participants. Participants were two middle-aged (50­64, P1 and P3) and four older (65+) mobile phone users (Table IV). While we focused on older adults' learning experiences, two middle-aged participants were included in our field study to provide additional insights into age-related differences found in the survey study. The participants all self-reported to be free from cognitive impairment and motor impairment in their hands. All participants had been using a mobile phone for at least a year; five used a "basic" mobile phone and P6 used a non-Android smart phone. None of them had a data plan. They were recruited through posters placed in local community centers and libraries and via snowball sampling.
+4.1.2 Materials. The materials for this study consisted of a smart phone, an instruction manual, a learning journal, and a task list.
+Smart phone. We generated learning opportunities for participants by giving them a smart phone to learn to use during the study. The smart phone was the HTC Google Nexus One, which runs the Android operating system [Google 2010]. We selected the Nexus One because Android-powered devices were, at the time of the study, the most popular smart phones, constituting 48% of the market and used by 57% of first-time buyers in the United States [Android Community 2012].
+The smart phone was provided to each participant with a prepaid phone plan that included voice calls and text messaging. A data plan was also included. The goal was to provide a fully equipped phone with rich features for participants to explore in their preferred way and in their own learning environment. We hereafter refer to the smart phone used for the study as the "study phone".
+Instruction manual. The manual was a color-printed copy (300+ pages) of the official manual for the Nexus One [Google 2010]. The Nexus One is not sold with a paper manual. We did not formally compare this manual with other smart phone manuals, but the instructions, the level of detail, and the use of technical language seemed to be representative of smart phone manuals.
+Learning journal. The Learning journal (Figure 5) was a small booklet (left) of 20 blank "Eureka" reports (adapted from Rieman [1996]). Each Eureka report consisted of three predefined sections (right). The top section was for participants to write down
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:18
+
+R. Leung et al.
+
+Fig. 5. (Left) Learning journal consisting pages of "Eureka" reports; (Right) a Eureka report completed by a participant.
+the features that they attempted to use or things that they discovered during their learning. The middle section displayed a list of learning methods: read the paper manual, used help provided by phone, used help from Internet, tried different things until it worked, stumbled on it by accident, asked someone in person or by phone, sent email or posted news request for help, and noticed someone else doing it. It also had a space for participants to describe methods used but not listed. The "used help provided by phone" method in our Eureka reports was not the same as the "device help" in the survey study. The survey's "help" referred to instructional support provided by the device (e.g., text description, interactive tutorial, video) whereas the field study "help" referred to the wizard-like interaction provided by the device to help users perform a complex task.
+The method of recording learning events was designed to more accurately portray the participants' actual learning behaviors, given that they were asked to record their learning in the Eureka reports as they occurred.
+Task list. The task list (Figure 6) displayed names (without instructions on how to complete the tasks) of 11 common task categories, such as "Phone calls", "Contacts", "Text messaging", "Email", "Camera", and "Internet", sorted in order of difficulty and printed on both sides of a piece of letter-size paper. Each category consisted of several tasks (see Appendix C for the complete list). Our intention of including the task list was for participants to use it as a quick reminder of possible features that they could explore.
+4.1.3 Methods. For each participant, we conducted two field visits (approximately 1.5 hours for the first visit and 45 minutes for the second, 7­10 days apart) and two semi-structured phone interviews (each about 15 minutes, between the two visits). Each field visit was conducted by two researchers in a place where our participants typically learned to use new technologies; we met with all our participants in their home except P1 who chose to meet with us in a local community center. All field visits were videotaped except the sessions with P1 who preferred no videotaping.
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:19
+
+Fig. 6. A snapshot of the task list showing the first two features (of eleven in total), and progress annotations and notes made by a participant.
+First field visit. We conducted a semi-structured interview to ask about participants' learning experience with their current mobile phone. We started by focusing on the methods that they had used for learning to use it and how they had learned to use other mobile devices such as a digital camera. We then asked them to demonstrate the features they used on their mobile phone. We also asked them to describe features that they might like to learn to use with their mobile phone.
+Next, we introduced the study phone. We showed participants the touch-screen interactions, key icons, physical buttons, and phone accessories. We were diligent not to show them too much as we did not wish to play a role in their learning process but wanted to give them a very basic introduction. We then gave them the paper instruction manual and the task list. We also offered them a digital version of the manual but only one participant (P2) accepted it. We explained to participants that they could use any methods and resources for learning to use the study phone. We then gave participants a learning journal and asked them to record elements of their learning experience including features explored, methods used, and the learning outcomes such as successes and problems encountered in the Eureka reports.
+Phone interviews and learning journal. Two phone interviews were conducted with each participant in between the field visits. In our phone conversations, we encouraged participants to share and discuss their learning experiences as recorded in their learning journal. We asked them to describe the features that they had explored, how they had learned to use those features, and the problems that they had encountered.
+Second field visit. We probed deeper into the learning methods that they used for the study phone, and the underlying reasons for choosing particular methods. We asked them for more details and clarifications about their learning experience using the participant's learning journal as a conversation prop. We also asked them to describe the challenges that they faced while learning. Finally, we collected their learning journals for further analysis.
+4.1.4 Data Analysis. About 30 handwritten pages of field data were collected and about 10 hours of audio from the video recording of field visits were transcribed. Phone interviews with participants on their learning experiences, such as the features they
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:20
+
+R. Leung et al.
+
+Table V. Count (%) of Methods Used by Each Participant as Recorded for Features Attempted in Eureka Reports
+
+Participant Age
+
+Try
+
+Read
+
+Ask Help** Stumble Total***
+
+P1
+
+57 4 (100.0)
+
+­
+
+­
+
+­
+
+­
+
+4
+
+P2
+
+69 2 (28.6) 3 (42.9) 1 (14.3)
+
+­
+
+1 (14.3)
+
+7
+
+P3
+
+60 2 (14.3) 2 (14.3) 1 (7.0) 2 (14.3) 7 (50.0)
+
+14
+
+P4
+
+67 3 (37.5) 3 (37.5)
+
+­
+
+2 (25.0)
+
+­
+
+8
+
+P5
+
+76 3 (33.3) 3 (33.3) 1 (11.1) 1 (11.1) 1 (11.1)
+
+9
+
+P6
+
+66 5 (62.5) 2 (25.0)
+
+­
+
+­
+
+1 (12.5)
+
+8
+
+Total*
+
+19
+
+13
+
+3
+
+5
+
+10
+
+50
+
+*total number of Eureka reports listing a method (i.e., frequency of each method in all the Eureka reports); some reports listed more than one method. **Help refers to help provided by phone; no one recorded using help from the Internet in the Eureka reports. ***total number of methods reported in Eureka reports by each participant.
+
+attempted to learn and the problems they encountered, were documented on paper during the phone conversations. Two researchers used open coding and grounded theory to examine and analyze the collected data. Emerging themes were identified and refined iteratively. A total of 36 completed Eureka reports were gathered. However, since P1 used a single Eureka report to record attempts of four different features using the same method, we are counting this as four separate Eureka reports to be consistent with the other submitted Eureka reports, each of which recorded a single feature. Hence, our analysis that follows is based on 39 Eureka reports and is focused on examining and counting the features that the participants explored and the learning methods they used in learning to use the study phone.
+
+4.2 Findings
+In this section, we first present findings of the Eureka reports. Next, we present the participants' preferences in methods for learning to use the study phone and the outcome of their learning experience. Finally, we reflect on the learning experience in relation to the participants' motivation for learning.
+4.2.1 Eureka Reports. The Eureka reports that we collected showed the features the participants attempted to learn, the methods they used for the learning, and the outcome of their learning. The attempts to learn a feature that participants recorded in the top section of the Eureka reports (Figure 5, right) were either a feature available on the phone (e.g., gallery) or a task performed on the phone (e.g., make a phone call), as listed in the task list. We did not distinguish them in our analysis; we collectively regarded them as "features". Our analysis presented here includes both features that participants learned successfully and those that participants did not learn successfully. Half of the Eureka reports recorded a single feature attempted while the others recorded multiple features.
+Eureka distribution by method. Five different methods were used by our participants for learning the study phone as shown in the Eureka reports: Try different things until it worked (same as trial-and-error in our survey), Read the paper manual, Ask someone, use Help provided by the phone (different from device help used in survey as described earlier), and Stumble on it by accident. Table V (bottom row) shows the frequency of each method used for learning the study phone and three methods, Try, Read, and Stumble, dominated the Eureka reports. Further, we noted that the manual (Read), if used, was often used for initial learning while relearning and
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+Table VI. Combination of Methods Shown with Eureka Reports
+
+Try Read Ask
+
+In Combination with*
+
+Alone Try Read Ask Help Stumble
+
+11
+
+­
+
+6
+
+2
+
+2
+
+2
+
+5
+
+6
+
+­
+
+2
+
+2
+
+2
+
+1
+
+2
+
+2
+
+­
+
+1
+
+­
+
+Help
+
+2
+
+2
+
+2
+
+1
+
+­
+
+­
+
+Stumble
+
+7
+
+2
+
+2
+
+­
+
+­
+
+­
+
+*9 Eureka reports recorded more than two methods; for these, all combinations of the methods were incremented, i.e., try + read + help added 1 to try-read, 1 to try-help, and 1 to read-help.
+
+11:21
+
+learning more advanced features were conducted through Try. For example, P4 recorded in the Eureka reports that she followed the manual instructions to capture video and was successful in playing back the video on the study phone. Then she succeeded in capturing videos by Try two days later. This could indicate that step-bystep instructions were effective for older adults' initial learning and for subsequent retaining of learning.
+Twenty-six (67%) of 39 Eureka reports recorded a single learning method, nine (23%) recorded multiple methods (four, four, and one reports recorded two, three, and four methods, respectively), and four (10%) did not specify any method. Table VI shows the counts of methods used alone and used in combination with other methods. By contrast with Rieman's [1996] finding where Try and Read were most frequently used together, our study indicated that participants mostly used a single method for their learning. Combined, 46% of the Eureka reports reported using Try things out alone (11) or Stumble by accident alone (7). Yet, when multiple methods were used for learning, Try and Read were most frequently combined, similar to Rieman's finding.
+Methods used by each participant recorded in Eureka reports were also examined, as shown in Table V. The middle-aged participants, P1 learned entirely by Try and P3 mostly learned through Stumble as compared with other methods. P6, the youngest of the older participant group, also largely learned by Try. The three oldest participants used the manual to a larger extent than the others. P2 mostly learned by Read, while P4 and P5 learned by Try and Read equally.
+4.2.2 Learning Method Preferences. In this subsection, we present participants' preferred learning styles. These findings were acquired from participants' learning experience with the study phone and also their general preferences of methods and styles for learning to use mobile devices. In view of the small sample in our field study, our findings are intended to provide additional insights to complement the survey results rather than as a basis for making broad generalizations.
+All our participants preferred step-by-step instructions. We asked participants whether they preferred receiving step-by-step instructions or gaining a general understanding of the device when learning. All participants expressed a preference for step-by-step instructions, which is consistent with our survey findings. Several participants also mentioned that they experienced frustration or confusion when the manual did not provide step-by-step instructions with a sufficient amount of detail.
+Most of our participants preferred learning alone. Consistent with our survey findings, all participants, except P6, preferred learning on their own. This finding was not limited to participants who lived alone; it also applied to those who had a techsavvy family member, such as their spouse. For example, P2 stated, "If I ask him [her
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:22
+
+R. Leung et al.
+
+Table VII. Use of Learning Methods Recorded in Eureka Reports and Reported in Field Interviews
+
+Participant Age
+
+P1
+
+57
+
+P2
+
+69
+
+P3
+
+60
+
+P4
+
+67
+
+P5
+
+76
+
+P6
+
+66
+
+Methods most used during study (Eureka reports) Trial-and-error (100%)
+Manual (43%)
+Stumbling (50%) Trial-and-error, manual (38% each) Trial-and-error, manual (33% each)
+Trial-and-error (63%)
+
+Preferred learning methods reported (Interviews during field visits)
+Trial-and-error, quick reference card Manual, demo, quick reference card,
+online tutorial Trial-and-error, demo
+Manual, demo
+Manual, demo, quick reference card Trial-and-error, online tutorial, class
+
+The oldest three participants are highlighted.
+
+husband], we will start World War III." Participants also did not seem to engage in learning with others outside their households since they felt everyone had a different phone and accessibility to other people was sometimes an issue. P6, however, was an exception. He strongly preferred learning with others, such as learning in a class, and he often practiced colearning with his wife, where they would sit together and try things out while exchanging control of the phone.
+Our middle-aged participants showed a preference for trial-and-error more than our older participants. All participants used trial-and-error at least once during the study. The youngest three participants used it as a primary learning method as indicated in both their Eureka reports and the field interviews, except P3 who recorded 50% Stumbling in Eureka reports (Table VII, not highlighted). P6 stated, "everything is trial-and-error. . . 99% of how I learnt was trial-and-error" although his Eureka reports showed that 62.5% of his learning was by trial-and-error and 25% by reading the manual. P1 emphasized that simplicity of the interface is key to facilitating trialand-error, which was her primary learning method, but found the Android interface difficult to use. In contrast, despite P4's strong preference for using the manual, she benefited from help provided by the phone and stated, "[it] seems to guide me really well as long as I have an idea of what I need to do". Half of the participants also indicated in their Eureka reports that they followed instructions provided by the phone in order to learn.
+Participants who did not use trial-and-error as their primary learning method stated that they feared damaging the phone or incurring extra charges on the service plan if they ventured into "unknown waters" (P4). Some participants also found it hard to replicate behavior learned through trial-and-error due to their inability to recall the steps taken. For example, P2 said, "it's a miracle to find the same thing twice, frustrating!"
+Our older participants preferred manual despite challenges. Participants were highly critical of the manual. For example, many participants were intimidated by the size of the manual, referring to it as "daunting" (P2) and "overwhelming" (P6). Apart from the size, participants complained that the instructions were not clear, lacked details, and did not map well to actual behavior of the phone. P2 said, "I sometimes get surprises and get frustrated". The manual was also criticized for excessive use of technical terms that greatly hindered their learning, which P2 referred to as "verbiage" and P4 as "jargonese". Such criticism towards manuals is consistent with the survey findings.
+Nevertheless, the oldest three participants (P2, P4, P5, highlighted in Table VII) expressed a preference for using the manual to learn. For example, P4 still strongly
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:23
+
+preferred the manual despite the "jargonese", because it provided good information, step-by-step instructions, and a way out when she got "stuck" during trial-and-error. Further, all but P1 actually used the manual at least once while learning to use the study phone. The stronger preference for the manual by the three oldest participants is consistent with the survey findings, but does contrast with their Eureka reports that indicated that they used the manual (Read) and trial-and-error (Try) with equal or almost equal frequency. More research is needed to see whether this difference between preference and usage holds with a larger sample size.
+Internet and help agents not preferred, but demonstrations were desired. None of the participants referred to online content for learning to use the study phone which differed from our survey that showed that 23% of older respondents preferred using the Internet to help them learn to use mobile devices. Participants in our field study generally found online content to be overwhelming and felt apprehensive of source credibility and the possibility of getting lost amid navigation of the Internet.
+Participants did not prefer to ask for help from IT support or customer service representatives mostly because of previous negative experiences. They found this resource unreliable and often unpleasant because of long waits, negative attitudes of the representatives, or unhelpful instructions. P2 stated, "I wouldn't call [help personnel] in a million years". Participants were also reluctant to ask family members or friends for help with using mobile devices, mainly because of accessibility and attitude issues, consistent with our survey findings. For example, P2 said, "you need a teenager to help with something like that and I don't have any around" and P3 found her daughters too impatient to show her how to use technology.
+Our participants also suggested several learning resources that we did not provide for the study phone. For example, they expressed interest in demonstrations followed by an opportunity to replicate steps and get feedback, a quick reference card that included basic functionality with simple and clear instructions, and online tutorials for self-paced learning.
+4.2.3 Reflections on Learning Experience and Motivation to Learn. While conversations, during the field visits and the phone interviews were largely centered around the participants' learning experiences, the participants often naturally delved into issues regarding how and why they were (or were not) motivated to learn to use a smart phone. We identified several factors, perceived usefulness, ease of use, social influence, familiarity with technology, and previous experience with learning resources, that impacted our participants' motivation to learn to use a smart phone. However, we identified a more salient motivator. Much to our surprise, we found that the simple sorted task list helped boost motivation for learning among our participants. All the participants, except P1, repeatedly indicated in the second field visits that the task list offered a roadmap of features to try out and learn. They used the task list as a source of concrete examples of tasks they could attempt to learn, that is, goals to achieve. For instance, P5 said he went over the list, decided what he wanted to learn, and then proceeded to the manual to learn them. Other participants also used that list as a guide for what they could accomplish on the phone and three older participants used it to track their progress and for note-taking (Figure 6). We probed the underlying reasons during the second visits. The participants indicated being intimidated by the complexity of new technologies and feared making mistakes that could damage their internal programming. In particular, not knowing what they could do with new technologies and how they were supposed to go about the learning created doubt and anxiety. As P6 pointed out, "I like that [task list]! Things to try. . . that's excellent! That should come with other phones, because otherwise you just don't know. . . I mean there're lots of apps
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:24
+
+R. Leung et al.
+
+Table VIII. Summary of Key Survey and Field Study Findings
+
+LEARNING METHOD
+
+SURVEY FINDINGS
+
+FIELD STUDY FINDINGS
+
+Trial-and-error
+
+Preferred by only 33% of older respondents Preferred much more by younger respondents than older respondents
+
+Used by all middle-aged participants (2/2) and one older participant (1/4) Used for re-learning
+
+Manual
+
+Preferred by 63% of older respondents Most strongly preferred by older respondents compared to other learning methods
+
+Preferred and used by most older participants (3/4) Used for initial learning
+
+Internet
+
+Preferred by only 23% of older respondents
+
+Not used by participants
+
+Help feature
+
+Preferred by 50% of older respondents *
+
+Stumble upon
+
+**
+
+Used by most participants (4/6) at least once
+
+Learning alone
+
+Preferred over learning with others
+
+Step-by-step instructions
+
+Preferred by older respondents, more than gaining general understanding
+
+Note-taking
+
+Used by 37.5% of older respondents
+
+Used by half of older participants (2/4)
+
+Sorted task list
+
+**
+
+Reported by most participants (4/6) to be strongly motivating
+
+Demonstrations
+
+Desired by older respondents, Desired by most participants (4/6) more than by younger respondents
+
+Practice and feedback
+
+Desired by older respondents, Desired by half of the
+
+more than by younger
+
+participants (3/6)
+
+respondents
+
+Bolded text indicates convergent findings between the two studies. Note: survey participants reported up to three preferred learning methods, which is why preferences total to more than 100%. *not available on phone **did not ask about in survey
+
+here." It thus appeared that the participants were able to experience early successes when exploring features specified in the task list, which helped boost their confidence and thus their self-efficacy to venture further in their learning.
+
+5. SUMMARY FINDINGS OF THE COMPLEMENTARY STUDIES Table VIII shows the key findings from our two studies.
+
+6. DISCUSSION
+In this section, we first discuss several key findings of the survey and the field study, followed by implications for designing better resources for helping older adults learn to use mobile devices. In the following sections, we illustrate these design implications in a novel Help Kiosk, followed by limitations of our studies.
+
+6.1 Older Adults Prefer Manuals over Trial-and-Error, Despite the Difficulties
+A key finding from our two complementary studies is that older adults preferred using the instruction manual more often than trial-and-error. This finding is consistent with
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:25
+
+findings from Mitzner et al. [2008] and helps clarify the mixed findings from Selwyn et al. [2003] and Kurniawan [2006].
+The survey and field studies offered many insights into why older adults prefer using the manual to learn to use mobile devices. Manuals generally contain step-by-step instructions for performing a task on a particular device, which older adults preferred. Some field study participants found manuals more credible than other learning materials because they are produced by a source of authority and they think the smart phone manufacturers "know best." In contrast, these participants remarked that Internet content is not always credible and thus less trustworthy. Further, the manual appeared to be appropriate for many older adults who have been found to prefer reflecting before actually executing an action [Truluck and Courtenay 1999]. Also, a manual, if accompanying a device, allows the user to keep it on hand and to learn independently. Paper manuals, in particular, afford easy annotation and older adults are also generally more familiar with this form factor relative to online content. Related, the instructions in paper manuals are static, which may be easier for some older users. Also, the survey found that many older respondents preferred using the manual because it matched their learning style. However, fewer younger computer users nowadays rely on manuals due to improved learnability of the UIs and the availability of embedded help [Novick and Ward 2006]. As a result, manuals are often not included with today's computing devices and software products. This in turn may negatively impact older adults if they continue to prefer using manuals to learn.
+Although we found a relatively strong preference for manuals from older adults, participants of all ages identified issues with manuals. Today's manuals generally follow the four principles of the Minimal Manual [Carroll et al. 1987]: focus on real tasks, brevity (no repetition, previews, reviews, and practice exercises), error recognition and recovery support, and guided exploration (i.e., "encourage and support learning through exploration" [Catrambone and Carroll 1987, page 169]). The Minimal Manual was designed to help learners perform actual tasks, and recognize and recover from errors, rather than carry out sequences of drill and practice exercises. However, it is likely that these and other existing principles for manuals do not provide adequate support for older adults to learn increasingly complex technologies. Our survey respondents also reported that they often found manuals "poorly written", used unfamiliar terminology targeted a more advanced level of technology experience than theirs, and lacked details that they were interested in. Our field study participants also reported difficulty in mapping references to the device's user interface illustrated in the manual to the user interface on the actual device. This difficulty may be due to possible differences between the image in the manual and what is shown on the device screen, as well as demands on visual spatial memory, which generally declines with age [Echt et al. 1998], from going back and forth between the manual and the device. Thus we can conclude that manuals, especially paper ones, will continue to be important resources for supporting older adults' learning. However, current manuals require much improvement, especially in reducing the need for older adults to make complex inferences and fill in gaps of missing information, also suggested by Fisk et al. [2009].
+On the other hand, several related factors appear to contribute to why older adults have a lower preference for using trial-and-error for learning to use mobile devices. First, learning with trial-and-error requires focused attention and remembering the outcomes of previous trials, which may be more difficult for older adults with declines in attention, memory, and other cognitive abilities. Second, challenges in using trial-and-error can decrease one's confidence in being able to use this learning method, making it more difficult to persist [Barry and West 1993]. Specifically, older adults have been found more negatively affected by errors [Birdi and Zapf 1997], a key
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:26
+
+R. Leung et al.
+
+component to the trial-and-error method. Adding to this challenge, older adults are more prone to making errors on mobile devices due to their relatively decreased finger dexterity. Our field study participants reported apprehension when they did not know what tasks to try out first and when they got stuck during trial-and-error. Third, older adults may be more wary of unintended negative consequences that might result from trial-and-error. Participants in our field study revealed their fear of breaking the device and the possibility of incurring unwanted charges while they tried to perform new tasks. Compared to younger adults' learning styles, older adults' styles have been found less active and hands-on as well as more observant and reflective [Truluck and Courtenay 1999], which is consistent with a lower preference for trial-and-error.
+
+6.2 Older Adults Generally Prefer Learning Alone, but Many Would Learn Socially If
+They Could
+Both of our studies found that older adults had a stronger preference for learning alone than we had expected. This finding is contrary to studies that have suggested that older adults prefer learning in traditional classroom settings [Van Wynen 2001] or with peers [Kurniawan 2006], but is consistent with the findings by Selwyn et al. [2003] and Mitzner et al. [2008]. This preference for learning independently may be due to older adults' preference to learn at their own pace [Fisk et al. 2009], and because getting help from someone, particularly IT support or an instructor, takes more time than they would want to spend on getting help. Our field study participants also reported that previous negative experiences involving seeking mobile device assistance from IT support and customer service representatives led these participants to refrain, whenever possible, from asking for help in order to avoid disappointment and resentment.
+Few older adults expressed wanting to take a class to learn to use their mobile device. However, a number of older participants did express desire to take part in an older-adults-only class; learning with considerably younger people was perceived to be potentially intimidating and embarrassing if the older adult failed to follow along.
+Further, based on comments gathered from the two studies, it seems that many older adults do not seek help from people in their generation, and specifically in their own social circle, because these people are generally perceived to be no more knowledgeable, and thus unable to help. In addition, many older adults are "empty nesters" and do not have easy access to younger, often more knowledgeable, family members. Yet, we did observe one participant in our field study who enjoyed colearning with his spouse to explore the phone provided in the study.
+
+6.3 Design Implications for Improving Learning Resources
+The findings from our two studies, combined with relevant findings from past research, point to several implications for designing better resources to help older adults learn to use mobile devices. We describe these design implications briefly, and then in the following section we illustrate how a novel system might be designed based on the design implications.
+6.3.1 Better Support for Trying Out Tasks. Our studies point to the need to provide better learning support for older adults to try out tasks. Trial-and-error is different from the other learning methods because it is self-directed, exploratory, and users learn to use the user interface primarily from interacting with the interface and learning from both successful and failed task attempts. While the survey respondents from all age groups and the field study participants saw value in this method, many older adults reported that they were unlikely to use trial-and-error for reasons described earlier.
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:27
+
+We suggest more support to help older adults try out tasks by minimizing opportunities for errors or at least minimize the impact of errors. One way to offer this support is to provide more opportunities, perhaps incorporated into the application the older adults are learning to use, to try out (i.e., explore) new tasks without the fear of breaking the device or changing data by accident. Another option is to provide opportunities integrated in the application to practice performing a task and get feedback, which our participants reportedly desired.
+6.3.2 Better Instructional Content and Presentation. Our studies also point to the need to improve the content of existing resources, which has implications for interaction design. In particular, many participants from both studies and of all ages criticized the content in the instruction manuals they have used, despite past work on designing paper manuals (e.g., Carroll et al. [1987]). First we suggest adding to the manual a list of available tasks, sorted by difficulty, similar to the task list used in the field study.
+Although paper manuals have been the dominant form of manuals, the increasing pervasiveness of online manuals and eBooks provides an opportunity to provide dynamic content information that offers personalized and additional help on content not clear to the user. For example, a dynamic manual could consist of different versions of content targeting different technology experience levels. A dynamic manual could also provide definitions of terms unfamiliar to the user, and more details if the user wanted more help. Adaptive interactive manuals could also provide demonstrations of new task steps at an appropriate level of detail, which both our older survey respondents and our field study participants reported to be of value.
+
+7. DESIGN IMPLICATIONS ILLUSTRATED
+To illustrate our implications for design, we describe a novel system, Help Kiosk, to help older adults learn to use smart phones. Help Kiosk is a system consisting of a desktop computer and a touch-screen monitor that augments the phone's display to provide additional guidance during the learning process. We first describe a scenario for using Help Kiosk, and then we present its features for supporting older adults in trying out new tasks and providing personalized real-time instructions and guidance.
+
+7.1 Use Scenario
+Mary, age 70, is retired and lives alone. She wants to use her new smart phone to wake her up in the morning but is not sure how to do it. She positions her phone close to her desktop computer and is automatically prompted by the phone with a "Launch Help Kiosk?" dialog. She accepts, and the Help Kiosk software quickly launches on her desktop display. Mary searches through the suggested topics related to the applications available on her specific model of phone. Mary selects "Alarm" and Help Kiosk lists a number of related tasks. Mary then selects "Setting an Alarm" from this list, which directs her to a page that lists the instructions (Figure 7, top). She performs step 1 easily (opening the clock application by touching its icon on her phone) because she has done this before, but then she gets stuck on step 2.
+Help Kiosk offers Mary different types of support, in addition to text instructions, to help her learn to perform the step. Mary reads the instruction for step 2, "Touch the Alarm icon", but is unsure where to find the icon because, for some reason, she is looking for the label "Alarm." She touches step 2 on Help Kiosk, highlighting its text instructions (callout a, where all callouts in this section refer to Figure 7), to get more help on performing this step. This does two things. First, it annotates Live View, a
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:28
+
+R. Leung et al.
+
+Fig. 7. Help Kiosk Learn/Do pane for adding an alarm task (step 2, top; step 4, bottom). Labeled callouts a­e are described in the use scenario.
+real-time screen capture of Mary's phone, highlighting (with an orange rectangle) the specific phone UI control for performing the step (callout b). In this case, Mary looks at Live View and finds out which specific icon to touch on her phone. Second, it queues up a demonstration video that shows how to perform the step and the expected outcome (callout c). Mary now thinks she knows how to perform the step based on Live View but touches the Demo Video area to play a 10-second video just to make sure.
+Help Kiosk can also offer Mary additional instructions on performing substeps of more complex steps (bottom screenshot). Mary performs steps 2 and 3, and then reaches step 4, which simply instructs her to set the alarm attributes. She can watch a demonstration video to see an example of someone setting various attributes, but she is most interested in learning to set the days of the week on which she wants the alarm to sound. Help Kiosk offers more support for this step, indicated by the presence of a "Show More Help" button (callout d). She presses this button and the "More Help" panel appears, listing various substeps phrased as questions (callout e). Mary touches the question she is interested in and reads the help she needs.
+Mary wants to perform one more substep, labeling this new alarm "weekday mornings", but is unfamiliar with the on-screen keyboard and is concerned that she might make accidental and unwanted changes to her previously entered alarm information.
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:29
+
+She remembers that she can switch to Help Kiosk's exploratory mode (toggle button not shown) to attempt to finish the step. With the exploratory mode enabled, she makes a few mistakes while trying to type the label but eventually completes the task properly. She then exits exploratory mode (rehitting the toggle), which gives her the option to revert the device back to its state prior to entering exploratory mode or to apply all changes made while in exploratory mode. Given that in the end she did enter the label correctly, she accepts the changes and touches the Done button to complete the task.
+Mary has successfully created her desired alarm. She moves her phone away from her desktop computer, which automatically minimizes the Help Kiosk program on the desktop display, and she continues on with the rest of her day.
+
+7.2 Help Kiosk Design
+Help Kiosk is a type of supportive scaffolding that helps users during the learning process with the goal that users will eventually be able to use their mobile phone without this support. It is intended to run on any secondary large display such as a desktop computer (e.g., at home, at a library) or laptop, making it convenient to access at most times, which we found to be important for both older and younger adults. We followed relevant existing design guidelines (e.g., minimize working memory demands and enable self-paced learning) and our design implications to better support trialand-error and provide timely and appropriate instructional content.
+Better support for trying tasks. To address concerns of breaking the device or causing unwanted changes, Help Kiosk has an exploratory mode that allows users to try out tasks and have the option to save the changes or return to the preexploratory state. Users have the option to try out tasks on the larger display in this mode to remind and assure them that their actions will not affect their mobile device.
+Better instructional content and presentation. To facilitate the provision of instructional content, Help Kiosk offers instructions in various formats and levels of detail. It also provides personalized real-time guidance to accommodate learners of varying ability and expertise. The three different ways are as follows.
+(1) Text instructions prescribe the steps needed to perform a task. (2) Live View shows the screen contents of the learner's device in real time to highlight
+the specific UI elements the learner should use to perform a particular step. This feature helps users map references from the text instructions to the user interface on the actual device. (3) Demonstration videos show how a step is performed. These videos also show the expected outcome, which helps users assess when they have correctly performed a step.
+In addition, text content not directly related to performing the main task steps is put aside in the More Help panel and can be accessed when needed. Such auxiliary information includes instructions that help users deal with potentially problematic substeps or perform various touch interactions.
+
+7.3 Preliminary Implementation and Evaluation
+Our current Help Kiosk prototype consists of a 19" touch-screen monitor and a desktop computer running Windows. The prototype connects to a Nexus One smart phone through a USB cable. The Help Kiosk software was written in Java and uses the
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:30
+
+R. Leung et al.
+
+Android Development Bridge (ADB) to monitor the device's logs and to infer the device's state (e.g., what application the user is currently using). Help Kiosk uses the open-source Droid@Screen to take continuous screen captures from the device. The prototype currently supports most of the Help Kiosk features described in the scenario except the exploratory mode. The prototype offered at the time of writing help for three tasks: take a photo, add contact, and set alarm.
+We conducted a small initial evaluation of Help Kiosk to assess whether such a system could help older adults learn to perform new tasks on a smart phone despite the added complexity of having to operate two devices at the same time. For example, the need to switch back and forth between two displays places demands on the user's visual spatial memory and divided attention, two abilities that decline with age [Hawthorn 2000]. We asked six participants (ages 55­75, four beginner and two novice mobile device users) to learn to perform one of two smart phone tasks (adding a contact, or setting an alarm) with Help Kiosk and the other task with the official manual for the smart phone [Google 2010]. We also collected participants' opinions about the usefulness of various Help Kiosk features.
+Participants generally found Help Kiosk easy to use to learn to perform the given smart phone tasks. They appreciated that the Help Kiosk text instructions were "less cluttered" and "easier to read." The Live View highlighting was found to be quite useful to some of the participants once they got used to looking at both displays at the same time. All participants found the demonstration videos useful for learning, because "it's visual" and helped to "figure out the sequence of the [smart phone] screens." In particular, one participant appreciated that the videos showed the expected outcome, claiming that the videos were "a confidence builder that [she had] done stuff correctly." To improve the videos, one participant suggested making them bigger, and another suggested slowing down the videos, particularly during the scenes that show mobile device screen transitions. At the end of the study, our participants, who had very little prior experience with smart phones and some had even expressed apprehension about using these devices, generally reported being encouraged after being exposed to Help Kiosk that they were able to learn to use a smart phone.
+
+8. LIMITATIONS
+A limitation of our evaluation studies is that participants were current mobile device users and were self-selected (i.e., not randomly chosen). The findings thus may not capture the needs and preferences of people who have had so much difficulty in learning to use mobile devices that they did not become users. Survey respondents, especially those who filled out the online questionnaire, may have had more computer experience and interest in technology than the general population. We expect that our findings will generalize somewhat to the general older population, but more work is needed to confirm this.
+Using a novel smart phone in the field study may have positively affected participants' desire to learn and thus impacted the features attempted and the methods used during the study. In addition, participants may not have recorded enough details of their learning experience or they may have been biased in their selection of events to report or their description of those events in the Eureka reports.
+
+9. CONCLUSIONS AND FUTURE WORK
+The research presented in this article included two complementary studies, a survey and a field study, to investigate how older adults learned to use mobile devices, what they preferred, and reasons for these preferences. We gained useful knowledge for
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:31
+
+improving the learning resources and to support older adults during the learning process. The findings of the two studies showed a high degree of convergence. Key convergent findings include: older adults more strongly preferred using the manual to trial-and-error despite difficulties with using the manual, and they preferred step-by-step instructions and learning alone. To our knowledge, we are the first to identify age-related differences in learning preferences related to mobile devices. Furthermore, we proposed designing better instruction manuals and providing better support for trial-and-error for older adults to learn to use mobile devices. We also developed a novel system, Help Kiosk, to support older adults' learning.
+This research can be extended in several ways. For example, there are many opportunities to improve or create new help resources. Since older adults are likely to continue to use paper manuals, we recommend investigating how the manuals can be improved in order to facilitate their learning of mobile devices. This work should assess how suitable current manual design principles (e.g., Minimal Manual [Carroll et al. 1987]) are for older users. Future work should also investigate how "minimal" a task list would need to be in order to achieve a desirable level of motivation in older adults. Other questions include if and how this kind of task list would impact the learning experience of other age groups such as the younger survey respondents.
+In addition, future work should include building and evaluating novel help systems like the Help Kiosk to offer more supportive features. Beyond improving help resources, future work should also include better understanding of how older adults' learning process may affect their adoption of mobile technology.
+
+ELECTRONIC APPENDIX
+The electronic appendix for this article can be accessed in the ACM Digital Library. (The appendix includes learning methods questionnaire, table of pair-wise comparisons between responses to survey questions Q12­Q15, and the complete task list.)
+
+ACKNOWLEDGMENTS
+The authors would like to thank Joseph K. Luk for his input into the Help Kiosk design and Matthew Brehmer for his constructive feedback. We are also grateful for the valuable comments and suggestions from the editors and anonymous reviewers that have greatly improved our article.
+REFERENCES
+ANDROID COMMUNITY. 2012. http://androidcommunity.com/android-most-popular-among-first-time-buyers -in-q4-says-npd-20120206/ (Last accessed 2/12).
+BARRY, J. M. AND WEST, R. L. 1993. Cognitive self-efficacy in relation to personal mastery and goal setting across the life span. Int. J. Behav. Devel. 16, 351­379.
+BIRDI, K. S. AND ZAPF, D. 1997. Age differences in reactions to errors in computer-based work. Behav. Inf. Technol. 16, 6, 309­319.
+CARROLL, J., SMITH-KERKER, P., FORD, J., AND MAZUR-RIMETZ, S. 1987. The minimal manual. Hum.Comput. Interact. 3, 2, 123­153.
+CATRAMBONE, R. AND CARROLL, J. M. 1987 Learning a word processing system with training wheels and guided exploration. In Proceedings of the SIGCHI/GI Conference on Human Factors in Computing Systems and Graphics Interface (CHI'87). 169­174.
+CZAJA, S. J. AND LEE, C. C. 2007. The impact of aging on access to technology. Univers. Access Inf. Soc. 5, 4, 341­349.
+DICKINSON, A., ARNOTT, J. L., AND PRIOR, S. 2007. Methods for human - computer interaction research with older people. Behav. Inf. Technol. 26, 4, 343­352.
+DOCAMPO RAMA, M., DE RIDDER, H., AND BOUMA, H. 2001. Technology generation and age in using layered user interfaces. Gerontechnol. 1, 1, 25­40.
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+11:32
+
+R. Leung et al.
+
+DUFFY, T. M., PALMER, J. E., AND MEHLENBACHER, B. 1992. Online Help: Design and Evaluation. Ablex Publishing, Norwood, NJ.
+ECHT, K. V., MORRELL, R. W., AND PARK, D. C. 1998. Effects of age and training formats on basic computer skill acquisition in older adults. Educ. Gerontol. 24, 1, 3­25.
+FISK, A. D., ROGERS, W. A., CHARNESS, N., CZAJA, S. J., AND SHARIT, J. 2009. Designing for Older Adults: Principles and Creative Human Factors Approaches 2nd Ed. CRC Press.
+FOZARD, J. L., BOUMA, H., FRANCO, A., AND VAN BRONSWIJK, J. E. M. H. 2009. Homo ludens: Adult creativity and quality of life. Gerontechnol. 8, 4, 187­196.
+GOOGLE. 2010. Nexus one user guide. http://www.google.com/googlephone/NexusOneOwnersGuide.pdf (Last accessed 3/11).
+GREGOR, P., NEWELL, A. F., AND ZAJICEK, M. 2002. Designing for dynamic diversity: Interfaces for older people. In Proceedings of the 5th International ACM Conference on Assistive Technologies (ASSETS). 151­156.
+HAWTHORN, D. 2000. Possible implications of aging for interface designers. Interact. Comput. 12, 5, 507­528.
+HAWTHORN, D. 2005. Training wheels for older users. In Proceedings of the 19th Conference of the ComputerHuman Interaction Special Interest Group of Australia on Computer-Human Interaction (CHISIG). 1­10.
+HICKMAN, J. M, ROGERS, W. A., AND FISK, A. D. 2007. Training older adults to use new technology. J. Gerontol. 62B, II, 77­84.
+INGLIS, E. A., SZYMKOWIAK, A., GREGOR, P., NEWELL, A. F., HINE, N., SHAH, P., WILSON, B. A., AND EVANS, J. 2003. Issues surrounding the user-centred development of a new interactive memory aid. Univer. Access Inf. Soc 2, 3, 226­234.
+KELLEY, C. L. AND CHARNESS, N. 1995. Issues in training older adults to use computers. Behav. Inf. Technol. 14, 2, 107­120.
+KURNIAWAN, S. 2006. An exploratory study of how older women use mobile phones. In Proceedings of the Ubicomp Conference. 105­122.
+KURNIAWAN, S. 2008. Older people and mobile phones: A multi-method investigation. Int. J. Hum.-Comput. Stud. 66, 889­901.
+KURNIAWAN, S., MAHMUD, M., AND NUGROHO, Y. 2006. A study of the use of mobile phones by older persons. In Extended Abstracts of the ACM SIGCHI Conference on Human Factors in Computing Systems. 989­994.
+LEUNG, R., MCGRENERE, J., AND GRAF, P. 2009. Age-Related differences in the initial usability of mobile device icons. Behav. Inf. Technol. 30, 5, 629­642.
+LEUNG, R., FINDLATER, L., MCGRENERE, J., GRAF, P., AND YANG, J. 2010. Multi-layered interfaces to improve older adults' initial learnability of mobile applications. ACM Trans. Access. Comput. 3, 1.
+MASSIMI, M., BAECKER, M., AND WU, M. 2007. Using participatory activities with seniors to critique, build, and evaluate mobile phones. In Proceedings of the International ACM Conference on Assistive Technologies (ASSETS). 155­162.
+MAURER, T. J. 2001. Career-Relevant learning and development, worker age, and beliefs about self-efficacy for development. J. Manage. 27, 123­140.
+MITZNER, T. L., FAUSSET, C. B., BORON, J. B., ADAMS, A. E., DIJKSTRA, K., LEE, C. C., ROGERS, W. A., AND FISK, A. D. 2008. Older adults' training preferences for learning to use technology. In Proceedings of Annual Meeting of Human Factors and Ergonomics Society. 2047­2051.
+MORRELL, R. W., PARK D. C., MAYHORN, C. B., AND KELLY, C. L. 2000. Effects of age and instructions on teaching older adults to use eldercomm, an electronic bulletin board system. Educ. Gerontol. 26, 3, 221­235.
+NOVICK, D. G. AND WARD, K. 2006. Why don't people read the manual? In Proceedings of ACM International Conference on Design of Communication (SIGDOC). 11­18.
+OFCOM. 2008. Media Literacy Audit: Report on Media Literacy amongst Older People. Ofcom, London.
+OFCOM. 2009. Media Literacy Audit - Digital Lifestyles: Adults Aged 60 and Over. Ofcom, London.
+RIEMAN, J. 1996. A field study of exploratory learning strategies. ACM Trans. Comput. Hum. Interact. 3, 3, 189­218.
+ROGERS, W. A., CABRERA, E. F., WALKER, N., GILBERT, D. K., AND FISK, A. D. 1996. A survey of automatic teller machine usage across the adult lifespan. Hum. Factors 38, 1, 156­166.
+SELWYN, N., GORARD, S., FURLONG, J., AND MADDEN, L. 2003. Older adults' use of information and communications technology in everyday life. Aging Soc. 23, 5, 561­582.
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+How Older Adults Learn to Use Mobile Devices: Survey and Field Investigations
+
+11:33
+
+TRULUCK, J. E. AND COURTENAY, B. C. 1999. Learning style preferences among older adults. Educ. Gerontol. 25, 3, 221­236.
+VAN WYNEN, E. A. 2001. A key to successful aging: Learning-Style patterns of older adults. J. Gerontol. Nurs. 27, 9, 6­15.
+WOBBROCK, J. O., FINDLATER, L., GERGLE, D., AND HIGGINS, J. J. 2011. The aligned rank transform for nonparametric factorial analyses using only anova procedures. In Proceedings of the ACM SIGCHI Conference on Human Factor in Computing Systems. 143­146.
+Received February 2012; revised October 2012; accepted October 2012
+
+ACM Transactions on Accessible Computing, Vol. 4, No. 3, Article 11, Publication date: December 2012.
+
+

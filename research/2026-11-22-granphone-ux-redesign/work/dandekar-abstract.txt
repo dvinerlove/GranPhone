@@ -1,0 +1,35 @@
+1. J Biomech Eng. 2003 Oct;125(5):682-91. doi: 10.1115/1.1613673.
+
+3-D finite-element models of human and monkey fingertips to investigate the 
+mechanics of tactile sense.
+
+Dandekar K(1), Raju BI, Srinivasan MA.
+
+Author information:
+(1)Touch Lab, Department of Mechanical Engineering, Research Laboratory of 
+Electronics, Massachusetts Institute of Technology, 50 Vassar Street, Cambridge, 
+MA 02139, USA.
+
+The biomechanics of skin and underlying tissues plays a fundamental role in the 
+human sense of touch. It governs the mechanics of contact between the skin and 
+an object, the transmission of the mechanical signals through the skin, and 
+their transduction into neural signals by the mechanoreceptors. To better 
+understand the mechanics of touch, it is necessary to establish quantitative 
+relationships between the loads imposed on the skin by an object, the state of 
+stresses/strains at mechanoreceptor locations, and the resulting neural 
+response. Towards this goal, 3-D finite-element models of human and monkey 
+fingertips with realistic external geometries were developed. By computing 
+fingertip model deformations under line loads, it was shown that a multi-layered 
+model was necessary to match previously obtained in vivo data on skin surface 
+displacements. An optimal ratio of elastic moduli of the layers was determined 
+through numerical experiments whose results were matched with empirical data. 
+Numerical values of the elastic moduli of the skin layers were obtained by 
+matching computed results with empirically determined force-displacement 
+relationships for a variety of indentors. Finally, as an example of the 
+relevance of the model to the study of tactile neural response, the multilayered 
+3-D finite-element model was shown to be able to predict the responses of the 
+slowly adapting type I (SA-I) mechanoreceptors to indentations by complex object 
+shapes.
+
+DOI: 10.1115/1.1613673
+PMID: 14618927 [Indexed for MEDLINE]
