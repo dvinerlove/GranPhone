@@ -444,4 +444,5 @@ adb shell dpm set-device-owner com.bald.uriah.baldphone/.broadcast_receivers.Bal
     <string name="kiosk_disabled">Режим киоска выключен.</string>
     <string name="remove_device_owner">Убрать права администратора</string>
     <string name="remove_device_owner_subtext">Режим киоска станет недоступен, приложение можно будет удалить. Чтобы вернуть, придётся снова выполнить команду с компьютера.</string>
+    <string name="signal_strength">Уровень связи</string>
 </resources>

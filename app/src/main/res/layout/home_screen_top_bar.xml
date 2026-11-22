@@ -19,32 +19,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.bald.uriah.baldphone.views.BaldImageButton
-        android:id="@+id/sos"
-        android:contentDescription="@string/sos"
+    <ImageView
+        android:id="@+id/signal"
+        android:contentDescription="@string/signal_strength"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/style_for_buttons_transparent"
-        android:padding="13dp"
-        android:src="@drawable/emergency"
+        android:padding="10dp"
+        android:src="@drawable/signal_level"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/battery"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.bald.uriah.baldphone.views.BaldImageButton
-        android:id="@+id/flash"
-        android:contentDescription="@string/flashlight"
+    <com.bald.uriah.baldphone.views.BatteryView
+        android:id="@+id/battery"
+        android:contentDescription="@string/battery"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/style_for_buttons_transparent"
         android:padding="10dp"
-        android:src="@drawable/flashlight_off_on_background"
+        android:src="@drawable/battery_unknown_on_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sound"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/battery"
+        app:layout_constraintStart_toEndOf="@+id/signal"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.bald.uriah.baldphone.views.BaldImageButton
@@ -57,7 +56,7 @@
         android:src="@drawable/sound_on_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/notifications"
-        app:layout_constraintStart_toEndOf="@+id/flash"
+        app:layout_constraintStart_toEndOf="@+id/battery"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.bald.uriah.baldphone.views.BaldImageButton
@@ -71,19 +70,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/sound"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.bald.uriah.baldphone.views.BatteryView
-        android:id="@+id/battery"
-        android:contentDescription="@string/battery"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/style_for_buttons_transparent"
-        android:padding="10dp"
-        android:src="@drawable/battery_unknown_on_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/flash"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/sos"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

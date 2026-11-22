@@ -138,7 +138,17 @@ public class HomeScreenActivity extends BaldActivity {
     private int notificationCount = 0;
     @ColorInt
     private int decorationColorOnBackground;
-    private BaldImageButton notificationsButton, sosButton, soundButton, flashButton;
+    private BaldImageButton notificationsButton, soundButton;
+    private android.widget.ImageView signalView;
+    private android.telephony.TelephonyManager telephonyManager;
+    private final android.telephony.PhoneStateListener signalListener = new android.telephony.PhoneStateListener() {
+        @Override
+        public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+            // ASU 0-31, 99 = unknown; MT6580 is GSM/WCDMA so gsm value is correct
+            final int asu = signalStrength.getGsmSignalStrength();
+            signalView.setImageLevel(asu == 99 ? 0 : Math.min(4, asu / 6));
+        }
+    };
     private AudioManager audioManager;
     private BaldHomeWatcher baldHomeWatcher;
     private boolean flashInited;
@@ -232,13 +242,6 @@ public class HomeScreenActivity extends BaldActivity {
             }
         }
 
-        if (sharedPreferences.getBoolean(BPrefs.EMERGENCY_BUTTON_VISIBLE_KEY, BPrefs.EMERGENCY_BUTTON_VISIBLE_DEFAULT_VALUE))
-            sosButton.setOnClickListener((v) -> {
-                startActivity(new Intent(this, SOSActivity.class));
-                overridePendingTransition(R.anim.slide_in_down, R.anim.nothing);
-            });
-        else
-            sosButton.setVisibility(View.GONE);
         notificationsButton.setOnClickListener((v) -> {
             startActivity(new Intent(this, NotificationsActivity.class));
             overridePendingTransition(R.anim.slide_in_down, R.anim.nothing);
@@ -325,19 +328,9 @@ public class HomeScreenActivity extends BaldActivity {
         }
 
         soundButton.setImageResource(SOUND_DRAWABLES[audioManager.getRingerMode()]);
-        flashButton.setImageResource(flashState ?
-                R.drawable.flashlight_on_background :
-                R.drawable.flashlight_off_on_background);
-        if (flashInited) {
-            flashButton.setOnClickListener((v) -> toggleTorch());
-        } else if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            flashButton.setOnClickListener(v -> startActivity(new Intent(this, PermissionActivity.class)
-                    .putExtra(PermissionActivity.EXTRA_REQUIRED_PERMISSIONS, PERMISSION_CAMERA)
-            ));
-
-        } else if (!testing) { // For travis screenshots to show the flashlight
-            flashButton.setOnClickListener(D.EMPTY_CLICK_LISTENER);
-            flashButton.setVisibility(View.GONE);
+        try {
+            telephonyManager.listen(signalListener, android.telephony.PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+        } catch (SecurityException ignore) {
         }
 
         LocalBroadcastManager.getInstance(this).
@@ -375,9 +368,6 @@ public class HomeScreenActivity extends BaldActivity {
             cameraManager.setTorchMode(torchCameraId, flashState);
         } catch (Exception ignored) {
         }
-        flashButton.setImageResource(flashState ?
-                R.drawable.flashlight_on_background :
-                R.drawable.flashlight_off_on_background);
     }
 
     @Override
@@ -396,6 +386,10 @@ public class HomeScreenActivity extends BaldActivity {
         try {
             unregisterReceiver(batteryReceiver);
         } catch (IllegalArgumentException ignore) {
+        }
+        try {
+            telephonyManager.listen(signalListener, android.telephony.PhoneStateListener.LISTEN_NONE);
+        } catch (Exception ignore) {
         }
         handler.removeCallbacks(shakeIt);
         super.onPause();
@@ -443,11 +437,11 @@ public class HomeScreenActivity extends BaldActivity {
             top_bar.getChildAt(i).setPadding(tmpPadding, tmpPadding, tmpPadding, tmpPadding);
         }
 
-        sosButton = top_bar.findViewById(R.id.sos);
+        signalView = top_bar.findViewById(R.id.signal);
+        telephonyManager = (android.telephony.TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         soundButton = top_bar.findViewById(R.id.sound);
         batteryView = top_bar.findViewById(R.id.battery);
         notificationsButton = top_bar.findViewById(R.id.notifications);
-        flashButton = top_bar.findViewById(R.id.flash);
     }
 
     @Override
