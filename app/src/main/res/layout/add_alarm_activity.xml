@@ -41,146 +41,157 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.5"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/alarm_name"
             android:inputType="text"
             android:textSize="@dimen/huge" />
 
-        <include layout="@layout/hour_and_minute_choosers" />
+        <include
+            layout="@layout/hour_and_minute_choosers"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.3" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1.4">
 
+            <!-- Days as 4+3 spread rows; radios own the bottom row so nothing overlaps.
+                 minHeight/minWidth keep every target >= 56dp. -->
             <CheckBox
                 android:id="@+id/sunday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:minWidth="56dp"
+                android:minHeight="56dp"
                 android:buttonTint="?bald_decoration_on_background"
                 android:text="@string/choose_sunday"
                 android:textColor="?bald_text_on_button"
                 android:textSize="@dimen/small"
+                app:layout_constraintEnd_toStartOf="@+id/monday"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <CheckBox
                 android:id="@+id/monday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:minWidth="56dp"
+                android:minHeight="56dp"
                 android:buttonTint="?bald_decoration_on_background"
                 android:text="@string/choose_monday"
                 android:textColor="?bald_text_on_button"
                 android:textSize="@dimen/small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tuesday"
+                app:layout_constraintStart_toEndOf="@+id/sunday"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <CheckBox
                 android:id="@+id/tuesday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:minWidth="56dp"
+                android:minHeight="56dp"
                 android:buttonTint="?bald_decoration_on_background"
                 android:text="@string/choose_tuesday"
                 android:textColor="?bald_text_on_button"
                 android:textSize="@dimen/small"
-                app:layout_constraintBottom_toBottomOf="@+id/monday"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/wednesday"
+                app:layout_constraintStart_toEndOf="@+id/monday"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <CheckBox
                 android:id="@+id/wednesday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:minWidth="56dp"
+                android:minHeight="56dp"
                 android:buttonTint="?bald_decoration_on_background"
                 android:text="@string/choose_wednesday"
                 android:textColor="?bald_text_on_button"
                 android:textSize="@dimen/small"
-                app:layout_constraintBottom_toTopOf="@+id/saturday"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sunday" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tuesday"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <CheckBox
                 android:id="@+id/thursday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="56dp"
+                android:minHeight="56dp"
                 android:buttonTint="?bald_decoration_on_background"
                 android:text="@string/choose_thursday"
                 android:textColor="?bald_text_on_button"
                 android:textSize="@dimen/small"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/friday"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/sunday" />
 
             <CheckBox
                 android:id="@+id/friday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:minWidth="56dp"
+                android:minHeight="56dp"
                 android:buttonTint="?bald_decoration_on_background"
                 android:text="@string/choose_friday"
                 android:textColor="?bald_text_on_button"
                 android:textSize="@dimen/small"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <RadioButton
-                android:id="@+id/rb_every_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:buttonTint="?bald_decoration_on_background"
-                android:text="@string/repeats_every_day"
-                android:textColor="?bald_text_on_button"
-                android:textSize="@dimen/small"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
+                app:layout_constraintEnd_toStartOf="@+id/saturday"
+                app:layout_constraintStart_toEndOf="@+id/thursday"
+                app:layout_constraintTop_toBottomOf="@+id/monday" />
 
             <CheckBox
                 android:id="@+id/saturday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:minWidth="56dp"
+                android:minHeight="56dp"
                 android:buttonTint="?bald_decoration_on_background"
                 android:text="@string/choose_saturday"
                 android:textColor="?bald_text_on_button"
                 android:textSize="@dimen/small"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/friday"
+                app:layout_constraintTop_toBottomOf="@+id/tuesday" />
 
+            <RadioButton
+                android:id="@+id/rb_every_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="56dp"
+                android:buttonTint="?bald_decoration_on_background"
+                android:text="@string/repeats_every_day"
+                android:textColor="?bald_text_on_button"
+                android:textSize="@dimen/small"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rb_once"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/thursday" />
 
             <RadioButton
                 android:id="@+id/rb_once"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:minHeight="56dp"
                 android:buttonTint="?bald_decoration_on_background"
                 android:checked="true"
                 android:text="@string/only_once"
                 android:textColor="?bald_text_on_button"
                 android:textSize="@dimen/small"
+                app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/rb_every_day"
+                app:layout_constraintTop_toBottomOf="@+id/friday" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
