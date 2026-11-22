@@ -445,4 +445,9 @@ adb shell dpm set-device-owner com.bald.uriah.baldphone/.broadcast_receivers.Bal
     <string name="remove_device_owner">Убрать права администратора</string>
     <string name="remove_device_owner_subtext">Режим киоска станет недоступен, приложение можно будет удалить. Чтобы вернуть, придётся снова выполнить команду с компьютера.</string>
     <string name="signal_strength">Уровень связи</string>
+    <string name="device_memory">Память</string>
+    <string name="storage">Хранилище</string>
+    <string name="ram">Оперативная память</string>
+    <string name="device_memory_subtext">Свободное место и оперативная память устройства</string>
+    <string name="free_of_total">Свободно %1$s из %2$s</string>
 </resources>

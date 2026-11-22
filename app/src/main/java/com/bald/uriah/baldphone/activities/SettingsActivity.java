@@ -26,11 +26,15 @@ import android.media.Ringtone;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
+import android.app.ActivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.os.StatFs;
 import android.os.Vibrator;
 import android.provider.Settings;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
@@ -41,6 +45,7 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -439,6 +444,16 @@ public class SettingsActivity extends BaldActivity {
                         , R.drawable.info_on_button)
         );
         mainCategory.add(
+                new BDBSettingsItem(R.string.device_memory,
+                        BDB.from(this)
+                                .addFlag(BDialog.FLAG_OK)
+                                .setTitle(R.string.device_memory)
+                                .setSubText(R.string.device_memory_subtext)
+                                .setPositiveButtonListener(params -> true)
+                                .setExtraView(buildMemoryStatusView())
+                        , R.drawable.tech_info_on_button)
+        );
+        mainCategory.add(
                 new RunnableSettingsItem(R.string.technical_information,
                         v -> startActivity(new Intent(this, TechnicalInfoActivity.class)),
                         R.drawable.tech_info_on_button)
@@ -478,6 +493,30 @@ public class SettingsActivity extends BaldActivity {
 
     }
 
+    private View buildMemoryStatusView() {
+        final View view = LayoutInflater.from(this).inflate(R.layout.storage_status, null, false);
+
+        final StatFs statFs = new StatFs(Environment.getDataDirectory().getPath());
+        final long storageTotal = statFs.getTotalBytes();
+        final long storageFree = statFs.getAvailableBytes();
+        ((ProgressBar) view.findViewById(R.id.pb_storage))
+                .setProgress((int) ((storageTotal - storageFree) * 100 / storageTotal));
+        ((TextView) view.findViewById(R.id.tv_storage))
+                .setText(getString(R.string.free_of_total,
+                        Formatter.formatFileSize(this, storageFree),
+                        Formatter.formatFileSize(this, storageTotal)));
+
+        final ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+        ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getMemoryInfo(memoryInfo);
+        ((ProgressBar) view.findViewById(R.id.pb_ram))
+                .setProgress((int) ((memoryInfo.totalMem - memoryInfo.availMem) * 100 / memoryInfo.totalMem));
+        ((TextView) view.findViewById(R.id.tv_ram))
+                .setText(getString(R.string.free_of_total,
+                        Formatter.formatFileSize(this, memoryInfo.availMem),
+                        Formatter.formatFileSize(this, memoryInfo.totalMem)));
+        return view;
+    }
+
     private void setupAlarmVolume() {
         final SeekBar volumeSeekBar = (SeekBar) LayoutInflater.from(this).inflate(R.layout.volume_seek_bar, null, false);
         final SharedPreferences sharedPreferences = BPrefs.get(this);
@@ -500,7 +539,8 @@ public class SettingsActivity extends BaldActivity {
 
                 sharedPreferences.edit().putInt(BPrefs.ALARM_VOLUME_KEY, progress).apply();
                 ringtone = AlarmScreenActivity.getRingtone(SettingsActivity.this);
-                ringtone.play();
+                if (ringtone != null)
+                    ringtone.play();
                 handler.postDelayed(closeRingtone, 4 * D.SECOND);
 
             }
