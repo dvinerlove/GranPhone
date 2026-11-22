@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -63,13 +66,18 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     private static final int FINISH_DELAY_MS = 1500;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private ImageView iv_photo;
-    private TextView tv_name, tv_number, tv_status;
+    private TextView tv_initial, tv_name, tv_number, tv_status;
+    private Drawable noPhotoDrawable;
     private View incomingButtons, ongoingButtons;
     private Button bt_speaker;
     @Nullable
     private PowerManager.WakeLock proximityWakeLock;
     @Nullable
     private String shownNumber;
+    @Nullable
+    private String contactName;
+    @Nullable
+    private String shownName;
     private boolean finishScheduled;
     @Nullable
     private Call simChooserShownFor;
@@ -101,12 +109,17 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         }
         setContentView(R.layout.activity_call);
         iv_photo = findViewById(R.id.iv_photo);
+        tv_initial = findViewById(R.id.tv_initial);
         tv_name = findViewById(R.id.tv_name);
         tv_number = findViewById(R.id.tv_number);
         tv_status = findViewById(R.id.tv_status);
         incomingButtons = findViewById(R.id.incoming_buttons);
         ongoingButtons = findViewById(R.id.ongoing_buttons);
         bt_speaker = findViewById(R.id.bt_speaker);
+
+        final TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.bald_decoration_on_background, typedValue, true);
+        noPhotoDrawable = new ColorDrawable(typedValue.data);
 
         findViewById(R.id.bt_answer).setOnClickListener(v -> {
             final Call call = CallManager.getPrimaryCall();
@@ -131,12 +144,17 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     protected void onStart() {
         super.onStart();
         CallManager.addListener(this);
+        CallManager.setCallScreenVisible(true);
+        // re-post the call notification: no heads-up once the screen is actually showing
+        CallManager.notifyListeners();
         handler.post(ticker);
     }
 
     @Override
     protected void onStop() {
+        CallManager.setCallScreenVisible(false);
         CallManager.removeListener(this);
+        CallManager.notifyListeners();
         handler.removeCallbacks(ticker);
         setProximityScreenOff(false);
         super.onStop();
@@ -290,40 +308,50 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         final Call.Details details = call.getDetails(); // documented nullable during state transitions
         final Uri handle = details == null ? null : details.getHandle();
         final String number = handle == null ? "" : handle.getSchemeSpecificPart();
-        if (number.equals(shownNumber))
-            return;
-        shownNumber = number;
-
-        String name = null, photo = null;
-        if (!number.isEmpty() && checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            final Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
-            try (Cursor cursor = getContentResolver().query(uri,
-                    new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup.PHOTO_URI},
-                    null, null, null)) {
-                if (cursor != null && cursor.moveToFirst()) {
-                    name = cursor.getString(0);
-                    photo = cursor.getString(1);
+        if (!number.equals(shownNumber)) {
+            shownNumber = number;
+            contactName = null;
+            String photo = null;
+            if (!number.isEmpty() && checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+                final Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+                try (Cursor cursor = getContentResolver().query(uri,
+                        new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup.PHOTO_URI},
+                        null, null, null)) {
+                    if (cursor != null && cursor.moveToFirst()) {
+                        contactName = cursor.getString(0);
+                        photo = cursor.getString(1);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "contact lookup failed", e);
                 }
-            } catch (Exception e) {
-                Log.e(TAG, "contact lookup failed", e);
+            }
+            if (photo != null) {
+                iv_photo.setImageURI(Uri.parse(photo));
+                tv_initial.setVisibility(View.GONE);
+            } else {
+                iv_photo.setImageDrawable(noPhotoDrawable);
+                tv_initial.setVisibility(View.VISIBLE);
             }
         }
-        if (TextUtils.isEmpty(name))
-            name = details == null ? null : details.getCallerDisplayName();
 
-        if (TextUtils.isEmpty(name)) {
+        String name = contactName;
+        // getCallerDisplayName exists only on API 29+ and may arrive late via onDetailsChanged
+        if (TextUtils.isEmpty(name) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            name = details == null ? null : details.getCallerDisplayName();
+        if (TextUtils.isEmpty(name))
+            name = null;
+        if (TextUtils.equals(name, shownName))
+            return;
+        shownName = name;
+
+        tv_initial.setText(name == null ? "" : name.substring(0, 1).toUpperCase(Locale.getDefault()));
+        if (name == null) {
             tv_name.setText(number.isEmpty() ? getString(R.string.unknown_number) : number);
             tv_number.setVisibility(View.GONE);
         } else {
             tv_name.setText(name);
             tv_number.setText(number);
             tv_number.setVisibility(number.isEmpty() ? View.GONE : View.VISIBLE);
-        }
-        if (photo != null) {
-            iv_photo.setImageURI(Uri.parse(photo));
-            iv_photo.setVisibility(View.VISIBLE);
-        } else {
-            iv_photo.setVisibility(View.GONE);
         }
     }
 

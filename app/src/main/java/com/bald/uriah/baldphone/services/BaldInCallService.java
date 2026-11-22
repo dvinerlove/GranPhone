@@ -38,7 +38,9 @@ import com.bald.uriah.baldphone.utils.CallManager;
 @TargetApi(Build.VERSION_CODES.M)
 public class BaldInCallService extends InCallService {
     private static final String TAG = BaldInCallService.class.getSimpleName();
-    private static final String CHANNEL_ID = "granphone_calls";
+    private static final String CHANNEL_RINGING = "granphone_calls";
+    // low importance: an ongoing-call heads-up would cover the caller block on our own call screen
+    private static final String CHANNEL_ONGOING = "granphone_calls_ongoing";
     private static final int NOTIFICATION_ID = 4210;
     private final CallManager.Listener listener = this::updateNotification;
 
@@ -100,8 +102,14 @@ public class BaldInCallService extends InCallService {
             notificationManager.cancel(NOTIFICATION_ID);
             return;
         }
+        final boolean ringing = CallManager.getState(call) == Call.STATE_RINGING;
+        // a heads-up over our own call screen would cover the caller block; the loud
+        // version is only the fallback for when the activity could not be started
+        final boolean headsUp = ringing && !CallManager.isCallScreenVisible();
+        final String channelId = headsUp ? CHANNEL_RINGING : CHANNEL_ONGOING;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            final NotificationChannel channel = new NotificationChannel(CHANNEL_ID, getString(R.string.calls_channel), NotificationManager.IMPORTANCE_HIGH);
+            final NotificationChannel channel = new NotificationChannel(channelId, getString(R.string.calls_channel),
+                    headsUp ? NotificationManager.IMPORTANCE_HIGH : NotificationManager.IMPORTANCE_LOW);
             channel.setSound(null, null); // the system already rings
             notificationManager.createNotificationChannel(channel);
         }
@@ -110,18 +118,17 @@ public class BaldInCallService extends InCallService {
                 0,
                 CallActivity.newIntent(this),
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        final boolean ringing = CallManager.getState(call) == Call.STATE_RINGING;
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.ic_call_white)
                 .setContentTitle(getString(ringing ? R.string.incoming_call : R.string.ongoing_call))
                 .setContentText(getString(R.string.tap_to_return_to_call))
                 .setCategory(NotificationCompat.CATEGORY_CALL)
-                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setPriority(headsUp ? NotificationCompat.PRIORITY_MAX : NotificationCompat.PRIORITY_LOW)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pendingIntent);
-        if (ringing)
+        if (headsUp)
             builder.setFullScreenIntent(pendingIntent, true);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }

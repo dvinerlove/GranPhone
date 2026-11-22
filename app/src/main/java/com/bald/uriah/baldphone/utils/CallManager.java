@@ -56,6 +56,7 @@ public final class CallManager {
     };
     @Nullable
     private static InCallService inCallService;
+    private static boolean callScreenVisible;
 
     private CallManager() {
     }
@@ -90,6 +91,14 @@ public final class CallManager {
 
     public static void removeListener(Listener listener) {
         listeners.remove(listener);
+    }
+
+    public static boolean isCallScreenVisible() {
+        return callScreenVisible;
+    }
+
+    public static void setCallScreenVisible(boolean visible) {
+        callScreenVisible = visible;
     }
 
     public static void notifyListeners() {
