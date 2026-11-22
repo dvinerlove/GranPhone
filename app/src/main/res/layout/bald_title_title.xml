@@ -19,9 +19,11 @@
     style="@style/BackgroundText.Medium"
     android:layout_width="0dp"
     android:layout_height="match_parent"
-    android:layout_weight="4"
+    android:layout_weight="8"
     android:alpha="0.75"
-    android:ellipsize="end"
+    android:ellipsize="marquee"
+    android:marqueeRepeatLimit="marquee_forever"
     android:gravity="center"
     android:maxLines="1"
+    android:singleLine="true"
     android:transitionName="bald_bar_title_animation" />
