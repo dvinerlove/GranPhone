@@ -146,9 +146,12 @@ public class HomeScreenActivity extends BaldActivity {
         public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
             if (signalStrength == null)
                 return;
-            // ASU 0-31, 99 = unknown; MT6580 is GSM/WCDMA so gsm value is correct
-            final int asu = signalStrength.getGsmSignalStrength();
-            signalView.setImageLevel(asu == 99 ? 0 : Math.min(4, asu / 6));
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+                signalView.setImageLevel(signalStrength.getLevel());
+            else {
+                final int asu = signalStrength.getGsmSignalStrength();
+                signalView.setImageLevel(asu == 99 ? 0 : Math.min(4, asu / 6));
+            }
         }
     };
     private AudioManager audioManager;

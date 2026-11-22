@@ -128,7 +128,7 @@
     <string name="help">Видео Инструкция</string>
     <string name="hide">Скрыть</string>
     <string name="high_level">Высокий Уровень</string>
-    <string name="home_phone_number">Домашний номер телефона</string>
+    <string name="home_phone_number">Домашний номер</string>
     <string name="hour">Час</string>
     <string name="huge">Огромный</string>
     <string name="internet">Интернет</string>
@@ -154,7 +154,7 @@
     <string name="minutes">Минут</string>
     <string name="missed">Пропущен</string>
 
-    <string name="mobile_phone_number">Мобильный номер телефона</string>
+    <string name="mobile_phone_number">Мобильный номер</string>
     <string name="monday">Понедельник</string>
     <string name="more">больше</string>
     <string name="morning">Утро</string>
