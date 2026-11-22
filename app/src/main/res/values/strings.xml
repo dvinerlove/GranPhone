@@ -262,6 +262,7 @@
     <string name="today">Today</string>
     <string name="took">Took!</string>
     <string name="tuesday">Tuesday</string>
+    <string name="understood">Understood</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_subtext">Are you sure you want to uninstall %s?\n%s\'s data will be gone forever!</string>
     <string name="up">Up</string>

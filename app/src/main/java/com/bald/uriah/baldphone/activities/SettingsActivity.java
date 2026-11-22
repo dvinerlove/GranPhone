@@ -60,6 +60,7 @@ import com.bald.uriah.baldphone.activities.alarms.AlarmScreenActivity;
 import com.bald.uriah.baldphone.activities.pills.PillTimeSetterActivity;
 import com.bald.uriah.baldphone.utils.DialogBuilder;
 import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
 import com.bald.uriah.baldphone.utils.BaldToast;
@@ -155,11 +156,7 @@ public class SettingsActivity extends BaldActivity {
     private void showKioskDialog() {
         final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
         if (!KioskManager.isDeviceOwner(this)) {
-            DialogBuilder.from(this)
-                    .setTitle(R.string.kiosk_mode)
-                    .setSubText(R.string.kiosk_not_device_owner_subtext)
-                    .addFlag(DialogFlags.FLAG_OK)
-                    .show();
+            DialogScreen.info(this, R.string.kiosk_mode, R.string.kiosk_not_device_owner_subtext);
         } else if (!KioskManager.isEnabled(this)) {
             DialogBuilder.from(this)
                     .setTitle(R.string.kiosk_mode)

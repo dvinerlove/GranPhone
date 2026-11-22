@@ -252,6 +252,7 @@
     <string name="today">Сегодня</string>
     <string name="took">Взял!</string>
     <string name="tuesday">Вторник</string>
+    <string name="understood">Понятно</string>
     <string name="uninstall">Удалить</string>
     <string name="uninstall_subtext">Вы уверены что хотите удалить %s?\n%s данные пропадут навсегда!</string>
     <string name="up">Вверх</string>
