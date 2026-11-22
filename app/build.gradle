@@ -21,6 +21,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+    buildFeatures {
+        viewBinding true
+    }
     defaultConfig {
         applicationId "com.granphone.launcher"
         minSdkVersion 21
