@@ -82,8 +82,8 @@ public class NotificationsActivity extends BaldActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setItemViewCacheSize(10);
 
-        if (!Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners")
-                .contains(getApplicationContext().getPackageName())) {
+        final String enabledListeners = Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners");
+        if (enabledListeners == null || !enabledListeners.contains(getApplicationContext().getPackageName())) {
             BDB.from(this)
                     .setTitle(R.string.enable_notification_access)
                     .setSubText(R.string.enable_notification_access_subtext)

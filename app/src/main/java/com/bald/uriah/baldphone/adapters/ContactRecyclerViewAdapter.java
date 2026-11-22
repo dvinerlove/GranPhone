@@ -93,13 +93,15 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
 
     private void applyToCursor() {
         letterToPosition.clear();
-        cursor.moveToFirst();
+        if (cursor == null || !cursor.moveToFirst())
+            return;
         String previousFirstLetter = null;
         String tmpThis;
 
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToPosition(i);
-            tmpThis = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME)).substring(0, 1).toUpperCase();
+            final String displayName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
+            tmpThis = (displayName == null || displayName.isEmpty()) ? " " : displayName.substring(0, 1).toUpperCase();
             if (!tmpThis.equals(previousFirstLetter)) {
                 letterToPosition.append(tmpThis.charAt(0), i);
             }

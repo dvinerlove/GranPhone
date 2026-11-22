@@ -17,6 +17,7 @@
 package com.bald.uriah.baldphone.utils;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -355,8 +356,12 @@ public class S {
     }
 
     public static void sendMessage(final String number, final Context context) {
-        context.startActivity(new Intent(Intent.ACTION_SENDTO)
-                .setData(Uri.parse("smsto:" + Uri.encode(number))));
+        try {
+            context.startActivity(new Intent(Intent.ACTION_SENDTO)
+                    .setData(Uri.parse("smsto:" + Uri.encode(number))));
+        } catch (ActivityNotFoundException e) {
+            BaldToast.error(context);
+        }
     }
 
     public static Intent getPhoneIntent(Context context) {

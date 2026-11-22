@@ -126,7 +126,7 @@ public class HomeScreenActivity extends BaldActivity {
             if (batteryView != null) {
                 final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                 final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                final int batteryPct = Math.round(level / (float) scale * 100);
+                final int batteryPct = scale > 0 ? Math.round(level / (float) scale * 100) : -1;
                 final int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
                 final boolean charged = chargePlug == BatteryManager.BATTERY_PLUGGED_AC || chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS || chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
                 batteryView.setLevel(batteryPct, charged);
@@ -144,6 +144,8 @@ public class HomeScreenActivity extends BaldActivity {
     private final android.telephony.PhoneStateListener signalListener = new android.telephony.PhoneStateListener() {
         @Override
         public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
+            if (signalStrength == null)
+                return;
             // ASU 0-31, 99 = unknown; MT6580 is GSM/WCDMA so gsm value is correct
             final int asu = signalStrength.getGsmSignalStrength();
             signalView.setImageLevel(asu == 99 ? 0 : Math.min(4, asu / 6));
@@ -330,7 +332,7 @@ public class HomeScreenActivity extends BaldActivity {
         soundButton.setImageResource(SOUND_DRAWABLES[audioManager.getRingerMode()]);
         try {
             telephonyManager.listen(signalListener, android.telephony.PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-        } catch (SecurityException ignore) {
+        } catch (Exception ignore) {
         }
 
         LocalBroadcastManager.getInstance(this).

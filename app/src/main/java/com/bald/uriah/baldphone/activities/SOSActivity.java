@@ -154,7 +154,7 @@ public class SOSActivity extends BaldActivity {
                         new String[]{
                                 lookupKey
                         }, null)) {
-                    if (cursor.moveToFirst()) {
+                    if (cursor != null && cursor.moveToFirst()) {
                         ret.add(new MiniContact(
                                 lookupKey,
                                 cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)),
@@ -167,7 +167,7 @@ public class SOSActivity extends BaldActivity {
                     }
 
                 } catch (Exception e) {
-                    throw new AssertionError(e);
+                    android.util.Log.e("SOSActivity", "pinned contact lookup failed", e);
                 }
             }
             Collections.sort(ret, (o1, o2) -> o1.name.compareTo(o2.name));

@@ -405,7 +405,7 @@ public class SettingsActivity extends BaldActivity {
         connectionCategory.add(new RunnableSettingsItem(R.string.bluetooth, v -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)), R.drawable.bluetooth_on_button));
 
         NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
-        NfcAdapter adapter = manager.getDefaultAdapter();
+        NfcAdapter adapter = manager == null ? null : manager.getDefaultAdapter();
         if (adapter != null)
             connectionCategory.add(new RunnableSettingsItem(R.string.nfc, v -> {
                 try {

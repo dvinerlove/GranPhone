@@ -175,7 +175,8 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
                     volumeRaisedFor = call;
                     FirstRunDefaults.setCallVolumeToMax(this);
                 }
-                final long connectTime = call.getDetails().getConnectTimeMillis();
+                final Call.Details activeDetails = call.getDetails();
+                final long connectTime = activeDetails == null ? 0 : activeDetails.getConnectTimeMillis();
                 tv_status.setText(connectTime > 0
                         ? getString(R.string.in_call) + "  " + formatDuration(System.currentTimeMillis() - connectTime)
                         : getString(R.string.in_call));
@@ -223,7 +224,8 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         simChooserShownFor = call;
         final TelecomManager telecomManager = (TelecomManager) getSystemService(TELECOM_SERVICE);
         List<PhoneAccountHandle> handles = null;
-        final Bundle extras = call.getDetails().getIntentExtras();
+        final Call.Details simDetails = call.getDetails();
+        final Bundle extras = simDetails == null ? null : simDetails.getIntentExtras();
         if (extras != null)
             handles = extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
         if ((handles == null || handles.isEmpty()) && telecomManager != null) {
@@ -285,7 +287,8 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     }
 
     private void bindCaller(Call call) {
-        final Uri handle = call.getDetails().getHandle();
+        final Call.Details details = call.getDetails(); // documented nullable during state transitions
+        final Uri handle = details == null ? null : details.getHandle();
         final String number = handle == null ? "" : handle.getSchemeSpecificPart();
         if (number.equals(shownNumber))
             return;
@@ -306,7 +309,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
             }
         }
         if (TextUtils.isEmpty(name))
-            name = call.getDetails().getCallerDisplayName();
+            name = details.getCallerDisplayName();
 
         if (TextUtils.isEmpty(name)) {
             tv_name.setText(number.isEmpty() ? getString(R.string.unknown_number) : number);

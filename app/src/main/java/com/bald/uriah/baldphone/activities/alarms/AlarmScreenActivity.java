@@ -105,14 +105,14 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         cancel.setOnClickListener(v -> {
             if (vibrator != null)
                 vibrator.vibrate(D.vibetime);
-            if (alarm.getName().equals(getString(R.string.timer)))
+            if (getString(R.string.timer).equals(alarm.getName()))
                 AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
             finish();
         });
         cancel.setOnLongClickListener(v -> {
             if (vibrator != null)
                 vibrator.vibrate(D.vibetime);
-            if (alarm.getName().equals(getString(R.string.timer)))
+            if (getString(R.string.timer).equals(alarm.getName()))
                 AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
             finish();
             return true;

@@ -170,8 +170,11 @@ public class HomePage1 extends HomeView {
 
     private Intent getCameraIntent() {
         final Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        final ActivityInfo activityInfo = activity.getPackageManager().resolveActivity(intent,
-                PackageManager.MATCH_DEFAULT_ONLY).activityInfo;
+        final ResolveInfo resolveInfo = activity.getPackageManager().resolveActivity(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        if (resolveInfo == null)
+            return null;
+        final ActivityInfo activityInfo = resolveInfo.activityInfo;
         final ComponentName name = new ComponentName(activityInfo.applicationInfo.packageName, activityInfo.name);
         return new Intent(Intent.ACTION_MAIN)
                 .addCategory(Intent.CATEGORY_LAUNCHER)
@@ -194,11 +197,16 @@ public class HomePage1 extends HomeView {
         bt_assistant.post(this::updateFlashIcon);
         setupButton(BPrefs.CUSTOM_MESSAGES_KEY, bt_messages, v -> {
             try {
+                final String smsPackage = Telephony.Sms.getDefaultSmsPackage(homeScreen);
+                if (smsPackage == null) {
+                    BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
+                    return;
+                }
                 final ResolveInfo resolveInfo =
                         homeScreen.getPackageManager()
                                 .queryIntentActivities(
                                         new Intent("android.intent.action.MAIN", null)
-                                                .setPackage(Telephony.Sms.getDefaultSmsPackage(homeScreen))
+                                                .setPackage(smsPackage)
                                         , 0)
                                 .iterator()
                                 .next();
@@ -209,7 +217,13 @@ public class HomePage1 extends HomeView {
             }
         });
         setupButton(BPrefs.CUSTOM_PHOTOS_KEY, bt_photos, v -> homeScreen.startActivity(new Intent(homeScreen, PhotosActivity.class)));
-        setupButton(BPrefs.CUSTOM_CAMERA_KEY, bt_camera, v -> homeScreen.startActivity(getCameraIntent()));
+        setupButton(BPrefs.CUSTOM_CAMERA_KEY, bt_camera, v -> {
+            final Intent intent = getCameraIntent();
+            if (intent != null)
+                homeScreen.startActivity(intent);
+            else
+                BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
+        });
         setupButton(BPrefs.CUSTOM_VIDEOS_KEY, bt_videos, v -> homeScreen.startActivity(new Intent(homeScreen, VideosActivity.class)));
         setupButton(BPrefs.CUSTOM_PILLS_KEY, bt_reminders, v -> homeScreen.startActivity(new Intent(homeScreen, PillsActivity.class)));
         setupButton(BPrefs.CUSTOM_APPS_KEY, bt_apps, v -> {

@@ -23,6 +23,7 @@ import android.os.Handler;
 import androidx.annotation.Nullable;
 
 import com.bald.uriah.baldphone.R;
+import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.D;
 
 public class CrashActivity extends BaldActivity {
@@ -33,6 +34,11 @@ public class CrashActivity extends BaldActivity {
         setContentView(R.layout.activity_crash);
         new Handler().postDelayed(
                 () -> {
+                    // crashed again within the backoff window — don't relaunch into a crash loop
+                    if (System.currentTimeMillis() - BPrefs.get(this).getLong(BPrefs.LAST_CRASH_KEY, -1) < BPrefs.LAST_CRASH_TIME_OK) {
+                        finish();
+                        return;
+                    }
                     startActivity(new Intent(this, HomeScreenActivity.class));
                     finish();
                 },

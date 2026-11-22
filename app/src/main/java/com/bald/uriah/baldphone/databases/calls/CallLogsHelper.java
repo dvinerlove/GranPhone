@@ -41,13 +41,15 @@ import static android.provider.CallLog.Calls.TYPE;
 public class CallLogsHelper {
     public static List<Call> getAllCalls(ContentResolver contentResolver) {
         try (Cursor cursor = contentResolver.query(CallLog.Calls.CONTENT_URI, Call.PROJECTION, null, null, CallLog.Calls.DATE + " DESC")) {
+            if (cursor == null)
+                return new ArrayList<>();
             final List<Call> calls = new ArrayList<>(cursor.getCount());
             while (cursor.moveToNext()) {
                 calls.add(new Call(cursor));
             }
             return calls;
         } catch (SecurityException e) {
-            throw new RuntimeException(e);
+            return new ArrayList<>();
         }
     }
 
@@ -56,13 +58,15 @@ public class CallLogsHelper {
             return new ArrayList<>();
         final Uri contactUri = ContactsContract.Contacts.getLookupUri(contact.getId(), contact.getLookupKey());
         try (Cursor cursor = contentResolver.query(CallLog.Calls.CONTENT_URI, Call.PROJECTION, CallLog.Calls.CACHED_LOOKUP_URI + "=?", new String[]{contactUri.toString()}, CallLog.Calls.DATE + " DESC")) {
+            if (cursor == null)
+                return new ArrayList<>();
             final List<Call> calls = new ArrayList<>(cursor.getCount());
             while (cursor.moveToNext()) {
                 calls.add(new Call(cursor));
             }
             return calls;
         } catch (SecurityException e) {
-            throw new RuntimeException(e);
+            return new ArrayList<>();
         }
     }
 
@@ -72,15 +76,14 @@ public class CallLogsHelper {
         values.put(CallLog.Calls.NEW, false);
         try {
             contentResolver.update(CallLog.Calls.CONTENT_URI, values, null, null);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (Exception ignore) {
         }
     }
 
     public static boolean isAllReadSafe(ContentResolver contentResolver) {
         try (final Cursor cursor = contentResolver.query(CallLog.Calls.CONTENT_URI, new String[]{TYPE, IS_READ, NEW}, String.format(Locale.US, "%s=0 AND %s=1 AND %s=%d", IS_READ, NEW, TYPE, CallsRecyclerViewAdapter.MISSED_TYPE), null, null)) {
-            return cursor.getCount() == 0;
-        } catch (SecurityException ignore) {
+            return cursor == null || cursor.getCount() == 0;
+        } catch (Exception ignore) {
             return true;
         }
     }
