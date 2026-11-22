@@ -32,8 +32,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.NotificationRecyclerViewAdapter;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 
 import static com.bald.uriah.baldphone.services.NotificationListenerService.ACTION_REGISTER_ACTIVITY;
 import static com.bald.uriah.baldphone.services.NotificationListenerService.ACTIVITY_NONE;
@@ -84,10 +84,10 @@ public class NotificationsActivity extends BaldActivity {
 
         final String enabledListeners = Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners");
         if (enabledListeners == null || !enabledListeners.contains(getApplicationContext().getPackageName())) {
-            BDB.from(this)
+            DialogBuilder.from(this)
                     .setTitle(R.string.enable_notification_access)
                     .setSubText(R.string.enable_notification_access_subtext)
-                    .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                     .setPositiveButtonListener(params -> {
                         getApplicationContext().startActivity(new Intent(
                                 "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));

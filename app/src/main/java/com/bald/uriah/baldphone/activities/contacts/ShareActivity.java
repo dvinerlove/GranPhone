@@ -32,8 +32,8 @@ import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.adapters.IntentAdapter;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -99,7 +99,7 @@ public class ShareActivity extends BaseContactsActivity {
             differently_container.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
             whatsapp_container.setVisibility(isChecked ? View.INVISIBLE : View.VISIBLE);
             if (isChecked)
-                S.hideKeyboard(this);
+                AppUtils.hideKeyboard(this);
         });
 
     }
@@ -140,13 +140,13 @@ public class ShareActivity extends BaseContactsActivity {
         try {
             contact = Contact.fromLookupKey(lookupKey, contentResolver);
         } catch (Contact.ContactNotFoundException e) {
-            Log.e(TAG, S.str(e.getMessage()));
+            Log.e(TAG, AppUtils.str(e.getMessage()));
             e.printStackTrace();
             BaldToast.error(this);
             finish();
             return;
         }
-        shareIntent.setPackage(D.WHATSAPP_PACKAGE_NAME);
+        shareIntent.setPackage(Const.WHATSAPP_PACKAGE_NAME);
         String smsNumber = PhoneNumberUtils.stripSeparators(contact.getWhatsappNumbers().get(0)).replace("+", "").replace(" ", "");
         shareIntent.putExtra("jid", smsNumber + "@s.whatsapp.net"); //phone number without "+" prefix
         startActivity(shareIntent);

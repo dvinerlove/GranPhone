@@ -47,10 +47,10 @@ import com.bald.uriah.baldphone.activities.contacts.AddContactActivity;
 import com.bald.uriah.baldphone.activities.contacts.SingleContactActivity;
 import com.bald.uriah.baldphone.databases.calls.Call;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.RandomColorMaker;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 import com.bumptech.glide.Glide;
 
@@ -159,7 +159,7 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
                                     letterContactBackground
                     ).into(profile_pic);
                 } else {
-                    if (S.isValidContextForGlide(profile_pic.getContext()))
+                    if (AppUtils.isValidContextForGlide(profile_pic.getContext()))
                         Glide.with(profile_pic).load(miniContact.photo).into(profile_pic);
                     image_letter.setVisibility(View.INVISIBLE);
                 }
@@ -180,12 +180,12 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
                     (index == 0 ||
                             new DateTime(callList.get(index - 1).dateTime).getDayOfYear() !=
                                     new DateTime(call.dateTime).getDayOfYear()) ?
-                            S.stringTimeFromLong(activity, call.dateTime, false) :
+                            AppUtils.stringTimeFromLong(activity, call.dateTime, false) :
                             null
             );
 
             final DateTime dateTime = new DateTime(call.dateTime);
-            tv_time.setText(S.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour()));
+            tv_time.setText(AppUtils.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour()));
         }
 
         public void setDay(final @Nullable String day) {
@@ -275,10 +275,10 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
                 );
             } else {
                 if (!call.isPrivate())
-                    BDB.from(activity)
+                    DialogBuilder.from(activity)
                             .setSubText(String.format(activity.getString(R.string.what_do_you_want_to_do_with___), call.phoneNumber))
                             .setOptions(R.string.call, R.string.add_contact, R.string.message)
-                            .addFlag(BDialog.FLAG_OK)
+                            .addFlag(DialogFlags.FLAG_OK)
                             .setPositiveButtonListener(params -> {
                                 final int option = (int) params[0];
                                 switch (option) {
@@ -289,7 +289,7 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
                                         activity.startActivity(new Intent(activity, AddContactActivity.class).putExtra(AddContactActivity.CONTACT_NUMBER, call.phoneNumber));
                                         return true;
                                     case 2:
-                                        S.sendMessage(call.phoneNumber, activity);
+                                        AppUtils.sendMessage(call.phoneNumber, activity);
                                         return true;
                                 }
                                 throw new IllegalArgumentException("option must be 0 or 1");

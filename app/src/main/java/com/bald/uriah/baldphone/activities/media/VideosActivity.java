@@ -29,7 +29,7 @@ import android.util.Size;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.Constants;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -81,7 +81,7 @@ public class VideosActivity extends MediaScrollingActivity implements Constants.
 
     @Override
     protected void bindViewHolder(Cursor cursor, MediaRecyclerViewAdapter.ViewHolder holder) {
-        if (!S.isValidContextForGlide(holder.itemView.getContext()))
+        if (!AppUtils.isValidContextForGlide(holder.itemView.getContext()))
             return;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -96,7 +96,7 @@ public class VideosActivity extends MediaScrollingActivity implements Constants.
                         .into(holder.pic);
 
             } catch (IOException e) {
-                Log.e(TAG, S.str(e.getMessage()));
+                Log.e(TAG, AppUtils.str(e.getMessage()));
                 e.printStackTrace();
             }
         } else {

@@ -35,10 +35,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 
@@ -95,10 +95,10 @@ public class PermissionActivity extends BaldActivity {
 
     private void calmyBDB() {
         if (isTaskRoot()) {
-            BDB.from(this)
+            DialogBuilder.from(this)
                     .setTitle(R.string.permissions_part)
                     .setSubText(R.string.permissions_calm)
-                    .addFlag(BDialog.FLAG_OK | BDialog.FLAG_NO)
+                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_NO)
                     .setPositiveButtonListener(params -> true)
                     .setNegativeButtonListener(params -> {
                         FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this);
@@ -212,7 +212,7 @@ public class PermissionActivity extends BaldActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (S.intArrayContains(REQUEST_CODES, requestCode))
+        if (AppUtils.intArrayContains(REQUEST_CODES, requestCode))
             refreshPermissions();
     }
 

@@ -40,8 +40,8 @@ import com.bald.uriah.baldphone.databases.alarms.AlarmsDatabase;
 import com.bald.uriah.baldphone.utils.Animations;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 /**
  * Alarm screen, will be called from {@link com.bald.uriah.baldphone.broadcast_receivers.AlarmReceiver}
@@ -83,7 +83,7 @@ public class AlarmScreenActivity extends TimedBaldActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        S.logImportant("alarmScreen was called!");
+        AppUtils.logImportant("alarmScreen was called!");
         setContentView(R.layout.alarm_screen);
 
         attachXml();
@@ -94,7 +94,7 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         if (key == -1) throw new AssertionError();
         alarm = AlarmsDatabase.getInstance(this).alarmsDatabaseDao().getByKey(key);
         if (alarm == null) {
-            S.logImportant("alarm == null!, returning");
+            AppUtils.logImportant("alarm == null!, returning");
             return;
         }
 
@@ -104,14 +104,14 @@ public class AlarmScreenActivity extends TimedBaldActivity {
 
         cancel.setOnClickListener(v -> {
             if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
+                vibrator.vibrate(Const.vibetime);
             if (getString(R.string.timer).equals(alarm.getName()))
                 AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
             finish();
         });
         cancel.setOnLongClickListener(v -> {
             if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
+                vibrator.vibrate(Const.vibetime);
             if (getString(R.string.timer).equals(alarm.getName()))
                 AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
             finish();
@@ -134,7 +134,7 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         }
 
         Animations.makeBiggerAndSmaller(this, cancel, () -> {
-            if (vibrator != null) vibrator.vibrate(D.vibetime);
+            if (vibrator != null) vibrator.vibrate(Const.vibetime);
         });
         scheduleNextAlarm();
     }
@@ -168,7 +168,7 @@ public class AlarmScreenActivity extends TimedBaldActivity {
 
     private void snooze() {
         if (vibrator != null)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
         AlarmScheduler.scheduleSnooze(alarm, this);
         finish();
     }
@@ -195,7 +195,7 @@ public class AlarmScreenActivity extends TimedBaldActivity {
 
     @Override
     protected int screenTimeout() {
-        return D.MINUTE * 5;
+        return Const.MINUTE * 5;
     }
 
     @Override

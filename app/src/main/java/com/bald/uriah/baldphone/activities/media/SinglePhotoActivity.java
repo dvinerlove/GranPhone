@@ -34,7 +34,7 @@ import androidx.annotation.RequiresApi;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.Constants;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bumptech.glide.Glide;
 
 /**
@@ -127,7 +127,7 @@ public class SinglePhotoActivity extends SingleMediaActivity implements Constant
             final int fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID);
             final long id = cursor.getLong(fieldIndex);
             final Uri imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
-            if (S.isValidContextForGlide(pic.getContext()))
+            if (AppUtils.isValidContextForGlide(pic.getContext()))
                 Glide.with(pic).load(imageUri).into(pic);
         }
 

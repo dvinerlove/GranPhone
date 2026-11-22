@@ -42,11 +42,11 @@ import androidx.core.app.ActivityCompat;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 
 import java.lang.ref.WeakReference;
@@ -96,7 +96,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     private Sensor proximitySensor;
     private boolean near;
     private int touches;
-    private int accidentalMinTouches = 3, accidentalTime = 3 * D.SECOND;
+    private int accidentalMinTouches = 3, accidentalTime = 3 * Const.SECOND;
     private boolean useAccidentalGuard = true;
     private Handler handler;
     private Runnable touchesDecreaser = () -> touches = (touches -= 1) < 0 ? 0 : touches;
@@ -222,7 +222,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
                 .getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE)
                 ? (Vibrator) getSystemService(VIBRATOR_SERVICE) : null;
         colorful = sharedPreferences.getBoolean(BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE);
-        themeIndex = S.getTheme(this);
+        themeIndex = AppUtils.getTheme(this);
         setTheme(themeIndex);
 
         final int statusBar = sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE);
@@ -235,7 +235,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
             final Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(D.DEFAULT_STATUS_BAR_COLOR);
+            window.setStatusBarColor(Const.DEFAULT_STATUS_BAR_COLOR);
         }
 
         if (useAccidentalGuard = sharedPreferences.getBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE)) {
@@ -251,7 +251,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onResume() {
         super.onResume();
-        if (themeIndex != S.getTheme(this))
+        if (themeIndex != AppUtils.getTheme(this))
             recreate();
         if (useAccidentalGuard)
             sensorManager.registerListener(this, proximitySensor,
@@ -280,19 +280,19 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     @Override
     public void onBackPressed() {
         if (vibrator != null)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
         super.onBackPressed();
     }
 
     public void autoDismiss(Dialog dialog) {
         if (dialogsToClose.size() > 10)
-            dialogsToClose = S.cleanWeakList(dialogsToClose);
+            dialogsToClose = AppUtils.cleanWeakList(dialogsToClose);
         dialogsToClose.add(new WeakReference<>(dialog));
     }
 
     public void autoDismiss(PopupWindow popupWindow) {
         if (popupWindowsToClose.size() > 10)
-            popupWindowsToClose = S.cleanWeakList(popupWindowsToClose);
+            popupWindowsToClose = AppUtils.cleanWeakList(popupWindowsToClose);
         popupWindowsToClose.add(new WeakReference<>(popupWindow));
     }
 
@@ -314,10 +314,10 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
         if (touches > accidentalMinTouches) {
             touches = -1;
             handler.removeCallbacks(touchesDecreaser);
-            BDB.from(this)
+            DialogBuilder.from(this)
                     .setTitle(R.string.accidental_touches)
                     .setSubText(R.string.accidental_touches_subtext)
-                    .addFlag(BDialog.FLAG_NOT_CANCELABLE | BDialog.FLAG_OK)
+                    .addFlag(DialogFlags.FLAG_NOT_CANCELABLE | DialogFlags.FLAG_OK)
                     .setPositiveButtonListener(params -> {
                         touches = 0;
                         accidentalMinTouches += 2;

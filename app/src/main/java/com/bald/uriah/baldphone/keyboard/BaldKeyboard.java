@@ -33,7 +33,7 @@ import androidx.annotation.LayoutRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_GO;
@@ -69,7 +69,7 @@ public abstract class BaldKeyboard extends FrameLayout {
         super(context);
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         this.backspaceRunnable = backspaceRunnable;
-        final ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, S.getTheme(context));
+        final ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, AppUtils.getTheme(context));
         keyboard = (ConstraintLayout) LayoutInflater.from(contextThemeWrapper).inflate(layout(), this, false);
         children = new View[keyboard.getChildCount()];
         final char[] codes = codes();

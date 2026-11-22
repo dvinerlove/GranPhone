@@ -24,7 +24,7 @@ import androidx.annotation.ColorInt;
 
 import com.bald.uriah.baldphone.R;
 
-public class D {
+public class Const {
     public static final String WHATSAPP_PACKAGE_NAME = "com.whatsapp";
     public static final int
             MILLISECOND = 1,
@@ -42,7 +42,7 @@ public class D {
     public static final int LOW_BATTERY_LEVEL = 20;
 
     //nope.
-    private D() {
+    private Const() {
     }
 
     public static class Days {

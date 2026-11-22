@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.HelpRecyclerViewAdapter;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 public class VideoTutorialsActivity extends BaldActivity {
 
@@ -42,8 +42,8 @@ public class VideoTutorialsActivity extends BaldActivity {
         recycler_view.setAdapter(
                 new HelpRecyclerViewAdapter(
                         this,
-                        S.typedArrayToResArray(resources, R.array.yt_texts),
-                        S.typedArrayToResArray(resources, R.array.yt_logos)));
+                        AppUtils.typedArrayToResArray(resources, R.array.yt_texts),
+                        AppUtils.typedArrayToResArray(resources, R.array.yt_logos)));
     }
 
     @Override

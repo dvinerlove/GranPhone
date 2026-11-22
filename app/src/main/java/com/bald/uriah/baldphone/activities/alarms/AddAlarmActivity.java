@@ -33,7 +33,7 @@ import com.bald.uriah.baldphone.databases.alarms.Alarm;
 import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
 import com.bald.uriah.baldphone.databases.alarms.AlarmsDatabase;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.views.BaldButton;
 import com.bald.uriah.baldphone.views.BaldNumberChooser;
 
@@ -79,7 +79,7 @@ public class AddAlarmActivity extends com.bald.uriah.baldphone.activities.BaldAc
                 only_once.setChecked(true);
             else
                 for (int i = 0; i < daysCheckBoxes.length; i++)
-                    daysCheckBoxes[i].setChecked((alarmDays | (D.Days.SUNDAY << i)) == alarmDays);
+                    daysCheckBoxes[i].setChecked((alarmDays | (Const.Days.SUNDAY << i)) == alarmDays);
         } else {
             final DateTime now = DateTime.now();
             chooser_hours.setNumber(now.getHourOfDay());
@@ -115,10 +115,10 @@ public class AddAlarmActivity extends com.bald.uriah.baldphone.activities.BaldAc
 
         int sum = 0;
         if (every_day.isChecked()) {
-            sum = D.Days.ALL;
+            sum = Const.Days.ALL;
         } else {
             for (int i = 0; i < daysCheckBoxes.length; i++)
-                sum |= daysCheckBoxes[i].isChecked() ? D.Days.SUNDAY << i : 0;
+                sum |= daysCheckBoxes[i].isChecked() ? Const.Days.SUNDAY << i : 0;
 
             if (sum == 0) sum = -1;
         }
@@ -149,7 +149,7 @@ public class AddAlarmActivity extends com.bald.uriah.baldphone.activities.BaldAc
     private void genOnClickListeners() {
         bt_alarm_submit.setOnClickListener((v) -> submit());
         only_once.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (vibrator != null) vibrator.vibrate(D.vibetime);
+            if (vibrator != null) vibrator.vibrate(Const.vibetime);
             if (isChecked) {
                 for (CheckBox checkBox : daysCheckBoxes)
                     checkBox.setChecked(false);
@@ -164,7 +164,7 @@ public class AddAlarmActivity extends com.bald.uriah.baldphone.activities.BaldAc
         every_day.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (vibrator != null) vibrator.vibrate(D.vibetime);
+                if (vibrator != null) vibrator.vibrate(Const.vibetime);
                 if (isChecked) {
                     for (CheckBox checkBox : daysCheckBoxes)
                         checkBox.setChecked(false);
@@ -183,7 +183,7 @@ public class AddAlarmActivity extends com.bald.uriah.baldphone.activities.BaldAc
         for (final CheckBox checkBox : daysCheckBoxes) {
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (vibrator != null)
-                    vibrator.vibrate(D.vibetime);
+                    vibrator.vibrate(Const.vibetime);
                 if (isChecked) {
                     only_once.setChecked(false);
                     every_day.setChecked(false);

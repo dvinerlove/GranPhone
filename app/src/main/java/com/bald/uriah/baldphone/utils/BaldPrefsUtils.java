@@ -94,7 +94,7 @@ public class BaldPrefsUtils {
     public static BaldPrefsUtils newInstance(Context context) {
         final SharedPreferences sharedPreferences = context.getSharedPreferences(BPrefs.KEY, Context.MODE_PRIVATE);
         return new BaldPrefsUtils(
-                S.getTheme(context),
+                AppUtils.getTheme(context),
                 sharedPreferences
                         .getBoolean(VIBRATION_FEEDBACK_KEY, VIBRATION_FEEDBACK_DEFAULT_VALUE),
                 sharedPreferences

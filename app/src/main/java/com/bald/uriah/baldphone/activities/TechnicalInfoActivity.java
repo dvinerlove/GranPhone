@@ -27,11 +27,11 @@ import androidx.annotation.Nullable;
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import java.io.File;
 
@@ -65,14 +65,14 @@ public class TechnicalInfoActivity extends BaldActivity {
     public static String getTechnicalInfo() {
         return
                 String.format("Api Level: %s\nVersion Name: %s\nVersion Code: %s\nFlavor: %s\nManufacturer: %s\nBrand: %s\nDevice: %s\nModel: %s\n",
-                        S.str(Build.VERSION.SDK_INT),
-                        S.str(BuildConfig.VERSION_NAME),
-                        S.str(BuildConfig.VERSION_CODE),
-                        S.str(BuildConfig.FLAVOR),
-                        S.str(Build.MANUFACTURER),
-                        S.str(Build.BRAND),
-                        S.str(Build.DEVICE),
-                        S.str(Build.MODEL))
+                        AppUtils.str(Build.VERSION.SDK_INT),
+                        AppUtils.str(BuildConfig.VERSION_NAME),
+                        AppUtils.str(BuildConfig.VERSION_CODE),
+                        AppUtils.str(BuildConfig.FLAVOR),
+                        AppUtils.str(Build.MANUFACTURER),
+                        AppUtils.str(Build.BRAND),
+                        AppUtils.str(Build.DEVICE),
+                        AppUtils.str(Build.MODEL))
                 ;
     }
 
@@ -84,8 +84,8 @@ public class TechnicalInfoActivity extends BaldActivity {
         setContentView(R.layout.activity_tech_info);
         ((TextView) findViewById(R.id.tv_info)).setText(getTechnicalInfo());
         findViewById(R.id.bt_clear_cache).setOnClickListener(v -> {
-            BDB.from(this)
-                    .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
+            DialogBuilder.from(this)
+                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
                     .setTitle(R.string.clear_cache)
                     .setSubText(R.string.clear_cache_subtext)
                     .setPositiveButtonListener(params -> {
@@ -105,18 +105,18 @@ public class TechnicalInfoActivity extends BaldActivity {
                 setOnClickListener(v ->
 
                 {
-                    BDB.from(this)
-                            .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
+                    DialogBuilder.from(this)
+                            .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
                             .setTitle(R.string.clear_data)
                             .setSubText(R.string.clear_data_subtext)
                             .setPositiveButtonListener(params -> {
-                                BDB.from(this)
-                                        .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
+                                DialogBuilder.from(this)
+                                        .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
                                         .setTitle(R.string.clear_data)
                                         .setSubText(R.string.clear_data_subtext2)
                                         .setPositiveButtonListener(params2 -> {
-                                            BDB.from(this)
-                                                    .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
+                                            DialogBuilder.from(this)
+                                                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
                                                     .setTitle(R.string.clear_data)
                                                     .setSubText(R.string.clear_data_subtext3)
                                                     .setPositiveButtonListener(params3 -> {

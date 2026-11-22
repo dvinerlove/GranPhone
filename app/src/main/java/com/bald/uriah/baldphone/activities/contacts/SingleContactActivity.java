@@ -51,10 +51,10 @@ import com.bald.uriah.baldphone.adapters.CallsRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.calls.Call;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.Toggeler;
 import com.bald.uriah.baldphone.views.BaldLinearLayoutButton;
 import com.bald.uriah.baldphone.views.BaldPictureTextButton;
@@ -373,8 +373,8 @@ public class SingleContactActivity extends BaldActivity {
                 new Intent(this, AddContactActivity.class)
                         .putExtra(CONTACT_LOOKUP_KEY, contact.getLookupKey());
         final View.OnClickListener deleteListener = (v) ->
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
                         .setSubText(String.format(getString(R.string.are_you_sure_you_want_to_delete___), contact.getName()))
                         .setPositiveButtonListener(params -> {
                             deleteContact();
@@ -392,7 +392,7 @@ public class SingleContactActivity extends BaldActivity {
 
         findViewById(R.id.bt_share).setOnClickListener(v -> {
                     changed = true;
-                    S.share(this, shareIntent);
+                    AppUtils.share(this, shareIntent);
                 }
         );
 
@@ -414,7 +414,7 @@ public class SingleContactActivity extends BaldActivity {
     }
 
     private void loadPhoto(String uriToLoad) {
-        if (S.isValidContextForGlide(contact_image.getContext()))
+        if (AppUtils.isValidContextForGlide(contact_image.getContext()))
             Glide.with(contact_image).load(uriToLoad).into(contact_image);
     }
 

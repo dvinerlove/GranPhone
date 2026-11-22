@@ -28,8 +28,8 @@ import com.bald.uriah.baldphone.activities.HomeScreenActivity;
 import com.bald.uriah.baldphone.activities.pills.PillsActivity;
 import com.bald.uriah.baldphone.broadcast_receivers.ReminderReceiver;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import org.joda.time.DateTime;
 import org.joda.time.MutableDateTime;
@@ -42,7 +42,7 @@ import java.util.List;
 public class ReminderScheduler {
     private static final String TAG = ReminderScheduler.class.getSimpleName();
     public static final Object LOCK = new Object();
-    public static final int SNOOZE_MILLIS = 5 * D.MINUTE;
+    public static final int SNOOZE_MILLIS = 5 * Const.MINUTE;
 
     /**
      * helper class should not be instantiate
@@ -127,8 +127,8 @@ public class ReminderScheduler {
 
         {   //find next day
             for (int i = baldDay << 1; i != baldDay; i <<= 1) {
-                if (i > D.Days.SATURDAY)
-                    i = D.Days.SUNDAY;
+                if (i > Const.Days.SATURDAY)
+                    i = Const.Days.SUNDAY;
 
                 if ((days & i) == i) {
                     selectedBaldDay = i;
@@ -184,9 +184,9 @@ public class ReminderScheduler {
     }
 
     public static void reStartReminders(final Context context) {
-        S.logImportant("reStartReminders was called!");
+        AppUtils.logImportant("reStartReminders was called!");
         synchronized (LOCK) {
-            S.logImportant("reStartReminders was started!");
+            AppUtils.logImportant("reStartReminders was started!");
             final List<Reminder> alarmList =
                     RemindersDatabase.getInstance(context)
                             .remindersDatabaseDao().getAllReminders();
@@ -195,7 +195,7 @@ public class ReminderScheduler {
                 ReminderScheduler.cancelReminder(alarm.getId(), context);
                 ReminderScheduler.scheduleReminder(alarm, context);
             }
-            S.logImportant("reStartReminders has finished!");
+            AppUtils.logImportant("reStartReminders has finished!");
         }
     }
 }

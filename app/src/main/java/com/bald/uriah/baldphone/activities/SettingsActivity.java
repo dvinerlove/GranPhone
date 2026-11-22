@@ -58,15 +58,15 @@ import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.alarms.AlarmScreenActivity;
 import com.bald.uriah.baldphone.activities.pills.PillTimeSetterActivity;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.KioskManager;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
@@ -118,7 +118,7 @@ public class SettingsActivity extends BaldActivity {
         if (!checkPermissions(this, requiredPermissions()))
             return;
         setContentView(R.layout.activity_settings);
-        sharedPreferences = getSharedPreferences(D.BALD_PREFS, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(Const.BALD_PREFS, MODE_PRIVATE);
         baldPrefsUtils = BaldPrefsUtils.newInstance(this);
         editor = sharedPreferences.edit();
 
@@ -155,17 +155,17 @@ public class SettingsActivity extends BaldActivity {
     private void showKioskDialog() {
         final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
         if (!KioskManager.isDeviceOwner(this)) {
-            BDB.from(this)
+            DialogBuilder.from(this)
                     .setTitle(R.string.kiosk_mode)
                     .setSubText(R.string.kiosk_not_device_owner_subtext)
-                    .addFlag(BDialog.FLAG_OK)
+                    .addFlag(DialogFlags.FLAG_OK)
                     .show();
         } else if (!KioskManager.isEnabled(this)) {
-            BDB.from(this)
+            DialogBuilder.from(this)
                     .setTitle(R.string.kiosk_mode)
                     .setSubText(R.string.kiosk_enable_subtext)
                     .setInputType(pinInputType)
-                    .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                     .setPositiveButtonListener(params -> {
                         final String pin = String.valueOf(params[0]).trim();
                         if (pin.length() < KioskManager.MIN_PIN_LENGTH || !android.text.TextUtils.isDigitsOnly(pin)) {
@@ -179,11 +179,11 @@ public class SettingsActivity extends BaldActivity {
                     })
                     .show();
         } else {
-            BDB.from(this)
+            DialogBuilder.from(this)
                     .setTitle(R.string.kiosk_mode)
                     .setSubText(R.string.kiosk_disable_subtext)
                     .setInputType(pinInputType)
-                    .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                     .setPositiveButtonListener(params -> {
                         if (!KioskManager.checkPin(this, String.valueOf(params[0]).trim())) {
                             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();
@@ -233,10 +233,10 @@ public class SettingsActivity extends BaldActivity {
 
         mainCategory.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));
         if (KioskManager.isDeviceOwner(this) && !KioskManager.isEnabled(this))
-            mainCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> BDB.from(this)
+            mainCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogBuilder.from(this)
                     .setTitle(R.string.remove_device_owner)
                     .setSubText(R.string.remove_device_owner_subtext)
-                    .addFlag(BDialog.FLAG_YES | BDialog.FLAG_NO)
+                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_NO)
                     .setPositiveButtonListener(params -> {
                         KioskManager.removeDeviceOwner(this);
                         this.recreate();
@@ -256,8 +256,8 @@ public class SettingsActivity extends BaldActivity {
 
         accessibilityCategory.add(new RunnableSettingsItem(R.string.accessibility_level, v -> startActivity(new Intent(this, AccessibilityLevelChangerActivity.class)), R.drawable.accessibility_on_button));
         accessibilityCategory.add(
-                new BDBSettingsItem(R.string.accidental_touches, BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL).setTitle(R.string.accidental_touches)
+                new BDBSettingsItem(R.string.accidental_touches, DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL).setTitle(R.string.accidental_touches)
                         .setSubText(R.string.accidental_touches_settings_subtext)
                         .setOptions(R.string.on, R.string.off)
                         .setPositiveButtonListener(params -> {
@@ -268,8 +268,8 @@ public class SettingsActivity extends BaldActivity {
                         .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE) ? 0 : 1), R.drawable.blocked_on_button));
         accessibilityCategory.add(
                 new BDBSettingsItem(R.string.strong_hand,
-                        BDB.from(this)
-                                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                        DialogBuilder.from(this)
+                                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                                 .setTitle(R.string.strong_hand)
                                 .setSubText(R.string.strong_hand_subtext)
                                 .setOptions(R.string.left_handed, R.string.right_handed)
@@ -282,8 +282,8 @@ public class SettingsActivity extends BaldActivity {
                 )
         );
         final SettingsItem themeSettingsItem = new BDBSettingsItem(R.string.theme_settings,
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                         .setTitle(R.string.theme_settings)
                         .setSubText(R.string.theme_settings_subtext)
                         .setOptions(R.string.light, R.string.adaptive, R.string.dark)
@@ -298,8 +298,8 @@ public class SettingsActivity extends BaldActivity {
         displayCategory.add(themeSettingsItem);
 
         personalizationCategory.add(new BDBSettingsItem(R.string.status_bar_settings,
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                         .setTitle(R.string.status_bar_settings)
                         .setSubText(R.string.status_bar_settings_subtext)
                         .setOptions(R.string.nowhere, R.string.only_home_screen, R.string.everywhere)
@@ -313,8 +313,8 @@ public class SettingsActivity extends BaldActivity {
         ));
 
         personalizationCategory.add(new BDBSettingsItem(R.string.notes_settings,
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                         .setTitle(R.string.notes_settings)
                         .setSubText(R.string.notes_settings_subtext)
                         .setOptions(R.string.yes, R.string.no)
@@ -327,8 +327,8 @@ public class SettingsActivity extends BaldActivity {
                 R.drawable.note_on_button
         ));
         personalizationCategory.add(new BDBSettingsItem(R.string.dialer_sounds,
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                         .setTitle(R.string.dialer_sounds)
                         .setSubText(R.string.dialer_sounds_subtext)
                         .setOptions(R.string.yes, R.string.no)
@@ -341,8 +341,8 @@ public class SettingsActivity extends BaldActivity {
                 R.drawable.phone_on_button
         ));
         personalizationCategory.add(new BDBSettingsItem(R.string.dual_sim,
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                         .setTitle(R.string.dual_sim)
                         .setSubText(R.string.dual_sim_subtext)
                         .setOptions(R.string.show_options, R.string.use_default)
@@ -356,8 +356,8 @@ public class SettingsActivity extends BaldActivity {
         ));
         personalizationCategory.add(
                 new BDBSettingsItem(R.string.apps_sort_method,
-                        BDB.from(this)
-                                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL).setTitle(R.string.apps_sort_method)
+                        DialogBuilder.from(this)
+                                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL).setTitle(R.string.apps_sort_method)
                                 .setSubText(R.string.apps_sort_method_subtext)
                                 .setOptions(R.string.one_grid, R.string.groups)
                                 .setPositiveButtonListener(params -> {
@@ -370,8 +370,8 @@ public class SettingsActivity extends BaldActivity {
 
         personalizationCategory.add(
                 new BDBSettingsItem(R.string.colorful,
-                        BDB.from(this)
-                                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL).setTitle(R.string.apps_sort_method)
+                        DialogBuilder.from(this)
+                                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL).setTitle(R.string.apps_sort_method)
                                 .setSubText(R.string.colorful_subtext)
                                 .setOptions(R.string.yes, R.string.no)
                                 .setPositiveButtonListener(params -> {
@@ -383,8 +383,8 @@ public class SettingsActivity extends BaldActivity {
                         R.drawable.colors_on_button));
 
         personalizationCategory.add(new BDBSettingsItem(R.string.low_battery_alert,
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                         .setTitle(R.string.low_battery_alert)
                         .setSubText(R.string.low_battery_alert_subtext)
                         .setOptions(R.string.yes, R.string.no)
@@ -424,8 +424,8 @@ public class SettingsActivity extends BaldActivity {
 
         mainCategory.add(
                 new BDBSettingsItem(R.string.device_memory,
-                        BDB.from(this)
-                                .addFlag(BDialog.FLAG_OK)
+                        DialogBuilder.from(this)
+                                .addFlag(DialogFlags.FLAG_OK)
                                 .setTitle(R.string.device_memory)
                                 .setSubText(R.string.device_memory_subtext)
                                 .setPositiveButtonListener(params -> true)
@@ -458,7 +458,7 @@ public class SettingsActivity extends BaldActivity {
         if (currentCategory == mainCategory)
             return false;
         if (vibrator != null)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
 
         newCategory(mainCategory);
         return true;
@@ -520,7 +520,7 @@ public class SettingsActivity extends BaldActivity {
                 ringtone = AlarmScreenActivity.getRingtone(SettingsActivity.this);
                 if (ringtone != null)
                     ringtone.play();
-                handler.postDelayed(closeRingtone, 4 * D.SECOND);
+                handler.postDelayed(closeRingtone, 4 * Const.SECOND);
 
             }
 
@@ -533,8 +533,8 @@ public class SettingsActivity extends BaldActivity {
         });
 
         final SettingsItem alarmVolumeSettingsItem = new BDBSettingsItem(R.string.alarm_volume,
-                BDB.from(this)
-                        .addFlag(BDialog.FLAG_OK)
+                DialogBuilder.from(this)
+                        .addFlag(DialogFlags.FLAG_OK)
                         .setTitle(R.string.alarm_volume)
                         .setSubText(R.string.alarm_volume_subtext)
                         .setPositiveButtonListener(params -> true)
@@ -608,9 +608,9 @@ public class SettingsActivity extends BaldActivity {
     }
 
     public class BDBSettingsItem extends SettingsItem {
-        private final BDB bdb;
+        private final DialogBuilder bdb;
 
-        BDBSettingsItem(@StringRes int textResId, BDB bdb, @DrawableRes int drawableResId) {
+        BDBSettingsItem(@StringRes int textResId, DialogBuilder bdb, @DrawableRes int drawableResId) {
             super(textResId, drawableResId);
             this.bdb = bdb;
         }

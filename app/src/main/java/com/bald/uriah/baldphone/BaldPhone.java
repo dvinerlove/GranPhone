@@ -26,7 +26,7 @@ import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
 import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.BaldUncaughtExceptionHandler;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -36,7 +36,7 @@ public class BaldPhone extends Application {
 
     @Override
     public void onCreate() {
-        S.logImportant("GranPhone was started!");
+        AppUtils.logImportant("GranPhone was started!");
         super.onCreate();
         JodaTimeAndroid.init(this);
         AlarmScheduler.reStartAlarms(this);

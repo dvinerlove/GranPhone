@@ -37,7 +37,7 @@ import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.databases.reminders.RemindersDatabase;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.views.BaldButton;
 import com.bald.uriah.baldphone.views.BaldMultipleSelection;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
@@ -98,11 +98,11 @@ public class AddPillActivity extends BaldActivity {
                 reminder_edit_name.setText(reminder.getTextualContent());
 
             final int alarmDays = reminder.getDays();
-            if (alarmDays == D.Days.ALL)
+            if (alarmDays == Const.Days.ALL)
                 every_day.setChecked(true);
             else {
                 for (int i = 0; i < daysCheckBoxes.length; i++) {
-                    daysCheckBoxes[i].setChecked((alarmDays | (D.Days.SUNDAY << i)) == alarmDays);
+                    daysCheckBoxes[i].setChecked((alarmDays | (Const.Days.SUNDAY << i)) == alarmDays);
                 }
             }
 
@@ -146,9 +146,9 @@ public class AddPillActivity extends BaldActivity {
 
         if (!every_day.isChecked()) {
             for (int i = 0; i < daysCheckBoxes.length; i++)
-                sum |= daysCheckBoxes[i].isChecked() ? D.Days.SUNDAY << i : 0;
+                sum |= daysCheckBoxes[i].isChecked() ? Const.Days.SUNDAY << i : 0;
         } else
-            sum = D.Days.ALL;
+            sum = Const.Days.ALL;
 
         if (sum == 0) {
             BaldToast.from(this).setType(TYPE_ERROR).setText(R.string.at_least_one_day_must_be_selected).show();
@@ -189,7 +189,7 @@ public class AddPillActivity extends BaldActivity {
         bt_submit.setOnClickListener((v) -> submit2());
 
         every_day.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (vibrator != null) vibrator.vibrate(D.vibetime);
+            if (vibrator != null) vibrator.vibrate(Const.vibetime);
             if (isChecked) {
                 for (CheckBox checkBox : daysCheckBoxes) {
                     checkBox.setChecked(false);
@@ -206,7 +206,7 @@ public class AddPillActivity extends BaldActivity {
 
         for (final CheckBox checkBox : daysCheckBoxes) {
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (vibrator != null) vibrator.vibrate(D.vibetime);
+                if (vibrator != null) vibrator.vibrate(Const.vibetime);
                 if (isChecked)
                     every_day.setChecked(false);
                 else {
@@ -225,7 +225,7 @@ public class AddPillActivity extends BaldActivity {
                 }
             });
             checkBox.setOnLongClickListener(v -> {
-                if (vibrator != null) vibrator.vibrate(D.vibetime);
+                if (vibrator != null) vibrator.vibrate(Const.vibetime);
                 checkBox.setChecked(!checkBox.isChecked());
                 return true;
             });

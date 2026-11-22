@@ -38,7 +38,7 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.adapters.BaldViewAdapter;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ViewPagerHolder;
 
@@ -98,7 +98,7 @@ public abstract class SingleMediaActivity extends BaldActivity {
         delete.setOnClickListener((v) ->
                 mediaPagerAdapter.delete(viewPagerHolder.getPageIndex()));
         share.setOnClickListener((v) ->
-                S.share(this, mediaPagerAdapter.share(viewPagerHolder.getPageIndex())));
+                AppUtils.share(this, mediaPagerAdapter.share(viewPagerHolder.getPageIndex())));
         more.setOnClickListener((more) -> {
             more.setVisibility(View.GONE);
             optionsBar.setVisibility(View.VISIBLE);
@@ -140,7 +140,7 @@ public abstract class SingleMediaActivity extends BaldActivity {
                     activity.setResult(SHOULD_REFRESH);
                     activity.finish();
                 } catch (RecoverableSecurityException e) {
-                    Log.e(TAG, S.str(e.getMessage()));
+                    Log.e(TAG, AppUtils.str(e.getMessage()));
                     e.printStackTrace();
                     try {
                         activity.startIntentSenderForResult(
@@ -151,13 +151,13 @@ public abstract class SingleMediaActivity extends BaldActivity {
                                 0,
                                 0);
                     } catch (IntentSender.SendIntentException ex) {
-                        Log.e(TAG, S.str(ex.getMessage()));
+                        Log.e(TAG, AppUtils.str(ex.getMessage()));
                         ex.printStackTrace();
                         BaldToast.error(activity);
                     }
                 }
             } else {
-                S.showAreYouSureYouWantToDelete(String.valueOf(activity.title()), activity, () -> {
+                AppUtils.showAreYouSureYouWantToDelete(String.valueOf(activity.title()), activity, () -> {
                     cursor.moveToPosition(position);
                     delete(activity);
                     activity.setResult(SHOULD_REFRESH);

@@ -43,12 +43,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.FirstRunDefaults;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import java.util.List;
 import java.util.Locale;
@@ -91,7 +91,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setTheme(S.getTheme(this));
+        setTheme(AppUtils.getTheme(this));
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
@@ -250,11 +250,11 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
             final PhoneAccount account = telecomManager == null ? null : telecomManager.getPhoneAccount(handles.get(i));
             names[i] = account != null && !TextUtils.isEmpty(account.getLabel()) ? account.getLabel() : "SIM " + (i + 1);
         }
-        BDB.from(this)
+        DialogBuilder.from(this)
                 .setTitle(R.string.choose_sim)
                 .setSubText(R.string.choose_sim_subtext)
                 .setOptions(names)
-                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL | BDialog.FLAG_NOT_CANCELABLE)
+                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL | DialogFlags.FLAG_NOT_CANCELABLE)
                 .setPositiveButtonListener(params -> {
                     call.phoneAccountSelected(finalHandles.get((Integer) params[0]), false);
                     return true;

@@ -28,7 +28,7 @@ import androidx.annotation.Nullable;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 /**
  * Simple Button, extends {@link androidx.appcompat.widget.AppCompatTextView}; adapted to App settings.
@@ -45,7 +45,7 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
 
     public BaldFrameLayoutButton(Context context) {
         super(context);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.longPresses = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE);
         this.longPressesShorter = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
@@ -55,7 +55,7 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
             if (longPressesShorter) {
                 baldButtonTouchListener = new BaldButtonTouchListener(this);
                 super.setOnTouchListener(baldButtonTouchListener);
-                super.setOnClickListener(D.EMPTY_CLICK_LISTENER);
+                super.setOnClickListener(Const.EMPTY_CLICK_LISTENER);
             } else {
                 super.setOnLongClickListener(this);
                 super.setOnClickListener(this);
@@ -67,7 +67,7 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
 
     public BaldFrameLayoutButton(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.longPresses = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE);
         this.longPressesShorter = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
@@ -77,7 +77,7 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
             if (longPressesShorter) {
                 baldButtonTouchListener = new BaldButtonTouchListener(this);
                 super.setOnTouchListener(baldButtonTouchListener);
-                super.setOnClickListener(D.EMPTY_CLICK_LISTENER);
+                super.setOnClickListener(Const.EMPTY_CLICK_LISTENER);
             } else {
                 super.setOnLongClickListener(this);
                 super.setOnClickListener(this);
@@ -88,7 +88,7 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
 
     public BaldFrameLayoutButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.longPresses = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE);
         this.longPressesShorter = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
@@ -98,7 +98,7 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
             if (longPressesShorter) {
                 baldButtonTouchListener = new BaldButtonTouchListener(this);
                 super.setOnTouchListener(baldButtonTouchListener);
-                super.setOnClickListener(D.EMPTY_CLICK_LISTENER);
+                super.setOnClickListener(Const.EMPTY_CLICK_LISTENER);
             } else {
                 super.setOnLongClickListener(this);
                 super.setOnClickListener(this);
@@ -162,6 +162,6 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
     @Override
     public void vibrate() {
         if (vibrationFeedback)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
     }
 }

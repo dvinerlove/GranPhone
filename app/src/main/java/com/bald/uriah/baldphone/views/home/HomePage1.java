@@ -57,12 +57,12 @@ import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.FirstPageAppIcon;
 
 import java.util.HashSet;
@@ -94,7 +94,7 @@ public class HomePage1 extends HomeView {
         public void onReceive(Context context, Intent intent) {
             final Set<String> packagesSet = new HashSet<>(intent.getStringArrayListExtra("packages"));
             if (!viewsToApps.containsValue(bt_whatsapp))
-                bt_whatsapp.setBadgeVisibility(packagesSet.contains(D.WHATSAPP_PACKAGE_NAME));
+                bt_whatsapp.setBadgeVisibility(packagesSet.contains(Const.WHATSAPP_PACKAGE_NAME));
             if (!viewsToApps.containsValue(bt_recent))
                 bt_recent.setBadgeVisibility(!CallLogsHelper.isAllReadSafe(getContext().getContentResolver()));
             if (!viewsToApps.containsValue(bt_messages))
@@ -225,7 +225,7 @@ public class HomePage1 extends HomeView {
                                         , 0)
                                 .iterator()
                                 .next();
-                S.startComponentName(homeScreen, new ComponentName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name));
+                AppUtils.startComponentName(homeScreen, new ComponentName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name));
 
             } catch (Exception e) {
                 BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
@@ -296,7 +296,7 @@ public class HomePage1 extends HomeView {
         if (homeScreen != null) {
             if (app == null) {
                 if (phone) {
-                    bt.setOnClickListener(v -> activity.startActivity(S.getPhoneIntent(activity)));
+                    bt.setOnClickListener(v -> activity.startActivity(AppUtils.getPhoneIntent(activity)));
                     bt.setText(R.string.phone);
                     bt.setImageResource(R.drawable.phone_on_button);
                 } else {
@@ -305,7 +305,7 @@ public class HomePage1 extends HomeView {
             } else {
                 bt.setText(app.getLabel());
                 AppsDatabaseHelper.loadPic(app, bt.imageView);
-                bt.setOnClickListener(v -> S.startComponentName(homeScreen, ComponentName.unflattenFromString(app.getFlattenComponentName())));
+                bt.setOnClickListener(v -> AppUtils.startComponentName(homeScreen, ComponentName.unflattenFromString(app.getFlattenComponentName())));
                 viewsToApps.put(app, bt);
             }
         } else {
@@ -320,10 +320,10 @@ public class HomePage1 extends HomeView {
             } else {
                 initialAppName = bt.getText();
             }
-            final BDB bdb = BDB.from(activity)
+            final DialogBuilder bdb = DialogBuilder.from(activity)
                     .setTitle(R.string.custom_app)
                     .setSubText(R.string.custom_app_subtext)
-                    .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                     .setOptions(initialAppName, activity.getText(R.string.custom), activity.getText(R.string.hide))
                     .setOptionsStartingIndex(() -> hidden ? 2 : (sharedPreferences.contains(bPrefsKey) ? 1 : 0))
                     .setPositiveButtonListener(params -> {

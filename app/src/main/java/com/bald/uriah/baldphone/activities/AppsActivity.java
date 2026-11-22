@@ -34,10 +34,10 @@ import com.bald.uriah.baldphone.adapters.AppsRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.apps.App;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -137,17 +137,17 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
         final View view = Objects.requireNonNull(recyclerView.getLayoutManager()).findViewByPosition(index);
         if (view == null)
             return;
-        S.showDropDownPopup(this, recyclerView.getWidth(), new DropDownRecyclerViewAdapter.DropDownListener() {
+        AppUtils.showDropDownPopup(this, recyclerView.getWidth(), new DropDownRecyclerViewAdapter.DropDownListener() {
             @Override
             public void onUpdate(DropDownRecyclerViewAdapter.ViewHolder viewHolder, int position, PopupWindow popupWindow) {
                 switch (position) {
                     case 0:
-                        if (S.isValidContextForGlide(viewHolder.pic.getContext()))
+                        if (AppUtils.isValidContextForGlide(viewHolder.pic.getContext()))
                             AppsDatabaseHelper.loadPic(app, viewHolder.pic);
                         viewHolder.text.setText(R.string.open);
                         viewHolder.itemView.setOnClickListener(v1 -> {
                             final ComponentName componentName = ComponentName.unflattenFromString(app.getFlattenComponentName());
-                            S.startComponentName(AppsActivity.this, componentName);
+                            AppUtils.startComponentName(AppsActivity.this, componentName);
                             popupWindow.dismiss();
                         });
                         break;
@@ -172,10 +172,10 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
                         viewHolder.pic.setImageResource(R.drawable.delete_on_button);
                         viewHolder.text.setText(R.string.uninstall);
                         viewHolder.itemView.setOnClickListener(v1 -> {
-                            BDB.from(AppsActivity.this)
+                            DialogBuilder.from(AppsActivity.this)
                                     .setTitle(String.format("%s %s", getText(R.string.uninstall), app.getLabel()))
                                     .setSubText(String.format(getString(R.string.uninstall_subtext), app.getLabel(), app.getLabel()))
-                                    .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
+                                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
                                     .setPositiveButtonListener(params -> {
                                         uninstallApp(app);
                                         return true;

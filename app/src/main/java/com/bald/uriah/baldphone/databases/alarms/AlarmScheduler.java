@@ -27,8 +27,8 @@ import androidx.annotation.NonNull;
 import com.bald.uriah.baldphone.activities.HomeScreenActivity;
 import com.bald.uriah.baldphone.activities.alarms.AlarmsActivity;
 import com.bald.uriah.baldphone.broadcast_receivers.AlarmReceiver;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import org.joda.time.DateTime;
 import org.joda.time.MutableDateTime;
@@ -41,7 +41,7 @@ import java.util.List;
 public class AlarmScheduler {
     private static final String TAG = AlarmScheduler.class.getSimpleName();
     public static final Object LOCK = new Object();
-    public static final int SNOOZE_MILLIS = 5 * D.MINUTE;
+    public static final int SNOOZE_MILLIS = 5 * Const.MINUTE;
 
     private AlarmScheduler() {
     }
@@ -124,8 +124,8 @@ public class AlarmScheduler {
 
         {   //find next day
             for (int i = baldDay << 1; i != baldDay; i <<= 1) {
-                if (i > D.Days.SATURDAY)
-                    i = D.Days.SUNDAY;
+                if (i > Const.Days.SATURDAY)
+                    i = Const.Days.SUNDAY;
 
                 if ((alarm.getDays() & i) == i) {
                     selectedBaldDay = i;
@@ -149,7 +149,7 @@ public class AlarmScheduler {
 
     public static void scheduleAlarm(@NonNull Alarm alarm, @NonNull Context context) throws IllegalArgumentException {
         synchronized (LOCK) {
-            S.logImportant("Scheduling an alarm!");
+            AppUtils.logImportant("Scheduling an alarm!");
             final AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             final long nextTimeAlarmWillWorkInMs = nextTimeAlarmWillWorkInMs(alarm);
             alarmManager.setAlarmClock(
@@ -182,15 +182,15 @@ public class AlarmScheduler {
     }
 
     public static void reStartAlarms(final Context context) {
-        S.logImportant("reStartAlarms was called!");
+        AppUtils.logImportant("reStartAlarms was called!");
         synchronized (LOCK) {
-            S.logImportant("reStartAlarms was started!");
+            AppUtils.logImportant("reStartAlarms was started!");
             final List<Alarm> alarmList = AlarmsDatabase.getInstance(context).alarmsDatabaseDao().getAllEnabled();
             for (Alarm alarm : alarmList) {
                 AlarmScheduler.cancelAlarm(alarm.getKey(), context);
                 AlarmScheduler.scheduleAlarm(alarm, context);
             }
-            S.logImportant("reStartAlarms has finished!");
+            AppUtils.logImportant("reStartAlarms has finished!");
 
         }
     }

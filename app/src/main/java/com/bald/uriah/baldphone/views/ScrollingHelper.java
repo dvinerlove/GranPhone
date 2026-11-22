@@ -41,7 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -132,7 +132,7 @@ public class ScrollingHelper extends ConstraintLayout {
         this.layoutInflater = LayoutInflater.from(context);
 
         //if touch is hard
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         gone = sharedPreferences.getBoolean(BPrefs.TOUCH_NOT_HARD_KEY, false);
 
         SCROLL_CONST = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, SCROLL_CONST_IN_DP, getResources().getDisplayMetrics());
@@ -330,7 +330,7 @@ public class ScrollingHelper extends ConstraintLayout {
                 }
             };
 
-        final OnClickListener onClickListener = D.EMPTY_CLICK_LISTENER;
+        final OnClickListener onClickListener = Const.EMPTY_CLICK_LISTENER;
 
         if (whereBar == RIGHT || whereBar == LEFT) {
             LinearLayout container;

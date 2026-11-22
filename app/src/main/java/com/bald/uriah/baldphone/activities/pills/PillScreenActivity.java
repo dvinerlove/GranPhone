@@ -38,8 +38,8 @@ import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.databases.reminders.RemindersDatabase;
 import com.bald.uriah.baldphone.utils.Animations;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 public class PillScreenActivity extends TimedBaldActivity {
     private static final String TAG = PillScreenActivity.class.getSimpleName();
@@ -54,7 +54,7 @@ public class PillScreenActivity extends TimedBaldActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        S.logImportant("reminderScreen was called!");
+        AppUtils.logImportant("reminderScreen was called!");
         setContentView(R.layout.reminder_screen);
 
         attachXml();
@@ -65,7 +65,7 @@ public class PillScreenActivity extends TimedBaldActivity {
         if (key == -1) throw new AssertionError();
         reminder = RemindersDatabase.getInstance(this).remindersDatabaseDao().getById(key);
         if (reminder == null) {
-            S.logImportant("reminder == null!, returning");
+            AppUtils.logImportant("reminder == null!, returning");
             return;
         }
 
@@ -82,12 +82,12 @@ public class PillScreenActivity extends TimedBaldActivity {
 
         took.setOnClickListener(v -> {
             if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
+                vibrator.vibrate(Const.vibetime);
             finish();
         });
         took.setOnLongClickListener(v -> {
             if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
+                vibrator.vibrate(Const.vibetime);
             finish();
             return true;
         });
@@ -142,7 +142,7 @@ public class PillScreenActivity extends TimedBaldActivity {
 
     private void snooze() {
         if (vibrator != null)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
         ReminderScheduler.scheduleSnooze(reminder, this);
         finish();
     }
@@ -159,7 +159,7 @@ public class PillScreenActivity extends TimedBaldActivity {
 
     @Override
     protected int screenTimeout() {
-        return D.MINUTE * 2;
+        return Const.MINUTE * 2;
     }
 
     @Override

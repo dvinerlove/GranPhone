@@ -38,7 +38,7 @@ import com.bald.uriah.baldphone.activities.contacts.ContactsActivity;
 import com.bald.uriah.baldphone.activities.media.PhotosActivity;
 import com.bald.uriah.baldphone.activities.media.VideosActivity;
 import com.bald.uriah.baldphone.activities.pills.PillsActivity;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -122,9 +122,9 @@ public class AppsDatabaseHelper {
                     app.setLabel(String.valueOf(activityInfo.loadLabel(packageManager)));
                     final Drawable drawable = activityInfo.loadIcon(packageManager);
                     if (drawable instanceof BitmapDrawable)
-                        app.setIcon(S.bitmapToByteArray(((BitmapDrawable) drawable).getBitmap()));
+                        app.setIcon(AppUtils.bitmapToByteArray(((BitmapDrawable) drawable).getBitmap()));
                     else
-                        app.setIcon(S.bitmapToByteArray(S.getBitmapFromDrawable(drawable)));
+                        app.setIcon(AppUtils.bitmapToByteArray(AppUtils.getBitmapFromDrawable(drawable)));
 
                 } catch (PackageManager.NameNotFoundException e) {
                     Log.e(TAG, e.getMessage());
@@ -161,6 +161,6 @@ public class AppsDatabaseHelper {
         if (app.getFlattenComponentName().startsWith(baldComponentNameBeginning))
             imageView.setImageResource(AppsDatabaseHelper.baldComponentNames.get(app.getFlattenComponentName()));
         else
-            Glide.with(imageView).load(S.byteArrayToBitmap(app.getIcon())).into(imageView);
+            Glide.with(imageView).load(AppUtils.byteArrayToBitmap(app.getIcon())).into(imageView);
     }
 }

@@ -100,10 +100,10 @@ public class UpdatingUtil {
                             try {
                                 final BaldUpdateObject baldUpdateObject = BaldUpdateObject.parseMessage(response);
                                 if (updatePending(baldUpdateObject)) {
-                                    BDB.from(activity)
+                                    DialogBuilder.from(activity)
                                             .setTitle(R.string.pending_update)
                                             .setSubText(R.string.a_new_update_is_available)
-                                            .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                                            .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                                             .setPositiveButtonListener(params -> {
                                                 activity.startActivity(
                                                         new Intent(activity, UpdatesActivity.class)
@@ -128,7 +128,7 @@ public class UpdatingUtil {
                             } catch (JSONException e) {
                                 if (retAnswer) {
                                     BaldToast.from(activity).setType(BaldToast.TYPE_ERROR).setText(R.string.update_message_is_corrupted).show();
-                                    BaldToast.from(activity).setType(BaldToast.TYPE_ERROR).setText(S.str(e.getMessage())).show();
+                                    BaldToast.from(activity).setType(BaldToast.TYPE_ERROR).setText(AppUtils.str(e.getMessage())).show();
                                 }
                             }
                             lifecycle.removeObserver(observer);

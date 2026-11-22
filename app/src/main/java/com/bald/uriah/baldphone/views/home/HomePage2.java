@@ -36,7 +36,7 @@ import com.bald.uriah.baldphone.activities.SettingsActivity;
 import com.bald.uriah.baldphone.activities.VideoTutorialsActivity;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -120,14 +120,14 @@ public class HomePage2 extends HomeView {
         }
 
         if (resolveInfos.size() > 1) {
-            bt.setOnClickListener(v -> S.showDropDownPopup(
+            bt.setOnClickListener(v -> AppUtils.showDropDownPopup(
                     homeScreen,
                     getWidth(),
                     new DropDownRecyclerViewAdapter.DropDownListener() {
                         @Override
                         public void onUpdate(DropDownRecyclerViewAdapter.ViewHolder viewHolder, int position, PopupWindow popupWindow) {
                             final ResolveInfo resolveInfo = resolveInfos.get(position);
-                            if (S.isValidContextForGlide(viewHolder.pic.getContext()))
+                            if (AppUtils.isValidContextForGlide(viewHolder.pic.getContext()))
                                 Glide.with(viewHolder.pic)
                                         .load(resolveInfo.loadIcon(packageManager))
                                         .into(viewHolder.pic);
@@ -146,7 +146,7 @@ public class HomePage2 extends HomeView {
                     }, bt));
         } else if (resolveInfos.size() == 1) {
             final ResolveInfo resolveInfo = resolveInfos.get(0);
-            if (S.isValidContextForGlide(iv.getContext()))
+            if (AppUtils.isValidContextForGlide(iv.getContext()))
                 Glide.with(iv)
                         .load(resolveInfo.loadIcon(packageManager))
                         .into(iv);

@@ -24,7 +24,7 @@ import android.widget.FrameLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 @SuppressLint("ViewConstructor")
 public class KeyboardPicker extends FrameLayout {
@@ -32,7 +32,7 @@ public class KeyboardPicker extends FrameLayout {
 
     public KeyboardPicker(BaldInputMethodService baldInputMethodService) {
         super(baldInputMethodService);
-        final ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(baldInputMethodService, S.getTheme(baldInputMethodService));
+        final ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(baldInputMethodService, AppUtils.getTheme(baldInputMethodService));
         final ConstraintLayout picker = (ConstraintLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.keyboard_language_picker, this, false);
         picker.findViewById(R.id.bt_hebrew).setOnClickListener(v -> baldInputMethodService.changeLanguage(HebrewKeyboard.LANGUAGE_ID));
         picker.findViewById(R.id.bt_english).setOnClickListener(v -> baldInputMethodService.changeLanguage(EnglishKeyboard.LANGUAGE_ID));

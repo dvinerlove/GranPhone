@@ -43,11 +43,11 @@ import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.activities.HomeScreenActivity;
 import com.bald.uriah.baldphone.activities.media.PhotosActivity;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldImageButton;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bumptech.glide.Glide;
@@ -175,7 +175,7 @@ public class AddContactActivity extends BaldActivity {
         et_mail.setText(currentContact.getMail());
 
         if (currentContact.getPhoto() != null) {
-            if (S.isValidContextForGlide(iv_image.getContext()))
+            if (AppUtils.isValidContextForGlide(iv_image.getContext()))
                 Glide.with(iv_image).load(Uri.parse(currentContact.getPhoto())).into(iv_image);
             iv_delete.setVisibility(View.VISIBLE);
         }
@@ -417,7 +417,7 @@ public class AddContactActivity extends BaldActivity {
     }
 
     private void setImage(Uri uri) {
-        if (S.isValidContextForGlide(iv_image.getContext()))
+        if (AppUtils.isValidContextForGlide(iv_image.getContext()))
             Glide.with(iv_image).load(uri).into(iv_image);
         newPhoto = uri.toString();
         iv_delete.setVisibility(View.VISIBLE);
@@ -436,26 +436,26 @@ public class AddContactActivity extends BaldActivity {
             super.onBackPressed();
         else {
             if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
+                vibrator.vibrate(Const.vibetime);
             showExitMessage();
         }
     }
 
     private boolean safeToExit() {
-        final String mobile_number = S.str(et_mobile_number.getText().toString());
-        final String home_number = S.str(et_home_number.getText().toString());
-        final String address = S.str(et_address.getText().toString());
-        final String name = S.str(et_name.getText().toString());
-        final String mail = S.str(et_mail.getText().toString());
+        final String mobile_number = AppUtils.str(et_mobile_number.getText().toString());
+        final String home_number = AppUtils.str(et_home_number.getText().toString());
+        final String address = AppUtils.str(et_address.getText().toString());
+        final String name = AppUtils.str(et_name.getText().toString());
+        final String mail = AppUtils.str(et_mail.getText().toString());
 
         if (currentContact == null)
             return mobile_number == home_number && address == name && mail == mobile_number; // check all of them are empty
 
-        final String _mobile_number = S.str(currentContact.getMobilePhone());
-        final String _home_number = S.str(currentContact.getHomePhone());
-        final String _address = S.str(currentContact.getAddress());
-        final String _name = S.str(currentContact.getName());
-        final String _mail = S.str(currentContact.getMail());
+        final String _mobile_number = AppUtils.str(currentContact.getMobilePhone());
+        final String _home_number = AppUtils.str(currentContact.getHomePhone());
+        final String _address = AppUtils.str(currentContact.getAddress());
+        final String _name = AppUtils.str(currentContact.getName());
+        final String _mail = AppUtils.str(currentContact.getMail());
 
         return (et_mobile_number.length() == 0 && et_home_number.length() == 0 && et_address.length() == 0 && et_name.length() == 0 && et_mail.length() == 0)
                 || (Objects.equals(newPhoto, currentContact.getPhoto())
@@ -467,8 +467,8 @@ public class AddContactActivity extends BaldActivity {
     }
 
     private void showExitMessage() {
-        BDB.from(this)
-                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+        DialogBuilder.from(this)
+                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                 .setSubText(R.string.do_you_want_to_save_your_changes)
                 .setOptions(R.string.save, R.string.discard)
                 .setPositiveButtonListener(params -> {

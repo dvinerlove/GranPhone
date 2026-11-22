@@ -42,7 +42,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 
@@ -177,7 +177,7 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
             if (timeStamp == 0L) {
                 time_stamp.setText("");
             } else {
-                time_stamp.setText(S.stringTimeFromLong(context, timeStamp, true));
+                time_stamp.setText(AppUtils.stringTimeFromLong(context, timeStamp, true));
             }
             final PendingIntent pendingIntent = item.getParcelable("content_intent");
             if (pendingIntent != null) {
@@ -186,7 +186,7 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                         pendingIntent.send();
                     } catch (Exception e) {
                         BaldToast.from(context).setText(R.string.an_error_has_occurred).setType(BaldToast.TYPE_ERROR).show();
-                        Log.e(TAG, S.str(e.getMessage()));
+                        Log.e(TAG, AppUtils.str(e.getMessage()));
                         e.printStackTrace();
                     }
                 });

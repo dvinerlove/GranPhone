@@ -26,9 +26,9 @@ import androidx.annotation.StringRes;
 import com.bald.uriah.baldphone.activities.BaldActivity;
 
 /**
- * Builder for {@link BDialog}
+ * Builder for {@link DialogFlags}
  */
-public class BDB {
+public class DialogBuilder {
     public Context context;
 
     @NonNull
@@ -36,10 +36,10 @@ public class BDB {
     CharSequence subText;
     CharSequence[] options;
     int inputType;
-    BDialog.DialogBoxListener positiveButtonListener = BDialog.DialogBoxListener.EMPTY;
-    BDialog.DialogBoxListener negativeButtonListener = BDialog.DialogBoxListener.EMPTY;
+    DialogFlags.DialogBoxListener positiveButtonListener = DialogFlags.DialogBoxListener.EMPTY;
+    DialogFlags.DialogBoxListener negativeButtonListener = DialogFlags.DialogBoxListener.EMPTY;
     @NonNull
-    BDialog.StartingIndexChooser startingIndexChooser = () -> 0;
+    DialogFlags.StartingIndexChooser startingIndexChooser = () -> 0;
     @Nullable
     BaldActivity baldActivityToAutoDismiss;
     @Nullable
@@ -50,11 +50,11 @@ public class BDB {
     CharSequence positiveCustomText;
     int flags;
 
-    private BDB() {
+    private DialogBuilder() {
     }
 
-    public static BDB from(@Nullable Context context) {
-        BDB bdb = new BDB();
+    public static DialogBuilder from(@Nullable Context context) {
+        DialogBuilder bdb = new DialogBuilder();
         bdb.context = context;
         if (context instanceof BaldActivity) {
             bdb.baldActivityToAutoDismiss = (BaldActivity) context;
@@ -62,31 +62,31 @@ public class BDB {
         return bdb;
     }
 
-    public BDB setTitle(CharSequence title) {
+    public DialogBuilder setTitle(CharSequence title) {
         this.title = title;
         return this;
     }
 
-    public BDB setTitle(@StringRes int titleId) {
+    public DialogBuilder setTitle(@StringRes int titleId) {
         return setTitle(context.getText(titleId));
     }
 
-    public BDB setSubText(CharSequence subText) {
+    public DialogBuilder setSubText(CharSequence subText) {
         this.subText = subText;
         return this;
     }
 
-    public BDB setSubText(@StringRes int subTextId) {
+    public DialogBuilder setSubText(@StringRes int subTextId) {
         return setSubText(context.getText(subTextId));
     }
 
-    public BDB setOptions(CharSequence... options) {
-        flags |= BDialog.FLAG_OPTIONS;
+    public DialogBuilder setOptions(CharSequence... options) {
+        flags |= DialogFlags.FLAG_OPTIONS;
         this.options = options;
         return this;
     }
 
-    public BDB setOptions(@StringRes int... options) {
+    public DialogBuilder setOptions(@StringRes int... options) {
         final CharSequence[] charSequences = new CharSequence[options.length];
         for (int i = 0; i < options.length; i++)
             charSequences[i] = context.getText(options[i]);
@@ -94,52 +94,52 @@ public class BDB {
         return setOptions(charSequences);
     }
 
-    public BDB setPositiveButtonListener(@Nullable BDialog.DialogBoxListener dialogBoxListener) {
+    public DialogBuilder setPositiveButtonListener(@Nullable DialogFlags.DialogBoxListener dialogBoxListener) {
         this.positiveButtonListener = dialogBoxListener;
-        return addFlag(BDialog.FLAG_POSITIVE);
+        return addFlag(DialogFlags.FLAG_POSITIVE);
     }
 
-    public BDB setNegativeButtonListener(@Nullable BDialog.DialogBoxListener dialogBoxListener) {
+    public DialogBuilder setNegativeButtonListener(@Nullable DialogFlags.DialogBoxListener dialogBoxListener) {
         this.negativeButtonListener = dialogBoxListener;
-        return addFlag(BDialog.FLAG_NEGATIVE);
+        return addFlag(DialogFlags.FLAG_NEGATIVE);
     }
 
-    public BDB setInputType(int inputType) {
+    public DialogBuilder setInputType(int inputType) {
         this.inputType = inputType;
-        return addFlag(BDialog.FLAG_INPUT);
+        return addFlag(DialogFlags.FLAG_INPUT);
     }
 
-    public BDB setOptionsStartingIndex(BDialog.StartingIndexChooser startingIndexChooser) {
+    public DialogBuilder setOptionsStartingIndex(DialogFlags.StartingIndexChooser startingIndexChooser) {
         this.startingIndexChooser = startingIndexChooser;
         return this;
     }
 
-    public BDB setExtraView(@Nullable View extraView) {
+    public DialogBuilder setExtraView(@Nullable View extraView) {
         this.extraView = extraView;
         return this;
     }
 
-    public BDB setBaldActivityToAutoDismiss(BaldActivity baldActivityToAutoDismiss) {
+    public DialogBuilder setBaldActivityToAutoDismiss(BaldActivity baldActivityToAutoDismiss) {
         this.baldActivityToAutoDismiss = baldActivityToAutoDismiss;
         return this;
     }
 
-    public BDB setNegativeCustomText(@Nullable CharSequence negativeCustomText) {
+    public DialogBuilder setNegativeCustomText(@Nullable CharSequence negativeCustomText) {
         this.negativeCustomText = negativeCustomText;
-        return addFlag(BDialog.FLAG_CUSTOM_NEGATIVE);
+        return addFlag(DialogFlags.FLAG_CUSTOM_NEGATIVE);
     }
 
-    public BDB setPositiveCustomText(@Nullable CharSequence positiveCustomText) {
+    public DialogBuilder setPositiveCustomText(@Nullable CharSequence positiveCustomText) {
         this.positiveCustomText = positiveCustomText;
-        return addFlag(BDialog.FLAG_CUSTOM_POSITIVE);
+        return addFlag(DialogFlags.FLAG_CUSTOM_POSITIVE);
     }
 
-    public BDB addFlag(int flags) {
+    public DialogBuilder addFlag(int flags) {
         this.flags |= flags;
         return this;
     }
 
-    public BDialog show() {
-        return BDialog.newInstance(this);
+    public DialogFlags show() {
+        return DialogFlags.newInstance(this);
     }
 }

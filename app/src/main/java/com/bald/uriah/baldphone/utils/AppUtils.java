@@ -71,10 +71,10 @@ import java.util.Locale;
 import java.util.UUID;
 
 /**
- * S - Static. Static methods which are used everywhere in the platform.
+ * AppUtils - Static. Static methods which are used everywhere in the platform.
  */
-public class S {
-    private static final String TAG = S.class.getSimpleName();
+public class AppUtils {
+    private static final String TAG = AppUtils.class.getSimpleName();
     public static final String BALD_IMPORTANT_MESSAGE = "Bald Important Message";
     private static final float DIM_AMOUNT = 0.5f;
     private static final String EMPTY = "";
@@ -88,12 +88,12 @@ public class S {
     }
 
     public static void shareGranPhone(@NonNull final BaldActivity baldActivity) {
-        BDB.from(baldActivity)
+        DialogBuilder.from(baldActivity)
                 .setTitle(R.string.share_GranPhone)
                 .setSubText(R.string.share_granphone_subtext)
-                .addFlag(BDialog.FLAG_YES | BDialog.FLAG_NO)
+                .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_NO)
                 .setPositiveButtonListener(params -> {
-                    S.share(baldActivity, new Intent(Intent.ACTION_SEND)
+                    AppUtils.share(baldActivity, new Intent(Intent.ACTION_SEND)
                             .setType("text/plain")
                             .putExtra(Intent.EXTRA_TEXT, baldActivity.getString(R.string.share_actual_text)));
                     return true;
@@ -115,19 +115,19 @@ public class S {
                 throw new RuntimeException("0 is not defined in a baldday int");
             case -1:
                 throw new RuntimeException("-1 doesn't have a String id");
-            case D.Days.SUNDAY:
+            case Const.Days.SUNDAY:
                 return R.string.sunday;
-            case D.Days.MONDAY:
+            case Const.Days.MONDAY:
                 return R.string.monday;
-            case D.Days.TUESDAY:
+            case Const.Days.TUESDAY:
                 return R.string.tuesday;
-            case D.Days.WEDNESDAY:
+            case Const.Days.WEDNESDAY:
                 return R.string.wednesday;
-            case D.Days.THURSDAY:
+            case Const.Days.THURSDAY:
                 return R.string.thursday;
-            case D.Days.FRIDAY:
+            case Const.Days.FRIDAY:
                 return R.string.friday;
-            case D.Days.SATURDAY:
+            case Const.Days.SATURDAY:
                 return R.string.saturday;
 
         }
@@ -162,7 +162,7 @@ public class S {
 
     @StyleRes
     public static int getTheme(@NonNull Context context) {
-        @StyleRes int theme = BPrefs.Themes.THEMES[context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE).getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE)];
+        @StyleRes int theme = BPrefs.Themes.THEMES[context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE)];
         if (theme == -1) {
             int hour = DateTime.now().getHourOfDay();
             if (hour > 6 && hour < 19)
@@ -188,13 +188,13 @@ public class S {
         Calendar c = Calendar.getInstance();
         c.setTime(dateTime.toDate());
         if (dateTime.isAfter(now.withMillisOfDay(0))) {
-            return withHoursAndMinutes ? S.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour())
+            return withHoursAndMinutes ? AppUtils.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour())
                     :
                     context.getString(R.string.today)
                     ;
         } else if (dateTime.isAfter(now.withMillisOfDay(0).minusDays(1))) {
             return withHoursAndMinutes ?
-                    String.format("%s %s", context.getString(R.string.yesterday), S.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour()))
+                    String.format("%s %s", context.getString(R.string.yesterday), AppUtils.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour()))
                     :
                     context.getString(R.string.yesterday);
         } else if (dateTime.isAfter(now.withMillisOfDay(0).withDayOfWeek(1))) {
@@ -247,14 +247,14 @@ public class S {
     public static void showAreYouSureYouWantToDelete(@NonNull final String what, @NonNull final BaldActivity baldActivity, @NonNull final Runnable deleteRunnable) {
         final CharSequence title = String.format(baldActivity.getString(R.string.delete___), what);
         final CharSequence message = String.format(baldActivity.getString(R.string.are_you_sure_you_want_to_delete___), what);
-        BDB.from(baldActivity)
+        DialogBuilder.from(baldActivity)
                 .setTitle(title)
                 .setSubText(message)
                 .setPositiveButtonListener((params -> {
                     deleteRunnable.run();
                     return true;
                 }))
-                .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
+                .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
                 .setBaldActivityToAutoDismiss(baldActivity)
                 .show();
     }
@@ -311,13 +311,13 @@ public class S {
         final ViewGroup root = (ViewGroup) baldActivity.getWindow().getDecorView().getRootView();
         if (root == null) throw new AssertionError();
         popupWindow.setOnDismissListener(() -> {
-            S.clearDim(root);
+            AppUtils.clearDim(root);
             dropDownListener.onDismiss();
         });
         popupWindow.setBackgroundDrawable(baldActivity.getDrawable(R.drawable.empty));
         popupWindow.showAsDropDown(view);
         baldActivity.autoDismiss(popupWindow);
-        S.applyDim(root);
+        AppUtils.applyDim(root);
     }
 
     /**

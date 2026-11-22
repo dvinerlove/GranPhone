@@ -43,8 +43,8 @@ import com.bald.uriah.baldphone.views.BaldMultipleSelection;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class BDialog extends Dialog {
-    private static final String TAG = BDialog.class.getSimpleName();
+public class DialogFlags extends Dialog {
+    private static final String TAG = DialogFlags.class.getSimpleName();
     public static final int
             FLAG_POSITIVE = 1,
             FLAG_NEGATIVE = 1 << 1,
@@ -77,7 +77,7 @@ public class BDialog extends Dialog {
     private BaldImageButton bt_cancel;
     private ViewGroup container, ll;
 
-    private BDialog(final @NonNull Context context,
+    private DialogFlags(final @NonNull Context context,
                     final @NonNull CharSequence title,
                     final @NonNull CharSequence subText,
                     final @Nullable CharSequence[] options,
@@ -105,18 +105,18 @@ public class BDialog extends Dialog {
         this.flags = flags;
     }
 
-    public static BDialog newInstance(BDB bdb) {
+    public static DialogFlags newInstance(DialogBuilder bdb) {
         if (bdb.context == null || bdb.title == null || bdb.subText == null)
-            throw new NullPointerException("bdb.activity, bdb.dialogState, bdb.title, bdb.subText cannot be null! perhaps forgot to setContext() on BDB");
+            throw new NullPointerException("bdb.activity, bdb.dialogState, bdb.title, bdb.subText cannot be null! perhaps forgot to setContext() on DialogBuilder");
 
-        final BDialog bDialog = BDialog.newInstance(bdb.context, bdb.title, bdb.subText, bdb.options, bdb.positiveButtonListener, bdb.negativeButtonListener, bdb.inputType, bdb.startingIndexChooser, bdb.extraView, bdb.negativeCustomText, bdb.positiveCustomText, bdb.flags);
+        final DialogFlags bDialog = DialogFlags.newInstance(bdb.context, bdb.title, bdb.subText, bdb.options, bdb.positiveButtonListener, bdb.negativeButtonListener, bdb.inputType, bdb.startingIndexChooser, bdb.extraView, bdb.negativeCustomText, bdb.positiveCustomText, bdb.flags);
         if (bdb.baldActivityToAutoDismiss != null) {
             bdb.baldActivityToAutoDismiss.autoDismiss(bDialog);
         }
         return bDialog;
     }
 
-    public static BDialog newInstance(final @NonNull Context context,
+    public static DialogFlags newInstance(final @NonNull Context context,
                                       final @NonNull CharSequence title,
                                       final @NonNull CharSequence subText,
                                       final @Nullable CharSequence[] options,
@@ -129,7 +129,7 @@ public class BDialog extends Dialog {
                                       final @Nullable CharSequence positiveCustomText,
                                       final int flags
     ) {
-        final BDialog baldDialogBox = new BDialog(context, title, subText, options, positive, negative, inputType, startingIndexChooser, extraView, negativeCustomText, positiveCustomText, flags);
+        final DialogFlags baldDialogBox = new DialogFlags(context, title, subText, options, positive, negative, inputType, startingIndexChooser, extraView, negativeCustomText, positiveCustomText, flags);
         baldDialogBox.show();
         Window window = baldDialogBox.getWindow();
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

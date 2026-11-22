@@ -34,7 +34,7 @@ import androidx.annotation.StringRes;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 public class BaldTitleBar extends LinearLayout {
     private CharSequence title;
@@ -113,7 +113,7 @@ public class BaldTitleBar extends LinearLayout {
         });
 
         bt_help.setOnClickListener(v -> BaldToast.from(context).setText(R.string.coming_soon).show());
-        final boolean rightHanded = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE).getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE);
+        final boolean rightHanded = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE);
         addView(rightHanded ? bt_help : bt_back);
         addView(tv_title);
         addView(rightHanded ? bt_back : bt_help);

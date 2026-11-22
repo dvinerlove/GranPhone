@@ -46,11 +46,11 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogBuilder;
+import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 import java.util.List;
 
@@ -63,7 +63,7 @@ public class DialerActivity extends BaldActivity {
     private final static String[] PROJECTION =
             {ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.PHOTO_URI, ContactsContract.Data.LOOKUP_KEY, ContactsContract.Data.STARRED};
     private static final String NUMBER_STATE = "NUMBER_STATE";
-    private static final int TONE_DURATION = 300 * D.MILLISECOND;
+    private static final int TONE_DURATION = 300 * Const.MILLISECOND;
     private static final int TONE_VOLUME = 75; // 0-100
 
     private ToneGenerator dtmfGenerator;
@@ -113,8 +113,8 @@ public class DialerActivity extends BaldActivity {
                     for (int i = 0; i < activeSubscriptionInfoList.size(); i++) {
                         simNames[i] = activeSubscriptionInfoList.get(i).getDisplayName();
                     }
-                    BDB.from(context)
-                            .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
+                    DialogBuilder.from(context)
+                            .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
                             .setTitle(R.string.choose_sim)
                             .setSubText(R.string.choose_sim_subtext)
                             .setOptions(simNames)

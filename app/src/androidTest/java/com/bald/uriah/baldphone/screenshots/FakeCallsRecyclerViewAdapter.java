@@ -39,7 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 import com.bumptech.glide.Glide;
 
@@ -150,7 +150,7 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
                     image_letter.setVisibility(View.VISIBLE);
                     profile_pic.setImageDrawable(letterContactBackground);
                 } else {
-                    if (S.isValidContextForGlide(profile_pic.getContext()))
+                    if (AppUtils.isValidContextForGlide(profile_pic.getContext()))
                         Glide.with(profile_pic).load(fakeCall.photo).into(profile_pic);
                     image_letter.setVisibility(View.INVISIBLE);
                 }
@@ -171,12 +171,12 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
                     (index == 0 ||
                             new DateTime(callList.get(index - 1).dateTime).getDayOfYear() !=
                                     new DateTime(fakeCall.dateTime).getDayOfYear()) ?
-                            S.stringTimeFromLong(activity, fakeCall.dateTime, false) :
+                            AppUtils.stringTimeFromLong(activity, fakeCall.dateTime, false) :
                             null
             );
 
             final DateTime dateTime = new DateTime(fakeCall.dateTime);
-            tv_time.setText(S.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour()));
+            tv_time.setText(AppUtils.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour()));
         }
 
         public void setDay(final @Nullable String day) {

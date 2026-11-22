@@ -130,7 +130,7 @@ public class BaldToast {
         toast.show();
         if (duration == LENGTH_SEC) {
             new Handler()
-                    .postDelayed(() -> toast.cancel(), D.SECOND);
+                    .postDelayed(() -> toast.cancel(), Const.SECOND);
         }
     }
 

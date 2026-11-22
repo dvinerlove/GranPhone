@@ -25,7 +25,7 @@ import androidx.annotation.StringRes;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.contacts.SingleContactActivity;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 public class HomeScreenAppView {
     public final ImageView iv_icon;
@@ -47,7 +47,7 @@ public class HomeScreenAppView {
     }
 
     public void setIntent(final ComponentName componentName) {
-        child.setOnClickListener(v -> S.startComponentName(v.getContext(), componentName));
+        child.setOnClickListener(v -> AppUtils.startComponentName(v.getContext(), componentName));
     }
 
     public void setIntent(final String contactLookupKey) {
