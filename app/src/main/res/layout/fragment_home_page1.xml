@@ -19,23 +19,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/page1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingLeft="@dimen/home_screen_padding"
     android:paddingRight="@dimen/home_screen_padding"
     android:paddingBottom="@dimen/home_screen_padding"
-    android:visibility="visible"
-    tools:ignore="NestedWeights">
+    android:visibility="visible">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="@drawable/style_for_buttons"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="32dp"
-        android:paddingBottom="4dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp">
 
         <TextClock
             android:id="@+id/clock"
@@ -62,13 +60,12 @@
 
     <android.widget.Space
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_height="@dimen/home_screen_padding" />
 
     <LinearLayout
         android:id="@+id/phone_container"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="@dimen/home_tile_row_height"
         android:background="@drawable/home_item_1"
         android:orientation="horizontal">
 
@@ -110,14 +107,12 @@
 
     <android.widget.Space
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_height="@dimen/home_screen_padding" />
 
     <LinearLayout
         android:id="@+id/messages_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/home_tile_row_height"
         android:background="@drawable/home_item_2"
         android:orientation="horizontal"
         tools:ignore="RtlHardcoded">
@@ -160,14 +155,12 @@
 
     <android.widget.Space
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_height="@dimen/home_screen_padding" />
 
     <LinearLayout
         android:id="@+id/media_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/home_tile_row_height"
         android:background="@drawable/home_item_3"
         android:orientation="horizontal"
         tools:ignore="RtlHardcoded">
@@ -210,14 +203,12 @@
 
     <android.widget.Space
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_height="@dimen/home_screen_padding" />
 
     <LinearLayout
         android:id="@+id/time_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/home_tile_row_height"
         android:background="@drawable/home_item_4"
         android:orientation="horizontal"
         android:padding="0dp"
@@ -256,31 +247,5 @@
             android:visibility="visible"
             app:__src="@drawable/clock_on_background"
             app:__text="@string/alarms" />
-    </LinearLayout>
-
-    <android.widget.Space
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.07" />
-
-    <LinearLayout
-        android:id="@+id/settings_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/home_item_4"
-        android:orientation="horizontal"
-        android:padding="0dp"
-        tools:ignore="RtlHardcoded">
-
-        <com.bald.uriah.baldphone.views.FirstPageAppIcon
-            android:id="@+id/bt_settings"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
-            android:visibility="visible"
-            app:__src="@drawable/settings_on_button"
-            app:__text="@string/settings" />
     </LinearLayout>
 </LinearLayout>

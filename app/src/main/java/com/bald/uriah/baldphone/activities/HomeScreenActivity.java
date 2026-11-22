@@ -44,6 +44,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
@@ -69,12 +70,10 @@ import com.bald.uriah.baldphone.utils.KioskManager;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
-import com.bald.uriah.baldphone.utils.PageTransformers;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldImageButton;
 import com.bald.uriah.baldphone.views.BatteryView;
-import com.bald.uriah.baldphone.views.ViewPagerHolder;
 import com.bald.uriah.baldphone.views.home.HomePage1;
 import com.bald.uriah.baldphone.views.home.NotesView;
 
@@ -114,7 +113,7 @@ public class HomeScreenActivity extends BaldActivity {
     private String torchCameraId;
     private SharedPreferences sharedPreferences;
     private BaldPrefsUtils baldPrefsUtils;
-    private ViewPagerHolder viewPagerHolder;
+    private ScrollView homeScroll;
     private BatteryView batteryView;
     private boolean lowBatteryAlert;
     /**
@@ -279,7 +278,7 @@ public class HomeScreenActivity extends BaldActivity {
                 .setType(BaldToast.TYPE_INFORMATIVE)
                 .show());
         baldPrefsUtils = BaldPrefsUtils.newInstance(this);
-        viewPagerHandler();
+        baldPagerAdapter = new BaldPagerAdapter(this);
         baldHomeWatcher = new BaldHomeWatcher(this, this::updateViewPager);
         recognizerManager.setHomeScreen(this);
 
@@ -328,7 +327,6 @@ public class HomeScreenActivity extends BaldActivity {
         KioskManager.enterIfNeeded(this);
         FirstRunDefaults.apply(this);
         if (baldPrefsUtils.hasChanged(this)) {
-            viewPagerHolder.getViewPager().removeAllViews();//android auto saves fragments, not good for us in this case
             this.recreate();
         }
 
@@ -431,28 +429,26 @@ public class HomeScreenActivity extends BaldActivity {
     }
 
     /**
-     * Starts the view pager - being called only in {@link #onCreate(Bundle)}
-     */
-    private void viewPagerHandler() {
-        baldPagerAdapter = new BaldPagerAdapter(this);
-        viewPagerHolder.setPageTransformer(false, PageTransformers.pageTransformers[sharedPreferences.getInt(BPrefs.PAGE_TRANSFORMERS_KEY, BPrefs.PAGE_TRANSFORMERS_DEFAULT_VALUE)]);
-        viewPagerHolder.setViewPagerAdapter(baldPagerAdapter);
-        viewPagerHolder.setCurrentItem(baldPagerAdapter.startingPage);
-    }
-
-    /**
-     * Updates {@link HomeScreenActivity#baldPagerAdapter} apps
-     * Sets the page to {@link BaldPagerAdapter#startingPage}
+     * Refreshes the pinned-app data and scrolls the single home page back to the top
+     * (the equivalent of the old "jump back to page 1").
      */
     private void updateViewPager() {
         baldPagerAdapter.obtainAppList();
-        viewPagerHolder.setCurrentItem(baldPagerAdapter.startingPage);
-        viewPagerHolder.notifyDataChanegd();
+        homeScroll.smoothScrollTo(0, 0);
     }
 
     private void attachToXml() {
         setContentView(R.layout.home_screen);
-        viewPagerHolder = findViewById(R.id.view_pager_holder);
+        homeScroll = findViewById(R.id.home_scroll);
+
+        findViewById(R.id.bt_home_sos).setOnClickListener(v -> startActivity(new Intent(this, SOSActivity.class)));
+        findViewById(R.id.bt_home_apps).setOnClickListener(v -> {
+            if (!finishedUpdatingApps)
+                launchAppsActivity = true;
+            else
+                startActivity(new Intent(this, AppsActivity.class));
+        });
+        findViewById(R.id.bt_home_settings).setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
         final ViewGroup top_bar = findViewById(R.id.top_bar);
         int tmpPadding = Math.min(screenSize.x, screenSize.y) / 45;

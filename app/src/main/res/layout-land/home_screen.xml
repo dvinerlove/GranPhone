@@ -33,15 +33,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.bald.uriah.baldphone.views.ViewPagerHolder
-        android:id="@+id/view_pager_holder"
+    <ScrollView
+        android:id="@+id/home_scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/bottom_row"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/top_bar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:hide_indicator="true" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.bald.uriah.baldphone.views.home.HomePage1
+            android:id="@+id/home_page_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottom_row"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/home_bottom_bar_height"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/top_bar">
+
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
+            android:id="@+id/bt_home_sos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/home_bottom_bar_height"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/style_for_buttons"
+            app:_src="@drawable/emergency_on_button"
+            app:_text="@string/sos"
+            app:variant="danger" />
+
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
+            android:id="@+id/bt_home_apps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/home_bottom_bar_height"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/style_for_buttons"
+            app:_src="@drawable/apps_on_background"
+            app:_text="@string/apps" />
+
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
+            android:id="@+id/bt_home_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/home_bottom_bar_height"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/style_for_buttons"
+            app:_src="@drawable/settings_on_button"
+            app:_text="@string/settings" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

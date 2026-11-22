@@ -47,7 +47,6 @@ import com.bald.uriah.baldphone.activities.HomeScreenActivity;
 import com.bald.uriah.baldphone.activities.Page1EditorActivity;
 import com.bald.uriah.baldphone.activities.RecentActivity;
 import com.bald.uriah.baldphone.activities.SOSActivity;
-import com.bald.uriah.baldphone.activities.SettingsActivity;
 import com.bald.uriah.baldphone.activities.alarms.AlarmsActivity;
 import com.bald.uriah.baldphone.activities.contacts.ContactsActivity;
 import com.bald.uriah.baldphone.activities.media.PhotosActivity;
@@ -107,7 +106,7 @@ public class HomePage1 extends HomeView {
         }
     };
     private View view;
-    private FirstPageAppIcon bt_clock, bt_camera, bt_videos, bt_assistant, bt_messages, bt_photos, bt_contacts, bt_dialer, bt_whatsapp, bt_apps, bt_reminders, bt_recent, bt_settings;
+    private FirstPageAppIcon bt_clock, bt_camera, bt_videos, bt_assistant, bt_messages, bt_photos, bt_contacts, bt_dialer, bt_whatsapp, bt_apps, bt_reminders, bt_recent;
     private boolean registered = false;
     private SharedPreferences sharedPreferences;
 
@@ -169,7 +168,6 @@ public class HomePage1 extends HomeView {
         bt_photos = view.findViewById(R.id.bt_photos);
         bt_messages = view.findViewById(R.id.bt_messages);
         bt_assistant = view.findViewById(R.id.bt_assistant);
-        bt_settings = view.findViewById(R.id.bt_settings);
     }
 
     private Intent getCameraIntent() {
@@ -250,9 +248,8 @@ public class HomePage1 extends HomeView {
                 homeScreen.startActivity(new Intent(HomePage1.this.homeScreen, AppsActivity.class));
         });
         setupButton(BPrefs.CUSTOM_ALARMS_KEY, bt_clock, v -> homeScreen.startActivity(new Intent(homeScreen, AlarmsActivity.class)));
-        setupButton(BPrefs.CUSTOM_SETTINGS_KEY, bt_settings, v -> homeScreen.startActivity(new Intent(homeScreen, SettingsActivity.class)));
         if (homeScreen != null)
-            for (int id : new int[]{R.id.phone_container, R.id.messages_container, R.id.media_container, R.id.time_container, R.id.settings_container})
+            for (int id : new int[]{R.id.phone_container, R.id.messages_container, R.id.media_container, R.id.time_container})
                 hideRowIfEmpty(id);
     }
 
