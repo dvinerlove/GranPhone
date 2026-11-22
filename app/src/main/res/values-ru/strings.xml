@@ -412,7 +412,7 @@
     <string name="calculator">Калькулятор</string>
     <string name="answer_call">ПРИНЯТЬ</string>
     <string name="decline_call">ОТКЛОНИТЬ</string>
-    <string name="hang_up">ПОВЕСИТЬ</string>
+    <string name="hang_up">ЗАВЕРШИТЬ</string>
     <string name="speaker_turn_on">Громкая связь</string>
     <string name="speaker_turn_off">Громкая связь вкл.</string>
     <string name="incoming_call">Входящий вызов</string>
