@@ -152,23 +152,6 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
                         });
                         break;
                     case 1:
-                        viewHolder.pic.setImageResource(app.isPinned() ? R.drawable.remove_on_button : R.drawable.add_on_button);
-                        viewHolder.text.setText(app.isPinned() ? R.string.remove_shortcut : R.string.add_shortcut);
-                        viewHolder.itemView.setOnClickListener(v1 -> {
-                            if (app.isPinned()) {
-                                appsDatabase.appsDatabaseDao().update(app.getId(), false);
-                                app.setPinned(false);
-                                appsRecyclerViewAdapter.notifyItemChanged(appsRecyclerViewAdapter.index);
-                            } else {
-                                appsDatabase.appsDatabaseDao().update(app.getId(), true);
-                                app.setPinned(true);
-                                appsRecyclerViewAdapter.notifyItemChanged(appsRecyclerViewAdapter.index);
-                            }
-                            popupWindow.dismiss();
-                            showDropDown(index);
-                        });
-                        break;
-                    case 2:
                         viewHolder.pic.setImageResource(R.drawable.delete_on_button);
                         viewHolder.text.setText(R.string.uninstall);
                         viewHolder.itemView.setOnClickListener(v1 -> {
@@ -189,7 +172,7 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
 
             @Override
             public int size() {
-                return app.getFlattenComponentName().startsWith(baldComponentNameBeginning) ? 2 : 3;
+                return app.getFlattenComponentName().startsWith(baldComponentNameBeginning) ? 1 : 2;
             }
 
             @Override

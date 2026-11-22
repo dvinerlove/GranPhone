@@ -309,20 +309,6 @@ public class SettingsActivity extends BaldActivity {
                 R.drawable.status_bar_on_button
         ));
 
-        personalizationCategory.add(new BDBSettingsItem(R.string.notes_settings,
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                        .setTitle(R.string.notes_settings)
-                        .setSubText(R.string.notes_settings_subtext)
-                        .setOptions(R.string.yes, R.string.no)
-                        .setPositiveButtonListener(params -> {
-                            editor.putBoolean(BPrefs.NOTE_VISIBLE_KEY, (Integer) params[0] == 0).apply();
-                            this.recreate();
-                            return true;
-                        })
-                        .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.NOTE_VISIBLE_KEY, BPrefs.NOTE_VISIBLE_DEFAULT_VALUE) ? 0 : 1),
-                R.drawable.note_on_button
-        ));
         personalizationCategory.add(new BDBSettingsItem(R.string.dialer_sounds,
                 DialogBuilder.from(this)
                         .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)

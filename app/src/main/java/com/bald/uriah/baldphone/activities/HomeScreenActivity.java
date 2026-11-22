@@ -450,6 +450,13 @@ public class HomeScreenActivity extends BaldActivity {
         });
         findViewById(R.id.bt_home_settings).setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
+        // Bottom-row labels must never wrap mid-word at large font scales — shrink to one line instead.
+        for (final int id : new int[]{R.id.bt_home_sos, R.id.bt_home_apps, R.id.bt_home_settings}) {
+            final android.widget.TextView label = ((com.bald.uriah.baldphone.views.BaldPictureTextButton) findViewById(id)).getTextView();
+            label.setMaxLines(1);
+            androidx.core.widget.TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(label, 8, 13, 1, TypedValue.COMPLEX_UNIT_SP);
+        }
+
         final ViewGroup top_bar = findViewById(R.id.top_bar);
         int tmpPadding = Math.min(screenSize.x, screenSize.y) / 45;
         for (int i = 0; i < top_bar.getChildCount(); i++) {
