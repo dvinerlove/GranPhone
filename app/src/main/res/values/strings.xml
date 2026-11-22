@@ -453,4 +453,5 @@
     <string name="ram">RAM</string>
     <string name="device_memory_subtext">Free storage and RAM on this device</string>
     <string name="free_of_total">Free %1$s of %2$s</string>
+    <string name="fake_launcher_label">GranPhone setup</string>
 </resources>
