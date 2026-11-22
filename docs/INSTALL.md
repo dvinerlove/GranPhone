@@ -38,7 +38,7 @@ Grants device-owner so the user cannot leave GranPhone or open system settings.
 Run once over adb (the phone must have no accounts configured):
 
 ```
-adb shell dpm set-device-owner com.bald.uriah.baldphone/.broadcast_receivers.BaldDeviceAdminReceiver
+adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.broadcast_receivers.BaldDeviceAdminReceiver
 ```
 
 Then enable Kiosk mode in GranPhone settings and set a PIN.
