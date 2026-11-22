@@ -17,8 +17,10 @@
 package com.bald.uriah.baldphone.views;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -73,6 +75,7 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
         final float pxSize = styleAttributesArray.getDimension(R.styleable.BaldPictureTextButton__size, 0);
         final Drawable pic = styleAttributesArray.getDrawable(R.styleable.BaldPictureTextButton__src);
         final String text = styleAttributesArray.getString(R.styleable.BaldPictureTextButton__text);
+        final int variant = styleAttributesArray.getInt(R.styleable.BaldPictureTextButton_variant, 0);
         styleAttributesArray.recycle();
 
         imageView = (ImageView) layoutInflater.inflate(R.layout.bald_picture_text_button_picture, this, false);
@@ -82,6 +85,32 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
         textView = (TextView) layoutInflater.inflate(R.layout.bald_picture_text_button_text, this, false);
         textView.setText(text);
         addView(textView);
+
+        if (variant != 0)
+            applyVariant(variant);
+    }
+
+    /**
+     * Tints the stateful background solid with the variant color and the icon/text with
+     * {@code bald_text_on_button}. variant: 1=brand, 2=danger, 3=info (0=neutral never gets here).
+     */
+    private void applyVariant(int variant) {
+        final int variantAttr = variant == 1 ? R.attr.bald_brand : variant == 2 ? R.attr.bald_danger : R.attr.bald_info;
+        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_clicked, R.attr.bald_button_disabled, R.attr.bald_text_on_button});
+        final int color = themeColors.getColor(0, 0);
+        final int clickedColor = themeColors.getColor(1, color);
+        final int disabledColor = themeColors.getColor(2, color);
+        final int onColor = themeColors.getColor(3, Color.WHITE);
+        themeColors.recycle();
+
+        setBackgroundTintList(new ColorStateList(
+                new int[][]{
+                        new int[]{-android.R.attr.state_enabled},
+                        new int[]{android.R.attr.state_pressed},
+                        new int[]{}},
+                new int[]{disabledColor, clickedColor, color}));
+        textView.setTextColor(onColor);
+        imageView.setImageTintList(ColorStateList.valueOf(onColor));
     }
 
     public void setText(CharSequence text) {

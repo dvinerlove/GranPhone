@@ -54,6 +54,12 @@
         <attr name="_src" format="reference" />
         <attr name="_text" format="string" />
         <attr name="_size" format="dimension" />
+        <attr name="variant" format="enum">
+            <enum name="neutral" value="0" />
+            <enum name="brand" value="1" />
+            <enum name="danger" value="2" />
+            <enum name="info" value="3" />
+        </attr>
     </declare-styleable>
 
 
@@ -80,6 +86,7 @@
 
     <declare-styleable name="BaldTitleBar">
         <attr name="title" format="string" />
+        <attr name="show_back" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="BaldNumberChooser">

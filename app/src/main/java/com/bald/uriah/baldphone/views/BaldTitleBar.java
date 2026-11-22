@@ -23,6 +23,7 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,9 +41,10 @@ public class BaldTitleBar extends LinearLayout {
     private CharSequence title;
     private Context context;
     private ImageView bt_back, bt_help;
-    private TextView tv_title;
+    private TextView tv_title, tv_back;
     private boolean added;
     private int textColorBeforeGold = -1;
+    private int backTextColorBeforeGold = -1;
 
     public BaldTitleBar(Context context) {
         super(context);
@@ -76,6 +78,7 @@ public class BaldTitleBar extends LinearLayout {
 
         final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.BaldTitleBar);
         title = styleAttributesArray.getString(R.styleable.BaldTitleBar_title);
+        final boolean showBack = styleAttributesArray.getBoolean(R.styleable.BaldTitleBar_show_back, false);
         if (title == null)
             title = "";
         styleAttributesArray.recycle();
@@ -84,6 +87,8 @@ public class BaldTitleBar extends LinearLayout {
         tv_title = (TextView) inflater.inflate(R.layout.bald_title_title, this, false);
         bt_back = (ImageView) inflater.inflate(R.layout.bald_title_back_button, this, false);
         bt_help = (ImageView) inflater.inflate(R.layout.bald_title_help, this, false);
+        if (showBack)
+            tv_back = (TextView) inflater.inflate(R.layout.bald_title_back_text, this, false);
         tv_title.setText(title);
         updateView();
 
@@ -99,6 +104,11 @@ public class BaldTitleBar extends LinearLayout {
         bt_back.setImageTintList(onGold);
         bt_help.setImageTintList(onGold);
         tv_title.setTextColor(gold ? onGoldColorInt : textColorBeforeGold);
+        if (tv_back != null) {
+            if (backTextColorBeforeGold == -1)
+                backTextColorBeforeGold = tv_back.getCurrentTextColor();
+            tv_back.setTextColor(gold ? onGoldColorInt : backTextColorBeforeGold);
+        }
     }
 
     //public on purpose, because of settings app... trust me
@@ -106,7 +116,8 @@ public class BaldTitleBar extends LinearLayout {
         if (added) {
             removeAllViews();
         }
-        bt_back.setOnClickListener(v -> {
+        final View backView = tv_back != null ? tv_back : bt_back;
+        backView.setOnClickListener(v -> {
             if (context instanceof Activity)
                 ((Activity) context).finish();
 
@@ -114,9 +125,9 @@ public class BaldTitleBar extends LinearLayout {
 
         bt_help.setOnClickListener(v -> BaldToast.from(context).setText(R.string.coming_soon).show());
         final boolean rightHanded = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE);
-        addView(rightHanded ? bt_help : bt_back);
+        addView(rightHanded ? bt_help : backView);
         addView(tv_title);
-        addView(rightHanded ? bt_back : bt_help);
+        addView(rightHanded ? backView : bt_help);
         // GranPhone: the help button opened video tutorials in English / Hebrew; hidden, but keeps the title centered
         bt_help.setVisibility(INVISIBLE);
         added = true;
