@@ -21,5 +21,7 @@
     android:layout_height="match_parent"
     android:layout_weight="4"
     android:alpha="0.75"
+    android:ellipsize="end"
     android:gravity="center"
+    android:maxLines="1"
     android:transitionName="bald_bar_title_animation" />

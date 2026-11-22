@@ -23,6 +23,8 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.util.Pair;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -81,6 +84,7 @@ public class SingleContactActivity extends BaldActivity {
     private String contactKeyExtra;
     private BaldTitleBar baldTitleBar;
     private ImageView contact_image;
+    private TextView tv_contact_name;
     private LinearLayout ll;
     private MediaPlayer mediaPlayer;
     private ContentResolver contentResolver;
@@ -112,8 +116,8 @@ public class SingleContactActivity extends BaldActivity {
         super.onStart();
 
         final int childCount = ll.getChildCount();
-        if (childCount > 2)
-            ll.removeViews(2, ll.getChildCount() - 2);
+        if (childCount > 3)
+            ll.removeViews(3, ll.getChildCount() - 3);
 
         try {
             contact = viaId ?
@@ -124,7 +128,8 @@ public class SingleContactActivity extends BaldActivity {
             return;
         }
 
-        baldTitleBar.setTitle(contact.getName());
+        baldTitleBar.setTitle("");
+        tv_contact_name.setText(contact.getName());
         setupBar();
 
         if (contact.hasPhone())
@@ -195,6 +200,7 @@ public class SingleContactActivity extends BaldActivity {
         baldTitleBar = findViewById(R.id.bald_title_bar);
         ll = findViewById(R.id.ll_info);
         contact_image = findViewById(R.id.contact_image);
+        tv_contact_name = findViewById(R.id.tv_contact_name);
     }
 
     private void inflatePhones() {
@@ -216,14 +222,17 @@ public class SingleContactActivity extends BaldActivity {
             View layout = layoutInflater.inflate(R.layout.contact_number, ll, false);
             final TextView tv_type = layout.findViewById(R.id.tv_type);
             final TextView tv_value = layout.findViewById(R.id.tv_value);
-            final BaldLinearLayoutButton call = layout.findViewById(R.id.call);
-            final BaldLinearLayoutButton message = layout.findViewById(R.id.message);
+            final BaldPictureTextButton call = layout.findViewById(R.id.call);
+            final BaldPictureTextButton message = layout.findViewById(R.id.message);
 
             tv_type.setText(ContactsContract.CommonDataKinds.Phone.getTypeLabel(
                     getResources(),
                     pair.first,
                     "Custom"));
             tv_value.setText(pair.second);
+            call.getTextView().setTextColor(Color.WHITE);
+            call.getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+            call.getTextView().setTypeface(Typeface.DEFAULT_BOLD);
             call.setOnClickListener(v -> DialerActivity.call(pair.second, this, false));
             message.setOnClickListener(v -> S.sendMessage(pair.second, this));
 
