@@ -309,7 +309,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
             }
         }
         if (TextUtils.isEmpty(name))
-            name = details.getCallerDisplayName();
+            name = details == null ? null : details.getCallerDisplayName();
 
         if (TextUtils.isEmpty(name)) {
             tv_name.setText(number.isEmpty() ? getString(R.string.unknown_number) : number);
