@@ -55,7 +55,7 @@ import java.util.Locale;
 
 /**
  * Big-button call screen for incoming and ongoing calls.
- * Opened by {@link com.bald.uriah.baldphone.services.BaldInCallService} when vophone is the default phone app.
+ * Opened by {@link com.bald.uriah.baldphone.services.BaldInCallService} when GranPhone is the default phone app.
  */
 @TargetApi(Build.VERSION_CODES.M)
 public class CallActivity extends AppCompatActivity implements CallManager.Listener {
@@ -124,7 +124,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
 
         final PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         if (powerManager != null && powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK))
-            proximityWakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "vophone:call");
+            proximityWakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "granphone:call");
     }
 
     @Override

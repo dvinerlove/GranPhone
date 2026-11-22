@@ -25,7 +25,7 @@ import android.util.Log;
 /**
  * Elderly-friendly phone settings, applied once (the family can change them afterwards):
  * loud ringer and call volume, bigger letters, screen stays on longer, no auto-rotate.
- * Works both when vophone is a normal app (after "change system settings" is allowed)
+ * Works both when GranPhone is a normal app (after "change system settings" is allowed)
  * and when it is built into the ROM.
  */
 public final class FirstRunDefaults {

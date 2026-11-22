@@ -50,23 +50,27 @@
                     android:layout_height="70dp"
                     android:layout_marginBottom="10dp" />
 
+                <com.bald.uriah.baldphone.views.SquaredCircleImageView
+                    android:id="@+id/contact_image"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:transitionName="prof_pic_contacts_animation" />
+
                 <TextView
                     android:id="@+id/tv_contact_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:gravity="center"
-                    android:maxLines="2"
+                    android:maxLines="3"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:textColor="?bald_text_on_background"
-                    android:textSize="32sp"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
-
-                <com.bald.uriah.baldphone.views.SquaredCircleImageView
-                    android:id="@+id/contact_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:transitionName="prof_pic_contacts_animation" />
             </LinearLayout>
         </com.bald.uriah.baldphone.views.ModularScrollView>
     </com.bald.uriah.baldphone.views.ScrollingHelper>

@@ -117,7 +117,7 @@ public class BaldTitleBar extends LinearLayout {
         addView(rightHanded ? bt_help : bt_back);
         addView(tv_title);
         addView(rightHanded ? bt_back : bt_help);
-        // vophone: the help button opened video tutorials in English / Hebrew; hidden, but keeps the title centered
+        // GranPhone: the help button opened video tutorials in English / Hebrew; hidden, but keeps the title centered
         bt_help.setVisibility(INVISIBLE);
         added = true;
 

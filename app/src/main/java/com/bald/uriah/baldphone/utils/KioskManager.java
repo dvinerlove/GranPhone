@@ -42,14 +42,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Kiosk mode: keeps the phone inside vophone using Android's lock task mode.
- * Needs vophone to be the device owner (set once from a computer with adb, see docs/INSTALACAO.md).
+ * Kiosk mode: keeps the phone inside GranPhone using Android's lock task mode.
+ * Needs GranPhone to be the device owner (set once from a computer with adb, see docs/INSTALACAO.md).
  * <p>
  * While enabled:
  * - the notification shade, recents and the Android settings are not reachable
- * - only vophone and the apps that appear in it (minus settings, app stores and other launchers) can be opened
+ * - only GranPhone and the apps that appear in it (minus settings, app stores and other launchers) can be opened
  * - apps cannot be uninstalled
- * - vophone is always the home screen and has all of its permissions granted
+ * - GranPhone is always the home screen and has all of its permissions granted
  */
 public final class KioskManager {
     private static final String TAG = KioskManager.class.getSimpleName();
@@ -94,7 +94,7 @@ public final class KioskManager {
     }
 
     /**
-     * @return false if vophone is not the device owner.
+     * @return false if GranPhone is not the device owner.
      */
     public static boolean enable(Activity activity, CharSequence pin) {
         if (!isDeviceOwner(activity))
@@ -108,7 +108,7 @@ public final class KioskManager {
     }
 
     /**
-     * Turns kiosk mode off. vophone stays device owner, so it can be turned on again without a computer.
+     * Turns kiosk mode off. GranPhone stays device owner, so it can be turned on again without a computer.
      *
      * @param activity an activity of the locked task, if available, to stop lock task right away.
      */
@@ -137,7 +137,7 @@ public final class KioskManager {
     }
 
     /**
-     * Turns kiosk mode off and gives up device owner, so vophone can be uninstalled.
+     * Turns kiosk mode off and gives up device owner, so GranPhone can be uninstalled.
      */
     @SuppressWarnings("deprecation")
     public static void removeDeviceOwner(Context context) {
@@ -208,7 +208,7 @@ public final class KioskManager {
         try {
             dpm.setLockTaskPackages(admin, allowedPackages(context));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                // Home button (goes back to vophone), power menu (to restart / turn off) and the clock & battery.
+                // Home button (goes back to GranPhone), power menu (to restart / turn off) and the clock & battery.
                 // No notification shade, no recents, no lock screen.
                 dpm.setLockTaskFeatures(admin,
                         DevicePolicyManager.LOCK_TASK_FEATURE_HOME
@@ -238,7 +238,7 @@ public final class KioskManager {
     }
 
     /**
-     * vophone, every app with a launcher icon, the camera, the SMS app and the permission dialogs;
+     * GranPhone, every app with a launcher icon, the camera, the SMS app and the permission dialogs;
      * but never the Android settings, app stores or other home screens.
      */
     private static String[] allowedPackages(Context context) {

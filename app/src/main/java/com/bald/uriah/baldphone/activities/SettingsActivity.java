@@ -226,7 +226,7 @@ public class SettingsActivity extends BaldActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             mainCategory.add(
-                    new RunnableSettingsItem(R.string.use_vophone_for_calls,
+                    new RunnableSettingsItem(R.string.use_granphone_for_calls,
                             v -> CallManager.requestDefaultDialer(this)
                             , R.drawable.phone_on_button)
             );

@@ -31,14 +31,14 @@ import com.bald.uriah.baldphone.activities.CallActivity;
 import com.bald.uriah.baldphone.utils.CallManager;
 
 /**
- * Bound by the system when vophone is the default phone app.
+ * Bound by the system when GranPhone is the default phone app.
  * Every incoming / outgoing call is shown on {@link CallActivity} (big buttons) instead of the stock call screen.
  * Ringing itself is still done by the system.
  */
 @TargetApi(Build.VERSION_CODES.M)
 public class BaldInCallService extends InCallService {
     private static final String TAG = BaldInCallService.class.getSimpleName();
-    private static final String CHANNEL_ID = "vophone_calls";
+    private static final String CHANNEL_ID = "granphone_calls";
     private static final int NOTIFICATION_ID = 4210;
     private final CallManager.Listener listener = this::updateNotification;
 

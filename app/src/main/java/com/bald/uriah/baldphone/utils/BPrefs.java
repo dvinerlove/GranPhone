@@ -47,7 +47,7 @@ public final class BPrefs {
     public static final String CUSTOM_ALARMS_KEY = "CUSTOM_ALARMS_KEY";
 
     public static final String LONG_PRESSES_KEY = "LONG_PRESSES_KEY";
-    public static final boolean LONG_PRESSES_DEFAULT_VALUE = false; // vophone: a simple tap opens things (the accidental-touch guard stays on)
+    public static final boolean LONG_PRESSES_DEFAULT_VALUE = false; // GranPhone: a simple tap opens things (the accidental-touch guard stays on)
 
     public static final String TEST_KEY = "TEST_KEY";
     public static final boolean TEST_DEFAULT_VALUE = false;
@@ -62,7 +62,7 @@ public final class BPrefs {
     public static final boolean VIBRATION_FEEDBACK_DEFAULT_VALUE = true;
 
     public static final String THEME_KEY = "THEME_KEY";
-    public static final int THEME_DEFAULT_VALUE = Themes.LIGHT; // vophone: always the same look (adaptive switched to dark at night)
+    public static final int THEME_DEFAULT_VALUE = Themes.LIGHT; // GranPhone: always the same look (adaptive switched to dark at night)
 
     public static final String NOTE_VISIBLE_KEY = "NOTE_VISIBLE_KEY";
     public static final boolean NOTE_VISIBLE_DEFAULT_VALUE = false;
@@ -85,7 +85,7 @@ public final class BPrefs {
     public static final String AFTER_TUTORIAL_KEY = "AFTER_TUTORIAL_KEY";
 
     public static final String PAGE_TRANSFORMERS_KEY = "pageTransformersKey";
-    public static final int PAGE_TRANSFORMERS_DEFAULT_VALUE = PageTransformers.PLAIN; // vophone: simple, fast page slide
+    public static final int PAGE_TRANSFORMERS_DEFAULT_VALUE = PageTransformers.PLAIN; // GranPhone: simple, fast page slide
 
     public static final String USE_ACCIDENTAL_GUARD_KEY = "USE_ACCIDENTAL_GUARD_KEY";
     public static final boolean USE_ACCIDENTAL_GUARD_DEFAULT_VALUE = true;

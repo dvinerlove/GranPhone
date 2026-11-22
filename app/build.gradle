@@ -33,11 +33,11 @@ android {
     }
 
     // Fixed debug key kept in the repo, so every build (any computer / session) can update the
-    // vophone already installed on the phone. As device owner, vophone cannot simply be uninstalled
+    // GranPhone already installed on the phone. As device owner, GranPhone cannot simply be uninstalled
     // and reinstalled with a different key.
     signingConfigs {
         debug {
-            storeFile file('vophone-debug.keystore')
+            storeFile file('granphone-debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'

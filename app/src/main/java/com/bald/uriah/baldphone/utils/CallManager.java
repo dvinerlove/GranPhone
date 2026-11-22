@@ -35,7 +35,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Keeps track of the calls handed to {@link com.bald.uriah.baldphone.services.BaldInCallService}
- * (only when vophone is the default phone app) and offers simple actions for the call screen.
+ * (only when GranPhone is the default phone app) and offers simple actions for the call screen.
  * All methods must be called on the main thread.
  */
 @TargetApi(Build.VERSION_CODES.M)
@@ -187,7 +187,7 @@ public final class CallManager {
     }
 
     /**
-     * Asks the user to make vophone the default phone app, so incoming and outgoing calls use {@link com.bald.uriah.baldphone.activities.CallActivity}.
+     * Asks the user to make GranPhone the default phone app, so incoming and outgoing calls use {@link com.bald.uriah.baldphone.activities.CallActivity}.
      */
     public static void requestDefaultDialer(Activity activity) {
         if (isDefaultDialer(activity)) {
