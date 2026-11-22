@@ -76,8 +76,6 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     private String shownNumber;
     @Nullable
     private String contactName;
-    @Nullable
-    private String shownName;
     private boolean finishScheduled;
     @Nullable
     private Call simChooserShownFor;
@@ -338,14 +336,9 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         // getCallerDisplayName exists only on API 29+ and may arrive late via onDetailsChanged
         if (TextUtils.isEmpty(name) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             name = details == null ? null : details.getCallerDisplayName();
-        if (TextUtils.isEmpty(name))
-            name = null;
-        if (TextUtils.equals(name, shownName))
-            return;
-        shownName = name;
 
-        tv_initial.setText(name == null ? "" : name.substring(0, 1).toUpperCase(Locale.getDefault()));
-        if (name == null) {
+        tv_initial.setText(TextUtils.isEmpty(name) ? "?" : name.substring(0, 1).toUpperCase(Locale.getDefault()));
+        if (TextUtils.isEmpty(name)) {
             tv_name.setText(number.isEmpty() ? getString(R.string.unknown_number) : number);
             tv_number.setVisibility(View.GONE);
         } else {

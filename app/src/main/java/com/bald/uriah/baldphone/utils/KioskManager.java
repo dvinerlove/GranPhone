@@ -118,7 +118,9 @@ public final class KioskManager {
      * @param activity an activity of the locked task, if available, to stop lock task right away.
      */
     public static void disable(Context context, @Nullable Activity activity) {
-        BPrefs.get(context).edit().putBoolean(KIOSK_KEY, false).apply();
+        // drop the PIN too: a leftover PIN would shadow the helper PIN in settings,
+        // and enable() always writes a fresh one anyway
+        BPrefs.get(context).edit().putBoolean(KIOSK_KEY, false).remove(KIOSK_PIN_KEY).apply();
         if (activity != null) {
             try {
                 activity.stopLockTask();
