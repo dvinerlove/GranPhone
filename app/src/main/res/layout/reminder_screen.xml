@@ -29,7 +29,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:src="@drawable/pill"
         android:textColor="?bald_decoration_on_background"
-        android:textSize="80dp"
+        android:textSize="80sp"
         app:layout_constraintBottom_toTopOf="@+id/textual_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

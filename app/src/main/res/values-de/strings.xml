@@ -400,5 +400,6 @@
     </string-array>
 
     <bool name="is_right_to_left">false</bool>
+    <string name="understood">Verstanden</string>
 
 </resources>

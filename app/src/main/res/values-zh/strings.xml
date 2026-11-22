@@ -401,5 +401,6 @@
     </string-array>
 
     <bool name="is_right_to_left">false</bool>
+    <string name="understood">明白了</string>
 
 </resources>

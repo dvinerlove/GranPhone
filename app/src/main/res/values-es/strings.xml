@@ -410,5 +410,6 @@
     </string-array>
 
     <bool name="is_right_to_left">false</bool>
+    <string name="understood">Entendido</string>
 
 </resources>

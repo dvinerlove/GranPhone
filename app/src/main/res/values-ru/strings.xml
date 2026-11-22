@@ -430,7 +430,7 @@
     <string name="kiosk_mode">Режим киоска (блокировка телефона)</string>
     <string name="kiosk_not_device_owner_subtext">Для режима киоска приложение должно быть администратором устройства. Это делается один раз с компьютера:
 
-adb shell dpm set-device-owner com.bald.uriah.baldphone/.broadcast_receivers.BaldDeviceAdminReceiver</string>
+adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.broadcast_receivers.BaldDeviceAdminReceiver</string>
     <string name="kiosk_enable_subtext">Телефон останется внутри приложения: без шторки уведомлений, настроек Android и удаления приложений.
 Задайте цифровой пароль (минимум 4 цифры), чтобы потом выключить режим.</string>
     <string name="kiosk_disable_subtext">Введите пароль, чтобы выключить режим киоска.</string>

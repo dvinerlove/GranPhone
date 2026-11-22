@@ -30,7 +30,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="?bald_decoration_on_background"
-        android:textSize="80dp"
+        android:textSize="80sp"
         app:layout_constraintBottom_toTopOf="@+id/alarm_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

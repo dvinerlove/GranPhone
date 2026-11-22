@@ -162,7 +162,8 @@ public class AppUtils {
 
     @StyleRes
     public static int getTheme(@NonNull Context context) {
-        @StyleRes int theme = BPrefs.Themes.THEMES[context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE)];
+        final int stored = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE);
+        @StyleRes int theme = BPrefs.Themes.THEMES[Math.max(0, Math.min(stored, BPrefs.Themes.THEMES.length - 1))];
         if (theme == -1) {
             int hour = DateTime.now().getHourOfDay();
             if (hour > 6 && hour < 19)

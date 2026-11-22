@@ -431,7 +431,7 @@
     <string name="already_default_dialer">GranPhone is already the phone app!</string>
     <string name="use_granphone_for_calls">Big-button call screen</string>
     <string name="kiosk_mode">Kiosk mode (lock the phone)</string>
-    <string name="kiosk_not_device_owner_subtext">To use kiosk mode, GranPhone must be the phone\'s administrator. This is done once from a computer (see docs/INSTALACAO.md):\n\nadb shell dpm set-device-owner com.bald.uriah.baldphone/.broadcast_receivers.BaldDeviceAdminReceiver</string>
+    <string name="kiosk_not_device_owner_subtext">To use kiosk mode, GranPhone must be the phone\'s administrator. This is done once from a computer (see docs/INSTALACAO.md):\n\nadb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.broadcast_receivers.BaldDeviceAdminReceiver</string>
     <string name="kiosk_enable_subtext">The phone will stay inside GranPhone: no notification shade, no Android settings and no uninstalling apps.\nCreate a password of at least 4 digits to turn it off later.</string>
     <string name="kiosk_disable_subtext">Type the password to turn kiosk mode off.</string>
     <string name="kiosk_pin_too_short">The password needs at least 4 digits.</string>
