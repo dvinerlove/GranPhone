@@ -342,6 +342,20 @@ public class HomeScreenActivity extends BaldActivity {
                                 .putExtra(KEY_EXTRA_ACTIVITY, NOTIFICATIONS_HOME_SCREEN)), 200 * D.MILLISECOND);
 
         registerReceiver(batteryReceiver, BATTERY_FILTER);
+        refreshBatteryView();
+    }
+
+    // Sticky broadcast is unreliable on this ROM — read the level directly once per resume.
+    private void refreshBatteryView() {
+        if (batteryView == null)
+            return;
+        final android.os.BatteryManager batteryManager =
+                (android.os.BatteryManager) getSystemService(BATTERY_SERVICE);
+        if (batteryManager == null)
+            return;
+        final int level = batteryManager.getIntProperty(android.os.BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        if (level >= 0)
+            batteryView.setLevel(level, batteryManager.isCharging());
     }
 
     // Sticky immersive: nav bar hidden on the home screen; a bottom edge swipe reveals it briefly.
