@@ -143,16 +143,17 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
 
         holder.lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.LOOKUP_KEY));
         final String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-        final String letter = name.substring(0, 1).toUpperCase();
+        final String letter = (name == null || name.isEmpty()) ? "?" : name.substring(0, 1).toUpperCase();
         holder.setFavorite(cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.STARRED)) == 1);
         holder.tv_contact_name.setText(name);
 
         if (position == 0) {
-            holder.setLetter(name.substring(0, 1));
+            holder.setLetter(letter);
         } else {
             final boolean moved = cursor.moveToPosition(position - 1);
             if (moved) {
-                final String prevNameFirstLetter = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME)).substring(0, 1).toUpperCase();
+                final String prevName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
+                final String prevNameFirstLetter = (prevName == null || prevName.isEmpty()) ? "?" : prevName.substring(0, 1).toUpperCase();
                 if (!prevNameFirstLetter.equals(letter)) {
                     holder.setLetter(letter);
                 } else
@@ -166,7 +167,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             holder.iv_contact_pic.setImageURI(Uri.parse(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))));
             holder.tv_image_letter.setVisibility(View.GONE);
         } else {
-            drawText(holder, letter, holder.lookupKey.hashCode());
+            drawText(holder, letter, holder.lookupKey == null ? 0 : holder.lookupKey.hashCode());
         }
 
     }

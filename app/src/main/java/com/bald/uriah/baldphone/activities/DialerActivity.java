@@ -43,7 +43,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.activities.contacts.AddContactActivity;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
@@ -72,7 +71,7 @@ public class DialerActivity extends BaldActivity {
     private ContactRecyclerViewAdapter contactRecyclerViewAdapter;
     private RecyclerView recyclerView;
     private TextView tv_number;
-    private View b_call, b_clear, b_hash, b_sulamit, b_backspace, empty_view;
+    private View b_call, b_clear, b_hash, b_sulamit, b_backspace;
     private View[] numpad;
     private StringBuilder number = new StringBuilder();
     private boolean playDialSounds;
@@ -177,7 +176,9 @@ public class DialerActivity extends BaldActivity {
     }
 
     private void getContactsByNumberFilter() {
-        final Uri uri = Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(number.toString()));
+        final Uri uri = number.length() == 0 ?
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI :
+                Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(number.toString()));
         final Cursor contactsCursor = contentResolver.query(uri, PROJECTION, null, null, SORT_ORDER);
         if (contactRecyclerViewAdapter != null) {
             contactRecyclerViewAdapter.changeCursor(contactsCursor);
@@ -206,7 +207,6 @@ public class DialerActivity extends BaldActivity {
                 findViewById(R.id.b_8),
                 findViewById(R.id.b_9)
         };
-        empty_view = findViewById(R.id.empty_view);
         b_call = findViewById(R.id.b_call);
         b_clear = findViewById(R.id.b_clear);
         b_backspace = findViewById(R.id.b_backspace);
@@ -231,11 +231,6 @@ public class DialerActivity extends BaldActivity {
             tv_number.setText(number);
             searchForContact();
         });
-        empty_view.setOnClickListener(v -> {
-            startActivity(new Intent(this, AddContactActivity.class)
-                    .putExtra(AddContactActivity.CONTACT_NUMBER, (CharSequence) number));
-        });
-
     }
 
     private void searchForContact() {

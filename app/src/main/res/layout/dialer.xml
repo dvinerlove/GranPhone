@@ -79,9 +79,10 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <include
+        <View
             android:id="@+id/empty_view"
-            layout="@layout/add_contact" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </com.bald.uriah.baldphone.views.ScrollingHelper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
