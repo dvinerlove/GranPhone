@@ -214,8 +214,17 @@ public class DialerActivity extends BaldActivity {
         if (number.length() > 0 && contactsCursor != null && contactsCursor.moveToFirst()) {
             final String name = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
             final String contactNumber = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            t9_chip.setText(contactNumber == null ? name : name + " — " + contactNumber);
-            t9_chip.setVisibility(View.VISIBLE);
+            // name == contactNumber (nameless contacts) adds nothing over tv_number → hide
+            final String text = name == null ? contactNumber
+                    : contactNumber == null ? name
+                    : name.equals(contactNumber) ? null
+                    : name + " — " + contactNumber;
+            if (text == null) {
+                t9_chip.setVisibility(View.GONE);
+            } else {
+                t9_chip.setText(text);
+                t9_chip.setVisibility(View.VISIBLE);
+            }
         } else {
             t9_chip.setVisibility(View.GONE);
         }
