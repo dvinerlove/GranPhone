@@ -360,6 +360,10 @@ public class HomeScreenActivity extends BaldActivity {
             hideNavBar();
     }
 
+    public boolean isFlashOn() {
+        return flashState;
+    }
+
     public void toggleTorch() {
         if (!flashInited)
             return;

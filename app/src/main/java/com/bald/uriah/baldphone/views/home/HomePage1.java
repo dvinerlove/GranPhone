@@ -187,7 +187,11 @@ public class HomePage1 extends HomeView {
         setupButton(BPrefs.CUSTOM_DIALER_KEY, bt_dialer, v -> homeScreen.startActivity(new Intent(homeScreen, DialerActivity.class)));
         setupButton(BPrefs.CUSTOM_CONTACTS_KEY, bt_contacts, v -> homeScreen.startActivity(new Intent(homeScreen, ContactsActivity.class)));
         setupButton(BPrefs.CUSTOM_APP_KEY, bt_whatsapp, v -> homeScreen.startActivity(new Intent(homeScreen, SOSActivity.class)));
-        setupButton(BPrefs.CUSTOM_ASSISTANT_KEY, bt_assistant, v -> homeScreen.toggleTorch());
+        setupButton(BPrefs.CUSTOM_ASSISTANT_KEY, bt_assistant, v -> {
+            homeScreen.toggleTorch();
+            updateFlashIcon();
+        });
+        bt_assistant.post(this::updateFlashIcon);
         setupButton(BPrefs.CUSTOM_MESSAGES_KEY, bt_messages, v -> {
             try {
                 final ResolveInfo resolveInfo =
@@ -215,6 +219,12 @@ public class HomePage1 extends HomeView {
                 homeScreen.startActivity(new Intent(HomePage1.this.homeScreen, AppsActivity.class));
         });
         setupButton(BPrefs.CUSTOM_ALARMS_KEY, bt_clock, v -> homeScreen.startActivity(new Intent(homeScreen, AlarmsActivity.class)));
+    }
+
+    private void updateFlashIcon() {
+        bt_assistant.setImageResource(homeScreen.isFlashOn()
+                ? R.drawable.flashlight_on_background
+                : R.drawable.flashlight_off_on_background);
     }
 
     private void setupButton(String bPrefsKey, FirstPageAppIcon bt, View.OnClickListener onClickListener) {

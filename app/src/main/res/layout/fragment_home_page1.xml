@@ -136,7 +136,7 @@
             android:layout_weight="1"
             android:background="@drawable/style_for_buttons_transparent"
             android:visibility="visible"
-            app:__src="@drawable/flashlight_on_background"
+            app:__src="@drawable/flashlight_off_on_background"
             app:__text="@string/flashlight" />
 
         <include layout="@layout/ll_divider_as_horizontal_layout" />
