@@ -24,7 +24,7 @@ import android.util.Log;
 
 /**
  * with help from {@link "https://stackoverflow.com/questions/8881951/detect-home-button-press-in-android"}
- * but suited for BaldPhone...
+ * but suited for GranPhone...
  */
 public class BaldHomeWatcher {
     private static final String TAG = BaldHomeWatcher.class.getSimpleName();

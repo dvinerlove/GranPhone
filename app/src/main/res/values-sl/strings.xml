@@ -228,7 +228,7 @@
 		v velikega, enostavnega in prijaznega za uporabo.\nLahko jo preneseš in uporabljaš brezplačno!\nPreveri spodnjo povezavo za več
 		informacij:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Hej, morda poznaš ljudi, ki bi želeli spoznati GranPhone ?\nLahko ga deliš z njimi !"</string>
+    <string name="share_granphone_subtext">Hej, morda poznaš ljudi, ki bi želeli spoznati GranPhone ?\nLahko ga deliš z njimi !"</string>
     <string name="share_GranPhone">Deli GranPhone</string>
     <string name="share_contact">Deli stik</string>
     <string name="share_differently">Deli preko druge aplikacije</string>

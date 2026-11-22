@@ -223,7 +223,7 @@
     <string name="share">Paylaş</string>
     <string name="share_actual_text">Merhaba, Ben \"GranPhone\" isimli, telefonun arayüzünü büyük, sade ve güzel bir arayüze çeviren bi uygulama kullanıyorum.
      \nMerak mı ettin?\nBedavaya indire bilirsin!\nDaha fazla bilgi için şu bağlantıyı kullan:\n\nhttps://github.com/dvinerlove/GranPhone</string>
-    <string name="share_bald_phone_subtext">Hey, GranPhone\'u tanımayan birini mi tanıyorsunuz?\nBunu onunla paylaşa bilirsiniz!</string>
+    <string name="share_granphone_subtext">Hey, GranPhone\'u tanımayan birini mi tanıyorsunuz?\nBunu onunla paylaşa bilirsiniz!</string>
     <string name="share_GranPhone">GranPhone\'u paylaş</string>
     <string name="share_contact">Kişiyi paylaş</string>
     <string name="share_differently">Başka uygulamayla paylaş</string>

@@ -216,7 +216,7 @@ veranderbaar en kan worden gewijzigd in de instellingen.</string>
     <string name="settings_permission">Instellingen Bevoegdheid</string>
     <string name="share">Delen</string>
     <string name="share_actual_text">Hallo, ik gebruik een app genaamd \"GranPhone\" dat de interface van de telefoon vervangt door een grote, eenvoudige en gebruiksvriendelijke interface. \ NGeïnteresseerd? \nJe kan het gratis downloaden! \nklik de link hieronder voor meer informatie: \n\nhttps://github.com/dvinerlove/GranPhone</string>
-    <string name="share_bald_phone_subtext">Ken je iemand die misschien meer wilt weten over GranPhone? \n
+    <string name="share_granphone_subtext">Ken je iemand die misschien meer wilt weten over GranPhone? \n
 Deel het met hen!\"</string>
     <string name="share_GranPhone">GranPhone delen</string>
     <string name="share_contact">Delen met Contact</string>

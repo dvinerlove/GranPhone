@@ -48,9 +48,9 @@ import java.io.File;
  * On Different class than {@link UpdatesActivity} because may be exported to library in the future
  */
 public class UpdatingUtil {
-    public static final String MESSAGE_URL = "https://api.github.com/repos/UriahShaulMandel/BaldPhone/releases/latest";
-    public static final String FILENAME = "BaldPhoneUpdate.apk";
-    public static final String VOLLEY_TAG = "baldphone";
+    public static final String MESSAGE_URL = "https://api.github.com/repos/dvinerlove/GranPhone/releases/latest";
+    public static final String FILENAME = "GranPhoneUpdate.apk";
+    public static final String VOLLEY_TAG = "granphone";
 
     @NonNull
     public static File getDownloadedFile() {

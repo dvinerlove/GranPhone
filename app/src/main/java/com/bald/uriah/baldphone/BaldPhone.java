@@ -36,7 +36,7 @@ public class BaldPhone extends Application {
 
     @Override
     public void onCreate() {
-        S.logImportant("BaldPhone was started!");
+        S.logImportant("GranPhone was started!");
         super.onCreate();
         JodaTimeAndroid.init(this);
         AlarmScheduler.reStartAlarms(this);

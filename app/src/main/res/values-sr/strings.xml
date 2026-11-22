@@ -212,7 +212,7 @@
     <string name="settings_permission">Dozvole za opcije</string>
     <string name="share">Podeli</string>
     <string name="share_actual_text">Zdravo, koristim platformu koja se zove \"GranPhone\" koja menja telefon interfejs sa drzgim koji je veći i pojednostavljen.\nZainteresovan?\nMožeš da ga skineš besplatno!\nPogledaj na ovom linku ispod za više informacija:\n\nhttps://github.com/dvinerlove/GranPhone</string>
-    <string name="share_bald_phone_subtext">Zdravo, poznaješ nekog ko bi želeo da zna za GranPhone?\nPodeli to sa njim!</string>
+    <string name="share_granphone_subtext">Zdravo, poznaješ nekog ko bi želeo da zna za GranPhone?\nPodeli to sa njim!</string>
     <string name="share_GranPhone">Podelite GranPhone</string>
     <string name="share_contact">Podeli kontakt</string>
     <string name="share_differently">Delite putem druge aplikacije</string>

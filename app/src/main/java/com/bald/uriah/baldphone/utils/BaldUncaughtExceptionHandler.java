@@ -44,7 +44,7 @@ public class BaldUncaughtExceptionHandler implements Thread.UncaughtExceptionHan
             return;
         }
         baldPrefs.edit().putLong(BPrefs.LAST_CRASH_KEY, currentTime).commit(); // commit and not apply because of System.exit(2)
-        S.logImportant("BaldPhone CRASHED!");
+        S.logImportant("GranPhone CRASHED!");
 
         final PendingIntent pendingIntent =
                 PendingIntent.getActivity(

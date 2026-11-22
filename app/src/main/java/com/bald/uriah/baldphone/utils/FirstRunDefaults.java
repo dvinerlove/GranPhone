@@ -30,8 +30,8 @@ import android.util.Log;
  */
 public final class FirstRunDefaults {
     private static final String TAG = FirstRunDefaults.class.getSimpleName();
-    private static final String VOLUMES_DONE_KEY = "VOPHONE_DEFAULT_VOLUMES_DONE";
-    private static final String SYSTEM_SETTINGS_DONE_KEY = "VOPHONE_DEFAULT_SYSTEM_SETTINGS_DONE";
+    private static final String VOLUMES_DONE_KEY = "GRANPHONE_DEFAULT_VOLUMES_DONE";
+    private static final String SYSTEM_SETTINGS_DONE_KEY = "GRANPHONE_DEFAULT_SYSTEM_SETTINGS_DONE";
     /** Same as the 5th step of the font size changer (see SettingsActivity.FONT_SIZES) */
     private static final float FONT_SCALE = 1.3f;
     private static final int SCREEN_OFF_TIMEOUT_MS = 2 * 60 * 1000;

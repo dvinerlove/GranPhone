@@ -231,7 +231,7 @@ ja muuttaa kirkkautta.</string>
         liittymän isoksi, helpoksi ja ystävälliseksi.\nKiinnostako?\nSinä voit ladata sen ilmaiseksi!\nKatso linkistä
         lisää tietoa:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Hei, tiedätkö joitain, jotka ehkä haluavat tietää GranPhonesta?\nSinä voit
+    <string name="share_granphone_subtext">Hei, tiedätkö joitain, jotka ehkä haluavat tietää GranPhonesta?\nSinä voit
         kertoa siitä heille!
     </string>
     <string name="share_GranPhone">Jaa GranPhonea</string>

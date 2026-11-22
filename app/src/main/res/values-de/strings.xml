@@ -223,7 +223,7 @@
     <string name="share">Weiterleiten</string>
     <string name="share_actual_text">Hallo, Ich benutze die Plattform \"GranPhone\". Sie macht die Bedienoberfläche des Handys größer, einfacher und netter.\nInteressiert dich das auch?\nDu kannst sie kostenlos herunterladen!\nFolge unten stehendem Link für mehr Informationen:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Hallo, kennst du Personen, die sich vielleicht für GranPhone interessieren?\nErzähl ihnen von der App!\"
+    <string name="share_granphone_subtext">Hallo, kennst du Personen, die sich vielleicht für GranPhone interessieren?\nErzähl ihnen von der App!\"
     </string>
     <string name="share_GranPhone">Anderen von GranPhone erzählen</string>
     <string name="share_contact">Kontakt weiterleiten</string>

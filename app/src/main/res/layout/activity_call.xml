@@ -23,13 +23,13 @@
             android:id="@+id/iv_photo"
             android:layout_width="88dp"
             android:layout_height="88dp"
+            android:layout_marginEnd="12dp"
             android:importantForAccessibility="no"
             android:src="@drawable/face_on_button" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -83,7 +83,9 @@
             android:layout_height="120dp"
             android:background="@drawable/call_button_green"
             android:drawableStart="@drawable/ic_call_white"
-            android:text="@string/answer_call" />
+            android:maxLines="1"
+            android:text="@string/answer_call"
+            app:autoSizeTextType="uniform" />
 
         <Button
             android:id="@+id/bt_decline"
@@ -92,7 +94,9 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/call_button_red"
             android:drawableStart="@drawable/ic_call_end_white"
-            android:text="@string/decline_call" />
+            android:maxLines="1"
+            android:text="@string/decline_call"
+            app:autoSizeTextType="uniform" />
     </LinearLayout>
 
     <LinearLayout
@@ -108,8 +112,10 @@
             android:layout_height="88dp"
             android:background="@drawable/call_button_gray"
             android:drawableStart="@drawable/ic_volume_up_white"
+            android:maxLines="1"
             android:text="@string/speaker_turn_on"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            app:autoSizeTextType="uniform" />
 
         <Button
             android:id="@+id/bt_hangup"
@@ -118,7 +124,9 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/call_button_red"
             android:drawableStart="@drawable/ic_call_end_white"
-            android:text="@string/hang_up" />
+            android:maxLines="1"
+            android:text="@string/hang_up"
+            app:autoSizeTextType="uniform" />
     </LinearLayout>
 
 </LinearLayout>

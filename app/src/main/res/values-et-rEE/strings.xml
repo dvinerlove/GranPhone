@@ -230,7 +230,7 @@
         menüüd suureks, lihtsaks ja sõbralikuks.\nKas pakub huvi?\nRakendus on tasuta.\nRohkem infot veebilehelt:\n
         \nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Kas teate kedagi, kellele võiks meeldida GranPhone?\nJagage teistega
+    <string name="share_granphone_subtext">Kas teate kedagi, kellele võiks meeldida GranPhone?\nJagage teistega
     </string>
     <string name="share_GranPhone">Jaga GranPhone\'i</string>
     <string name="share_contact">Jaga kontakti</string>

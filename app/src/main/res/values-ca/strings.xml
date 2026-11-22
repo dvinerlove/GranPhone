@@ -241,7 +241,7 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
 	\n
 	https://github.com/dvinerlove/GranPhone
 </string>
-    <string name="share_bald_phone_subtext">Hey, coneix a algú que pugui estar interessat en GranPhone?\n
+    <string name="share_granphone_subtext">Hey, coneix a algú que pugui estar interessat en GranPhone?\n
 	Pot compartir-ho amb ells!"
 </string>
     <string name="share_GranPhone">Compartir GranPhone</string>

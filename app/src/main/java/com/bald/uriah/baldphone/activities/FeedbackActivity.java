@@ -40,8 +40,7 @@ public class FeedbackActivity extends BaldActivity {
                 Intent intent =
                         new Intent(Intent.ACTION_SENDTO)
                                 .setData(Uri.parse("mailto:"))
-                                .putExtra(Intent.EXTRA_EMAIL, new String[]{"baldphone.contact@gmail.com"})
-                                .putExtra(Intent.EXTRA_SUBJECT, "BaldPhone feedback")
+                                .putExtra(Intent.EXTRA_SUBJECT, "GranPhone feedback")
                                 .putExtra(Intent.EXTRA_TEXT, String.valueOf(text));
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);

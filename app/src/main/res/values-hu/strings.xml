@@ -216,7 +216,7 @@ Megérkezett a GranPhone NAGY billentyűzete!</string>
     <string name="share_actual_text">Szia!
 A GranPhone platformot használom, ami lecseréli a telefonom kis gombjait nagy jól olvasható felratokra. Ha téged is érdekel nézd meg ezen az oldalon:
 https://github.com/dvinerlove/GranPhone</string>
-    <string name="share_bald_phone_subtext">Tudsz valakit akit érdekelne a GranPhone felület? Küld el neki!</string>
+    <string name="share_granphone_subtext">Tudsz valakit akit érdekelne a GranPhone felület? Küld el neki!</string>
     <string name="share_GranPhone">GranPhone megosztása</string>
     <string name="share_contact">Névjegy megosztása</string>
     <string name="share_differently">Megosztás másik alkalmazáson keresztül</string>

@@ -319,10 +319,12 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
             tv_number.setText(number);
             tv_number.setVisibility(number.isEmpty() ? View.GONE : View.VISIBLE);
         }
-        if (photo != null)
+        if (photo != null) {
             iv_photo.setImageURI(Uri.parse(photo));
-        else
-            iv_photo.setImageResource(R.drawable.face_on_button);
+            iv_photo.setVisibility(View.VISIBLE);
+        } else {
+            iv_photo.setVisibility(View.GONE);
+        }
     }
 
     private void setProximityScreenOff(boolean on) {

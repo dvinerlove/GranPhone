@@ -25,11 +25,11 @@ import android.widget.TextView;
 import com.bald.uriah.baldphone.R;
 
 public class TutorialFragment1 extends TutorialFragment {
-    private TextView hello, and_welcome_to_baldphone;
+    private TextView hello, and_welcome_to_granphone;
 
     protected void attachXml() {
         hello = root.findViewById(R.id.hello);
-        and_welcome_to_baldphone = root.findViewById(R.id.and_welcome_to_baldphone);
+        and_welcome_to_granphone = root.findViewById(R.id.and_welcome_to_granphone);
     }
 
     private void firstAnimation(final View view, final Runnable afterAnimation, final long msDuration) {
@@ -67,13 +67,13 @@ public class TutorialFragment1 extends TutorialFragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (hello != null)
             if (isVisibleToUser) {
-                firstAnimation(hello, () -> and_welcome_to_baldphone.setVisibility(View.VISIBLE), 2000);
+                firstAnimation(hello, () -> and_welcome_to_granphone.setVisibility(View.VISIBLE), 2000);
             }
     }
 
     @Override
     protected void actualSetup() {
-        firstAnimation(hello, () -> and_welcome_to_baldphone.setVisibility(View.VISIBLE), 2000);
+        firstAnimation(hello, () -> and_welcome_to_granphone.setVisibility(View.VISIBLE), 2000);
     }
 
     @Override

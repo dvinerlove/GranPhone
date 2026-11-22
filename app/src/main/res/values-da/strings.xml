@@ -214,7 +214,7 @@
     <string name="share">Del</string>
     <string name="share_actual_text">Hej,\nJeg bruger en app, som hedder "GranPhone", som giver telefonen et overskueligt udseende med tydelige knapper og simple indstillinger.\nHvis du er intersseret, kan du hente den her gratis:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Kender du nogen, som du synes skal høre om GranPhone?\nSå kan du dele den med dem her!</string>
+    <string name="share_granphone_subtext">Kender du nogen, som du synes skal høre om GranPhone?\nSå kan du dele den med dem her!</string>
     <string name="share_GranPhone">Del et link til GranPhone</string>
     <string name="share_contact">Del kontaktinformation</string>
     <string name="share_differently">Del via en anden app</string>

@@ -87,10 +87,10 @@ public class S {
         context.startActivity(new Intent(context, ShareActivity.class).putExtra(ShareActivity.EXTRA_SHARABLE_URI, intent));
     }
 
-    public static void shareBaldPhone(@NonNull final BaldActivity baldActivity) {
+    public static void shareGranPhone(@NonNull final BaldActivity baldActivity) {
         BDB.from(baldActivity)
                 .setTitle(R.string.share_GranPhone)
-                .setSubText(R.string.share_bald_phone_subtext)
+                .setSubText(R.string.share_granphone_subtext)
                 .addFlag(BDialog.FLAG_YES | BDialog.FLAG_NO)
                 .setPositiveButtonListener(params -> {
                     S.share(baldActivity, new Intent(Intent.ACTION_SEND)

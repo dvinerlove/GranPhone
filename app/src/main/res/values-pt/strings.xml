@@ -220,7 +220,7 @@
     <string name="share">Partillhar</string>
     <string name="share_actual_text">Olá, estou a utilizar uma aplicação chamada "GranPhone" \nque substitui a interface do telefone por uma interface grande, simples e intuitiva.\n
         Caso esteja interessado Podes obtê-la gratuitamente no link abaixo \n\nhttps://github.com/dvinerlove/GranPhone</string>
-    <string name="share_bald_phone_subtext">Oi, conhece alguém que gostaria de saber sobre o GranPhone? \n Pode partilhá-lo com eles!</string>
+    <string name="share_granphone_subtext">Oi, conhece alguém que gostaria de saber sobre o GranPhone? \n Pode partilhá-lo com eles!</string>
     <string name="share_GranPhone">Partilhar GranPhone</string>
     <string name="share_contact">Partilhar Contacto</string>
     <string name="share_differently">Partilhar por outras aplicações</string>

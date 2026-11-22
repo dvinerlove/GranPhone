@@ -223,7 +223,7 @@
     <string name="share">გაზიარება</string>
     <string name="share_actual_text">სალამი, მე ვიყენებ ამ პლატფორმას "GranPhone"-ს,რომელიც ცვლის ტელეფონის ინტერფეისს დიდ, მარტივ და მეგობრულზე.\nდაინტერესდი?\nშენ შეგიძლია გადმოწერო ის უფასოდ!\nნახეთ მეტი ინფორმაცისათვის:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">იცნობთ ადამიანებს,რომლებსაც შეიძლება სურდეთ მელოტი ტელეფონის შესახებ მეტის გაგება?\nთქვენ შეგიძლიათ გაუზიაროთ ის მათ!"
+    <string name="share_granphone_subtext">იცნობთ ადამიანებს,რომლებსაც შეიძლება სურდეთ მელოტი ტელეფონის შესახებ მეტის გაგება?\nთქვენ შეგიძლიათ გაუზიაროთ ის მათ!"
     </string>
     <string name="share_GranPhone">გააზიარე GranPhone</string>
     <string name="share_contact">კონტაქტთან გაზიარება</string>

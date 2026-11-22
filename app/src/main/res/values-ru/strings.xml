@@ -220,7 +220,7 @@
     <string name="share">Поделиться</string>
     <string name="share_actual_text">Привет, Я использую платформу названную "GranPhone" которая заменяет интерфейс телефона на более крупный, простой и дружелюбный.\nЗаинтересовался?\nВы можете скачать его бесплатно!\nоткройте ссылку ниже для получения дополнительной информации:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Эй, знаете кого-нибудь, кто хотел бы узнать о GranPhone?\nВы можете поделиться им с ними!"
+    <string name="share_granphone_subtext">Эй, знаете кого-нибудь, кто хотел бы узнать о GranPhone?\nВы можете поделиться им с ними!"
     </string>
     <string name="share_GranPhone">Поделиться GranPhone</string>
     <string name="share_contact">Поделиться Контактом</string>

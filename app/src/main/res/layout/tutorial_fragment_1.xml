@@ -32,7 +32,7 @@
         android:textSize="60dp" />
 
     <TextView
-        android:id="@+id/and_welcome_to_baldphone"
+        android:id="@+id/and_welcome_to_granphone"
         style="@style/BackgroundText.Huge"
         android:layout_width="match_parent"
         android:layout_height="0dp"

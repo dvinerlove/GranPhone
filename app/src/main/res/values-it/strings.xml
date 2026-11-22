@@ -220,7 +220,7 @@
         più grande e facile da usare.\nTi interessa?\nPuoi scaricarla gratuitamente!\nGuarda questo link
         per altre informazioni:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Conosci qualcuno che potrebbe essere interessato a GranPhone? Fagli sapere che esiste!</string>
+    <string name="share_granphone_subtext">Conosci qualcuno che potrebbe essere interessato a GranPhone? Fagli sapere che esiste!</string>
     <string name="share_GranPhone">Condividi GranPhone</string>
     <string name="share_contact">Condividi contatto</string>
     <string name="share_differently">Condividi per mezzo di un\'altra app</string>

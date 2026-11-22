@@ -221,7 +221,7 @@
     <string name="share_actual_text">Cześć, używam aplikacji "GranPhone" która sprawia że interfejs telefonu jest duży, prosty i przyjazny. \nZaintesowany/a?\nTa aplikacja jest darmowa!\nkliknij link
         poniżej aby zobaczyć więcej informacji:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Znasz kogoś kto też chciałby używać GranPhone ? Udostępnij !</string>
+    <string name="share_granphone_subtext">Znasz kogoś kto też chciałby używać GranPhone ? Udostępnij !</string>
     <string name="share_GranPhone">Udostępnij GranPhone</string>
     <string name="share_contact">Udostępnij kontakt</string>
     <string name="share_differently">Udostępnij przez inną aplikację</string>

@@ -221,7 +221,7 @@
     <string name="share">Dela</string>
     <string name="share_actual_text">Hej, jag använder appen "GranPhone" som ersätter telefonens ursprungliga användargränssnitt mot ett som är större, tydligare och enklare.\nLåter det intressant?\nDu kan ladda ner det gratis!\nBesök länken nedan för mer information:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Känner du till någon som kan ha nytta av GranPhone?\n\n
+    <string name="share_granphone_subtext">Känner du till någon som kan ha nytta av GranPhone?\n\n
       Du kan berätta för dem om appen!"
     </string>
     <string name="share_GranPhone">Berätta om GranPhone</string>
