@@ -40,7 +40,7 @@
     <string name="alarm_name">Название Будильника</string>
     <string name="alarm_volume">Громкость Будильника</string>
     <string name="alarm_volume_subtext">Выберите громкость будильника.\nГромкость увеличивается с лева на право.</string>
-    <string name="alarms">Будильники</string>
+    <string name="alarms">Будильник</string>
 
     <string name="alarms_repeats_every">Повторять каждые</string>
     <string name="all_alarms">Все Будильники</string>
@@ -49,7 +49,7 @@
     <string name="an_error_has_occurred">Произошла ошибка!</string>
     <string name="and_welcome_to_GranPhone">и добро пожаловать в GranPhone</string>
 
-    <string name="apps">Приложения</string>
+    <string name="apps">Программы</string>
     <string name="are_you_sure_you_want_to_delete___">Вы уверенны что хотите удалить %s?</string>
     <string name="assistant">Ассистент</string>
     <string name="flashlight">Фонарик</string>
@@ -184,7 +184,7 @@
     <string name="personalization_settings">Персонализация</string>
     <string name="phone">Телефон</string>
     <string name="photo">Фотография</string>
-    <string name="photos">Фотографии</string>
+    <string name="photos">Фото</string>
     <string name="pill_added">Таблетка добавлена!</string>
     <string name="pill_name">Название Таблетки</string>
     <string name="pills">Таблетки</string>
