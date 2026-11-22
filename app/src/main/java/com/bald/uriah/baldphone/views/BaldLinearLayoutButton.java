@@ -144,7 +144,7 @@ public class BaldLinearLayoutButton extends LinearLayout implements BaldButtonIn
 
     @Override
     public void setOnTouchListener(OnTouchListener l) {
-        if (longPressesShorter)
+        if (baldButtonTouchListener != null)
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);

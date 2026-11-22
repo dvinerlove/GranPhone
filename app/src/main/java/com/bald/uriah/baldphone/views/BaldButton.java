@@ -122,7 +122,7 @@ public class BaldButton extends androidx.appcompat.widget.AppCompatTextView impl
 
     @Override
     public void setOnTouchListener(OnTouchListener l) {
-        if (longPressesShorter)
+        if (baldButtonTouchListener != null)
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);

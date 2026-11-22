@@ -128,7 +128,7 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void setOnTouchListener(OnTouchListener l) {
-        if (longPressesShorter)
+        if (baldButtonTouchListener != null)
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);

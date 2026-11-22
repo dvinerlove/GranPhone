@@ -122,7 +122,7 @@ public class BaldImageButton extends androidx.appcompat.widget.AppCompatImageVie
 
     @Override
     public void setOnTouchListener(OnTouchListener l) {
-        if (longPressesShorter)
+        if (baldButtonTouchListener != null)
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);

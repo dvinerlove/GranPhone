@@ -123,7 +123,7 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
 
     @Override
     public void setOnTouchListener(OnTouchListener l) {
-        if (longPressesShorter)
+        if (baldButtonTouchListener != null)
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);
