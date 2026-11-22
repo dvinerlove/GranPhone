@@ -28,7 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/pending_update" />
+        app:title="@string/pending_update"
+        app:show_back="true" />
 
     <TextView
         android:id="@+id/textView2"

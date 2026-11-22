@@ -29,7 +29,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/settings" />
+        app:title="@string/settings"
+        app:show_back="true" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="0dp"

@@ -125,7 +125,7 @@ public class SettingsActivity extends BaldActivity {
 
         vibrator = (sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE)) ? (Vibrator) getSystemService(VIBRATOR_SERVICE) : null;
         baldTitleBar = findViewById(R.id.bald_title_bar);
-        baldTitleBar.getBt_back().setOnClickListener((v) -> onBackPressed());
+        baldTitleBar.setBackListener((v) -> onBackPressed());
 
         recyclerView = findViewById(R.id.child);
 

@@ -126,7 +126,7 @@ public class AddContactActivity extends BaldActivity {
             v.setVisibility(View.INVISIBLE);
         });
         save.setOnClickListener(v -> save());
-        ((BaldTitleBar) findViewById(R.id.bald_title_bar)).getBt_back().setOnClickListener(v -> {
+        ((BaldTitleBar) findViewById(R.id.bald_title_bar)).setBackListener(v -> {
             if (safeToExit())
                 finish();
             else

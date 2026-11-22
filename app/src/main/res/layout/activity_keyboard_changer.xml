@@ -28,7 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/set_keyboard" />
+        app:title="@string/set_keyboard"
+        app:show_back="true" />
 
     <fragment
         android:id="@+id/fragment"

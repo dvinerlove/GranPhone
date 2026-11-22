@@ -29,7 +29,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/permissions_part" />
+        app:title="@string/permissions_part"
+        app:show_back="true" />
 
     <TextView
         android:id="@+id/textView4"

@@ -28,7 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/notifications" />
+        app:title="@string/notifications"
+        app:show_back="true" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:id="@+id/scroller"

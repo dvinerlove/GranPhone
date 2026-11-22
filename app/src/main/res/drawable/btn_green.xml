@@ -18,7 +18,7 @@
     android:shape="rectangle">
     <corners android:radius="?attr/bald_button_corners_radius" />
 
-    <solid android:color="@color/received" />
+    <solid android:color="?attr/bald_brand" />
 
 
     <stroke

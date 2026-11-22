@@ -26,11 +26,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/color_1"
-        app:title="Dad" />
+        app:title="Dad"
+        app:show_back="true" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <com.bald.uriah.baldphone.views.ModularScrollView
             android:id="@+id/single_contact_scroll_view"

@@ -83,7 +83,7 @@ public class PermissionActivity extends BaldActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(new PermissionRecyclerViewAdapter());
         BaldTitleBar baldTitleBar = findViewById(R.id.bald_title_bar);
-        baldTitleBar.getBt_back().setOnClickListener(v -> calmyBDB());
+        baldTitleBar.setBackListener(v -> calmyBDB());
 
     }
 

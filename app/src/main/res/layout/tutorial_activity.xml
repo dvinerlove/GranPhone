@@ -22,4 +22,4 @@
     android:background="?bald_background"
     android:orientation="vertical"
     app:show_hints="true"
-    app:use_circles="true" />
+    app:use_circles="false" />

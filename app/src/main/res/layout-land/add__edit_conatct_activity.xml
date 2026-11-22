@@ -36,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/add_contact" />
+        app:title="@string/add_contact"
+        app:show_back="true" />
 
     <com.bald.uriah.baldphone.views.BaldEditText
         android:id="@+id/et_name"

@@ -154,6 +154,14 @@ public class BaldTitleBar extends LinearLayout {
     }
 
     /**
+     * Replaces the default finish() behavior on whichever back control is
+     * actually shown — the icon, or the text view when show_back is set.
+     */
+    public void setBackListener(View.OnClickListener listener) {
+        (tv_back != null ? tv_back : bt_back).setOnClickListener(listener);
+    }
+
+    /**
      * use with cation
      *
      * @return btBack
