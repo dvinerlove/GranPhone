@@ -1,18 +1,15 @@
-<h2><b>Description</b></h2>
-BaldPhone is a platform which replaces the phone’s interface with a bigger, simpler and friendlier one.
-It is built for elderly people, people with motoric problems and people who need a visual aid.
-It’s 100% free and open source. It is made out of a desire to help the community and is purely a goodwill product.
+GranPhone replaces the phone's interface with a bigger, simpler one —
+built for elderly people who find standard smartphones confusing.
 
-<h2><b>Main features</b></h2>
- - Home Launcher
- - Keyboard
- - Video Tutorials
- - Reminders For Pills
- - Contacts and Phone Applications
- - Voice Assistant
- - Alarms
- - Photos and Videos Viewer
- - Notification Management
- - SOS Button
- - Advanced Settings
- - Much More!
+Features:
+- Home screen with large tiles: Phone, Contacts, SOS, Messages, Photos, Alarms, Flashlight
+- Default dialer with an oversized incoming/outgoing call screen
+- SOS button with a configurable emergency contact
+- Pill reminders
+- Optional kiosk mode (device owner) to lock the phone to essentials
+- Immersive full screen, dark and light themes
+- Works offline on old hardware (Android 6+, 1 GB RAM)
+- No ads, no accounts, no telemetry
+
+Forked from BaldPhone (Apache 2.0), with fixes and simplifications
+for real low-end devices.

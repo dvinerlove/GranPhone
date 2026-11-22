@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GranPhone — a phone your grandmother can actually use</title>
+<meta name="description" content="Free, open-source Android launcher and dialer for elderly users. Big buttons, offline, no ads, no accounts. Forked from BaldPhone.">
+<style>
+  :root { --bg:#111316; --card:#22262b; --text:#e8eaed; --dim:#9aa0a6; --green:#2e7d32; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.5; }
+  .wrap { max-width:860px; margin:0 auto; padding:0 20px; }
+  header { text-align:center; padding:64px 20px 32px; }
+  h1 { font-size:clamp(40px,8vw,72px); letter-spacing:-1px; }
+  .tag { font-size:clamp(18px,3vw,26px); color:var(--dim); margin-top:12px; }
+  .cta { display:inline-block; margin-top:32px; background:var(--green); color:#fff; font-size:20px; font-weight:600; padding:16px 40px; border-radius:14px; text-decoration:none; }
+  .cta:hover { filter:brightness(1.15); }
+  .shots { display:flex; gap:16px; justify-content:center; padding:32px 0; flex-wrap:wrap; }
+  .shots img { width:220px; border-radius:18px; border:1px solid #333; }
+  section { padding:40px 0; }
+  h2 { font-size:30px; margin-bottom:20px; }
+  ul.feat { list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  ul.feat li { background:var(--card); border-radius:14px; padding:18px 20px; font-size:18px; }
+  ul.feat li b { color:#7fd48a; }
+  .vs { width:100%; border-collapse:collapse; font-size:17px; }
+  .vs td,.vs th { padding:10px 14px; border-bottom:1px solid #333; text-align:left; }
+  .vs th { color:var(--dim); font-weight:500; }
+  .install { background:var(--card); border-radius:14px; padding:24px; font-size:18px; }
+  .install code { background:#000; padding:2px 8px; border-radius:6px; font-size:16px; }
+  footer { text-align:center; color:var(--dim); padding:40px 0 64px; font-size:15px; }
+  a { color:#8ab4f8; }
+</style>
+</head>
+<body>
+<header>
+  <h1>GranPhone</h1>
+  <p class="tag">A phone your grandmother can actually use.<br>Big buttons. No ads. No accounts. Free &amp; open source.</p>
+  <a class="cta" href="https://github.com/dvinerlove/GranPhone/releases">Download APK</a>
+</header>
+<div class="wrap">
+  <div class="shots">
+    <img src="screenshots/home.png" alt="GranPhone home screen — large tiles">
+    <img src="screenshots/dialer.png" alt="GranPhone dialer — huge keypad">
+    <img src="screenshots/sos.png" alt="GranPhone SOS screen">
+  </div>
+  <section>
+    <h2>What it is</h2>
+    <ul class="feat">
+      <li><b>One screen, huge tiles</b> — Phone, Contacts, SOS, Messages, Photos, Alarms, Flashlight</li>
+      <li><b>Real dialer built in</b> — giant keypad and an oversized incoming-call screen</li>
+      <li><b>SOS button</b> — one tap calls a family member</li>
+      <li><b>Kiosk mode</b> — lock the phone to the essentials, PIN to exit</li>
+      <li><b>Runs on old phones</b> — Android 6+, 1 GB RAM, fully offline</li>
+      <li><b>Nothing to betray them</b> — no ads, no accounts, no telemetry, auditable code</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Why not the others</h2>
+    <table class="vs">
+      <tr><th></th><th>Price</th><th>Open source</th><th>Ads</th></tr>
+      <tr><td><b>GranPhone</b></td><td>Free</td><td>Apache 2.0</td><td>Never</td></tr>
+      <tr><td>BIG Launcher</td><td>$41+ lifetime / $14 yr</td><td>No — needs 4 separate apps</td><td>No</td></tr>
+      <tr><td>Grand Launcher</td><td>$10.99</td><td>No — plus 2 more paid apps</td><td>No</td></tr>
+      <tr><td>"Free" senior launchers</td><td>"Free"</td><td>No</td><td>Yes — seniors tap them and get lost</td></tr>
+    </table>
+  </section>
+  <section>
+    <h2>Install</h2>
+    <div class="install">
+      <p>1. Download the APK from <a href="https://github.com/dvinerlove/GranPhone/releases">Releases</a></p>
+      <p>2. On the phone: press HOME → pick <b>GranPhone</b> → <b>Always</b></p>
+      <p>3. Set GranPhone as the default Phone app for the big-button call screen</p>
+      <p style="margin-top:12px;color:var(--dim)">Full guide incl. kiosk mode:
+      <a href="https://github.com/dvinerlove/GranPhone/blob/master/docs/INSTALL.md">docs/INSTALL.md</a> (English + Русский)</p>
+    </div>
+  </section>
+  <footer>
+    Forked from <a href="https://github.com/UriahShaulMandel/BaldPhone">BaldPhone</a> via
+    <a href="https://github.com/dhqdev/vophone">vophone</a> · Apache 2.0 ·
+    <a href="https://github.com/dvinerlove/GranPhone">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>

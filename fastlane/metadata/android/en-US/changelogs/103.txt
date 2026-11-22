@@ -1,0 +1,1 @@
+GranPhone fork: cleaned settings, immersive home screen, memory status, crash fixes for low-end devices.

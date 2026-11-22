@@ -1,1 +1,1 @@
-Replace your phone's interface with a big, simple and friendly one
+Big-button launcher and dialer for elderly users. Offline, no ads.
