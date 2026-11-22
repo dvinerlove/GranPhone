@@ -69,7 +69,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/call_button_red"
         android:text="@string/clear_data"
-        android:textColor="#FFFFFF"
+        android:textColor="?attr/bald_card"
         app:layout_constraintBottom_toBottomOf="@+id/bt_clear_cache"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintLeft_toRightOf="@id/bt_clear_cache"

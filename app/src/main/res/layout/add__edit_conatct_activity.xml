@@ -156,7 +156,7 @@
         android:layout_margin="12dp"
         android:background="@drawable/call_button_green"
         android:text="@string/save"
-        android:textColor="#FFFFFF"
+        android:textColor="?attr/bald_card"
         android:textStyle="bold" />
 
 </LinearLayout>

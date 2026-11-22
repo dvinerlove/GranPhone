@@ -109,7 +109,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/emergency_services"
-            android:textColor="#FFFFFF"
+            android:textColor="?attr/bald_card"
             android:textSize="@dimen/large"
             android:textStyle="bold" />
     </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>

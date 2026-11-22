@@ -56,6 +56,14 @@
         <item name="bald_text_on_background">@color/bald_text_on_background_light</item>
         <item name="bald_text_on_button">@color/bald_text_on_button_light</item>
         <item name="bald_text_on_key">@color/bald_text_on_key_light</item>
+        <item name="bald_surface">@color/bald_surface_light</item>
+        <item name="bald_card">@color/bald_card_light</item>
+        <item name="bald_card_border">@color/bald_card_border_light</item>
+        <item name="bald_brand">@color/bald_brand_light</item>
+        <item name="bald_danger">@color/bald_danger_light</item>
+        <item name="bald_info">@color/bald_info_light</item>
+        <item name="bald_text_primary">@color/bald_text_primary_light</item>
+        <item name="bald_text_secondary">@color/bald_text_secondary_light</item>
     </style>
 
     <style name="bald_dark" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -84,6 +92,14 @@
         <item name="bald_text_on_background">@color/bald_text_on_background_dark</item>
         <item name="bald_text_on_button">@color/bald_text_on_button_dark</item>
         <item name="bald_text_on_key">@color/bald_text_on_key_dark</item>
+        <item name="bald_surface">@color/bald_surface_dark</item>
+        <item name="bald_card">@color/bald_card_dark</item>
+        <item name="bald_card_border">@color/bald_card_border_dark</item>
+        <item name="bald_brand">@color/bald_brand_dark</item>
+        <item name="bald_danger">@color/bald_danger_dark</item>
+        <item name="bald_info">@color/bald_info_dark</item>
+        <item name="bald_text_primary">@color/bald_text_primary_dark</item>
+        <item name="bald_text_secondary">@color/bald_text_secondary_dark</item>
     </style>
 
 
