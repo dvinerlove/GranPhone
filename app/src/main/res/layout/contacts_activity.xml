@@ -47,14 +47,27 @@
         android:layout_height="64dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/style_for_buttons"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_favorite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bald_title_bar" />
+
+    <ImageView
+        android:id="@+id/bt_favorite"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/style_for_buttons"
+        android:contentDescription="@string/add_to_favorite"
+        android:padding="16dp"
+        android:src="@drawable/star_gold"
+        app:layout_constraintBottom_toBottomOf="@id/bt_add_contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bt_add_contact" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
