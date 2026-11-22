@@ -208,6 +208,7 @@
         app:layout_constraintEnd_toEndOf="@+id/long_presses"
         app:layout_constraintStart_toStartOf="@+id/long_presses" />
 
+    <!-- maxLines="2" relies on every *_level string staying <= 2 words; autosize only stops splitting a word when a split would add a third line -->
     <TextView
         android:id="@+id/long_presses"
         app:autoSizeTextType="uniform"
