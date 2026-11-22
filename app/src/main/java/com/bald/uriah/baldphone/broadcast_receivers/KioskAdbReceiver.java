@@ -18,17 +18,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.utils.KioskManager;
 
 /**
  * Recovery from a computer (e.g. forgotten kiosk password). Protected by android.permission.DUMP,
  * so only the adb shell / system can send it:
- * adb shell am broadcast -a com.bald.uriah.baldphone.action.KIOSK_OFF -n com.bald.uriah.baldphone/.broadcast_receivers.KioskAdbReceiver
- * adb shell am broadcast -a com.bald.uriah.baldphone.action.REMOVE_DEVICE_OWNER -n com.bald.uriah.baldphone/.broadcast_receivers.KioskAdbReceiver
+ * adb shell am broadcast -a com.granphone.launcher.action.KIOSK_OFF -n com.granphone.launcher/.broadcast_receivers.KioskAdbReceiver
+ * adb shell am broadcast -a com.granphone.launcher.action.REMOVE_DEVICE_OWNER -n com.granphone.launcher/.broadcast_receivers.KioskAdbReceiver
  */
 public class KioskAdbReceiver extends BroadcastReceiver {
-    public static final String ACTION_KIOSK_OFF = "com.bald.uriah.baldphone.action.KIOSK_OFF";
-    public static final String ACTION_REMOVE_DEVICE_OWNER = "com.bald.uriah.baldphone.action.REMOVE_DEVICE_OWNER";
+    public static final String ACTION_KIOSK_OFF = BuildConfig.APPLICATION_ID + ".action.KIOSK_OFF";
+    public static final String ACTION_REMOVE_DEVICE_OWNER = BuildConfig.APPLICATION_ID + ".action.REMOVE_DEVICE_OWNER";
 
     @Override
     public void onReceive(Context context, Intent intent) {

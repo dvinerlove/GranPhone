@@ -25,6 +25,7 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.views.BaldButton;
@@ -89,7 +90,7 @@ public class TutorialFragment3 extends TutorialFragment {
         final List<InputMethodInfo> inputMethodInfoList = im.getEnabledInputMethodList();
         boolean turnedOn = false;
         for (InputMethodInfo inputMethodInfo : inputMethodInfoList) {
-            if (inputMethodInfo.getId().equals("com.bald.uriah.baldphone/.keyboard.BaldInputMethodService")) {
+            if (inputMethodInfo.getId().equals(BuildConfig.APPLICATION_ID + "/.keyboard.BaldInputMethodService")) {
                 turnedOn = true;
                 break;
             }

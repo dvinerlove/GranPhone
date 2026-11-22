@@ -326,8 +326,8 @@
             android:exported="true"
             android:permission="android.permission.DUMP">
             <intent-filter>
-                <action android:name="com.bald.uriah.baldphone.action.KIOSK_OFF" />
-                <action android:name="com.bald.uriah.baldphone.action.REMOVE_DEVICE_OWNER" />
+                <action android:name="${applicationId}.action.KIOSK_OFF" />
+                <action android:name="${applicationId}.action.REMOVE_DEVICE_OWNER" />
             </intent-filter>
         </receiver>
         <receiver

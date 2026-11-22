@@ -18,7 +18,7 @@
 
     <string name="app_name" translatable="false">GranPhone</string>
 
-    <string name="authorities" translatable="false">com.bald.uriah.baldphone.fileprovider</string>
+    <string name="authorities" translatable="false">com.granphone.launcher.fileprovider</string>
 
     <string name="empty" translatable="false" />
 
