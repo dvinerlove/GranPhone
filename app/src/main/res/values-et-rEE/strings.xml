@@ -17,7 +17,7 @@
 <resources>
     <string name="about">Teave</string>
     <string name="about_subtext">Tere.\nMinu nimi on Uriah Shaul Mandel, ma olen selle rakenduse looja.\n
-         Olen seda rakendust arendanud terve oma täiskasvanu ea. Programm on kõigile kasutamiseks tasuta.\nKui soovite võite minuga, inglise keeles, ühendust võtta: nbaldphone.contact@gmail.com
+         Olen seda rakendust arendanud terve oma täiskasvanu ea. Programm on kõigile kasutamiseks tasuta.\nKui soovite võite minuga, inglise keeles, ühendust võtta: nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Hõlbustuse tase</string>
     <string name="accessibility_settings">Hõlbustusfunktsioonid</string>
@@ -52,7 +52,7 @@
     <string name="allow">Luba</string>
     <string name="already_setted">Juba määratud.\nMuutmiseks toksa siin</string>
     <string name="an_error_has_occurred">Veateade!</string>
-    <string name="and_welcome_to_baldphone">ja tere tulemast Baldphone\'i</string>
+    <string name="and_welcome_to_GranPhone">ja tere tulemast GranPhone\'i</string>
 
     <string name="apps">Rakendused</string>
     <string name="are_you_sure_you_want_to_delete___">Kas olete kindel, et soovite %s\'i kustutada?</string>
@@ -60,7 +60,7 @@
     <string name="at_least_one_day_must_be_selected">Vähemalt ühe päeva peab valima.</string>
     <string name="auto_brightness">Automaatne\nheledus</string>
     <string name="backspace">tagasilüke</string>
-    <string name="baldphone_bla_allow_permission">Palun andke järgmised õigused:</string>
+    <string name="GranPhone_bla_allow_permission">Palun andke järgmised õigused:</string>
     <string name="blocked">Keelatud</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Heledus</string>
@@ -75,7 +75,7 @@
     <string name="camera_subtext">Taskulambi kasutamiseks on vaja juurdepääsuluba.</string>
     <string name="cancel">Tühista</string>
     <string name="change_pills_time">Muuda tablettide võtmise aega</string>
-    <string name="change_system_settings_subtext">Palun anna luba BaldPhone\'il muuta seadeid nagu šrifti suurendamine
+    <string name="change_system_settings_subtext">Palun anna luba GranPhone\'il muuta seadeid nagu šrifti suurendamine
         ja heleduse muutmine.
     </string>
     <string name="choose_friday">R</string>
@@ -88,7 +88,7 @@
     <string name="clear">Tühjenda</string>
     <string name="clear_cache">Tühjenda vahemälu</string>
     <string name="clear_data">Tühjenda kõik andmed</string>
-    <string name="clear_data_subtext">Kas te soovite kõik kasutaja andmed kustutada? Peale seda on BaldPhone\'i rakendus samas seisus nagu   peale paigaldamist. </string>
+    <string name="clear_data_subtext">Kas te soovite kõik kasutaja andmed kustutada? Peale seda on GranPhone\'i rakendus samas seisus nagu   peale paigaldamist. </string>
     <string name="clear_data_subtext2">100%?</string>
     <string name="clear_data_subtext3">kindel?\nvajutades, jah, kustutatakse kõik andmed.</string>
     <string name="clock">Kell</string>
@@ -99,7 +99,7 @@
     <string name="contacts">Kontaktid</string>
     <string name="contacts_read_subtext">Kontaktide sirvimiseks on vaja juurdepääsuluba.</string>
     <string name="contacts_subtext">Uute kontaktide lisamiseks on vaja juurdepääsuluba.</string>
-    <string name="crash">Oih.\nBaldPhone jooksis kokku ja kohe taaskäivitub.</string>
+    <string name="crash">Oih.\nGranPhone jooksis kokku ja kohe taaskäivitub.</string>
     <string name="current_time">Kellaaeg</string>
     <string name="custom">Kohandatud</string>
     <string name="dark">Tume</string>
@@ -113,7 +113,7 @@
     <string name="edit">Muuda</string>
     <string name="email">E-post:</string>
     <string name="enable_notification_access">Luba juurdepääs teavitustele</string>
-    <string name="enable_notification_access_subtext">Palun andke BaldPhone\'ile juurdepääs teavitustele.</string>
+    <string name="enable_notification_access_subtext">Palun andke GranPhone\'ile juurdepääs teavitustele.</string>
     <string name="enter">Sisesta</string>
     <string name="enter_contact_or_phone_number">Sisesta kontakti nimi:</string>
     <string name="evening">Õhtul</string>
@@ -128,8 +128,8 @@
     </string>
     <string name="font_size">Šrifti suurus</string>
     <string name="friday">Reede</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Kui telefoni klaviatuur on liiga väike,
-        kasutage BaldPhone\'i BIG ehk suurt klaviatuuri.
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Kui telefoni klaviatuur on liiga väike,
+        kasutage GranPhone\'i BIG ehk suurt klaviatuuri.
     </string>
     <string name="hello">Tere</string>
     <string name="help">Videoõpetus</string>
@@ -140,8 +140,8 @@
     <string name="huge">Väga suur</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Tööle pandud:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Viimane
-        nõuanne:\nSoovitatav on kasutada BaldPhone\'i avakuva peamise käivitajana
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Viimane
+        nõuanne:\nSoovitatav on kasutada GranPhone\'i avakuva peamise käivitajana
     </string>
     <string name="language">keel</string>
     <string name="language_settings">Keel</string>
@@ -216,9 +216,9 @@
     <string name="save">Salvesta</string>
     <string name="send">Saada</string>
     <string name="set_default_dialer">Määra helistamise rakendus</string>
-    <string name="set_default_dialer_subtext">BaldPhone\'i peab määrama peamiseks helistamise rakenduseks.</string>
+    <string name="set_default_dialer_subtext">GranPhone\'i peab määrama peamiseks helistamise rakenduseks.</string>
     <string name="set_home_screen">Määra avakuva</string>
-    <string name="set_home_screen_subtext">BaldPhone\'i kasutamiseks peate rakenduse määrama avakuvaks.\n
+    <string name="set_home_screen_subtext">GranPhone\'i kasutamiseks peate rakenduse määrama avakuvaks.\n
         Soovi korral saab selle tagasi muuta seadetes.
     </string>
     <string name="set_keyboard">Määra klaviatuur</string>
@@ -226,13 +226,13 @@
     <string name="settings">Seaded</string>
     <string name="settings_permission">Seadete juurdepääsuluba</string>
     <string name="share">Jaga</string>
-    <string name="share_actual_text">Tere. Mina kasutan nutitelefoni rakendust \"BaldPhone\", mis muudab telefoni
+    <string name="share_actual_text">Tere. Mina kasutan nutitelefoni rakendust \"GranPhone\", mis muudab telefoni
         menüüd suureks, lihtsaks ja sõbralikuks.\nKas pakub huvi?\nRakendus on tasuta.\nRohkem infot veebilehelt:\n
-        \nhttps://baldphone.com
+        \nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Kas teate kedagi, kellele võiks meeldida BaldPhone?\nJagage teistega
+    <string name="share_bald_phone_subtext">Kas teate kedagi, kellele võiks meeldida GranPhone?\nJagage teistega
     </string>
-    <string name="share_baldphone">Jaga BaldPhone\'i</string>
+    <string name="share_GranPhone">Jaga GranPhone\'i</string>
     <string name="share_contact">Jaga kontakti</string>
     <string name="share_differently">Jaga mõne teise rakendusega</string>
     <string name="share_via_whatsapp">Jaga Whatsapp\'iga</string>
@@ -284,16 +284,16 @@
     <string name="no_alarms">Äratusi ei ole\nÄratuse saate lisada toksates\n\"Lisa äratus\"\nvõi\n\"Lisa taimer</string>
     <string name="no_pills">Tablette ei ole\nTableti saate lisada toksates\n\"Lisa tablett\"</string>
     <string name="clear_all_notifications">Kustuta kõik teavitused</string>
-    <string name="clear_cache_subtext">Kas olete kindel, et soovite vahemälu sisu kustutada? Ajutiste failide kustutamine vahemälust võib lahendada mõned BaldPhone\'is ilmnevad vead, aga ka avakuvale loodud otseteed eemaldatakse. </string>
-    <string name="permissions_calm">Tere. BaldPhone\'i sujuvaks töötamiseks peate andma järgnevad juurdepääsuload.
-        Mõned load võivad kõlada hirmsalt, aga see on ainus moodus, kuidas BaldPhone saab töötada. Rakendus
-        ei kogu andmeid ja ei tee liiga telefonile. Loa andmiseks vajutage OK või BaldPhone\'st väljumiseks, ei.
+    <string name="clear_cache_subtext">Kas olete kindel, et soovite vahemälu sisu kustutada? Ajutiste failide kustutamine vahemälust võib lahendada mõned GranPhone\'is ilmnevad vead, aga ka avakuvale loodud otseteed eemaldatakse. </string>
+    <string name="permissions_calm">Tere. GranPhone\'i sujuvaks töötamiseks peate andma järgnevad juurdepääsuload.
+        Mõned load võivad kõlada hirmsalt, aga see on ainus moodus, kuidas GranPhone saab töötada. Rakendus
+        ei kogu andmeid ja ei tee liiga telefonile. Loa andmiseks vajutage OK või GranPhone\'st väljumiseks, ei.
     </string>
     <string name="pending_update">Uuendus ootamas</string>
     <string name="download">Lae alla</string>
     <string name="install_updates">Paigalda uuendused</string>
-    <string name="install_updates_subtext">Juurdepääsuluba on vaja BaldPhone\'i uuendamiseks</string>
-    <string name="a_new_update_is_available">Uuendus on saadaval.\nUuendused on vajalikud BaldPhone\'i sujuvaks 
+    <string name="install_updates_subtext">Juurdepääsuluba on vaja GranPhone\'i uuendamiseks</string>
+    <string name="a_new_update_is_available">Uuendus on saadaval.\nUuendused on vajalikud GranPhone\'i sujuvaks 
         töötamiseks.\nAllalaadimiseks vajuta OK.
     </string>
     <string name="current_version">Praegune versioon:\n</string>
@@ -311,7 +311,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">Alla laetud uuenduse faili ei saanud kustutada.</string>
     <string name="downloading">Allalaadimine…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone\'i kõige viimane versioon on paigaldatud.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone\'i kõige viimane versioon on paigaldatud.</string>
     <string name="what_s_new">Mis on uus</string>
     <string name="download_finished">Allalaadimine on lõpetatud.</string>
     <string name="downloading_updates">Uuenduste allalaadimine…</string>
@@ -320,7 +320,7 @@
     <string name="download_progress">Allalaadimise seis</string>
     <string name="what_do_you_want_to_do_with___">Mida te soovite %s\'ga teha?</string>
     <string name="crash_reports">Veateated</string>
-    <string name="crash_reports_subtext">Veateated on aruanded, mis aitavad BaldPhone\'i teha paremaks\nTeateid kasutatakse
+    <string name="crash_reports_subtext">Veateated on aruanded, mis aitavad GranPhone\'i teha paremaks\nTeateid kasutatakse
         ainult rakenduse vigade parandamiseks, mitte millekski muuks.
     </string>
     <string name="custom_app">Kohandatud rakendus</string>
@@ -357,7 +357,7 @@
     <string name="low_battery_alert">Madala akutaseme teavitus</string>
     <string name="low_battery_alert_subtext">Valige, kui soovite, et avakuva tegumiriba oleks punane, kui aku mahutavus on alla 20%\nTähelepanek Seda ei näidata, kui süsteemi tegumiriba on peidus.</string>
 
-    <string name="also_available_at">Tagasiside saab saata ka\nbaldphone.contact@gmail.com\nTekst peab olema inglise või heebrea keeles.</string>
+    <string name="also_available_at">Tagasiside saab saata ka\nGranPhone.contact@gmail.com\nTekst peab olema inglise või heebrea keeles.</string>
     <string name="grant_all_permissions">Anna kõik vajalikud juurdepääsuload</string>
 
 
@@ -385,7 +385,7 @@
     <string name="groups">Grupid</string>
     <string name="one_grid">Ühes reas</string>
     <string name="colorful">Värviline</string>
-    <string name="colorful_subtext">Kas soovite BaldPhone\'ile värvi lisada?</string>
+    <string name="colorful_subtext">Kas soovite GranPhone\'ile värvi lisada?</string>
     <string name="edit_home_screen">Redigeeri avakuva</string>
     <string name="dual_sim">Kaks SIM-kaarti</string>
     <string name="dual_sim_subtext">Valige, kuidas soovite hallata kahte SIM-kaarti\nMärkus: valides menüüst Kuva valikud, peate andma veel ühe juurdepääsuloa</string>

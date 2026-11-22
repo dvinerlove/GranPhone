@@ -18,7 +18,7 @@
     <string name="about">Sobre</string>
     <string name="about_subtext">Olá!\nO meu nome é Uriah Shaul Mandel, e fui eu que programei esta aplicação.\n
         Passei a maior parte da minha vida \"adulta\" a criar esta aplicação, e agora disponibilizei-a gratuitamente, para qualquer pessoa
-        utilizar.\nNão hesite em contactar me por email:\nbaldphone.contact@gmail.com
+        utilizar.\nNão hesite em contactar me por email:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Nível de Acessibilidade</string>
     <string name="accessibility_settings">Acessibilidade</string>
@@ -53,7 +53,7 @@
     <string name="allow">Permitir</string>
     <string name="already_setted">Já Criado!\nClique aqui para alterar</string>
     <string name="an_error_has_occurred">Ocorreu um erro!</string>
-    <string name="and_welcome_to_baldphone">seja bem-vindo ao Baldphone</string>
+    <string name="and_welcome_to_GranPhone">seja bem-vindo ao GranPhone</string>
 
     <string name="apps">Aplicações</string>
     <string name="are_you_sure_you_want_to_delete___">Tem a certeza que pretende eliminar %s?</string>
@@ -61,7 +61,7 @@
     <string name="at_least_one_day_must_be_selected">Pelo menos um dia tem de estar seleccionado!</string>
     <string name="auto_brightness">Auto\nLuminosidade</string>
     <string name="backspace">Apagar</string>
-    <string name="baldphone_bla_allow_permission">Por favor aceite as seguintes permissões:</string>
+    <string name="GranPhone_bla_allow_permission">Por favor aceite as seguintes permissões:</string>
     <string name="blocked">Bloqueado</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Luminosidade</string>
@@ -76,7 +76,7 @@
     <string name="camera_subtext">Esta permissão é necessária para ligar a lanterna.</string>
     <string name="cancel">Cancelar</string>
     <string name="change_pills_time">Alterar Horário de Medicação</string>
-    <string name="change_system_settings_subtext">Por favor permita ao BaldPhone alterar definições como alterar o tamanho do texto ou a luminosidade.</string>
+    <string name="change_system_settings_subtext">Por favor permita ao GranPhone alterar definições como alterar o tamanho do texto ou a luminosidade.</string>
     <string name="choose_friday">Sex</string>
     <string name="choose_monday">Seg</string>
     <string name="choose_saturday">Sab</string>
@@ -98,7 +98,7 @@
     <string name="contacts">Contactos</string>
     <string name="contacts_read_subtext">Esta permissão é necessária para vizualizar os contactos.</string>
     <string name="contacts_subtext">Esta permissão é necessária para novos contactos.</string>
-    <string name="crash">Oops!\nBaldPhone encontrou um problema e vai reiniciar.</string>
+    <string name="crash">Oops!\nGranPhone encontrou um problema e vai reiniciar.</string>
     <string name="current_time">Hora Actual</string>
     <string name="custom">Personalizado</string>
     <string name="dark">Escuro</string>
@@ -125,7 +125,7 @@
     </string>
     <string name="font_size">Tipo de Letra</string>
     <string name="friday">Sexta-feira</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Dificuldades em utilizar o teclado do telefone? Utilize o teclado GRANDE do Baldphone!</string>
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Dificuldades em utilizar o teclado do telefone? Utilize o teclado GRANDE do GranPhone!</string>
     <string name="hello">Olá</string>
     <string name="help">Tutorial em Vídeo</string>
     <string name="hide">Esconder</string>
@@ -135,7 +135,7 @@
     <string name="huge">Enorme</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Invocado em:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Uma última coisa: É altamente recomendado utilizar o Ecrã Inicial do BaldPhone como Ecrã Inicial por Definição.</string>
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Uma última coisa: É altamente recomendado utilizar o Ecrã Inicial do GranPhone como Ecrã Inicial por Definição.</string>
     <string name="language">idioma</string>
     <string name="language_settings">Idioma</string>
     <string name="large">Grande</string>
@@ -210,18 +210,18 @@
     <string name="save">gravar</string>
     <string name="send">Enviar</string>
     <string name="set_default_dialer">Definir como aplicação de Chamadas pré-definida</string>
-    <string name="set_default_dialer_subtext">BaldPhone necessita de ser definida como aplicação pré-definida de Chamdas.</string>
+    <string name="set_default_dialer_subtext">GranPhone necessita de ser definida como aplicação pré-definida de Chamdas.</string>
     <string name="set_home_screen">Definir Ecrã Inicial</string>
-    <string name="set_home_screen_subtext">Para utilizar o BaldPhone, é necessário defini-lo como Ecrã-Inicial.\nEsta acção é reversível e pode ser alterada nas Definições.</string>
+    <string name="set_home_screen_subtext">Para utilizar o GranPhone, é necessário defini-lo como Ecrã-Inicial.\nEsta acção é reversível e pode ser alterada nas Definições.</string>
     <string name="set_keyboard">Definir Teclado</string>
     <string name="setting_does_not_exist">Definição Não Existente</string>
     <string name="settings">Definições</string>
     <string name="settings_permission">Definições de Permissões</string>
     <string name="share">Partillhar</string>
-    <string name="share_actual_text">Olá, estou a utilizar uma aplicação chamada "BaldPhone" \nque substitui a interface do telefone por uma interface grande, simples e intuitiva.\n
-        Caso esteja interessado Podes obtê-la gratuitamente no link abaixo \n\nhttps://baldphone.com</string>
-    <string name="share_bald_phone_subtext">Oi, conhece alguém que gostaria de saber sobre o BaldPhone? \n Pode partilhá-lo com eles!</string>
-    <string name="share_baldphone">Partilhar BaldPhone</string>
+    <string name="share_actual_text">Olá, estou a utilizar uma aplicação chamada "GranPhone" \nque substitui a interface do telefone por uma interface grande, simples e intuitiva.\n
+        Caso esteja interessado Podes obtê-la gratuitamente no link abaixo \n\nhttps://github.com/dvinerlove/GranPhone</string>
+    <string name="share_bald_phone_subtext">Oi, conhece alguém que gostaria de saber sobre o GranPhone? \n Pode partilhá-lo com eles!</string>
+    <string name="share_GranPhone">Partilhar GranPhone</string>
     <string name="share_contact">Partilhar Contacto</string>
     <string name="share_differently">Partilhar por outras aplicações</string>
     <string name="share_via_whatsapp">Partilhar por Whatsapp</string>
@@ -275,12 +275,12 @@
     <string name="clear_all_notifications">Limpar Todas as Notificações</string>
     <string name="clear_cache_subtext">Tem a certeza que pretende apagar a cashe?\nAplicações e Atalhos serão removidos também!
     </string>
-    <string name="permissions_calm">Olá, o BaldPhone necessita das seguintes permissões para poder substituir a interface do telefone. Algumas soam assustadoramente mas nenhuns dados são recolhidos e não causará problemas. Pressione OK para ceder as permissões ou Não para saír do BaldPhone.</string>
+    <string name="permissions_calm">Olá, o GranPhone necessita das seguintes permissões para poder substituir a interface do telefone. Algumas soam assustadoramente mas nenhuns dados são recolhidos e não causará problemas. Pressione OK para ceder as permissões ou Não para saír do GranPhone.</string>
     <string name="pending_update">Actualização Pendente</string>
     <string name="download">Download</string>
     <string name="install_updates">Instalar Actualizações</string>
-    <string name="install_updates_subtext">Esta permissão é necessária para actualizar o BaldPhone</string>
-    <string name="a_new_update_is_available">Novas actualizações disponíveis! As actualizações são necessárias para mander o BaldPhone a funcionar correctamente \nPressione OK para actualizar.</string>
+    <string name="install_updates_subtext">Esta permissão é necessária para actualizar o GranPhone</string>
+    <string name="a_new_update_is_available">Novas actualizações disponíveis! As actualizações são necessárias para mander o GranPhone a funcionar correctamente \nPressione OK para actualizar.</string>
     <string name="current_version">Versão Actual:\n</string>
     <string name="new_version">Nova Versão:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Existem novas actualizações.</string>
@@ -295,7 +295,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">O ficheiro descarregado não pôde ser apagado!</string>
     <string name="downloading">Efectuando o download…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone está actualizado.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone está actualizado.</string>
     <string name="what_s_new">O que há de novo</string>
     <string name="download_finished">Download completo!</string>
     <string name="downloading_updates">Descarregando Actualizações…</string>
@@ -340,7 +340,7 @@
     <string name="low_battery_alert_subtext">
         Escolha se quer a barra de notificações em vermelho quando a bateria está abaixo de 20%\nNão será mostrado se a barra de notificações estiver escondida.</string>
 
-    <string name="also_available_at">Also available at\nbaldphone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
+    <string name="also_available_at">Also available at\nGranPhone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
     <string name="grant_all_permissions">Grant All Permissions</string>
 
 
@@ -368,7 +368,7 @@
     <string name="groups">Groups</string>
     <string name="one_grid">One Grid</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make BaldPhone more colorful?</string>
+    <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>

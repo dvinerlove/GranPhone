@@ -18,7 +18,7 @@
     <string name="about">बारे में</string>
     <string name="about_subtext">नमस्ते!\nमेरा नाम उरिय्याह शॉल मंडेल है, और मैं इस मंच का विकासकर्ता हूँ।\n
         मैंने अपना अधिकांश \"वयस्क\" जीवन इस प्लेटफॉर्म को बनाने में बिताया है, और मैंने इसे सभी के लिए मुफ्त में जारी किया है।
-        उपयोग करें।\nआपका स्वागत है मुझसे ईमेल द्वारा संपर्क करने के लिए:\nbaldphone.contact@gmail.com
+        उपयोग करें।\nआपका स्वागत है मुझसे ईमेल द्वारा संपर्क करने के लिए:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">अभिगम्यता स्तर</string>
     <string name="accessibility_settings">सरल उपयोग</string>
@@ -54,7 +54,7 @@
     <string name="allow">अनुमति देना</string>
     <string name="already_setted">पहले से ही सेट!\nइसे बदलने के लिए यहां क्लिक करें</string>
     <string name="an_error_has_occurred">एक गलती हुई है!</string>
-    <string name="and_welcome_to_baldphone">और बाल्डफ़ोन में आपका स्वागत है</string>
+    <string name="and_welcome_to_GranPhone">और बाल्डफ़ोन में आपका स्वागत है</string>
 
     <string name="apps">ऐप्स</string>
     <string name="are_you_sure_you_want_to_delete___">क्या आप वाकई %s हटाना चाहते हैं?</string>
@@ -62,7 +62,7 @@
     <string name="at_least_one_day_must_be_selected">कम से कम एक दिन चुना जाना चाहिए!</string>
     <string name="auto_brightness">स्वतः\nचमक</string>
     <string name="backspace">बैकस्पेस</string>
-    <string name="baldphone_bla_allow_permission">कृपया निम्नलिखित अनुमतियों की अनुमति दें:</string>
+    <string name="GranPhone_bla_allow_permission">कृपया निम्नलिखित अनुमतियों की अनुमति दें:</string>
     <string name="blocked">अवरोधित</string>
     <string name="bluetooth">ब्लूटूथ</string>
     <string name="brightness">चमक</string>
@@ -129,7 +129,7 @@
     </string>
     <string name="font_size">फ़ॉन्ट आकार</string>
     <string name="friday">शुक्रवार</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">उपयोग करने में कठिनाई हो रही है
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">उपयोग करने में कठिनाई हो रही है
         फोन का कीबोर्ड? इसके बजाय बाल्डफ़ोन के बड़े कीबोर्ड का उपयोग करें!
     </string>
     <string name="hello">नमस्ते</string>
@@ -141,7 +141,7 @@
     <string name="huge">विशाल</string>
     <string name="internet">इंटरनेट</string>
     <string name="invoked_in">इसमें शामिल किया गया:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">एक आखिरी
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">एक आखिरी
         बात:\n डिफ़ॉल्ट होम लॉन्चर के रूप में बाल्डफ़ोन की होम स्क्रीन का उपयोग करने की अत्यधिक अनुशंसा की जाती है
     </string>
     <string name="language">भाषा</string>
@@ -230,12 +230,12 @@
     <string name="share">साझा करना</string>
     <string name="share_actual_text">नमस्ते, मैं "बाल्डफोन" नाम के इस प्लेटफॉर्म का उपयोग कर रहा हूं जो फोन को बदल देता है
         एक बड़े, सरल और मैत्रीपूर्ण इंटरफ़ेस के लिए।\nइच्छुक?\nआप इसे मुफ्त में डाउनलोड कर सकते हैं!\nलिंक देखें
-        अधिक जानकारी के लिए नीचे:\n\nhttps://baldphone.com
+        अधिक जानकारी के लिए नीचे:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
     <string name="share_bald_phone_subtext">अरे, किसी ऐसे व्यक्ति को जानिए जो बाल्डफ़ोन के बारे में जानना चाहे?\nआप कर सकते हैं
         इसे उनके साथ साझा करें!"
     </string>
-    <string name="share_baldphone">बाल्डफ़ोन साझा करें</string>
+    <string name="share_GranPhone">बाल्डफ़ोन साझा करें</string>
     <string name="share_contact">संपर्क साझा करें</string>
     <string name="share_differently">अन्य ऐप के माध्यम से साझा करें</string>
     <string name="share_via_whatsapp">Whatsapp के माध्यम से साझा करें</string>
@@ -290,7 +290,7 @@
     <string name="clear_cache_subtext">क्या आप वाकई कैशे की सामग्री को हटाना चाहते हैं? अस्थायी फ़ाइलों को हटाने से कुछ बाल्डफ़ोन ऐप की खराबी का समाधान हो सकता है, लेकिन होम स्क्रीन में बनाए गए शॉर्टकट भी हटा दिए जाएंगे।</string>
     <string name="permissions_calm">नमस्ते, बाल्डफोन को चलाने के लिए निम्नलिखित अनुमतियां होनी चाहिए। उनमे से कुछ
         ध्वनि डरावना है, लेकिन यह एकमात्र तरीका है जिससे बाल्डफोन फोन के इंटरफेस को बदल सकता है। कोई डेटा नहीं लिया जाता है और इसका कारण बनता है
-        कोई नुकसान नहीं। BaldPhone से बाहर निकलने के लिए अनुमति या नहीं देने के लिए OK दबाएं।
+        कोई नुकसान नहीं। GranPhone से बाहर निकलने के लिए अनुमति या नहीं देने के लिए OK दबाएं।
     </string>
     <string name="pending_update">लंबित अद्यतन</string>
     <string name="download">डाउनलोड</string>
@@ -315,7 +315,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">डाउनलोड की गई अद्यतन फ़ाइल को हटाया नहीं जा सका!</string>
     <string name="downloading">डाउनलोड हो रहा है…</string>
 
-    <string name="baldphone_is_up_to_date">बाल्डफोन अप टू डेट है।</string>
+    <string name="GranPhone_is_up_to_date">बाल्डफोन अप टू डेट है।</string>
     <string name="what_s_new">नया क्या है</string>
     <string name="download_finished">डाउनलोड समाप्त!</string>
     <string name="downloading_updates">अपडेट डाउनलोड हो रहे हैं…</string>
@@ -361,7 +361,7 @@
     <string name="low_battery_alert">कम बैटरी अलर्ट</string>
     <string name="low_battery_alert_subtext">चुनें कि क्या आप चाहते हैं कि होम स्क्रीन पर स्टेटस बार लाल हो, जब बैटरी 20% से कम हो\nध्यान दें कि सिस्टम स्टेटस बार छुपा हुआ है तो यह नहीं दिखाया जाएगा।</string>
 
-    <string name="also_available_at">\nbaldphone.contact@gmail.com पर भी उपलब्ध है\nप्रतिक्रिया अंग्रेजी/हिब्रू में होनी चाहिए!</string>
+    <string name="also_available_at">\nGranPhone.contact@gmail.com पर भी उपलब्ध है\nप्रतिक्रिया अंग्रेजी/हिब्रू में होनी चाहिए!</string>
     <string name="grant_all_permissions">सभी अनुमतियां प्रदान करें</string>
 
 

@@ -16,7 +16,7 @@
 
 <resources>
     <string name="about">Honi buruz</string>
-    <string name="about_subtext">Kaixo!\nNire izena Uriah Shaul Mandel da, eta plataforma honen sustatzailea naiz.\n Nire bizitza \"helduaren\" zatirik handiena plataforma hau egiten eman dut, eta dohainik argitaratu dut, edonorrek erabili dezan.\nOngi etorria zara nirekin posta elektronikoz harremanetan jartzeko:\nbaldphone.contact@gmail.com</string>
+    <string name="about_subtext">Kaixo!\nNire izena Uriah Shaul Mandel da, eta plataforma honen sustatzailea naiz.\n Nire bizitza \"helduaren\" zatirik handiena plataforma hau egiten eman dut, eta dohainik argitaratu dut, edonorrek erabili dezan.\nOngi etorria zara nirekin posta elektronikoz harremanetan jartzeko:\nGranPhone.contact@gmail.com</string>
     <string name="accessibility_level">Erabilerraztasun maila</string>
     <string name="accessibility_settings">Erabilerraztasuna</string>
     <string name="accidental_touches">Ustekabeko utzitzen aurkako babesa</string>
@@ -47,7 +47,7 @@
     <string name="allow">Baimendu</string>
     <string name="already_setted">Jadanik prest!\nHemen klikatu aldatzeko</string>
     <string name="an_error_has_occurred">Akats bat gertatu da!</string>
-    <string name="and_welcome_to_baldphone">ta ongi etorri Baldphone-ra</string>
+    <string name="and_welcome_to_GranPhone">ta ongi etorri GranPhone-ra</string>
 
     <string name="apps">Aplikazioak</string>
     <string name="are_you_sure_you_want_to_delete___">%s ezabatzeko ziur al zaude?</string>
@@ -55,7 +55,7 @@
     <string name="at_least_one_day_must_be_selected">Egun bat aukeratu behar duzu gutxienez!</string>
     <string name="auto_brightness">Distira\ndoigarria</string>
     <string name="backspace">atzera egin</string>
-    <string name="baldphone_bla_allow_permission">Hurrengo baimenak baimendu, mesedez:</string>
+    <string name="GranPhone_bla_allow_permission">Hurrengo baimenak baimendu, mesedez:</string>
     <string name="blocked">Blokeatuta</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Distira</string>
@@ -70,7 +70,7 @@
     <string name="camera_subtext">Baimen hau derrigorrezkoa da linterna pizteko.</string>
     <string name="cancel">Utzi</string>
     <string name="change_pills_time">Pilulen ordua aldatu</string>
-    <string name="change_system_settings_subtext">Mesedez, baimena emaiozu BaldPhone-ri, ezarpenak aldatu ahal izateko, adibidez:
+    <string name="change_system_settings_subtext">Mesedez, baimena emaiozu GranPhone-ri, ezarpenak aldatu ahal izateko, adibidez:
 letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="choose_friday">ol.</string>
     <string name="choose_monday">al.</string>
@@ -82,7 +82,7 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="clear">Hustu</string>
     <string name="clear_cache">Cachea hustu</string>
     <string name="clear_data">Datu guztiak hustu</string>
-    <string name="clear_data_subtext">Ziur zaude erabiltzaile-datu guztiak garbitu nahi dituzula? BaldPhone appa berrezarri egingo da, instalatu berri balitz bezala.</string>
+    <string name="clear_data_subtext">Ziur zaude erabiltzaile-datu guztiak garbitu nahi dituzula? GranPhone appa berrezarri egingo da, instalatu berri balitz bezala.</string>
     <string name="clear_data_subtext2">%100?</string>
     <string name="clear_data_subtext3">Ziur zaude?\n\"Bai\" sakatzean, datu guztiak ezabatuko dira!</string>
     <string name="clock">Erlojua</string>
@@ -93,7 +93,7 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="contacts">Kontaktuak</string>
     <string name="contacts_read_subtext">Baimen hau derrigorrezkoa da kontaktuak irakurtzeko.</string>
     <string name="contacts_subtext">Baimen hau derrigorrezkoa da kontaktu berriak sortzeko.</string>
-    <string name="crash">Epa!\nBaldPhonek arazo bat aurkitu du eta berriro hasiko da.</string>
+    <string name="crash">Epa!\nGranPhonek arazo bat aurkitu du eta berriro hasiko da.</string>
     <string name="current_time">Oraingo ordua</string>
     <string name="custom">Neurrira</string>
     <string name="dark">Iluna</string>
@@ -107,7 +107,7 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="edit">Editatu</string>
     <string name="email">Email:</string>
     <string name="enable_notification_access">Baimendu jakinarazpenen sarbidea</string>
-    <string name="enable_notification_access_subtext">Mesedez emaiozu BaldPhoneri sarbidea jakinarazpenak irakurtzeko</string>
+    <string name="enable_notification_access_subtext">Mesedez emaiozu GranPhoneri sarbidea jakinarazpenak irakurtzeko</string>
     <string name="enter">Sartu</string>
     <string name="enter_contact_or_phone_number">Sartu kontaktuaren izena:</string>
     <string name="evening">Arratsalde</string>
@@ -118,7 +118,7 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Erabilerraztasun maila aukeratu</string>
     <string name="font_size">Letra-tipoaren neurria</string>
     <string name="friday">Ostirala</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Asko kostatzen zaizu telefonoaren teklatua erabiltzea? Horren ordez, BaldPhoneren teklatu HANDIA erabili dezakezu.</string>
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Asko kostatzen zaizu telefonoaren teklatua erabiltzea? Horren ordez, GranPhoneren teklatu HANDIA erabili dezakezu.</string>
     <string name="hello">Kaixo</string>
     <string name="help">Bideo tutoriala</string>
     <string name="hide">Ezkutatu</string>
@@ -127,7 +127,7 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="hour">Ordua</string>
     <string name="huge">Itzela</string>
     <string name="internet">Internet</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Azken gauza bat:\nOso gomendagarria da Baldphone-ren hasierako pantaila lehenetsitako abiarazle gisa erabiltzea</string>
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Azken gauza bat:\nOso gomendagarria da GranPhone-ren hasierako pantaila lehenetsitako abiarazle gisa erabiltzea</string>
     <string name="language">hizkuntza</string>
     <string name="language_settings">Hizkuntza</string>
     <string name="large">Handia</string>
@@ -197,7 +197,7 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="save">Gorde</string>
     <string name="send">Bidali</string>
     <string name="share">Partekatu</string>
-    <string name="share_baldphone">BaldPhone partekatu</string>
+    <string name="share_GranPhone">GranPhone partekatu</string>
     <string name="share_contact">Kontaktua partekatu </string>
     <string name="share_differently">Beste app baten bidez partekatu</string>
     <string name="share_via_whatsapp">WhatsApp bidez partekatu</string>
@@ -229,7 +229,7 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="video_tutorials">Bideo tutorialak</string>
     <string name="videos">Bideo tutorialak</string>
 
-    <string name="install_updates_subtext">Baimen hau derrigorrezkoa da BaldPhone eguneratzeko.</string>
+    <string name="install_updates_subtext">Baimen hau derrigorrezkoa da GranPhone eguneratzeko.</string>
     <string name="read_phone_state">Irakurri telefonoaren egoera</string>
     <string name="read_phone_state_subtext">Baimen hau derrigorrezkoa da bigarren simarekin deiak egiteko.</string>
     <string name="choose_sim">Aukeratu sima</string>

@@ -18,7 +18,7 @@
     <string name="about">Относно</string>
     <string name="about_subtext">Здрвейте!\nКазвам се Uriah Shaul Mandel и съм разработчикът на тази платформа.\n
         Посветих голяма част от зрелия си живот на създаването на тази платформа и я предоставих за безплатно ползване на
-        всички.\nЧувствайте се добре дошли да се свържете с мен на електонната ми поща:\nbaldphone.contact@gmail.com
+        всички.\nЧувствайте се добре дошли да се свържете с мен на електонната ми поща:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Ниво на достъпност</string>
     <string name="accessibility_settings">Достъпност</string>
@@ -54,7 +54,7 @@
     <string name="allow">Разреши</string>
     <string name="already_setted">Направена настройка!\nНатиснете тук за промяна</string>
     <string name="an_error_has_occurred">Възникна грешка!</string>
-    <string name="and_welcome_to_baldphone">и добре дошли в Baldphone</string>
+    <string name="and_welcome_to_GranPhone">и добре дошли в GranPhone</string>
 
     <string name="apps">Приложения</string>
     <string name="are_you_sure_you_want_to_delete___">Сигурни ли сте, че желаете да изтриете %s?</string>
@@ -62,7 +62,7 @@
     <string name="at_least_one_day_must_be_selected">Трябва да бъде избран поне един ден!</string>
     <string name="auto_brightness">Автоматична\nЯркост</string>
     <string name="backspace">назад</string>
-    <string name="baldphone_bla_allow_permission">Моля, позволете следните разрешения:</string>
+    <string name="GranPhone_bla_allow_permission">Моля, позволете следните разрешения:</string>
     <string name="blocked">Блокиран</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Яркост</string>
@@ -77,7 +77,7 @@
     <string name="camera_subtext">Разрешението е необходимо, за да включите светкавицата.</string>
     <string name="cancel">Отказ</string>
     <string name="change_pills_time">Промяна на времето за прием на лекарства</string>
-    <string name="change_system_settings_subtext">Моля, позволете на BaldPhone да променя настройките, като например увеличаване
+    <string name="change_system_settings_subtext">Моля, позволете на GranPhone да променя настройките, като например увеличаване
          размера на шрифта и промяна на яркостта.
     </string>
     <string name="choose_friday">Пт</string>
@@ -90,7 +90,7 @@
     <string name="clear">Почисти</string>
     <string name="clear_cache">Почистване на кеш паметта</string>
     <string name="clear_data">Изтриване на всички данни</string>
-    <string name="clear_data_subtext">Наистина ли искате да изтриете всички потребителски данни? BaldPhone ще се върне в първоначалното си състояние, като след нова инсталация.</string>
+    <string name="clear_data_subtext">Наистина ли искате да изтриете всички потребителски данни? GranPhone ще се върне в първоначалното си състояние, като след нова инсталация.</string>
     <string name="clear_data_subtext2">100%?</string>
     <string name="clear_data_subtext3">Сигурни ли сте?\натискането на ДА ще изтрие всички данни!</string>
     <string name="clock">Часовник</string>
@@ -101,7 +101,7 @@
     <string name="contacts">Контакти</string>
     <string name="contacts_read_subtext">Разрешението е необходимо, за да има достъп до контактите.</string>
     <string name="contacts_subtext">Разрешението е необходимо, за да добавите нов контакт.</string>
-    <string name="crash">Oops!\nBaldPhone се сблъска с проблем и ще се рестартира.</string>
+    <string name="crash">Oops!\nGranPhone се сблъска с проблем и ще се рестартира.</string>
     <string name="current_time">Текущо време</string>
     <string name="custom">Персонализиран</string>
     <string name="dark">Тъмен</string>
@@ -115,7 +115,7 @@
     <string name="edit">Редактиране</string>
     <string name="email">Email:</string>
     <string name="enable_notification_access">Активиране на достъп до известията</string>
-    <string name="enable_notification_access_subtext">Моля да предоставите на BaldPhone достъп до известията.</string>
+    <string name="enable_notification_access_subtext">Моля да предоставите на GranPhone достъп до известията.</string>
     <string name="enter">Въвеждане</string>
     <string name="enter_contact_or_phone_number">Въведете името на контакта:</string>
     <string name="evening">Вечер</string>
@@ -130,8 +130,8 @@
     </string>
     <string name="font_size">Рзмер на текста</string>
     <string name="friday">Петък</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Изпитвате затруднения с
-        клавиатурата на телефона? Използвайте вместо нея ГОЛЯМАТА клавиатура на Baldphone!
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Изпитвате затруднения с
+        клавиатурата на телефона? Използвайте вместо нея ГОЛЯМАТА клавиатура на GranPhone!
     </string>
     <string name="hello">Здравейте</string>
     <string name="help">Видео урок</string>
@@ -142,8 +142,8 @@
     <string name="huge">Огромен</string>
     <string name="internet">Интернет</string>
     <string name="invoked_in">Извикана в:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Едно последно
-        нещо:\nСилно предпоръчително е да използвате началния екран на Baldphone като стартер по подразбиране
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Едно последно
+        нещо:\nСилно предпоръчително е да използвате началния екран на GranPhone като стартер по подразбиране
     </string>
     <string name="language">език</string>
     <string name="language_settings">Език</string>
@@ -219,9 +219,9 @@
     <string name="save">Запис</string>
     <string name="send">Изпращане</string>
     <string name="set_default_dialer">Задаване на приложение за обаждания по подразбиране</string>
-    <string name="set_default_dialer_subtext">Необходимо е BaldPhone да бъде приложение за обаждания по подразбиране.</string>
+    <string name="set_default_dialer_subtext">Необходимо е GranPhone да бъде приложение за обаждания по подразбиране.</string>
     <string name="set_home_screen">Задаване на Начален екран</string>
-    <string name="set_home_screen_subtext">За да използвате BaldPhone е необходимо да го зададете като Начален екран.\nТова
+    <string name="set_home_screen_subtext">За да използвате GranPhone е необходимо да го зададете като Начален екран.\nТова
         може отново да бъде променено в Настройките.
     </string>
     <string name="set_keyboard">Задаване на клавиатура</string>
@@ -229,14 +229,14 @@
     <string name="settings">Настройки</string>
     <string name="settings_permission">Разрешение за настройки</string>
     <string name="share">Споделяне</string>
-    <string name="share_actual_text">Привет, използвам платформата "BaldPhone", която замества интерфейса
+    <string name="share_actual_text">Привет, използвам платформата "GranPhone", която замества интерфейса
         на телефона с нов - уголемен,опростен и удобен.\nЗаинтересуван сте?\nМожете да я изтеглите безплатно!\nЗа повече информация
-        използвайте следния линк:\n\nhttps://baldphone.com
+        използвайте следния линк:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Здравей, имаш ли познати, които биха се заинтересували от BaldPhone?\nМожеш
+    <string name="share_bald_phone_subtext">Здравей, имаш ли познати, които биха се заинтересували от GranPhone?\nМожеш
         да го споделиш с тях!"
     </string>
-    <string name="share_baldphone">Споделяне на BaldPhone</string>
+    <string name="share_GranPhone">Споделяне на GranPhone</string>
     <string name="share_contact">Споделяне на контакт</string>
     <string name="share_differently">Споделяне посредством друго приложение</string>
     <string name="share_via_whatsapp">Споделяне посредством Whatsapp</string>
@@ -288,16 +288,16 @@
     <string name="no_alarms">Няма аларми\nСъздайте нова като натиснете\n\"Добавяне на аларма\"\nили\n\"Добавяне на таймер\"</string>
     <string name="no_pills">Няма лекрства\nСъздайте ново като натиснете\n\"Добавяне на лекарство\"</string>
     <string name="clear_all_notifications">Изтриване на всички известия</string>
-    <string name="clear_cache_subtext">Сигурни ли сте, че желаете да изтриете съдържанието на кеш паметта? Изтриването на временните файлове може да разреши някои функционални проблеми на BaldPhone, но също така ще изтрие от началния екран създадените преки пътища.</string>
-    <string name="permissions_calm">Здравейте, за да работи BaldPhone трябва да има следните разрешения. Някои
-        от тях звучат плашещо, но това е единственият начин BaldPhone да замени интерфейса на телефона ви. Той не събира данни и не
-         причинява вреди. Натиснете OK, за да предоставите разрешенията или Не за изход от BaldPhone.
+    <string name="clear_cache_subtext">Сигурни ли сте, че желаете да изтриете съдържанието на кеш паметта? Изтриването на временните файлове може да разреши някои функционални проблеми на GranPhone, но също така ще изтрие от началния екран създадените преки пътища.</string>
+    <string name="permissions_calm">Здравейте, за да работи GranPhone трябва да има следните разрешения. Някои
+        от тях звучат плашещо, но това е единственият начин GranPhone да замени интерфейса на телефона ви. Той не събира данни и не
+         причинява вреди. Натиснете OK, за да предоставите разрешенията или Не за изход от GranPhone.
     </string>
     <string name="pending_update">Предстоящо обновяване</string>
     <string name="download">Изтегляне</string>
     <string name="install_updates">Инсталиране на обновления</string>
-    <string name="install_updates_subtext">Разрешението е необходимо, за да се обнови BaldPhone</string>
-    <string name="a_new_update_is_available">Налично е обновление!\nОбновленията са важни за да може BaldPhone да работи
+    <string name="install_updates_subtext">Разрешението е необходимо, за да се обнови GranPhone</string>
+    <string name="a_new_update_is_available">Налично е обновление!\nОбновленията са важни за да може GranPhone да работи
         гладко.\nНатиснете ОК за да го изтеглите.
     </string>
     <string name="current_version">Текуща версия:\n</string>
@@ -316,7 +316,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">Изтегленото обновление не може да бъде изтрито!</string>
     <string name="downloading">Изтегляне…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone е актуален.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone е актуален.</string>
     <string name="what_s_new">Какво ново</string>
     <string name="download_finished">Изтеглянето завърши!</string>
     <string name="downloading_updates">Изтегляне на актуализации…</string>
@@ -325,7 +325,7 @@
     <string name="download_progress">Напредък на изтеглянето</string>
     <string name="what_do_you_want_to_do_with___">Какво желаете да направите с %s?</string>
     <string name="crash_reports">Отчети за сривове</string>
-    <string name="crash_reports_subtext">Отчетите за сривове ни помагат да подобрим BaldPhone.\nТе се използват само за
+    <string name="crash_reports_subtext">Отчетите за сривове ни помагат да подобрим GranPhone.\nТе се използват само за
         отстраняване на грешки и не събират никаква друга информация.
     </string>
     <string name="custom_app">Персонализирано приложение</string>
@@ -362,7 +362,7 @@
     <string name="low_battery_alert">Предупреждение за изтощена батерия</string>
     <string name="low_battery_alert_subtext">Изберете дали лентата на състоянието да бъде червена на началния екран, когато батерията е под  20%\nЗабележете, че това няма да се вижда, ако лентата на състоянието е скрита.</string>
 
-    <string name="also_available_at">Също достъпно на\nbaldphone.contact@gmail.com\nОбратната връзка трябва да бъде на английски/иврит!</string>
+    <string name="also_available_at">Също достъпно на\nGranPhone.contact@gmail.com\nОбратната връзка трябва да бъде на английски/иврит!</string>
     <string name="grant_all_permissions">Даване на всички разрешения</string>
 
 
@@ -390,7 +390,7 @@
     <string name="groups">Групи</string>
     <string name="one_grid">Общ списък</string>
     <string name="colorful">Цветен</string>
-    <string name="colorful_subtext">Желаете ли да направите BaldPhone по-цветен?</string>
+    <string name="colorful_subtext">Желаете ли да направите GranPhone по-цветен?</string>
     <string name="edit_home_screen">Редактиране на Начален екран</string>
     <string name="dual_sim">Две SIM карти</string>
     <string name="dual_sim_subtext">Изберете как искате да управлявате двете SIM карти\nЗабележка: Ако изберете Показване на опции, ще трябва да позволите и друго разрешение</string>

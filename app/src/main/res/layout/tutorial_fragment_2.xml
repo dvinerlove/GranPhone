@@ -210,6 +210,7 @@
 
     <TextView
         android:id="@+id/long_presses"
+        app:autoSizeTextType="uniform"
         style="@style/ButtonsText.Medium"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -238,6 +239,7 @@
 
     <com.bald.uriah.baldphone.views.MediumBaldButtonForTutorial
         android:id="@+id/medium_presses"
+        app:autoSizeTextType="uniform"
         style="@style/ButtonsText.Medium"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -265,6 +267,7 @@
 
     <TextView
         android:id="@+id/short_presses"
+        app:autoSizeTextType="uniform"
         style="@style/ButtonsText.Medium"
         android:layout_width="0dp"
         android:layout_height="0dp"

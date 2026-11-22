@@ -18,7 +18,7 @@
     <string name="about">Tietoja</string>
     <string name="about_subtext">Hei!\nNimeni on Uriah Shaul Mandel, ja olen tämän alustan kehittäjä.\n
         Olen käyttänyt valtaosan \"aikuisikääni\" alustan tekemiseen ja julkaisen sen ilmeiseksi, kaikkien
-        käyttöön.\nVoit mielihyvin ottaa minuun yhteyttä sähköpostilla:\nbaldphone.contact@gmail.com
+        käyttöön.\nVoit mielihyvin ottaa minuun yhteyttä sähköpostilla:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Esteettömyys-taso</string>
     <string name="accessibility_settings">Esteettömyys</string>
@@ -54,7 +54,7 @@
     <string name="allow">Salli</string>
     <string name="already_setted">Jo asetettu!\nNapsauta tätä vaihtaaksesi siihen</string>
     <string name="an_error_has_occurred">Tapahtui virhe</string>
-    <string name="and_welcome_to_baldphone">ja tervetuloa BaldPhoneen</string>
+    <string name="and_welcome_to_GranPhone">ja tervetuloa GranPhoneen</string>
 
     <string name="apps">Sovellukset</string>
     <string name="are_you_sure_you_want_to_delete___">Oletko varma että haluat poistaa %s?</string>
@@ -62,7 +62,7 @@
     <string name="at_least_one_day_must_be_selected">Vähintään yksi päivä tulee valita</string>
     <string name="auto_brightness">Automaattinen kirkkaus</string>
     <string name="backspace">askelpalautin</string>
-    <string name="baldphone_bla_allow_permission">Tarvitaan seuraavat oikeudet</string>
+    <string name="GranPhone_bla_allow_permission">Tarvitaan seuraavat oikeudet</string>
     <string name="blocked">Estetty</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Kirkkaus</string>
@@ -77,7 +77,7 @@
     <string name="camera_subtext">Tämä lupa tarvitaan taskulampun sytyttämiseksi</string>
     <string name="cancel">Peruuta</string>
     <string name="change_pills_time">Muuta lääkitysaikaa</string>
-    <string name="change_system_settings_subtext">Anna BaldPhonen muuttaa asetuksia, kuten isontaa kirjasinkokoa
+    <string name="change_system_settings_subtext">Anna GranPhonen muuttaa asetuksia, kuten isontaa kirjasinkokoa
 ja muuttaa kirkkautta.</string>
     <string name="choose_friday">Pe</string>
     <string name="choose_monday">Ma</string>
@@ -89,7 +89,7 @@ ja muuttaa kirkkautta.</string>
     <string name="clear">Tyhjää</string>
     <string name="clear_cache">Tyhjää välimuisti</string>
     <string name="clear_data">Tyhjää kaikki tiedot</string>
-    <string name="clear_data_subtext">Haluatko varmasti poistaa kaikki käyttäjätiedot? BaldPhone-sovellus palaa tuoreeseen, juuri asennettuun tilaan.</string>
+    <string name="clear_data_subtext">Haluatko varmasti poistaa kaikki käyttäjätiedot? GranPhone-sovellus palaa tuoreeseen, juuri asennettuun tilaan.</string>
     <string name="clear_data_subtext2">100%?</string>
     <string name="clear_data_subtext3">varma?\nvalitsemalla kyllä kaikki tiedot poistetaan!</string>
     <string name="clock">Kello</string>
@@ -100,7 +100,7 @@ ja muuttaa kirkkautta.</string>
     <string name="contacts">Kontaktit</string>
     <string name="contacts_read_subtext">Tämä oikeus on tarpeen yhteystietojen lukemiseksi.</string>
     <string name="contacts_subtext">Tämä oikeus on tarpeen uusien yhteystietojen luomiseksi.</string>
-    <string name="crash">Hups! \nBaldPhone törmäsi ongelmaan ja käynnistyy nyt uudelleen.</string>
+    <string name="crash">Hups! \nGranPhone törmäsi ongelmaan ja käynnistyy nyt uudelleen.</string>
     <string name="current_time">Tänhetkinen aika</string>
     <string name="custom">Mukautettu</string>
     <string name="dark">Tumma</string>
@@ -114,7 +114,7 @@ ja muuttaa kirkkautta.</string>
     <string name="edit">Muuta</string>
     <string name="email">Sähköposti:</string>
     <string name="enable_notification_access">Ota käyttöön ilmoitusten käyttö</string>
-    <string name="enable_notification_access_subtext">Anna BaldPhonelle käyttöoikeus ilmoituksiin.</string>
+    <string name="enable_notification_access_subtext">Anna GranPhonelle käyttöoikeus ilmoituksiin.</string>
     <string name="enter">Syötä</string>
     <string name="enter_contact_or_phone_number">Syötä yhteyshenkilön nimi</string>
     <string name="evening">Ilta</string>
@@ -128,8 +128,8 @@ ja muuttaa kirkkautta.</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Valitse esteettömyystaso</string>
     <string name="font_size">Kirjasinkoko</string>
     <string name="friday">Perjantai</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Onko vaikeaa käyttää
-        puhelimen näppäimistöä? Käytä Baldphonen ISOA näppäimistöä!
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Onko vaikeaa käyttää
+        puhelimen näppäimistöä? Käytä GranPhonen ISOA näppäimistöä!
     </string>
     <string name="hello">Hei</string>
     <string name="help">Video-ohje</string>
@@ -140,8 +140,8 @@ ja muuttaa kirkkautta.</string>
     <string name="huge">Valtava</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Käynnistetty:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Vielä yksi
-        asia:\nOn suositeltavaa käyttää Baldphonen kotinäkymää oletuksena käynnistysnäkymänä
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Vielä yksi
+        asia:\nOn suositeltavaa käyttää GranPhonen kotinäkymää oletuksena käynnistysnäkymänä
     </string>
     <string name="language">kieli</string>
     <string name="language_settings">Kieli</string>
@@ -217,9 +217,9 @@ ja muuttaa kirkkautta.</string>
     <string name="save">Talleta</string>
     <string name="send">Lähetä</string>
     <string name="set_default_dialer">Aseta oletus-soittosovellus</string>
-    <string name="set_default_dialer_subtext">BaldPhone tarvitsee merkitä oletuspuhelusovellukseksi.</string>
+    <string name="set_default_dialer_subtext">GranPhone tarvitsee merkitä oletuspuhelusovellukseksi.</string>
     <string name="set_home_screen">Aseta Koti-näyttö</string>
-    <string name="set_home_screen_subtext">BaldPhonen käyttämiseksi sinun tulee asettaa se aloitusnäytöksi.\nSen voi
+    <string name="set_home_screen_subtext">GranPhonen käyttämiseksi sinun tulee asettaa se aloitusnäytöksi.\nSen voi
         vaihtaa takaisin pois käytöstä asetuksista.
     </string>
     <string name="set_keyboard">Aseta näppäimistö</string>
@@ -227,14 +227,14 @@ ja muuttaa kirkkautta.</string>
     <string name="settings">Asetukset</string>
     <string name="settings_permission">Asetusten käyttöoikeudet</string>
     <string name="share">Jaa</string>
-    <string name="share_actual_text">Hei, Käytän tätä \"BaldPhone\"-nimistä alustaa, joka korvaa puhelimen käyttö-
+    <string name="share_actual_text">Hei, Käytän tätä \"GranPhone\"-nimistä alustaa, joka korvaa puhelimen käyttö-
         liittymän isoksi, helpoksi ja ystävälliseksi.\nKiinnostako?\nSinä voit ladata sen ilmaiseksi!\nKatso linkistä
-        lisää tietoa:\n\nhttps://baldphone.com
+        lisää tietoa:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Hei, tiedätkö joitain, jotka ehkä haluavat tietää BaldPhonesta?\nSinä voit
+    <string name="share_bald_phone_subtext">Hei, tiedätkö joitain, jotka ehkä haluavat tietää GranPhonesta?\nSinä voit
         kertoa siitä heille!
     </string>
-    <string name="share_baldphone">Jaa BaldPhonea</string>
+    <string name="share_GranPhone">Jaa GranPhonea</string>
     <string name="share_contact">Jaa yhteystieto</string>
     <string name="share_differently">Jaa toisen sovelluksen kautta</string>
     <string name="share_via_whatsapp">Jaa Whatsappissa</string>
@@ -286,16 +286,16 @@ ja muuttaa kirkkautta.</string>
     <string name="no_alarms">Ei hälytyksiä\nLuo uusi painamalla\n\"Lisää hälytys\"\ntai\n\"Lisää ajastin\"</string>
     <string name="no_pills">Ei lääkityksiä\nLisää uusi painamalla\n\"Lisää lääkitys\"</string>
     <string name="clear_all_notifications">Poista kaikki muistutukset</string>
-    <string name="clear_cache_subtext">Haluatko varmasti poistaa välimuistin sisällön? Väliaikaistiedostojen poistaminen voi ratkaista joitain BaldPhone-sovelluksen toimintahäiriöitä, mutta myös aloitusnäytölle luodut pikakuvakkeet poistetaan.</string>
-    <string name="permissions_calm">Hei, BaldPhone tarvitsee seuraavat oikeudet toimiakseen. Osa voi kuulostaa
-        pelottavalta, mutta vain niin BaldPhone voi korvata käyttöliittymän. Tietoja ei oteta eikä se aiheuta haittaa
-        Paina OK antaaksesi oikeudet tai Ei poistuaksesi BaldPhonesta.
+    <string name="clear_cache_subtext">Haluatko varmasti poistaa välimuistin sisällön? Väliaikaistiedostojen poistaminen voi ratkaista joitain GranPhone-sovelluksen toimintahäiriöitä, mutta myös aloitusnäytölle luodut pikakuvakkeet poistetaan.</string>
+    <string name="permissions_calm">Hei, GranPhone tarvitsee seuraavat oikeudet toimiakseen. Osa voi kuulostaa
+        pelottavalta, mutta vain niin GranPhone voi korvata käyttöliittymän. Tietoja ei oteta eikä se aiheuta haittaa
+        Paina OK antaaksesi oikeudet tai Ei poistuaksesi GranPhonesta.
     </string>
     <string name="pending_update">Odottava päivitys</string>
     <string name="download">Lataa</string>
     <string name="install_updates">Asenna päivitykset</string>
-    <string name="install_updates_subtext">Tämä lupa tarvitaan BaldPhonen päivityksen asentamiseksi</string>
-    <string name="a_new_update_is_available">Uusi päivitys on saatavana!\nPäivitykset ovat tärkeitä, jotta BaldPhone toimii
+    <string name="install_updates_subtext">Tämä lupa tarvitaan GranPhonen päivityksen asentamiseksi</string>
+    <string name="a_new_update_is_available">Uusi päivitys on saatavana!\nPäivitykset ovat tärkeitä, jotta GranPhone toimii
         sujuvasti.\nPaina OK ladataksesi.
     </string>
     <string name="current_version">Nykyinen versio \n</string>
@@ -314,7 +314,7 @@ ja muuttaa kirkkautta.</string>
     <string name="downloaded_update_file_could_not_be_deleted">Ladattua päivitystiedostoa ei voitu poistaa!</string>
     <string name="downloading">Ladataan…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone on ajantasalla</string>
+    <string name="GranPhone_is_up_to_date">GranPhone on ajantasalla</string>
     <string name="what_s_new">Mikä on uutta</string>
     <string name="download_finished">Lataus on valmis</string>
     <string name="downloading_updates">Ladataan päivityksiä…</string>
@@ -323,7 +323,7 @@ ja muuttaa kirkkautta.</string>
     <string name="download_progress">Latauksen edistyminen</string>
     <string name="what_do_you_want_to_do_with___">Mitä haluat tehdä: %s?</string>
     <string name="crash_reports">Kaatumisraportit</string>
-    <string name="crash_reports_subtext">Kaatumisraporteilla parannetaan BaldPhonen käyttöä sujuvaksi\nNiitä käytetään vain
+    <string name="crash_reports_subtext">Kaatumisraporteilla parannetaan GranPhonen käyttöä sujuvaksi\nNiitä käytetään vain
         virhekorjaukseen ja vain virheen korjaamiseen välttämättömiä tietoja otetaan
     </string>
     <string name="custom_app">Mukautettu sovellus</string>
@@ -360,7 +360,7 @@ ja muuttaa kirkkautta.</string>
     <string name="low_battery_alert">Akku vähissä hälytys</string>
     <string name="low_battery_alert_subtext">Valitse, haluatko tilarivin olevan punainen aloitusnäytössä, kun akun varaus on alle 20%\nHuomaa, Sitä ei näytetä, jos järjestelmän tilarivi on piilotettu.</string>
 
-    <string name="also_available_at">Myös saatavilla\nbaldphone.contact@gmail.com\nPalaute oltava englanniksi / hepreaksi!</string>
+    <string name="also_available_at">Myös saatavilla\nGranPhone.contact@gmail.com\nPalaute oltava englanniksi / hepreaksi!</string>
     <string name="grant_all_permissions">Myönnä kaikki käyttöoikeudet</string>
 
 
@@ -388,7 +388,7 @@ ja muuttaa kirkkautta.</string>
     <string name="groups">Ryhmät</string>
     <string name="one_grid">Yksi ruudukko</string>
     <string name="colorful">Värikäs</string>
-    <string name="colorful_subtext">Haluatko tehdä BaldPhonen värikkäämmäksi?</string>
+    <string name="colorful_subtext">Haluatko tehdä GranPhonen värikkäämmäksi?</string>
     <string name="edit_home_screen">Muokkaa aloitusnäyttöä</string>
     <string name="dual_sim">Kaksois-SIM</string>
     <string name="dual_sim_subtext">Valitse, kuinka haluat hallita kaksois-SIM:ä\nHuomaa: Jos valitset Näytä vaihtoehdot, sinun on annettava uusi käyttöoikeus</string>

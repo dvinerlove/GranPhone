@@ -18,6 +18,7 @@ package com.bald.uriah.baldphone.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -36,6 +37,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
@@ -138,6 +140,10 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
 
         public void update(int index) {
             final Call call = callList.get(index);
+            @ColorInt final int textColor = textColorOnRegular;
+            contact_name.setTextColor(textColor);
+            tv_time.setTextColor(textColor);
+            tv_type.setTextColor(textColor);
             final MiniContact miniContact = call.getMiniContact(activity);
             if (miniContact != null) {
                 if (miniContact.photo == null) {
@@ -158,10 +164,6 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
                     image_letter.setVisibility(View.INVISIBLE);
                 }
                 contact_name.setText(miniContact.name);
-                @ColorInt final int textColor = textColorOnRegular;
-                contact_name.setTextColor(textColor);
-                tv_time.setTextColor(textColor);
-                tv_type.setTextColor(textColor);
             } else {
                 image_letter.setVisibility(View.INVISIBLE);
                 if (call.isPrivate()) {
@@ -255,8 +257,10 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
                     colorRes = R.color.other;
             }
             tv_type.setText(stringRes);
+            final int color = ContextCompat.getColor(activity, colorRes);
+            tv_type.setTextColor(color);
+            iv_type.setImageTintList(ColorStateList.valueOf(color));
             iv_type.setImageResource(drawableRes);
-            this.fl_contact_only.setBackgroundResource(colorRes);
 
         }
 

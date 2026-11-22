@@ -31,7 +31,7 @@
         android:gravity="center"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:text="@string/it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher"
+        android:text="@string/it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher"
         app:layout_constraintBottom_toTopOf="@+id/bt_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

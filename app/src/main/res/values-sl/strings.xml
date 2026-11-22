@@ -18,7 +18,7 @@
     <string name="about">O aplikaciji</string>
     <string name="about_subtext">Zdravo!\nMoje ime je Uriah Shaul Mandel in sem razvijalec te platforme.
 		\nVečino svojega odraslega življenja sem preživel z ustvarjanjem te platforme in sem jo izdal brezplačno za vse.
-        \nSte več kot dobrodošli, da me v angleškem jeziku kontaktirate na e-pošto:\nbaldphone.contact@gmail.com
+        \nSte več kot dobrodošli, da me v angleškem jeziku kontaktirate na e-pošto:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Stopnja dostopnosti</string>
     <string name="accessibility_settings">Nastavitve dostopnosti</string>
@@ -54,7 +54,7 @@
     <string name="allow">Dovoli</string>
     <string name="already_setted">Že nastavljeno!\nPritisni tukaj da spremeniš</string>
     <string name="an_error_has_occurred">Pojavila se je napaka!</string>
-    <string name="and_welcome_to_baldphone">In dobrodošli v BaldPhone.</string>
+    <string name="and_welcome_to_GranPhone">In dobrodošli v GranPhone.</string>
 
     <string name="apps">Aplikacije</string>
     <string name="are_you_sure_you_want_to_delete___">Ali ste prepričani da želite izbrisati %s?</string>
@@ -62,7 +62,7 @@
     <string name="at_least_one_day_must_be_selected">Izbran mora biti vsaj en dan!</string>
     <string name="auto_brightness">Samodejna\nSvetlost</string>
     <string name="backspace">vračalka</string>
-    <string name="baldphone_bla_allow_permission">Prosimo odobrite sledeča dovoljenja:</string>
+    <string name="GranPhone_bla_allow_permission">Prosimo odobrite sledeča dovoljenja:</string>
     <string name="blocked">Blokiran</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Svetlost</string>
@@ -77,7 +77,7 @@
     <string name="camera_subtext">Ta odobritev je potrebna, da se lahko vključi svetilko.</string>
     <string name="cancel">Prekliči</string>
     <string name="change_pills_time">Spremeni čas za zdravila</string>
-    <string name="change_system_settings_subtext">Prosimo odobrite aplikaciji BaldPhone, da lahko spreminja nastavitve, kot sta povečanje velikosti pisave
+    <string name="change_system_settings_subtext">Prosimo odobrite aplikaciji GranPhone, da lahko spreminja nastavitve, kot sta povečanje velikosti pisave
         in spreminjanje svetlosti.
     </string>
     <string name="choose_friday">Pet</string>
@@ -101,7 +101,7 @@
     <string name="contacts">Stiki</string>
     <string name="contacts_read_subtext">Ta odobritev je potrebna, da se lahko dostopa do stikov.</string>
     <string name="contacts_subtext">Ta odobritev je potrebna, da se lahko doda nove stike.</string>
-    <string name="crash">Ups!\nBaldPhone je naletel na težavo in se bo sedaj zagnal znova.</string>
+    <string name="crash">Ups!\nGranPhone je naletel na težavo in se bo sedaj zagnal znova.</string>
     <string name="current_time">Trenutni čas</string>
     <string name="custom">Po meri</string>
     <string name="dark">Temna</string>
@@ -115,7 +115,7 @@
     <string name="edit">Uredi</string>
     <string name="email">E-pošta:</string>
     <string name="enable_notification_access">Omogoči dostop do obvestil</string>
-    <string name="enable_notification_access_subtext">Prosimo omogočite aplikaciji BaldPhone dostop do obvestil.</string>
+    <string name="enable_notification_access_subtext">Prosimo omogočite aplikaciji GranPhone dostop do obvestil.</string>
     <string name="enter">Vnesi</string>
     <string name="enter_contact_or_phone_number">Vnesi ime stika:</string>
     <string name="evening">Zvečer</string>
@@ -127,8 +127,8 @@
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Izberite stopnjo dostopnosti.\nTo lahko spremenite v nastavitvah.</string>
     <string name="font_size">Velikost pisave</string>
     <string name="friday">Petek</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Ali s težavo uporabljate privzeto tipkovnico?
-	 Poskusite z veliko BaldPhone tipkovnico!</string>
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Ali s težavo uporabljate privzeto tipkovnico?
+	 Poskusite z veliko GranPhone tipkovnico!</string>
     <string name="hello">Pozdravljeni</string>
     <string name="help">Video vodič</string>
     <string name="hide">Skrij</string>
@@ -138,7 +138,7 @@
     <string name="huge">Ogromno</string>
     <string name="internet">Splet</string>
     <string name="invoked_in">Priklicana v:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Še ena stvar:\nBaldphone je zelo priporočljivo uporabiti
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Še ena stvar:\nGranPhone je zelo priporočljivo uporabiti
 	 kot privzeti začetni zaslon.</string>
     <string name="language">Jezik</string>
     <string name="language_settings">Jezik</string>
@@ -214,9 +214,9 @@
     <string name="save">Shrani</string>
     <string name="send">Pošlji</string>
     <string name="set_default_dialer">Nastavi privzeto klicalno aplikacijo</string>
-    <string name="set_default_dialer_subtext">BaldPhone mora biti označen kot privzeta klicalna aplikacija.</string>
+    <string name="set_default_dialer_subtext">GranPhone mora biti označen kot privzeta klicalna aplikacija.</string>
     <string name="set_home_screen">Spremeni začetni zaslon</string>
-    <string name="set_home_screen_subtext">Da lahko uporabljaš BaldPhone nemoteno, ga moraš nastaviti za domač zaslon.
+    <string name="set_home_screen_subtext">Da lahko uporabljaš GranPhone nemoteno, ga moraš nastaviti za domač zaslon.
 		\nTo se da razveljaviti in spremeniti v nastavitvah.
 	</string>
     <string name="set_keyboard">Nastavi tipkovnico</string>
@@ -224,12 +224,12 @@
     <string name="settings">Nastavitve</string>
     <string name="settings_permission">Dovoljenja nastavitev</string>
     <string name="share">Deli</string>
-    <string name="share_actual_text">Zdravo, uporabljam platformo imenovano BaldPhone, katera nadomesti privzet telefonski vmesnik
+    <string name="share_actual_text">Zdravo, uporabljam platformo imenovano GranPhone, katera nadomesti privzet telefonski vmesnik
 		v velikega, enostavnega in prijaznega za uporabo.\nLahko jo preneseš in uporabljaš brezplačno!\nPreveri spodnjo povezavo za več
-		informacij:\n\nhttps://baldphone.com
+		informacij:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Hej, morda poznaš ljudi, ki bi želeli spoznati BaldPhone ?\nLahko ga deliš z njimi !"</string>
-    <string name="share_baldphone">Deli BaldPhone</string>
+    <string name="share_bald_phone_subtext">Hej, morda poznaš ljudi, ki bi želeli spoznati GranPhone ?\nLahko ga deliš z njimi !"</string>
+    <string name="share_GranPhone">Deli GranPhone</string>
     <string name="share_contact">Deli stik</string>
     <string name="share_differently">Deli preko druge aplikacije</string>
     <string name="share_via_whatsapp">Deli preko WhatsApp</string>
@@ -282,15 +282,15 @@
     <string name="no_pills">Ni zdravil.\nDodaj novo s tem, da klikneš\n\'Dodaj zdravilo\'</string>
     <string name="clear_all_notifications">Počisti vsa obvestila</string>
     <string name="clear_cache_subtext">Ali ste prepričani, da želite počistiti celoten predpomnilnik?\nOdstranjene bodo tudi bližnjice aplikacij!</string>
-    <string name="permissions_calm">Pozdravljeni, BaldPhone potrebuje sledeča dovoljenja da lahko deluje pravilno. Nekatera izmed teh zvenijo
-        veliko, ampak so edini način, da lahko BaldPhone zamenja telefonski vmesnik. Poslanih ne bo nič podatkov in povzročene ne bo nobene škode.
-        Pritisni \'Ok\', da odobriš dovoljenja, ali \'ne\' da zapustiš BaldPhone.
+    <string name="permissions_calm">Pozdravljeni, GranPhone potrebuje sledeča dovoljenja da lahko deluje pravilno. Nekatera izmed teh zvenijo
+        veliko, ampak so edini način, da lahko GranPhone zamenja telefonski vmesnik. Poslanih ne bo nič podatkov in povzročene ne bo nobene škode.
+        Pritisni \'Ok\', da odobriš dovoljenja, ali \'ne\' da zapustiš GranPhone.
     </string>
     <string name="pending_update">Čakajoča posodobitev</string>
     <string name="download">Prenesi</string>
     <string name="install_updates">Namesti posodobitve</string>
-    <string name="install_updates_subtext">Ta potrditev je potrebna, da lahko BaldPhone posodobite na novejšo različico.</string>
-    <string name="a_new_update_is_available">Nova posodobitev je na voljo!\nPosodobitve so pomembne, da lahko BaldPhone deluje tekoče.\nPritisni Ok da preneseš novo posodobitev.
+    <string name="install_updates_subtext">Ta potrditev je potrebna, da lahko GranPhone posodobite na novejšo različico.</string>
+    <string name="a_new_update_is_available">Nova posodobitev je na voljo!\nPosodobitve so pomembne, da lahko GranPhone deluje tekoče.\nPritisni Ok da preneseš novo posodobitev.
     </string>
     <string name="current_version">Trenutna različica:\n</string>
     <string name="new_version">Nova različica:\n</string>
@@ -308,7 +308,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">Prenešene posodobitve ni bilo mogoče odstraniti!</string>
     <string name="downloading">Prenašanje…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone je posodobljen.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone je posodobljen.</string>
     <string name="what_s_new">Kaj je novega</string>
     <string name="download_finished">Prenos končan!</string>
     <string name="downloading_updates">Prenašanje posodobitev…</string>
@@ -317,7 +317,7 @@
     <string name="download_progress">Napredek prenosa</string>
     <string name="what_do_you_want_to_do_with___">Kaj želiš storiti s %s?</string>
     <string name="crash_reports">Poročilo zrušitve</string>
-    <string name="crash_reports_subtext">Poročila zrušitev pomagajo, da je uporabniška izkušnja z BaldPhone brezhibna.\nPoročila so potrebna le za 
+    <string name="crash_reports_subtext">Poročila zrušitev pomagajo, da je uporabniška izkušnja z GranPhone brezhibna.\nPoročila so potrebna le za 
 		popravila programskih napak in poslani so le nujno potrebni podatki o delovanju aplikacije.
     </string>
     <string name="custom_app">Aplikacija po meri</string>
@@ -355,7 +355,7 @@
     <string name="low_battery_alert_subtext">Izberi, ali želiš, da se opravilno vrstica na domačem zaslonu obarva rdeče,
 		ko je zmogljivost baterije pod 20%.\nV vednost: to ne bo vidno, če je opravilna vrstica skrita.</string>
 
-    <string name="also_available_at">Tudi na voljo na \nbaldphone.contact@gmail.com\nPovratne informacije morajo biti v angleščini!</string>
+    <string name="also_available_at">Tudi na voljo na \nGranPhone.contact@gmail.com\nPovratne informacije morajo biti v angleščini!</string>
     <string name="grant_all_permissions">Potrdi vsa dovoljenja</string>
 
 
@@ -383,7 +383,7 @@
     <string name="groups">Skupine</string>
     <string name="one_grid">Mreža</string>
     <string name="colorful">Barvito</string>
-    <string name="colorful_subtext">Ali želite, da je BaldPhone bolj barvit?</string>
+    <string name="colorful_subtext">Ali želite, da je GranPhone bolj barvit?</string>
     <string name="edit_home_screen">Uredi elemente na domačem zaslonu</string>
     <string name="dual_sim">Dve SIM kartici</string>
     <string name="dual_sim_subtext">Izberite, kako želite upravljati dve sim kartici\nOpomba: Če izberete Prikaži Možnosti, boste morali odobriti še eno dovoljenje </string>

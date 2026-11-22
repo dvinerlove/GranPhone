@@ -18,7 +18,7 @@
     <string name="about">About</string>
     <string name="about_subtext">Hi!\nMy name is Uriah Shaul Mandel, and I\'m the developer of this platform.\n
         I\'ve spent most of my \"adult\" life making this platform, and I\'ve released it for free, for all to
-        use.\nYou are more than welcome to contact me by email:\nbaldphone.contact@gmail.com
+        use.\nYou are more than welcome to contact me by email:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Erişilebilirlik Seviyesi</string>
     <string name="accessibility_settings">Erişilebilirlik</string>
@@ -52,7 +52,7 @@
     <string name="allow">Izin ver</string>
     <string name="already_setted">Zaten kurulu! Değiştirmek için buraya basın</string>
     <string name="an_error_has_occurred">Hata oluştu</string>
-    <string name="and_welcome_to_baldphone">Baldphone\'a hoşgeldiniz</string>
+    <string name="and_welcome_to_GranPhone">GranPhone\'a hoşgeldiniz</string>
 
     <string name="apps">Uygulamalar</string>
     <string name="are_you_sure_you_want_to_delete___">Bunu silmek istediğinize emin misiniz %s?</string>
@@ -60,7 +60,7 @@
     <string name="at_least_one_day_must_be_selected">En az bir gün seçilmek sorunda!</string>
     <string name="auto_brightness">Otomatik\n parlaklık</string>
     <string name="backspace">Geri tuşu</string>
-    <string name="baldphone_bla_allow_permission">Lütfen gerekli izinleri veriniz:</string>
+    <string name="GranPhone_bla_allow_permission">Lütfen gerekli izinleri veriniz:</string>
     <string name="blocked">Bloke edilmiş</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Parlaklık</string>
@@ -75,7 +75,7 @@
     <string name="camera_subtext">Bu gerekçe, el fenerini kullanmak için gerekli.</string>
     <string name="cancel">Vazgeç</string>
     <string name="change_pills_time">Hap zamanını değiştir.</string>
-    <string name="change_system_settings_subtext">Lütfen Baldphone\'a ayarları değiştirme onayı veriniz, örneğin yazı tipini değiştirmek veya parlaklığı değiştirmek için.
+    <string name="change_system_settings_subtext">Lütfen GranPhone\'a ayarları değiştirme onayı veriniz, örneğin yazı tipini değiştirmek veya parlaklığı değiştirmek için.
     </string>
     <string name="choose_friday">Cum</string>
     <string name="choose_monday">Pzt</string>
@@ -98,7 +98,7 @@
     <string name="contacts">Kişiler</string>
     <string name="contacts_read_subtext">Bu gerekçe, Kişilere bakmak için gerekli.</string>
     <string name="contacts_subtext">But gerekçe, yeni Kişi eklemek için gerekli..</string>
-    <string name="crash">Hay daaa!\ BaldPhone\'da Hata oluştu! Yeniden başlatılıyot.</string>
+    <string name="crash">Hay daaa!\ GranPhone\'da Hata oluştu! Yeniden başlatılıyot.</string>
     <string name="current_time">Şimdiki zaman</string>
     <string name="custom">Özel</string>
     <string name="dark">Karanlık</string>
@@ -112,7 +112,7 @@
     <string name="edit">Düzenle</string>
     <string name="email">E-posta:</string>
     <string name="enable_notification_access">Bildirim erişimine izin veriniz</string>
-    <string name="enable_notification_access_subtext">Lütfen BaldPhone bildirimlerine izin veriniz.</string>
+    <string name="enable_notification_access_subtext">Lütfen GranPhone bildirimlerine izin veriniz.</string>
     <string name="enter">Giriş</string>
     <string name="enter_contact_or_phone_number">Kişinin ismini giriniz:</string>
     <string name="evening">Akşam</string>
@@ -126,7 +126,7 @@
     </string>
     <string name="font_size">Metin büyüklüğü</string>
     <string name="friday">Cuma</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Şu klavyeyi kullanmakt sıkıntı mı yaşıyorsunuz? BaldPhone\'un BÜYÜK Klavyesini deneyin.
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Şu klavyeyi kullanmakt sıkıntı mı yaşıyorsunuz? GranPhone\'un BÜYÜK Klavyesini deneyin.
     </string>
     <string name="hello">Merhaba</string>
     <string name="help">Yardım</string>
@@ -137,7 +137,7 @@
     <string name="huge">Huge</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Çağrıldı:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Son bir şey:\n Baldphon\'un kendi ana sayfayasnini kullanmanızı tavsiye ederiz.
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Son bir şey:\n Baldphon\'un kendi ana sayfayasnini kullanmanızı tavsiye ederiz.
     </string>
     <string name="language">Dil</string>
     <string name="language_settings">Dil ayarları</string>
@@ -213,18 +213,18 @@
     <string name="save">Kaydet</string>
     <string name="send">Gönder</string>
     <string name="set_default_dialer">Varsayılan arama uygulamasını seçiniz</string>
-    <string name="set_default_dialer_subtext">BaldPhone varsayılan arama uygulaması olarak seçilmeli.</string>
+    <string name="set_default_dialer_subtext">GranPhone varsayılan arama uygulaması olarak seçilmeli.</string>
     <string name="set_home_screen">Ana sayfayı ayarla</string>
-    <string name="set_home_screen_subtext">BaldPhone\'u kullanmak için, onu ana sayfa olarak ayarlamalısınız.\nBu ayar Ayarlar kısmından geri çevirebilirsiniz.</string>
+    <string name="set_home_screen_subtext">GranPhone\'u kullanmak için, onu ana sayfa olarak ayarlamalısınız.\nBu ayar Ayarlar kısmından geri çevirebilirsiniz.</string>
     <string name="set_keyboard">Klavye ayarla</string>
     <string name="setting_does_not_exist">Böyle ayar yok</string>
     <string name="settings">Ayarlar</string>
     <string name="settings_permission">Ayarlar izni</string>
     <string name="share">Paylaş</string>
-    <string name="share_actual_text">Merhaba, Ben \"BaldPhone\" isimli, telefonun arayüzünü büyük, sade ve güzel bir arayüze çeviren bi uygulama kullanıyorum.
-     \nMerak mı ettin?\nBedavaya indire bilirsin!\nDaha fazla bilgi için şu bağlantıyı kullan:\n\nhttps://baldphone.com</string>
-    <string name="share_bald_phone_subtext">Hey, BaldPhone\'u tanımayan birini mi tanıyorsunuz?\nBunu onunla paylaşa bilirsiniz!</string>
-    <string name="share_baldphone">BaldPhone\'u paylaş</string>
+    <string name="share_actual_text">Merhaba, Ben \"GranPhone\" isimli, telefonun arayüzünü büyük, sade ve güzel bir arayüze çeviren bi uygulama kullanıyorum.
+     \nMerak mı ettin?\nBedavaya indire bilirsin!\nDaha fazla bilgi için şu bağlantıyı kullan:\n\nhttps://github.com/dvinerlove/GranPhone</string>
+    <string name="share_bald_phone_subtext">Hey, GranPhone\'u tanımayan birini mi tanıyorsunuz?\nBunu onunla paylaşa bilirsiniz!</string>
+    <string name="share_GranPhone">GranPhone\'u paylaş</string>
     <string name="share_contact">Kişiyi paylaş</string>
     <string name="share_differently">Başka uygulamayla paylaş</string>
     <string name="share_via_whatsapp">Whatsapp ile paylaş</string>
@@ -277,12 +277,12 @@
     <string name="no_pills">Listede hiç bir ilacınız yok \nŞuraya basarak birini yaratın\n\"İlaç ekle\"</string>
     <string name="clear_all_notifications">Tüm bildirimleri temizle</string>
     <string name="clear_cache_subtext">Önbelleyi temizlemek istediğinize emin misiniz?\nUygulama kısayolları kaldırılacak!</string>
-    <string name="permissions_calm">Merhaba, BaldPhone\'un düzgün çalışması için aşağıdakı izinleri vermelisiniz. Bazı izinler korkunç seslene bilir, ama BaldPhone\'un telefonunuzun arayüzünün yerini almasının başka bir yolu yok. Bu işlem tamamen zararsızdır ve hiç bir bilginiz ele geçirilmeyecek. Tamama basarak şu izinleri veriniz.</string>
+    <string name="permissions_calm">Merhaba, GranPhone\'un düzgün çalışması için aşağıdakı izinleri vermelisiniz. Bazı izinler korkunç seslene bilir, ama GranPhone\'un telefonunuzun arayüzünün yerini almasının başka bir yolu yok. Bu işlem tamamen zararsızdır ve hiç bir bilginiz ele geçirilmeyecek. Tamama basarak şu izinleri veriniz.</string>
     <string name="pending_update">Bekleyen güncelleme</string>
     <string name="download">İndir</string>
     <string name="install_updates">Güncellemeleri kurun</string>
-    <string name="install_updates_subtext">BaldPhone\'u güncellemek için şu izin gerekli</string>
-    <string name="a_new_update_is_available">Yeni güncelleme hazır!\nGüncellemeler BaldPhone\'un hızlı ve pürüzsüz çalışması için önemli.\nTamama basarak indiriniz.</string>
+    <string name="install_updates_subtext">GranPhone\'u güncellemek için şu izin gerekli</string>
+    <string name="a_new_update_is_available">Yeni güncelleme hazır!\nGüncellemeler GranPhone\'un hızlı ve pürüzsüz çalışması için önemli.\nTamama basarak indiriniz.</string>
     <string name="current_version">Şimdiki sürüm:\n</string>
     <string name="new_version">Yeni sürüm:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Yeni güncellemeler indirilmeye hazır.</string>
@@ -297,7 +297,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">indirilmiş güncelleme dosyası silinemedi!</string>
     <string name="downloading">İndiriliyor…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone güncel.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone güncel.</string>
     <string name="what_s_new">Yeni ne var?</string>
     <string name="download_finished">İndirme tamamlandı!</string>
     <string name="downloading_updates">Güncellemeler indiriliyor…</string>
@@ -306,7 +306,7 @@
     <string name="download_progress">İndirme ilerlemesi</string>
     <string name="what_do_you_want_to_do_with___">Şununla ne etmek istiyorsunuz %s?</string>
     <string name="crash_reports">Kaza şikayetleri</string>
-    <string name="crash_reports_subtext">Kaza şikayetleri BaldPhone\'un kullanım tecrübesinin geliştirilmesine yardım ediyorlar.\nOnlar sadece hataların bulunması ve düzeltilmesine yardım ediyorlars, ve size ait hiçbir bilgi elde edilmiyor.</string>
+    <string name="crash_reports_subtext">Kaza şikayetleri GranPhone\'un kullanım tecrübesinin geliştirilmesine yardım ediyorlar.\nOnlar sadece hataların bulunması ve düzeltilmesine yardım ediyorlars, ve size ait hiçbir bilgi elde edilmiyor.</string>
     <string name="custom_app">Özel uygulama</string>
     <string name="custom_app_subtext">Ana sayfada olacak özel uygulamayı seçiniz.</string>
     <string name="no_app_was_found">Eşleşen uygulama bulunamadı!</string>
@@ -341,7 +341,7 @@
     <string name="low_battery_alert">Düşük pil alarmı</string>
     <string name="low_battery_alert_subtext">Eğer pil düşük olduğu zaman durum çubuğunun kırmızıya boyanmasını istiyorsanız seçiniz.\nNot: eğer durum çubuğu gizliyse görünmeyecektir.</string>
 
-    <string name="also_available_at">\nbaldphone.contact@gmail.com\nFeedback\'de de mevcut! Yalnız İngilizce ve İbranice olmalı!</string>
+    <string name="also_available_at">\nGranPhone.contact@gmail.com\nFeedback\'de de mevcut! Yalnız İngilizce ve İbranice olmalı!</string>
     <string name="grant_all_permissions">Tüm izinleri veriniz</string>
 
 
@@ -369,7 +369,7 @@
     <string name="groups">Gruplar</string>
     <string name="one_grid">Tek hane</string>
     <string name="colorful">Renkli</string>
-    <string name="colorful_subtext">BaldPhone\'u daha renkli yapmak ister misiniz?</string>
+    <string name="colorful_subtext">GranPhone\'u daha renkli yapmak ister misiniz?</string>
     <string name="edit_home_screen">Ana sayfayı düzenle</string>
 
 

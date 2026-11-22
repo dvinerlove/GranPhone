@@ -114,7 +114,7 @@ public class TutorialFragment3 extends TutorialFragment {
     }
 
     public void firstAnimation(final long msDuration) {
-        final String theString = getString(R.string.have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead);
+        final String theString = getString(R.string.have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead);
         final int theStringLength = theString.length();
         final Animation animation = new Animation() {
             int a = 0;

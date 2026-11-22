@@ -18,7 +18,7 @@
     <string name="about">O aplikaci</string>
     <string name="about_subtext">Ahoj!\nJmenuji se Uriah Shaul Mandel a jsem vývojář této platformy.\n
         Většinu svého \"dospělého\" života jsem strávit tvorbou této platformy a rozhodl jsem se ji vydat zadarmo, a to pro
-        všechny.\nJste více než vítáni kontaktovat mě na email:\nbaldphone.contact@gmail.com
+        všechny.\nJste více než vítáni kontaktovat mě na email:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Úroveň přistupnosti</string>
     <string name="accessibility_settings">Přístupnost</string>
@@ -54,7 +54,7 @@
     <string name="allow">Povolit</string>
     <string name="already_setted">Již nastaveno!\nKlikněte zde pro změnu</string>
     <string name="an_error_has_occurred">Nastala chyba!</string>
-    <string name="and_welcome_to_baldphone">A vítejte u BaldPhone</string>
+    <string name="and_welcome_to_GranPhone">A vítejte u GranPhone</string>
 
     <string name="apps">Aplikace</string>
     <string name="are_you_sure_you_want_to_delete___">Jste si jisté že chcete smazat %s?</string>
@@ -62,7 +62,7 @@
     <string name="at_least_one_day_must_be_selected">Aspoň jedno musí být vybráno!</string>
     <string name="auto_brightness">Automatický\njas</string>
     <string name="backspace">backspace</string>
-    <string name="baldphone_bla_allow_permission">Prosím povolte následující oprávnění:</string>
+    <string name="GranPhone_bla_allow_permission">Prosím povolte následující oprávnění:</string>
     <string name="blocked">Zablokováno</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Jas</string>
@@ -77,7 +77,7 @@
     <string name="camera_subtext">Toto oprávnění je nutné k používání svítilny.</string>
     <string name="cancel">Zrušit</string>
     <string name="change_pills_time">Změnit čas pilulky</string>
-    <string name="change_system_settings_subtext">Prosím povolte BaldPhone změnu nastavení, jako například
+    <string name="change_system_settings_subtext">Prosím povolte GranPhone změnu nastavení, jako například
     zvětšení písma a změnu jasu.
     </string>
     <string name="choose_friday">Pá</string>
@@ -101,7 +101,7 @@
     <string name="contacts">Kontakty</string>
     <string name="contacts_read_subtext">Toto oprávnění je nutné ke čtení kontaktů.</string>
     <string name="contacts_subtext">Toto oprávnění je nutné k přidání nových kontaktů.</string>
-    <string name="crash">Ale ne!\nBaldPhone narazil na problém a nyní se restartuje.</string>
+    <string name="crash">Ale ne!\nGranPhone narazil na problém a nyní se restartuje.</string>
     <string name="current_time">Čas nyní</string>
     <string name="custom">Vlastní</string>
     <string name="dark">Tmavý</string>
@@ -115,7 +115,7 @@
     <string name="edit">Upravit</string>
     <string name="email">Email:</string>
     <string name="enable_notification_access">Povolit Přístup K Upozorněním</string>
-    <string name="enable_notification_access_subtext">Prosím povolte BaldPhone přístup k upozorněním.</string>
+    <string name="enable_notification_access_subtext">Prosím povolte GranPhone přístup k upozorněním.</string>
     <string name="enter">Zadat</string>
     <string name="enter_contact_or_phone_number">Zadejte jméno kontaktu:</string>
     <string name="evening">Večer</string>
@@ -130,8 +130,8 @@
     </string>
     <string name="font_size">Písmo</string>
     <string name="friday">Pátek</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Máte potíže s používáním klávesnice telefonu?
-    Použijte velkou klávesnici BaldPhone.
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Máte potíže s používáním klávesnice telefonu?
+    Použijte velkou klávesnici GranPhone.
     </string>
     <string name="hello">Dobrý den</string>
     <string name="help">Video návod</string>
@@ -142,8 +142,8 @@
     <string name="huge">Obrovský</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Vyvoláno v:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Jedna poslední věc:
-    \nJe velice doboručeno, že použijete BaldPhone jako výchozí domovskou obrazovku
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Jedna poslední věc:
+    \nJe velice doboručeno, že použijete GranPhone jako výchozí domovskou obrazovku
     </string>
     <string name="language">Jazyk</string>
     <string name="language_settings">Jazyk</string>
@@ -219,9 +219,9 @@
     <string name="save">Uložit</string>
     <string name="send">Poslat</string>
     <string name="set_default_dialer">Nastavit výchozí telefoní aplikaci</string>
-    <string name="set_default_dialer_subtext">BaldPhone musí být nasteven jako výchozí aplikace pro telefonování.</string>
+    <string name="set_default_dialer_subtext">GranPhone musí být nasteven jako výchozí aplikace pro telefonování.</string>
     <string name="set_home_screen">Nastavit domovskou obrazovku</string>
-    <string name="set_home_screen_subtext">Aby jste mohli používat BaldPhone, měli by jste ho nastavit jako domovskou obrazovku.\nJde
+    <string name="set_home_screen_subtext">Aby jste mohli používat GranPhone, měli by jste ho nastavit jako domovskou obrazovku.\nJde
         to vrátit a může být změněno v nastavení.
     </string>
     <string name="set_keyboard">Nastavit klávesnici</string>
@@ -229,14 +229,14 @@
     <string name="settings">Nastavení</string>
     <string name="settings_permission">Nastavení oprávnění</string>
     <string name="share">Sdílet</string>
-    <string name="share_actual_text">Ahoj, používám platformu BaldPhone, která nahrazuje rozhraní telefonu
+    <string name="share_actual_text">Ahoj, používám platformu GranPhone, která nahrazuje rozhraní telefonu
         za jedno, co je velké a jednoduché. Zaujalo vás to? Lze stáhnou zadarmo! Podívej se na odkaz
-        :\n\nhttps://baldphone.com
+        :\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Hej, víš o někom, kdo by chtěl používat BaldPhone?\nMůžeš to s
+    <string name="share_bald_phone_subtext">Hej, víš o někom, kdo by chtěl používat GranPhone?\nMůžeš to s
     ním sdílet!"
     </string>
-    <string name="share_baldphone">Sdílet BaldPhone</string>
+    <string name="share_GranPhone">Sdílet GranPhone</string>
     <string name="share_contact">Sdílet kontakt</string>
     <string name="share_differently">Sdílet přes jinou aplikaci</string>
     <string name="share_via_whatsapp">Sdílet přes Whatsapp</string>
@@ -290,15 +290,15 @@
     <string name="clear_all_notifications">Vyčistit všechna upozornění</string>
     <string name="clear_cache_subtext">Jste si jistí že chcete smazat všechna dočastná data?\nZkratky aplikací budou smazány také!
     </string>
-    <string name="permissions_calm">Ahoj, BaldPhone potřebuje následující oprávnění k funkci. Některá z nich
-        zní strašidelně, ale je to jediný způsob, jak může BaldPhone nahradit prostředí vašeho telefonu. Žádné data nejsou sebrána a nezpůsobuje
-        žádné škody. Zmáčkněte OK pro udělení oprávnění, nebo ne pro opuštění BaldPhone.
+    <string name="permissions_calm">Ahoj, GranPhone potřebuje následující oprávnění k funkci. Některá z nich
+        zní strašidelně, ale je to jediný způsob, jak může GranPhone nahradit prostředí vašeho telefonu. Žádné data nejsou sebrána a nezpůsobuje
+        žádné škody. Zmáčkněte OK pro udělení oprávnění, nebo ne pro opuštění GranPhone.
     </string>
     <string name="pending_update">Čeká na aktualizaci</string>
     <string name="download">Stáhnout</string>
     <string name="install_updates">Instalovat aktualizace</string>
-    <string name="install_updates_subtext">Toto oprávnění je nutné k aktualizaci BaldPhone.</string>
-    <string name="a_new_update_is_available">Nová aktualizace je dostupná!\nAktualizace jsou důležité, aby BaldPhone běžel
+    <string name="install_updates_subtext">Toto oprávnění je nutné k aktualizaci GranPhone.</string>
+    <string name="a_new_update_is_available">Nová aktualizace je dostupná!\nAktualizace jsou důležité, aby GranPhone běžel
         plynule.\nZmáčkněte OK pro stažení.
     </string>
     <string name="current_version">Současná verze:\n</string>
@@ -317,7 +317,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">Stažený aktualizační soubor nemůže být smazán!</string>
     <string name="downloading">Stahuji…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone je aktuální.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone je aktuální.</string>
     <string name="what_s_new">Co je nového</string>
     <string name="download_finished">Stahování dokončeno!</string>
     <string name="downloading_updates">Stahuji aktualizace…</string>
@@ -326,7 +326,7 @@
     <string name="download_progress">Průběh stahování</string>
     <string name="what_do_you_want_to_do_with___">Co chcete dělat s %s?</string>
     <string name="crash_reports">Zprávy o havárii</string>
-    <string name="crash_reports_subtext">Zprávy o havárii pomáhají dělat prostředí BaldPhone bezchybné\nJsou používány pouze
+    <string name="crash_reports_subtext">Zprávy o havárii pomáhají dělat prostředí GranPhone bezchybné\nJsou používány pouze
         k opravě chyb a žádné jiné informace, než to co je potřeba k opravě chyb, není posíláno.
     </string>
     <string name="custom_app">Vlastní aplikace</string>
@@ -363,7 +363,7 @@
     <string name="low_battery_alert">Pozor, nízká baterie</string>
     <string name="low_battery_alert_subtext">Zvolte, pokud chcete, aby stavový řádek byl na domovské obrazovce červený, když je baterie méně než 20% \nPoznámka se nezobrazí, pokud je stavový řádek systému skrytý.</string>
 
-    <string name="also_available_at">Also available at\nbaldphone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
+    <string name="also_available_at">Also available at\nGranPhone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
     <string name="grant_all_permissions">Grant All Permissions</string>
 
 
@@ -391,7 +391,7 @@
     <string name="groups">Groups</string>
     <string name="one_grid">One Grid</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make BaldPhone more colorful?</string>
+    <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>

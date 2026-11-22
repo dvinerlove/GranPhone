@@ -18,7 +18,7 @@
     <string name="about">关于</string>
     <string name="about_subtext">你好!\n我的名字是乌利亚·绍尔·曼德尔，我是这个平台的开发者。\n
              我花了我“成年”生活的大部分时间来创建这个平台，并且我已经免费发布了它，所有人
-             都可使用。\n欢迎您通过电子邮件:\nbaldphone.contact@gmail.com与我联系</string>
+             都可使用。\n欢迎您通过电子邮件:\nGranPhone.contact@gmail.com与我联系</string>
     <string name="accessibility_level">輔助功能程度</string>
     <string name="accessibility_settings">輔助功能設定</string>
     <string name="accidental_touches">防誤觸功能</string>
@@ -51,7 +51,7 @@
     <string name="allow">允許</string>
     <string name="already_setted">已設定!\n按此再更改</string>
     <string name="an_error_has_occurred">發生了錯誤!</string>
-    <string name="and_welcome_to_baldphone">歡迎來到清風電話</string>
+    <string name="and_welcome_to_GranPhone">歡迎來到清風電話</string>
 
     <string name="apps">程式</string>
     <string name="are_you_sure_you_want_to_delete___">你肯定要移除%s?</string>
@@ -59,7 +59,7 @@
     <string name="at_least_one_day_must_be_selected">最少要選擇一日!</string>
     <string name="auto_brightness">自動調校亮度</string>
     <string name="backspace">退格鍵</string>
-    <string name="baldphone_bla_allow_permission">請允許以下權限:</string>
+    <string name="GranPhone_bla_allow_permission">請允許以下權限:</string>
     <string name="blocked">已封鎖</string>
     <string name="bluetooth">藍牙</string>
     <string name="brightness">亮度</string>
@@ -125,7 +125,7 @@
     </string>
     <string name="font_size">字型</string>
     <string name="friday">星期五</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">覺得電話鍵盤字太小?轉用清風電話的大字鍵盤吧!
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">覺得電話鍵盤字太小?轉用清風電話的大字鍵盤吧!
     </string>
     <string name="hello">你好</string>
     <string name="help">影片教學</string>
@@ -136,7 +136,7 @@
     <string name="huge">巨大</string>
     <string name="internet">互聯網</string>
     <string name="invoked_in">倒數計時:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">最後:\n我們強烈建議你使用清風電話為預設主螢幕
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">最後:\n我們強烈建議你使用清風電話為預設主螢幕
     </string>
     <string name="language">語言</string>
     <string name="language_settings">語言</string>
@@ -221,11 +221,11 @@
     <string name="settings">設定</string>
     <string name="settings_permission">設定權限</string>
     <string name="share">分享</string>
-    <string name="share_actual_text">你好！我正使用清風電話，電話的字體現在又大又簡單易用！\n立即免費下載!\n到這個網址下載:\n\nhttps://baldphone.com
+    <string name="share_actual_text">你好！我正使用清風電話，電話的字體現在又大又簡單易用！\n立即免費下載!\n到這個網址下載:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
     <string name="share_bald_phone_subtext">你認識其他會喜歡清風電話的人嗎?與他們分享吧!"
     </string>
-    <string name="share_baldphone">分享清風電話</string>
+    <string name="share_GranPhone">分享清風電話</string>
     <string name="share_contact">分享聯絡人</string>
     <string name="share_differently">通過其他程式分享</string>
     <string name="share_via_whatsapp">通過 Whatsapp 分享</string>
@@ -303,7 +303,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">已下載的更新檔不能移除!</string>
     <string name="downloading">下載中…</string>
 
-    <string name="baldphone_is_up_to_date">清風電話已是最新版本。</string>
+    <string name="GranPhone_is_up_to_date">清風電話已是最新版本。</string>
     <string name="what_s_new">新功能</string>
     <string name="download_finished">下載完成!</string>
     <string name="downloading_updates">下載更新中…</string>
@@ -348,7 +348,7 @@
     <string name="low_battery_alert">低電量警告</string>
     <string name="low_battery_alert_subtext">你可以選擇電量低於 20% 時，讓狀態列轉紅\n注意，如果狀態列不顯示時，紅色效果也不會顯示。</string>
 
-    <string name="also_available_at">也可聯絡\nbaldphone.contact@gmail.com\n反饋需以英文或希伯來文寫成。</string>
+    <string name="also_available_at">也可聯絡\nGranPhone.contact@gmail.com\n反饋需以英文或希伯來文寫成。</string>
     <string name="grant_all_permissions">允許所有權限</string>
 
 
@@ -376,7 +376,7 @@
     <string name="groups">组别</string>
     <string name="one_grid">一个网格</string>
     <string name="colorful">多彩的</string>
-    <string name="colorful_subtext">你想让BaldPhone更有色彩吗?</string>
+    <string name="colorful_subtext">你想让GranPhone更有色彩吗?</string>
     <string name="edit_home_screen">编辑主屏幕</string>
     <string name="dual_sim">双 Sim卡</string>
     <string name="dual_sim_subtext">选择如何管理双卡\n注意：如果选择“显示选项”，则需要允许另一个权限</string>

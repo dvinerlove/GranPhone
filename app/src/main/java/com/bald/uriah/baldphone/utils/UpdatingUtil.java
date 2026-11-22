@@ -122,7 +122,7 @@ public class UpdatingUtil {
                                     if (retAnswer)
                                         BaldToast
                                                 .from(activity)
-                                                .setText(R.string.baldphone_is_up_to_date)
+                                                .setText(R.string.GranPhone_is_up_to_date)
                                                 .show();
                                 }
                             } catch (JSONException e) {

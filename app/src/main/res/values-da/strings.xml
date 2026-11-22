@@ -17,7 +17,7 @@
 <resources>
     <string name="about">Om denne app</string>
     <string name="about_subtext">Hej!\nMit navn er Uriah Shaul Mandel. Jeg er udvikleren bag denne app.\n
-        Jeg har brugt det meste af mit \"voksenliv\" på at lave denne app. Jeg har gjort den gratis, så alle kan få gavn af den.\nDu er mere end velkommen til at kontakte mig på  email (skriv på engelsk):\nbaldphone.contact@gmail.com\nDen danske oversættelse er lavet af en tilfreds bruger, så hans mormor også kan få gavn af app\'en &lt;3\nFejl i oversættelsen? Send rettelsen til baldphone@fam-petersen.eu
+        Jeg har brugt det meste af mit \"voksenliv\" på at lave denne app. Jeg har gjort den gratis, så alle kan få gavn af den.\nDu er mere end velkommen til at kontakte mig på  email (skriv på engelsk):\nGranPhone.contact@gmail.com\nDen danske oversættelse er lavet af en tilfreds bruger, så hans mormor også kan få gavn af app\'en &lt;3\nFejl i oversættelsen? Send rettelsen til GranPhone@fam-petersen.eu
     </string>
     <string name="accessibility_level">Tilgængelighedsniveau</string>
     <string name="accessibility_settings">Tilgængelighedsindstillinger</string>
@@ -49,7 +49,7 @@
     <string name="allow">Tillad</string>
     <string name="already_setted">Er allerede indstillet!\nKlik her for at ændre til det</string>
     <string name="an_error_has_occurred">Der er sket en fejl!</string>
-    <string name="and_welcome_to_baldphone">og velkommen til Baldphone</string>
+    <string name="and_welcome_to_GranPhone">og velkommen til GranPhone</string>
 
     <string name="apps">Apps</string>
     <string name="are_you_sure_you_want_to_delete___">Er du sikker på, at du vil slette %s?</string>
@@ -57,7 +57,7 @@
     <string name="at_least_one_day_must_be_selected">Du skal vælge mindst én dag!</string>
     <string name="auto_brightness">Automatisk\nlysstyrke</string>
     <string name="backspace">Slet</string>
-    <string name="baldphone_bla_allow_permission">Du skal give følgende tilladelser:</string>
+    <string name="GranPhone_bla_allow_permission">Du skal give følgende tilladelser:</string>
     <string name="blocked">Blokeret</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Lysstyrke</string>
@@ -72,7 +72,7 @@
     <string name="camera_subtext">Denne rettighed er nødvendig for, at du kan tænde lommelygten.</string>
     <string name="cancel">Annullér</string>
     <string name="change_pills_time">Skift tidspunkt for piller</string>
-    <string name="change_system_settings_subtext">Tillad at BaldPhone ændrer indstillinger, såsom at øge skriftstørrelsen og ændre lysstyrken.</string>
+    <string name="change_system_settings_subtext">Tillad at GranPhone ændrer indstillinger, såsom at øge skriftstørrelsen og ændre lysstyrken.</string>
     <string name="choose_friday">Fredag</string>
     <string name="choose_monday">Mandag</string>
     <string name="choose_saturday">Lørdag</string>
@@ -83,7 +83,7 @@
     <string name="clear">Ryd</string>
     <string name="clear_cache">Ryd midlertidig hukommelse</string>
     <string name="clear_data">Slet al data</string>
-    <string name="clear_data_subtext">Er du sikker på, at du ønsker at slette al brugerdata? BaldPhone-app\'en vil vende tilbage til fabriksindstillingerne (som da du lige havde installeret den).</string>
+    <string name="clear_data_subtext">Er du sikker på, at du ønsker at slette al brugerdata? GranPhone-app\'en vil vende tilbage til fabriksindstillingerne (som da du lige havde installeret den).</string>
     <string name="clear_data_subtext2">Helt sikker?</string>
     <string name="clear_data_subtext3">Absolut sikker?\nHvis du trykker "Ja" slettes ALT brugerdata og app\'en mister alle dine indstillinger!</string>
     <string name="clock">Ur</string>
@@ -94,7 +94,7 @@
     <string name="contacts">Kontakter</string>
     <string name="contacts_read_subtext">Denne rettighed er nødvendig for, at app\'en kan se og vise dine kontakter.</string>
     <string name="contacts_subtext">Denne rettighed er nødvendig for, at du kan tilføje nye kontakter.</string>
-    <string name="crash">Hov!\nBaldPhone har kludret i det og er nødt til at genstarte sig selv nu.</string>
+    <string name="crash">Hov!\nGranPhone har kludret i det og er nødt til at genstarte sig selv nu.</string>
     <string name="current_time">Nuværende tid</string>
     <string name="custom">Tilpasset</string>
     <string name="dark">Mørk</string>
@@ -108,7 +108,7 @@
     <string name="edit">Ændr</string>
     <string name="email">Email:</string>
     <string name="enable_notification_access">Giv adgang til notifikationer</string>
-    <string name="enable_notification_access_subtext">Du er nødt til at give BaldPhone adgang til dine notifikationer.</string>
+    <string name="enable_notification_access_subtext">Du er nødt til at give GranPhone adgang til dine notifikationer.</string>
     <string name="enter">Indtast</string>
     <string name="enter_contact_or_phone_number">Indtast navn på kontakten:</string>
     <string name="evening">Aften</string>
@@ -120,7 +120,7 @@
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Vælg tilgængelighedsniveau</string>
     <string name="font_size">Skriftstørrelse</string>
     <string name="friday">Fredag</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Har du svært ved at bruge telefonens tastatur, så brug Baldphones \"BIG keyboard\" i stedet!</string>
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Har du svært ved at bruge telefonens tastatur, så brug GranPhones \"BIG keyboard\" i stedet!</string>
     <string name="hello">Hej</string>
     <string name="help">Videoinstruktion</string>
     <string name="hide">Skjul</string>
@@ -130,7 +130,7 @@
     <string name="huge">Meget stor</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Aktiveret om:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">En sidste ting:\nDet anbefales kraftigt at bruge Baldphone\'s \"skrivebord\" i stedet for telefonens eget.</string>
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">En sidste ting:\nDet anbefales kraftigt at bruge GranPhone\'s \"skrivebord\" i stedet for telefonens eget.</string>
     <string name="language">sprog</string>
     <string name="language_settings">Sprogindstillinger</string>
     <string name="large">Stor</string>
@@ -204,18 +204,18 @@
     <string name="save">Gem</string>
     <string name="send">Send</string>
     <string name="set_default_dialer">Indstil standardapp til brug for opkald</string>
-    <string name="set_default_dialer_subtext">BaldPhone skal være indstillet til at være din telefons standardapp for opkald.</string>
+    <string name="set_default_dialer_subtext">GranPhone skal være indstillet til at være din telefons standardapp for opkald.</string>
     <string name="set_home_screen">Indstil standardapp for visning af \"skrivebord\".</string>
-    <string name="set_home_screen_subtext">For at kunne bruge BaldPhone, skal du indstille den til at være din telefons \"skrivebord\".\nDet kan ændres igen under telefonens indstillinger og organiseringen af dit nuværende \"skrivebord\" vil stadig være der.</string>
+    <string name="set_home_screen_subtext">For at kunne bruge GranPhone, skal du indstille den til at være din telefons \"skrivebord\".\nDet kan ændres igen under telefonens indstillinger og organiseringen af dit nuværende \"skrivebord\" vil stadig være der.</string>
     <string name="set_keyboard">Indstil tastatur</string>
     <string name="setting_does_not_exist">Indstilling findes ikke</string>
     <string name="settings">Indstillinger</string>
     <string name="settings_permission">Rettigheder for indstillinger</string>
     <string name="share">Del</string>
-    <string name="share_actual_text">Hej,\nJeg bruger en app, som hedder "BaldPhone", som giver telefonen et overskueligt udseende med tydelige knapper og simple indstillinger.\nHvis du er intersseret, kan du hente den her gratis:\n\nhttps://baldphone.com
+    <string name="share_actual_text">Hej,\nJeg bruger en app, som hedder "GranPhone", som giver telefonen et overskueligt udseende med tydelige knapper og simple indstillinger.\nHvis du er intersseret, kan du hente den her gratis:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Kender du nogen, som du synes skal høre om BaldPhone?\nSå kan du dele den med dem her!</string>
-    <string name="share_baldphone">Del et link til BaldPhone</string>
+    <string name="share_bald_phone_subtext">Kender du nogen, som du synes skal høre om GranPhone?\nSå kan du dele den med dem her!</string>
+    <string name="share_GranPhone">Del et link til GranPhone</string>
     <string name="share_contact">Del kontaktinformation</string>
     <string name="share_differently">Del via en anden app</string>
     <string name="share_via_whatsapp">Del via Whatsapp</string>
@@ -229,7 +229,7 @@
     <string name="speak">Tal</string>
     <string name="speech_to_text">Tale-til-tekst</string>
     <string name="strong_hand">Dominerende hånd</string>
-    <string name="strong_hand_subtext">Vælg hvilken hånd der er din dominerende for at tilpasse udseendet af BaldPhone efter dette.</string>
+    <string name="strong_hand_subtext">Vælg hvilken hånd der er din dominerende for at tilpasse udseendet af GranPhone efter dette.</string>
     <string name="submit">Indsend</string>
     <string name="sunday">Søndag</string>
     <string name="technical_information">Teknisk information</string>
@@ -266,14 +266,14 @@
     <string name="no_alarms">Ingen alarmer\nOpret en ved at klikke på \n\"Tilføj alarm\"\neller\n\"tilføj stopur\"</string>
     <string name="no_pills">Ingen piller\nOpret en ved at klikke på\n\"Tilføj pille\"</string>
     <string name="clear_all_notifications">Ryd alle notifikationer</string>
-    <string name="clear_cache_subtext">Er du sikker på, at du vil slette den midlertidige hukommelse? Dette kan afhjælpe småfejl i BaldPhone, men vil også slette genvejene på \"skrivebordet\".</string>
-    <string name="permissions_calm">BaldPhone har brug for nogle rettigheder for at fungere. Nogle af dem lyder måske ubetryggende, men det er den eneste måde BaldPhone kan ændre din telefons udseende, så det bliver bedre for dig. Intet data vil blive taget fra dig eller ødelagt.\nTryk OK for at give app\'en de nødvendige rettigheder eller \"Nej\" for at afslutte BaldPhone.
+    <string name="clear_cache_subtext">Er du sikker på, at du vil slette den midlertidige hukommelse? Dette kan afhjælpe småfejl i GranPhone, men vil også slette genvejene på \"skrivebordet\".</string>
+    <string name="permissions_calm">GranPhone har brug for nogle rettigheder for at fungere. Nogle af dem lyder måske ubetryggende, men det er den eneste måde GranPhone kan ændre din telefons udseende, så det bliver bedre for dig. Intet data vil blive taget fra dig eller ødelagt.\nTryk OK for at give app\'en de nødvendige rettigheder eller \"Nej\" for at afslutte GranPhone.
     </string>
     <string name="pending_update">Afventende opdatering</string>
     <string name="download">Download</string>
     <string name="install_updates">Installér opdateringer</string>
-    <string name="install_updates_subtext">Denne rettighed er nødvendig for at kunne opdatere BaldPhone.</string>
-    <string name="a_new_update_is_available">En ny opdatering er tilgængelig!\nOpdateringer er vigtige, fordi de sikrer, at BaldPhone bliver ved med at fungere godt!\nTryk OK for at downloade.</string>
+    <string name="install_updates_subtext">Denne rettighed er nødvendig for at kunne opdatere GranPhone.</string>
+    <string name="a_new_update_is_available">En ny opdatering er tilgængelig!\nOpdateringer er vigtige, fordi de sikrer, at GranPhone bliver ved med at fungere godt!\nTryk OK for at downloade.</string>
     <string name="current_version">Nuværende version:\n</string>
     <string name="new_version">Ny version:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Nye opdateringer er klar til at blive downloaded.</string>
@@ -288,7 +288,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">Opdateringsfilen kunne ikke slettes!</string>
     <string name="downloading">Downloader…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone is helt opdateret!</string>
+    <string name="GranPhone_is_up_to_date">GranPhone is helt opdateret!</string>
     <string name="what_s_new">Nyheder</string>
     <string name="download_finished">Download afsluttet!</string>
     <string name="downloading_updates">Downloader opdateringer…</string>
@@ -297,7 +297,7 @@
     <string name="download_progress">Downloadens status</string>
     <string name="what_do_you_want_to_do_with___">Hvad vil du gerne gøre med %s?</string>
     <string name="crash_reports">Rapportér fejl</string>
-    <string name="crash_reports_subtext">Fejlrapporter hjælper med at gøre oplevelsen af BaldPhone bedre.\nRapporterne bliver kund brugt til at udbedre fejl\; kun den nødvendige information for dette, bliver anvendt fra dem.</string>
+    <string name="crash_reports_subtext">Fejlrapporter hjælper med at gøre oplevelsen af GranPhone bedre.\nRapporterne bliver kund brugt til at udbedre fejl\; kun den nødvendige information for dette, bliver anvendt fra dem.</string>
     <string name="custom_app">Valgfri app</string>
     <string name="custom_app_subtext">Vælg en valgfri app, som du vil have en genvej til på \"skrivebordet\".</string>
     <string name="no_app_was_found">Ingen app der passede blev fundet!</string>
@@ -327,7 +327,7 @@
     <string name="low_battery_alert">Advarsel om lavt batteriniveau</string>
     <string name="low_battery_alert_subtext">Vælg om du vil have statusbjælken farvet rød på \"skrivebordet\", hvis batteriniveauet på telefonen er under 20 \%\nVær opmærksom på, at du ikke kan se statusbjælken, hvis den er skjult af en app.</string>
 
-    <string name="also_available_at">Også tilgængelig via\nbaldphone.contact@gmail.com\nFeedback skal gives på engelsk eller hebræisk!</string>
+    <string name="also_available_at">Også tilgængelig via\nGranPhone.contact@gmail.com\nFeedback skal gives på engelsk eller hebræisk!</string>
     <string name="grant_all_permissions">Tildel alle rettigheder</string>
 
 
@@ -355,7 +355,7 @@
     <string name="groups">Groups</string>
     <string name="one_grid">One Grid</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make BaldPhone more colorful?</string>
+    <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
     <string name="dual_sim">Dual Sim</string>
     <string name="dual_sim_subtext">Choose how you want to manage dual sim\nNote: If you choose Show Options, you\'ll need to allow another permission</string>

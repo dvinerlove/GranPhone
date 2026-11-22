@@ -18,7 +18,7 @@
     <string name="about">Over</string>
     <string name="about_subtext">Hallo! \n Mijn naam is Uriah Shaul Mandel en ik ben de ontwikkelaar van dit platform.\n 
 Ik heb het grootste deel van mijn \"volwassen\" leven besteed aan het maken van dit platform, en ik heb het gratis vrijgegeven zodat iedereen
-het kan gebruiken.\n U bent meer dan welkom om contact met mij op te nemen via e-mail:  \n baldphone.contact@gmail.com</string>
+het kan gebruiken.\n U bent meer dan welkom om contact met mij op te nemen via e-mail:  \n GranPhone.contact@gmail.com</string>
     <string name="accessibility_level">Toegankelijkheidsniveau</string>
     <string name="accessibility_settings">Toegankelijkheid</string>
     <string name="accidental_touches">Onbedoelde aanrakingsbeveiliging</string>
@@ -50,7 +50,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="allow">Toestaan</string>
     <string name="already_setted">Al ingesteld! \ NKlik hier om ernaartoe te gaan</string>
     <string name="an_error_has_occurred">Er is een fout opgetreden!</string>
-    <string name="and_welcome_to_baldphone">en welkom bij Baldphone</string>
+    <string name="and_welcome_to_GranPhone">en welkom bij GranPhone</string>
 
     <string name="apps">Apps</string>
     <string name="are_you_sure_you_want_to_delete___">Weet u zeker dat u %s wilt verwijderen?</string>
@@ -58,7 +58,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="at_least_one_day_must_be_selected">Er moet minimaal één dag zijn geselecteerd!</string>
     <string name="auto_brightness">Automatische\nHelderheid</string>
     <string name="backspace">backspace</string>
-    <string name="baldphone_bla_allow_permission">Sta de volgende bevoegdheden toe:</string>
+    <string name="GranPhone_bla_allow_permission">Sta de volgende bevoegdheden toe:</string>
     <string name="blocked">Geblokkeerd</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Helderheid</string>
@@ -73,7 +73,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="camera_subtext">Deze bevoegdheid is vereist om de zaklamp aan te zetten.</string>
     <string name="cancel">Annuleren</string>
     <string name="change_pills_time">Verander tijd van de medicijnen</string>
-    <string name="change_system_settings_subtext">Geef a.u.b. toestemming aan BaldPhone om de instellingen te wijzigen, zoals het vergroten van het lettertype</string>
+    <string name="change_system_settings_subtext">Geef a.u.b. toestemming aan GranPhone om de instellingen te wijzigen, zoals het vergroten van het lettertype</string>
     <string name="choose_friday">Vr</string>
     <string name="choose_monday">Ma</string>
     <string name="choose_saturday">Za</string>
@@ -84,7 +84,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="clear">Wis</string>
     <string name="clear_cache">Cache wissen</string>
     <string name="clear_data">Wis alle gegevens</string>
-    <string name="clear_data_subtext">Weet u zeker dat u alle gebruikersgegevens wilt verwijderen? De BaldPhone-app keert terug naar een nieuw-geïnstalleerde blanco staat.</string>
+    <string name="clear_data_subtext">Weet u zeker dat u alle gebruikersgegevens wilt verwijderen? De GranPhone-app keert terug naar een nieuw-geïnstalleerde blanco staat.</string>
     <string name="clear_data_subtext2">100%?</string>
     <string name="clear_data_subtext3">zeker?\ndoor op ja te drukken worden alle gegevens verwijderd!</string>
     <string name="clock">Klok</string>
@@ -95,7 +95,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="contacts">Contacten</string>
     <string name="contacts_read_subtext">Deze bevoegdheid is vereist om contacten te lezen.</string>
     <string name="contacts_subtext">Deze bevoegdheid is vereist om nieuwe contacten toe te voegen.</string>
-    <string name="crash">Oeps!\nBaldPhone is een probleem tegengekomen en zal daarom nu opnieuw opstarten.</string>
+    <string name="crash">Oeps!\nGranPhone is een probleem tegengekomen en zal daarom nu opnieuw opstarten.</string>
     <string name="current_time">Huidige tijd</string>
     <string name="custom">Aangepaste</string>
     <string name="dark">Donker</string>
@@ -109,7 +109,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="edit">Bewerken</string>
     <string name="email">Email:</string>
     <string name="enable_notification_access">Notificatietoestemming geven</string>
-    <string name="enable_notification_access_subtext">Geef BaldPhone notificatietoestemming.</string>
+    <string name="enable_notification_access_subtext">Geef GranPhone notificatietoestemming.</string>
     <string name="enter">Enter</string>
     <string name="enter_contact_or_phone_number">Voer contactnaam in:</string>
     <string name="evening">Avond</string>
@@ -121,7 +121,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Selecteer het toegankelijkheidsniveau</string>
     <string name="font_size">Lettertypegrootte</string>
     <string name="friday">Vrijdag</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Heeft u moeite met het gebruik van het toetsenbord van de telefoon? Gebruik in plaats daarvan Baldphone\'s GROTE toetsenbord!</string>
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Heeft u moeite met het gebruik van het toetsenbord van de telefoon? Gebruik in plaats daarvan GranPhone\'s GROTE toetsenbord!</string>
     <string name="hello">Hallo</string>
     <string name="help">Videouitleg</string>
     <string name="hide">Verbergen</string>
@@ -131,7 +131,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="huge">Reusachtig</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Ingeroepen in:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Nog een ding:\nHet is sterk aanbevolen om het startscherm van Baldphone als het standaard startprogramma in te schakelen</string>
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Nog een ding:\nHet is sterk aanbevolen om het startscherm van GranPhone als het standaard startprogramma in te schakelen</string>
     <string name="language">taal</string>
     <string name="language_settings">Taal</string>
     <string name="large">Groot</string>
@@ -206,19 +206,19 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="save">Opslaan</string>
     <string name="send">Verzenden</string>
     <string name="set_default_dialer">Standaard bel-app instellen</string>
-    <string name="set_default_dialer_subtext">BaldPhone moet als de standaard bel-app worden ingesteld.</string>
+    <string name="set_default_dialer_subtext">GranPhone moet als de standaard bel-app worden ingesteld.</string>
     <string name="set_home_screen">Startscherm instellen</string>
-    <string name="set_home_screen_subtext">Om BaldPhone te gebruiken, moet u deze instellen als startscherm. \ NDit is
+    <string name="set_home_screen_subtext">Om GranPhone te gebruiken, moet u deze instellen als startscherm. \ NDit is
 veranderbaar en kan worden gewijzigd in de instellingen.</string>
     <string name="set_keyboard">Toetsenbord instellen</string>
     <string name="setting_does_not_exist">Instelling bestaat niet</string>
     <string name="settings">Instellingen</string>
     <string name="settings_permission">Instellingen Bevoegdheid</string>
     <string name="share">Delen</string>
-    <string name="share_actual_text">Hallo, ik gebruik een app genaamd \"BaldPhone\" dat de interface van de telefoon vervangt door een grote, eenvoudige en gebruiksvriendelijke interface. \ NGeïnteresseerd? \nJe kan het gratis downloaden! \nklik de link hieronder voor meer informatie: \n\nhttps://baldphone.com</string>
-    <string name="share_bald_phone_subtext">Ken je iemand die misschien meer wilt weten over BaldPhone? \n
+    <string name="share_actual_text">Hallo, ik gebruik een app genaamd \"GranPhone\" dat de interface van de telefoon vervangt door een grote, eenvoudige en gebruiksvriendelijke interface. \ NGeïnteresseerd? \nJe kan het gratis downloaden! \nklik de link hieronder voor meer informatie: \n\nhttps://github.com/dvinerlove/GranPhone</string>
+    <string name="share_bald_phone_subtext">Ken je iemand die misschien meer wilt weten over GranPhone? \n
 Deel het met hen!\"</string>
-    <string name="share_baldphone">BaldPhone delen</string>
+    <string name="share_GranPhone">GranPhone delen</string>
     <string name="share_contact">Delen met Contact</string>
     <string name="share_differently">Delen via een andere app</string>
     <string name="share_via_whatsapp">Delen via WhatsApp</string>
@@ -270,15 +270,15 @@ Deel het met hen!\"</string>
     <string name="no_alarms">Geen alarmen\nMaak er een door op\n\"Alarm toevoegen\"\nof\n\\"Timer toevoegen\" te klikken</string>
     <string name="no_pills">Geen medicatie ingesteld\nMaak er een door op\n\"Medicatie toevoegen\" te klikken</string>
     <string name="clear_all_notifications">Wis alle notificaties</string>
-    <string name="clear_cache_subtext">Weet u zeker dat u de cache-inhoud wilt verwijderen? Het verwijderen van tijdelijke bestanden kan enkele storingen in de BaldPhone-app oplossen, maar ook snelkoppelingen die in het startscherm zijn gemaakt zullen worden verwijderd.</string>
-    <string name="permissions_calm">Hallo, BaldPhone moet de volgende bevoegdheden hebben om goed te kunnen werken. Sommigen van hen
-klinken misschien eng, maar het is de enige manier waarop BaldPhone de interface van de telefoon kan vervangen. Er worden geen gegevens verzameld en zal ook
-geen schade veroorzaken. Druk op OK om de bevoegdheden te geven of druk op nee om BaldPhone af te sluiten.</string>
+    <string name="clear_cache_subtext">Weet u zeker dat u de cache-inhoud wilt verwijderen? Het verwijderen van tijdelijke bestanden kan enkele storingen in de GranPhone-app oplossen, maar ook snelkoppelingen die in het startscherm zijn gemaakt zullen worden verwijderd.</string>
+    <string name="permissions_calm">Hallo, GranPhone moet de volgende bevoegdheden hebben om goed te kunnen werken. Sommigen van hen
+klinken misschien eng, maar het is de enige manier waarop GranPhone de interface van de telefoon kan vervangen. Er worden geen gegevens verzameld en zal ook
+geen schade veroorzaken. Druk op OK om de bevoegdheden te geven of druk op nee om GranPhone af te sluiten.</string>
     <string name="pending_update">Geplande Update</string>
     <string name="download">Downloaden</string>
     <string name="install_updates">Updates installeren</string>
-    <string name="install_updates_subtext">Deze bevoegdheid is vereist om BaldPhone te kunnen updaten</string>
-    <string name="a_new_update_is_available">Er is een nieuwe update beschikbaar!\nUpdates zijn belangrijk om BaldPhone goed te laten werken./nDruk op OK om te downloaden.</string>
+    <string name="install_updates_subtext">Deze bevoegdheid is vereist om GranPhone te kunnen updaten</string>
+    <string name="a_new_update_is_available">Er is een nieuwe update beschikbaar!\nUpdates zijn belangrijk om GranPhone goed te laten werken./nDruk op OK om te downloaden.</string>
     <string name="current_version">Huidige Versie:\n</string>
     <string name="new_version">Nieuwe Versie:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Nieuwe updates zijn klaar om gedownload te worden.</string>
@@ -294,7 +294,7 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
     <string name="downloaded_update_file_could_not_be_deleted">Het gedownloade updatebestand kon niet worden verwijderd!</string>
     <string name="downloading">Aan het downloaden…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone is up-to-date.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone is up-to-date.</string>
     <string name="what_s_new">Wat is er nieuw</string>
     <string name="download_finished">Download voltooid!</string>
     <string name="downloading_updates">Updates worden gedownload…</string>
@@ -303,7 +303,7 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
     <string name="download_progress">Voortgang downloaden</string>
     <string name="what_do_you_want_to_do_with___">Wat wilt u doen met %s?</string>
     <string name="crash_reports">Crashrapporten</string>
-    <string name="crash_reports_subtext">Crashrapporten helpen om BaldPhone te verbeteren\nZe worden alleen gebruikt om bugs op te lossen en er wordt geen andere informatie verstuurd dan dat wat nodig is om de bug op te lossen.</string>
+    <string name="crash_reports_subtext">Crashrapporten helpen om GranPhone te verbeteren\nZe worden alleen gebruikt om bugs op te lossen en er wordt geen andere informatie verstuurd dan dat wat nodig is om de bug op te lossen.</string>
     <string name="custom_app">Aangepaste App</string>
     <string name="custom_app_subtext">Kies een aangepaste app die op het startscherm zal verschijnen.</string>
     <string name="no_app_was_found">Er is geen overeenkomende app gevonden!</string>
@@ -338,7 +338,7 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
     <string name="low_battery_alert">Waarschuwing lage batterij</string>
     <string name="low_battery_alert_subtext">Kies dit als u wilt dat de statusbalk rood wordt op het startscherm wanneer de batterij onder de 20% is\nLet op: Wanneer de statusbalk verborgen is wordt dit niet weergegeven.</string>
 
-    <string name="also_available_at">Ook bereikbaar op \nbaldphone.contact@gmail.com\nFeedback moet echter wel in het Engels / Hebreeuws zijn!</string>
+    <string name="also_available_at">Ook bereikbaar op \nGranPhone.contact@gmail.com\nFeedback moet echter wel in het Engels / Hebreeuws zijn!</string>
     <string name="grant_all_permissions">Verleen alle bevoegdheden</string>
 
 
@@ -366,7 +366,7 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
     <string name="groups">Groepen</string>
     <string name="one_grid">Eén raster</string>
     <string name="colorful">Kleurrijk</string>
-    <string name="colorful_subtext">Wilt u BaldPhone kleurrijker maken?</string>
+    <string name="colorful_subtext">Wilt u GranPhone kleurrijker maken?</string>
     <string name="edit_home_screen">Startscherm aanpassen</string>
     <string name="dual_sim">Dual Sim</string>
     <string name="dual_sim_subtext">Kies hoe je dual sim wilt beheren\nAls je Toon Opties kiest, moet je ook nog een andere bevoegdheid geven</string>

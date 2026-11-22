@@ -18,7 +18,7 @@
     <string name="about">Despre</string>
     <string name="about_subtext">Hi!\nMy name is Uriah Shaul Mandel, and I\'m the developer of this platform.\n
         I\'ve spent most of my \"adult\" life making this platform, and I\'ve released it for free, for all to
-        use.\nYou are more than welcome to contact me by email:\nbaldphone.contact@gmail.com
+        use.\nYou are more than welcome to contact me by email:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Nivel accesibilitate</string>
     <string name="accessibility_settings">Accesibilitate</string>
@@ -53,7 +53,7 @@
     <string name="allow">Permite</string>
     <string name="already_setted">Deja stabilit!\nAtinge aici pentru a schimba</string>
     <string name="an_error_has_occurred">S-a ivit o eroare!</string>
-    <string name="and_welcome_to_baldphone">și bine ați venit la Baldphone</string>
+    <string name="and_welcome_to_GranPhone">și bine ați venit la GranPhone</string>
 
     <string name="apps">Aplicații</string>
     <string name="are_you_sure_you_want_to_delete___">Sunteți sigur că vreți să ștergeți %s?</string>
@@ -61,7 +61,7 @@
     <string name="at_least_one_day_must_be_selected">Cel puțin o zi trebuie selectată!</string>
     <string name="auto_brightness">Luminiozitate\auto</string>
     <string name="backspace">Șterge</string>
-    <string name="baldphone_bla_allow_permission">Vă rugăm să acceptați urmatoarele permisiuni:</string>
+    <string name="GranPhone_bla_allow_permission">Vă rugăm să acceptați urmatoarele permisiuni:</string>
     <string name="blocked">Blocat</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Luminiozitate</string>
@@ -99,7 +99,7 @@
     <string name="contacts">Contacte</string>
     <string name="contacts_read_subtext">Această permisiune este necesară pentru a citi contacte.</string>
     <string name="contacts_subtext">Această permisiune este necesară pentru a adauga contacte noi.</string>
-    <string name="crash">Oops!\nBaldPhone a întâmpinat o problema și se va restarta</string>
+    <string name="crash">Oops!\nGranPhone a întâmpinat o problema și se va restarta</string>
     <string name="current_time">Ora curentă</string>
     <string name="custom">Personalizat</string>
     <string name="dark">Întuneric</string>
@@ -127,7 +127,7 @@
     </string>
     <string name="font_size">Dimensiune text</string>
     <string name="friday">Vineri</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Aveți probleme folosind tastatura telefonului? Folosiți tasatura mare a lui BaldPhone în schimb!
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Aveți probleme folosind tastatura telefonului? Folosiți tasatura mare a lui GranPhone în schimb!
     </string>
     <string name="hello">Salut!</string>
     <string name="help">Tutoriale video</string>
@@ -138,7 +138,7 @@
     <string name="huge">Imens</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Invocat în:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Încă un lucru:\n este recomandat să setați BaldPhone ca lansator implicit
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Încă un lucru:\n este recomandat să setați GranPhone ca lansator implicit
     </string>
     <string name="language">Limbă</string>
     <string name="language_settings">Limbă</string>
@@ -213,23 +213,23 @@
     <string name="save">Salvează</string>
     <string name="send">Trimite</string>
     <string name="set_default_dialer">Setează aplicație implicită pentru apelat</string>
-    <string name="set_default_dialer_subtext">BaldPhone trebuie sa fie aplicația implicită pentru apelat</string>
+    <string name="set_default_dialer_subtext">GranPhone trebuie sa fie aplicația implicită pentru apelat</string>
     <string name="set_home_screen">Setează pagină principală</string>
-    <string name="set_home_screen_subtext">Pentru a folosi BaldPhone, trebuie sa îl setați ca pagină principală\nAceastă setare este reversibilă.
+    <string name="set_home_screen_subtext">Pentru a folosi GranPhone, trebuie sa îl setați ca pagină principală\nAceastă setare este reversibilă.
     </string>
     <string name="set_keyboard">Setează tasatură</string>
     <string name="setting_does_not_exist">Setarea nu există</string>
     <string name="settings">Setări</string>
     <string name="settings_permission">Permisiune setări</string>
     <string name="share">Share</string>
-    <string name="share_actual_text">Hi, I\'m using this platform named "BaldPhone" which replaces the phone\'s
+    <string name="share_actual_text">Hi, I\'m using this platform named "GranPhone" which replaces the phone\'s
         interface to a big, simple and friendly one.\nInterested?\nYou can download it for free!\ncheck out the link
-        below for more information:\n\nhttps://baldphone.com
+        below for more information:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Hey, know anyone who may want to know about BaldPhone?\nYou can
+    <string name="share_bald_phone_subtext">Hey, know anyone who may want to know about GranPhone?\nYou can
         share it with them!"
     </string>
-    <string name="share_baldphone">Share BaldPhone</string>
+    <string name="share_GranPhone">Share GranPhone</string>
     <string name="share_contact">Share Contact</string>
     <string name="share_differently">Share prin altă aplicație</string>
     <string name="share_via_whatsapp">Share Via Whatsapp</string>
@@ -283,13 +283,13 @@
     <string name="clear_all_notifications">Stergeți toate notificările</string>
     <string name="clear_cache_subtext">Sunteți sigur că vreți să stergeți datele cache?\nScurtăturilor vor fi de asemenea șterse!
     </string>
-    <string name="permissions_calm">Hei, BaldPhone are nevoie de urmatoarele permisuni pentru a funcțion\n
-        Unele pot suna înspăimântător dar altfel nu îti vom putea înlocui interfața telefonului\nNu îți vom gestiona datele.  Apasă OK pentru a permite sau No pentru a inchide BaldPhone</string>
+    <string name="permissions_calm">Hei, GranPhone are nevoie de urmatoarele permisuni pentru a funcțion\n
+        Unele pot suna înspăimântător dar altfel nu îti vom putea înlocui interfața telefonului\nNu îți vom gestiona datele.  Apasă OK pentru a permite sau No pentru a inchide GranPhone</string>
     <string name="pending_update">Actualizare în așteptare</string>
     <string name="download">Download</string>
     <string name="install_updates">Actualizează</string>
-    <string name="install_updates_subtext">Această permisiune este necesară pentru a actualiza BaldPhone</string>
-    <string name="a_new_update_is_available">A aparut o nouă actualizare! Apasă OK pentru a actualiza BaldPhone!
+    <string name="install_updates_subtext">Această permisiune este necesară pentru a actualiza GranPhone</string>
+    <string name="a_new_update_is_available">A aparut o nouă actualizare! Apasă OK pentru a actualiza GranPhone!
     </string>
     <string name="current_version">Versiune curentă:\n</string>
     <string name="new_version">Versiune nouă:\n</string>
@@ -306,7 +306,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">Fișierul descărcat nu a putut fii șters!</string>
     <string name="downloading">Se descarcă…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone este actualizat.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone este actualizat.</string>
     <string name="what_s_new">Ce este nou</string>
     <string name="download_finished">Descarcare terminată</string>
     <string name="downloading_updates">Se descarcă actualizări</string>
@@ -351,7 +351,7 @@
     <string name="low_battery_alert">Alertă nivel scăzut baterie</string>
     <string name="low_battery_alert_subtext">Alegeți dacă doriți ca bara de status sa apară roșie atunci când bateria scade sub 20%.</string>
 
-    <string name="also_available_at">Also available at\nbaldphone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
+    <string name="also_available_at">Also available at\nGranPhone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
     <string name="grant_all_permissions">Acordați toate permisiunile</string>
 
 

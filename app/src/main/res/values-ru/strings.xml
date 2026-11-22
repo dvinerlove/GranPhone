@@ -47,7 +47,7 @@
     <string name="allow">Разрешить</string>
     <string name="already_setted">Уже Установлен!\nНажмите сюда что бы поменять на него</string>
     <string name="an_error_has_occurred">Произошла ошибка!</string>
-    <string name="and_welcome_to_baldphone">и добро пожаловать в Baldphone</string>
+    <string name="and_welcome_to_GranPhone">и добро пожаловать в GranPhone</string>
 
     <string name="apps">Приложения</string>
     <string name="are_you_sure_you_want_to_delete___">Вы уверенны что хотите удалить %s?</string>
@@ -56,7 +56,7 @@
     <string name="at_least_one_day_must_be_selected">Не меньше одного дня должно быть выбранно!</string>
     <string name="auto_brightness">Автоматическая\nЯркость</string>
     <string name="backspace">удалить</string>
-    <string name="baldphone_bla_allow_permission">Пожалуйста предоставьте следующие разрешения:</string>
+    <string name="GranPhone_bla_allow_permission">Пожалуйста предоставьте следующие разрешения:</string>
     <string name="blocked">Заблокирован</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Яркость</string>
@@ -71,7 +71,7 @@
     <string name="camera_subtext">Это разрешение требуется для включения фонарика.</string>
     <string name="cancel">Отмена</string>
     <string name="change_pills_time">Изменить время приёма</string>
-    <string name="change_system_settings_subtext">Пожалуйста, разрешите BaldPhone изменять настройки, такие как увеличение размера шрифта и изменение яркости.
+    <string name="change_system_settings_subtext">Пожалуйста, разрешите GranPhone изменять настройки, такие как увеличение размера шрифта и изменение яркости.
     </string>
     <string name="choose_friday">Пт</string>
     <string name="choose_monday">Пн</string>
@@ -94,7 +94,7 @@
     <string name="contacts">Контакты</string>
     <string name="contacts_read_subtext">Это разрешение требуется для чтения контактов.</string>
     <string name="contacts_subtext">Это разрешение требуется для добавления новых контактов.</string>
-    <string name="crash">Упс!\nBaldPhone столкнулся с проблемой и теперь перезапустится.</string>
+    <string name="crash">Упс!\nGranPhone столкнулся с проблемой и теперь перезапустится.</string>
     <string name="current_time">Текущее время</string>
     <string name="custom">Свое</string>
     <string name="dark">Темный</string>
@@ -108,7 +108,7 @@
     <string name="edit">Изменить</string>
     <string name="email">Эл. почта:</string>
     <string name="enable_notification_access">Включить Доступ к Уведомлениям</string>
-    <string name="enable_notification_access_subtext">Пожалуйста, предоставьте BaldPhone доступ к уведомлениям.</string>
+    <string name="enable_notification_access_subtext">Пожалуйста, предоставьте GranPhone доступ к уведомлениям.</string>
     <string name="enter">Ввод</string>
     <string name="enter_contact_or_phone_number">Введите имя контакта:</string>
     <string name="evening">Вечер</string>
@@ -122,7 +122,7 @@
     </string>
     <string name="font_size">Шрифт</string>
     <string name="friday">Пятница</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Трудно использовать клавиатуру телефона? Вместо этого используйте БОЛЬШУЮ клавиатуру Baldphone!
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Трудно использовать клавиатуру телефона? Вместо этого используйте БОЛЬШУЮ клавиатуру GranPhone!
     </string>
     <string name="hello">Привет</string>
     <string name="help">Видео Инструкция</string>
@@ -133,7 +133,7 @@
     <string name="huge">Огромный</string>
     <string name="internet">Интернет</string>
     <string name="invoked_in">Установить на:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Последняя вещь:\nНастоятельно рекомендуется использовать домашний экран Baldphone в кочестве основной панели запуска
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Последняя вещь:\nНастоятельно рекомендуется использовать домашний экран GranPhone в кочестве основной панели запуска
     </string>
     <string name="language">язык</string>
     <string name="language_settings">Язык</string>
@@ -209,20 +209,20 @@
     <string name="save">сохранить</string>
     <string name="send">Отправить</string>
     <string name="set_default_dialer">Установить приложение для вызова по умолчанию</string>
-    <string name="set_default_dialer_subtext">BaldPhone должен быть отмечен как приложение для вызова по умолчанию.</string>
+    <string name="set_default_dialer_subtext">GranPhone должен быть отмечен как приложение для вызова по умолчанию.</string>
     <string name="set_home_screen">Установить домашний экран</string>
-    <string name="set_home_screen_subtext">Чтобы использовать BaldPhone, вы должны установить его в качестве домашнего экрана.\nЭто обратимо и может быть изменено в настройках.
+    <string name="set_home_screen_subtext">Чтобы использовать GranPhone, вы должны установить его в качестве домашнего экрана.\nЭто обратимо и может быть изменено в настройках.
     </string>
     <string name="set_keyboard">Установить клавиатуру</string>
     <string name="setting_does_not_exist">Настройки не существуют</string>
     <string name="settings">Настройки</string>
     <string name="settings_permission">Настройка Разрешений</string>
     <string name="share">Поделиться</string>
-    <string name="share_actual_text">Привет, Я использую платформу названную "BaldPhone" которая заменяет интерфейс телефона на более крупный, простой и дружелюбный.\nЗаинтересовался?\nВы можете скачать его бесплатно!\nоткройте ссылку ниже для получения дополнительной информации:\n\nhttps://baldphone.com
+    <string name="share_actual_text">Привет, Я использую платформу названную "GranPhone" которая заменяет интерфейс телефона на более крупный, простой и дружелюбный.\nЗаинтересовался?\nВы можете скачать его бесплатно!\nоткройте ссылку ниже для получения дополнительной информации:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Эй, знаете кого-нибудь, кто хотел бы узнать о BaldPhone?\nВы можете поделиться им с ними!"
+    <string name="share_bald_phone_subtext">Эй, знаете кого-нибудь, кто хотел бы узнать о GranPhone?\nВы можете поделиться им с ними!"
     </string>
-    <string name="share_baldphone">Поделиться BaldPhone</string>
+    <string name="share_GranPhone">Поделиться GranPhone</string>
     <string name="share_contact">Поделиться Контактом</string>
     <string name="share_differently">Поделиться Другим Приложением</string>
     <string name="share_via_whatsapp">Поделиться в Whatsapp</string>
@@ -281,13 +281,13 @@
     <string name="clear_all_notifications">Очистить Все Оповещения</string>
     <string name="clear_cache_subtext">Вы уверенны что хотите очистить кэш?\nЯрлык программы будет удален тоже!
     </string>
-    <string name="permissions_calm">Привет, BaldPhone должны быть предоставленны следующие разрешения для запуска. Некоторые из них, звучат страшно, но это единственный способ для BaldPhone заменить интерфейс телефона. Это не причинит вреда и не украдет ваши данные. Нажмите OK для предоставления разрешений или Нет что бы выйти из BaldPhone.
+    <string name="permissions_calm">Привет, GranPhone должны быть предоставленны следующие разрешения для запуска. Некоторые из них, звучат страшно, но это единственный способ для GranPhone заменить интерфейс телефона. Это не причинит вреда и не украдет ваши данные. Нажмите OK для предоставления разрешений или Нет что бы выйти из GranPhone.
     </string>
     <string name="pending_update">Ожидание Обновления</string>
     <string name="download">Загрузка</string>
     <string name="install_updates">Установка Обновлений</string>
-    <string name="install_updates_subtext">Это Разрешение необходимо для обновления BaldPhone</string>
-    <string name="a_new_update_is_available">Доступно обновление!\nОбновления важны для обеспечения бесперебойной работы BaldPhone.\nНажмите OK для загрузки.
+    <string name="install_updates_subtext">Это Разрешение необходимо для обновления GranPhone</string>
+    <string name="a_new_update_is_available">Доступно обновление!\nОбновления важны для обеспечения бесперебойной работы GranPhone.\nНажмите OK для загрузки.
     </string>
     <string name="current_version">Текущая Версия:\n</string>
     <string name="new_version">Новая Версия:\n</string>
@@ -304,7 +304,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">Загруженный файл обновления не может быть удален!</string>
     <string name="downloading">Загрузка…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone обновлен.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone обновлен.</string>
     <string name="what_s_new">Что нового</string>
     <string name="download_finished">Загрузка завершена!</string>
     <string name="downloading_updates">Загрузка Обновлений…</string>
@@ -313,7 +313,7 @@
     <string name="download_progress">Процесс загрузки</string>
     <string name="what_do_you_want_to_do_with___">Что вы хотите сделать %s?</string>
     <string name="crash_reports">Отчеты о сбоях</string>
-    <string name="crash_reports_subtext">Отчеты о сбоях помогают сделать использованние BaldPhone безупречным\nОни используются только что бы исправлять ошибки и никакая информация, кроме той, что необходима для исправления ошибок, не применяется.
+    <string name="crash_reports_subtext">Отчеты о сбоях помогают сделать использованние GranPhone безупречным\nОни используются только что бы исправлять ошибки и никакая информация, кроме той, что необходима для исправления ошибок, не применяется.
     </string>
     <string name="custom_app">Пользовательское приложение</string>
     <string name="custom_app_subtext">Выберите пользовательское приложение для установки на домашний экран.</string>
@@ -349,7 +349,7 @@
     <string name="low_battery_alert">Предупреждение о низком заряде батареи</string>
     <string name="low_battery_alert_subtext">Выберите, хотите ли вы, чтобы строка состояния была красной на главном экране, когда уровень заряда батареи ниже 20%\nПримечание: не будет отображаться, если строка состояния системы скрыта.</string>
 
-    <string name="also_available_at">Также доступно по адресу\nbaldphone.contact@gmail.com\nОбратная связь должна быть на английском/иврите!</string>
+    <string name="also_available_at">Также доступно по адресу\nGranPhone.contact@gmail.com\nОбратная связь должна быть на английском/иврите!</string>
     <string name="grant_all_permissions">Предоставить все разрешения</string>
 
 
@@ -376,7 +376,7 @@
     <string name="groups">Группы</string>
     <string name="one_grid">Одна сетка</string>
     <string name="colorful">Цветной интерфейс</string>
-    <string name="colorful_subtext">Сделать BaldPhone более цветным?</string>
+    <string name="colorful_subtext">Сделать GranPhone более цветным?</string>
     <string name="edit_home_screen">Изменить главный экран</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>
@@ -406,7 +406,7 @@
     <string name="add_emergency_contact_2">Добавить второй</string>
     <string name="close">Закрыть</string>
     <string name="back">Назад</string>
-    <string name="notification_service">BaldPhone: сервис уведомлений</string>
+    <string name="notification_service">GranPhone: сервис уведомлений</string>
     <string name="notification_service_fail">Не удалось запустить сервис уведомлений!</string>
     <string name="battery">Батарея</string>
     <string name="calculator">Калькулятор</string>
@@ -429,7 +429,7 @@
     <string name="kiosk_mode">Режим киоска (блокировка телефона)</string>
     <string name="kiosk_not_device_owner_subtext">Для режима киоска приложение должно быть администратором устройства. Это делается один раз с компьютера:
 
-adb shell dpm set-device-owner com.bald.uriah.baldphone/.broadcast_receivers.BaldDeviceAdminReceiver</string>
+adb shell dpm set-device-owner com.bald.uriah.GranPhone/.broadcast_receivers.BaldDeviceAdminReceiver</string>
     <string name="kiosk_enable_subtext">Телефон останется внутри приложения: без шторки уведомлений, настроек Android и удаления приложений.
 Задайте цифровой пароль (минимум 4 цифры), чтобы потом выключить режим.</string>
     <string name="kiosk_disable_subtext">Введите пароль, чтобы выключить режим киоска.</string>

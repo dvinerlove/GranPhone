@@ -17,7 +17,7 @@
 <resources>
     <string name="about">Tentang</string>
     <string name="about_subtext">Hai!\nNama saya Uriah Shaul Mandel, pengembang piranti lunak ini.\n
-        Saya menghabiskan sebagian besar masa \"dewasa\" saya untuk membuat BaldPhone, dan merilisnya secara gratis agar Anda semua bisa menggunakannya.\nAnda bisa menghubungi saya melalui email:\nbaldphone.contact@gmail.com
+        Saya menghabiskan sebagian besar masa \"dewasa\" saya untuk membuat GranPhone, dan merilisnya secara gratis agar Anda semua bisa menggunakannya.\nAnda bisa menghubungi saya melalui email:\nGranPhone.contact@gmail.com
     </string>
     <string name="accessibility_level">Tingkat Aksesibilitas</string>
     <string name="accessibility_settings">Aksesibilitas</string>
@@ -53,7 +53,7 @@
     <string name="allow">Izinkan</string>
     <string name="already_setted">Sudah diatur!\nKlik di sini untuk mengubahnya</string>
     <string name="an_error_has_occurred">Terjadi kesalahan!</string>
-    <string name="and_welcome_to_baldphone">dan selamat datang di Baldphone</string>
+    <string name="and_welcome_to_GranPhone">dan selamat datang di GranPhone</string>
 
     <string name="apps">Aplikasi</string>
     <string name="are_you_sure_you_want_to_delete___">Anda yakin ingin menghapus %s?</string>
@@ -61,7 +61,7 @@
     <string name="at_least_one_day_must_be_selected">Setidaknya pilih satu hari!</string>
     <string name="auto_brightness">Kecerahan\nOtomatis</string>
     <string name="backspace">menghapus</string>
-    <string name="baldphone_bla_allow_permission">Harap izinkan perizinan berikut:</string>
+    <string name="GranPhone_bla_allow_permission">Harap izinkan perizinan berikut:</string>
     <string name="blocked">Diblokir</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Kecerahan</string>
@@ -76,7 +76,7 @@
     <string name="camera_subtext">Izin ini diperlukan unutk menyalakan lampu senter.</string>
     <string name="cancel">Batal</string>
     <string name="change_pills_time">Ubah Waktu Pil</string>
-    <string name="change_system_settings_subtext">Izinkan BaldPhone untuk mengubah pengaturan, seperti memperbesar ukuran huruf dan mengubah kecerahan.</string>
+    <string name="change_system_settings_subtext">Izinkan GranPhone untuk mengubah pengaturan, seperti memperbesar ukuran huruf dan mengubah kecerahan.</string>
     <string name="choose_friday">Jum</string>
     <string name="choose_monday">sen</string>
     <string name="choose_saturday">Sab</string>
@@ -98,7 +98,7 @@
     <string name="contacts">Kontak</string>
     <string name="contacts_read_subtext">Izin ini diperlukan untuk membaca kontak.</string>
     <string name="contacts_subtext">Izin ini diperlukan untuk menambahkan kontak.</string>
-    <string name="crash">Ups!\nBaldPhone bermasalah dan sekarang akan dimulai ulang.</string>
+    <string name="crash">Ups!\nGranPhone bermasalah dan sekarang akan dimulai ulang.</string>
     <string name="current_time">Waktu Saat Ini</string>
     <string name="custom">Khusus</string>
     <string name="dark">Gelap</string>
@@ -112,7 +112,7 @@
     <string name="edit">Sunting</string>
     <string name="email">Email:</string>
     <string name="enable_notification_access">Aktifkan Akses Pemberitahuan</string>
-    <string name="enable_notification_access_subtext">Harap beri BaldPhone akses ke pemberitahuan.</string>
+    <string name="enable_notification_access_subtext">Harap beri GranPhone akses ke pemberitahuan.</string>
     <string name="enter">Enter</string>
     <string name="enter_contact_or_phone_number">Masukkan nama kontak:</string>
     <string name="evening">Malam</string>
@@ -126,8 +126,8 @@
     </string>
     <string name="font_size">Ukuran Huruf</string>
     <string name="friday">Jumat</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_baldphone_s_big_keyboard_instead">Kesulitan menggunakan
-        papan ketik telepon? Gunakan papan ketik BESAR Baldphone sebagai gantinya!
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Kesulitan menggunakan
+        papan ketik telepon? Gunakan papan ketik BESAR GranPhone sebagai gantinya!
     </string>
     <string name="hello">Halo</string>
     <string name="help">Video Tutorial</string>
@@ -138,8 +138,8 @@
     <string name="huge">Sangat Besar</string>
     <string name="internet">Internet</string>
     <string name="invoked_in">Dipanggil dalam:</string>
-    <string name="it_s_highly_recommended_to_use_baldphone_s_home_screen_as_the_default_home_launcher">Satu hal
-        terakhir:\nSangat disarankan untuk menggunakan layar Beranda Baldphone sebagai peluncur Beranda asali
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Satu hal
+        terakhir:\nSangat disarankan untuk menggunakan layar Beranda GranPhone sebagai peluncur Beranda asali
     </string>
     <string name="language">bahasa</string>
     <string name="language_settings">Bahasa</string>
@@ -215,9 +215,9 @@
     <string name="save">Simpan</string>
     <string name="send">Kirim</string>
     <string name="set_default_dialer">Setel Aplikasi Panggilan Asali</string>
-    <string name="set_default_dialer_subtext">BaldPhone perlu ditandai sebagai aplikasi panggilan asali.</string>
+    <string name="set_default_dialer_subtext">GranPhone perlu ditandai sebagai aplikasi panggilan asali.</string>
     <string name="set_home_screen">Setel Layar Beranda</string>
-    <string name="set_home_screen_subtext">Untuk menggunakan BaldPhone, Anda harus mengaturnya sebagai layar beranda.\nPengaturan ini
+    <string name="set_home_screen_subtext">Untuk menggunakan GranPhone, Anda harus mengaturnya sebagai layar beranda.\nPengaturan ini
         bisa dikembalikan dan diubah dalam pengaturan.
     </string>
     <string name="set_keyboard">Setel papan ketik</string>
@@ -225,14 +225,14 @@
     <string name="settings">Pengaturan</string>
     <string name="settings_permission">Pengaturan Perizinan</string>
     <string name="share">Bagikan</string>
-    <string name="share_actual_text">Hai, Saya menggunakan aplikasi bernama "BaldPhone" yang menggantikan antarmuka telepon
+    <string name="share_actual_text">Hai, Saya menggunakan aplikasi bernama "GranPhone" yang menggantikan antarmuka telepon
         menjadi besar, sederhana dan ramah.\nTertarik?\nAnda bisa mengunduhnya secara gratis!\nPeriksa tautan
-        di bawah untuk keterangan lebih lanjut:\n\nhttps://baldphone.com
+        di bawah untuk keterangan lebih lanjut:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_bald_phone_subtext">Hai, kenal seseorang yang mungkin tertarik dengan BaldPhone?\nAnda bisa
+    <string name="share_bald_phone_subtext">Hai, kenal seseorang yang mungkin tertarik dengan GranPhone?\nAnda bisa
         berbagi dengan mereka!"
     </string>
-    <string name="share_baldphone">Bagikan BaldPhone</string>
+    <string name="share_GranPhone">Bagikan GranPhone</string>
     <string name="share_contact">Bagikan Kontak</string>
     <string name="share_differently">Bagikan Melalui Aplikasi Lain</string>
     <string name="share_via_whatsapp">Bagikan Melalui Whatsapp</string>
@@ -286,15 +286,15 @@
     <string name="clear_all_notifications">Kosongkan Semua Pemberitahuan</string>
     <string name="clear_cache_subtext">Anda yakin ingin menghapus cache?\nAplikasi pintasan juga akan dihapus!
     </string>
-    <string name="permissions_calm">Hai, BaldPhone membutuhkan perizinan berikut agar bisa berjalan. Beberapa
-        mungkin terdengar menakutkan, namun ini satu-satunya cara agar BaldPhone bisa menggantikan antarmuka telepon. Tidak ada data yang diambil dan akan menyebabkan
-        masalah. Tekan OK untuk mengizinkan atau TIDAK untuk keluar dari BaldPhone.
+    <string name="permissions_calm">Hai, GranPhone membutuhkan perizinan berikut agar bisa berjalan. Beberapa
+        mungkin terdengar menakutkan, namun ini satu-satunya cara agar GranPhone bisa menggantikan antarmuka telepon. Tidak ada data yang diambil dan akan menyebabkan
+        masalah. Tekan OK untuk mengizinkan atau TIDAK untuk keluar dari GranPhone.
     </string>
     <string name="pending_update">Pembaruan Tertunda</string>
     <string name="download">Unduh</string>
     <string name="install_updates">Pasang Pembaruan</string>
-    <string name="install_updates_subtext">Izin ini diperlukan untuk memperbarui BaldPhone</string>
-    <string name="a_new_update_is_available">Pembaruan tersedia!\nPembaruan penting untuk untuk menjaga BaldPhone berjalan
+    <string name="install_updates_subtext">Izin ini diperlukan untuk memperbarui GranPhone</string>
+    <string name="a_new_update_is_available">Pembaruan tersedia!\nPembaruan penting untuk untuk menjaga GranPhone berjalan
         dengan lancar.\nTekan OK untuk mengunduh.
     </string>
     <string name="current_version">Versi Sekarang:\n</string>
@@ -313,7 +313,7 @@
     <string name="downloaded_update_file_could_not_be_deleted">Berkas pembaruan yang telah diunduh tidak bisa dihapus!</string>
     <string name="downloading">Mengunduh…</string>
 
-    <string name="baldphone_is_up_to_date">BaldPhone sudah terbaru.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone sudah terbaru.</string>
     <string name="what_s_new">Apa yang baru</string>
     <string name="download_finished">Pengunduhan selesai!</string>
     <string name="downloading_updates">Mengunduh pembaruan…</string>
@@ -322,7 +322,7 @@
     <string name="download_progress">Laju Pengunduhan</string>
     <string name="what_do_you_want_to_do_with___">Apa yang ingin Anda lakukan dengan %s?</string>
     <string name="crash_reports">Laporan Kerusakan</string>
-    <string name="crash_reports_subtext">Laporan kerusakan membantu menjadikan pengalaman menggunakan BaldPhone tanpa cela\nLaporan hanya digunakan
+    <string name="crash_reports_subtext">Laporan kerusakan membantu menjadikan pengalaman menggunakan GranPhone tanpa cela\nLaporan hanya digunakan
         untuk memperbaiki kutu, dan tidak ada info selain apa yang diperlukan untuk memperbaiki kutu
     </string>
     <string name="custom_app">Aplikasi Khusus</string>
@@ -359,7 +359,7 @@
     <string name="low_battery_alert">Peringatan Baterai Rendah</string>
     <string name="low_battery_alert_subtext">Pilih jika Anda ingin bilah status menjadi merah di layar beranda ketika baterai di bawah 20%\nPerhatikan ia tidak akan ditampilkan jika bilah status disembunyikan.</string>
 
-    <string name="also_available_at">Juga tersedia di\nbaldphone.contact@gmail.com\nUmpan balik harus dalam bahasa Inggris atau Ibrani!</string>
+    <string name="also_available_at">Juga tersedia di\nGranPhone.contact@gmail.com\nUmpan balik harus dalam bahasa Inggris atau Ibrani!</string>
     <string name="grant_all_permissions">Berikan semua perizinan</string>
 
 
@@ -387,7 +387,7 @@
     <string name="groups">Kelompok</string>
     <string name="one_grid">Satu Kotak</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make BaldPhone more colorful?</string>
+    <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>

@@ -89,7 +89,7 @@ public class S {
 
     public static void shareBaldPhone(@NonNull final BaldActivity baldActivity) {
         BDB.from(baldActivity)
-                .setTitle(R.string.share_baldphone)
+                .setTitle(R.string.share_GranPhone)
                 .setSubText(R.string.share_bald_phone_subtext)
                 .addFlag(BDialog.FLAG_YES | BDialog.FLAG_NO)
                 .setPositiveButtonListener(params -> {

@@ -22,13 +22,13 @@
     <string name="add_emergency_contact">Kara</string>
     <string name="add_pill">Kara Kwaya</string>
     <string name="afternoon">Yamma</string>
-    <string name="and_welcome_to_baldphone">kuma barka da zuwa Baldphone</string>
+    <string name="and_welcome_to_GranPhone">kuma barka da zuwa GranPhone</string>
 
     <string name="apps">Apps</string>
     <string name="assistant">Mataimaki</string>
     <string name="at_least_one_day_must_be_selected">Aƙalla rana ɗaya dole ne a zaɓi!</string>
     <string name="backspace">kashin baya</string>
-    <string name="baldphone_bla_allow_permission">Da fatan za a ba da izini masu izini kamar haka:</string>
+    <string name="GranPhone_bla_allow_permission">Da fatan za a ba da izini masu izini kamar haka:</string>
     <string name="blocked">An toshe</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Haske</string>
@@ -68,7 +68,7 @@
     <string name="settings">Saiti</string>
     <string name="settings_permission">Izinin Saiti</string>
     <string name="share">Raba</string>
-    <string name="share_baldphone">Raba BaldPhone</string>
+    <string name="share_GranPhone">Raba GranPhone</string>
     <string name="share_contact">Raba Adireshin</string>
     <string name="show">Nuna</string>
     <string name="small">Karami</string>
