@@ -434,11 +434,7 @@ public class SettingsActivity extends BaldActivity {
         final LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         LayoutInflater.from(this).inflate(R.layout.credits_button, linearLayout, true);
-        LayoutInflater.from(this).inflate(R.layout.open_source_licenses_button, linearLayout, true);
-        LayoutInflater.from(this).inflate(R.layout.website_button, linearLayout, true);
         linearLayout.findViewById(R.id.credits_button).setOnClickListener(v -> startActivity(new Intent(this, CreditsActivity.class)));
-        linearLayout.findViewById(R.id.open_source_licenses_button).setOnClickListener(v -> startActivity(new Intent(ACTION_VIEW, Uri.parse("https://sites.google.com/view/baldphone-open-source-licenses/home"))));
-        linearLayout.findViewById(R.id.website_button).setOnClickListener(v -> startActivity(new Intent(ACTION_VIEW, Uri.parse("https://baldphone.com/"))));
         final ImageView pic = new ImageView(this);
         linearLayout.addView(pic);
         Glide.with(pic).load(R.drawable.me).into(pic);
@@ -455,23 +451,9 @@ public class SettingsActivity extends BaldActivity {
                         , R.drawable.info_on_button)
         );
         mainCategory.add(
-                new RunnableSettingsItem(R.string.get_involved,
-                        v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/UriahShaulMandel/BaldPhone/blob/master/CONTRIBUTING.md"))),
-                        R.drawable.contribute_on_button)
-        );
-        mainCategory.add(
                 new RunnableSettingsItem(R.string.technical_information,
                         v -> startActivity(new Intent(this, TechnicalInfoActivity.class)),
                         R.drawable.tech_info_on_button)
-        );
-        mainCategory.add(
-                new RunnableSettingsItem(R.string.share_baldphone, v -> S.shareBaldPhone(this), R.drawable.share_on_background)
-        );
-
-        mainCategory.add(
-                new RunnableSettingsItem(R.string.feedback,
-                        v -> startActivity(new Intent(this, FeedbackActivity.class)),
-                        R.drawable.feedback_on_button)
         );
         if (!checkPermissions(this, -1))
             mainCategory.add(
@@ -479,19 +461,6 @@ public class SettingsActivity extends BaldActivity {
                             v -> startActivity(new Intent(this, PermissionActivity.class)),
                             R.drawable.grant_all_permissions_on_button)
             );
-        mainCategory.add(
-                new BDBSettingsItem(R.string.crash_reports,
-                        BDB.from(this)
-                                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL).setTitle(R.string.crash_reports)
-                                .setSubText(R.string.crash_reports_subtext)
-                                .setOptions(R.string.on, R.string.off)
-                                .setPositiveButtonListener(params -> {
-                                    editor.putBoolean(BPrefs.CRASH_REPORTS_KEY, params[0].equals(0)).apply();
-                                    this.recreate();
-                                    return true;
-                                })
-                                .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.CRASH_REPORTS_KEY, BPrefs.CRASH_REPORTS_DEFAULT_VALUE) ? 0 : 1),
-                        R.drawable.upload_on_button));
         if (BuildConfig.FLAVOR.equals("baldUpdates"))
             mainCategory.add(
                     new RunnableSettingsItem(R.string.check_for_updates,

@@ -298,9 +298,6 @@ public class HomeScreenActivity extends BaldActivity {
                                 return true;
                             })
                             .show();
-                } else if (percent > 99 && Math.random() < 0.1) {
-                    onStartCounter = 0;
-                    S.shareBaldPhone(this);
                 } else if (percent > 95) {
                     //noinspection ConstantConditions
                     if (BuildConfig.FLAVOR.equals("baldUpdates"))

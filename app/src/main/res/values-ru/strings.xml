@@ -243,7 +243,7 @@
     <string name="strong_hand_subtext">Выберите свою преобладающую руку, чтобы настроить пользовательский интерфейс.</string>
     <string name="submit">Подтвердить</string>
     <string name="sunday">Воскресенье</string>
-    <string name="technical_information">Техническая Информация</string>
+    <string name="technical_information">Техническая информация</string>
     <string name="theme_settings">Тема</string>
     <string name="theme_settings_subtext">Выберите тему</string>
 
@@ -354,7 +354,7 @@
     <string name="low_battery_alert_subtext">Выберите, хотите ли вы, чтобы строка состояния была красной на главном экране, когда уровень заряда батареи ниже 20%\nПримечание: не будет отображаться, если строка состояния системы скрыта.</string>
 
     <string name="also_available_at">Также доступно по адресу\nbaldphone.contact@gmail.com\nОбратная связь должна быть на английском/иврите!</string>
-    <string name="grant_all_permissions">Предоставить Все Разрешения</string>
+    <string name="grant_all_permissions">Предоставить все разрешения</string>
 
 
     <!--For Tests:-->
