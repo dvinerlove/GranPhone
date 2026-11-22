@@ -56,3 +56,25 @@ Full tour on `emulator-5554` (API 29, 480x800, ru locale), screenshots
 - signalView NPE fix holds through rotation; home + dialer landscape OK;
   force-stop + relaunch OK; incoming + outgoing calls OK via CallActivity once
   `android.app.role.DIALER` is granted.
+
+## Wave-1 emulator tour (task 6, 2026-11-23)
+
+Full tour on `emulator-5554` (API 29, 480x800, ru locale), screenshots
+`screenshots/v6-wave1-*.png`, detailed report at
+`.superpowers/sdd/2026-11-22-granphone-wave1-system/task-6-report.md`.
+
+- **Visual diff vs wave-0 goldens: zero regressions.** Home (all-rows state),
+  home page 2, dialer (light + dark), settings list + display sub-page, alarms
+  empty-state, dark home, landscape home, and post-relaunch home are all
+  identical to `v5-wave0-*` equivalents (clock digits/avatar-disc tint aside).
+- **0 FATAL crashes, 0 ANRs** across install → home → dialer → settings →
+  kiosk INFO dialog → alarms → dark theme → landscape → portrait →
+  force-stop + relaunch. The wave-0 keyboard-NPE path (fixed in `b2970b2`)
+  was not re-exercised — the custom IME is still not the selected keyboard.
+- Converted site verified: Settings → «Режим киоска» shows the new
+  DialogScreen INFO layout — rounded card, scrollable body
+  (`MaxHeightScrollView`), single «Понятно», no X. `select()`/`confirm()`
+  remain compile-verified only (no call sites yet).
+- Pre-existing (not wave-1): the kiosk dialog's `adb shell dpm
+  set-device-owner` text still names `com.bald.uriah.baldphone` instead of
+  `com.granphone.launcher` — stale string resource, same as wave 0.

@@ -16,6 +16,7 @@ Rule: extend the existing `bald_*` theme-attribute system (attrs declared in `re
 | `bald_info` | #1565C0 | #64B5F6 |
 | `bald_text_primary` | #14171A | #F2F4F7 |
 | `bald_text_secondary` | #4A5560 | #B0B8C0 |
+| `bald_text_on_variant` | #FFFFFF | #14171A |
 
 Contrast: ≥4.5:1 for all text, ≥3:1 for icons/borders.
 
@@ -29,16 +30,18 @@ Radius: cards/buttons 16dp, small chips 28dp. Spacing grid: 8dp.
 
 ## Components (build once, reuse everywhere)
 
-- **BigButton** — height 72–88dp, icon 28dp + text label 20sp, filled, pressed = 8% darken + optional vibration. Variants: `brand` (call/confirm), `danger` (SOS/hang up/delete), `neutral`, `info`.
-- **Tile** — home grid cell: icon 32dp + label 18sp, `bald_card` background; semantic override only for SOS (danger) and Phone (brand).
-- **TitleBar** — 64dp: title 24sp (marquee/ellipsize-safe, never clipped) + explicit `Назад` text-button; no lone icon affordances.
-- **DialogScreen** — the single dialog component, three modes:
-  - `SELECT`: vertical option list (64dp rows, radio indicator, current selection highlighted), applies instantly on tap, `Назад` button at bottom. No OK/Cancel/X.
-  - `CONFIRM`: one verb-labeled action (e.g. «Удалить контакт») + one `Отмена`. Irreversible actions get a hold/double-tap-confirm.
-  - `INFO`: message + one `Понятно` button.
-  - Max 2 buttons + option list. Corner `X` removed everywhere.
-- **StatusBar** (home only) — keep the custom large-icon status bar.
-- **TextSwitch** — the «Включить/Выключить» text-pill pattern from alarms, promoted to shared component.
+Spec component → real implementation:
+
+- **BigButton** = `views/BaldPictureTextButton` — height 72–88dp, icon 28dp + text label 20sp, filled, pressed = 8% darken + optional vibration. Variants via `app:variant` enum (`neutral|brand|danger|info`, default `neutral`): non-neutral variants tint the stateful background with `bald_brand`/`bald_danger`/`bald_info` and the icon+label with `bald_text_on_variant`. `brand` = call/confirm, `danger` = SOS/hang up/delete.
+- **Tile** = `views/FirstPageAppIcon` (the home grid cell widget, `BaldFrameLayoutButton`); `views/HomeScreenAppView` is the helper binding a tile to its pinned app/contact. Icon 32dp + label 18sp, `bald_card` background; semantic override only for SOS (danger) and Phone (brand).
+- **TitleBar** = `views/BaldTitleBar` — 64dp: title 24sp (`ellipsize=end`, `maxLines=1`, never clipped) + optional `app:show_back` (default off) rendering an explicit `Назад` text-button (`bald_title_back_text`, also ellipsized) that backs out of the host activity; the legacy icon back button stays when `show_back=false`.
+- **DialogScreen** = `utils/DialogScreen` — `Dialog` subclass, one factory per mode:
+  - `DialogScreen.select(ctx, title, selectedIndex, listener, options…)` — `SELECT`: vertical option list (64dp rows, check indicator + brand text on current selection), applies instantly on tap, `Назад` button at bottom. No OK/Cancel/X.
+  - `DialogScreen.confirm(ctx, title, message, action, onAction)` — `CONFIRM`: one verb-labeled action (e.g. «Удалить контакт») + one `Отмена`. Irreversible actions get a hold/double-tap-confirm.
+  - `DialogScreen.info(ctx, title, message)` — `INFO`: message + one `Понятно` button.
+  - Max 2 buttons + option list. Corner `X` removed everywhere. Reference conversion: `SettingsActivity.showKioskDialog()` kiosk INFO branch.
+- **StatusBar** (home only) = the custom home top bar — `home_screen_top_bar.xml` inside `home_screen.xml`, wired in `HomeScreenActivity` (signal/sound/battery/notifications large icons).
+- **TextSwitch** = `views/BaldSwitch` — the «Включить/Выключить» text-pill pattern from alarms, promoted to shared component.
 
 ## Icons
 

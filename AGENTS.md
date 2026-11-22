@@ -24,7 +24,7 @@ Launcher for elderly/low-vision users (fork of BaldPhone). Java + XML Views, no 
 - `activities/` — screens (incl. `alarms/`, `contacts/`, `media/`, `pills/` subpackages)
 - `views/` — custom widgets (`Bald*Button`, `BaldTitleBar`, `views/home/` home pages)
 - `databases/` — Room DBs (`alarms`, `apps`, `calls`, `contacts`, `home_screen_pins`, `reminders`)
-- `utils/` — `BPrefs` (all SharedPreferences keys), `AppUtils`, `Const`, `DialogBuilder`, `DialogFlags`, `BaldPrefsUtils` (change-detection snapshot), `KioskManager`, `CallManager`
+- `utils/` — `BPrefs` (all SharedPreferences keys), `AppUtils`, `Const`, `DialogBuilder`, `DialogFlags`, `DialogScreen` (the redesign dialog component — new dialogs use its `info`/`confirm`/`select` factories), `BaldPrefsUtils` (change-detection snapshot), `KioskManager`, `CallManager`
 - `adapters/`, `broadcast_receivers/`, `services/`, `keyboard/` (IME), `fragments_and_dialogs/`, `content_providers/`
 - `BaldPhone.java` — Application class
 
