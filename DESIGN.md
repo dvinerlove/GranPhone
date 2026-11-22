@@ -2,7 +2,7 @@
 
 Token/component contract for every UI change. Source spec (full context, waves, verification): `docs/superpowers/specs/2026-11-22-granphone-ux-redesign-design.md` §3–4. This file is the working copy you apply; if they disagree, the spec wins.
 
-Rule: extend the existing `bald_*` theme-attribute system (`R.attr.bald_*` in `res/values/themes_values.xml`, consumed via `?attr/…`). Do not invent a parallel palette.
+Rule: extend the existing `bald_*` theme-attribute system (attrs declared in `res/values/attrs.xml`, bound per theme in `res/values/styles.xml`, values in `res/values/themes_values.xml`; consumed via `?attr/…`). Do not invent a parallel palette.
 
 ## Color tokens
 
