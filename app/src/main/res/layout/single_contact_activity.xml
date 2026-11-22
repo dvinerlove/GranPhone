@@ -63,13 +63,18 @@
                     android:id="@+id/tv_contact_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:breakStrategy="high_quality"
                     android:ellipsize="end"
                     android:gravity="center"
+                    android:hyphenationFrequency="full"
                     android:maxLines="3"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:textColor="?bald_text_on_background"
                     android:textSize="28sp"
+                    app:autoSizeMaxTextSize="28sp"
+                    app:autoSizeMinTextSize="18sp"
+                    app:autoSizeTextType="uniform" />
                     android:textStyle="bold" />
             </LinearLayout>
         </com.bald.uriah.baldphone.views.ModularScrollView>
