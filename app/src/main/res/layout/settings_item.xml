@@ -44,5 +44,6 @@
         android:maxLines="2"
         android:paddingEnd="16dp"
         app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="12sp" />
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="@dimen/medium" />
 </com.bald.uriah.baldphone.views.BaldFrameLayoutButton>
