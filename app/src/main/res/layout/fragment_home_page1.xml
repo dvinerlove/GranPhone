@@ -24,7 +24,6 @@
     android:orientation="vertical"
     android:paddingStart="@dimen/home_screen_padding"
     android:paddingEnd="@dimen/home_screen_padding"
-    android:paddingBottom="@dimen/home_screen_padding"
     android:visibility="visible">
 
     <LinearLayout
