@@ -29,7 +29,6 @@ import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.Tutoria
 import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragment4;
 import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragmentBattery;
 import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragmentHelper;
-import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.views.ViewPagerHolder;
 
 public class TutorialActivity extends BaldActivity {
@@ -38,7 +37,8 @@ public class TutorialActivity extends BaldActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutorial_activity);
-        getSharedPreferences(BPrefs.KEY, MODE_PRIVATE).edit().putBoolean(BPrefs.AFTER_TUTORIAL_KEY, true).apply();
+        // AFTER_TUTORIAL_KEY is written by TutorialFragment4's home button — setting it
+        // here would let a force-quit mid-tutorial skip it permanently.
         ViewPagerHolder viewPagerHolder = findViewById(R.id.view_pager_holder);
         viewPagerHolder.setViewPagerAdapter(new Adapter(getSupportFragmentManager()));
     }

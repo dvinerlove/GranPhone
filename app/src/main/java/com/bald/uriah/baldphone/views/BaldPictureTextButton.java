@@ -27,6 +27,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -70,7 +71,11 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
     }
 
     private void init(AttributeSet attributeSet) {
-        setOrientation(HORIZONTAL);
+        // android:orientation on the element is parsed by the LinearLayout ctor but
+        // would be stomped here — honor it so narrow tiles can stack icon over text.
+        final int orientation = attributeSet == null ? HORIZONTAL :
+                attributeSet.getAttributeIntValue("http://schemas.android.com/apk/res/android", "orientation", HORIZONTAL);
+        setOrientation(orientation);
         setGravity(Gravity.CENTER);
         final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.BaldPictureTextButton);
         final float pxSize = styleAttributesArray.getDimension(R.styleable.BaldPictureTextButton__size, 0);
@@ -81,16 +86,33 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
 
         imageView = (ImageView) layoutInflater.inflate(R.layout.bald_picture_text_button_picture, this, false);
         imageView.setImageDrawable(pic);
+        if (orientation == VERTICAL)
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
         addView(imageView);
 
         textView = (TextView) layoutInflater.inflate(R.layout.bald_picture_text_button_text, this, false);
         textView.setText(text);
-        if (pxSize != 0) {
+        if (pxSize != 0)
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, pxSize);
-            // setTextSize clears autosize — re-enable with pxSize as max so labels shrink instead of clipping
-            androidx.core.widget.TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
-                    textView, (int) (10 * getResources().getDisplayMetrics().scaledDensity), (int) pxSize, 1, TypedValue.COMPLEX_UNIT_PX);
-        }
+        // AppCompat 1.1.0 autosize is unreliable here (ellipsize+weighted width), so
+        // shrink manually once real width exists — same pattern as HomePage1.shrinkToFit.
+        textView.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
+            final float avail = v.getWidth() - v.getPaddingStart() - v.getPaddingEnd();
+            final CharSequence s = textView.getText();
+            if (avail <= 0 || s == null || s.length() == 0)
+                return;
+            // Shrink only when the longest single word can't fit — multi-word
+            // labels should wrap (maxLines=2), not shrink.
+            float wanted = 0;
+            for (String word : s.toString().split("\\s+"))
+                wanted = Math.max(wanted, textView.getPaint().measureText(word));
+            final float floor = 8 * getResources().getDisplayMetrics().scaledDensity;
+            if (wanted > avail && textView.getTextSize() > floor)
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        Math.max(floor, textView.getTextSize() * (avail / wanted)));
+        });
+        if (orientation == VERTICAL)
+            textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
         addView(textView);
 
         if (variant != 0)

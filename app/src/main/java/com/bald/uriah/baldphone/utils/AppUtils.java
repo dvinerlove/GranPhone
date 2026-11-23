@@ -35,7 +35,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
-import android.util.TypedValue;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -285,14 +285,11 @@ public class AppUtils {
     public static void showDropDownPopup(BaldActivity baldActivity, int windowsWidth, DropDownRecyclerViewAdapter.DropDownListener dropDownListener, View view) {
         final RelativeLayout dropDownContainer = (RelativeLayout) LayoutInflater.from(baldActivity).inflate(R.layout.drop_down_recycler_view, null, false);
         final RecyclerView recyclerView = dropDownContainer.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(baldActivity) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        });
-        final PopupWindow popupWindow = new PopupWindow(dropDownContainer, (int) (windowsWidth / 1.3),
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 82 * dropDownListener.size(), baldActivity.getResources().getDisplayMetrics()), true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(baldActivity));
+        // Rows can grow above 82dp when long labels wrap — let the popup wrap
+        // content and allow scrolling instead of clipping the last item.
+        final PopupWindow popupWindow = new PopupWindow(dropDownContainer, windowsWidth,
+                ViewGroup.LayoutParams.WRAP_CONTENT, true);
         final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(baldActivity, DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(baldActivity.getDrawable(R.drawable.settings_divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
