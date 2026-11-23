@@ -104,6 +104,7 @@
     <string name="delete">Delete</string>
     <string name="delete___">Delete %s?</string>
     <string name="delete_all_alarms">Delete all alarms</string>
+    <string name="delete_all">Delete all</string>
     <string name="dialer">Dialer</string>
     <string name="display_settings">Display</string>
     <string name="done">Done</string>
@@ -164,6 +165,7 @@
     <string name="mobile_phone_number">Mobile phone number</string>
     <string name="monday">Monday</string>
     <string name="more">more</string>
+    <string name="less">less</string>
     <string name="morning">Morning</string>
     <string name="name">Name</string>
     <string name="named__">named</string>
@@ -195,6 +197,8 @@
     <string name="pill_added">Pill added!</string>
     <string name="pill_name">Pill Name</string>
     <string name="pills">Pills</string>
+    <string name="pill">Pill</string>
+    <string name="pill_time">Pill time</string>
     <string name="press_longer">Press Longer!</string>
     <string name="timer">Timer</string>
     <string name="read_call_log">Read Call History</string>
@@ -210,6 +214,11 @@
     <string name="remove_shortcut">Remove shortcut</string>
     <string name="removed_all_alarms">Removed all alarms!</string>
     <string name="repeats_every_day">Every day</string>
+    <string name="repeat">Repeat</string>
+    <string name="specific_days">Specific days</string>
+    <string name="time">Time</string>
+    <string name="color">Color</string>
+    <string name="minutes_short">min</string>
     <string name="right_handed">Right Handed</string>
 
     <string name="saturday">Saturday</string>
@@ -283,8 +292,8 @@
     <string name="yesterday">Yesterday</string>
     <string name="nothing">Nothing</string>
     <string name="no_contacts_found">No Contacts Found!</string>
-    <string name="no_alarms">No Alarms\nCreate one by clicking\n\"Add Alarm\"\nOr\n\"Add Timer\"</string>
-    <string name="no_pills">No Pills\nCreate one by clicking\n\"Add Pill\"</string>
+    <string name="no_alarms">No alarms.\nTap \"Alarm\" or \"Timer\"\nbelow to create one.</string>
+    <string name="no_pills">No pills.\nTap \"Pill\" below\nto create one.</string>
     <string name="clear_all_notifications">Clear All Notifications</string>
     <string name="clear_cache_subtext">Are you sure you want to delete the cache contents? Deleting temporary files may solve some GranPhone app malfunctions, but also shortcuts created in the Home screen will be removed.</string>
     <string name="permissions_calm">Hi, GranPhone must have the following permissions in order to run. Some of them

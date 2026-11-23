@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,125 +23,92 @@
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
         android:id="@+id/bald_title_bar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/color_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/alarms"
-        app:show_back="true" />
-
+        app:show_back="true"
+        app:title="@string/alarms" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:id="@+id/scrolling_helper"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:empty_text="@string/no_alarms"
-        app:layout_constraintBottom_toTopOf="@id/options_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bald_title_bar">
+        android:layout_weight="1"
+        app:empty_text="@string/no_alarms">
 
+        <!-- ModularRecyclerView must stay the first child (ScrollingHelper contract);
+             empty_view is picked up by id and shown when the adapter is empty. -->
         <com.bald.uriah.baldphone.views.ModularRecyclerView
             android:id="@+id/child"
             style="@style/ScrollStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layoutAnimation="@anim/layout_animation_fall_down"
+            android:layoutAnimation="@anim/layout_animation_fall_down" />
 
-            >
-
-        </com.bald.uriah.baldphone.views.ModularRecyclerView>
-
-    </com.bald.uriah.baldphone.views.ScrollingHelper>
-
-    <LinearLayout
-        android:id="@+id/options_bar"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:background="?bald_background_transparent"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
-            android:id="@+id/bt_add_alarm"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="invisible">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:alpha="0.5"
+                android:importantForAccessibility="no"
                 android:src="@drawable/alarm_on_background" />
 
             <TextView
-                style="@style/ButtonsText.Auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:text="@string/add_alarm" />
-        </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
+                android:text="@string/no_alarms"
+                android:textColor="?attr/bald_text_secondary"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </com.bald.uriah.baldphone.views.ScrollingHelper>
 
-        <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
+            android:id="@+id/bt_add_alarm"
+            android:layout_width="0dp"
+            android:layout_height="76dp"
+            android:layout_weight="1.3"
+            android:background="@drawable/style_for_buttons"
+            app:_size="@dimen/medium"
+            app:_src="@drawable/add_on_button"
+            app:_text="@string/alarm"
+            app:variant="brand" />
+
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_quickly_add_alarm"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="76dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
-            android:orientation="vertical">
+            android:background="@drawable/style_for_buttons"
+            app:_size="@dimen/medium"
+            app:_src="@drawable/timer_on_background"
+            app:_text="@string/timer" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/timer_on_background" />
-
-            <TextView
-                style="@style/ButtonsText.Auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/add_alarm_quickly" />
-
-
-        </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
-
-        <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_cancel_all_alarms"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="76dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/alarm_off_on_button" />
-
-            <TextView
-                style="@style/ButtonsText.Auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/delete_all_alarms" />
-
-        </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
+            android:background="@drawable/style_for_buttons"
+            app:_size="@dimen/medium"
+            app:_src="@drawable/alarm_off_on_button"
+            app:_text="@string/delete_all" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -148,6 +148,7 @@ public class AddAlarmActivity extends com.bald.uriah.baldphone.activities.BaldAc
 
     private void genOnClickListeners() {
         bt_alarm_submit.setOnClickListener((v) -> submit());
+        findViewById(R.id.bt_cancel).setOnClickListener(v -> finish());
         only_once.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (vibrator != null) vibrator.vibrate(Const.vibetime);
             if (isChecked) {

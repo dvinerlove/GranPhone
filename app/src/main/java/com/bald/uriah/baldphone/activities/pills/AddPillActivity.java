@@ -125,7 +125,7 @@ public class AddPillActivity extends BaldActivity {
                 findViewById(R.id.friday),
                 findViewById(R.id.saturday)
         };
-        every_day = findViewById(R.id.rb_once);
+        every_day = findViewById(R.id.rb_every_day);
         colors = new ImageView[]{
                 findViewById(R.id.blue),
                 findViewById(R.id.red),
@@ -187,6 +187,7 @@ public class AddPillActivity extends BaldActivity {
 
     private void genOnClickListeners() {
         bt_submit.setOnClickListener((v) -> submit2());
+        findViewById(R.id.bt_cancel).setOnClickListener(v -> finish());
 
         every_day.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (vibrator != null) vibrator.vibrate(Const.vibetime);

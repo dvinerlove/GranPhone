@@ -23,6 +23,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -84,6 +85,8 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
 
         textView = (TextView) layoutInflater.inflate(R.layout.bald_picture_text_button_text, this, false);
         textView.setText(text);
+        if (pxSize != 0)
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, pxSize);
         addView(textView);
 
         if (variant != 0)

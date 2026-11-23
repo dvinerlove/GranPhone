@@ -17,7 +17,6 @@
 package com.bald.uriah.baldphone.activities.alarms;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +36,6 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.databases.alarms.Alarm;
 import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
 import com.bald.uriah.baldphone.databases.alarms.AlarmsDatabase;
-import com.bald.uriah.baldphone.utils.BaldGridItemDecoration;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
@@ -74,8 +72,6 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
         int numberOfAppsInARow = screenOrientation ? 2 : 1;
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfAppsInARow);
         recyclerView.setLayoutManager(gridLayoutManager);
-        Resources r = getResources();
-        recyclerView.addItemDecoration(new BaldGridItemDecoration(r.getDimensionPixelSize(R.dimen.divider), numberOfAppsInARow, getDrawable(R.drawable.ll_divider), r.getDimensionPixelSize(R.dimen.padding_dividers)));
 
         recyclerView.setAdapter(adapter);
 

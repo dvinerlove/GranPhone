@@ -31,6 +31,7 @@ import com.bald.uriah.baldphone.databases.alarms.Alarm;
 import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
 import com.bald.uriah.baldphone.databases.alarms.AlarmsDatabase;
 import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.views.BaldButton;
 
 import org.joda.time.DateTime;
 
@@ -40,7 +41,8 @@ import org.joda.time.DateTime;
 public class AddTimerActivity extends BaldActivity {
     private static final String TAG = AddTimerActivity.class.getSimpleName();
     static final String ALARM_KEY_AS_EXTRA_KEY = "alarm";
-    private int timeIn5Minutes = 1;
+    // minutes granularity; +/- step by 5, presets 1/5/10
+    private int timeInMinutes = 5;
     private View bt_alarm_submit, bt_add, bt_dec;
     private TextView time;
 
@@ -60,6 +62,15 @@ public class AddTimerActivity extends BaldActivity {
         time = findViewById(R.id.tv_number);
     }
 
+    private void attachPreset(int id, final int minutes) {
+        final BaldButton preset = findViewById(id);
+        preset.setText(minutes + " " + getString(R.string.minutes_short));
+        preset.setOnClickListener(v -> {
+            timeInMinutes = minutes;
+            updateAccordingToTime();
+        });
+    }
+
     private void submit() {
         final String name = getString(R.string.timer);
         final DateTime now = DateTime.now();
@@ -68,7 +79,7 @@ public class AddTimerActivity extends BaldActivity {
         alarm.setDays(-1);
         alarm.setHour(now.getHourOfDay());
         alarm.setMinute(now.getMinuteOfHour());
-        alarm.addMinutes(5 * timeIn5Minutes);
+        alarm.addMinutes(timeInMinutes);
         alarm.setEnabled(true);
         alarm.setName(name);
 
@@ -89,12 +100,16 @@ public class AddTimerActivity extends BaldActivity {
 
     private void genOnClickListeners() {
         bt_alarm_submit.setOnClickListener((v) -> submit());
+        findViewById(R.id.bt_cancel).setOnClickListener(v -> finish());
+        attachPreset(R.id.preset_1, 1);
+        attachPreset(R.id.preset_5, 5);
+        attachPreset(R.id.preset_10, 10);
         bt_add.setOnClickListener(v -> {
-            timeIn5Minutes++;
+            timeInMinutes += 5;
             updateAccordingToTime();
         });
         bt_dec.setOnClickListener(v -> {
-            timeIn5Minutes--;
+            timeInMinutes -= 5;
             updateAccordingToTime();
         });
         updateAccordingToTime();
@@ -102,9 +117,9 @@ public class AddTimerActivity extends BaldActivity {
 
     @SuppressLint("DefaultLocale")
     private void updateAccordingToTime() {
-        if (timeIn5Minutes < 1 || timeIn5Minutes > (Const.DAY / (5 * Const.MINUTE)))//its 288
-            timeIn5Minutes = 1;
-        time.setText(String.format("%d %s", timeIn5Minutes * 5, getString(R.string.minutes)));
+        if (timeInMinutes < 1 || timeInMinutes > (Const.DAY / Const.MINUTE))//a day
+            timeInMinutes = 1;
+        time.setText(String.format("%d %s", timeInMinutes, getString(R.string.minutes)));
     }
 
     @Override

@@ -101,6 +101,7 @@
     <string name="delete">Удалить</string>
     <string name="delete___">Удалить %s?</string>
     <string name="delete_all_alarms">Удалить все будильники</string>
+    <string name="delete_all">Удалить всё</string>
     <string name="dialer">Телефон</string>
     <string name="display_settings">Дисплей</string>
     <string name="done">Готово</string>
@@ -158,6 +159,7 @@
     <string name="mobile_phone_number">Мобильный номер</string>
     <string name="monday">Понедельник</string>
     <string name="more">больше</string>
+    <string name="less">меньше</string>
     <string name="morning">Утро</string>
     <string name="name">Имя</string>
     <string name="named__">названный</string>
@@ -189,6 +191,8 @@
     <string name="pill_added">Таблетка добавлена!</string>
     <string name="pill_name">Название Таблетки</string>
     <string name="pills">Таблетки</string>
+    <string name="pill">Таблетка</string>
+    <string name="pill_time">Время приёма</string>
     <string name="press_longer">Нажмите и удерживайте!</string>
     <string name="timer">Таймер</string>
     <string name="read_call_log">Чтение Истории Вызовов</string>
@@ -204,6 +208,11 @@
     <string name="remove_shortcut">Удалить ярлык</string>
     <string name="removed_all_alarms">Удалены все будильники!</string>
     <string name="repeats_every_day">Каждый день</string>
+    <string name="repeat">Повторять</string>
+    <string name="specific_days">По дням недели</string>
+    <string name="time">Время</string>
+    <string name="color">Цвет</string>
+    <string name="minutes_short">мин</string>
     <string name="right_handed">Правша</string>
 
     <string name="saturday">Суббота</string>
@@ -273,13 +282,11 @@
     <string name="yesterday">Вчера</string>
     <string name="nothing">Пусто</string>
     <string name="no_contacts_found">Контакты не найдены!</string>
-    <string name="no_alarms">Нет будильника.
-Создайте его, нажав
-«Добавить будильник»
-или «Добавить таймер»</string>
+    <string name="no_alarms">Нет будильников.
+Нажмите «Будильник»
+или «Таймер» внизу.</string>
     <string name="no_pills">Нет таблеток.
-Создайте её, нажав
-«Добавить таблетку»</string>
+Нажмите «Таблетка» внизу.</string>
     <string name="clear_all_notifications">Очистить Все Оповещения</string>
     <string name="clear_cache_subtext">Вы уверенны что хотите очистить кэш?\nЯрлык программы будет удален тоже!
     </string>

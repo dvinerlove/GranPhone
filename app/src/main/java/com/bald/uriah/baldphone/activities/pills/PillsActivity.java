@@ -17,7 +17,6 @@
 package com.bald.uriah.baldphone.activities.pills;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -39,7 +38,6 @@ import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.databases.reminders.Reminder;
 import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.databases.reminders.RemindersDatabase;
-import com.bald.uriah.baldphone.utils.BaldGridItemDecoration;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
@@ -69,12 +67,6 @@ public class PillsActivity extends BaldActivity {
         int numberOfAppsInARow = screenOrientation ? 2 : 1;
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfAppsInARow);
         recyclerView.setLayoutManager(gridLayoutManager);
-        Resources r = getResources();
-        recyclerView.addItemDecoration(
-                new BaldGridItemDecoration(r.getDimensionPixelSize(R.dimen.divider),
-                        numberOfAppsInARow,
-                        getDrawable(R.drawable.ll_divider),
-                        r.getDimensionPixelSize(R.dimen.padding_dividers)));
 
         recyclerView.setAdapter(new PillsRecyclerViewAdapter());
 
