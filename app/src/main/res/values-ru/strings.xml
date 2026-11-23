@@ -18,9 +18,9 @@
     <string name="accessibility_level">Уровень доступа</string>
     <string name="accessibility_settings">Специальные возможности</string>
     <string name="accidental_touches">Защита от случайных нажатий</string>
-    <string name="accidental_touches_settings_subtext">Защита блокирует ваш телефон от случайных нажатий когда телефон накрыт, если у вас возникли проблемы с ним, вы можете его выключить.
+    <string name="accidental_touches_settings_subtext">Защита блокирует нажатия, пока телефон накрыт.\nЕсли она мешает, её можно выключить здесь.
     </string>
-    <string name="accidental_touches_subtext">Обнаруженно случайное нажатие\nнажмите «Понятно» чтобы продолжить пользоваться телефоном, если это сообщение продолжает появляться, вы можете его отключить в специальных возможностях.
+    <string name="accidental_touches_subtext">Обнаружено случайное нажатие.\nНажмите «Понятно», чтобы продолжить пользоваться телефоном.\nЕсли сообщение появляется снова и снова, защиту можно выключить в специальных возможностях.
     </string>
     <string name="acknowledgments">Благодарность</string>
     <string name="adaptive">Авто</string>
@@ -29,44 +29,49 @@
     <string name="add_contact">Добавить контакт</string>
     <string name="add_emergency_contact">Добавить контакт</string>
     <string name="add_pill">Добавить таблетку</string>
-    <string name="add_shortcut">Добавить Ярлык</string>
-    <string name="add_to_favorite">Добавить в Избранное</string>
-    <string name="add_to_home">Добавить на Главный Экран</string>
+    <string name="add_shortcut">Добавить ярлык</string>
+    <string name="add_to_favorite">Добавить в избранное</string>
+    <string name="add_to_home">Добавить на главный экран</string>
     <string name="add_to_sos">Добавить в SOS</string>
     <string name="address">Адрес</string>
     <string name="advanced_options">Дополнительные параметры</string>
-    <string name="afternoon">После полудня</string>
-    <string name="airplane_mode">Режим Полета</string>
-    <string name="alarm_name">Название Будильника</string>
-    <string name="alarm_volume">Громкость Будильника</string>
-    <string name="alarm_volume_subtext">Выберите громкость будильника.\nГромкость увеличивается с лева на право.</string>
-    <string name="alarms">Будильник</string>
+    <string name="afternoon">День</string>
+    <string name="airplane_mode">Режим полёта</string>
+    <string name="alarm_name">Название будильника</string>
+    <string name="alarm_volume">Громкость будильника</string>
+    <string name="alarm_volume_subtext">Выберите громкость будильника.\nГромкость увеличивается слева направо.</string>
+    <string name="alarms">Будильники</string>
 
     <string name="alarms_repeats_every">Повторять каждые</string>
-    <string name="all_alarms">Все Будильники</string>
+    <string name="all_alarms">Все будильники</string>
     <string name="allow">Разрешить</string>
-    <string name="already_setted">Уже Установлен!\nНажмите сюда что бы поменять на него</string>
-    <string name="an_error_has_occurred">Произошла ошибка!</string>
+    <string name="already_setted">Уже установлен.\nНажмите, чтобы изменить.</string>
+    <string name="an_error_has_occurred">Что-то пошло не так. Попробуйте ещё раз.</string>
+    <string name="no_messages_app">Нет приложения для сообщений.</string>
+    <string name="no_camera_app">Нет приложения камеры.</string>
+    <string name="could_not_open_notification">Не удалось открыть уведомление.</string>
+    <string name="choose_another_app">Выбрать приложение</string>
+    <string name="turn_off">Выключить</string>
     <string name="and_welcome_to_GranPhone">и добро пожаловать в GranPhone</string>
 
-    <string name="apps">Программы</string>
-    <string name="are_you_sure_you_want_to_delete___">Вы уверенны что хотите удалить %s?</string>
+    <string name="apps">Приложения</string>
+    <string name="are_you_sure_you_want_to_delete___">Вы уверены, что хотите удалить %s?</string>
     <string name="assistant">Ассистент</string>
     <string name="flashlight">Фонарик</string>
-    <string name="at_least_one_day_must_be_selected">Не меньше одного дня должно быть выбранно!</string>
-    <string name="auto_brightness">Автоматическая\nЯркость</string>
+    <string name="at_least_one_day_must_be_selected">Выберите хотя бы один день.</string>
+    <string name="auto_brightness">Автоматическая\nяркость</string>
     <string name="backspace">удалить</string>
-    <string name="GranPhone_bla_allow_permission">Пожалуйста предоставьте следующие разрешения:</string>
+    <string name="GranPhone_bla_allow_permission">Пожалуйста, предоставьте следующие разрешения:</string>
     <string name="blocked">Заблокирован</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Яркость</string>
-    <string name="brightness_subtext">Изменить Яркость.</string>
-    <string name="cache_cleared_successfully">Кэш успешно удален!</string>
+    <string name="brightness_subtext">Изменить яркость.</string>
+    <string name="cache_cleared_successfully">Кэш очищен.</string>
     <string name="call">Позвонить</string>
     <string name="calling">Звонки</string>
 
-    <string name="call_log">Журнал Вызовов:</string>
-    <string name="call_subtext">Это разрешение требуется для вызова контактов.</string>
+    <string name="call_log">Журнал звонков:</string>
+    <string name="call_subtext">Это разрешение нужно, чтобы звонить контактам.</string>
     <string name="camera">Камера</string>
     <string name="camera_subtext">Это разрешение требуется для включения фонарика.</string>
     <string name="cancel">Отмена</string>
@@ -81,23 +86,22 @@
     <string name="choose_tuesday">Вт</string>
     <string name="choose_wednesday">Ср</string>
     <string name="clear">Очистить</string>
-    <string name="clear_cache">Очистить Кэш</string>
-    <string name="clear_data">Удалить все Данные</string>
-    <string name="clear_data_subtext">Вы уверенычто хотите удалить все данные?</string>
-    <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">точно?
-все данные будут удалены!</string>
+    <string name="clear_cache">Очистить кэш</string>
+    <string name="clear_data">Удалить все данные</string>
+    <string name="clear_data_subtext">Удалить все данные? GranPhone вернётся к состоянию после установки.</string>
+    <string name="clear_data_subtext2">Это действие нельзя отменить. Удалить все данные GranPhone?</string>
+    <string name="clear_data_subtext3">Последняя проверка — все данные будут удалены.\nПродолжить?</string>
     <string name="clock">Часы</string>
-    <string name="coming_soon">Скоро!</string>
+    <string name="coming_soon">Скоро</string>
     <string name="connection_settings">Подключение</string>
-    <string name="contact_must_has_name">Контакт должен иметь Имя!</string>
-    <string name="contact_not_created">Контакт не создан!</string>
+    <string name="contact_must_has_name">Введите имя контакта.</string>
+    <string name="contact_not_created">Не удалось сохранить контакт. Проверьте поля и попробуйте ещё раз.</string>
     <string name="contacts">Контакты</string>
     <string name="contacts_read_subtext">Это разрешение требуется для чтения контактов.</string>
     <string name="contacts_subtext">Это разрешение требуется для добавления новых контактов.</string>
-    <string name="crash">Упс!\nGranPhone столкнулся с проблемой и теперь перезапустится.</string>
+    <string name="crash">GranPhone столкнулся с ошибкой и перезапустится.\nВаши данные в порядке.</string>
     <string name="current_time">Текущее время</string>
-    <string name="custom">Свое</string>
+    <string name="custom">Своё</string>
     <string name="dark">Темный</string>
     <string name="delete">Удалить</string>
     <string name="delete___">Удалить %s?</string>
@@ -109,7 +113,7 @@
     <string name="down">Вниз</string>
     <string name="edit">Изменить</string>
     <string name="email">Эл. почта:</string>
-    <string name="enable_notification_access">Включить Доступ к Уведомлениям</string>
+    <string name="enable_notification_access">Включить доступ к уведомлениям</string>
     <string name="enable_notification_access_subtext">Пожалуйста, предоставьте GranPhone доступ к уведомлениям.</string>
     <string name="enter">Ввод</string>
     <string name="enter_contact_or_phone_number">Введите имя контакта:</string>
@@ -120,25 +124,25 @@
     <string name="example_of_different_text_sizes">Пример текста разных размеров\nДолжен быть читаемым и не слишком большим.
     </string>
     <string name="external_storage_subtext">Это разрешение требуется для сохранения изображений.</string>
-    <string name="feedback">Отправить Отзыв</string>
-    <string name="feedback_cannot_be_empty">Отзыв не может быть пустым!</string>
+    <string name="feedback">Отправить отзыв</string>
+    <string name="feedback_cannot_be_empty">Напишите пару слов, а затем отправьте.</string>
     <string name="feedback_sent_successfully">Отзыв успешно отправлен!</string>
-    <string name="first_please_select_how_you_want_to_interact_with_buttons">Пожалуйста выберите уровень доступности
+    <string name="first_please_select_how_you_want_to_interact_with_buttons">Пожалуйста, выберите уровень доступности
     </string>
     <string name="font_size">Шрифт</string>
     <string name="friday">Пятница</string>
-    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Трудно использовать клавиатуру телефона? Вместо этого используйте БОЛЬШУЮ клавиатуру GranPhone!
+    <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Трудно пользоваться клавиатурой телефона? Попробуйте большую клавиатуру GranPhone.
     </string>
     <string name="hello">Привет</string>
-    <string name="help">Видео Инструкция</string>
+    <string name="help">Видеоинструкция</string>
     <string name="hide">Скрыть</string>
-    <string name="high_level">Высокий Уровень</string>
+    <string name="high_level">Высокий уровень</string>
     <string name="home_phone_number">Домашний номер</string>
     <string name="hour">Час</string>
     <string name="huge">Огромный</string>
     <string name="internet">Интернет</string>
-    <string name="invoked_in">Установить на:</string>
-    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Последняя вещь:\nНастоятельно рекомендуется использовать домашний экран GranPhone в качестве основной панели запуска
+    <string name="invoked_in">Сработает через:</string>
+    <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">И последнее:\nнастоятельно рекомендуем сделать GranPhone главным экраном телефона.
     </string>
     <string name="language">язык</string>
     <string name="language_settings">Язык</string>
@@ -151,26 +155,26 @@
 
 
     <string name="medium">Средний</string>
-    <string name="medium_level">Средний Уровень</string>
+    <string name="medium_level">Средний уровень</string>
     <string name="message">Сообщение</string>
     <string name="messages">Сообщения</string>
     <string name="minute">Минута</string>
     <string name="minutes">Минут</string>
-    <string name="missed">Пропущен</string>
+    <string name="missed">Пропущенный</string>
 
     <string name="mobile_phone_number">Мобильный номер</string>
     <string name="monday">Понедельник</string>
-    <string name="more">больше</string>
-    <string name="less">меньше</string>
+    <string name="more">Увеличить</string>
+    <string name="less">Уменьшить</string>
     <string name="morning">Утро</string>
     <string name="name">Имя</string>
-    <string name="named__">названный</string>
-    <string name="new_alarm___was_created">новый будильник %s создан!</string>
+    <string name="named__">«%1$s»</string>
+    <string name="new_alarm___was_created">Будильник%1$s создан.</string>
     <string name="nfc">NFC</string>
     <string name="no">Нет</string>
     <string name="notes">Заметки</string>
     <string name="notes_settings">Заметки</string>
-    <string name="notes_settings_subtext">Выберите, хотите ли вы иметь страницу Заметок на главном экране.</string>
+    <string name="notes_settings_subtext">Выберите, хотите ли вы иметь страницу заметок на главном экране.</string>
     <string name="notifications">Уведомления</string>
 
     <string name="of">из</string>
@@ -192,27 +196,27 @@
     <string name="photo">Фотография</string>
     <string name="photos">Фото</string>
     <string name="pill_added">Таблетка добавлена!</string>
-    <string name="pill_name">Название Таблетки</string>
+    <string name="pill_name">Название таблетки</string>
     <string name="pills">Таблетки</string>
     <string name="pill">Таблетка</string>
     <string name="pill_time">Время приёма</string>
     <string name="pin_to_home">Закрепить на главном</string>
     <string name="unpin_from_home">Убрать с главного</string>
-    <string name="press_longer">Нажмите и удерживайте!</string>
+    <string name="press_longer">Нажмите и удерживайте</string>
     <string name="timer">Таймер</string>
-    <string name="read_call_log">Чтение Истории Вызовов</string>
-    <string name="read_call_log_subtext">Это разрешение требуется для просмотра журнала звонков.</string>
-    <string name="write_call_log_subtext">Это разрешение требуется для просмотра и управления журналом звонков.</string>
+    <string name="read_call_log">Чтение журнала звонков</string>
+    <string name="read_call_log_subtext">Это разрешение нужно для просмотра журнала звонков.</string>
+    <string name="write_call_log_subtext">Это разрешение нужно для просмотра и изменения журнала звонков.</string>
     <string name="read_contacts">Чтение контактов</string>
-    <string name="received">Получен</string>
+    <string name="received">Входящий</string>
     <string name="recent">Недавние</string>
     <string name="regular_level">Обычный уровень</string>
 
-    <string name="remove_from_favorite">Удалить из Избранного</string>
-    <string name="remove_from_home">Удалить с Домашнего экрана</string>
+    <string name="remove_from_favorite">Удалить из избранного</string>
+    <string name="remove_from_home">Удалить с домашнего экрана</string>
     <string name="remove_from_sos">Удалить из SOS</string>
     <string name="remove_shortcut">Удалить ярлык</string>
-    <string name="removed_all_alarms">Удалены все будильники!</string>
+    <string name="removed_all_alarms">Все будильники удалены.</string>
     <string name="repeats_every_day">Каждый день</string>
     <string name="repeat">Повторять</string>
     <string name="specific_days">По дням недели</string>
@@ -224,33 +228,33 @@
     <string name="saturday">Суббота</string>
     <string name="save">Сохранить</string>
     <string name="send">Отправить</string>
-    <string name="set_default_dialer">Установить приложение для вызова по умолчанию</string>
-    <string name="set_default_dialer_subtext">GranPhone должен быть отмечен как приложение для вызова по умолчанию.</string>
+    <string name="set_default_dialer">Назначить приложением для звонков</string>
+    <string name="set_default_dialer_subtext">GranPhone должен быть назначен приложением для звонков по умолчанию.</string>
     <string name="set_home_screen">Установить домашний экран</string>
-    <string name="set_home_screen_subtext">Чтобы использовать GranPhone, вы должны установить его в качестве домашнего экрана.\nЭто обратимо и может быть изменено в настройках.
+    <string name="set_home_screen_subtext">Чтобы использовать GranPhone, установите его главным экраном.\nЭто обратимо — можно изменить в настройках.
     </string>
     <string name="set_keyboard">Установить клавиатуру</string>
-    <string name="setting_does_not_exist">Настройки не существуют</string>
+    <string name="setting_does_not_exist">Такой настройки нет</string>
     <string name="settings">Настройки</string>
-    <string name="settings_permission">Настройка Разрешений</string>
+    <string name="settings_permission">Изменение системных настроек</string>
     <string name="share">Поделиться</string>
-    <string name="share_actual_text">Привет, Я использую платформу названную "GranPhone" которая заменяет интерфейс телефона на более крупный, простой и дружелюбный.\nЗаинтересовался?\nВы можете скачать его бесплатно!\nоткройте ссылку ниже для получения дополнительной информации:\n\nhttps://github.com/dvinerlove/GranPhone
+    <string name="share_actual_text">Привет! Я пользуюсь приложением GranPhone — оно делает интерфейс телефона крупным, простым и удобным.\nИнтересно?\nЕго можно скачать бесплатно!\nПодробности по ссылке:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_granphone_subtext">Эй, знаете кого-нибудь, кто хотел бы узнать о GranPhone?\nВы можете поделиться им с ними!"
+    <string name="share_granphone_subtext">Знаете кого-нибудь, кому подошёл бы GranPhone?\nПоделитесь с ним.
     </string>
     <string name="share_GranPhone">Поделиться GranPhone</string>
-    <string name="share_contact">Поделиться Контактом</string>
-    <string name="share_differently">Поделиться Другим Приложением</string>
-    <string name="share_via_whatsapp">Поделиться в Whatsapp</string>
+    <string name="share_contact">Поделиться контактом</string>
+    <string name="share_differently">Поделиться другим приложением</string>
+    <string name="share_via_whatsapp">Поделиться в WhatsApp</string>
     <string name="shift">регистр</string>
     <string name="show">Показать</string>
     <string name="small">Маленький</string>
     <string name="snooze">Отложить на 5 мин</string>
     <string name="sos">SOS</string>
-    <string name="sos_is_full">SOS заполнен!</string>
-    <string name="sos_is_full_subtext">SOS заполнен! пожалуйста удалите другие SOS контакты перед добавление новых</string>
+    <string name="sos_is_full">Список SOS заполнен</string>
+    <string name="sos_is_full_subtext">В списке SOS не больше 2 контактов. Удалите один, чтобы добавить новый.</string>
     <string name="speak">Продиктовать</string>
-    <string name="speech_to_text">Речь в Текст</string>
+    <string name="speech_to_text">Речь в текст</string>
     <string name="strong_hand">Преобладающая рука</string>
     <string name="strong_hand_subtext">Выберите свою преобладающую руку, чтобы настроить пользовательский интерфейс.</string>
     <string name="submit">Подтвердить</string>
@@ -262,78 +266,79 @@
     <string name="thursday">Четверг</string>
     <string name="time_changer">Изменение времени приёма</string>
     <string name="tiny">Крошечный</string>
-    <string name="to___days_and___hours_from_now">%d дней и %d час(ов) с текущего момента</string>
-    <string name="to___hours_and___minutes_from_now">%d час(ов) и %d минут с текущего момента</string>
-    <string name="to___minuets_from_now">%d минут(ы) с текущего момента</string>
+    <string name="to___days_and___hours_from_now">Сработает через %1$d дн. %2$d ч.</string>
+    <string name="to___hours_and___minutes_from_now">Сработает через %1$d ч. %2$d мин</string>
+    <string name="to___minuets_from_now">Сработает через %1$d мин</string>
     <string name="today">Сегодня</string>
-    <string name="took">Принял!</string>
+    <string name="took">Принято</string>
     <string name="tuesday">Вторник</string>
     <string name="understood">Понятно</string>
     <string name="uninstall">Удалить</string>
-    <string name="uninstall_subtext">Вы уверены что хотите удалить %s?\n%s данные пропадут навсегда!</string>
+    <string name="uninstall_subtext">Удалить %s?\nВсе данные этого приложения будут стёрты.</string>
     <string name="up">Вверх</string>
     <string name="video">Видео</string>
-    <string name="video_tutorials">Видео Инструкции</string>
+    <string name="video_tutorials">Видеоинструкции</string>
     <string name="videos">Видео</string>
 
-    <string name="voice_mail">Голосовая Почта</string>
+    <string name="voice_mail">Голосовая почта</string>
     <string name="wednesday">Среда</string>
-    <string name="whatsapp">Whatsapp</string>
-    <string name="wifi">Wifi</string>
-    <string name="will_repeat_only_once">повторить только один раз!</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="will_repeat_only_once">Повторится только один раз.</string>
     <string name="write">Записать</string>
-    <string name="write_contacts">Записать контакты</string>
-    <string name="write_external_storage">Записать на внешнее хранилище</string>
+    <string name="write_contacts">Изменение контактов</string>
+    <string name="write_external_storage">Запись на внешнее хранилище</string>
     <string name="yes">Да</string>
     <string name="yesterday">Вчера</string>
-    <string name="nothing">Пусто</string>
-    <string name="no_contacts_found">Контакты не найдены!</string>
+    <string name="nothing">Пока пусто</string>
+    <string name="no_contacts_found">Никого не нашлось. Проверьте написание.</string>
     <string name="no_alarms">Нет будильников.
 Нажмите «Будильник»
 или «Таймер» внизу.</string>
-    <string name="no_pills">Нет таблеток.
-Нажмите «+ Таблетка» внизу.</string>
-    <string name="clear_all_notifications">Очистить Все Оповещения</string>
+    <string name="no_pills">Таблеток нет.
+Нажмите кнопку внизу,
+чтобы добавить.</string>
+    <string name="clear_all_notifications">Удалить все уведомления</string>
     <string name="clear_all_notifications_subtext">Все уведомления будут удалены.</string>
-    <string name="clear_cache_subtext">Вы уверенны что хотите очистить кэш?\nЯрлык программы будет удален тоже!
+    <string name="clear_cache_subtext">Очистить кэш? Это может устранить сбои, но ярлыки на главном экране тоже будут удалены.
     </string>
-    <string name="permissions_calm">Привет, GranPhone должны быть предоставленны следующие разрешения для запуска. Некоторые из них, звучат страшно, но это единственный способ для GranPhone заменить интерфейс телефона. Это не причинит вреда и не украдет ваши данные. Продолжите, чтобы предоставить разрешения, или выйдите из GranPhone.
+    <string name="permissions_calm">Для работы GranPhone нужны следующие разрешения. Некоторые звучат пугающе, но это единственный способ заменить интерфейс телефона. Данные не собираются и вреда не будет. Продолжите, чтобы предоставить разрешения, или выйдите из GranPhone.
     </string>
-    <string name="pending_update">Ожидание Обновления</string>
-    <string name="download">Загрузка</string>
-    <string name="install_updates">Установка Обновлений</string>
-    <string name="install_updates_subtext">Это Разрешение необходимо для обновления GranPhone</string>
-    <string name="a_new_update_is_available">Доступно обновление!\nОбновления важны для обеспечения бесперебойной работы GranPhone.\nПродолжите для загрузки.
+    <string name="pending_update">Ожидание обновления</string>
+    <string name="download">Скачать</string>
+    <string name="install_updates">Установка обновлений</string>
+    <string name="install_updates_subtext">Это разрешение нужно для обновления GranPhone</string>
+    <string name="a_new_update_is_available">Доступно обновление.\nОбновления важны для бесперебойной работы GranPhone.\nПродолжите, чтобы скачать.
     </string>
-    <string name="current_version">Текущая Версия:\n</string>
-    <string name="new_version">Новая Версия:\n</string>
+    <string name="current_version">Текущая версия:\n</string>
+    <string name="new_version">Новая версия:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Обновления готовы к загрузке.</string>
     <string name="install">Установить</string>
-    <string name="data_warning">Предупреждение о Данных</string>
-    <string name="data_warning_subtext">Привет, вы не подключенны к WIFI.\nРазмер загрузкипримерно 3MB, если вы находитесь за границей, это может стоить вам денег.\nХотите продолжить загрузку?
+    <string name="data_warning">Предупреждение о данных</string>
+    <string name="data_warning_subtext">Вы не подключены к Wi-Fi.\nЗагрузка — около 3 МБ. За границей это может стоить денег.\nПродолжить загрузку?
     </string>
-    <string name="update_message_is_corrupted">Сообщение об обновлении повреждено.</string>
+    <string name="update_message_is_corrupted">Сообщение об обновлении повреждено. Попробуйте ещё раз или перезагрузите телефон.</string>
     <string name="check_for_updates">Проверить наличие обновлений</string>
-    <string name="could_not_connect_to_server">Не удалось подключиться к серверу!</string>
-    <string name="could_not_connect_to_internet">Не удалось подключиться к Интернету!</string>
-    <string name="could_not_start_the_download">Не удалось начать загрузку!</string>
-    <string name="downloaded_update_file_could_not_be_deleted">Загруженный файл обновления не может быть удален!</string>
+    <string name="could_not_connect_to_server">Не удалось подключиться к серверу. Попробуйте позже.</string>
+    <string name="could_not_connect_to_internet">Нет соединения с интернетом. Проверьте Wi-Fi или мобильный интернет и попробуйте ещё раз.</string>
+    <string name="could_not_start_the_download">Не удалось начать загрузку. Попробуйте ещё раз.</string>
+    <string name="downloaded_update_file_could_not_be_deleted">Не удалось удалить загруженный файл обновления. Перезагрузите телефон и попробуйте ещё раз.</string>
     <string name="downloading">Загрузка…</string>
 
-    <string name="GranPhone_is_up_to_date">GranPhone обновлен.</string>
+    <string name="GranPhone_is_up_to_date">GranPhone обновлён.</string>
     <string name="what_s_new">Что нового</string>
-    <string name="download_finished">Загрузка завершена!</string>
-    <string name="downloading_updates">Загрузка Обновлений…</string>
+    <string name="download_finished">Загрузка завершена.</string>
+    <string name="downloading_updates">Загрузка обновлений…</string>
     <string name="installing_doesn_t_work">Установка не работает?</string>
     <string name="try_now">Попробуйте сейчас</string>
     <string name="download_progress">Процесс загрузки</string>
     <string name="what_do_you_want_to_do_with___">Что вы хотите сделать с %s?</string>
     <string name="crash_reports">Отчеты о сбоях</string>
-    <string name="crash_reports_subtext">Отчеты о сбоях помогают сделать использованние GranPhone безупречным\nОни используются только что бы исправлять ошибки и никакая информация, кроме той, что необходима для исправления ошибок, не применяется.
+    <string name="crash_reports_subtext">Отчёты о сбоях помогают сделать GranPhone безупречным.\nОни используются только для исправления ошибок — никакие другие данные не собираются.
     </string>
     <string name="custom_app">Пользовательское приложение</string>
     <string name="custom_app_subtext">Выберите пользовательское приложение для установки на домашний экран.</string>
-    <string name="no_app_was_found">Не найдено подходящего приложения!</string>
+    <string name="no_app_was_found">Подходящее приложение не найдено.</string>
     <string name="alarm">Будильник</string>
     <string name="no_new_notifications">Нет новых уведомлений</string>
     <string name="sound">Звук</string>
@@ -343,7 +348,7 @@
 
 
     <string name="status_bar_settings">Строка состояния</string>
-    <string name="status_bar_settings_subtext">Где вы хотите отобразить строку состояния?</string>
+    <string name="status_bar_settings_subtext">Где показывать строку состояния?</string>
     <string name="only_home_screen">Домашний экран</string>
     <string name="nowhere">Нигде</string>
     <string name="everywhere">Везде</string>
@@ -361,12 +366,12 @@
     <string name="go">Перейти</string>
 
 
-    <string name="dialer_sounds">Звуки Номеронабирателя</string>
-    <string name="dialer_sounds_subtext">Выберите, хотите ли вы иметь Звуки Номеронабирателя.</string>
+    <string name="dialer_sounds">Звуки набора номера</string>
+    <string name="dialer_sounds_subtext">Выберите, хотите ли вы звуки набора номера.</string>
     <string name="low_battery_alert">Предупреждение о низком заряде батареи</string>
     <string name="low_battery_alert_subtext">Выберите, хотите ли вы, чтобы строка состояния была красной на главном экране, когда уровень заряда батареи ниже 20%\nПримечание: не будет отображаться, если строка состояния системы скрыта.</string>
 
-    <string name="also_available_at">Также доступно по адресу\nGranPhone.contact@gmail.com\nОбратная связь должна быть на английском/иврите!</string>
+    <string name="also_available_at">Также можно написать на\nGranPhone.contact@gmail.com\nПожалуйста, пишите на английском или иврите.</string>
     <string name="grant_all_permissions">Предоставить все разрешения</string>
 
 
@@ -387,7 +392,7 @@
     <string name="_short">Короткое</string>
     <string name="do_you_want_to_save_your_changes">Сохранить изменения?</string>
     <string name="discard">Сбросить</string>
-    <string name="no_recent_calls">Нет недавних вызовов</string>
+    <string name="no_recent_calls">Нет недавних звонков</string>
     <string name="no_apps">Нет приложений</string>
     <string name="no_photos">Нет фотографий</string>
     <string name="no_videos">Нет видео</string>
@@ -421,30 +426,30 @@
     <string name="website">Сайт</string>
     <string name="appear_on_top">Поверх других окон</string>
     <string name="appear_on_top_subtext">Это разрешение нужно, чтобы показывать будильники и напоминания поверх экрана блокировки</string>
-    <string name="mail_application_not_found">Приложение для почты не найдено!</string>
+    <string name="mail_application_not_found">На телефоне нет почтового приложения, поэтому отзыв отправить нельзя.</string>
     <string name="get_involved">Помочь проекту</string>
     <string name="close">Закрыть</string>
     <string name="back">Назад</string>
     <string name="notification_service">GranPhone: сервис уведомлений</string>
-    <string name="notification_service_fail">Не удалось запустить сервис уведомлений!</string>
+    <string name="notification_service_fail">Не удалось запустить сервис уведомлений. Перезагрузите телефон и попробуйте ещё раз.</string>
     <string name="battery">Батарея</string>
     <string name="calculator">Калькулятор</string>
-    <string name="answer_call">ПРИНЯТЬ</string>
-    <string name="decline_call">ОТКЛОНИТЬ</string>
-    <string name="hang_up">ЗАВЕРШИТЬ</string>
-    <string name="speaker_turn_on">Громкая связь</string>
-    <string name="speaker_turn_off">Громкая связь вкл.</string>
-    <string name="incoming_call">Входящий вызов</string>
-    <string name="call_status_calling">Вызов…</string>
-    <string name="in_call">Разговор</string>
+    <string name="answer_call">Принять</string>
+    <string name="decline_call">Отклонить</string>
+    <string name="hang_up">Завершить</string>
+    <string name="speaker_turn_on">Громкая связь: выкл.</string>
+    <string name="speaker_turn_off">Громкая связь: вкл.</string>
+    <string name="incoming_call">Входящий звонок</string>
+    <string name="call_status_calling">Звонок…</string>
+    <string name="in_call">В звонке</string>
     <string name="on_hold">На удержании</string>
-    <string name="call_ended">Вызов завершён</string>
+    <string name="call_ended">Звонок завершён</string>
     <string name="unknown_number">Неизвестный номер</string>
-    <string name="ongoing_call">Идёт разговор</string>
-    <string name="tap_to_return_to_call">Нажмите, чтобы вернуться к разговору</string>
+    <string name="ongoing_call">Идёт звонок</string>
+    <string name="tap_to_return_to_call">Нажмите, чтобы вернуться к звонку</string>
     <string name="calls_channel">Звонки</string>
-    <string name="already_default_dialer">Уже назначено приложением для звонков!</string>
-    <string name="use_granphone_for_calls">Экран вызова крупными кнопками</string>
+    <string name="already_default_dialer">GranPhone уже назначен приложением для звонков.</string>
+    <string name="use_granphone_for_calls">Экран звонка крупными кнопками</string>
     <string name="kiosk_mode">Режим киоска (блокировка телефона)</string>
     <string name="kiosk_not_device_owner_subtext">Для режима киоска приложение должно быть администратором устройства. Это делается один раз с компьютера:
 
@@ -459,7 +464,7 @@ adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.b
     <string name="remove_device_owner">Убрать права администратора</string>
     <string name="remove_device_owner_subtext">Режим киоска станет недоступен, приложение можно будет удалить. Чтобы вернуть, придётся снова выполнить команду с компьютера.</string>
     <string name="signal_strength">Уровень связи</string>
-    <string name="device_memory">Память</string>
+    <string name="device_memory">Хранилище и память</string>
     <string name="storage">Хранилище</string>
     <string name="ram">Оперативная память</string>
     <string name="device_memory_subtext">Свободное место и оперативная память устройства</string>
@@ -478,7 +483,7 @@ adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.b
     <string name="tutorial_battery_generic">Разрешите GranPhone работать в фоне, чтобы звонки и напоминания всегда доходили до вас.</string>
     <string name="sos_hold_explanation">Нажмите и удерживайте кнопку SOS, чтобы вызвать помощь</string>
     <string name="sos_call_help">Вызвать помощь</string>
-    <string name="sos_calling_in">Вызов через %d…</string>
+    <string name="sos_calling_in">Звонок через %d…</string>
     <string name="sos_confirm_call">Позвонить в экстренные службы?</string>
     <string name="sos_button_description">SOS — вызвать помощь</string>
 </resources>

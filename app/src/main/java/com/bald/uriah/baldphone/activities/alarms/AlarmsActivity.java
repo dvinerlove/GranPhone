@@ -146,7 +146,7 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
 
                 final Alarm newAlarm = AlarmsDatabase.getInstance(this).alarmsDatabaseDao().getByKey(key);
                 final String name = newAlarm.getName();
-                final String message = String.format(getString(R.string.new_alarm___was_created), name == null || name.equals("") ? "" : getString(R.string.named__) + " " + name);
+                final String message = String.format(getString(R.string.new_alarm___was_created), name == null || name.equals("") ? "" : " " + String.format(getString(R.string.named__), name));
                 BaldToast.from(this).setText(message).setType(BaldToast.TYPE_INFORMATIVE).show();
                 final long nextTimeAlarmWillWork = AlarmScheduler.nextTimeAlarmWillWorkInMsFromNow(newAlarm);
                 final String message2;

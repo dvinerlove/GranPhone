@@ -18,21 +18,21 @@
     <string name="accessibility_level">Accessibility Level</string>
     <string name="accessibility_settings">Accessibility</string>
     <string name="accidental_touches">Accidental Touch Guard</string>
-    <string name="accidental_touches_settings_subtext">The guard blocks your phone from touch input when the phone is
-        covered\nif you have problems with it you can turn it off
+    <string name="accidental_touches_settings_subtext">The guard blocks touches while the phone is covered.\nIf it
+        causes problems, you can turn it off here.
     </string>
-    <string name="accidental_touches_subtext">Accidental touch was detected\npress \"Understood\" to continue using the phone\nif
-        this message keeps appearing you can disable it in the accessibility settings
+    <string name="accidental_touches_subtext">An accidental touch was detected.\nTap \"Understood\" to keep using the
+        phone.\nIf this message keeps appearing, you can turn the guard off in accessibility settings.
     </string>
     <string name="acknowledgments">Acknowledgments</string>
-    <string name="adaptive">Adaptive</string>
+    <string name="adaptive">Auto</string>
     <string name="add_alarm">Add Alarm</string>
     <string name="add_alarm_quickly">Add Timer</string>
     <string name="add_contact">Add Contact</string>
     <string name="add_emergency_contact">Add Contact</string>
     <string name="add_pill">Add Pill</string>
     <string name="add_shortcut">Add Shortcut</string>
-    <string name="add_to_favorite">Add to Favorite</string>
+    <string name="add_to_favorite">Add to Favorites</string>
     <string name="add_to_home">Add to Home</string>
     <string name="add_to_sos">Add to SOS</string>
     <string name="address">Address</string>
@@ -41,38 +41,43 @@
     <string name="airplane_mode">Airplane Mode</string>
     <string name="alarm_name">Alarm Name</string>
     <string name="alarm_volume">Alarm Volume</string>
-    <string name="alarm_volume_subtext">Choose Volume for Alarms.\nVolume increases from left to right.</string>
+    <string name="alarm_volume_subtext">Choose the alarm volume.\nVolume increases from left to right.</string>
     <string name="alarms">Alarms</string>
 
     <string name="alarms_repeats_every">Alarm repeats every</string>
     <string name="all_alarms">All Alarms</string>
     <string name="allow">Allow</string>
-    <string name="already_setted">Already Set!\nClick here to change to it</string>
-    <string name="an_error_has_occurred">An error has occurred!</string>
+    <string name="already_setted">Already set.\nTap to change it.</string>
+    <string name="an_error_has_occurred">Something went wrong — please try again.</string>
+    <string name="no_messages_app">No messages app is installed.</string>
+    <string name="no_camera_app">No camera app is installed.</string>
+    <string name="could_not_open_notification">Couldn\'t open the notification.</string>
+    <string name="choose_another_app">Choose another app</string>
+    <string name="turn_off">Turn off</string>
     <string name="and_welcome_to_GranPhone">and welcome to GranPhone</string>
 
     <string name="apps">Apps</string>
     <string name="are_you_sure_you_want_to_delete___">Are you sure you want to delete %s?</string>
     <string name="assistant">Assistant</string>
     <string name="flashlight">Flashlight</string>
-    <string name="at_least_one_day_must_be_selected">At least one day must be selected!</string>
+    <string name="at_least_one_day_must_be_selected">Choose at least one day.</string>
     <string name="auto_brightness">Auto\nBrightness</string>
     <string name="backspace">backspace</string>
     <string name="GranPhone_bla_allow_permission">Please allow the following permissions:</string>
     <string name="blocked">Blocked</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Brightness</string>
-    <string name="brightness_subtext">Change Brightness.</string>
-    <string name="cache_cleared_successfully">Cache Cleared Successfully!</string>
+    <string name="brightness_subtext">Change brightness.</string>
+    <string name="cache_cleared_successfully">Cache cleared.</string>
     <string name="call">Call</string>
-    <string name="calling">Calling</string>
+    <string name="calling">Phone calls</string>
 
     <string name="call_log">Call Log:</string>
     <string name="call_subtext">This permission is required in order to call contacts.</string>
     <string name="camera">Camera</string>
     <string name="camera_subtext">This permission is required in order to turn on the flashlight.</string>
     <string name="cancel">Cancel</string>
-    <string name="change_pills_time">Change Pills Time</string>
+    <string name="change_pills_time">Change pill times</string>
     <string name="change_system_settings_subtext">Please allow GranPhone to change settings, such as increasing the font
         size and changing the brightness.
     </string>
@@ -86,19 +91,18 @@
     <string name="clear">Clear</string>
     <string name="clear_cache">Clear Cache</string>
     <string name="clear_data">Clear All Data</string>
-    <string name="clear_data_subtext">Are you sure you want to delete all user data? The GranPhone app will revert in a fresh-new state, as if it were just installed.</string>
-    <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">sure?
-This will delete all data!</string>
+    <string name="clear_data_subtext">Delete all data? GranPhone will return to its just-installed state.</string>
+    <string name="clear_data_subtext2">This cannot be undone. Delete all GranPhone data?</string>
+    <string name="clear_data_subtext3">Last check — all data will be deleted.\nContinue?</string>
     <string name="clock">Clock</string>
-    <string name="coming_soon">Coming Soon!</string>
+    <string name="coming_soon">Coming soon</string>
     <string name="connection_settings">Connection</string>
-    <string name="contact_must_has_name">Contact must have a Name!</string>
-    <string name="contact_not_created">Contact not created!</string>
+    <string name="contact_must_has_name">Enter a name for the contact.</string>
+    <string name="contact_not_created">Couldn\'t save the contact. Check the fields and try again.</string>
     <string name="contacts">Contacts</string>
     <string name="contacts_read_subtext">This permission is required in order to read contacts.</string>
     <string name="contacts_subtext">This permission is required in order to add new contacts.</string>
-    <string name="crash">Oops!\nGranPhone ran into a problem and will now restart.</string>
+    <string name="crash">GranPhone hit a problem and will restart.\nYour data is safe.</string>
     <string name="current_time">Current Time</string>
     <string name="custom">Custom</string>
     <string name="dark">Dark</string>
@@ -125,14 +129,14 @@ This will delete all data!</string>
     </string>
     <string name="external_storage_subtext">This permission is required in order to save pictures.</string>
     <string name="feedback">Send Feedback</string>
-    <string name="feedback_cannot_be_empty">Feedback cannot be empty!</string>
+    <string name="feedback_cannot_be_empty">Write a few words first, then send.</string>
     <string name="feedback_sent_successfully">Feedback sent successfully!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Please select the level of accessibility
     </string>
     <string name="font_size">Font Size</string>
     <string name="friday">Friday</string>
     <string name="have_hard_time_using_the_phone_s_keyboard_use_GranPhone_s_big_keyboard_instead">Having a hard time using
-        the phone\'s keyboard? use GranPhone\'s BIG keyboard instead!
+        the phone\'s keyboard? Use GranPhone\'s big keyboard instead.
     </string>
     <string name="hello">Hello</string>
     <string name="help">Video Tutorial</string>
@@ -142,9 +146,9 @@ This will delete all data!</string>
     <string name="hour">Hour</string>
     <string name="huge">Huge</string>
     <string name="internet">Internet</string>
-    <string name="invoked_in">Invoked in:</string>
+    <string name="invoked_in">Goes off in:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">One last
-        thing:\nIt\'s highly recommended to use GranPhone\'s home screen as the default home launcher
+        thing:\nit\'s highly recommended to set GranPhone as the phone\'s home screen
     </string>
     <string name="language">language</string>
     <string name="language_settings">Language</string>
@@ -166,12 +170,12 @@ This will delete all data!</string>
 
     <string name="mobile_phone_number">Mobile phone number</string>
     <string name="monday">Monday</string>
-    <string name="more">more</string>
-    <string name="less">less</string>
+    <string name="more">Increase</string>
+    <string name="less">Decrease</string>
     <string name="morning">Morning</string>
     <string name="name">Name</string>
-    <string name="named__">named</string>
-    <string name="new_alarm___was_created">new alarm %s was created!</string>
+    <string name="named__">\"%1$s\"</string>
+    <string name="new_alarm___was_created">Alarm%1$s created.</string>
     <string name="nfc">NFC</string>
     <string name="no">No</string>
     <string name="notes">Notes</string>
@@ -204,7 +208,7 @@ This will delete all data!</string>
     <string name="pill_time">Pill time</string>
     <string name="pin_to_home">Pin to home</string>
     <string name="unpin_from_home">Unpin from home</string>
-    <string name="press_longer">Press Longer!</string>
+    <string name="press_longer">Press and hold a little longer</string>
     <string name="timer">Timer</string>
     <string name="read_call_log">Read Call History</string>
     <string name="read_call_log_subtext">This permission is required in order to view the call history.</string>
@@ -214,11 +218,11 @@ This will delete all data!</string>
     <string name="recent">Recent</string>
     <string name="regular_level">Regular level</string>
 
-    <string name="remove_from_favorite">Remove from Favorite</string>
+    <string name="remove_from_favorite">Remove from Favorites</string>
     <string name="remove_from_home">Remove from Home</string>
     <string name="remove_from_sos">Remove from SOS</string>
     <string name="remove_shortcut">Remove shortcut</string>
-    <string name="removed_all_alarms">Removed all alarms!</string>
+    <string name="removed_all_alarms">All alarms removed.</string>
     <string name="repeats_every_day">Every day</string>
     <string name="repeat">Repeat</string>
     <string name="specific_days">Specific days</string>
@@ -237,16 +241,15 @@ This will delete all data!</string>
         reversible and can be changed in the settings.
     </string>
     <string name="set_keyboard">Set keyboard</string>
-    <string name="setting_does_not_exist">Setting Does Not Exist</string>
+    <string name="setting_does_not_exist">Setting does not exist</string>
     <string name="settings">Settings</string>
-    <string name="settings_permission">Settings Permission</string>
+    <string name="settings_permission">Change system settings</string>
     <string name="share">Share</string>
-    <string name="share_actual_text">Hi, I\'m using this platform named "GranPhone" which replaces the phone\'s
-        interface to a big, simple and friendly one.\nInterested?\nYou can download it for free!\ncheck out the link
+    <string name="share_actual_text">Hi, I\'m using an app called \"GranPhone\" — it makes the phone\'s
+        interface big, simple and friendly.\nInterested?\nYou can download it for free!\nCheck out the link
         below for more information:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
-    <string name="share_granphone_subtext">Hey, know anyone who may want to know about GranPhone?\nYou can
-        share it with them!"
+    <string name="share_granphone_subtext">Know anyone who might like GranPhone?\nYou can share it with them.
     </string>
     <string name="share_GranPhone">Share GranPhone</string>
     <string name="share_contact">Share Contact</string>
@@ -257,55 +260,55 @@ This will delete all data!</string>
     <string name="small">Small</string>
     <string name="snooze">Snooze for 5 min</string>
     <string name="sos">SOS</string>
-    <string name="sos_is_full">SOS is full!</string>
-    <string name="sos_is_full_subtext">SOS is full! please remove other SOS contacts before adding a new one</string>
+    <string name="sos_is_full">SOS list is full</string>
+    <string name="sos_is_full_subtext">The SOS list holds 2 contacts. Remove one before adding another.</string>
     <string name="speak">Speak</string>
     <string name="speech_to_text">Speech to Text</string>
     <string name="strong_hand">Dominant Hand</string>
     <string name="strong_hand_subtext">Choose your dominant hand to adjust the user interface.</string>
-    <string name="submit">submit</string>
+    <string name="submit">Submit</string>
     <string name="sunday">Sunday</string>
     <string name="technical_information">Technical Information</string>
     <string name="theme_settings">Theme</string>
     <string name="theme_settings_subtext">Choose a theme</string>
 
     <string name="thursday">Thursday</string>
-    <string name="time_changer">Pills Time Changer</string>
+    <string name="time_changer">Pill times</string>
     <string name="tiny">Tiny</string>
-    <string name="to___days_and___hours_from_now">to %d days and %d hours from now</string>
-    <string name="to___hours_and___minutes_from_now">to %d hours and %d minutes from now</string>
-    <string name="to___minuets_from_now">to %d minutes from now</string>
+    <string name="to___days_and___hours_from_now">Goes off in %1$d d %2$d h</string>
+    <string name="to___hours_and___minutes_from_now">Goes off in %1$d h %2$d min</string>
+    <string name="to___minuets_from_now">Goes off in %1$d min</string>
     <string name="today">Today</string>
-    <string name="took">Took!</string>
+    <string name="took">I took it</string>
     <string name="tuesday">Tuesday</string>
     <string name="understood">Understood</string>
     <string name="uninstall">Uninstall</string>
-    <string name="uninstall_subtext">Are you sure you want to uninstall %s?\n%s\'s data will be gone forever!</string>
+    <string name="uninstall_subtext">Are you sure you want to uninstall %s?\n%s\'s data will be gone forever.</string>
     <string name="up">Up</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video Tutorials</string>
     <string name="videos">Videos</string>
 
-    <string name="voice_mail">Voice Mail</string>
+    <string name="voice_mail">Voicemail</string>
     <string name="wednesday">Wednesday</string>
-    <string name="whatsapp">Whatsapp</string>
-    <string name="wifi">Wifi</string>
-    <string name="will_repeat_only_once">will repeat only once!</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="will_repeat_only_once">Repeats only once.</string>
     <string name="write">Write</string>
     <string name="write_contacts">Write Contacts</string>
     <string name="write_external_storage">Write external storage</string>
     <string name="yes">Yes</string>
     <string name="yesterday">Yesterday</string>
-    <string name="nothing">Nothing</string>
-    <string name="no_contacts_found">No Contacts Found!</string>
+    <string name="nothing">Nothing here yet</string>
+    <string name="no_contacts_found">No contacts match — check the spelling.</string>
     <string name="no_alarms">No alarms.\nTap \"Alarm\" or \"Timer\"\nbelow to create one.</string>
-    <string name="no_pills">No pills.\nTap \"+ Pill\" below\nto create one.</string>
+    <string name="no_pills">No pills yet.\nTap the button below\nto add one.</string>
     <string name="clear_all_notifications">Clear All Notifications</string>
     <string name="clear_all_notifications_subtext">All notifications will be removed.</string>
-    <string name="clear_cache_subtext">Are you sure you want to delete the cache contents? Deleting temporary files may solve some GranPhone app malfunctions, but also shortcuts created in the Home screen will be removed.</string>
-    <string name="permissions_calm">Hi, GranPhone must have the following permissions in order to run. Some of them
-        sound scary, but it is the only way GranPhone can replace the phone\'s interface. No data is taken and it causes
-        no harm. Continue to grant the permissions, or leave GranPhone.
+    <string name="clear_cache_subtext">Delete the cache? This can fix some problems, but shortcuts on the home screen will be removed too.</string>
+    <string name="permissions_calm">GranPhone needs the following permissions to run. Some of them sound scary, but
+        they are the only way GranPhone can replace the phone\'s interface. No data is taken and no harm is done.
+        Continue to grant the permissions, or leave GranPhone.
     </string>
     <string name="pending_update">Pending Update</string>
     <string name="download">Download</string>
@@ -319,15 +322,15 @@ This will delete all data!</string>
     <string name="new_updates_are_ready_to_be_downloaded">New updates are ready to be downloaded.</string>
     <string name="install">Install</string>
     <string name="data_warning">Data Warning</string>
-    <string name="data_warning_subtext">Hi, you\'re not connected to WIFI.\nThe size of the download is approximately 3MB,
-        if you\'re abroad it may cost you money.\nDo you want to continue with the download?
+    <string name="data_warning_subtext">You\'re not connected to Wi-Fi.\nThe download is about 3 MB — abroad it may
+        cost you money.\nContinue with the download?
     </string>
-    <string name="update_message_is_corrupted">Update message is corrupted.</string>
+    <string name="update_message_is_corrupted">The update message is corrupted. Try again or restart the phone.</string>
     <string name="check_for_updates">Check for updates</string>
-    <string name="could_not_connect_to_server">Could not connect to server!</string>
-    <string name="could_not_connect_to_internet">Could not connect to internet!</string>
-    <string name="could_not_start_the_download">Could not start the download!</string>
-    <string name="downloaded_update_file_could_not_be_deleted">Downloaded update file could not be deleted!</string>
+    <string name="could_not_connect_to_server">Couldn\'t connect to the server. Try again later.</string>
+    <string name="could_not_connect_to_internet">No internet connection. Check Wi-Fi or mobile data and try again.</string>
+    <string name="could_not_start_the_download">The download couldn\'t start. Try again.</string>
+    <string name="downloaded_update_file_could_not_be_deleted">The downloaded update file could not be deleted. Restart the phone and try again.</string>
     <string name="downloading">Downloading…</string>
 
     <string name="GranPhone_is_up_to_date">GranPhone is up to date.</string>
@@ -344,9 +347,9 @@ This will delete all data!</string>
     </string>
     <string name="custom_app">Custom App</string>
     <string name="custom_app_subtext">Choose custom app to be on the home screen.</string>
-    <string name="no_app_was_found">No matching app was found!</string>
+    <string name="no_app_was_found">No matching app was found.</string>
     <string name="alarm">Alarm</string>
-    <string name="no_new_notifications">No New Notifications</string>
+    <string name="no_new_notifications">No new notifications</string>
     <string name="sound">Sound</string>
     <string name="mute">Mute</string>
     <string name="vibrate">Vibrate</string>
@@ -375,9 +378,9 @@ This will delete all data!</string>
     <string name="dialer_sounds">Dialer Sounds</string>
     <string name="dialer_sounds_subtext">Choose if you want to have Dialer Sounds.</string>
     <string name="low_battery_alert">Low battery alert</string>
-    <string name="low_battery_alert_subtext">Choose if you want the status bar to be red on the home screen when battery is under 20%\nNotice It won\'t be shown if the system status bar is hidden.</string>
+    <string name="low_battery_alert_subtext">Choose if you want the status bar to be red on the home screen when battery is under 20%\nNote: it won\'t be shown if the system status bar is hidden.</string>
 
-    <string name="also_available_at">Also available at\nGranPhone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
+    <string name="also_available_at">Also available at\nGranPhone.contact@gmail.com\nPlease write in English or Hebrew.</string>
     <string name="grant_all_permissions">Grant All Permissions</string>
 
 
@@ -398,8 +401,8 @@ This will delete all data!</string>
     <string name="_short">Short</string>
     <string name="do_you_want_to_save_your_changes">Do you want to save your changes?</string>
     <string name="discard">Discard</string>
-    <string name="no_recent_calls">No Recent Calls</string>
-    <string name="no_apps">No Apps</string>
+    <string name="no_recent_calls">No recent calls</string>
+    <string name="no_apps">No apps</string>
     <string name="no_photos">No photos</string>
     <string name="no_videos">No videos</string>
     <string name="apps_sort_method">Apps Sort Method</string>
@@ -409,7 +412,7 @@ This will delete all data!</string>
     <string name="colorful">Colorful</string>
     <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
-    <string name="dual_sim">Dual Sim</string>
+    <string name="dual_sim">Dual SIM</string>
     <string name="dual_sim_subtext">Choose how you want to manage dual sim\nNote: If you choose Show Options, you\'ll need to allow another permission</string>
     <string name="use_default">Use Default</string>
     <string name="show_options">Show Options</string>
@@ -421,7 +424,7 @@ This will delete all data!</string>
     <string name="appear_on_top">Appear on top</string>
     <string name="appear_on_top_subtext">This permission is required on new version of android in order to show alarms and reminders when the screen is closed</string>
 
-    <string name="mail_application_not_found">Mail application not found!</string>
+    <string name="mail_application_not_found">No mail app is installed, so the message can\'t be sent.</string>
     <string name="get_involved">Get Involved</string>
 
     <string-array name="names_for_screenshots">
@@ -435,11 +438,11 @@ This will delete all data!</string>
 
     <bool name="is_right_to_left">false</bool>
 
-    <string name="answer_call">ANSWER</string>
-    <string name="decline_call">DECLINE</string>
-    <string name="hang_up">HANG UP</string>
-    <string name="speaker_turn_on">Speaker</string>
-    <string name="speaker_turn_off">Speaker ON</string>
+    <string name="answer_call">Answer</string>
+    <string name="decline_call">Decline</string>
+    <string name="hang_up">Hang up</string>
+    <string name="speaker_turn_on">Speaker off</string>
+    <string name="speaker_turn_off">Speaker on</string>
     <string name="incoming_call">Incoming call</string>
     <string name="call_status_calling">Calling…</string>
     <string name="in_call">In call</string>
@@ -449,7 +452,7 @@ This will delete all data!</string>
     <string name="ongoing_call">Call in progress</string>
     <string name="tap_to_return_to_call">Tap to return to the call</string>
     <string name="calls_channel">Calls</string>
-    <string name="already_default_dialer">GranPhone is already the phone app!</string>
+    <string name="already_default_dialer">GranPhone is already the phone app.</string>
     <string name="use_granphone_for_calls">Big-button call screen</string>
     <string name="kiosk_mode">Kiosk mode (lock the phone)</string>
     <string name="kiosk_not_device_owner_subtext">To use kiosk mode, GranPhone must be the phone\'s administrator. This is done once from a computer (see docs/INSTALL.md):\n\nadb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.broadcast_receivers.BaldDeviceAdminReceiver</string>
@@ -464,12 +467,12 @@ This will delete all data!</string>
     <string name="close">Close</string>
     <string name="back">Back</string>
     <string name="notification_service">GranPhone notification service</string>
-    <string name="notification_service_fail">Could not start notification service!</string>
+    <string name="notification_service_fail">Couldn\'t start the notification service. Restart the phone and try again.</string>
     <string name="battery">Battery</string>
     <string name="calculator">Calculator</string>
     <string name="signal_strength">Signal strength</string>
     <string name="date_format" translatable="false">EEE, d MMMM</string>
-    <string name="device_memory">Memory</string>
+    <string name="device_memory">Storage and memory</string>
     <string name="storage">Storage</string>
     <string name="ram">RAM</string>
     <string name="device_memory_subtext">Free storage and RAM on this device</string>

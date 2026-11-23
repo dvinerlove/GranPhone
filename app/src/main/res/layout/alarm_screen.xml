@@ -71,7 +71,7 @@
         android:background="@drawable/style_for_buttons"
         app:_size="@dimen/large"
         app:_src="@drawable/alarm_off_on_button"
-        app:_text="@string/off"
+        app:_text="@string/turn_off"
         app:variant="danger" />
 
 </LinearLayout>

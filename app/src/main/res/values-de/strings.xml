@@ -255,7 +255,7 @@ Alle Daten werden gelöscht!</string>
     <string name="to___hours_and___minutes_from_now">zu %d Stunden und %d Minuten von jetzt an</string>
     <string name="to___minuets_from_now">zu %d Minuten von jetzt an</string>
     <string name="today">Heute</string>
-    <string name="took">Angenommen!</string>
+    <string name="took">Eingenommen!</string>
     <string name="tuesday">Dienstag</string>
     <string name="uninstall">Deinstallieren</string>
     <string name="uninstall_subtext">Bist du dir sicher, dass du %s deinstallieren willst?\nDie Daten von %s !</string>

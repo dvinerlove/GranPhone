@@ -272,7 +272,7 @@ public class HomePage1 extends HomeView {
             try {
                 final String smsPackage = Telephony.Sms.getDefaultSmsPackage(homeScreen);
                 if (smsPackage == null) {
-                    BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
+                    BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_messages_app).show();
                     return;
                 }
                 final ResolveInfo resolveInfo =
@@ -295,7 +295,7 @@ public class HomePage1 extends HomeView {
             if (intent != null)
                 homeScreen.startActivity(intent);
             else
-                BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
+                BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_camera_app).show();
         });
         setupButton(BPrefs.CUSTOM_VIDEOS_KEY, bt_videos, v -> homeScreen.startActivity(new Intent(homeScreen, VideosActivity.class)));
         setupButton(BPrefs.CUSTOM_PILLS_KEY, bt_reminders, v -> homeScreen.startActivity(new Intent(homeScreen, PillsActivity.class)));
@@ -388,7 +388,7 @@ public class HomePage1 extends HomeView {
                                 else
                                     sharedPreferences.edit().putString(bPrefsKey, HIDDEN_TILE).apply();
                             },
-                            initialAppName, activity.getText(R.string.custom), activity.getText(R.string.hide))
+                            initialAppName, activity.getText(R.string.choose_another_app), activity.getText(R.string.hide))
                     .setOnDismissListener(dialog -> {
                         if (page1EditorActivity.baldPrefsUtils.hasChanged(page1EditorActivity)) {
                             page1EditorActivity.recreate();

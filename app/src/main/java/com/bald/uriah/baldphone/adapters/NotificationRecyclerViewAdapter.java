@@ -193,7 +193,7 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                     try {
                         pendingIntent.send();
                     } catch (Exception e) {
-                        BaldToast.from(context).setText(R.string.an_error_has_occurred).setType(BaldToast.TYPE_ERROR).show();
+                        BaldToast.from(context).setText(R.string.could_not_open_notification).setType(BaldToast.TYPE_ERROR).show();
                         Log.e(TAG, AppUtils.str(e.getMessage()));
                         e.printStackTrace();
                     }

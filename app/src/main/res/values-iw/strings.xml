@@ -255,7 +255,7 @@
     <string name="snooze">נודניק</string>
     <string name="sos">SOS</string>
     <string name="sos_is_full">SOS מלא!</string>
-    <string name="sos_is_full_subtext">SOS מלא! נא למחוק אנשי קשר אחרים לפני!</string>
+    <string name="sos_is_full_subtext">יש מקום ל-2 אנשי קשר בלבד. נא למחוק איש קשר לפני שמוסיפים חדש</string>
     <string name="speak">דבר</string>
     <string name="speech_to_text">דיבור לטקסט</string>
     <string name="strong_hand">יד חזקה</string>
