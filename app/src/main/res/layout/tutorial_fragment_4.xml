@@ -22,27 +22,28 @@
 
     <TextView
         android:id="@+id/bald"
-        style="@style/BackgroundText.Large"
+        style="@style/BackgroundText.Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:text="@string/it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/bt_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_back" />
 
     <com.bald.uriah.baldphone.views.BaldButton
         android:id="@+id/bt_home"
         style="@style/ButtonsText.Large"
         android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="48dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/style_for_buttons"
         android:text="@string/set_home_screen"
         app:layout_constraintBottom_toBottomOf="parent"

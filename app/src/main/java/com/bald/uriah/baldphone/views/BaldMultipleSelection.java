@@ -52,7 +52,7 @@ public class BaldMultipleSelection extends LinearLayout {
     private LayoutInflater layoutInflater;
     private int selection = -1;
     private int size = 0;
-    private float pxDimen;
+    private float pxDimen = -1;
     private ArrayList<BaldButton> buttons = new ArrayList<>(5);
 
     public BaldMultipleSelection(Context context) {
@@ -167,9 +167,9 @@ public class BaldMultipleSelection extends LinearLayout {
         button.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int l, int t, int r, int b, int ol, int ot, int or2, int ob) {
-                v.removeOnLayoutChangeListener(this);
                 final float avail = button.getWidth() - button.getPaddingLeft() - button.getPaddingRight();
-                if (avail <= 0) return;
+                if (avail <= 0) return;   // keep the listener — first pass can be 0-width
+                v.removeOnLayoutChangeListener(this);
                 final android.graphics.Paint paint = new android.graphics.Paint(button.getPaint());
                 paint.setTextSize(maxPx);
                 final float wanted = paint.measureText(button.getText().toString());
@@ -182,7 +182,7 @@ public class BaldMultipleSelection extends LinearLayout {
         });
         buttons.add(button);
         final LayoutParams layoutParams = new LayoutParams(getOrientation() == VERTICAL ? ViewGroup.LayoutParams.MATCH_PARENT : 0, getOrientation() != VERTICAL ? ViewGroup.LayoutParams.MATCH_PARENT : 0);
-        int inPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, context.getResources().getDisplayMetrics());
+        int inPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, context.getResources().getDisplayMetrics());
         layoutParams.setMargins(getOrientation() == VERTICAL ? 0 : inPx, getOrientation() != VERTICAL ? 0 : inPx, getOrientation() == VERTICAL ? 0 : inPx, getOrientation() != VERTICAL ? 0 : inPx);
         layoutParams.weight = 1f;
         this.addView(button, layoutParams);
