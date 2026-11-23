@@ -94,6 +94,7 @@ public class ViewPagerHolder extends LinearLayout {
         useCircle = typedArray.getBoolean(R.styleable.ViewPagerHolder_use_circles, false);
         hideIndicator = typedArray.getBoolean(R.styleable.ViewPagerHolder_hide_indicator, false);
         showHints = typedArray.getBoolean(R.styleable.ViewPagerHolder_show_hints, false);
+        noArrows = noArrows || typedArray.getBoolean(R.styleable.ViewPagerHolder_no_arrows, false);
 
         typedArray.recycle();
         of = String.valueOf(context.getText(R.string.of));

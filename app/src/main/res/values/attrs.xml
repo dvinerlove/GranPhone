@@ -106,6 +106,7 @@
         <attr name="use_circles" format="boolean" />
         <attr name="hide_indicator" format="boolean" />
         <attr name="show_hints" format="boolean" />
+        <attr name="no_arrows" format="boolean" />
 
     </declare-styleable>
 
