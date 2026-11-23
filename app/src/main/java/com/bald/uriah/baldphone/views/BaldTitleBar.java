@@ -45,6 +45,7 @@ public class BaldTitleBar extends LinearLayout {
     private TextView tv_title, tv_back;
     private boolean added;
     private int textColorBeforeGold = -1;
+    private ColorStateList backgroundTintBeforeGold;
     private int backTextColorBeforeGold = -1;
 
     public BaldTitleBar(Context context) {
@@ -107,7 +108,9 @@ public class BaldTitleBar extends LinearLayout {
         if (textColorBeforeGold == -1) {
             textColorBeforeGold = tv_title.getCurrentTextColor();
         }
-        setBackgroundTintList(gold ? ColorStateList.valueOf(getContext().getResources().getColor(R.color.gold)) : null);
+        if (backgroundTintBeforeGold == null)
+            backgroundTintBeforeGold = getBackgroundTintList();
+        setBackgroundTintList(gold ? ColorStateList.valueOf(getContext().getResources().getColor(R.color.gold)) : backgroundTintBeforeGold);
         final int onGoldColorInt = getContext().getResources().getColor(R.color.on_gold);
         final ColorStateList onGold = gold ? ColorStateList.valueOf(onGoldColorInt) : null;
         bt_back.setImageTintList(onGold);

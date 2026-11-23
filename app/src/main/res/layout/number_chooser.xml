@@ -42,7 +42,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/down"
         app:layout_constraintTop_toTopOf="@+id/middle"
+        app:layout_constraintWidth_max="150dp"
         app:srcCompat="@drawable/add_on_button" />
 
     <ImageView
@@ -55,8 +57,10 @@
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@+id/up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/middle"
+        app:layout_constraintWidth_max="150dp"
         app:srcCompat="@drawable/remove_on_button" />
 
     <TextView

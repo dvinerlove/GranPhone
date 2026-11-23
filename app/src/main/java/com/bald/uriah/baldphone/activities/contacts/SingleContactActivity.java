@@ -110,6 +110,10 @@ public class SingleContactActivity extends BaldActivity {
                         callingIntent.getStringExtra(CONTACT_LOOKUP_KEY)
         ;
         callingIntent.removeExtra(PIC_URI_EXTRA);
+        if (contactKeyExtra == null) {
+            finish();
+            return;
+        }
 
     }
 
