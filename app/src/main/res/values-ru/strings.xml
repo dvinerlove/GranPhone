@@ -196,6 +196,8 @@
     <string name="pills">Таблетки</string>
     <string name="pill">Таблетка</string>
     <string name="pill_time">Время приёма</string>
+    <string name="pin_to_home">Закрепить на главном</string>
+    <string name="unpin_from_home">Убрать с главного</string>
     <string name="press_longer">Нажмите и удерживайте!</string>
     <string name="timer">Таймер</string>
     <string name="read_call_log">Чтение Истории Вызовов</string>

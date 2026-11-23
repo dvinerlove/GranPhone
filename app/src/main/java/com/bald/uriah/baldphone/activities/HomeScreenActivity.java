@@ -56,7 +56,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.adapters.BaldPagerAdapter;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.DialogScreen;
@@ -105,7 +104,6 @@ public class HomeScreenActivity extends BaldActivity {
     public final NotesView.RecognizerManager recognizerManager = new NotesView.RecognizerManager();
 
     public boolean finishedUpdatingApps, launchAppsActivity;
-    public BaldPagerAdapter baldPagerAdapter;
 
     private Point screenSize;
     private android.hardware.camera2.CameraManager cameraManager;
@@ -113,6 +111,7 @@ public class HomeScreenActivity extends BaldActivity {
     private SharedPreferences sharedPreferences;
     private BaldPrefsUtils baldPrefsUtils;
     private ScrollView homeScroll;
+    private HomePage1 homePage1;
     private BatteryView batteryView;
     private boolean lowBatteryAlert;
     /**
@@ -277,7 +276,6 @@ public class HomeScreenActivity extends BaldActivity {
                 .setType(BaldToast.TYPE_INFORMATIVE)
                 .show());
         baldPrefsUtils = BaldPrefsUtils.newInstance(this);
-        baldPagerAdapter = new BaldPagerAdapter(this);
         baldHomeWatcher = new BaldHomeWatcher(this, this::updateViewPager);
         recognizerManager.setHomeScreen(this);
 
@@ -428,13 +426,16 @@ public class HomeScreenActivity extends BaldActivity {
      * (the equivalent of the old "jump back to page 1").
      */
     private void updateViewPager() {
-        baldPagerAdapter.obtainAppList();
+        homePage1.populatePins();
         homeScroll.smoothScrollTo(0, 0);
     }
 
     private void attachToXml() {
         setContentView(R.layout.home_screen);
         homeScroll = findViewById(R.id.home_scroll);
+        // findViewById(R.id.home_page_1) returns null: HomePage1's AttributeSet ctor drops
+        // attrs, so android:id is never applied. The ScrollView's only child is HomePage1.
+        homePage1 = (HomePage1) homeScroll.getChildAt(0);
 
         findViewById(R.id.bt_home_sos).setOnClickListener(v -> startActivity(new Intent(this, SOSActivity.class)));
         findViewById(R.id.bt_home_apps).setOnClickListener(v -> {

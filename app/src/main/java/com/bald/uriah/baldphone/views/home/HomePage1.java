@@ -35,6 +35,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Space;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -56,15 +58,20 @@ import com.bald.uriah.baldphone.databases.apps.App;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
+import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.views.BaldLinearLayoutButton;
 import com.bald.uriah.baldphone.views.FirstPageAppIcon;
+import com.bald.uriah.baldphone.views.HomeScreenAppView;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -127,7 +134,48 @@ public class HomePage1 extends HomeView {
 
         attachXml();
         genOnClickListeners();
+        populatePins();
         return view;
+    }
+
+    /**
+     * Re-reads {@link HomeScreenPinHelper#getAll} and renders pinned contacts/apps as
+     * 2-column tile rows below the clock. The section stays hidden when there are no pins.
+     */
+    public void populatePins() {
+        final LinearLayout pinsContainer = view.findViewById(R.id.pins_container);
+        pinsContainer.removeAllViews();
+        final List<HomeScreenPinHelper.HomeScreenPinnable> pins = homeScreen == null ?
+                Collections.emptyList() : HomeScreenPinHelper.getAll(activity);
+        if (pins.isEmpty()) {
+            pinsContainer.setVisibility(GONE);
+            return;
+        }
+        pinsContainer.setVisibility(VISIBLE);
+        final int tileHeight = getResources().getDimensionPixelSize(R.dimen.home_tile_row_height);
+        final int tileMargin = getResources().getDimensionPixelSize(R.dimen.home_pin_tile_margin);
+        final LayoutInflater inflater = LayoutInflater.from(activity);
+        for (int i = 0; i < pins.size(); i += 2) {
+            final LinearLayout row = new LinearLayout(activity);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            for (int j = i; j < i + 2; j++) {
+                final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, tileHeight, 1);
+                lp.setMargins(tileMargin, 0, tileMargin, 0);
+                if (j < pins.size()) {
+                    final BaldLinearLayoutButton tile = (BaldLinearLayoutButton)
+                            inflater.inflate(R.layout.home_screen_app_view, row, false);
+                    row.addView(tile, lp);
+                    pins.get(j).applyToHomeScreenAppView(new HomeScreenAppView(tile));
+                } else {
+                    row.addView(new Space(activity), lp);
+                }
+            }
+            final LinearLayout.LayoutParams rowLp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            if (i + 2 < pins.size())
+                rowLp.bottomMargin = tileMargin * 2;
+            pinsContainer.addView(row, rowLp);
+        }
     }
 
     @Override

@@ -52,6 +52,7 @@ import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.calls.Call;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
+import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.AppUtils;
@@ -85,7 +86,7 @@ public class SingleContactActivity extends BaldActivity {
     private ImageView contact_image;
     private TextView tv_contact_name, image_letter;
     private LinearLayout ll_phones, ll_dynamic;
-    private BaldSwitch sos_switch;
+    private BaldSwitch sos_switch, home_pin_switch;
     private View bt_call, bt_sms;
     private MediaPlayer mediaPlayer;
     private ContentResolver contentResolver;
@@ -204,6 +205,7 @@ public class SingleContactActivity extends BaldActivity {
         image_letter = findViewById(R.id.image_letter);
         tv_contact_name = findViewById(R.id.tv_contact_name);
         sos_switch = findViewById(R.id.sos_switch);
+        home_pin_switch = findViewById(R.id.home_pin_switch);
         bt_call = findViewById(R.id.bt_call);
         bt_sms = findViewById(R.id.bt_sms);
 
@@ -327,6 +329,14 @@ public class SingleContactActivity extends BaldActivity {
             } else {
                 SOSActivity.PinHelper.removeContact(this, contact.getLookupKey());
             }
+        });
+
+        home_pin_switch.setChecked(HomeScreenPinHelper.isPinned(this, contact.getLookupKey()));
+        home_pin_switch.setOnChangeListener(isChecked -> {
+            if (isChecked)
+                HomeScreenPinHelper.pinContact(this, contact.getLookupKey());
+            else
+                HomeScreenPinHelper.removeContact(this, contact.getLookupKey());
         });
     }
 

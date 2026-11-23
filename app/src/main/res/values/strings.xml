@@ -202,6 +202,8 @@ This will delete all data!</string>
     <string name="pills">Pills</string>
     <string name="pill">Pill</string>
     <string name="pill_time">Pill time</string>
+    <string name="pin_to_home">Pin to home</string>
+    <string name="unpin_from_home">Unpin from home</string>
     <string name="press_longer">Press Longer!</string>
     <string name="timer">Timer</string>
     <string name="read_call_log">Read Call History</string>
