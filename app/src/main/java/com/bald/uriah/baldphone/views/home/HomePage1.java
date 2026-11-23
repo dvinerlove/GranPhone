@@ -57,8 +57,7 @@ import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
@@ -320,27 +319,22 @@ public class HomePage1 extends HomeView {
             } else {
                 initialAppName = bt.getText();
             }
-            final DialogBuilder bdb = DialogBuilder.from(activity)
-                    .setTitle(R.string.custom_app)
-                    .setSubText(R.string.custom_app_subtext)
-                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                    .setOptions(initialAppName, activity.getText(R.string.custom), activity.getText(R.string.hide))
-                    .setOptionsStartingIndex(() -> hidden ? 2 : (sharedPreferences.contains(bPrefsKey) ? 1 : 0))
-                    .setPositiveButtonListener(params -> {
-                        if (params[0].equals(0)) {
-                            sharedPreferences.edit().remove(bPrefsKey).apply();
-                        } else if (params[0].equals(1))
-                            activity.startActivityForResult(new Intent(activity, AppsActivity.class).putExtra(AppsActivity.CHOOSE_MODE, bPrefsKey), AppsActivity.REQUEST_SELECT_CUSTOM_APP);
-                        else
-                            sharedPreferences.edit().putString(bPrefsKey, HIDDEN_TILE).apply();
-                        return true;
-                    });
-
-            bt.setOnClickListener(v -> bdb.show().setOnDismissListener(dialog -> {
-                if (page1EditorActivity.baldPrefsUtils.hasChanged(page1EditorActivity)) {
-                    page1EditorActivity.recreate();
-                }
-            }));
+            bt.setOnClickListener(v -> DialogScreen.select(activity, R.string.custom_app,
+                            hidden ? 2 : (sharedPreferences.contains(bPrefsKey) ? 1 : 0),
+                            index -> {
+                                if (index == 0)
+                                    sharedPreferences.edit().remove(bPrefsKey).apply();
+                                else if (index == 1)
+                                    activity.startActivityForResult(new Intent(activity, AppsActivity.class).putExtra(AppsActivity.CHOOSE_MODE, bPrefsKey), AppsActivity.REQUEST_SELECT_CUSTOM_APP);
+                                else
+                                    sharedPreferences.edit().putString(bPrefsKey, HIDDEN_TILE).apply();
+                            },
+                            initialAppName, activity.getText(R.string.custom), activity.getText(R.string.hide))
+                    .setOnDismissListener(dialog -> {
+                        if (page1EditorActivity.baldPrefsUtils.hasChanged(page1EditorActivity)) {
+                            page1EditorActivity.recreate();
+                        }
+                    }));
 
             if (app != null) {
                 bt.setText(app.getLabel());
