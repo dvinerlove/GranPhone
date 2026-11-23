@@ -293,7 +293,7 @@
     <string name="nothing">Nothing</string>
     <string name="no_contacts_found">No Contacts Found!</string>
     <string name="no_alarms">No alarms.\nTap \"Alarm\" or \"Timer\"\nbelow to create one.</string>
-    <string name="no_pills">No pills.\nTap \"Pill\" below\nto create one.</string>
+    <string name="no_pills">No pills.\nTap \"+ Pill\" below\nto create one.</string>
     <string name="clear_all_notifications">Clear All Notifications</string>
     <string name="clear_cache_subtext">Are you sure you want to delete the cache contents? Deleting temporary files may solve some GranPhone app malfunctions, but also shortcuts created in the Home screen will be removed.</string>
     <string name="permissions_calm">Hi, GranPhone must have the following permissions in order to run. Some of them

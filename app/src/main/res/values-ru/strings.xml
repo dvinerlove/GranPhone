@@ -286,7 +286,7 @@
 Нажмите «Будильник»
 или «Таймер» внизу.</string>
     <string name="no_pills">Нет таблеток.
-Нажмите «Таблетка» внизу.</string>
+Нажмите «+ Таблетка» внизу.</string>
     <string name="clear_all_notifications">Очистить Все Оповещения</string>
     <string name="clear_cache_subtext">Вы уверенны что хотите очистить кэш?\nЯрлык программы будет удален тоже!
     </string>
