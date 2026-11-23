@@ -28,10 +28,15 @@
         app:show_back="true"
         app:title="@string/add_contact" />
 
-    <ScrollView
+    <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
+        <com.bald.uriah.baldphone.views.ModularScrollView
+            style="@style/ScrollStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -205,7 +210,8 @@
                 android:paddingEnd="16dp"
                 android:textColorHint="?bald_hint_on_background" />
         </LinearLayout>
-    </ScrollView>
+        </com.bald.uriah.baldphone.views.ModularScrollView>
+    </com.bald.uriah.baldphone.views.ScrollingHelper>
 
     <LinearLayout
         android:layout_width="match_parent"

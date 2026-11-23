@@ -146,7 +146,6 @@
     <string name="left_handed">Левша</string>
     <string name="light">Светлый</string>
     <string name="location">Место нахождения</string>
-    <string name="emergency_services">Аварийные службы</string>
     <string name="mail">Почта</string>
     <string name="maps">Карты</string>
 
@@ -421,7 +420,6 @@
     <string name="appear_on_top_subtext">Это разрешение нужно, чтобы показывать будильники и напоминания поверх экрана блокировки</string>
     <string name="mail_application_not_found">Приложение для почты не найдено!</string>
     <string name="get_involved">Помочь проекту</string>
-    <string name="add_emergency_contact_2">Добавить второй</string>
     <string name="close">Закрыть</string>
     <string name="back">Назад</string>
     <string name="notification_service">GranPhone: сервис уведомлений</string>

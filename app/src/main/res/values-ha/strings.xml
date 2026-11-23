@@ -24,6 +24,7 @@
     <string name="afternoon">Yamma</string>
     <string name="and_welcome_to_GranPhone">kuma barka da zuwa GranPhone</string>
 
+    <string name="allow">Ƙyale</string>
     <string name="apps">Apps</string>
     <string name="assistant">Mataimaki</string>
     <string name="at_least_one_day_must_be_selected">Aƙalla rana ɗaya dole ne a zaɓi!</string>
@@ -59,8 +60,10 @@
     <string name="delete">Share</string>
     <string name="done">Anyi</string>
     <string name="down">Kasa</string>
+    <string name="download">Sauke</string>
     <string name="evening">Maraice</string>
     <string name="hide">Boye</string>
+    <string name="install">Shigar</string>
     <string name="remove_from_sos">Cire daga SOS</string>
     <string name="repeats_every_day">Kowace rana</string>
     <string name="right_handed">Hannun dama</string>
@@ -74,6 +77,7 @@
     <string name="small">Karami</string>
     <string name="speak">Yi magana</string>
     <string name="today">Yau</string>
+    <string name="understood">Na fahimta</string>
     <string name="write">Rubuta</string>
     <string name="write_contacts">Rubuta Lambobin Sadarwa</string>
     <string name="yes">Haka ne</string>

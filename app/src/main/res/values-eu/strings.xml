@@ -105,6 +105,7 @@ Datu guztiak ezabatuko dira!</string>
     <string name="display_settings">Pantaila</string>
     <string name="done">Eginda</string>
     <string name="down">Behera</string>
+    <string name="download">Deskargatu</string>
     <string name="edit">Editatu</string>
     <string name="email">Email:</string>
     <string name="enable_notification_access">Baimendu jakinarazpenen sarbidea</string>
@@ -127,6 +128,7 @@ Datu guztiak ezabatuko dira!</string>
     <string name="home_phone_number">Etxeko telefono zenbakia</string>
     <string name="hour">Ordua</string>
     <string name="huge">Itzela</string>
+    <string name="install">Instalatu</string>
     <string name="internet">Internet</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Azken gauza bat:\nOso gomendagarria da GranPhone-ren hasierako pantaila lehenetsitako abiarazle gisa erabiltzea</string>
     <string name="language">hizkuntza</string>

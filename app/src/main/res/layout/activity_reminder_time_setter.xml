@@ -29,28 +29,49 @@
         app:show_back="true"
         app:title="@string/time_changer" />
 
-    <com.bald.uriah.baldphone.views.BaldMultipleSelection
-        android:id="@+id/multiple_selection"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        app:text_size="@dimen/medium" />
-
-    <!-- fixed height: BaldNumberChooser buttons are 1:1 squares sized from
-         height, a stretched container makes them overlap each other -->
-    <LinearLayout
+    <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_weight="1">
 
-        <include
-            layout="@layout/hour_and_minute_choosers"
+        <com.bald.uriah.baldphone.views.ModularScrollView
+            style="@style/ScrollStyle"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.bald.uriah.baldphone.views.BaldMultipleSelection
+                    android:id="@+id/multiple_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    app:text_size="@dimen/medium" />
+
+                <!-- fixed height: BaldNumberChooser buttons are 1:1 squares sized from
+                     height, a stretched container makes them overlap each other;
+                     minHeight keeps it scrollable when the viewport is cramped -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:minHeight="300dp"
+                    android:gravity="center">
+
+                    <include
+                        layout="@layout/hour_and_minute_choosers"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.bald.uriah.baldphone.views.ModularScrollView>
+    </com.bald.uriah.baldphone.views.ScrollingHelper>
 </LinearLayout>
