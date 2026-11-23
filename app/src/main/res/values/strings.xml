@@ -465,4 +465,7 @@
     <string name="tutorial_battery_xiaomi">Allow GranPhone to work in the background: Settings → Apps → GranPhone → Autostart on, Battery saver → No restrictions.</string>
     <string name="tutorial_battery_samsung">Allow GranPhone to work in the background: Settings → Battery → Background usage limits → Never sleeping apps → add GranPhone.</string>
     <string name="tutorial_battery_generic">Please allow GranPhone to work in the background, so calls and reminders always reach you.</string>
+    <string name="sos_hold_explanation">Press and hold the SOS button to call for help</string>
+    <string name="sos_call_help">Call emergency services</string>
+    <string name="sos_calling_in">Calling in %d…</string>
 </resources>
