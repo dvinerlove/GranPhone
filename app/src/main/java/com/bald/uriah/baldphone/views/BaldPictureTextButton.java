@@ -92,6 +92,9 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
 
         textView = (TextView) layoutInflater.inflate(R.layout.bald_picture_text_button_text, this, false);
         textView.setText(text);
+        if (orientation == HORIZONTAL)
+            // Icon+label must center as one group — weight-1 text centers only itself.
+            textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         if (pxSize != 0)
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, pxSize);
         // AppCompat 1.1.0 autosize is unreliable here (ellipsize+weighted width), so

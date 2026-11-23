@@ -47,6 +47,7 @@
     <color name="bald_card_light">#FFFFFF</color>
     <color name="bald_card_border_light">#7F8890</color>
     <color name="bald_brand_light">#2E7D32</color>
+    <color name="bald_brand_pressed_light">#1B5E20</color>
     <color name="bald_danger_light">#D32F2F</color>
     <color name="bald_info_light">#1565C0</color>
     <color name="bald_text_primary_light">#14171A</color>
@@ -83,6 +84,7 @@
     <color name="bald_card_dark">#1C2126</color>
     <color name="bald_card_border_dark">#5A636C</color>
     <color name="bald_brand_dark">#4CAF50</color>
+    <color name="bald_brand_pressed_dark">#388E3C</color>
     <color name="bald_danger_dark">#E57373</color>
     <color name="bald_info_dark">#64B5F6</color>
     <color name="bald_text_primary_dark">#F2F4F7</color>

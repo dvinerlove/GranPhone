@@ -73,6 +73,7 @@
         <item name="bald_card">@color/bald_card_light</item>
         <item name="bald_card_border">@color/bald_card_border_light</item>
         <item name="bald_brand">@color/bald_brand_light</item>
+        <item name="bald_brand_pressed">@color/bald_brand_pressed_light</item>
         <item name="bald_danger">@color/bald_danger_light</item>
         <item name="bald_info">@color/bald_info_light</item>
         <item name="bald_text_primary">@color/bald_text_primary_light</item>
@@ -111,6 +112,7 @@
         <item name="bald_card">@color/bald_card_dark</item>
         <item name="bald_card_border">@color/bald_card_border_dark</item>
         <item name="bald_brand">@color/bald_brand_dark</item>
+        <item name="bald_brand_pressed">@color/bald_brand_pressed_dark</item>
         <item name="bald_danger">@color/bald_danger_dark</item>
         <item name="bald_info">@color/bald_info_dark</item>
         <item name="bald_text_primary">@color/bald_text_primary_dark</item>

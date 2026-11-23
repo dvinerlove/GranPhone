@@ -2,23 +2,23 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="#1b5e20" />
-            <corners android:radius="28dp" />
+            <solid android:color="?bald_brand_pressed" />
+            <corners android:radius="?attr/bald_button_corners_radius" />
         </shape>
     </item>
     <item android:state_focused="true">
         <shape android:shape="rectangle">
-            <solid android:color="#2e7d32" />
+            <solid android:color="?bald_brand" />
             <stroke
                 android:width="3dp"
                 android:color="?bald_decoration_on_background" />
-            <corners android:radius="28dp" />
+            <corners android:radius="?attr/bald_button_corners_radius" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#2e7d32" />
-            <corners android:radius="28dp" />
+            <solid android:color="?bald_brand" />
+            <corners android:radius="?attr/bald_button_corners_radius" />
         </shape>
     </item>
 </selector>
