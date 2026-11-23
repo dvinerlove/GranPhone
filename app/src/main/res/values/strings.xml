@@ -31,6 +31,7 @@
     <string name="add_contact">Add Contact</string>
     <string name="add_emergency_contact">Add Contact</string>
     <string name="add_pill">Add Pill</string>
+    <string name="edit_pill">Edit Pill</string>
     <string name="add_shortcut">Add Shortcut</string>
     <string name="add_to_favorite">Add to Favorites</string>
     <string name="add_to_home">Add to Home</string>

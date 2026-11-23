@@ -90,9 +90,9 @@
                 android:textSize="@dimen/small" />
         </LinearLayout>
 
-        android:importantForAccessibility="no"
         <ImageView
             android:id="@+id/large_icon"
+            android:importantForAccessibility="no"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="12dp" />

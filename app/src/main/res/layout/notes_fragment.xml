@@ -22,7 +22,7 @@
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/bt_edit"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="56dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/style_for_buttons"
@@ -47,7 +47,7 @@
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/bt_speak"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="56dp"
         android:visibility="gone"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

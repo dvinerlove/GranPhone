@@ -81,6 +81,7 @@ public class AddPillActivity extends BaldActivity {
                 throw new IllegalArgumentException("REMINDER_KEY_AS_EXTRA_KEY cannot be -1!!");
             final Reminder reminder = RemindersDatabase.getInstance(this).remindersDatabaseDao().getById(remindersIndex);
             reminderIdToEdit = reminder.getId();
+            baldTitleBar.setTitle(getString(R.string.edit_pill));
 
             baldMultipleSelection.setSelection(reminder.getStartingTime());
 
@@ -178,7 +179,6 @@ public class AddPillActivity extends BaldActivity {
         } else {
             reminder.setId(reminderIdToEdit);
             RemindersDatabase.getInstance(this).remindersDatabaseDao().replace(reminder);
-            ReminderScheduler.scheduleReminder(reminder, this);
         }
         ReminderScheduler.scheduleReminder(reminder, this);
 

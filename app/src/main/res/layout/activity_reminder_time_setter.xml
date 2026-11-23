@@ -48,10 +48,11 @@
                 <com.bald.uriah.baldphone.views.BaldMultipleSelection
                     android:id="@+id/multiple_selection"
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
+                    android:layout_height="180dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
+                    app:is_vertical="true"
                     app:text_size="@dimen/medium" />
 
                 <!-- fixed height: BaldNumberChooser buttons are 1:1 squares sized from

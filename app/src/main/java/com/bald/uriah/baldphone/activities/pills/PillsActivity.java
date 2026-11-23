@@ -90,19 +90,6 @@ public class PillsActivity extends BaldActivity {
         bt_time_changer.setOnClickListener(v -> startActivity(new Intent(this, PillTimeSetterActivity.class)));
     }
 
-    private void cancelAllAlarms() {
-        final RemindersDatabase remindersDatabase = RemindersDatabase.getInstance(this);
-        final List<Reminder> reminderList =
-                remindersDatabase.remindersDatabaseDao()
-                        .getAllRemindersOrderedByTime();
-        for (Reminder reminder : reminderList)
-            ReminderScheduler.cancelReminder(reminder.getId(), this);
-        remindersDatabase.remindersDatabaseDao().deleteAll();
-
-        refreshViews();
-        BaldToast.from(this).setText(R.string.removed_all_alarms).show();
-    }
-
     public void refreshViews() {
         list = RemindersDatabase.getInstance(this).remindersDatabaseDao().getAllRemindersOrderedByTime();
         recyclerView.getAdapter().notifyDataSetChanged();
@@ -191,7 +178,10 @@ public class PillsActivity extends BaldActivity {
                         )
                 );
                 bt_delete.setOnClickListener((v) ->
-                        AppUtils.showAreYouSureYouWantToDelete(reminder.getTextualContent(), PillsActivity.this, () -> {
+                        AppUtils.showAreYouSureYouWantToDelete(
+                                reminder.getTextualContent() == null ? getString(R.string.pill) : reminder.getTextualContent(),
+                                PillsActivity.this, () -> {
+                            ReminderScheduler.cancelReminder(reminder.getId(), PillsActivity.this);
                             RemindersDatabase.getInstance(PillsActivity.this).remindersDatabaseDao().removeReminders(reminder.getId());
                             list.remove(reminder);
                             notifyDataSetChanged();

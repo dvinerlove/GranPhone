@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -158,17 +159,33 @@ public class BaldMultipleSelection extends LinearLayout {
         button.setBackground(defaultDrawable.getConstantState().newDrawable());
 
         button.setText(name);
-        if (pxDimen != -1)
-            button.setTextSize(TypedValue.COMPLEX_UNIT_PX, pxDimen);
-        else
-            button.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.medium));
-        this.addView(button);
+        final float maxPx = pxDimen != -1 ? pxDimen
+                : context.getResources().getDimension(R.dimen.medium);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_PX, maxPx);
+        // setTextSize clears autosize — re-enable so long labels shrink instead of clipping
+        // shortcut: autosize can't see weighted widths on this appcompat — shrink once after layout
+        button.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int l, int t, int r, int b, int ol, int ot, int or2, int ob) {
+                v.removeOnLayoutChangeListener(this);
+                final float avail = button.getWidth() - button.getPaddingLeft() - button.getPaddingRight();
+                if (avail <= 0) return;
+                final android.graphics.Paint paint = new android.graphics.Paint(button.getPaint());
+                paint.setTextSize(maxPx);
+                final float wanted = paint.measureText(button.getText().toString());
+                if (wanted > avail) {
+                    final float minPx = 12 * getResources().getDisplayMetrics().scaledDensity;
+                    button.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            Math.max(minPx, maxPx * avail / wanted * 0.95f));
+                }
+            }
+        });
         buttons.add(button);
         final LayoutParams layoutParams = new LayoutParams(getOrientation() == VERTICAL ? ViewGroup.LayoutParams.MATCH_PARENT : 0, getOrientation() != VERTICAL ? ViewGroup.LayoutParams.MATCH_PARENT : 0);
         int inPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, context.getResources().getDisplayMetrics());
         layoutParams.setMargins(getOrientation() == VERTICAL ? 0 : inPx, getOrientation() != VERTICAL ? 0 : inPx, getOrientation() == VERTICAL ? 0 : inPx, getOrientation() != VERTICAL ? 0 : inPx);
         layoutParams.weight = 1f;
-        button.setLayoutParams(layoutParams);
+        this.addView(button, layoutParams);
         button.setOnClickListener(Const.longer);
         button.setTextColor(textColorOnButton);
         button.setOnClickListener(v -> {

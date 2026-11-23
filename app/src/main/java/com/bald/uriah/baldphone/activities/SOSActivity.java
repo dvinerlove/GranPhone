@@ -123,7 +123,6 @@ public class SOSActivity extends BaldActivity {
         for (final TextView name : names)
             name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
         btAddContact = findViewById(R.id.bt_add_contact);
-        btAddContact.getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
         btSos.setOnTouchListener((v, event) -> {
             switch (event.getActionMasked()) {

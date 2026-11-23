@@ -30,6 +30,7 @@
     <string name="add_contact">Kontakt hinzufügen</string>
     <string name="add_emergency_contact">Hinzufügen</string>
     <string name="add_pill">Medikament hinzufügen</string>
+    <string name="edit_pill">Medikament bearbeiten</string>
     <string name="add_shortcut">Kurzwahl hinzufügen</string>
     <string name="add_to_favorite">Zu den Favoriten hinzufügen</string>
     <string name="add_to_home">Zum Startbildschirm hinzufügen</string>

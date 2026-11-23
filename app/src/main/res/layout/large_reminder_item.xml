@@ -64,16 +64,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textColor="?attr/bald_text_primary"
-                android:textSize="@dimen/medium" />
+                android:textSize="@dimen/medium"
+                app:autoSizeMinTextSize="14sp"
+                app:autoSizeTextType="uniform" />
 
             <TextView
                 android:id="@+id/repeating_days"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textColor="?attr/bald_text_secondary"
-                android:textSize="@dimen/small" />
+                android:textSize="@dimen/small"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeTextType="uniform" />
         </LinearLayout>
     </LinearLayout>
 

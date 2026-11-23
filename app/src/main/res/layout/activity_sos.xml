@@ -232,6 +232,7 @@
                     android:layout_height="72dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/style_for_buttons"
+                    app:_size="@dimen/medium"
                     app:_src="@drawable/add_on_button"
                     app:_text="@string/add_emergency_contact" />
             </LinearLayout>

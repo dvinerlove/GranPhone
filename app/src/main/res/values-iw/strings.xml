@@ -32,6 +32,7 @@
     <string name="add_contact">הוסף איש קשר</string>
     <string name="add_emergency_contact">הוסף מספר</string>
     <string name="add_pill">הוסף תרופה</string>
+    <string name="edit_pill">ערוך תרופה</string>
     <string name="add_shortcut">הוסף קיצור-דרך</string>
     <string name="add_to_favorite">הוסף למועדפים</string>
     <string name="add_to_home">הוסף למסך הבית</string>

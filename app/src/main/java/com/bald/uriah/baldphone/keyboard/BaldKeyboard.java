@@ -178,12 +178,13 @@ public abstract class BaldKeyboard extends FrameLayout {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    backspaceThread = new Thread(backspaceRunnable);
-                    backspaceThread.start();
+                    if (backspaceThread == null || !backspaceThread.isAlive()) {
+                        backspaceThread = new Thread(backspaceRunnable);
+                        backspaceThread.start();
+                    }
+                } else if (backspaceThread != null) {
+                    backspaceThread.interrupt();
                 }
-                if (event.getAction() == MotionEvent.ACTION_UP)
-                    if (BaldKeyboard.this.backspaceRunnable != null)
-                        backspaceThread.interrupt();
                 return false;
             }
         };

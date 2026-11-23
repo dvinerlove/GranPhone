@@ -90,12 +90,12 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
 
     @Override
     public int getItemCount() {
-        return bundles.length;
+        return bundles == null ? 0 : bundles.length;
     }
 
     public void clearAll() {
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(context);
-        for (int i = 0; i < bundles.length; i++) {
+        for (int i = 0; i < getItemCount(); i++) {
             localBroadcastManager.sendBroadcast(
                     new Intent(NotificationListenerService.ACTION_CLEAR)
                             .putExtra(NotificationListenerService.KEY_EXTRA_KEY, bundles[i].getString(NotificationListenerService.KEY_EXTRA_KEY))

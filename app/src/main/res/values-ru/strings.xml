@@ -29,6 +29,7 @@
     <string name="add_contact">Добавить контакт</string>
     <string name="add_emergency_contact">Добавить контакт</string>
     <string name="add_pill">Добавить таблетку</string>
+    <string name="edit_pill">Изменить таблетку</string>
     <string name="add_shortcut">Добавить ярлык</string>
     <string name="add_to_favorite">Добавить в избранное</string>
     <string name="add_to_home">Добавить на главный экран</string>
