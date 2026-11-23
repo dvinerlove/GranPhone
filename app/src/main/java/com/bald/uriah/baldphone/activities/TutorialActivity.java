@@ -40,8 +40,15 @@ public class TutorialActivity extends BaldActivity {
         setContentView(R.layout.tutorial_activity);
         // AFTER_TUTORIAL_KEY is written by TutorialFragment4's home button — setting it
         // here would let a force-quit mid-tutorial skip it permanently.
-        ViewPagerHolder viewPagerHolder = findViewById(R.id.view_pager_holder);
+        viewPagerHolder = findViewById(R.id.view_pager_holder);
         viewPagerHolder.setViewPagerAdapter(new Adapter(getSupportFragmentManager()));
+    }
+
+    private ViewPagerHolder viewPagerHolder;
+
+    public void advancePage() {
+        if (viewPagerHolder.getPageIndex() + 1 < viewPagerHolder.getCount())
+            viewPagerHolder.setCurrentItem(viewPagerHolder.getPageIndex() + 1);
     }
 
     private static class Adapter extends FragmentPagerAdapter {

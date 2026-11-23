@@ -28,6 +28,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 
 import com.bald.uriah.baldphone.R;
+import com.bald.uriah.baldphone.activities.TutorialActivity;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
@@ -104,6 +105,8 @@ public class TutorialFragment2 extends TutorialFragment {
         if (recreateActivityOnSelect && activity != null) {
             activity.recreate();
         }
+        if (activity instanceof TutorialActivity)
+            v.postDelayed(((TutorialActivity) activity)::advancePage, 700);
 
     }
 
