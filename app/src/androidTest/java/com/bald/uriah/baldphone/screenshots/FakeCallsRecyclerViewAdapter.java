@@ -118,7 +118,6 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
         final ImageView profile_pic, iv_type;
         final TextView tv_type, contact_name, tv_time, image_letter, day;
         final View line;
-        final FrameLayout fl_contact_only;
         final LinearLayout container, ll_contact_only;
         private boolean expanded;
 
@@ -134,7 +133,6 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
             image_letter = container.findViewById(R.id.image_letter);
             line = container.findViewById(R.id.line);
             day = container.findViewById(R.id.day);
-            fl_contact_only = container.findViewById(R.id.fl_contact_only);
             ll_contact_only.setOnClickListener(this);
         }
 
@@ -249,7 +247,7 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
             }
             tv_type.setText(stringRes);
             iv_type.setImageResource(drawableRes);
-            this.fl_contact_only.setBackgroundResource(colorRes);
+            this.ll_contact_only.setBackgroundResource(colorRes);
 
         }
 

@@ -63,7 +63,7 @@
     <string name="brightness_subtext">Изменить Яркость.</string>
     <string name="cache_cleared_successfully">Кэш успешно удален!</string>
     <string name="call">Позвонить</string>
-    <string name="calling">Звоню</string>
+    <string name="calling">Звонки</string>
 
     <string name="call_log">Журнал Вызовов:</string>
     <string name="call_subtext">Это разрешение требуется для вызова контактов.</string>

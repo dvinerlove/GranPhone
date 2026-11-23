@@ -98,7 +98,7 @@ public class PhoneActivityTest extends BaseActivityTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ViewInteraction baldLinearLayoutButton2 = onView(allOf(withId(R.id.bt_edit), childAtPosition(allOf(withId(R.id.options_bar), childAtPosition(withId(R.id.ll_info), 0)), 0), isDisplayed()));
+        ViewInteraction baldLinearLayoutButton2 = onView(allOf(withId(R.id.bt_edit), childAtPosition(allOf(withId(R.id.options_bar), childAtPosition(withId(R.id.single_contact_scroll_view), 0)), 0), isDisplayed()));
         sleep();
         baldLinearLayoutButton2.perform(longClick());
         ViewInteraction baldEditText2 = onView(allOf(withId(R.id.et_mail), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 7), isDisplayed()));
@@ -108,7 +108,7 @@ public class PhoneActivityTest extends BaseActivityTest {
         sleep();
         baldButton5.perform(longClick());
         sleep();
-        ViewInteraction baldLinearLayoutButton3 = onView(allOf(withId(R.id.bt_delete), childAtPosition(allOf(withId(R.id.options_bar), childAtPosition(withId(R.id.ll_info), 0)), 2), isDisplayed()));
+        ViewInteraction baldLinearLayoutButton3 = onView(allOf(withId(R.id.bt_delete), childAtPosition(allOf(withId(R.id.options_bar), childAtPosition(withId(R.id.single_contact_scroll_view), 0)), 2), isDisplayed()));
         sleep();
         baldLinearLayoutButton3.perform(longClick());
         ViewInteraction baldButton6 = onView(allOf(withId(R.id.dialog_box_true), childAtPosition(childAtPosition(withId(R.id.container), 1), 0), isDisplayed()));
