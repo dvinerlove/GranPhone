@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:empty_icon="@drawable/pill"
         app:empty_text="@string/no_pills"
         app:horizontal_scrolling="false">
 
@@ -45,31 +46,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <LinearLayout
+        <include
             android:id="@+id/empty_view"
+            layout="@layout/bald_empty_state"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:visibility="invisible">
-
-            <ImageView
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:alpha="0.5"
-                android:importantForAccessibility="no"
-                android:src="@drawable/pill" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:text="@string/no_pills"
-                android:textColor="?attr/bald_text_secondary"
-                android:textSize="20sp" />
-        </LinearLayout>
+            android:layout_height="match_parent" />
     </com.bald.uriah.baldphone.views.ScrollingHelper>
 
     <LinearLayout

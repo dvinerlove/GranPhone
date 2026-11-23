@@ -227,7 +227,7 @@ public class AppsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<
                 app_name.setTextColor(textColorOnSelected);
             } else {
                 container.setElevation(0);
-                container.setBackground(null);
+                container.setBackgroundResource(R.drawable.style_for_buttons_rectangle);
                 app_name.setTextColor(textColorOnBackground);
 
             }

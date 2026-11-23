@@ -82,6 +82,7 @@
         <attr name="where_bar" format="integer" />
         <attr name="im_aware_this_inner_view_isnt_modular" format="boolean" />
         <attr name="empty_text" format="string" />
+        <attr name="empty_icon" format="reference" />
 
     </declare-styleable>
 

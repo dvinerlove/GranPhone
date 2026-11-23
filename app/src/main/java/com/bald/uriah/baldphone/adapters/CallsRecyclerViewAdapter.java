@@ -26,7 +26,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -111,13 +110,12 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private static final int expandedSize = 150;
-        private static final int notExpandedSize = 100;
+        private static final int expandedSize = 133;
+        private static final int notExpandedSize = 88;
 
         final ImageView profile_pic, iv_type;
         final TextView tv_type, contact_name, tv_time, image_letter, day;
         final View line;
-        final FrameLayout fl_contact_only;
         final LinearLayout container, ll_contact_only;
         private boolean expanded;
 
@@ -133,7 +131,6 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
             image_letter = container.findViewById(R.id.image_letter);
             line = container.findViewById(R.id.line);
             day = container.findViewById(R.id.day);
-            fl_contact_only = container.findViewById(R.id.fl_contact_only);
             ll_contact_only.setOnClickListener(this);
         }
 

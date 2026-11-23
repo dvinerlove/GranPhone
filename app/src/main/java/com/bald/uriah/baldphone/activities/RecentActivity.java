@@ -19,7 +19,6 @@ package com.bald.uriah.baldphone.activities;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
@@ -38,9 +37,6 @@ public class RecentActivity extends BaldActivity {
         setContentView(R.layout.activity_recent);
 
         recyclerView = findViewById(R.id.recycler_view);
-        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(getDrawable(R.drawable.ll_divider));
-        recyclerView.addItemDecoration(dividerItemDecoration);
         final CallsRecyclerViewAdapter callsRecyclerViewAdapter = new CallsRecyclerViewAdapter(CallLogsHelper.getAllCalls(getContentResolver()), this);
         CallLogsHelper.markAllAsRead(getContentResolver());
         recyclerView.setAdapter(callsRecyclerViewAdapter);

@@ -28,6 +28,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -70,6 +72,7 @@ public class ScrollingHelper extends ConstraintLayout {
     private Context context;
     private View child;
     private String empty;
+    private Drawable emptyIcon;
 
     private boolean aViewAdded = false,
             programmerAwareOfUsingNonModularViews = false,
@@ -147,6 +150,12 @@ public class ScrollingHelper extends ConstraintLayout {
             if (this.emptyView != null)
                 removeView(this.emptyView);
             this.emptyView = child;
+            final View icon = child.findViewById(R.id.empty_icon);
+            if (icon instanceof ImageView && emptyIcon != null)
+                ((ImageView) icon).setImageDrawable(emptyIcon);
+            final View text = child.findViewById(R.id.empty_text);
+            if (text instanceof TextView && empty != null)
+                ((TextView) text).setText(empty);
             super.addView(this.emptyView, index, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             return;
         }
@@ -244,6 +253,7 @@ public class ScrollingHelper extends ConstraintLayout {
         final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.ScrollingHelper);
         horizontalScrolling = styleAttributesArray.getBoolean(R.styleable.ScrollingHelper_horizontal_scrolling, false);
         empty = styleAttributesArray.getString(R.styleable.ScrollingHelper_empty_text);
+        emptyIcon = styleAttributesArray.getDrawable(R.styleable.ScrollingHelper_empty_icon);
         if (empty == null)
             empty = context.getString(R.string.nothing);
         whereBar =

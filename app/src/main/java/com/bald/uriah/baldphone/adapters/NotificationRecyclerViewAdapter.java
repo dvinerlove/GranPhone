@@ -134,7 +134,7 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
             {
                 final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
                 layoutParams.topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                        first ? 10 : 0,
+                        first ? 12 : 6,
                         displayMetrics);
                 itemView.setLayoutParams(layoutParams);
             }
@@ -209,9 +209,9 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                 this.first = first;
                 this.summery = flag_summery;
                 final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
-                layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                        first ? flag_summery ? 60 : 160 : 130,
-                        displayMetrics);
+                // a non-first summary row has every field hidden — collapse it instead
+                // of leaving an empty card stub behind.
+                layoutParams.height = !first && flag_summery ? 0 : ViewGroup.LayoutParams.WRAP_CONTENT;
                 itemView.setLayoutParams(layoutParams);
                 final int firstVisibility = first ? View.VISIBLE : View.GONE;
                 app_name.setVisibility(firstVisibility);

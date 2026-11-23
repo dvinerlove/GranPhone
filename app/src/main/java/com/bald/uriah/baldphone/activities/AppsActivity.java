@@ -18,15 +18,12 @@ package com.bald.uriah.baldphone.activities;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
@@ -53,7 +50,6 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
     private static final String SELECTED_APP_INDEX = "SELECTED_APP_INDEX";
 
     private AppsDatabase appsDatabase;
-    private int numberOfAppsInARow;
 
     private RecyclerView recyclerView;
 
@@ -72,27 +68,6 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
         recyclerView = findViewById(R.id.rc_apps);
         chooseKey = getIntent().getStringExtra(CHOOSE_MODE);
         appsRecyclerViewAdapter = new AppsRecyclerViewAdapter(appList, this, chooseKey != null ? this::appChosen : this::showDropDown, recyclerView);
-
-        final WindowManager windowManager = getWindowManager();
-        final Point point = new Point();
-        windowManager.getDefaultDisplay().getSize(point);
-        final boolean screenOrientation = (point.x / point.y) != 0;
-        numberOfAppsInARow = screenOrientation ? 6 : 3;
-        final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfAppsInARow);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                switch (appsRecyclerViewAdapter.getItemViewType(position)) {
-                    case TYPE_HEADER:
-                        return numberOfAppsInARow;
-                    case AppsRecyclerViewAdapter.TYPE_ITEM:
-                        return 1;
-                    default:
-                        return 1;
-                }
-            }
-        });
-        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(appsRecyclerViewAdapter);
     }
 
@@ -185,8 +160,7 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
             }
         }, view);
 
-        if (index + numberOfAppsInARow >= appsRecyclerViewAdapter.dataList.size())
-            recyclerView.scrollToPosition(index);
+        recyclerView.scrollToPosition(index);
 
     }
 

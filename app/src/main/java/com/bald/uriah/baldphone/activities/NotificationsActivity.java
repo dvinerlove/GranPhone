@@ -26,7 +26,6 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
@@ -34,6 +33,7 @@ import com.bald.uriah.baldphone.adapters.NotificationRecyclerViewAdapter;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.DialogBuilder;
 import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 
 import static com.bald.uriah.baldphone.services.NotificationListenerService.ACTION_REGISTER_ACTIVITY;
 import static com.bald.uriah.baldphone.services.NotificationListenerService.ACTIVITY_NONE;
@@ -70,16 +70,17 @@ public class NotificationsActivity extends BaldActivity {
             return;
 
         setContentView(R.layout.activity_notifications);
-        findViewById(R.id.clear_all_notifications).setOnClickListener(v -> {
-            if (notificationRecyclerViewAdapter != null)
-                notificationRecyclerViewAdapter.clearAll();
-            finish();
-        });
+        findViewById(R.id.clear_all_notifications).setOnClickListener(v ->
+                DialogScreen.confirm(this,
+                        R.string.clear_all_notifications,
+                        R.string.clear_all_notifications_subtext,
+                        R.string.clear,
+                        () -> {
+                            if (notificationRecyclerViewAdapter != null)
+                                notificationRecyclerViewAdapter.clearAll();
+                            finish();
+                        }));
         recyclerView = findViewById(R.id.recycler_view);
-        final DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(getDrawable(R.drawable.ll_divider));
-        recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setItemViewCacheSize(10);
 
         final String enabledListeners = Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners");

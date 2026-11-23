@@ -295,6 +295,7 @@
     <string name="no_alarms">No alarms.\nTap \"Alarm\" or \"Timer\"\nbelow to create one.</string>
     <string name="no_pills">No pills.\nTap \"+ Pill\" below\nto create one.</string>
     <string name="clear_all_notifications">Clear All Notifications</string>
+    <string name="clear_all_notifications_subtext">All notifications will be removed.</string>
     <string name="clear_cache_subtext">Are you sure you want to delete the cache contents? Deleting temporary files may solve some GranPhone app malfunctions, but also shortcuts created in the Home screen will be removed.</string>
     <string name="permissions_calm">Hi, GranPhone must have the following permissions in order to run. Some of them
         sound scary, but it is the only way GranPhone can replace the phone\'s interface. No data is taken and it causes
@@ -391,6 +392,7 @@
     <string name="do_you_want_to_save_your_changes">Do you want to save your changes?</string>
     <string name="discard">Discard</string>
     <string name="no_recent_calls">No Recent Calls</string>
+    <string name="no_apps">No Apps</string>
     <string name="apps_sort_method">Apps Sort Method</string>
     <string name="apps_sort_method_subtext">Choose whether you want to sort the apps in one grid or to have them divided into different groups via letters</string>
     <string name="groups">Groups</string>

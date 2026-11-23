@@ -14,41 +14,43 @@
   ~ limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?bald_background">
+    android:background="?attr/bald_background"
+    android:orientation="vertical">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
         android:id="@+id/bald_title_bar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/color_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/recent"
-        app:show_back="true" />
+        app:show_back="true"
+        app:title="@string/recent" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:id="@+id/scrolling_helper"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:empty_text="@string/no_recent_calls"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bald_title_bar">
+        android:layout_weight="1"
+        app:empty_icon="@drawable/history_on_background"
+        app:empty_text="@string/no_recent_calls">
 
+        <!-- ModularRecyclerView must stay the first child (ScrollingHelper contract);
+             empty_view is picked up by id and shown when the adapter is empty. -->
         <com.bald.uriah.baldphone.views.ModularRecyclerView
             android:id="@+id/recycler_view"
+            style="@style/ScrollStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fadingEdgeLength="@dimen/transparent_length_in_scrollers"
-            android:requiresFadingEdge="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+        <include
+            android:id="@+id/empty_view"
+            layout="@layout/bald_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </com.bald.uriah.baldphone.views.ScrollingHelper>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
