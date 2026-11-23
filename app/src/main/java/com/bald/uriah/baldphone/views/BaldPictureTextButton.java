@@ -109,7 +109,7 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
             final float floor = 8 * getResources().getDisplayMetrics().scaledDensity;
             if (wanted > avail && textView.getTextSize() > floor)
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                        Math.max(floor, textView.getTextSize() * (avail / wanted)));
+                        Math.max(floor, textView.getTextSize() * (avail / wanted) * 0.95f));
         });
         if (orientation == VERTICAL)
             textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));

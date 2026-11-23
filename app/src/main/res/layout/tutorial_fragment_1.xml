@@ -37,8 +37,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:text="@string/and_welcome_to_GranPhone"
         android:textSize="40sp"
+        app:autoSizeMaxTextSize="40sp"
+        app:autoSizeMinTextSize="14sp"
         app:autoSizeTextType="uniform"
         android:visibility="gone" />
 

@@ -29,6 +29,19 @@
         <item name="colorAccent">?attr/bald_brand</item>
     </style>
 
+    <style name="Theme.AppCompat.NoActionBar.FullScreen" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActionBar">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">?bald_background</item>
+        <item name="bald_button_gold">@color/gold</item>
+        <item name="bald_text_on_gold">@color/on_gold</item>
+        <item name="android:actionBarStyle">@style/BaldActionBar</item>
+        <item name="colorAccent">?attr/bald_brand</item>
+    </style>
+
 
     <style name="bald_light" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
         <item name="bald_key_margin">@dimen/bald_key_margin</item>
@@ -68,7 +81,7 @@
         <item name="bald_gold">@color/bald_gold_light</item>
     </style>
 
-    <style name="bald_dark" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
+    <style name="bald_dark" parent="Theme.AppCompat.NoActionBar.FullScreen">
         <item name="bald_key_margin">@dimen/bald_key_margin</item>
         <item name="bald_background">@color/bald_background_dark</item>
         <item name="bald_background_transparent">@color/bald_background_transparent_dark</item>
