@@ -95,7 +95,9 @@
                 android:maxLines="1"
                 android:textColor="?bald_text_primary"
                 android:textSize="@dimen/large"
-                android:transitionName="bald_bar_title_animation" />
+                android:transitionName="bald_bar_title_animation"
+                app:autoSizeMinTextSize="14sp"
+                app:autoSizeTextType="uniform" />
 
             <LinearLayout
                 android:layout_width="match_parent"

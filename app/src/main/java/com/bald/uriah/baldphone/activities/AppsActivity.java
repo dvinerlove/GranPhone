@@ -66,6 +66,8 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
         final List<App> appList = appsDatabase.appsDatabaseDao().getAllOrderedByABC();
         recyclerView = findViewById(R.id.rc_apps);
         chooseKey = getIntent().getStringExtra(CHOOSE_MODE);
+        if (chooseKey != null)
+            ((com.bald.uriah.baldphone.views.BaldTitleBar) findViewById(R.id.bald_title_bar)).setTitle(R.string.choose_another_app);
         appsRecyclerViewAdapter = new AppsRecyclerViewAdapter(appList, this, chooseKey != null ? this::appChosen : this::showDropDown, recyclerView);
         recyclerView.setAdapter(appsRecyclerViewAdapter);
     }

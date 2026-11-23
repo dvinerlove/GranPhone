@@ -33,6 +33,7 @@
         android:orientation="horizontal">
 
         <ImageView
+        android:importantForAccessibility="no"
             android:id="@+id/small_icon"
             android:layout_width="28dp"
             android:layout_height="28dp" />
@@ -89,6 +90,7 @@
                 android:textSize="@dimen/small" />
         </LinearLayout>
 
+        android:importantForAccessibility="no"
         <ImageView
             android:id="@+id/large_icon"
             android:layout_width="48dp"

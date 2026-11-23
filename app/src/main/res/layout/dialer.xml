@@ -82,6 +82,7 @@
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:id="@+id/scrolling_helper"
+        app:empty_icon="@drawable/phone_on_background"
         app:empty_text="@string/no_contacts"
         android:layout_width="0dp"
         android:layout_height="140dp"
@@ -107,7 +108,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="?bald_text_secondary"
-            android:textSize="@dimen/small" />
+            android:textSize="@dimen/medium" />
     </com.bald.uriah.baldphone.views.ScrollingHelper>
 
     <include

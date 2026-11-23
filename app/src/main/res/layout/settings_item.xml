@@ -27,6 +27,7 @@
     android:background="@drawable/dialer_key_background">
 
     <ImageView
+        android:importantForAccessibility="no"
         android:id="@+id/setting_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"

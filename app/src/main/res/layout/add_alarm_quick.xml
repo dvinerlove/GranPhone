@@ -95,6 +95,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="?attr/bald_text_primary"
                     android:textSize="40sp"
                     android:textStyle="bold" />

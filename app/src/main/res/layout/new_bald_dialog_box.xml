@@ -15,6 +15,7 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -98,7 +99,9 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@drawable/style_for_buttons"
-            android:text="@string/yes" />
+            android:text="@string/yes"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeTextType="uniform" />
         <com.bald.uriah.baldphone.views.BaldButton
             android:id="@+id/dialog_box_false"
             style="@style/ButtonsText.Large"
@@ -107,6 +110,8 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/style_for_buttons"
-            android:text="@string/no" />
+            android:text="@string/no"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeTextType="uniform" />
     </LinearLayout>
 </FrameLayout>

@@ -16,6 +16,7 @@
 
 <!-- Help row: wave-5 card (same selector as settings_item). -->
 <com.bald.uriah.baldphone.views.BaldLinearLayoutButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_help"
     android:layout_width="match_parent"
     android:layout_height="88dp"
@@ -29,6 +30,7 @@
     android:paddingEnd="16dp">
 
     <ImageView
+        android:importantForAccessibility="no"
         android:id="@+id/pic"
         android:layout_width="56dp"
         android:layout_height="56dp"
@@ -38,9 +40,14 @@
     <TextView
         android:id="@+id/text"
         style="@style/ButtonsText.Large"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
         android:gravity="center_vertical"
-        android:transitionName="bald_bar_title_animation" />
+        android:maxLines="2"
+        android:transitionName="bald_bar_title_animation"
+        app:autoSizeMinTextSize="14sp"
+        app:autoSizeTextType="uniform" />
 </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>

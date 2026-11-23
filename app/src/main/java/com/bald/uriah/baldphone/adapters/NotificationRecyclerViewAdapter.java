@@ -162,7 +162,6 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                     } catch (PackageManager.NameNotFoundException e) {
                         Log.e(TAG, e.getMessage());
                         e.printStackTrace();
-                        throw new RuntimeException(e);
                     }
                 }
                 app_name.setText(app_name_string);

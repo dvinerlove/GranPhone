@@ -29,6 +29,7 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:importantForAccessibility="no"
         android:id="@+id/app_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -44,7 +45,9 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="?bald_text_primary"
-        android:textSize="@dimen/large" />
+        android:textSize="@dimen/large"
+        app:autoSizeMinTextSize="14sp"
+        app:autoSizeTextType="uniform" />
 
     <ImageView
         android:id="@+id/pin"

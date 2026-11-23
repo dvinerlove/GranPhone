@@ -85,8 +85,12 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
 
         textView = (TextView) layoutInflater.inflate(R.layout.bald_picture_text_button_text, this, false);
         textView.setText(text);
-        if (pxSize != 0)
+        if (pxSize != 0) {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, pxSize);
+            // setTextSize clears autosize — re-enable with pxSize as max so labels shrink instead of clipping
+            androidx.core.widget.TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+                    textView, (int) (10 * getResources().getDisplayMetrics().scaledDensity), (int) pxSize, 1, TypedValue.COMPLEX_UNIT_PX);
+        }
         addView(textView);
 
         if (variant != 0)
