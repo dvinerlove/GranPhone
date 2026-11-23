@@ -190,6 +190,7 @@
     <string name="outgoing">Outgoing</string>
     <string name="page">Page</string>
     <string name="permissions_part">Permissions</string>
+    <string name="permission_step">Step %1$d of %2$d</string>
     <string name="personalization_settings">Personalization</string>
     <string name="phone">Phone</string>
     <string name="photo">Photo</string>
@@ -249,7 +250,7 @@
     <string name="shift">shift</string>
     <string name="show">Show</string>
     <string name="small">Small</string>
-    <string name="snooze">Snooze</string>
+    <string name="snooze">Snooze for 5 min</string>
     <string name="sos">SOS</string>
     <string name="sos_is_full">SOS is full!</string>
     <string name="sos_is_full_subtext">SOS is full! please remove other SOS contacts before adding a new one</string>

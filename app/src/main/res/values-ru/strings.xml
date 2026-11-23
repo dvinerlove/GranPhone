@@ -184,6 +184,7 @@
     <string name="outgoing">Исходящий</string>
     <string name="page">Страница</string>
     <string name="permissions_part">Разрешения</string>
+    <string name="permission_step">Шаг %1$d из %2$d</string>
     <string name="personalization_settings">Персонализация</string>
     <string name="phone">Телефон</string>
     <string name="photo">Фотография</string>
@@ -239,7 +240,7 @@
     <string name="shift">регистр</string>
     <string name="show">Показать</string>
     <string name="small">Маленький</string>
-    <string name="snooze">Отложить</string>
+    <string name="snooze">Отложить на 5 мин</string>
     <string name="sos">SOS</string>
     <string name="sos_is_full">SOS заполнен!</string>
     <string name="sos_is_full_subtext">SOS заполнен! пожалуйста удалите другие SOS контакты перед добавление новых</string>
@@ -260,7 +261,7 @@
     <string name="to___hours_and___minutes_from_now">%d час(ов) и %d минут с текущего момента</string>
     <string name="to___minuets_from_now">%d минут(ы) с текущего момента</string>
     <string name="today">Сегодня</string>
-    <string name="took">Взял!</string>
+    <string name="took">Принял!</string>
     <string name="tuesday">Вторник</string>
     <string name="understood">Понятно</string>
     <string name="uninstall">Удалить</string>

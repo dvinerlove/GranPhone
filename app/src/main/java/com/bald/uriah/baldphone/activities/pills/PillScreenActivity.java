@@ -46,7 +46,8 @@ public class PillScreenActivity extends TimedBaldActivity {
 
     private static final int TIME_DELAYED_SCHEDULE = 100;
 
-    private TextView tv_textual_content, snooze, took;
+    private TextView tv_textual_content;
+    private View snooze, took;
     private ImageView iv_pill;
     private Ringtone ringtone;
     private Reminder reminder;
@@ -80,23 +81,15 @@ public class PillScreenActivity extends TimedBaldActivity {
 
         }
 
+        // BaldPictureTextButton maps long-press onto the click listener itself
+        // (long-press mode is an app setting), so one listener covers both.
         took.setOnClickListener(v -> {
             if (vibrator != null)
                 vibrator.vibrate(Const.vibetime);
             finish();
         });
-        took.setOnLongClickListener(v -> {
-            if (vibrator != null)
-                vibrator.vibrate(Const.vibetime);
-            finish();
-            return true;
-        });
 
         snooze.setOnClickListener((v) -> snooze());
-        snooze.setOnLongClickListener((v) -> {
-            snooze();
-            return true;
-        });
 
         try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

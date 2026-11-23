@@ -22,39 +22,54 @@
     android:background="?bald_background">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
-        android:backgroundTint="@color/color_1"
         android:id="@+id/bald_title_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/color_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/permissions_part"
-        app:show_back="true" />
+        app:show_back="true"
+        app:title="@string/permissions_part" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="@string/GranPhone_bla_allow_permission"
-        android:textColor="?bald_decoration_on_background"
-        android:textSize="@dimen/medium"
+        android:textColor="?bald_text_primary"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bald_title_bar"
-        tools:layout_editor_absoluteY="100dp" />
+        app:layout_constraintTop_toBottomOf="@id/bald_title_bar" />
+
+    <TextView
+        android:id="@+id/progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:textColor="?bald_text_secondary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        tools:text="Шаг 2 из 6" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/progress">
 
         <com.bald.uriah.baldphone.views.ModularRecyclerView
             android:id="@+id/child"

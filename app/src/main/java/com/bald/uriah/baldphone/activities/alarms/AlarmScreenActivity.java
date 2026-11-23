@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -55,8 +54,8 @@ public class AlarmScreenActivity extends TimedBaldActivity {
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build();
 
-    private TextView tv_name, snooze;
-    private ImageView cancel;
+    private TextView tv_name;
+    private View snooze, cancel;
     private Ringtone ringtone;
     private Alarm alarm;
 
@@ -102,6 +101,8 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         if (name == null) tv_name.setVisibility(View.GONE);
         else tv_name.setText(name);
 
+        // BaldPictureTextButton maps long-press onto the click listener itself
+        // (long-press mode is an app setting), so one listener covers both.
         cancel.setOnClickListener(v -> {
             if (vibrator != null)
                 vibrator.vibrate(Const.vibetime);
@@ -109,20 +110,8 @@ public class AlarmScreenActivity extends TimedBaldActivity {
                 AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
             finish();
         });
-        cancel.setOnLongClickListener(v -> {
-            if (vibrator != null)
-                vibrator.vibrate(Const.vibetime);
-            if (getString(R.string.timer).equals(alarm.getName()))
-                AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
-            finish();
-            return true;
-        });
 
         snooze.setOnClickListener((v) -> snooze());
-        snooze.setOnLongClickListener((v) -> {
-            snooze();
-            return true;
-        });
 
         ringtone = getRingtone(this);
         try {
