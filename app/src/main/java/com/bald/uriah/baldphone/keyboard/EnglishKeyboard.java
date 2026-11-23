@@ -47,7 +47,8 @@ public class EnglishKeyboard extends BaldKeyboard implements BaldKeyboard.Capita
     public void setCaps() {
         caps = !caps;
         final char[] codes = codes();
-        for (int i = 0; i < children.length; i++) {
+        // children has one trailing null slot (sized by getChildCount); bound by codes
+        for (int i = 0; i < codes.length; i++) {
             children[i].setTag(codes[i]);
             if (children[i] instanceof TextView)
                 ((TextView) children[i]).setText(new char[]{codes[i]}, 0, 1);

@@ -349,6 +349,7 @@
     <string name="choose_language_for_keyboard">Выбор языка</string>
     <string name="hebrew">Иврит</string>
     <string name="english">Английский</string>
+    <string name="russian">Русский</string>
 
     <string name="search">Поиск</string>
     <string name="next">Дальше</string>

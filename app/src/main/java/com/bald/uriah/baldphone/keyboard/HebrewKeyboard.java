@@ -44,7 +44,7 @@ public class HebrewKeyboard extends BaldKeyboard {
 
     @Override
     int nextLanguage() {
-        return EnglishKeyboard.LANGUAGE_ID;
+        return RussianKeyboard.LANGUAGE_ID;
     }
 
     @Override
