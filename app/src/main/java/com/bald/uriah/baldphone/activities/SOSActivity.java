@@ -33,6 +33,7 @@ import android.provider.ContactsContract;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
 import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
 import com.bald.uriah.baldphone.utils.BaldToast;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.RandomColorMaker;
 import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 
@@ -72,6 +74,7 @@ public class SOSActivity extends BaldActivity {
     private int backgroundColor;
     private RandomColorMaker randomColorMaker;
     private long holdStartedAt = -1;
+    private int holdSecondsShown = -1;
 
     private final Runnable holdTicker = new Runnable() {
         @Override
@@ -84,8 +87,11 @@ public class SOSActivity extends BaldActivity {
                 callEmergencyNumber();
             } else {
                 sosProgress.setProgress((int) elapsed);
-                sosSubtitle.setText(getString(R.string.sos_calling_in,
-                        (int) (HOLD_TO_CALL_MS - elapsed + 999) / 1000));
+                final int secondsLeft = (int) (HOLD_TO_CALL_MS - elapsed + 999) / 1000;
+                if (secondsLeft != holdSecondsShown) {
+                    holdSecondsShown = secondsLeft;
+                    sosSubtitle.setText(getString(R.string.sos_calling_in, secondsLeft));
+                }
                 btSos.postDelayed(this, HOLD_TICK_MS);
             }
         }
@@ -122,13 +128,24 @@ public class SOSActivity extends BaldActivity {
                     startHold();
                     return true;
                 case MotionEvent.ACTION_UP:
+                    // a quick touch is a tap -> accessible confirm dialog; a release
+                    // after a real hold started is a cancel (safe direction)
+                    final boolean wasTap = holdStartedAt >= 0 &&
+                            SystemClock.uptimeMillis() - holdStartedAt < ViewConfiguration.getLongPressTimeout();
+                    cancelHold(!wasTap);
+                    if (wasTap)
+                        v.performClick();
+                    return true;
                 case MotionEvent.ACTION_CANCEL:
-                    cancelHold(event.getActionMasked() == MotionEvent.ACTION_UP);
+                    cancelHold(false);
                     return true;
                 default:
                     return true;
             }
         });
+        // reached via performClick — quick taps routed above, TalkBack/switch-access/DPAD directly
+        btSos.setOnClickListener(v -> DialogScreen.confirm(this,
+                R.string.sos, R.string.sos_confirm_call, R.string.call, this::callEmergencyNumber));
         setupYoutube(4);
     }
 
@@ -172,6 +189,7 @@ public class SOSActivity extends BaldActivity {
 
     private void resetHoldUi() {
         holdStartedAt = -1;
+        holdSecondsShown = -1;
         btSos.setPressed(false);
         sosProgress.setVisibility(View.GONE);
         sosSubtitle.setText(R.string.sos_call_help);
@@ -189,6 +207,12 @@ public class SOSActivity extends BaldActivity {
         btAddContact.setVisibility(size < MAX_PINNED_CONTACTS ? View.VISIBLE : View.GONE);
         btAddContact.setOnClickListener(v -> startActivity(new Intent(v.getContext().getApplicationContext(), ContactsActivity.class)
                 .putExtra(ContactsActivity.INTENT_EXTRA_CONTACT_ADAPTER_MODE, ContactRecyclerViewAdapter.MODE_SOS)));
+    }
+
+    @Override
+    protected void onStop() {
+        cancelHold(false);//don't let a queued tick fire the call while paused
+        super.onStop();
     }
 
     /**

@@ -42,6 +42,7 @@
             android:layout_height="112dp"
             android:background="@drawable/style_for_buttons"
             android:clickable="true"
+            android:contentDescription="@string/sos_button_description"
             android:focusable="true"
             android:gravity="center"
             android:orientation="horizontal">

@@ -460,4 +460,6 @@ adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.b
     <string name="sos_hold_explanation">Нажмите и удерживайте кнопку SOS, чтобы вызвать помощь</string>
     <string name="sos_call_help">Вызвать помощь</string>
     <string name="sos_calling_in">Вызов через %d…</string>
+    <string name="sos_confirm_call">Позвонить в экстренные службы?</string>
+    <string name="sos_button_description">SOS — вызвать помощь</string>
 </resources>
