@@ -50,6 +50,7 @@ import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.views.ScrollingHelper;
 
 import java.util.List;
 
@@ -193,6 +194,11 @@ public class DialerActivity extends BaldActivity {
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI :
                 Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(number.toString()));
         final Cursor contactsCursor = contentResolver.query(uri, PROJECTION, null, null, SORT_ORDER);
+        final View sh = findViewById(R.id.scrolling_helper);
+        if (sh instanceof ScrollingHelper) {
+            ((ScrollingHelper) sh).setEmptyText(getString(number.length() == 0
+                    ? R.string.no_contacts : R.string.no_contacts_found));
+        }
         updateT9Chip(contactsCursor);
         if (contactRecyclerViewAdapter != null) {
             contactRecyclerViewAdapter.changeCursor(contactsCursor);

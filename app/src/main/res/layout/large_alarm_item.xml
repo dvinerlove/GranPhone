@@ -15,7 +15,7 @@
   -->
 
 <!-- Alarm row card: bald_card fill + 16dp corners + 1dp border (dialog_screen_card).
-     Big time + Вкл/Выкл state switch on top, name + repeat summary secondary,
+     Big time + On/Off state switch on top, name + repeat summary secondary,
      worded edit/delete actions at the bottom end. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

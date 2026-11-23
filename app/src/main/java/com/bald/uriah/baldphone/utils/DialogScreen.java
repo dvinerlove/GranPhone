@@ -40,9 +40,9 @@ import com.bald.uriah.baldphone.views.BaldButton;
 
 /**
  * The single redesign dialog component, three modes:
- * SELECT - vertical option list, applies instantly on tap, "Назад" text button at bottom. No OK/Cancel/X.
- * CONFIRM - message + one verb-labeled action + one "Отмена".
- * INFO - message + one "Понятно".
+ * SELECT - vertical option list, applies instantly on tap, "Back" text button at bottom. No OK/Cancel/X.
+ * CONFIRM - message + one verb-labeled action + one "Cancel".
+ * INFO - message + one "Got it".
  */
 public class DialogScreen extends Dialog {
     private static final float DIM_LEVEL = 0.9f;
@@ -66,7 +66,7 @@ public class DialogScreen extends Dialog {
     }
 
     /**
-     * INFO mode: title + message + one "Понятно" button.
+     * INFO mode: title + message + one "Got it" button.
      */
     public static DialogScreen info(@NonNull Context context, @StringRes int titleRes, @StringRes int messageRes) {
         final DialogScreen dialog = new DialogScreen(context);
@@ -77,7 +77,7 @@ public class DialogScreen extends Dialog {
     }
 
     /**
-     * CONFIRM mode: title + message + one verb-labeled action + one "Отмена".
+     * CONFIRM mode: title + message + one verb-labeled action + one "Cancel".
      */
     public static DialogScreen confirm(@NonNull Context context, @StringRes int titleRes, @StringRes int messageRes,
                                        @StringRes int actionRes, @NonNull Runnable onAction) {
@@ -96,7 +96,7 @@ public class DialogScreen extends Dialog {
     }
 
     /**
-     * SELECT mode: title + vertical option list (instant apply on tap) + "Назад" text button at bottom.
+     * SELECT mode: title + vertical option list (instant apply on tap) + "Back" text button at bottom.
      */
     public static DialogScreen select(@NonNull Context context, @StringRes int titleRes, int selectedIndex,
                                       @NonNull OnOptionSelectedListener listener, @StringRes int... optionRes) {
@@ -186,7 +186,7 @@ public class DialogScreen extends Dialog {
                 onPrimary.run();
                 dismiss();
             } else {
-                // SELECT's «Назад» / INFO's «Понятно» are dismissals, not actions — route through cancel()
+                // SELECT's Back / INFO's Got it are dismissals, not actions — route through cancel()
                 cancel();
             }
         });

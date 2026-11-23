@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<!-- Section label inside the settings list («Для пользователя» / «Для помощника»).
+<!-- Section label inside the settings list ("For the user" / "For the helper").
      Padding aligns the text with the card rows' icon edge. -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"

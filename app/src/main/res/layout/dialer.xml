@@ -82,6 +82,7 @@
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:id="@+id/scrolling_helper"
+        app:empty_text="@string/no_contacts"
         android:layout_width="0dp"
         android:layout_height="140dp"
         android:layout_marginStart="8dp"
@@ -100,10 +101,13 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <View
+        <TextView
             android:id="@+id/empty_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="?bald_text_secondary"
+            android:textSize="@dimen/small" />
     </com.bald.uriah.baldphone.views.ScrollingHelper>
 
     <include
