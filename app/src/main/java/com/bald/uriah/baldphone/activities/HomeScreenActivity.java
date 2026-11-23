@@ -426,6 +426,9 @@ public class HomeScreenActivity extends BaldActivity {
      * (the equivalent of the old "jump back to page 1").
      */
     private void updateViewPager() {
+        // BaldHomeWatcher/onStart can fire before attachToXml() binds homePage1.
+        if (homePage1 == null)
+            return;
         homePage1.populatePins();
         homeScroll.smoothScrollTo(0, 0);
     }

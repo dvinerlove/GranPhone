@@ -58,6 +58,10 @@ public class HomeScreenPinHelper {
                             lookupKey
                     }, null)) {
 
+                if (cursor == null) {
+                    // Provider failure — keep the pin, just skip rendering it.
+                    continue;
+                }
                 if (cursor.moveToFirst()) {
                     ret.add(new MiniContact(
                             lookupKey,
@@ -70,7 +74,8 @@ public class HomeScreenPinHelper {
                     removeContact(context, lookupKey);
                 }
             } catch (Exception e) {
-                throw new AssertionError(e);
+                // One bad pin must not crash the home screen — skip it.
+                android.util.Log.e("HomeScreenPinHelper", "pinned contact lookup failed", e);
             }
         }
         Collections.sort(ret, (o1, o2) -> o1.name.compareTo(o2.name));

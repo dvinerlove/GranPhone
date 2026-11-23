@@ -147,6 +147,9 @@ public class HomePage1 extends HomeView {
      * 2-column tile rows below the clock. The section stays hidden when there are no pins.
      */
     public void populatePins() {
+        // view exists only after onCreateView — updateViewPager can fire earlier.
+        if (view == null)
+            return;
         final LinearLayout pinsContainer = view.findViewById(R.id.pins_container);
         pinsContainer.removeAllViews();
         final List<HomeScreenPinHelper.HomeScreenPinnable> pins = homeScreen == null ?
