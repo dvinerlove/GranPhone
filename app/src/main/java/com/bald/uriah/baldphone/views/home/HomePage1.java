@@ -35,7 +35,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.text.TextUtils;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Space;
 
 import androidx.annotation.NonNull;
@@ -168,6 +170,10 @@ public class HomePage1 extends HomeView {
                             inflater.inflate(R.layout.home_screen_app_view, row, false);
                     row.addView(tile, lp);
                     pins.get(j).applyToHomeScreenAppView(new HomeScreenAppView(tile));
+                    // Names must stay readable — allow two lines with ellipsis instead of clipping.
+                    final TextView name = tile.findViewById(R.id.et_name);
+                    name.setMaxLines(2);
+                    name.setEllipsize(TextUtils.TruncateAt.END);
                 } else {
                     row.addView(new Space(activity), lp);
                 }
