@@ -30,8 +30,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="@drawable/style_for_buttons"
-        android:gravity="center_horizontal"
+        android:gravity="top|center_horizontal"
         android:orientation="vertical"
         android:paddingTop="16dp"
         android:paddingBottom="8dp">
@@ -61,14 +62,11 @@
             android:visibility="visible" />
     </LinearLayout>
 
-    <android.widget.Space
-        android:layout_width="0dp"
-        android:layout_height="@dimen/home_screen_padding" />
-
     <LinearLayout
         android:id="@+id/pins_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_screen_padding"
         android:layout_marginBottom="@dimen/home_screen_padding"
         android:orientation="vertical"
         android:visibility="gone" />
@@ -77,6 +75,7 @@
         android:id="@+id/phone_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
+        android:layout_marginTop="@dimen/home_screen_padding"
         android:background="@drawable/home_item_1"
         android:orientation="horizontal">
 
@@ -116,14 +115,11 @@
             app:__text="@string/contacts" />
     </LinearLayout>
 
-    <android.widget.Space
-        android:layout_width="0dp"
-        android:layout_height="@dimen/home_screen_padding" />
-
     <LinearLayout
         android:id="@+id/messages_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
+        android:layout_marginTop="@dimen/home_screen_padding"
         android:background="@drawable/home_item_2"
         android:orientation="horizontal"
         tools:ignore="RtlHardcoded">
@@ -164,14 +160,11 @@
             app:__text="@string/messages" />
     </LinearLayout>
 
-    <android.widget.Space
-        android:layout_width="0dp"
-        android:layout_height="@dimen/home_screen_padding" />
-
     <LinearLayout
         android:id="@+id/media_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
+        android:layout_marginTop="@dimen/home_screen_padding"
         android:background="@drawable/home_item_3"
         android:orientation="horizontal"
         tools:ignore="RtlHardcoded">
@@ -212,14 +205,11 @@
 
     </LinearLayout>
 
-    <android.widget.Space
-        android:layout_width="0dp"
-        android:layout_height="@dimen/home_screen_padding" />
-
     <LinearLayout
         android:id="@+id/time_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
+        android:layout_marginTop="@dimen/home_screen_padding"
         android:background="@drawable/home_item_4"
         android:orientation="horizontal"
         android:padding="0dp"
