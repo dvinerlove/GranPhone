@@ -51,6 +51,7 @@ import java.lang.annotation.RetentionPolicy;
 public class ScrollingHelper extends ConstraintLayout {
 
     private static final String TAG = ScrollingHelper.class.getSimpleName();
+    private final android.view.ViewTreeObserver.OnGlobalLayoutListener arrowsVisibilityListener = this::updateArrowsVisibility;
     public static final int START = -3;
     public static final int RIGHT = 2;
     public static final int END = 3;
@@ -478,7 +479,13 @@ public class ScrollingHelper extends ConstraintLayout {
             return false;
         });
 
-        getViewTreeObserver().addOnGlobalLayoutListener(this::updateArrowsVisibility);
+        getViewTreeObserver().addOnGlobalLayoutListener(arrowsVisibilityListener);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        getViewTreeObserver().removeOnGlobalLayoutListener(arrowsVisibilityListener);
     }
 
     @IntDef({RIGHT, LEFT, UP, DOWN, NO})
