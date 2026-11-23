@@ -60,6 +60,17 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             ContactsContract.Contacts.PHOTO_URI,
             ContactsContract.Data.LOOKUP_KEY,
             ContactsContract.Data.STARRED};
+    /**
+     * For queries against {@code Data}/{@code Phone} URIs only — {@code contact_id} is
+     * NOT a valid projection on {@code Contacts.CONTENT_URI}.
+     */
+    public final static String[] PROJECTION_WITH_CONTACT_ID = {
+            ContactsContract.Data.DISPLAY_NAME,
+            ContactsContract.Data._ID,
+            ContactsContract.Contacts.PHOTO_URI,
+            ContactsContract.Data.LOOKUP_KEY,
+            ContactsContract.Data.STARRED,
+            ContactsContract.Data.CONTACT_ID};
     public static final int MODE_DEFAULT = 0;
     public static final int MODE_SOS = 1;
     public static final int MODE_SHARE = 2;

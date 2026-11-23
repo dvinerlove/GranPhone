@@ -123,7 +123,7 @@ public class ShareActivity extends BaseContactsActivity {
         final String[] args = {"com.whatsapp", "%" + filter + "%"};
         try {
             return contentResolver.query(ContactsContract.Data.CONTENT_URI,
-                    ContactRecyclerViewAdapter.PROJECTION,
+                    ContactRecyclerViewAdapter.PROJECTION_WITH_CONTACT_ID,
                     SELECTION_NAME + (favorite ? (STAR_SELECTION) : ("")),
                     args,
                     SORT_ORDER);

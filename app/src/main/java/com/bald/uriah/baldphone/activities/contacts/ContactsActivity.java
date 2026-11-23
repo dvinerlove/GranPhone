@@ -119,7 +119,7 @@ public class ContactsActivity extends BaseContactsActivity {
         try {
             return contentResolver.query(
                     uri,
-                    ContactRecyclerViewAdapter.PROJECTION,
+                    ContactRecyclerViewAdapter.PROJECTION_WITH_CONTACT_ID,
                     favorite ? STAR_SELECTION : null,
                     null,
                     SORT_ORDER);
