@@ -66,6 +66,16 @@ public class VideosActivity extends MediaScrollingActivity implements Constants.
     }
 
     @Override
+    protected CharSequence emptyText() {
+        return getString(R.string.no_videos);
+    }
+
+    @Override
+    protected int emptyIcon() {
+        return R.drawable.movie_on_background;
+    }
+
+    @Override
     protected Cursor cursor(ContentResolver contentResolver) {
         return contentResolver.query(VIDEOS_URI, PROJECTION,
                 null,

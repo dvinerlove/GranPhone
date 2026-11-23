@@ -43,15 +43,13 @@
             android:textSize="40sp"
             android:textStyle="bold" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
+        <!-- weight-fill whatever the time label leaves over: the switch must
+             never overflow the card edge -->
         <com.bald.uriah.baldphone.views.BaldSwitch
             android:id="@+id/alarm_switch"
-            android:layout_width="180dp"
+            android:layout_width="0dp"
             android:layout_height="56dp"
+            android:layout_weight="1"
             app:no="@string/no"
             app:size="@dimen/medium"
             app:yes="@string/yes" />
@@ -79,15 +77,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:gravity="end"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_edit"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_weight="1"
-            android:minWidth="110dp"
             android:background="@drawable/style_for_buttons"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
@@ -97,11 +92,9 @@
 
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_delete"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:minWidth="110dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/style_for_buttons"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"

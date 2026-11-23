@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -71,6 +72,8 @@ public abstract class MediaScrollingActivity extends BaldActivity {
         recyclerView = findViewById(R.id.child);
 
         baldTitleBar.setTitle(title());
+        ((android.widget.ImageView) findViewById(R.id.empty_icon)).setImageResource(emptyIcon());
+        ((android.widget.TextView) findViewById(R.id.empty_text)).setText(emptyText());
 
         final Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
@@ -108,6 +111,10 @@ public abstract class MediaScrollingActivity extends BaldActivity {
     protected abstract void setupBeforeAdapter();
 
     protected abstract CharSequence title();
+
+    protected abstract CharSequence emptyText();
+
+    protected abstract @DrawableRes int emptyIcon();
 
     public class MediaRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<MediaRecyclerViewAdapter.ViewHolder> {
         private final LayoutInflater layoutInflater;

@@ -69,6 +69,16 @@ public class PhotosActivity extends MediaScrollingActivity implements Constants.
     }
 
     @Override
+    protected CharSequence emptyText() {
+        return getString(R.string.no_photos);
+    }
+
+    @Override
+    protected int emptyIcon() {
+        return R.drawable.photo_on_background;
+    }
+
+    @Override
     protected Cursor cursor(ContentResolver contentResolver) {
         return contentResolver.query(IMAGES_URI, PROJECTION, null, null, SORT_ORDER);
     }

@@ -20,6 +20,10 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
     <path
-        android:fillColor="?bald_decoration_on_background"
-        android:pathData="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z" />
+        android:fillColor="@android:color/transparent"
+        android:pathData="M6.5,15.5 L12,10 L17.5,15.5"
+        android:strokeColor="?bald_text_secondary"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2.2" />
 </vector>

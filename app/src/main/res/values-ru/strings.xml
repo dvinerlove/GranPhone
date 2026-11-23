@@ -387,6 +387,8 @@
     <string name="discard">Сбросить</string>
     <string name="no_recent_calls">Нет недавних вызовов</string>
     <string name="no_apps">Нет приложений</string>
+    <string name="no_photos">Нет фотографий</string>
+    <string name="no_videos">Нет видео</string>
     <string name="apps_sort_method">Сортировка приложений</string>
     <string name="apps_sort_method_subtext">Выберите: приложения одной сеткой или по группам по буквам</string>
     <string name="groups">Группы</string>

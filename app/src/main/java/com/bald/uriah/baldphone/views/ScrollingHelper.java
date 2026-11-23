@@ -77,6 +77,7 @@ public class ScrollingHelper extends ConstraintLayout {
     private boolean aViewAdded = false,
             programmerAwareOfUsingNonModularViews = false,
             gone,
+            arrowsVisible = true,
             horizontalScrolling = false;
 
     @IdRes
@@ -94,8 +95,6 @@ public class ScrollingHelper extends ConstraintLayout {
                 RecyclerView.Adapter<?> adapter = ((RecyclerView) child).getAdapter();
                 if (adapter != null && emptyView != null) {
                     if (adapter.getItemCount() == 0) {
-                        if (!gone)
-                            setArrowsVisibility(false);
                         if (emptyView instanceof TextView) {
                             ((TextView) emptyView).setText(empty);
                         } else
@@ -105,9 +104,9 @@ public class ScrollingHelper extends ConstraintLayout {
                             ((TextView) emptyView).setText("");
                         } else
                             emptyView.setVisibility(INVISIBLE);
-                        if (!gone)
-                            setArrowsVisibility(true);
                     }
+                    if (!gone)
+                        post(ScrollingHelper.this::updateArrowsVisibility);
                 }
             }
 
@@ -206,6 +205,20 @@ public class ScrollingHelper extends ConstraintLayout {
             scrollerHandler();
         }
 
+    }
+
+    /**
+     * The arrows are the only scroll mechanism for users who can't swipe —
+     * hide them ONLY when the child can't scroll at all in either direction.
+     */
+    private void updateArrowsVisibility() {
+        if (child == null || gone || whereBar == TOP_AND_BOTTOM)
+            return;
+        final boolean show = child.canScrollVertically(-1) || child.canScrollVertically(1);
+        if (show != arrowsVisible) {
+            arrowsVisible = show;
+            setArrowsVisibility(show);
+        }
     }
 
     private void setArrowsVisibility(boolean visible) {
@@ -465,6 +478,7 @@ public class ScrollingHelper extends ConstraintLayout {
             return false;
         });
 
+        getViewTreeObserver().addOnGlobalLayoutListener(this::updateArrowsVisibility);
     }
 
     @IntDef({RIGHT, LEFT, UP, DOWN, NO})
