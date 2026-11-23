@@ -16,9 +16,11 @@
   ~ limitations under the License.
   -->
 
+<!-- List-row surface: name kept for Java call sites, but rows are cards now —
+     bald_card fill + 16dp corners (dialog_screen_card), rounded state feedback. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/btn_disabled" android:state_enabled="false" />
-    <item android:drawable="@drawable/btn_clicked_rectangle" android:state_enabled="true" android:state_pressed="true" />
-    <item android:drawable="@drawable/btn_focused_rectangle" android:state_enabled="true" android:state_focused="true" />
-    <item android:drawable="@drawable/btn_enabled_rectangle" android:state_enabled="true" />
+    <item android:drawable="@drawable/btn_clicked" android:state_enabled="true" android:state_pressed="true" />
+    <item android:drawable="@drawable/btn_focused" android:state_enabled="true" android:state_focused="true" />
+    <item android:drawable="@drawable/dialog_screen_card" android:state_enabled="true" />
 </selector>

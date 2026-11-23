@@ -436,4 +436,20 @@
     <string name="stay">הישאר</string>
     <string name="settings_for_user">למשתמש</string>
     <string name="settings_for_helper">לעוזר</string>
+    <string name="pin_to_home">נעיצה למסך הבית</string>
+    <string name="unpin_from_home">הסרה ממסך הבית</string>
+    <string name="write_call_log_subtext">ההרשאה הזו נדרשת כדי לצפות ולנהל את היסטוריית השיחות</string>
+    <string name="cd_previous_page">עמוד קודם</string>
+    <string name="cd_next_page">עמוד הבא</string>
+    <string name="cd_space">רווח</string>
+    <string name="cd_numbers">מספרים</string>
+    <string name="cd_letters">אותיות</string>
+    <string name="cd_play_pause">הפעלה או השהייה</string>
+    <string name="cd_media_item">תמונה או סרטון</string>
+    <string name="cd_pill_blue">כחול</string>
+    <string name="cd_pill_red">אדום</string>
+    <string name="cd_pill_gray">אפור</string>
+    <string name="cd_pill_yellow">צהוב</string>
+    <string name="cd_pill_green">ירוק</string>
+    <string name="cd_pill_custom">צבע מותאם</string>
 </resources>

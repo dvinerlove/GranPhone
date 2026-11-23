@@ -37,7 +37,7 @@
             android:gravity="center"
             android:text="@string/choose_sunday"
             android:textColor="@color/day_chip_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/small" />
 
         <CheckBox
             android:id="@+id/monday"
@@ -50,7 +50,7 @@
             android:gravity="center"
             android:text="@string/choose_monday"
             android:textColor="@color/day_chip_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/small" />
 
         <CheckBox
             android:id="@+id/tuesday"
@@ -63,7 +63,7 @@
             android:gravity="center"
             android:text="@string/choose_tuesday"
             android:textColor="@color/day_chip_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/small" />
 
         <CheckBox
             android:id="@+id/wednesday"
@@ -76,7 +76,7 @@
             android:gravity="center"
             android:text="@string/choose_wednesday"
             android:textColor="@color/day_chip_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/small" />
     </LinearLayout>
 
     <LinearLayout
@@ -95,7 +95,7 @@
             android:gravity="center"
             android:text="@string/choose_thursday"
             android:textColor="@color/day_chip_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/small" />
 
         <CheckBox
             android:id="@+id/friday"
@@ -108,7 +108,7 @@
             android:gravity="center"
             android:text="@string/choose_friday"
             android:textColor="@color/day_chip_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/small" />
 
         <CheckBox
             android:id="@+id/saturday"
@@ -121,7 +121,7 @@
             android:gravity="center"
             android:text="@string/choose_saturday"
             android:textColor="@color/day_chip_text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/small" />
 
         <Space
             android:layout_width="0dp"

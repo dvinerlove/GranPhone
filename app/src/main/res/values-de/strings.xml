@@ -413,4 +413,20 @@ Tippe auf \"+ Tablette\" unten.</string>
     <string name="stay">Bleiben</string>
     <string name="settings_for_user">Für den Nutzer</string>
     <string name="settings_for_helper">Für den Helfer</string>
+    <string name="pin_to_home">Zum Startbildschirm hinzufügen</string>
+    <string name="unpin_from_home">Vom Startbildschirm entfernen</string>
+    <string name="write_call_log_subtext">Diese Berechtigung wird benötigt, um den Anrufverlauf anzuzeigen und zu verwalten.</string>
+    <string name="cd_previous_page">Vorherige Seite</string>
+    <string name="cd_next_page">Nächste Seite</string>
+    <string name="cd_space">Leertaste</string>
+    <string name="cd_numbers">Zahlen</string>
+    <string name="cd_letters">Buchstaben</string>
+    <string name="cd_play_pause">Wiedergabe oder Pause</string>
+    <string name="cd_media_item">Foto oder Video</string>
+    <string name="cd_pill_blue">Blau</string>
+    <string name="cd_pill_red">Rot</string>
+    <string name="cd_pill_gray">Grau</string>
+    <string name="cd_pill_yellow">Gelb</string>
+    <string name="cd_pill_green">Grün</string>
+    <string name="cd_pill_custom">Eigene Farbe</string>
 </resources>

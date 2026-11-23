@@ -63,7 +63,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="?attr/bald_text_primary"
-        android:textSize="20sp" />
+        android:textSize="@dimen/medium" />
 
     <TextView
         android:id="@+id/repeating_days"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:textColor="?attr/bald_text_secondary"
-        android:textSize="16sp" />
+        android:textSize="@dimen/small" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -45,13 +45,15 @@
     <color name="bald_text_on_key_light">@color/bald_text_on_background_light</color>
     <color name="bald_surface_light">#F2F4F7</color>
     <color name="bald_card_light">#FFFFFF</color>
-    <color name="bald_card_border_light">#E2E5E9</color>
+    <color name="bald_card_border_light">#7F8890</color>
     <color name="bald_brand_light">#2E7D32</color>
     <color name="bald_danger_light">#D32F2F</color>
     <color name="bald_info_light">#1565C0</color>
     <color name="bald_text_primary_light">#14171A</color>
     <color name="bald_text_secondary_light">#4A5560</color>
     <color name="bald_text_on_variant_light">#FFFFFF</color>
+    <!-- gold icon on light surfaces (raw #FFCF40 is 1.5:1 on white cards) -->
+    <color name="bald_gold_light">#A87800</color>
     <!--/Light Theme-->
 
 
@@ -79,13 +81,14 @@
     <color name="bald_text_on_key_dark">#cdd4db</color>
     <color name="bald_surface_dark">#101418</color>
     <color name="bald_card_dark">#1C2126</color>
-    <color name="bald_card_border_dark">#2E3439</color>
+    <color name="bald_card_border_dark">#5A636C</color>
     <color name="bald_brand_dark">#4CAF50</color>
     <color name="bald_danger_dark">#E57373</color>
     <color name="bald_info_dark">#64B5F6</color>
     <color name="bald_text_primary_dark">#F2F4F7</color>
     <color name="bald_text_secondary_dark">#B0B8C0</color>
     <color name="bald_text_on_variant_dark">#14171A</color>
+    <color name="bald_gold_dark">@color/gold</color>
     <!--/dark Theme-->
 
 </resources>

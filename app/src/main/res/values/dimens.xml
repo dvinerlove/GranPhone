@@ -15,11 +15,13 @@
   -->
 
 <resources>
+    <!-- Type scale (DESIGN.md §3): tiny 14 caption, small 18 label,
+         medium 20 body, large 24 title, huge 28 display; heroes are inline sp. -->
     <dimen name="huge">28sp</dimen>
-    <dimen name="large">21sp</dimen>
-    <dimen name="medium">17sp</dimen>
-    <dimen name="small">13sp</dimen>
-    <dimen name="tiny">8sp</dimen>
+    <dimen name="large">24sp</dimen>
+    <dimen name="medium">20sp</dimen>
+    <dimen name="small">18sp</dimen>
+    <dimen name="tiny">14sp</dimen>
     <dimen name="btn_corners_pill_radius">500dp</dimen>
     <dimen name="transparent_length_in_scrollers">20dp</dimen>
     <dimen name="pin_radius">13dp</dimen>

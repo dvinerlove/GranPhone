@@ -14,13 +14,18 @@
   ~ limitations under the License.
   -->
 
-<!-- Call-log row — contacts-list look: optional day header + divider, avatar,
-     name, call-type icon + worded label (missed = danger), time. -->
+<!-- Call-log row card — contacts-list look: optional day header, avatar,
+     name, call-type icon + worded label (missed = danger), time.
+     Card separation replaces the divider. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/contact_row_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="88dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="6dp"
     android:orientation="vertical">
 
     <com.bald.uriah.baldphone.views.BaldButton
@@ -33,15 +38,16 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textColor="?bald_text_secondary"
-        android:textSize="24sp"
+        android:textSize="@dimen/large"
         android:textStyle="bold"
         android:visibility="gone" />
 
+    <!-- kept for the adapter's id contract; card gaps are the divider -->
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?bald_decoration_on_background"
+        android:background="@android:color/transparent"
         android:visibility="gone" />
 
     <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
@@ -69,8 +75,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="?bald_text_on_background"
-                android:textSize="24sp"
+                android:textColor="?bald_text_primary"
+                android:textSize="@dimen/large"
                 android:textStyle="bold" />
         </FrameLayout>
 
@@ -87,8 +93,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="?bald_text_on_button"
-                android:textSize="22sp"
+                android:textColor="?bald_text_primary"
+                android:textSize="@dimen/large"
                 android:transitionName="bald_bar_title_animation" />
 
             <LinearLayout
@@ -109,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/small" />
             </LinearLayout>
         </LinearLayout>
 
@@ -120,7 +126,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:textColor="?bald_text_secondary"
-            android:textSize="18sp" />
+            android:textSize="@dimen/small" />
     </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
 
 </LinearLayout>

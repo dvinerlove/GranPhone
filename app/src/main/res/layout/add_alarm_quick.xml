@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/current_time"
                 android:textColor="?attr/bald_text_secondary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <TextClock
                 android:id="@+id/clock"
@@ -69,7 +69,7 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/invoked_in"
                 android:textColor="?attr/bald_text_secondary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                     android:background="@drawable/day_chip"
                     android:gravity="center"
                     android:textColor="@color/day_chip_text"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/small" />
 
                 <com.bald.uriah.baldphone.views.BaldButton
                     android:id="@+id/preset_5"
@@ -137,7 +137,7 @@
                     android:background="@drawable/day_chip"
                     android:gravity="center"
                     android:textColor="@color/day_chip_text"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/small" />
 
                 <com.bald.uriah.baldphone.views.BaldButton
                     android:id="@+id/preset_10"
@@ -148,7 +148,7 @@
                     android:background="@drawable/day_chip"
                     android:gravity="center"
                     android:textColor="@color/day_chip_text"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/small" />
             </LinearLayout>
         </LinearLayout>
         </com.bald.uriah.baldphone.views.ModularScrollView>

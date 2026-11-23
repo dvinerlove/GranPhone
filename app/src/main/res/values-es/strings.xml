@@ -422,4 +422,20 @@ Pulsa «+ Pastilla» abajo.</string>
     <string name="stay">Quedarse</string>
     <string name="settings_for_user">Para el usuario</string>
     <string name="settings_for_helper">Para el asistente</string>
+    <string name="pin_to_home">Anclar a inicio</string>
+    <string name="unpin_from_home">Desanclar de inicio</string>
+    <string name="write_call_log_subtext">Este permiso es necesario para ver y gestionar el historial de llamadas.</string>
+    <string name="cd_previous_page">Página anterior</string>
+    <string name="cd_next_page">Página siguiente</string>
+    <string name="cd_space">Espacio</string>
+    <string name="cd_numbers">Números</string>
+    <string name="cd_letters">Letras</string>
+    <string name="cd_play_pause">Reproducir o pausar</string>
+    <string name="cd_media_item">Foto o video</string>
+    <string name="cd_pill_blue">Azul</string>
+    <string name="cd_pill_red">Rojo</string>
+    <string name="cd_pill_gray">Gris</string>
+    <string name="cd_pill_yellow">Amarillo</string>
+    <string name="cd_pill_green">Verde</string>
+    <string name="cd_pill_custom">Color personalizado</string>
 </resources>

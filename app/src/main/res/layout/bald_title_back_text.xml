@@ -22,7 +22,7 @@
     android:minWidth="48dp"
     android:paddingStart="12dp"
     android:paddingEnd="12dp"
-    android:alpha="0.75"
+    android:alpha="0.85"
     android:background="@drawable/style_for_buttons_transparent"
     android:clickable="true"
     android:ellipsize="end"

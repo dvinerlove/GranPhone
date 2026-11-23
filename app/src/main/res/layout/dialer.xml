@@ -43,6 +43,7 @@
         android:background="@drawable/dialer_input_background"
         android:gravity="center"
         android:maxLines="2"
+        android:ellipsize="end"
         android:minHeight="56dp"
         android:paddingStart="12dp"
         android:paddingTop="6dp"

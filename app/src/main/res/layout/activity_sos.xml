@@ -147,7 +147,7 @@
                             android:layout_height="64dp"
                             android:gravity="center"
                             android:textColor="?bald_text_on_background"
-                            android:textSize="26sp"
+                            android:textSize="@dimen/large"
                             android:textStyle="bold"
                             android:visibility="gone" />
                     </FrameLayout>
@@ -161,7 +161,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textColor="?bald_text_primary"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/large"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -201,7 +201,7 @@
                             android:layout_height="64dp"
                             android:gravity="center"
                             android:textColor="?bald_text_on_background"
-                            android:textSize="26sp"
+                            android:textSize="@dimen/large"
                             android:textStyle="bold"
                             android:visibility="gone" />
                     </FrameLayout>
@@ -215,7 +215,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textColor="?bald_text_primary"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/large"
                         android:textStyle="bold" />
 
                     <ImageView

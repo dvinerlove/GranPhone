@@ -400,4 +400,20 @@ Appuyez sur \"+ Médicament\" en bas.</string>
     <string name="stay">Rester</string>
     <string name="settings_for_user">Pour l’utilisateur</string>
     <string name="settings_for_helper">Pour l’assistant</string>
+    <string name="pin_to_home">Épingler à l’écran d’accueil</string>
+    <string name="unpin_from_home">Désépingler de l’écran d’accueil</string>
+    <string name="write_call_log_subtext">Cette autorisation est nécessaire pour afficher et gérer l’historique des appels.</string>
+    <string name="cd_previous_page">Page précédente</string>
+    <string name="cd_next_page">Page suivante</string>
+    <string name="cd_space">Espace</string>
+    <string name="cd_numbers">Chiffres</string>
+    <string name="cd_letters">Lettres</string>
+    <string name="cd_play_pause">Lecture ou pause</string>
+    <string name="cd_media_item">Photo ou vidéo</string>
+    <string name="cd_pill_blue">Bleu</string>
+    <string name="cd_pill_red">Rouge</string>
+    <string name="cd_pill_gray">Gris</string>
+    <string name="cd_pill_yellow">Jaune</string>
+    <string name="cd_pill_green">Vert</string>
+    <string name="cd_pill_custom">Couleur personnalisée</string>
 </resources>

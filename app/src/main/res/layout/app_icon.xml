@@ -14,12 +14,16 @@
   ~ limitations under the License.
   -->
 
-<!-- Apps list row — same look as the contacts list rows. -->
+<!-- Apps list row card — same look as the contacts list rows. -->
 <com.bald.uriah.baldphone.views.BaldLinearLayoutButton xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="80dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="6dp"
     android:background="@drawable/style_for_buttons_rectangle"
     android:gravity="center_vertical"
     android:orientation="horizontal">
@@ -39,8 +43,8 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="?bald_text_on_button"
-        android:textSize="22sp" />
+        android:textColor="?bald_text_primary"
+        android:textSize="@dimen/large" />
 
     <ImageView
         android:id="@+id/pin"

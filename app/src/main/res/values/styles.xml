@@ -65,6 +65,7 @@
         <item name="bald_text_primary">@color/bald_text_primary_light</item>
         <item name="bald_text_secondary">@color/bald_text_secondary_light</item>
         <item name="bald_text_on_variant">@color/bald_text_on_variant_light</item>
+        <item name="bald_gold">@color/bald_gold_light</item>
     </style>
 
     <style name="bald_dark" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -102,6 +103,7 @@
         <item name="bald_text_primary">@color/bald_text_primary_dark</item>
         <item name="bald_text_secondary">@color/bald_text_secondary_dark</item>
         <item name="bald_text_on_variant">@color/bald_text_on_variant_dark</item>
+        <item name="bald_gold">@color/bald_gold_dark</item>
     </style>
 
 
@@ -189,7 +191,7 @@
         <item name="android:paddingStart">32dp</item>
         <item name="android:paddingEnd">32dp</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/call_button_text</item>
         <item name="android:textSize">36sp</item>
         <item name="android:textStyle">bold</item>
     </style>

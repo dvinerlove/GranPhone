@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="?bald_text_primary"
-        android:textSize="24sp" />
+        android:textSize="@dimen/large" />
 
     <com.bald.uriah.baldphone.views.MaxHeightScrollView
         android:id="@+id/dialog_screen_scroll"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.2"
                 android:textColor="?bald_text_secondary"
-                android:textSize="20sp" />
+                android:textSize="@dimen/medium" />
 
             <LinearLayout
                 android:id="@+id/dialog_screen_options"

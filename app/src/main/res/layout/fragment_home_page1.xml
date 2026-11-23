@@ -55,7 +55,7 @@
             android:format24Hour="@string/date_format"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:textSize="22sp"
+            android:textSize="@dimen/large"
             android:visibility="visible" />
     </LinearLayout>
 

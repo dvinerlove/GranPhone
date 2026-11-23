@@ -39,7 +39,7 @@
             android:minHeight="56dp"
             android:text="@string/call_log"
             android:textColor="?bald_text_primary"
-            android:textSize="20sp" />
+            android:textSize="@dimen/medium" />
 
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_show"

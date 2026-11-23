@@ -54,7 +54,7 @@
                 android:labelFor="@id/et_name"
                 android:text="@string/name"
                 android:textColor="?bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                 android:layout_marginTop="4dp"
                 android:text="@string/contact_must_has_name"
                 android:textColor="?bald_danger"
-                android:textSize="16sp"
+                android:textSize="@dimen/small"
                 android:visibility="gone" />
 
             <TextView
@@ -126,7 +126,7 @@
                 android:labelFor="@id/et_mobile_number"
                 android:text="@string/mobile_phone_number"
                 android:textColor="?bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <com.bald.uriah.baldphone.views.BaldEditText
                 android:id="@+id/et_mobile_number"
@@ -151,7 +151,7 @@
                 android:labelFor="@id/et_home_number"
                 android:text="@string/home_phone_number"
                 android:textColor="?bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <com.bald.uriah.baldphone.views.BaldEditText
                 android:id="@+id/et_home_number"
@@ -176,7 +176,7 @@
                 android:labelFor="@id/et_address"
                 android:text="@string/address"
                 android:textColor="?bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <com.bald.uriah.baldphone.views.BaldEditText
                 android:id="@+id/et_address"
@@ -201,7 +201,7 @@
                 android:labelFor="@id/et_mail"
                 android:text="@string/mail"
                 android:textColor="?bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <com.bald.uriah.baldphone.views.BaldEditText
                 android:id="@+id/et_mail"

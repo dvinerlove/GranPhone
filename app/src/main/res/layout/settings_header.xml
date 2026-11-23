@@ -25,4 +25,4 @@
     android:paddingEnd="16dp"
     android:paddingBottom="8dp"
     android:textColor="?bald_text_secondary"
-    android:textSize="18sp" />
+    android:textSize="@dimen/small" />

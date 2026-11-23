@@ -55,7 +55,7 @@
                 android:labelFor="@id/reminder_edit_name"
                 android:text="@string/pill_name"
                 android:textColor="?attr/bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <com.bald.uriah.baldphone.views.BaldEditText
                 android:id="@+id/reminder_edit_name"
@@ -78,7 +78,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/time"
                 android:textColor="?attr/bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <com.bald.uriah.baldphone.views.BaldMultipleSelection
                 android:id="@+id/multiple_selection"
@@ -94,7 +94,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/color"
                 android:textColor="?attr/bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -188,7 +188,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/repeat"
                 android:textColor="?attr/bald_text_primary"
-                android:textSize="18sp" />
+                android:textSize="@dimen/small" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -215,7 +215,7 @@
                     android:paddingEnd="8dp"
                     android:text="@string/repeats_every_day"
                     android:textColor="?attr/bald_text_primary"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/medium" />
 
                 <View
                     android:layout_width="match_parent"
@@ -231,7 +231,7 @@
                     android:layout_marginBottom="4dp"
                     android:text="@string/specific_days"
                     android:textColor="?attr/bald_text_secondary"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/small" />
 
                 <include layout="@layout/day_chips" />
             </LinearLayout>
