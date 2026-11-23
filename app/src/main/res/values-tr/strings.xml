@@ -89,7 +89,8 @@
     <string name="clear_data">Tüm hafızayı sil</string>
     <string name="clear_data_subtext">Tüm bilgileri silmek istediğinize emin misiniz?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Emin misiniz?\nBasmak bütün bilgilerinizi siler!</string>
+    <string name="clear_data_subtext3">Emin misiniz?
+Bütün bilgileriniz silinecek!</string>
     <string name="clock">Saat</string>
     <string name="coming_soon">Gelecek/Daha işlemde!</string>
     <string name="connection_settings">Bağlantı</string>
@@ -281,12 +282,12 @@ Aşağıdaki \"Alarm\" veya
 Aşağıdaki \"+ İlaç\"a basın.</string>
     <string name="clear_all_notifications">Tüm bildirimleri temizle</string>
     <string name="clear_cache_subtext">Önbelleyi temizlemek istediğinize emin misiniz?\nUygulama kısayolları kaldırılacak!</string>
-    <string name="permissions_calm">Merhaba, GranPhone\'un düzgün çalışması için aşağıdakı izinleri vermelisiniz. Bazı izinler korkunç seslene bilir, ama GranPhone\'un telefonunuzun arayüzünün yerini almasının başka bir yolu yok. Bu işlem tamamen zararsızdır ve hiç bir bilginiz ele geçirilmeyecek. Tamama basarak şu izinleri veriniz.</string>
+    <string name="permissions_calm">Merhaba, GranPhone\'un düzgün çalışması için aşağıdakı izinleri vermelisiniz. Bazı izinler korkunç seslene bilir, ama GranPhone\'un telefonunuzun arayüzünün yerini almasının başka bir yolu yok. Bu işlem tamamen zararsızdır ve hiç bir bilginiz ele geçirilmeyecek. İzinleri vermek için devam edin veya GranPhone\'dan çıkın.</string>
     <string name="pending_update">Bekleyen güncelleme</string>
     <string name="download">İndir</string>
     <string name="install_updates">Güncellemeleri kurun</string>
     <string name="install_updates_subtext">GranPhone\'u güncellemek için şu izin gerekli</string>
-    <string name="a_new_update_is_available">Yeni güncelleme hazır!\nGüncellemeler GranPhone\'un hızlı ve pürüzsüz çalışması için önemli.\nTamama basarak indiriniz.</string>
+    <string name="a_new_update_is_available">Yeni güncelleme hazır!\nGüncellemeler GranPhone\'un hızlı ve pürüzsüz çalışması için önemli.\nDevam ederek indiriniz.</string>
     <string name="current_version">Şimdiki sürüm:\n</string>
     <string name="new_version">Yeni sürüm:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Yeni güncellemeler indirilmeye hazır.</string>

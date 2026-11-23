@@ -90,7 +90,8 @@
     <string name="clear_data">Wyczyść dane</string>
     <string name="clear_data_subtext">Napewno chcesz wyczyścić dane?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">napewno?\npotwierdzenie wyczyści wszystkie dane!</string>
+    <string name="clear_data_subtext3">napewno?
+wszystkie dane zostaną wyczyszczone!</string>
     <string name="clock">Zegar</string>
     <string name="coming_soon">Wkrótce!</string>
     <string name="connection_settings">Połączenie</string>
@@ -281,13 +282,13 @@ Naciśnij \"+ Tabletka\" poniżej.</string>
     <string name="clear_cache_subtext">Napewno chcesz uzunąć cały cachce ?\nSkróty aplikacji zostaną usunięte w wyniku tej operacji
     </string>
     <string name="permissions_calm">Witaj, GranPhone musi mieć następujące dozwolenia aby funkcjonować. Kilka z nich może wydawać się niepotrzebnych, ale tylko tak GranPhone może zastąpić interfejs telefonu.
-      Nie są wysyłane żadne dane. Wciśnij OK aby przyznać dozwolenia lub Anuluj aby wyjść
+      Nie są wysyłane żadne dane. Kontynuuj, aby przyznać dozwolenia, lub wyjdź z GranPhone
     </string>
     <string name="pending_update">Oczekująca aktualizacja</string>
     <string name="download">Pobierz</string>
     <string name="install_updates">Zainstaluj aktualizacje</string>
     <string name="install_updates_subtext">To dozwolenie jest wymagane aby zaktualizować GranPhone</string>
-    <string name="a_new_update_is_available">Dostępna jest nowa wersja GranPhone\nAktualizacje są ważne ze wzgledów bezpieczeństwa i płynności działania\nNaciśnij OK aby pobrać aktualizacje.
+    <string name="a_new_update_is_available">Dostępna jest nowa wersja GranPhone\nAktualizacje są ważne ze wzgledów bezpieczeństwa i płynności działania\nKontynuuj, aby pobrać aktualizacje.
     </string>
     <string name="current_version">Obecna wersja:\n</string>
     <string name="new_version">Nowa wersja:\n</string>

@@ -87,7 +87,8 @@
     <string name="clear_data">Apagar Todos os Dados</string>
     <string name="clear_data_subtext">Tem a certeza que deseja apagar todos os dados?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Certeza absoluta?\nPressionar "Sim" apagará todos os dados do aplicativo!</string>
+    <string name="clear_data_subtext3">Certeza absoluta?
+Todos os dados do aplicativo serão apagados!</string>
     <string name="clock">Relógio</string>
     <string name="coming_soon">Em breve!</string>
     <string name="connection_settings">Conexão</string>
@@ -277,12 +278,12 @@ Toque em \"+ Medicamento\" abaixo.</string>
     <string name="clear_all_notifications">Limpar Todas as Notificações</string>
     <string name="clear_cache_subtext">Tem a certeza que deseja apagar o cache?\nOs Aplicativos e Atalhos também serão removidos!
     </string>
-    <string name="permissions_calm">Olá, o GranPhone necessita das seguintes permissões para poder substituir a interface do telefone. Algumas soam assustadoramente, mas nenhum dado será coletado e não causará problemas em seu telefone. Pressione OK para conceder as permissões ou Não para saír do GranPhone.</string>
+    <string name="permissions_calm">Olá, o GranPhone necessita das seguintes permissões para poder substituir a interface do telefone. Algumas soam assustadoramente, mas nenhum dado será coletado e não causará problemas em seu telefone. Continue para conceder as permissões ou saia do GranPhone.</string>
     <string name="pending_update">Atualização Pendente</string>
     <string name="download">Baixar</string>
     <string name="install_updates">Instalar Atualizações</string>
     <string name="install_updates_subtext">Esta permissão é necessária para atualizar o GranPhone</string>
-    <string name="a_new_update_is_available">Novas atualizações disponíveis! As atualizações são necessárias para manter o GranPhone funcionando corretamente \nPressione OK para atualizar.</string>
+    <string name="a_new_update_is_available">Novas atualizações disponíveis! As atualizações são necessárias para manter o GranPhone funcionando corretamente \nContinue para atualizar.</string>
     <string name="current_version">Versão Atual:\n</string>
     <string name="new_version">Nova Versão:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Existem novas atualizações.</string>

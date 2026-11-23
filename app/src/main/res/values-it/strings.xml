@@ -87,7 +87,8 @@
     <string name="clear_data">Elimina dati</string>
     <string name="clear_data_subtext">Sei sicuro di voler eliminare tutti i dati? La app tornerà come appena installata.</string>
     <string name="clear_data_subtext2">Sicuro al 100%?</string>
-    <string name="clear_data_subtext3">Sicuro sicuro?\nToccando Sì eliminerai tutti i dati!</string>
+    <string name="clear_data_subtext3">Sicuro sicuro?
+Tutti i dati verranno eliminati!</string>
     <string name="clock">Orologio</string>
     <string name="coming_soon">In arrivo prossimamente!</string>
     <string name="connection_settings">Connessione</string>
@@ -281,14 +282,14 @@ Tocca \"+ Pillola\" in basso.</string>
     </string>
     <string name="permissions_calm">Ciao, GranPhone deve avere le seguenti autorizzazioni per funzionare. Alcune di queste
         possono spaventarti, ma è l\'unico modo in cui GranPhone può sostituire l\'interfaccia del telefono. Nessuna informazione viene presa e non causa
-        danni. Premi OK per fornire le autorizzazioni o premi No per uscire da GranPhone.
+        danni. Continua per fornire le autorizzazioni o esci da GranPhone.
     </string>
     <string name="pending_update">In attesa di aggiornamento</string>
     <string name="download">Download</string>
     <string name="install_updates">Installa gli aggiornamenti</string>
     <string name="install_updates_subtext">Autorizzazione necessaria per l\'auto-aggiornamento di GranPhone.</string>
     <string name="a_new_update_is_available">Un nuovo aggiornamento è disponibile!\nGli aggiornamenti sono importanti perché permettono a GranPhone di funzionare
-        senza problemi.\nPremi OK per scaricare.
+        senza problemi.\nContinua per scaricare.
     </string>
     <string name="current_version">Versione attuale:\n</string>
     <string name="new_version">Nuova versione:\n</string>

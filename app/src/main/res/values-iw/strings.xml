@@ -304,15 +304,12 @@
         מוצמדים
     </string>
     <string name="permissions_calm">הי, GranPhone חייב לקבל את ההרשאות הבאות בשביל לרוץ. חלק נשמעות מפחיד, אבל זוהי הדרך
-        היחידה שבה GranPhone יכול להחליף את ממשק הטלפון. שום מידע לא נלקח ומתן ההרשאות לא גורם לשום נזק. לחץ אישור על
-        מנת לאפשר את ההרשאות או לא בשביל לצאת מGranPhone.
-    </string>
+        היחידה שבה GranPhone יכול להחליף את ממשק הטלפון. שום מידע לא נלקח ומתן ההרשאות לא גורם לשום נזק. המשך כדי לאפשר את ההרשאות או צא מGranPhone.</string>
     <string name="pending_update">עדכון מחכה</string>
     <string name="download">הורד</string>
     <string name="install_updates">התקן עדכונים</string>
     <string name="install_updates_subtext">אנא אפשר לGranPhone להתקין עדכונים.</string>
-    <string name="a_new_update_is_available">עדכון חדש מחכה!\nעדכונים הם חשובים על מנת ש-GranPhone ירוץ בצורה חלקה.\nלחץ
-        על אישור על מנת לעדכן
+    <string name="a_new_update_is_available">עדכון חדש מחכה!\nעדכונים הם חשובים על מנת ש-GranPhone ירוץ בצורה חלקה.\nהמשך כדי לעדכן
     </string>
     <string name="current_version">גרסה נוכחית:\n</string>
     <string name="new_version">גרסה חדשה:\n</string>

@@ -92,7 +92,8 @@
     <string name="clear_data">सभी डेटा साफ़ करें</string>
     <string name="clear_data_subtext">क्या आप वाकई सभी उपयोगकर्ता डेटा हटाना चाहते हैं? बाल्डफोन ऐप नए सिरे से नई स्थिति में वापस आ जाएगा, जैसे कि इसे अभी इंस्टॉल किया गया हो।</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">पक्का?\nहाँ दबाने से सारा डेटा हट जाएगा!</string>
+    <string name="clear_data_subtext3">पक्का?
+सारा डेटा हट जाएगा!</string>
     <string name="clock">घड़ी</string>
     <string name="coming_soon">जल्द आ रहा है!</string>
     <string name="connection_settings">संबंध</string>
@@ -294,14 +295,14 @@
     <string name="clear_cache_subtext">क्या आप वाकई कैशे की सामग्री को हटाना चाहते हैं? अस्थायी फ़ाइलों को हटाने से कुछ बाल्डफ़ोन ऐप की खराबी का समाधान हो सकता है, लेकिन होम स्क्रीन में बनाए गए शॉर्टकट भी हटा दिए जाएंगे।</string>
     <string name="permissions_calm">नमस्ते, बाल्डफोन को चलाने के लिए निम्नलिखित अनुमतियां होनी चाहिए। उनमे से कुछ
         ध्वनि डरावना है, लेकिन यह एकमात्र तरीका है जिससे बाल्डफोन फोन के इंटरफेस को बदल सकता है। कोई डेटा नहीं लिया जाता है और इसका कारण बनता है
-        कोई नुकसान नहीं। GranPhone से बाहर निकलने के लिए अनुमति या नहीं देने के लिए OK दबाएं।
+        कोई नुकसान नहीं। अनुमतियां देने के लिए जारी रखें या GranPhone से बाहर निकलें।
     </string>
     <string name="pending_update">लंबित अद्यतन</string>
     <string name="download">डाउनलोड</string>
     <string name="install_updates">अद्यतनों को स्थापित करें</string>
     <string name="install_updates_subtext">बाल्डफोन को अपडेट करने के लिए इस अनुमति की आवश्यकता है</string>
     <string name="a_new_update_is_available">एक नया अपडेट उपलब्ध है!\n बाल्डफोन को चालू रखने के लिए अपडेट महत्वपूर्ण हैं
-        सुचारू रूप से।\nडाउनलोड करने के लिए ओके दबाएं।
+        सुचारू रूप से।\nडाउनलोड करने के लिए जारी रखें।
     </string>
     <string name="current_version">वर्तमान संस्करण:\n</string>
     <string name="new_version">नया संस्करण:\n</string>

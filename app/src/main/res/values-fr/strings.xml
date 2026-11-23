@@ -88,7 +88,8 @@
     <string name="clear_data">Effacer toutes les données</string>
     <string name="clear_data_subtext">Êtes-vous sûr(e) de vouloir effacer toutes les données ?</string>
     <string name="clear_data_subtext2">100% ?</string>
-    <string name="clear_data_subtext3">Sûr(e) ?\nAppuyer sur Oui effacera toutes les données !</string>
+    <string name="clear_data_subtext3">Sûr(e) ?
+Toutes les données seront effacées !</string>
     <string name="clock">Horloge</string>
     <string name="coming_soon">Prochainement !</string>
     <string name="connection_settings">Connexion</string>
@@ -283,13 +284,13 @@ Appuyez sur \"+ Médicament\" en bas.</string>
     <string name="clear_all_notifications">Effacer toutes les notifications</string>
     <string name="clear_cache_subtext">Êtes-vous sûr(e) de vouloir effacer tout le cache ?\nLes raccourcis d\'applications seront aussi supprimés !
     </string>
-    <string name="permissions_calm">Bonjour, GranPhone doit avoir les permissions suivantes pour fonctionner. Certaines font peur mais c\'est la seule manière pour GranPhone de remplacer l\'interface de votre téléphone. Aucune donnée n\'est prise et vous n\'encourez aucun risque. Appuyez sur OK pour accorder les permissions, sinon vous pouvez fermer GranPhone.
+    <string name="permissions_calm">Bonjour, GranPhone doit avoir les permissions suivantes pour fonctionner. Certaines font peur mais c\'est la seule manière pour GranPhone de remplacer l\'interface de votre téléphone. Aucune donnée n\'est prise et vous n\'encourez aucun risque. Continuez pour accorder les permissions, ou quittez GranPhone.
     </string>
     <string name="pending_update">Mise à jour en attente</string>
     <string name="download">Télécharger</string>
     <string name="install_updates">Installer les mises à jour</string>
     <string name="install_updates_subtext">Cette permission est requise pour mettre à jour GranPhone</string>
-    <string name="a_new_update_is_available">Une nouvelle mise à jour est disponible !\nLes mises à jour sont importantes pour que GranPhone puisse continuer à fonctionner normalement.\nAppuyez sur OK pour télécharger.
+    <string name="a_new_update_is_available">Une nouvelle mise à jour est disponible !\nLes mises à jour sont importantes pour que GranPhone puisse continuer à fonctionner normalement.\nContinuez pour télécharger.
     </string>
     <string name="current_version">Version actuelle :\n</string>
     <string name="new_version">Nouvelle version :\n</string>

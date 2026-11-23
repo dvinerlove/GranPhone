@@ -89,7 +89,8 @@
     <string name="clear_data">Hapus Semua Data</string>
     <string name="clear_data_subtext">Apakah Anda yakin ingin menghapus semua data?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">yakin?\nMenekan ya akan menghapus semua data!</string>
+    <string name="clear_data_subtext3">yakin?
+Semua data akan dihapus!</string>
     <string name="clock">Jam</string>
     <string name="coming_soon">Segera Hadir!</string>
     <string name="connection_settings">Sambungan</string>
@@ -292,14 +293,14 @@ Tekan \"+ Pil\" di bawah.</string>
     </string>
     <string name="permissions_calm">Hai, GranPhone membutuhkan perizinan berikut agar bisa berjalan. Beberapa
         mungkin terdengar menakutkan, namun ini satu-satunya cara agar GranPhone bisa menggantikan antarmuka telepon. Tidak ada data yang diambil dan akan menyebabkan
-        masalah. Tekan OK untuk mengizinkan atau TIDAK untuk keluar dari GranPhone.
+        masalah. Lanjutkan untuk mengizinkan atau keluar dari GranPhone.
     </string>
     <string name="pending_update">Pembaruan Tertunda</string>
     <string name="download">Unduh</string>
     <string name="install_updates">Pasang Pembaruan</string>
     <string name="install_updates_subtext">Izin ini diperlukan untuk memperbarui GranPhone</string>
     <string name="a_new_update_is_available">Pembaruan tersedia!\nPembaruan penting untuk untuk menjaga GranPhone berjalan
-        dengan lancar.\nTekan OK untuk mengunduh.
+        dengan lancar.\nLanjutkan untuk mengunduh.
     </string>
     <string name="current_version">Versi Sekarang:\n</string>
     <string name="new_version">Versi Baru:\n</string>

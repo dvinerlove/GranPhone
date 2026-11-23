@@ -91,7 +91,8 @@ ja muuttaa kirkkautta.</string>
     <string name="clear_data">Tyhjää kaikki tiedot</string>
     <string name="clear_data_subtext">Haluatko varmasti poistaa kaikki käyttäjätiedot? GranPhone-sovellus palaa tuoreeseen, juuri asennettuun tilaan.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">varma?\nvalitsemalla kyllä kaikki tiedot poistetaan!</string>
+    <string name="clear_data_subtext3">varma?
+kaikki tiedot poistetaan!</string>
     <string name="clock">Kello</string>
     <string name="coming_soon">Tulossa pian!</string>
     <string name="connection_settings">Yhteys</string>
@@ -293,14 +294,14 @@ Paina \"+ Lääke\" alla.</string>
     <string name="clear_cache_subtext">Haluatko varmasti poistaa välimuistin sisällön? Väliaikaistiedostojen poistaminen voi ratkaista joitain GranPhone-sovelluksen toimintahäiriöitä, mutta myös aloitusnäytölle luodut pikakuvakkeet poistetaan.</string>
     <string name="permissions_calm">Hei, GranPhone tarvitsee seuraavat oikeudet toimiakseen. Osa voi kuulostaa
         pelottavalta, mutta vain niin GranPhone voi korvata käyttöliittymän. Tietoja ei oteta eikä se aiheuta haittaa
-        Paina OK antaaksesi oikeudet tai Ei poistuaksesi GranPhonesta.
+        Jatka antaaksesi oikeudet tai poistu GranPhonesta.
     </string>
     <string name="pending_update">Odottava päivitys</string>
     <string name="download">Lataa</string>
     <string name="install_updates">Asenna päivitykset</string>
     <string name="install_updates_subtext">Tämä lupa tarvitaan GranPhonen päivityksen asentamiseksi</string>
     <string name="a_new_update_is_available">Uusi päivitys on saatavana!\nPäivitykset ovat tärkeitä, jotta GranPhone toimii
-        sujuvasti.\nPaina OK ladataksesi.
+        sujuvasti.\nJatka ladataksesi.
     </string>
     <string name="current_version">Nykyinen versio \n</string>
     <string name="new_version">Uusi versio \n</string>

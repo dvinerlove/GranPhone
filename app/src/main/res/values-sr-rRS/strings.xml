@@ -83,7 +83,8 @@
     <string name="clear_data">Obriši sve podatke</string>
     <string name="clear_data_subtext">Da li ste sigurni da želite da obrišete sve korisničke podatke? GranPhone aplikacija će biti restartovana na početna podešavanja.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">sigurno?\npritiskom na \"da\" obrisaćete sve podatke!</string>
+    <string name="clear_data_subtext3">sigurno?
+svi podaci će biti obrisani!</string>
     <string name="clock">Sat</string>
     <string name="coming_soon">Uskoro dolazi!</string>
     <string name="connection_settings">Veza</string>
@@ -270,12 +271,12 @@ Pritisnite \"Alarm\" ili
 Pritisnite \"+ Lek\" ispod.</string>
     <string name="clear_all_notifications">Obriši sva obeveštenja</string>
     <string name="clear_cache_subtext">Da li ste sigurni da želite da obrišete keširan sadržaj? Brisanje privremenih datoteka može rešiti neke kvarove BoldPhone aplikacije, ali će takodje biti uklonjene i prečice kreirane na početnom ekranu.</string>
-    <string name="permissions_calm">Zdravo, GranPhone mora imate sledeće dozvole kako bi radio. Neke od izgledaju zastrašujuće ali su neophodne kako bi GranPhone zamenio interfejs telefona. Vaši podaci su bezbedni i ostaju privatni. Pritisnite OK da biste odobrili dozvole ili ne za izlazak iz GranPhone-a.</string>
+    <string name="permissions_calm">Zdravo, GranPhone mora imate sledeće dozvole kako bi radio. Neke od izgledaju zastrašujuće ali su neophodne kako bi GranPhone zamenio interfejs telefona. Vaši podaci su bezbedni i ostaju privatni. Nastavite da biste odobrili dozvole ili izađite iz GranPhone-a.</string>
     <string name="pending_update">Ažuriranje na čekanju</string>
     <string name="download">Preuzimanje</string>
     <string name="install_updates">Instalirajte ažuriranja</string>
     <string name="install_updates_subtext">Ova dozvola je potrebna kako bi se GranPhone ažurirao</string>
-    <string name="a_new_update_is_available">Dostupno je novo ažuriranje!\nAžuriranja su važna da bi GranPhone funkcionisao ispravno.\nPritisnite OK za preuzimanje.</string>
+    <string name="a_new_update_is_available">Dostupno je novo ažuriranje!\nAžuriranja su važna da bi GranPhone funkcionisao ispravno.\nNastavite za preuzimanje.</string>
     <string name="current_version">Trenutna verzija:\n</string>
     <string name="new_version">Nova verzija:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Nova ažuriranje su dostupna za preuzimanje.</string>

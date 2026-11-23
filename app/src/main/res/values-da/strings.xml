@@ -85,7 +85,8 @@
     <string name="clear_data">Slet al data</string>
     <string name="clear_data_subtext">Er du sikker på, at du ønsker at slette al brugerdata? GranPhone-app\'en vil vende tilbage til fabriksindstillingerne (som da du lige havde installeret den).</string>
     <string name="clear_data_subtext2">Helt sikker?</string>
-    <string name="clear_data_subtext3">Absolut sikker?\nHvis du trykker "Ja" slettes ALT brugerdata og app\'en mister alle dine indstillinger!</string>
+    <string name="clear_data_subtext3">Absolut sikker?
+ALT brugerdata slettes og app\'en mister alle dine indstillinger!</string>
     <string name="clock">Ur</string>
     <string name="coming_soon">Kommer snart!</string>
     <string name="connection_settings">Forbindelser</string>
@@ -271,13 +272,13 @@ Tryk på \"Alarm\" eller
 Tryk på \"+ Pille\" nedenfor.</string>
     <string name="clear_all_notifications">Ryd alle notifikationer</string>
     <string name="clear_cache_subtext">Er du sikker på, at du vil slette den midlertidige hukommelse? Dette kan afhjælpe småfejl i GranPhone, men vil også slette genvejene på \"skrivebordet\".</string>
-    <string name="permissions_calm">GranPhone har brug for nogle rettigheder for at fungere. Nogle af dem lyder måske ubetryggende, men det er den eneste måde GranPhone kan ændre din telefons udseende, så det bliver bedre for dig. Intet data vil blive taget fra dig eller ødelagt.\nTryk OK for at give app\'en de nødvendige rettigheder eller \"Nej\" for at afslutte GranPhone.
+    <string name="permissions_calm">GranPhone har brug for nogle rettigheder for at fungere. Nogle af dem lyder måske ubetryggende, men det er den eneste måde GranPhone kan ændre din telefons udseende, så det bliver bedre for dig. Intet data vil blive taget fra dig eller ødelagt.\nFortsæt for at give app\'en de nødvendige rettigheder, eller afslut GranPhone.
     </string>
     <string name="pending_update">Afventende opdatering</string>
     <string name="download">Download</string>
     <string name="install_updates">Installér opdateringer</string>
     <string name="install_updates_subtext">Denne rettighed er nødvendig for at kunne opdatere GranPhone.</string>
-    <string name="a_new_update_is_available">En ny opdatering er tilgængelig!\nOpdateringer er vigtige, fordi de sikrer, at GranPhone bliver ved med at fungere godt!\nTryk OK for at downloade.</string>
+    <string name="a_new_update_is_available">En ny opdatering er tilgængelig!\nOpdateringer er vigtige, fordi de sikrer, at GranPhone bliver ved med at fungere godt!\nFortsæt for at downloade.</string>
     <string name="current_version">Nuværende version:\n</string>
     <string name="new_version">Ny version:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Nye opdateringer er klar til at blive downloaded.</string>

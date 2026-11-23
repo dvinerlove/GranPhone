@@ -88,7 +88,8 @@
     <string name="clear_data">Clear All Data</string>
     <string name="clear_data_subtext">Are you sure you want to delete all user data? The GranPhone app will revert in a fresh-new state, as if it were just installed.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">sure?\npressing yes will delete all data!</string>
+    <string name="clear_data_subtext3">sure?
+This will delete all data!</string>
     <string name="clock">Clock</string>
     <string name="coming_soon">Coming Soon!</string>
     <string name="connection_settings">Connection</string>
@@ -301,14 +302,14 @@
     <string name="clear_cache_subtext">Are you sure you want to delete the cache contents? Deleting temporary files may solve some GranPhone app malfunctions, but also shortcuts created in the Home screen will be removed.</string>
     <string name="permissions_calm">Hi, GranPhone must have the following permissions in order to run. Some of them
         sound scary, but it is the only way GranPhone can replace the phone\'s interface. No data is taken and it causes
-        no harm. Press Exit to leave GranPhone or Cancel to grant the permissions.
+        no harm. Continue to grant the permissions, or leave GranPhone.
     </string>
     <string name="pending_update">Pending Update</string>
     <string name="download">Download</string>
     <string name="install_updates">Install Updates</string>
     <string name="install_updates_subtext">This Permission is required in order to update GranPhone</string>
     <string name="a_new_update_is_available">A new update is available!\nUpdates are important to keep GranPhone running
-        smoothly.\nPress Install to download.
+        smoothly.\nContinue to download.
     </string>
     <string name="current_version">Current Version:\n</string>
     <string name="new_version">New Version:\n</string>

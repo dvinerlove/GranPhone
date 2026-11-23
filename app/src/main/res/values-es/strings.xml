@@ -90,7 +90,7 @@
     <string name="clear_data">Borrar todos los datos</string>
     <string name="clear_data_subtext">¿Seguro que quieres borrar todos los datos del usuario? La aplicación de GranPhone volverá al estado inicial, como si la acabaras de instalar.</string>
     <string name="clear_data_subtext2">¿Seguro, seguro?</string>
-    <string name="clear_data_subtext3">¿Estás seguro? Pulsar «sí» borrará todos los datos.</string>
+    <string name="clear_data_subtext3">¿Estás seguro? Se borrarán todos los datos.</string>
     <string name="clock">Reloj</string>
     <string name="coming_soon">Esta función todavía no está disponible.</string>
     <string name="connection_settings">Conexiones de red</string>
@@ -287,7 +287,7 @@ Pulsa «+ Pastilla» abajo.</string>
     <string name="permissions_calm">
 		Hola, GranPhone debe tener los siguientes permisos para ejecutarse. Algunos pueden parecer demasiado, pero es la única forma de que GranPhone pueda reemplazar la interfaz del teléfono.
 		GranPhone no hará nada raro con tus datos personales ni dañará tu teléfono.
-		Presiona el botón de «Aceptar» para otorgar los permisos o «No» para salir de GranPhone.
+		Continúa para otorgar los permisos o sal de GranPhone.
     </string>
     <string name="pending_update">Hay una actualización pendiente</string>
     <string name="download">Descargar</string>
@@ -295,7 +295,7 @@ Pulsa «+ Pastilla» abajo.</string>
     <string name="install_updates_subtext">Este permiso es necesario para poder actualizar GranPhone</string>
     <string name="a_new_update_is_available">Hay una versión nueva de la aplicación\n
 		Las actualizaciones son importantes para que GranPhone siga funcionando bien y corregir pequeños defectos.\n
-		Pulsa el botón «Aceptar» para descargarla.
+		Continúa para descargarla.
     </string>
     <string name="current_version">Versión actual:\n</string>
     <string name="new_version">Versión nueva:\n</string>

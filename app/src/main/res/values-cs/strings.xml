@@ -92,7 +92,8 @@
     <string name="clear_data">Vymazat všechna data</string>
     <string name="clear_data_subtext">Jste si jistí, že chcete vymazat všechna data?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Opravdu?\nZmáčknutí tlačítka ano vymaže všechna data</string>
+    <string name="clear_data_subtext3">Opravdu?
+Všechna data budou vymazána!</string>
     <string name="clock">Hodiny</string>
     <string name="coming_soon">Brzy!</string>
     <string name="connection_settings">Připojení</string>
@@ -296,14 +297,14 @@ Stiskněte \"+ Pilulka\" níže.</string>
     </string>
     <string name="permissions_calm">Ahoj, GranPhone potřebuje následující oprávnění k funkci. Některá z nich
         zní strašidelně, ale je to jediný způsob, jak může GranPhone nahradit prostředí vašeho telefonu. Žádné data nejsou sebrána a nezpůsobuje
-        žádné škody. Zmáčkněte OK pro udělení oprávnění, nebo ne pro opuštění GranPhone.
+        žádné škody. Pokračujte pro udělení oprávnění, nebo opusťte GranPhone.
     </string>
     <string name="pending_update">Čeká na aktualizaci</string>
     <string name="download">Stáhnout</string>
     <string name="install_updates">Instalovat aktualizace</string>
     <string name="install_updates_subtext">Toto oprávnění je nutné k aktualizaci GranPhone.</string>
     <string name="a_new_update_is_available">Nová aktualizace je dostupná!\nAktualizace jsou důležité, aby GranPhone běžel
-        plynule.\nZmáčkněte OK pro stažení.
+        plynule.\nPokračujte pro stažení.
     </string>
     <string name="current_version">Současná verze:\n</string>
     <string name="new_version">Nová verze:\n</string>

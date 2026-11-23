@@ -95,7 +95,8 @@ com augmentar la grandària de font o canviar la lluentor.
     <string name="clear_data">Netejar totes les Dades</string>
     <string name="clear_data_subtext">Està segur de voler ESBORRAR totes les Dades?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">segur?\nPrémer Si esborrarà totes les dades.</string>
+    <string name="clear_data_subtext3">segur?
+Això esborrarà totes les dades.</string>
     <string name="clock">Rellotge</string>
     <string name="coming_soon">Pròximament!</string>
     <string name="connection_settings">Connexió</string>
@@ -306,7 +307,7 @@ Premeu \"+ Pastilla\" a sota.</string>
 Hola, GranPhone ha de tenir els següents permisos per a executar-se. Alguns
 poden espantar, però és l\'única forma en què GranPhone pot reemplaçar la interfície del telèfon.
 GranPhone no usarà les seves dades personals ni danyarà el seu telèfon.
-Pressioni OK per a atorgar els permisos o No per a sortir de GranPhone.
+Continui per a atorgar els permisos o surti de GranPhone.
 </string>
     <string name="pending_update">Actualització pendent</string>
     <string name="download">Descarregar</string>
@@ -314,7 +315,7 @@ Pressioni OK per a atorgar els permisos o No per a sortir de GranPhone.
     <string name="install_updates_subtext">Aquest permís és necessari per a poder actualitzar GranPhone</string>
     <string name="a_new_update_is_available">Nova actualiación disponible!\n
 Les actualitzacions són importants per a millorar l\'App.\n
-Premi OK per a descarregar-la.
+Continui per a descarregar-la.
 </string>
     <string name="current_version">Versió actual:
 </string>

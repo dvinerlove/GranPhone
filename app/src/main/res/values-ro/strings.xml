@@ -90,7 +90,8 @@
     <string name="clear_data">Ștergeti toate datele</string>
     <string name="clear_data_subtext">Sunteți sigur că doriți ștergerea tuturor datelor?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Sigur?\nVeți șterge toate datele apasând \'Yes\'</string>
+    <string name="clear_data_subtext3">Sigur?
+Toate datele vor fi șterse</string>
     <string name="clock">Ceas</string>
     <string name="coming_soon">În curând</string>
     <string name="connection_settings">Conexiune</string>
@@ -288,12 +289,12 @@ Apăsați \"+ Medicament\" mai jos.</string>
     <string name="clear_cache_subtext">Sunteți sigur că vreți să stergeți datele cache?\nScurtăturilor vor fi de asemenea șterse!
     </string>
     <string name="permissions_calm">Hei, GranPhone are nevoie de urmatoarele permisuni pentru a funcțion\n
-        Unele pot suna înspăimântător dar altfel nu îti vom putea înlocui interfața telefonului\nNu îți vom gestiona datele.  Apasă OK pentru a permite sau No pentru a inchide GranPhone</string>
+        Unele pot suna înspăimântător dar altfel nu îti vom putea înlocui interfața telefonului\nNu îți vom gestiona datele.  Continuă pentru a permite sau închide GranPhone</string>
     <string name="pending_update">Actualizare în așteptare</string>
     <string name="download">Download</string>
     <string name="install_updates">Actualizează</string>
     <string name="install_updates_subtext">Această permisiune este necesară pentru a actualiza GranPhone</string>
-    <string name="a_new_update_is_available">A aparut o nouă actualizare! Apasă OK pentru a actualiza GranPhone!
+    <string name="a_new_update_is_available">A aparut o nouă actualizare! Continuă pentru a actualiza GranPhone!
     </string>
     <string name="current_version">Versiune curentă:\n</string>
     <string name="new_version">Versiune nouă:\n</string>

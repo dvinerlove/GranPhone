@@ -90,7 +90,8 @@
     <string name="clear_data">Tühjenda kõik andmed</string>
     <string name="clear_data_subtext">Kas te soovite kõik kasutaja andmed kustutada? Peale seda on GranPhone\'i rakendus samas seisus nagu   peale paigaldamist. </string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">kindel?\nvajutades, jah, kustutatakse kõik andmed.</string>
+    <string name="clear_data_subtext3">kindel?
+kõik andmed kustutatakse.</string>
     <string name="clock">Kell</string>
     <string name="coming_soon">Saabub peatselt.</string>
     <string name="connection_settings">Ühendus</string>
@@ -291,14 +292,14 @@ Toksake \"+ Tablett\" allpool.</string>
     <string name="clear_cache_subtext">Kas olete kindel, et soovite vahemälu sisu kustutada? Ajutiste failide kustutamine vahemälust võib lahendada mõned GranPhone\'is ilmnevad vead, aga ka avakuvale loodud otseteed eemaldatakse. </string>
     <string name="permissions_calm">Tere. GranPhone\'i sujuvaks töötamiseks peate andma järgnevad juurdepääsuload.
         Mõned load võivad kõlada hirmsalt, aga see on ainus moodus, kuidas GranPhone saab töötada. Rakendus
-        ei kogu andmeid ja ei tee liiga telefonile. Loa andmiseks vajutage OK või GranPhone\'st väljumiseks, ei.
+        ei kogu andmeid ja ei tee liiga telefonile. Jätkake loa andmiseks või väljuge GranPhone\'st.
     </string>
     <string name="pending_update">Uuendus ootamas</string>
     <string name="download">Lae alla</string>
     <string name="install_updates">Paigalda uuendused</string>
     <string name="install_updates_subtext">Juurdepääsuluba on vaja GranPhone\'i uuendamiseks</string>
     <string name="a_new_update_is_available">Uuendus on saadaval.\nUuendused on vajalikud GranPhone\'i sujuvaks 
-        töötamiseks.\nAllalaadimiseks vajuta OK.
+        töötamiseks.\nAllalaadimiseks jätkake.
     </string>
     <string name="current_version">Praegune versioon:\n</string>
     <string name="new_version">Uus versioon:\n</string>

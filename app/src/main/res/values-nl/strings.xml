@@ -86,7 +86,8 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="clear_data">Wis alle gegevens</string>
     <string name="clear_data_subtext">Weet u zeker dat u alle gebruikersgegevens wilt verwijderen? De GranPhone-app keert terug naar een nieuw-geïnstalleerde blanco staat.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">zeker?\ndoor op ja te drukken worden alle gegevens verwijderd!</string>
+    <string name="clear_data_subtext3">zeker?
+alle gegevens worden verwijderd!</string>
     <string name="clock">Klok</string>
     <string name="coming_soon">Binnenkort beschikbaar!</string>
     <string name="connection_settings">Verbinding</string>
@@ -277,12 +278,12 @@ Tik op \"+ Pil\" hieronder.</string>
     <string name="clear_cache_subtext">Weet u zeker dat u de cache-inhoud wilt verwijderen? Het verwijderen van tijdelijke bestanden kan enkele storingen in de GranPhone-app oplossen, maar ook snelkoppelingen die in het startscherm zijn gemaakt zullen worden verwijderd.</string>
     <string name="permissions_calm">Hallo, GranPhone moet de volgende bevoegdheden hebben om goed te kunnen werken. Sommigen van hen
 klinken misschien eng, maar het is de enige manier waarop GranPhone de interface van de telefoon kan vervangen. Er worden geen gegevens verzameld en zal ook
-geen schade veroorzaken. Druk op OK om de bevoegdheden te geven of druk op nee om GranPhone af te sluiten.</string>
+geen schade veroorzaken. Ga verder om de bevoegdheden te geven of sluit GranPhone af.</string>
     <string name="pending_update">Geplande Update</string>
     <string name="download">Downloaden</string>
     <string name="install_updates">Updates installeren</string>
     <string name="install_updates_subtext">Deze bevoegdheid is vereist om GranPhone te kunnen updaten</string>
-    <string name="a_new_update_is_available">Er is een nieuwe update beschikbaar!\nUpdates zijn belangrijk om GranPhone goed te laten werken./nDruk op OK om te downloaden.</string>
+    <string name="a_new_update_is_available">Er is een nieuwe update beschikbaar!\nUpdates zijn belangrijk om GranPhone goed te laten werken.\nGa verder om te downloaden.</string>
     <string name="current_version">Huidige Versie:\n</string>
     <string name="new_version">Nieuwe Versie:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Nieuwe updates zijn klaar om gedownload te worden.</string>

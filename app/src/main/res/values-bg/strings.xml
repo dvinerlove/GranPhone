@@ -92,7 +92,8 @@
     <string name="clear_data">Изтриване на всички данни</string>
     <string name="clear_data_subtext">Наистина ли искате да изтриете всички потребителски данни? GranPhone ще се върне в първоначалното си състояние, като след нова инсталация.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Сигурни ли сте?\натискането на ДА ще изтрие всички данни!</string>
+    <string name="clear_data_subtext3">Сигурни ли сте?
+Това ще изтрие всички данни!</string>
     <string name="clock">Часовник</string>
     <string name="coming_soon">Очаквайте скоро!</string>
     <string name="connection_settings">Връзка</string>
@@ -295,14 +296,14 @@
     <string name="clear_cache_subtext">Сигурни ли сте, че желаете да изтриете съдържанието на кеш паметта? Изтриването на временните файлове може да разреши някои функционални проблеми на GranPhone, но също така ще изтрие от началния екран създадените преки пътища.</string>
     <string name="permissions_calm">Здравейте, за да работи GranPhone трябва да има следните разрешения. Някои
         от тях звучат плашещо, но това е единственият начин GranPhone да замени интерфейса на телефона ви. Той не събира данни и не
-         причинява вреди. Натиснете OK, за да предоставите разрешенията или Не за изход от GranPhone.
+         причинява вреди. Продължете, за да предоставите разрешенията, или излезте от GranPhone.
     </string>
     <string name="pending_update">Предстоящо обновяване</string>
     <string name="download">Изтегляне</string>
     <string name="install_updates">Инсталиране на обновления</string>
     <string name="install_updates_subtext">Разрешението е необходимо, за да се обнови GranPhone</string>
     <string name="a_new_update_is_available">Налично е обновление!\nОбновленията са важни за да може GranPhone да работи
-        гладко.\nНатиснете ОК за да го изтеглите.
+        гладко.\nПродължете, за да го изтеглите.
     </string>
     <string name="current_version">Текуща версия:\n</string>
     <string name="new_version">Нова версия:\n</string>

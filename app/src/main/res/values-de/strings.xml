@@ -88,7 +88,8 @@
     <string name="clear_data">Alle Daten löschen</string>
     <string name="clear_data_subtext">Bist du dir sicher, dass du alle Daten löschen willst?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Sicher?\nWenn du ja drückst, werden alle Daten gelöscht!</string>
+    <string name="clear_data_subtext3">Sicher?
+Alle Daten werden gelöscht!</string>
     <string name="clock">Uhr</string>
     <string name="coming_soon">Kommt bald!</string>
     <string name="connection_settings">Verbindungseinstellungen</string>
@@ -283,13 +284,13 @@ Tippe auf \"+ Tablette\" unten.</string>
     <string name="clear_all_notifications">Alle Benachrichtigungen löschen</string>
     <string name="clear_cache_subtext">Bist du dir sicher, dass du den gesamten Cache leeren willst?\nAuch die Schnellwahltasten für die Apps werden gelöscht!
     </string>
-    <string name="permissions_calm">Hi, GranPhone benötigt folgende Berechtigungen, um zu funktionieren. Manche klingen beängstigend, aber das ist die einzige Möglichkeit, wie GranPhone die Bedienoberfläche des Handys ersetzen kann. Es werden keine Daten gesamelt und kein Schaden verursacht. Drücke OK, um die Berechtigungen zu erteilen, oder Nein, um GranPhone zu verlassen.
+    <string name="permissions_calm">Hi, GranPhone benötigt folgende Berechtigungen, um zu funktionieren. Manche klingen beängstigend, aber das ist die einzige Möglichkeit, wie GranPhone die Bedienoberfläche des Handys ersetzen kann. Es werden keine Daten gesamelt und kein Schaden verursacht. Fahre fort, um die Berechtigungen zu erteilen, oder verlasse GranPhone.
     </string>
     <string name="pending_update">Ausstehende Aktualisierung</string>
     <string name="download">Download</string>
     <string name="install_updates">Aktualisierung installieren</string>
     <string name="install_updates_subtext">Diese Erlaubnis wird benötigt, um GranPhone aktualisieren zu können.</string>
-    <string name="a_new_update_is_available">Eine neue Aktualisierung steht bereit!\nAktualisierungen sind wichtig, damit GranPhone weiterhin flüssig läuft.\nDrücke OK, um herunterzuladen.
+    <string name="a_new_update_is_available">Eine neue Aktualisierung steht bereit!\nAktualisierungen sind wichtig, damit GranPhone weiterhin flüssig läuft.\nFahre fort, um herunterzuladen.
     </string>
     <string name="current_version">Die aktuelle Version:\n</string>
     <string name="new_version">Die neue Version:\n</string>
