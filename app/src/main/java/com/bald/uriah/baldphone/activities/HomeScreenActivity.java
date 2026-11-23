@@ -39,6 +39,8 @@ import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -447,8 +449,10 @@ public class HomeScreenActivity extends BaldActivity {
         });
         findViewById(R.id.bt_home_settings).setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
-        if (sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE))
+        if (sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE)) {
             findViewById(R.id.bottom_row).setVisibility(View.GONE);
+            attachSettingsSwipe();
+        }
 
         // Bottom-row labels must never wrap mid-word at large font scales — shrink to one line instead.
         for (final int id : new int[]{R.id.bt_home_sos, R.id.bt_home_apps, R.id.bt_home_settings}) {
@@ -468,6 +472,37 @@ public class HomeScreenActivity extends BaldActivity {
         soundButton = top_bar.findViewById(R.id.sound);
         batteryView = top_bar.findViewById(R.id.battery);
         notificationsButton = top_bar.findViewById(R.id.notifications);
+    }
+
+    private GestureDetector settingsSwipeDetector;
+
+    /**
+     * With the bottom row hidden, a left swipe acts as a "next page" — Settings
+     * slides in from the right like an adjacent home page.
+     */
+    private void attachSettingsSwipe() {
+        settingsSwipeDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                if (e1 == null || e2 == null)
+                    return false;
+                final float dx = e2.getX() - e1.getX();
+                final float dy = e2.getY() - e1.getY();
+                if (dx < -120 && Math.abs(dx) > 2 * Math.abs(dy)) {
+                    startActivity(new Intent(HomeScreenActivity.this, SettingsActivity.class));
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.nothing);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (settingsSwipeDetector != null)
+            settingsSwipeDetector.onTouchEvent(ev);
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
