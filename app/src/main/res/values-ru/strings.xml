@@ -16,6 +16,7 @@
 
 <resources>
     <string name="accessibility_level">Уровень доступа</string>
+    <string name="system_settings">Система</string>
     <string name="accessibility_settings">Специальные возможности</string>
     <string name="accidental_touches">Защита от случайных нажатий</string>
     <string name="accidental_touches_settings_subtext">Защита блокирует нажатия, пока телефон накрыт.\nЕсли она мешает, её можно выключить здесь.

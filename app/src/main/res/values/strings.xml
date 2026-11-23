@@ -16,6 +16,7 @@
 
 <resources>
     <string name="accessibility_level">Accessibility Level</string>
+    <string name="system_settings">System</string>
     <string name="accessibility_settings">Accessibility</string>
     <string name="accidental_touches">Accidental Touch Guard</string>
     <string name="accidental_touches_settings_subtext">The guard blocks touches while the phone is covered.\nIf it

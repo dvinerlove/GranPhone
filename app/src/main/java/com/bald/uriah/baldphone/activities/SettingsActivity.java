@@ -338,14 +338,132 @@ public class SettingsActivity extends BaldActivity {
                         R.string.light, R.string.dark),
                 R.drawable.brush_on_button
         ));
+        mainCategory.add(new RunnableSettingsItem(R.string.language_settings, v -> showLanguageDialog(), R.drawable.translate_on_button));
         mainCategory.add(new Header(R.string.settings_for_helper));
         mainCategory.add(helperCategory);
 
         // Helper layer: everything operational or dangerous stays behind the PIN gate.
-        helperCategory.add(connectionCategory);
-        helperCategory.add(accessibilityCategory);
-        helperCategory.add(personalizationCategory);
+        // One flat scannable list — headers instead of nested category pages.
+        helperCategory.add(new Header(R.string.personalization_settings));
+        helperCategory.add(
+                new RunnableSettingsItem(R.string.hide_bottom_row,
+                        v -> DialogScreen.select(this, R.string.hide_bottom_row,
+                                sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, index == 0).apply();
+                                    this.recreate();
+                                },
+                                R.string.yes, R.string.no),
+                        R.drawable.keyboard_hide_on_button));
+        helperCategory.add(new RunnableSettingsItem(R.string.time_changer, v -> startActivity(new Intent(this, PillTimeSetterActivity.class)), R.drawable.pill));
+        helperCategory.add(new RunnableSettingsItem(R.string.edit_home_screen, v -> startActivity(new Intent(this, Page1EditorActivity.class)), R.drawable.edit_on_button));
+        helperCategory.add(new RunnableSettingsItem(R.string.status_bar_settings,
+                v -> DialogScreen.select(this, R.string.status_bar_settings,
+                        sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE),
+                        index -> {
+                            editor.putInt(BPrefs.STATUS_BAR_KEY, index).apply();
+                            this.recreate();
+                        },
+                        R.string.nowhere, R.string.only_home_screen, R.string.everywhere),
+                R.drawable.status_bar_on_button
+        ));
+        helperCategory.add(new RunnableSettingsItem(R.string.dialer_sounds,
+                v -> DialogScreen.select(this, R.string.dialer_sounds,
+                        sharedPreferences.getBoolean(BPrefs.DIALER_SOUNDS_KEY, BPrefs.DIALER_SOUNDS_DEFAULT_VALUE) ? 0 : 1,
+                        index -> {
+                            editor.putBoolean(BPrefs.DIALER_SOUNDS_KEY, index == 0).apply();
+                            this.recreate();
+                        },
+                        R.string.yes, R.string.no),
+                R.drawable.phone_on_button
+        ));
+        helperCategory.add(new RunnableSettingsItem(R.string.dual_sim,
+                v -> DialogScreen.select(this, R.string.dual_sim,
+                        sharedPreferences.getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE) ? 0 : 1,
+                        index -> {
+                            editor.putBoolean(BPrefs.DUAL_SIM_KEY, index == 0).apply();
+                            this.recreate();
+                        },
+                        R.string.show_options, R.string.use_default),
+                R.drawable.sim_on_button
+        ));
+        helperCategory.add(
+                new RunnableSettingsItem(R.string.apps_sort_method,
+                        v -> DialogScreen.select(this, R.string.apps_sort_method,
+                                sharedPreferences.getBoolean(BPrefs.APPS_ONE_GRID_KEY, BPrefs.APPS_ONE_GRID_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.APPS_ONE_GRID_KEY, index == 0).apply();
+                                    this.recreate();
+                                },
+                                R.string.one_grid, R.string.groups),
+                        R.drawable.apps_on_button));
+        helperCategory.add(
+                new RunnableSettingsItem(R.string.colorful,
+                        v -> DialogScreen.select(this, R.string.colorful,
+                                sharedPreferences.getBoolean(BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.COLORFUL_KEY, index == 0).apply();
+                                    this.recreate();
+                                },
+                                R.string.yes, R.string.no),
+                        R.drawable.colors_on_button));
+        helperCategory.add(new RunnableSettingsItem(R.string.low_battery_alert,
+                v -> DialogScreen.select(this, R.string.low_battery_alert,
+                        sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE) ? 0 : 1,
+                        index -> {
+                            editor.putBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, index == 0).apply();
+                            this.recreate();
+                        },
+                        R.string.yes, R.string.no),
+                R.drawable.low_battery_alert_on_button
+        ));
 
+        helperCategory.add(new Header(R.string.accessibility_settings));
+        helperCategory.add(new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button));
+        helperCategory.add(
+                new RunnableSettingsItem(R.string.accidental_touches,
+                        v -> DialogScreen.select(this, R.string.accidental_touches,
+                                sharedPreferences.getBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, index == 0).apply();
+                                    this.recreate();
+                                },
+                                R.string.on, R.string.off),
+                        R.drawable.blocked_on_button));
+        helperCategory.add(
+                new RunnableSettingsItem(R.string.strong_hand,
+                        v -> DialogScreen.select(this, R.string.strong_hand,
+                                sharedPreferences.getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE) ? 1 : 0,
+                                index -> {
+                                    editor.putBoolean(BPrefs.RIGHT_HANDED_KEY, index == 1).apply();
+                                    this.recreate();
+                                },
+                                R.string.left_handed, R.string.right_handed),
+                        R.drawable.hand_on_button
+                )
+        );
+
+        helperCategory.add(new Header(R.string.connection_settings));
+        helperCategory.add(new RunnableSettingsItem(R.string.airplane_mode, v -> startActivity(new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS)), R.drawable.airplane_mode_on_button));
+        helperCategory.add(new RunnableSettingsItem(R.string.wifi, v -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)), R.drawable.wifi_on_button));
+        helperCategory.add(new RunnableSettingsItem(R.string.bluetooth, v -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)), R.drawable.bluetooth_on_button));
+
+        final NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
+        final NfcAdapter adapter = manager == null ? null : manager.getDefaultAdapter();
+        if (adapter != null)
+            helperCategory.add(new RunnableSettingsItem(R.string.nfc, v -> {
+                try {
+                    startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, e.getMessage());
+                    e.printStackTrace();
+                    BaldToast.from(this).setText(R.string.setting_does_not_exist).setType(BaldToast.TYPE_ERROR).show();
+
+                }
+            }, R.drawable.nfc_on_button));
+        helperCategory.add(new RunnableSettingsItem(R.string.location, v -> startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)), R.drawable.location_on_button));
+
+        helperCategory.add(new Header(R.string.system_settings));
         helperCategory.add(
                 new RunnableSettingsItem(R.string.set_home_screen,
                         v -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this)
@@ -370,132 +488,6 @@ public class SettingsActivity extends BaldActivity {
                         this.recreate();
                     }), R.drawable.blocked_on_button));
 
-        helperCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
-
-        final SettingsItem keyboard = new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button);
-        accessibilityCategory.add(keyboard);
-
-        personalizationCategory.add(new RunnableSettingsItem(R.string.language_settings, v -> showLanguageDialog(), R.drawable.translate_on_button));
-
-        personalizationCategory.add(
-                new RunnableSettingsItem(R.string.hide_bottom_row,
-                        v -> DialogScreen.select(this, R.string.hide_bottom_row,
-                                sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.yes, R.string.no),
-                        R.drawable.keyboard_hide_on_button));
-
-        personalizationCategory.add(new RunnableSettingsItem(R.string.time_changer, v -> startActivity(new Intent(this, PillTimeSetterActivity.class)), R.drawable.pill));
-        personalizationCategory.add(new RunnableSettingsItem(R.string.edit_home_screen, v -> startActivity(new Intent(this, Page1EditorActivity.class)), R.drawable.edit_on_button));
-
-        accessibilityCategory.add(
-                new RunnableSettingsItem(R.string.accidental_touches,
-                        v -> DialogScreen.select(this, R.string.accidental_touches,
-                                sharedPreferences.getBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.on, R.string.off),
-                        R.drawable.blocked_on_button));
-        accessibilityCategory.add(
-                new RunnableSettingsItem(R.string.strong_hand,
-                        v -> DialogScreen.select(this, R.string.strong_hand,
-                                sharedPreferences.getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE) ? 1 : 0,
-                                index -> {
-                                    editor.putBoolean(BPrefs.RIGHT_HANDED_KEY, index == 1).apply();
-                                    this.recreate();
-                                },
-                                R.string.left_handed, R.string.right_handed),
-                        R.drawable.hand_on_button
-                )
-        );
-        personalizationCategory.add(new RunnableSettingsItem(R.string.status_bar_settings,
-                v -> DialogScreen.select(this, R.string.status_bar_settings,
-                        sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE),
-                        index -> {
-                            editor.putInt(BPrefs.STATUS_BAR_KEY, index).apply();
-                            this.recreate();
-                        },
-                        R.string.nowhere, R.string.only_home_screen, R.string.everywhere),
-                R.drawable.status_bar_on_button
-        ));
-
-        personalizationCategory.add(new RunnableSettingsItem(R.string.dialer_sounds,
-                v -> DialogScreen.select(this, R.string.dialer_sounds,
-                        sharedPreferences.getBoolean(BPrefs.DIALER_SOUNDS_KEY, BPrefs.DIALER_SOUNDS_DEFAULT_VALUE) ? 0 : 1,
-                        index -> {
-                            editor.putBoolean(BPrefs.DIALER_SOUNDS_KEY, index == 0).apply();
-                            this.recreate();
-                        },
-                        R.string.yes, R.string.no),
-                R.drawable.phone_on_button
-        ));
-        personalizationCategory.add(new RunnableSettingsItem(R.string.dual_sim,
-                v -> DialogScreen.select(this, R.string.dual_sim,
-                        sharedPreferences.getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE) ? 0 : 1,
-                        index -> {
-                            editor.putBoolean(BPrefs.DUAL_SIM_KEY, index == 0).apply();
-                            this.recreate();
-                        },
-                        R.string.show_options, R.string.use_default),
-                R.drawable.sim_on_button
-        ));
-        personalizationCategory.add(
-                new RunnableSettingsItem(R.string.apps_sort_method,
-                        v -> DialogScreen.select(this, R.string.apps_sort_method,
-                                sharedPreferences.getBoolean(BPrefs.APPS_ONE_GRID_KEY, BPrefs.APPS_ONE_GRID_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.APPS_ONE_GRID_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.one_grid, R.string.groups),
-                        R.drawable.apps_on_button));
-
-        personalizationCategory.add(
-                new RunnableSettingsItem(R.string.colorful,
-                        v -> DialogScreen.select(this, R.string.colorful,
-                                sharedPreferences.getBoolean(BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.COLORFUL_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.yes, R.string.no),
-                        R.drawable.colors_on_button));
-
-        personalizationCategory.add(new RunnableSettingsItem(R.string.low_battery_alert,
-                v -> DialogScreen.select(this, R.string.low_battery_alert,
-                        sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE) ? 0 : 1,
-                        index -> {
-                            editor.putBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, index == 0).apply();
-                            this.recreate();
-                        },
-                        R.string.yes, R.string.no),
-                R.drawable.low_battery_alert_on_button
-        ));
-        //connections
-        connectionCategory.add(new RunnableSettingsItem(R.string.airplane_mode, v -> startActivity(new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS)), R.drawable.airplane_mode_on_button));
-        connectionCategory.add(new RunnableSettingsItem(R.string.wifi, v -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)), R.drawable.wifi_on_button));
-        connectionCategory.add(new RunnableSettingsItem(R.string.bluetooth, v -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)), R.drawable.bluetooth_on_button));
-
-        NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
-        NfcAdapter adapter = manager == null ? null : manager.getDefaultAdapter();
-        if (adapter != null)
-            connectionCategory.add(new RunnableSettingsItem(R.string.nfc, v -> {
-                try {
-                    startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
-                } catch (ActivityNotFoundException e) {
-                    Log.e(TAG, e.getMessage());
-                    e.printStackTrace();
-                    BaldToast.from(this).setText(R.string.setting_does_not_exist).setType(BaldToast.TYPE_ERROR).show();
-
-                }
-            }, R.drawable.nfc_on_button));
-        connectionCategory.add(new RunnableSettingsItem(R.string.location, v -> startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)), R.drawable.location_on_button));
-
         helperCategory.add(
                 new BDBSettingsItem(R.string.device_memory,
                         // keeps DialogBuilder: DialogScreen can't carry the storage/RAM extraView
@@ -518,6 +510,7 @@ public class SettingsActivity extends BaldActivity {
                             v -> startActivity(new Intent(this, PermissionActivity.class)),
                             R.drawable.grant_all_permissions_on_button)
             );
+        helperCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
         if (BuildConfig.FLAVOR.equals("baldUpdates"))
             helperCategory.add(
                     new RunnableSettingsItem(R.string.check_for_updates,
@@ -542,6 +535,7 @@ public class SettingsActivity extends BaldActivity {
     private void newCategory(Category category) {
         this.currentCategory = category;
         recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scrollToPosition(0);
         // the fall-down stagger is a first-entry flourish — not per drill-in/out
         if (!layoutAnimationPlayed && !AppUtils.animationsDisabled(this)) {
             layoutAnimationPlayed = true;
