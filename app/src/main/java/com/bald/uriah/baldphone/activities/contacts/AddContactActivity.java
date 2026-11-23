@@ -29,10 +29,13 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,6 +78,7 @@ public class AddContactActivity extends BaldActivity {
     private String newPhoto;
     private EditText et_name, et_mobile_number, et_home_number, et_address, et_mail;
     private BaldImageButton iv_image, iv_delete;
+    private TextView tv_name_error;
     private View save;
 
     private static void addFullSizePhoto(int rawContactId, byte[] fullSizedPhotoData, final ContentResolver cr) throws IOException {
@@ -102,6 +106,7 @@ public class AddContactActivity extends BaldActivity {
         final String contactLookupKey = callingIntent.getStringExtra(SingleContactActivity.CONTACT_LOOKUP_KEY);
         if (contactLookupKey != null)
             try {
+                ((BaldTitleBar) findViewById(R.id.bald_title_bar)).setTitle(R.string.edit);
                 fillWithContact(contactLookupKey);
             } catch (IllegalStateException | Contact.ContactNotFoundException e) {
                 // sometimes it may happen, that the lookup key changes during the transition;
@@ -126,18 +131,35 @@ public class AddContactActivity extends BaldActivity {
             v.setVisibility(View.INVISIBLE);
         });
         save.setOnClickListener(v -> save());
-        ((BaldTitleBar) findViewById(R.id.bald_title_bar)).setBackListener(v -> {
+        final View.OnClickListener exitListener = v -> {
             if (safeToExit())
                 finish();
             else
                 showExitMessage();
+        };
+        findViewById(R.id.cancel).setOnClickListener(exitListener);
+        ((BaldTitleBar) findViewById(R.id.bald_title_bar)).setBackListener(exitListener);
+        et_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tv_name_error.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 
     private void save() {
         final String name = String.valueOf(et_name.getText());
         if (TextUtils.isEmpty(name.replace(" ", ""))) {
-            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.contact_must_has_name).show();
+            tv_name_error.setVisibility(View.VISIBLE);
+            et_name.requestFocus();
         } else if (!(currentContact != null ? update() : insert())) {
             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.contact_not_created).show();
         } else {
@@ -163,6 +185,7 @@ public class AddContactActivity extends BaldActivity {
         iv_image = findViewById(R.id.iv_image);
         save = findViewById(R.id.save);
         iv_delete = findViewById(R.id.iv_delete);
+        tv_name_error = findViewById(R.id.tv_name_error);
     }
 
     private void fillWithContact(String contactLookupKey) throws Contact.ContactNotFoundException {

@@ -23,8 +23,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,7 +46,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.activities.DialerActivity;
+import com.bald.uriah.baldphone.activities.SOSActivity;
 import com.bald.uriah.baldphone.adapters.CallsRecyclerViewAdapter;
+import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.calls.Call;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
@@ -55,9 +56,10 @@ import com.bald.uriah.baldphone.utils.DialogBuilder;
 import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.RandomColorMaker;
 import com.bald.uriah.baldphone.utils.Toggeler;
-import com.bald.uriah.baldphone.views.BaldLinearLayoutButton;
 import com.bald.uriah.baldphone.views.BaldPictureTextButton;
+import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ScrollingHelper;
 import com.bumptech.glide.Glide;
@@ -82,8 +84,10 @@ public class SingleContactActivity extends BaldActivity {
     private String contactKeyExtra;
     private BaldTitleBar baldTitleBar;
     private ImageView contact_image;
-    private TextView tv_contact_name;
-    private LinearLayout ll;
+    private TextView tv_contact_name, image_letter;
+    private LinearLayout ll_phones, ll_dynamic;
+    private BaldSwitch sos_switch;
+    private View bt_call, bt_sms;
     private MediaPlayer mediaPlayer;
     private ContentResolver contentResolver;
     private LayoutInflater layoutInflater;
@@ -113,9 +117,8 @@ public class SingleContactActivity extends BaldActivity {
     protected void onStart() {
         super.onStart();
 
-        final int childCount = ll.getChildCount();
-        if (childCount > 3)
-            ll.removeViews(3, ll.getChildCount() - 3);
+        ll_phones.removeAllViews();
+        ll_dynamic.removeAllViews();
 
         try {
             contact = viaId ?
@@ -163,7 +166,7 @@ public class SingleContactActivity extends BaldActivity {
                 if (uri != null) {
                     loadPhoto(uri);
                 } else
-                    contact_image.setVisibility(View.GONE);
+                    drawInitials();
 
             }, 1000);
 
@@ -171,10 +174,10 @@ public class SingleContactActivity extends BaldActivity {
             if (contact.hasPhoto())
                 loadPhoto(contact.getPhoto());
             else
-                contact_image.setVisibility(View.GONE);
+                drawInitials();
         }
 
-        inflateAdders();
+        setupActions();
 
         final List<Call> callList =
                 CallLogsHelper.getForSpecificContact(contentResolver, contact);
@@ -196,9 +199,18 @@ public class SingleContactActivity extends BaldActivity {
 
     private void attachXml() {
         baldTitleBar = findViewById(R.id.bald_title_bar);
-        ll = findViewById(R.id.ll_info);
+        ll_phones = findViewById(R.id.ll_phones);
+        ll_dynamic = findViewById(R.id.ll_dynamic);
         contact_image = findViewById(R.id.contact_image);
+        image_letter = findViewById(R.id.image_letter);
         tv_contact_name = findViewById(R.id.tv_contact_name);
+        sos_switch = findViewById(R.id.sos_switch);
+        bt_call = findViewById(R.id.bt_call);
+        bt_sms = findViewById(R.id.bt_sms);
+
+        ((BaldPictureTextButton) bt_call).getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
+        for (int id : new int[]{R.id.bt_sms, R.id.bt_edit, R.id.bt_share, R.id.bt_delete})
+            ((BaldPictureTextButton) findViewById(id)).getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
     }
 
     private void inflatePhones() {
@@ -217,22 +229,18 @@ public class SingleContactActivity extends BaldActivity {
         }
 
         for (final Pair<Integer /*Type*/ , String> pair : contact.getPhoneList()) {
-            View layout = layoutInflater.inflate(R.layout.contact_number, ll, false);
+            final View layout = layoutInflater.inflate(R.layout.contact_number, ll_phones, false);
             final TextView tv_type = layout.findViewById(R.id.tv_type);
             final TextView tv_value = layout.findViewById(R.id.tv_value);
-            final BaldPictureTextButton call = layout.findViewById(R.id.call);
 
             tv_type.setText(ContactsContract.CommonDataKinds.Phone.getTypeLabel(
                     getResources(),
                     pair.first,
                     "Custom"));
             tv_value.setText(pair.second);
-            call.getTextView().setTextColor(Color.WHITE);
-            call.getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-            call.getTextView().setTypeface(Typeface.DEFAULT_BOLD);
-            call.setOnClickListener(v -> DialerActivity.call(pair.second, this, false));
+            layout.setOnClickListener(v -> DialerActivity.call(pair.second, this, false));
 
-            ll.addView(layout);
+            ll_phones.addView(layout);
         }
 
     }
@@ -240,8 +248,8 @@ public class SingleContactActivity extends BaldActivity {
     private void inflateWhatsapp() {
         final List<String> whatappNumbers = contact.getWhatsappNumbers();
         for (String whatappNumber : whatappNumbers) {
-            final View layout = layoutInflater.inflate(R.layout.contact_whatsapp, ll, false);
-            layout.findViewById(R.id.whatsapp).setOnClickListener((v) ->
+            final View layout = layoutInflater.inflate(R.layout.contact_whatsapp, ll_dynamic, false);
+            layout.setOnClickListener((v) ->
                     startActivity(
                             new Intent("android.intent.activate.MAIN")
                                     .setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"))
@@ -254,7 +262,7 @@ public class SingleContactActivity extends BaldActivity {
                                             ) + "@s.whatsapp.net")
                     )
             );
-            ll.addView(layout);
+            ll_dynamic.addView(layout);
         }
     }
 
@@ -270,25 +278,23 @@ public class SingleContactActivity extends BaldActivity {
             }
         }
         for (final String phone : contact.getMailList()) {
-            final View layout = layoutInflater.inflate(R.layout.contact_mail, ll, false);
+            final View layout = layoutInflater.inflate(R.layout.contact_mail, ll_dynamic, false);
             final TextView tv_value = layout.findViewById(R.id.tv_value);
-            final BaldLinearLayoutButton mail = layout.findViewById(R.id.mail);
             tv_value.setText(phone);
-            mail.setOnClickListener(v -> {
+            layout.setOnClickListener(v -> {
                 final Intent intent = new Intent(Intent.ACTION_SEND)
                         .setType("text/html")
                         .putExtra(Intent.EXTRA_EMAIL, phone);
                 startActivity(intent);
 
             });
-            ll.addView(layout);
+            ll_dynamic.addView(layout);
         }
 
     }
 
-    private void inflateAdders() {
-        final View view = layoutInflater.inflate(R.layout.contact_add_to, ll, false);
-        final ImageView favorite = view.findViewById(R.id.favorite);
+    private void setupActions() {
+        final ImageView favorite = findViewById(R.id.bt_favorite);
 
         final ContentValues STAR = new ContentValues();
         STAR.put(ContactsContract.Contacts.STARRED, 1);
@@ -311,14 +317,29 @@ public class SingleContactActivity extends BaldActivity {
                 },
                 contact.isFavorite() ? 1 : 0,
                 1);
-        ll.addView(view);
+
+        sos_switch.setChecked(SOSActivity.PinHelper.isPinned(this, contact.getLookupKey()));
+        sos_switch.setOnChangeListener(isChecked -> {
+            if (isChecked) {
+                if (!SOSActivity.PinHelper.pinContact(this, contact.getLookupKey())) {
+                    sos_switch.setChecked(false);
+                    DialogBuilder.from(this)
+                            .setTitle(R.string.sos_is_full)
+                            .setSubText(R.string.sos_is_full_subtext)
+                            .addFlag(DialogFlags.FLAG_OK)
+                            .show();
+                }
+            } else {
+                SOSActivity.PinHelper.removeContact(this, contact.getLookupKey());
+            }
+        });
     }
 
     private void inflateAddresses() {
         for (Pair<Integer, String[]> pair : contact.getAddressList()) {
-            final View layout = layoutInflater.inflate(R.layout.contact_address, ll, false);
+            final View layout = layoutInflater.inflate(R.layout.contact_address, ll_dynamic, false);
             final TextView tv_addressType = layout.findViewById(R.id.tv_address);
-            final BaldPictureTextButton button = layout.findViewById(R.id.address_button);
+            final TextView tv_value = layout.findViewById(R.id.tv_value);
             tv_addressType.setText(
                     String.format("%s %s",
                             String.valueOf(ContactsContract.CommonDataKinds.SipAddress.getTypeLabel(getResources(),
@@ -337,15 +358,15 @@ public class SingleContactActivity extends BaldActivity {
                 stringBuilder.append(s).append(" ");
 
             }
-            button.setText(stringBuilder);
-            button.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + stringBuilder))));
+            tv_value.setText(stringBuilder);
+            layout.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + stringBuilder))));
 
-            ll.addView(layout);
+            ll_dynamic.addView(layout);
         }
     }
 
     private void inflateHistory(List<Call> callList) {
-        final View view = layoutInflater.inflate(R.layout.contact_history, ll, false);
+        final View view = layoutInflater.inflate(R.layout.contact_history, ll_dynamic, false);
         final ScrollingHelper scrollingHelper = view.findViewById(R.id.scrolling_helper);
         final RecyclerView recyclerView = scrollingHelper.findViewById(R.id.child);
         final DividerItemDecoration dividerItemDecoration =
@@ -365,7 +386,7 @@ public class SingleContactActivity extends BaldActivity {
                 R.string.hide,
                 v -> scrollingHelper.setVisibility(View.VISIBLE),
                 v -> scrollingHelper.setVisibility(View.GONE));
-        ll.addView(view);
+        ll_dynamic.addView(view);
     }
 
     private void setupBar() {
@@ -396,6 +417,31 @@ public class SingleContactActivity extends BaldActivity {
                 }
         );
 
+        if (contact.hasPhone()) {
+            final String primary = contact.getMobilePhone() != null ?
+                    contact.getMobilePhone() : contact.getPhoneList().get(0).second;
+            bt_call.setVisibility(View.VISIBLE);
+            bt_call.setOnClickListener(v -> DialerActivity.call(primary, this, false));
+            bt_sms.setVisibility(View.VISIBLE);
+            bt_sms.setOnClickListener(v -> AppUtils.sendMessage(primary, this));
+        } else {
+            bt_call.setVisibility(View.GONE);
+            bt_sms.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * initials on a hash-colored background, same trick as {@link ContactRecyclerViewAdapter}
+     */
+    private void drawInitials() {
+        image_letter.setText(ContactRecyclerViewAdapter.initials(contact.getName()));
+        image_letter.setVisibility(View.VISIBLE);
+        final TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.bald_background, typedValue, true);
+        contact_image.setImageDrawable(colorful ?
+                new ColorDrawable(new RandomColorMaker(typedValue.data)
+                        .generateColor(contact.getLookupKey() == null ? 0 : contact.getLookupKey().hashCode())) :
+                new ColorDrawable(typedValue.data));
     }
 
     private void deleteContact() {
@@ -414,8 +460,10 @@ public class SingleContactActivity extends BaldActivity {
     }
 
     private void loadPhoto(String uriToLoad) {
-        if (AppUtils.isValidContextForGlide(contact_image.getContext()))
+        if (AppUtils.isValidContextForGlide(contact_image.getContext())) {
             Glide.with(contact_image).load(uriToLoad).into(contact_image);
+            image_letter.setVisibility(View.GONE);
+        }
     }
 
     @Override

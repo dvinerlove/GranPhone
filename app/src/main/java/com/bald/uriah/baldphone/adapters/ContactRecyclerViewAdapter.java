@@ -50,6 +50,9 @@ import com.bald.uriah.baldphone.utils.RandomColorMaker;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<ContactRecyclerViewAdapter.ViewHolder> {
     public final static String[] PROJECTION = {
             ContactsContract.Data.DISPLAY_NAME,
@@ -67,9 +70,10 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
     private final RecyclerView recyclerView;
     private final int mode;
     @ColorInt
-    private final int textColorOnGold, textColorOnButton;
+    private final int textColorOnGold, textColorOnButton, textColorSecondary;
     private RandomColorMaker randomColorMaker;
     private Cursor cursor;
+    private final Map<String, String> numbersCache = new HashMap<>();
 
     public ContactRecyclerViewAdapter(BaldActivity activity, Cursor cursor, RecyclerView recyclerView, @IntRange(from = MODE_DEFAULT, to = MODE_SHARE) int mode) {
         this.mode = mode;
@@ -87,6 +91,8 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
         textColorOnGold = typedValue.data;
         theme.resolveAttribute(R.attr.bald_text_on_button, typedValue, true);
         textColorOnButton = typedValue.data;
+        theme.resolveAttribute(R.attr.bald_text_secondary, typedValue, true);
+        textColorSecondary = typedValue.data;
 
         applyToCursor();
     }
@@ -111,6 +117,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
 
     public void changeCursor(@NonNull Cursor cursor) {
         this.cursor = cursor;
+        numbersCache.clear();
         applyToCursor();
         notifyDataSetChanged();
 
@@ -147,6 +154,17 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
         holder.setFavorite(cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.STARRED)) == 1);
         holder.tv_contact_name.setText(name);
 
+        // Contacts cursors expose the contact id as _id; Data/Phone cursors as contact_id
+        final int contactIdIndex = cursor.getColumnIndex(ContactsContract.Data.CONTACT_ID);
+        final String number = numberFor(contactIdIndex >= 0 ? cursor.getString(contactIdIndex) :
+                cursor.getString(cursor.getColumnIndex(ContactsContract.Data._ID)));
+        if (number == null) {
+            holder.tv_contact_number.setVisibility(View.GONE);
+        } else {
+            holder.tv_contact_number.setText(number);
+            holder.tv_contact_number.setVisibility(View.VISIBLE);
+        }
+
         if (position == 0) {
             holder.setLetter(letter);
         } else {
@@ -167,9 +185,47 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             holder.iv_contact_pic.setImageURI(Uri.parse(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))));
             holder.tv_image_letter.setVisibility(View.GONE);
         } else {
-            drawText(holder, letter, holder.lookupKey == null ? 0 : holder.lookupKey.hashCode());
+            drawText(holder, initials(name), holder.lookupKey == null ? 0 : holder.lookupKey.hashCode());
         }
 
+    }
+
+    /**
+     * first letters of the first two words, e.g. "John Smith" -> "JS"
+     */
+    public static String initials(@Nullable String name) {
+        if (name == null)
+            return "?";
+        final String[] words = name.trim().split("\\s+");
+        final StringBuilder ret = new StringBuilder(2);
+        for (final String word : words) {
+            if (word.isEmpty() || ret.length() == 2)
+                break;
+            ret.append(Character.toUpperCase(word.charAt(0)));
+        }
+        return ret.length() == 0 ? "?" : ret.toString();
+    }
+
+    @Nullable
+    private String numberFor(@Nullable String contactId) {
+        if (contactId == null)
+            return null;
+        if (numbersCache.containsKey(contactId))
+            return numbersCache.get(contactId);
+        String number = null;
+        try (final Cursor phones = activity.getContentResolver().query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER},
+                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                new String[]{contactId},
+                null)) {
+            if (phones != null && phones.moveToFirst())
+                number = phones.getString(0);
+        } catch (Exception e) {
+            // shortcut: a failed lookup just leaves the second line empty; a proper fix needs an async loader
+        }
+        numbersCache.put(contactId, number);
+        return number;
     }
 
     @Override
@@ -188,12 +244,12 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        static final int expandedSize = 150;
-        static final int notExpandedSize = 100;
+        static final int expandedSize = 133;
+        static final int notExpandedSize = 80;
 
         final View line;
         final LinearLayout container, ll_contact_only;
-        final TextView tv_contact_name, tv_letter, tv_image_letter;
+        final TextView tv_contact_name, tv_contact_number, tv_letter, tv_image_letter;
         final ImageView iv_contact_pic;
 
         String lookupKey;
@@ -205,6 +261,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             this.container = (LinearLayout) itemView;
             this.ll_contact_only = container.findViewById(R.id.ll_contact_only);
             this.tv_contact_name = container.findViewById(R.id.contact_name);
+            this.tv_contact_number = container.findViewById(R.id.contact_number);
             this.iv_contact_pic = container.findViewById(R.id.profile_pic);
             this.tv_letter = container.findViewById(R.id.letter);
             this.ll_contact_only.setOnClickListener(this);
@@ -261,6 +318,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             favorite = f;
             ll_contact_only.setBackgroundResource(favorite ? R.drawable.style_for_buttons_rectangle_gold : R.drawable.style_for_buttons_rectangle);
             tv_contact_name.setTextColor(favorite ? textColorOnGold : textColorOnButton);
+            tv_contact_number.setTextColor(favorite ? textColorOnGold : textColorSecondary);
 
         }
 

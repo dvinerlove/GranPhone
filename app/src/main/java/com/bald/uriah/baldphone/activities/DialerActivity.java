@@ -62,7 +62,7 @@ public class DialerActivity extends BaldActivity {
     public static final String SORT_ORDER =
             "upper(" + ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + ") ASC";
     private final static String[] PROJECTION =
-            {ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.PHOTO_URI, ContactsContract.Data.LOOKUP_KEY, ContactsContract.Data.STARRED, ContactsContract.CommonDataKinds.Phone.NUMBER};
+            {ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.PHOTO_URI, ContactsContract.Data.LOOKUP_KEY, ContactsContract.Data.STARRED, ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.Data.CONTACT_ID};
     private static final String NUMBER_STATE = "NUMBER_STATE";
     private static final int TONE_DURATION = 300 * Const.MILLISECOND;
     private static final int TONE_VOLUME = 75; // 0-100

@@ -143,6 +143,11 @@ abstract class BaseContactsActivity extends BaldActivity {
             });
     }
 
+    protected void setFilter(String filter) {
+        this.filter = filter == null ? "" : filter;
+        applyFilter();
+    }
+
     protected abstract Cursor getCursorForFilter(String filter, boolean favorite);
 
     public void applyFilter() {
