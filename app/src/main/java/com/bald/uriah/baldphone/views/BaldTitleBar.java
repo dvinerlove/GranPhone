@@ -24,6 +24,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -142,6 +143,14 @@ public class BaldTitleBar extends LinearLayout {
         addView(rightHanded ? backView : bt_help);
         // GranPhone: the help button opened video tutorials in English / Hebrew; hidden, but keeps the title centered
         bt_help.setVisibility(INVISIBLE);
+        // the invisible spacer must match the visible back control's real width or the title sits off-center
+        backView.post(() -> {
+            final ViewGroup.LayoutParams lp = bt_help.getLayoutParams();
+            if (lp.width != backView.getWidth()) {
+                lp.width = backView.getWidth();
+                bt_help.setLayoutParams(lp);
+            }
+        });
         added = true;
 
     }

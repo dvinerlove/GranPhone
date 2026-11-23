@@ -18,6 +18,7 @@
      via style_for_buttons_rectangle). Card separation replaces the divider. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contact_row_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="80dp"
@@ -92,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Contact Name"
+                tools:text="Contact Name"
                 android:textColor="?bald_text_primary"
                 android:textSize="@dimen/large"
                 android:transitionName="bald_bar_title_animation" />

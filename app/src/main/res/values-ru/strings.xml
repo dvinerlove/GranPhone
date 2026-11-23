@@ -295,6 +295,7 @@
     <string name="yes">Да</string>
     <string name="yesterday">Вчера</string>
     <string name="nothing">Пока пусто</string>
+    <string name="no_contacts">Контактов пока нет.</string>
     <string name="no_contacts_found">Никого не нашлось. Проверьте написание.</string>
     <string name="no_alarms">Нет будильников.
 Нажмите «Будильник»

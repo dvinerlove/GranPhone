@@ -271,6 +271,7 @@ Alle Daten werden gelöscht!</string>
     <string name="yes">Ja</string>
     <string name="yesterday">Gestern</string>
     <string name="nothing">Nichts</string>
+    <string name="no_contacts">Noch keine Kontakte.</string>
     <string name="no_contacts_found">Es wurden keine Kontakte gefunden!</string>
     <string name="no_alarms">Keine Wecker vorhanden.
 Tippe auf \"Wecker\" oder

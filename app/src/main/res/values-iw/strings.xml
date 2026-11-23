@@ -285,6 +285,7 @@
     <string name="yes">כן</string>
     <string name="yesterday">אתמול</string>
     <string name="nothing">לא נמצא כלום</string>
+    <string name="no_contacts">אין אנשי קשר עדיין.</string>
     <string name="no_contacts_found">איש קשר לא נמצא!</string>
     <string name="no_alarms">אין שעונים מעוררים.
 לחץ על \"שעון מעורר\"

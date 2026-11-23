@@ -261,6 +261,17 @@ public class ScrollingHelper extends ConstraintLayout {
 
     }
 
+    public void setEmptyText(@Nullable CharSequence text) {
+        empty = text != null ? text.toString() : null;
+        if (emptyView instanceof TextView) {
+            ((TextView) emptyView).setText(empty);
+        } else if (emptyView != null) {
+            final View t = emptyView.findViewById(R.id.empty_text);
+            if (t instanceof TextView)
+                ((TextView) t).setText(empty);
+        }
+    }
+
     private void getAttributeSet(@Nullable AttributeSet attributeSet) {
         if (attributeSet == null)
             return;

@@ -33,6 +33,7 @@ import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.utils.SoftInputAssist;
 import com.bald.uriah.baldphone.utils.Toggeler;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
+import com.bald.uriah.baldphone.views.ScrollingHelper;
 
 /**
  * Base activity for {@link ShareActivity} and {@link ContactsActivity}.
@@ -53,6 +54,7 @@ abstract class BaseContactsActivity extends BaldActivity {
     private String filter = "";
     private boolean favorite = false;
     private SoftInputAssist softInputAssist;
+    private ScrollingHelper scrollingHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +73,10 @@ abstract class BaseContactsActivity extends BaldActivity {
 
         attachXml();
         viewsInit();
+
+        scrollingHelper = findViewById(R.id.include);
+        if (scrollingHelper == null)
+            scrollingHelper = findViewById(R.id.whatsapp_container);
 
         applyFilter();
     }
@@ -151,6 +157,10 @@ abstract class BaseContactsActivity extends BaldActivity {
     protected abstract Cursor getCursorForFilter(String filter, boolean favorite);
 
     public void applyFilter() {
+        if (scrollingHelper != null) {
+            scrollingHelper.setEmptyText(getString(filter.isEmpty()
+                    ? R.string.no_contacts : R.string.no_contacts_found));
+        }
         if (contactRecyclerViewAdapter != null) {
             contactRecyclerViewAdapter.changeCursor(getCursorForFilter(filter, favorite));
         } else {

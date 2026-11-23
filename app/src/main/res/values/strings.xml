@@ -304,6 +304,7 @@
     <string name="yes">Yes</string>
     <string name="yesterday">Yesterday</string>
     <string name="nothing">Nothing here yet</string>
+    <string name="no_contacts">No contacts yet.</string>
     <string name="no_contacts_found">No contacts match — check the spelling.</string>
     <string name="no_alarms">No alarms.\nTap “Alarm” or “Timer”\nbelow to create one.</string>
     <string name="no_pills">No pills yet.\nTap the button below\nto add one.</string>
