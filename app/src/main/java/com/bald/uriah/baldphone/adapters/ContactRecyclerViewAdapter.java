@@ -327,6 +327,9 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
                 this.tv_letter.setText(character);
                 expanded = true;
             }
+            // the letter alone reads as a stray character — tell TalkBack it opens the letter picker
+            this.tv_letter.setContentDescription(character == null ? null :
+                    activity.getString(R.string.cd_letters) + ": " + character);
         }
 
         public void setFavorite(final boolean f) {

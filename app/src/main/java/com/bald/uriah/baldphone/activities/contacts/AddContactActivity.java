@@ -158,6 +158,7 @@ public class AddContactActivity extends BaldActivity {
         final String name = String.valueOf(et_name.getText());
         if (TextUtils.isEmpty(name.replace(" ", ""))) {
             tv_name_error.setVisibility(View.VISIBLE);
+            tv_name_error.announceForAccessibility(tv_name_error.getText());
             et_name.requestFocus();
         } else if (!(currentContact != null ? update() : insert())) {
             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.contact_not_created).show();

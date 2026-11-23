@@ -276,7 +276,7 @@ public class HomeScreenActivity extends BaldActivity {
                 .setType(BaldToast.TYPE_INFORMATIVE)
                 .show());
         baldPrefsUtils = BaldPrefsUtils.newInstance(this);
-        baldHomeWatcher = new BaldHomeWatcher(this, this::updateViewPager);
+        baldHomeWatcher = new BaldHomeWatcher(this, this::refreshHome);
         recognizerManager.setHomeScreen(this);
 
     }
@@ -286,7 +286,7 @@ public class HomeScreenActivity extends BaldActivity {
         super.onStart();
         onStartCounter++;
         if (finishedUpdatingApps)
-            updateViewPager();
+            refreshHome();
         baldHomeWatcher.startWatch();
         if (!testing) { // TODO replace with system env
             final int percent = (int) (Math.random() * 100) + 1;//1 - 100
@@ -425,7 +425,7 @@ public class HomeScreenActivity extends BaldActivity {
      * Refreshes the pinned-app data and scrolls the single home page back to the top
      * (the equivalent of the old "jump back to page 1").
      */
-    private void updateViewPager() {
+    private void refreshHome() {
         // BaldHomeWatcher/onStart can fire before attachToXml() binds homePage1.
         if (homePage1 == null)
             return;
@@ -517,7 +517,7 @@ public class HomeScreenActivity extends BaldActivity {
     public void onBackPressed() {
         if (vibrator != null)
             vibrator.vibrate(Const.vibetime);
-        updateViewPager();
+        refreshHome();
     }
 
     static class UpdateApps extends AsyncTask<Context, Void, Void> {
@@ -542,7 +542,7 @@ public class HomeScreenActivity extends BaldActivity {
         protected void onPostExecute(Void aVoid) {
             HomeScreenActivity homeScreen = homeScreenWeakReference.get();
             if (homeScreen != null) {
-                homeScreen.updateViewPager();
+                homeScreen.refreshHome();
                 homeScreen.finishedUpdatingApps = true;
                 if (homeScreen.launchAppsActivity)
                     homeScreen.startActivity(new Intent(homeScreen, AppsActivity.class));

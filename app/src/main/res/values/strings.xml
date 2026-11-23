@@ -167,6 +167,8 @@
     <string name="minute">Minute</string>
     <string name="minutes">Minutes</string>
     <string name="missed">Missed</string>
+    <string name="missed_alarm">Missed alarm</string>
+    <string name="missed_pill">Missed pill</string>
 
     <string name="mobile_phone_number">Mobile phone number</string>
     <string name="monday">Monday</string>

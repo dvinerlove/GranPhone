@@ -41,6 +41,7 @@ import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.MissedNotifications;
 
 /**
  * Alarm screen, will be called from {@link com.bald.uriah.baldphone.broadcast_receivers.AlarmReceiver}
@@ -48,6 +49,7 @@ import com.bald.uriah.baldphone.utils.AppUtils;
 public class AlarmScreenActivity extends TimedBaldActivity {
     private static final String TAG = AlarmScreenActivity.class.getSimpleName();
     private static final int TIME_DELAYED_SCHEDULE = 100;
+    private static final String MISSED_NOTIFICATION_TAG = "missed_alarm";
     private static final AudioAttributes alarmAttributes =
             new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
@@ -188,6 +190,13 @@ public class AlarmScreenActivity extends TimedBaldActivity {
     @Override
     protected int screenTimeout() {
         return Const.MINUTE * 5;
+    }
+
+    @Override
+    protected void onScreenTimeout() {
+        // the alarm rang itself out unacknowledged — leave a trace for whoever slept through it
+        MissedNotifications.post(this, MISSED_NOTIFICATION_TAG, alarm.getKey(),
+                R.string.missed_alarm, alarm.getName(), R.drawable.clock_on_background, AlarmsActivity.class);
     }
 
     @Override

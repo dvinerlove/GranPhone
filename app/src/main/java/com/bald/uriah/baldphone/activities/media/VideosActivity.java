@@ -93,6 +93,7 @@ public class VideosActivity extends MediaScrollingActivity implements Constants.
     protected void bindViewHolder(Cursor cursor, MediaRecyclerViewAdapter.ViewHolder holder) {
         if (!AppUtils.isValidContextForGlide(holder.itemView.getContext()))
             return;
+        holder.itemView.setContentDescription(getText(R.string.video));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             final int fieldIndex = cursor.getColumnIndex(MediaStore.Video.Media._ID);

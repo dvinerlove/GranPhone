@@ -92,6 +92,7 @@ public class PhotosActivity extends MediaScrollingActivity implements Constants.
     protected void bindViewHolder(Cursor cursor, MediaRecyclerViewAdapter.ViewHolder holder) {
         if (!AppUtils.isValidContextForGlide(holder.itemView.getContext()))
             return;
+        holder.itemView.setContentDescription(getText(R.string.photo));
 
         final long imgId = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media._ID));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

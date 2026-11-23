@@ -40,11 +40,13 @@ import com.bald.uriah.baldphone.utils.Animations;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.MissedNotifications;
 
 public class PillScreenActivity extends TimedBaldActivity {
     private static final String TAG = PillScreenActivity.class.getSimpleName();
 
     private static final int TIME_DELAYED_SCHEDULE = 100;
+    private static final String MISSED_NOTIFICATION_TAG = "missed_pill";
 
     private TextView tv_textual_content;
     private View snooze, took;
@@ -156,6 +158,13 @@ public class PillScreenActivity extends TimedBaldActivity {
     @Override
     protected int screenTimeout() {
         return Const.MINUTE * 2;
+    }
+
+    @Override
+    protected void onScreenTimeout() {
+        // the reminder rang itself out unacknowledged — leave a trace
+        MissedNotifications.post(this, MISSED_NOTIFICATION_TAG, reminder.getId(),
+                R.string.missed_pill, reminder.getTextualContent(), R.drawable.pill, PillsActivity.class);
     }
 
     @Override

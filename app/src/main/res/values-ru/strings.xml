@@ -161,6 +161,8 @@
     <string name="minute">Минута</string>
     <string name="minutes">Минут</string>
     <string name="missed">Пропущенный</string>
+    <string name="missed_alarm">Пропущен будильник</string>
+    <string name="missed_pill">Пропущена таблетка</string>
 
     <string name="mobile_phone_number">Мобильный номер</string>
     <string name="monday">Понедельник</string>

@@ -134,6 +134,7 @@ public class BaldSwitch extends LinearLayout {
                     checked = true;
                     onChangeListener.onChange(checked);
                     updateView();
+                    announceForAccessibility(yes);
                 }
             });
 
@@ -148,6 +149,7 @@ public class BaldSwitch extends LinearLayout {
                     checked = false;
                     onChangeListener.onChange(checked);
                     updateView();
+                    announceForAccessibility(no);
                     return;
                 }
             });
@@ -167,6 +169,10 @@ public class BaldSwitch extends LinearLayout {
 
         tv_yes.setEnabled(enabled);
         tv_no.setEnabled(enabled);
+
+        // no app drawable keys off state_selected — this flag is purely for TalkBack
+        tv_yes.setSelected(checked);
+        tv_no.setSelected(!checked);
 
         if (enabled) {
 

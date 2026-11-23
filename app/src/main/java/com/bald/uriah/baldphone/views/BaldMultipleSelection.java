@@ -178,6 +178,7 @@ public class BaldMultipleSelection extends LinearLayout {
                 setClicked(buttons.get(selection), false);
             selection = index;
             setClicked(buttons.get(selection), true);
+            button.announceForAccessibility(button.getText());
             onItemClickListener.onItemClick(getSelection());
         });
         if (selection == -1) {
@@ -203,6 +204,8 @@ public class BaldMultipleSelection extends LinearLayout {
     }
 
     private void setClicked(BaldButton button, boolean state) {
+        // no app drawable keys off state_selected — this flag is purely for TalkBack
+        button.setSelected(state);
         if (state) {
             button.setBackground(defaultDrawableSelected.getConstantState().newDrawable());
             button.setTextColor(textColorOnSelected);
