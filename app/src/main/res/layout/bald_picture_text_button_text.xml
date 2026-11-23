@@ -23,5 +23,7 @@
     android:ellipsize="end"
     android:gravity="center"
     android:maxLines="1"
+    android:paddingStart="4dp"
+    android:paddingEnd="12dp"
     app:autoSizeMinTextSize="10sp"
     app:autoSizeTextType="uniform" />

@@ -93,6 +93,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="14sp"
                 tools:text="Contact Name"
                 android:textColor="?bald_text_primary"
                 android:textSize="@dimen/large"

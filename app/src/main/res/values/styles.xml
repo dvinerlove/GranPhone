@@ -177,6 +177,8 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">?attr/bald_text_primary</item>
         <item name="android:textSize">@dimen/huge</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">14sp</item>
     </style>
 
     <style name="BaldActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
