@@ -123,6 +123,8 @@ public class HomePage1 extends HomeView {
 
     public HomePage1(@NonNull Context context, AttributeSet attributeSet) {
         this(context);
+        // attrs never reach View (ctor chain drops them) so android:id is not applied — set it.
+        setId(R.id.home_page_1);
     }
 
     @Override

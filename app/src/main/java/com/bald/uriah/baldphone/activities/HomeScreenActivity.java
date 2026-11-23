@@ -433,9 +433,7 @@ public class HomeScreenActivity extends BaldActivity {
     private void attachToXml() {
         setContentView(R.layout.home_screen);
         homeScroll = findViewById(R.id.home_scroll);
-        // findViewById(R.id.home_page_1) returns null: HomePage1's AttributeSet ctor drops
-        // attrs, so android:id is never applied. The ScrollView's only child is HomePage1.
-        homePage1 = (HomePage1) homeScroll.getChildAt(0);
+        homePage1 = findViewById(R.id.home_page_1);
 
         findViewById(R.id.bt_home_sos).setOnClickListener(v -> startActivity(new Intent(this, SOSActivity.class)));
         findViewById(R.id.bt_home_apps).setOnClickListener(v -> {
