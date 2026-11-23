@@ -23,6 +23,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -46,6 +47,7 @@ public class NotificationsActivity extends BaldActivity {
     public Bundle[] activeNotifications;
     public RecyclerView recyclerView;
     private NotificationRecyclerViewAdapter notificationRecyclerViewAdapter;
+    private View clearAllButton;
     private final BroadcastReceiver notificationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -60,6 +62,8 @@ public class NotificationsActivity extends BaldActivity {
             } else {
                 notificationRecyclerViewAdapter.changeNotifications(activeNotifications);
             }
+            clearAllButton.setVisibility(activeNotifications == null || activeNotifications.length == 0
+                    ? View.GONE : View.VISIBLE);
         }
     };
 
@@ -70,7 +74,8 @@ public class NotificationsActivity extends BaldActivity {
             return;
 
         setContentView(R.layout.activity_notifications);
-        findViewById(R.id.clear_all_notifications).setOnClickListener(v ->
+        clearAllButton = findViewById(R.id.clear_all_notifications);
+        clearAllButton.setOnClickListener(v ->
                 DialogScreen.confirm(this,
                         R.string.clear_all_notifications,
                         R.string.clear_all_notifications_subtext,

@@ -131,10 +131,18 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
             final Bundle item = bundles[position];
             final CharSequence app_name_string = item.getCharSequence("app_name");
             final boolean first = position == 0 || !bundles[position - 1].getCharSequence("app_name").equals(app_name_string);
+            final boolean clearable = item.getBoolean("clearable");
+            boolean flag_summery = item.getBoolean("summery");
+            if (flag_summery)
+                if (isAlone(position, String.valueOf(app_name_string)))
+                    flag_summery = false;
+            // a non-first summary row has every field hidden — collapse it instead
+            // of leaving an empty card stub behind.
+            final boolean collapsed = !first && flag_summery;
             {
                 final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
                 layoutParams.topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                        first ? 12 : 6,
+                        collapsed ? 0 : (first ? 12 : 6),
                         displayMetrics);
                 itemView.setLayoutParams(layoutParams);
             }
@@ -192,11 +200,6 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                 });
             } else
                 itemView.setOnClickListener(null);
-            final boolean clearable = item.getBoolean("clearable");
-            boolean flag_summery = item.getBoolean("summery");
-            if (flag_summery)
-                if (isAlone(position, String.valueOf(app_name_string)))
-                    flag_summery = false;
             if (this.first != first || this.summery != flag_summery) {
                 if (this.summery != flag_summery) {
                     final int summeryVisibility = flag_summery ? View.GONE : View.VISIBLE;
@@ -209,16 +212,16 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                 this.first = first;
                 this.summery = flag_summery;
                 final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
-                // a non-first summary row has every field hidden — collapse it instead
-                // of leaving an empty card stub behind.
-                layoutParams.height = !first && flag_summery ? 0 : ViewGroup.LayoutParams.WRAP_CONTENT;
+                layoutParams.height = collapsed ? 0 : ViewGroup.LayoutParams.WRAP_CONTENT;
                 itemView.setLayoutParams(layoutParams);
                 final int firstVisibility = first ? View.VISIBLE : View.GONE;
                 app_name.setVisibility(firstVisibility);
                 small_icon.setVisibility(firstVisibility);
             }
 
-            if (clearable) {
+            // summary rows render header-only (or collapse entirely) — a lone
+            // clear button on an otherwise empty card reads as a stray control.
+            if (clearable && !flag_summery) {
                 clear.setVisibility(View.VISIBLE);
                 clear.setOnClickListener((v) -> {
                     LocalBroadcastManager.getInstance(context)
