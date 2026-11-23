@@ -425,4 +425,7 @@ Tippe auf \"+ Tablette\" unten.</string>
     <string name="cd_pill_yellow">Gelb</string>
     <string name="cd_pill_green">Grün</string>
     <string name="cd_pill_custom">Eigene Farbe</string>
+    <string name="helper_pin_repeat_subtext">Geben Sie dasselbe Passwort erneut ein.</string>
+    <string name="helper_pin_mismatch">Die Passwörter stimmen nicht überein.</string>
 </resources>
+

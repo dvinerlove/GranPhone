@@ -444,4 +444,7 @@
     <string name="cd_pill_yellow">צהוב</string>
     <string name="cd_pill_green">ירוק</string>
     <string name="cd_pill_custom">צבע מותאם</string>
+    <string name="helper_pin_repeat_subtext">הזן שוב את אותה סיסמה.</string>
+    <string name="helper_pin_mismatch">הסיסמאות לא תואמות.</string>
 </resources>
+

@@ -480,6 +480,8 @@ adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.b
     <string name="settings_for_helper">Для помощника</string>
     <string name="helper_pin_create_subtext">Придумайте пароль минимум из 4 цифр. Он защищает настройки помощника.</string>
     <string name="helper_pin_enter_subtext">Введите пароль помощника.</string>
+    <string name="helper_pin_repeat_subtext">Введите тот же пароль ещё раз.</string>
+    <string name="helper_pin_mismatch">Пароли не совпадают.</string>
     <string name="vibration_feedback_subtext">Вибрация при нажатии кнопок.</string>
     <string name="tutorial_helper_setup">Родственник или помощник может добавить ваши контакты и приложения и задать PIN-код в разделе «Настройки помощника».</string>
     <string name="tutorial_battery_huawei">Разрешите GranPhone работать в фоне: Настройки → Батарея → Запуск приложений → GranPhone → Управление вручную.</string>

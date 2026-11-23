@@ -19,9 +19,10 @@
     android:id="@+id/iv_close"
                 android:focusable="true"
     android:contentDescription="@string/close"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
     android:layout_gravity="end"
-    android:layout_marginEnd="10dp"
+    android:layout_marginTop="34dp"
+    android:layout_marginEnd="34dp"
     android:background="@drawable/style_for_buttons_transparent"
     app:srcCompat="@drawable/close_on_background" />

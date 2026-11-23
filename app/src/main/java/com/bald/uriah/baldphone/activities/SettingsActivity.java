@@ -174,11 +174,53 @@ public class SettingsActivity extends BaldActivity {
                             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_pin_too_short).show();
                             return false;
                         }
-                        editor.putString(BPrefs.HELPER_PIN_KEY, pin).apply();
+                        showHelperPinConfirmDialog(pin);
+                        return true;
                     } else if (!pin.equals(saved)) {
                         BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();
                         return false;
                     }
+                    newCategory(helperCategory);
+                    return true;
+                })
+                .show();
+    }
+
+    /** Second step of kiosk PIN creation — a mistyped PIN could lock the device itself. */
+    private void showKioskPinConfirmDialog(final String pin) {
+        final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+        DialogBuilder.from(this)
+                .setTitle(R.string.kiosk_mode)
+                .setSubText(R.string.helper_pin_repeat_subtext)
+                .setInputType(pinInputType)
+                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                .setPositiveButtonListener(params -> {
+                    if (!pin.equals(String.valueOf(params[0]).trim())) {
+                        BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.helper_pin_mismatch).show();
+                        return false;
+                    }
+                    if (KioskManager.enable(this, pin))
+                        BaldToast.from(this).setText(R.string.kiosk_enabled).show();
+                    this.recreate();
+                    return true;
+                })
+                .show();
+    }
+
+    /** Second step of PIN creation — a mistyped PIN would lock the helper out of their own settings. */
+    private void showHelperPinConfirmDialog(final String pin) {
+        final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
+        DialogBuilder.from(this)
+                .setTitle(R.string.helper_settings)
+                .setSubText(R.string.helper_pin_repeat_subtext)
+                .setInputType(pinInputType)
+                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                .setPositiveButtonListener(params -> {
+                    if (!pin.equals(String.valueOf(params[0]).trim())) {
+                        BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.helper_pin_mismatch).show();
+                        return false;
+                    }
+                    editor.putString(BPrefs.HELPER_PIN_KEY, pin).apply();
                     newCategory(helperCategory);
                     return true;
                 })
@@ -202,9 +244,7 @@ public class SettingsActivity extends BaldActivity {
                             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_pin_too_short).show();
                             return false;
                         }
-                        if (KioskManager.enable(this, pin))
-                            BaldToast.from(this).setText(R.string.kiosk_enabled).show();
-                        this.recreate();
+                        showKioskPinConfirmDialog(pin);
                         return true;
                     })
                     .show();

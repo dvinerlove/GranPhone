@@ -488,6 +488,8 @@
     <string name="settings_for_helper">For the helper</string>
     <string name="helper_pin_create_subtext">Set a password of at least 4 digits. It protects the helper settings.</string>
     <string name="helper_pin_enter_subtext">Enter the helper password.</string>
+    <string name="helper_pin_repeat_subtext">Enter the same password again.</string>
+    <string name="helper_pin_mismatch">The passwords do not match.</string>
     <string name="vibration_feedback_subtext">Vibrate when buttons are pressed.</string>
     <string name="tutorial_helper_setup">A family member or helper can add your contacts and apps and set a PIN in Settings → Helper settings.</string>
     <string name="tutorial_battery_huawei">Allow GranPhone to work in the background: Settings → Battery → App launch → GranPhone → Manage manually.</string>
