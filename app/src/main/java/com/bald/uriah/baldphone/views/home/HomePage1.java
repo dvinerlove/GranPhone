@@ -32,6 +32,7 @@ import android.net.Uri;
 import android.provider.Telephony;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,7 +140,29 @@ public class HomePage1 extends HomeView {
         attachXml();
         genOnClickListeners();
         populatePins();
+        shrinkToFit(view.findViewById(R.id.clock));
+        shrinkToFit(view.findViewById(R.id.date));
         return view;
+    }
+
+    /**
+     * TextClock has no autosize on minSdk 21 — shrink it manually once the parent's
+     * real width is known, same pattern as {@link com.bald.uriah.baldphone.views.BaldMultipleSelection}.
+     * Only ever shrinks (never grows): at extreme system fontScale the clock/date
+     * stay fully readable instead of ellipsizing into uselessness.
+     */
+    private static void shrinkToFit(final TextView tv) {
+        tv.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
+            final View parent = (View) v.getParent();
+            final float avail = parent.getWidth() - parent.getPaddingStart() - parent.getPaddingEnd();
+            final CharSequence text = ((TextView) v).getText();
+            if (avail <= 0 || text == null || text.length() == 0)
+                return;
+            final float wanted = ((TextView) v).getPaint().measureText(text.toString());
+            if (wanted > avail)
+                ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        ((TextView) v).getTextSize() * (avail / wanted) * 0.98f);
+        });
     }
 
     /**
