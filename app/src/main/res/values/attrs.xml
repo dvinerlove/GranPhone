@@ -46,6 +46,7 @@
     <attr name="bald_card_border" format="reference|color" />
     <attr name="bald_brand" format="reference|color" />
     <attr name="bald_brand_pressed" format="reference|color" />
+    <attr name="bald_brand_tint" format="reference|color" />
     <attr name="bald_danger" format="reference|color" />
     <attr name="bald_info" format="reference|color" />
     <attr name="bald_text_primary" format="reference|color" />

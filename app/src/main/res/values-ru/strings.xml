@@ -146,6 +146,8 @@
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">И последнее:\nнастоятельно рекомендуем сделать GranPhone главным экраном телефона.
     </string>
     <string name="language">язык</string>
+    <string name="hide_bottom_row">Скрыть нижний ряд кнопок</string>
+    <string name="system_default">Как в системе</string>
     <string name="language_settings">Язык</string>
     <string name="large">Большой</string>
     <string name="left_handed">Левша</string>
@@ -346,6 +348,7 @@
     <string name="custom_app_subtext">Выберите пользовательское приложение для установки на домашний экран.</string>
     <string name="no_app_was_found">Подходящее приложение не найдено.</string>
     <string name="alarm">Будильник</string>
+    <string name="new_notifications">Новые уведомления</string>
     <string name="no_new_notifications">Нет новых уведомлений</string>
     <string name="sound">Звук</string>
     <string name="mute">Без звука</string>

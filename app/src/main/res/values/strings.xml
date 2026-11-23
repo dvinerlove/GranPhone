@@ -152,6 +152,8 @@
         thing:\nit\'s highly recommended to set GranPhone as the phone\'s home screen
     </string>
     <string name="language">language</string>
+    <string name="hide_bottom_row">Hide bottom button row</string>
+    <string name="system_default">System default</string>
     <string name="language_settings">Language</string>
     <string name="large">Large</string>
     <string name="left_handed">Left Handed</string>
@@ -355,6 +357,7 @@
     <string name="custom_app_subtext">Choose custom app to be on the home screen.</string>
     <string name="no_app_was_found">No matching app was found.</string>
     <string name="alarm">Alarm</string>
+    <string name="new_notifications">New notifications</string>
     <string name="no_new_notifications">No new notifications</string>
     <string name="sound">Sound</string>
     <string name="mute">Mute</string>

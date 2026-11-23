@@ -22,7 +22,7 @@
     <ImageView
         android:id="@+id/signal"
         android:contentDescription="@string/signal_strength"
-        android:focusable="true"
+        android:focusable="false"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="10dp"

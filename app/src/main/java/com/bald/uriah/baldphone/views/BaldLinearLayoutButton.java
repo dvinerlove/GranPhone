@@ -175,6 +175,13 @@ public class BaldLinearLayoutButton extends LinearLayout implements BaldButtonIn
     }
 
     @Override
+    public boolean performClick() {
+        return baldButtonTouchListener != null
+                ? BaldButtonInterface.performClick(this, baldButtonTouchListener)
+                : super.performClick();
+    }
+
+    @Override
     public void baldPerformClick() {
         if (onClickListener != null)
             onClickListener.onClick(this);

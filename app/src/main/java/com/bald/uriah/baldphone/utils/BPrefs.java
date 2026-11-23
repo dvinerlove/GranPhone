@@ -100,6 +100,12 @@ public final class BPrefs {
     public static final String COLORFUL_KEY = "COLORFUL_KEY";
     public static final boolean COLORFUL_DEFAULT_VALUE = false;
 
+    public static final String HIDE_BOTTOM_ROW_KEY = "HIDE_BOTTOM_ROW_KEY";
+    public static final boolean HIDE_BOTTOM_ROW_DEFAULT_VALUE = false;
+
+    public static final String LANGUAGE_KEY = "LANGUAGE_KEY";
+    public static final String LANGUAGE_DEFAULT_VALUE = "";
+
     public static final String LAST_CRASH_KEY = "LAST_CRASH_KEY";
     public static final long LAST_CRASH_TIME_OK = 12 * Const.SECOND;
 

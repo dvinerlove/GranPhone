@@ -283,6 +283,33 @@ public class SettingsActivity extends BaldActivity {
             newCategory(categorySparseArray.get(id));
     }
 
+    private static final String[] LANGUAGE_CODES = {
+            "", "ar", "bg", "ca", "cs", "da", "de", "el", "en", "es", "et", "eu", "fi", "fr",
+            "ha", "hi", "hr", "hu", "id", "it", "iw", "ka", "ko", "nl", "pl", "pt", "pt-rBR",
+            "ro", "ru", "sl", "sr", "sv", "tr", "zh"
+    };
+
+    private void showLanguageDialog() {
+        final String current = sharedPreferences.getString(BPrefs.LANGUAGE_KEY, BPrefs.LANGUAGE_DEFAULT_VALUE);
+        final CharSequence[] options = new CharSequence[LANGUAGE_CODES.length];
+        int selected = 0;
+        for (int i = 0; i < LANGUAGE_CODES.length; i++) {
+            if (i == 0) {
+                options[i] = getText(R.string.system_default);
+            } else {
+                final java.util.Locale locale = java.util.Locale.forLanguageTag(LANGUAGE_CODES[i].replace("-r", "-"));
+                options[i] = locale.getDisplayName(locale);
+            }
+            if (LANGUAGE_CODES[i].equals(current))
+                selected = i;
+        }
+        DialogScreen.select(this, R.string.language_settings, selected,
+                index -> {
+                    editor.putString(BPrefs.LANGUAGE_KEY, LANGUAGE_CODES[index]).apply();
+                    this.recreate();
+                }, options);
+    }
+
     private void populateSettingsList() {
         // User layer: the safe rows an elderly user can change directly.
         mainCategory.add(new Header(R.string.settings_for_user));
@@ -348,7 +375,18 @@ public class SettingsActivity extends BaldActivity {
         final SettingsItem keyboard = new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button);
         accessibilityCategory.add(keyboard);
 
-        personalizationCategory.add(new RunnableSettingsItem(R.string.language_settings, v -> startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS)), R.drawable.translate_on_button));
+        personalizationCategory.add(new RunnableSettingsItem(R.string.language_settings, v -> showLanguageDialog(), R.drawable.translate_on_button));
+
+        personalizationCategory.add(
+                new RunnableSettingsItem(R.string.hide_bottom_row,
+                        v -> DialogScreen.select(this, R.string.hide_bottom_row,
+                                sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, index == 0).apply();
+                                    this.recreate();
+                                },
+                                R.string.yes, R.string.no),
+                        R.drawable.keyboard_hide_on_button));
 
         personalizationCategory.add(new RunnableSettingsItem(R.string.time_changer, v -> startActivity(new Intent(this, PillTimeSetterActivity.class)), R.drawable.pill));
         personalizationCategory.add(new RunnableSettingsItem(R.string.edit_home_screen, v -> startActivity(new Intent(this, Page1EditorActivity.class)), R.drawable.edit_on_button));

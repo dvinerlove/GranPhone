@@ -41,6 +41,12 @@ public class TutorialFragment2 extends TutorialFragment {
     @ColorInt
     private int textColorOnSelected, textColorOnButton;
     private int longPressesFlag = 2;//2 is most 1 is medium 0 is regular
+    private boolean recreateActivityOnSelect = true;
+
+    /** Inside TutorialActivity a recreate would bounce the pager to page 1. */
+    public void setRecreateActivityOnSelect(boolean recreateActivityOnSelect) {
+        this.recreateActivityOnSelect = recreateActivityOnSelect;
+    }
 
     @Override
     protected void actualSetup() {
@@ -95,7 +101,7 @@ public class TutorialFragment2 extends TutorialFragment {
                 .putBoolean(BPrefs.TOUCH_NOT_HARD_KEY, longPressesFlag == 0)
                 .apply();
         Activity activity = getActivity();
-        if (activity != null) {
+        if (recreateActivityOnSelect && activity != null) {
             activity.recreate();
         }
 
@@ -103,9 +109,11 @@ public class TutorialFragment2 extends TutorialFragment {
 
     private void applyDuoToFlag() {
         for (int i = 0; i < presses.length; i++) {
-            selected[i].setVisibility(longPressesFlag == i ? View.VISIBLE : View.INVISIBLE);
-            presses[i].setBackgroundResource(longPressesFlag == i ? R.drawable.btn_selected : R.drawable.style_for_buttons);
-            presses[i].setTextColor(longPressesFlag == i ? textColorOnSelected : textColorOnButton);
+            final boolean isSelected = longPressesFlag == i;
+            selected[i].setVisibility(isSelected ? View.VISIBLE : View.INVISIBLE);
+            presses[i].setSelected(isSelected);
+            presses[i].setBackgroundResource(isSelected ? R.drawable.btn_selected : R.drawable.style_for_buttons);
+            presses[i].setTextColor(isSelected ? textColorOnSelected : textColorOnButton);
         }
 
     }

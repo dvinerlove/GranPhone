@@ -89,6 +89,8 @@ public class FirstPageAppIcon extends BaldFrameLayoutButton {
 
     public void setBadgeVisibility(boolean visible) {
         badge.setVisibility(visible ? VISIBLE : INVISIBLE);
+        badge.setContentDescription(visible ? context.getString(R.string.new_notifications) : null);
+        badge.setImportantForAccessibility(visible ? IMPORTANT_FOR_ACCESSIBILITY_YES : IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
 
     public CharSequence getText() {

@@ -153,6 +153,13 @@ public class BaldButton extends androidx.appcompat.widget.AppCompatTextView impl
     }
 
     @Override
+    public boolean performClick() {
+        return baldButtonTouchListener != null
+                ? BaldButtonInterface.performClick(this, baldButtonTouchListener)
+                : super.performClick();
+    }
+
+    @Override
     public void baldPerformClick() {
         if (onClickListener != null)
             onClickListener.onClick(this);

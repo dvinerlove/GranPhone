@@ -17,6 +17,7 @@
 package com.bald.uriah.baldphone.activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -89,6 +90,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     protected Vibrator vibrator;
     @StyleRes
     private int themeIndex;
+    private String appliedLanguage;
     private List<WeakReference<Dialog>> dialogsToClose = new ArrayList<>(1);
     private List<WeakReference<PopupWindow>> popupWindowsToClose = new ArrayList<>(1);
     private SensorManager sensorManager;
@@ -99,6 +101,20 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     private boolean useAccidentalGuard = true;
     private Handler handler;
     private Runnable touchesDecreaser = () -> touches = (touches -= 1) < 0 ? 0 : touches;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        appliedLanguage = BPrefs.get(newBase).getString(BPrefs.LANGUAGE_KEY, BPrefs.LANGUAGE_DEFAULT_VALUE);
+        if (appliedLanguage.isEmpty()) {
+            super.attachBaseContext(newBase);
+            return;
+        }
+        final java.util.Locale locale = java.util.Locale.forLanguageTag(appliedLanguage);
+        java.util.Locale.setDefault(locale);
+        final Configuration config = new Configuration();
+        config.setLocale(locale);
+        super.attachBaseContext(newBase.createConfigurationContext(config));
+    }
 
     @Override
     public void
@@ -250,7 +266,8 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onResume() {
         super.onResume();
-        if (themeIndex != AppUtils.getTheme(this))
+        if (themeIndex != AppUtils.getTheme(this) ||
+                !BPrefs.get(this).getString(BPrefs.LANGUAGE_KEY, BPrefs.LANGUAGE_DEFAULT_VALUE).equals(appliedLanguage))
             recreate();
         if (useAccidentalGuard)
             sensorManager.registerListener(this, proximitySensor,

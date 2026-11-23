@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/style_for_buttons"
+        android:background="@drawable/dialog_screen_card"
         android:gravity="top|center_horizontal"
         android:orientation="vertical"
         android:paddingTop="16dp"

@@ -447,6 +447,9 @@ public class HomeScreenActivity extends BaldActivity {
         });
         findViewById(R.id.bt_home_settings).setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
+        if (sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE))
+            findViewById(R.id.bottom_row).setVisibility(View.GONE);
+
         // Bottom-row labels must never wrap mid-word at large font scales — shrink to one line instead.
         for (final int id : new int[]{R.id.bt_home_sos, R.id.bt_home_apps, R.id.bt_home_settings}) {
             final android.widget.TextView label = ((com.bald.uriah.baldphone.views.BaldPictureTextButton) findViewById(id)).getTextView();

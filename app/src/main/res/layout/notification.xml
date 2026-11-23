@@ -101,7 +101,7 @@
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/clear"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="64dp"
         android:layout_gravity="end"
         android:layout_marginTop="10dp"
         android:minWidth="120dp"

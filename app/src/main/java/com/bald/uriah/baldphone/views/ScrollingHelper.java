@@ -226,9 +226,9 @@ public class ScrollingHelper extends ConstraintLayout {
         }
         // each arrow dims at its edge — "nothing more this way" is the state users need to see
         if (upArrow != null)
-            upArrow.setAlpha(canUp ? 1f : 0.25f);
+            upArrow.setAlpha(canUp ? 1f : 0.5f);
         if (downArrow != null)
-            downArrow.setAlpha(canDown ? 1f : 0.25f);
+            downArrow.setAlpha(canDown ? 1f : 0.5f);
     }
 
     private void setArrowsVisibility(boolean visible) {
@@ -374,7 +374,9 @@ public class ScrollingHelper extends ConstraintLayout {
                 }
             };
 
-        final OnClickListener onClickListener = Const.EMPTY_CLICK_LISTENER;
+        // a11y/dpad activation must actually scroll (was EMPTY_CLICK_LISTENER — a lying control)
+        final OnClickListener upClick = v -> child.scrollBy(0, -child.getHeight() / 2);
+        final OnClickListener downClick = v -> child.scrollBy(0, child.getHeight() / 2);
 
         if (whereBar == RIGHT || whereBar == LEFT) {
             LinearLayout container;
@@ -395,8 +397,8 @@ public class ScrollingHelper extends ConstraintLayout {
                 downArrow = down;
                 container.addView(up, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
                 container.addView(down, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
-                up.setOnClickListener(onClickListener);
-                down.setOnClickListener(onClickListener);
+                up.setOnClickListener(upClick);
+                down.setOnClickListener(downClick);
                 up.setOnTouchListener((v, event) -> {
                     if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_HOVER_ENTER) {
                         direction = UP;
@@ -463,8 +465,8 @@ public class ScrollingHelper extends ConstraintLayout {
             constraintSet.connect(downContainerId, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
 
             constraintSet.applyTo(this);
-            upContainer.setOnClickListener(onClickListener);
-            downContainer.setOnClickListener(onClickListener);
+            upContainer.setOnClickListener(upClick);
+            downContainer.setOnClickListener(downClick);
 
             upContainer.setOnTouchListener((v, event) -> {
                 if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_HOVER_ENTER) {

@@ -45,6 +45,8 @@ Source of truth: `app/src/main/java/com/bald/uriah/baldphone/utils/BPrefs.java`.
 | `CRASH_REPORTS_KEY` | boolean | `true` | Declared, currently unused — never read (sole occurrence `BPrefs.java:93`). |
 | `APPS_ONE_GRID_KEY` | boolean | `false` | Apps screen: one tall grid vs paginated. |
 | `COLORFUL_KEY` | boolean | `false` | Colorful app icons vs uniform. |
+| `HIDE_BOTTOM_ROW_KEY` | boolean | `false` | Home screen: hide the fixed SOS/Apps/Settings row. Set via Settings → helper layer. |
+| `LANGUAGE_KEY` | String | `""` | Per-app UI locale (`""` = follow system). BCP-47-ish tag matching shipped `values-*` dirs (e.g. `ru`, `pt-rBR`). Applied in `BaldActivity.attachBaseContext`; activities recreate on change. |
 | `LAST_CRASH_KEY` | long | `-1` | Timestamp of last crash (`BaldUncaughtExceptionHandler`). Within `LAST_CRASH_TIME_OK` (12s, `12 * Const.SECOND`) = crash loop → `System.exit`. Not a user pref. |
 | `LAST_APK_VERSION_KEY` | int | `-1` | Version code of last downloaded APK (`UpdatesActivity`). |
 | `LAST_UPDATE_ASKED_VERSION_KEY` | long | `0` | Timestamp when update prompt last shown (`UpdatingUtil`; read at `HomeScreenActivity.java:312`). |

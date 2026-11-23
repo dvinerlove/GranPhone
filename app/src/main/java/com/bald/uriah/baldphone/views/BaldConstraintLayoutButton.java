@@ -159,6 +159,13 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
     }
 
     @Override
+    public boolean performClick() {
+        return baldButtonTouchListener != null
+                ? BaldButtonInterface.performClick(this, baldButtonTouchListener)
+                : super.performClick();
+    }
+
+    @Override
     public void baldPerformClick() {
         if (onClickListener != null)
             onClickListener.onClick(this);

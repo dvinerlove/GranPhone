@@ -154,6 +154,13 @@ public class BaldImageButton extends androidx.appcompat.widget.AppCompatImageVie
     }
 
     @Override
+    public boolean performClick() {
+        return baldButtonTouchListener != null
+                ? BaldButtonInterface.performClick(this, baldButtonTouchListener)
+                : super.performClick();
+    }
+
+    @Override
     public void baldPerformClick() {
         if (onClickListener != null)
             onClickListener.onClick(this);
