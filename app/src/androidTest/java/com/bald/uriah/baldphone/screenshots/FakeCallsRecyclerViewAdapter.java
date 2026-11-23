@@ -17,6 +17,7 @@
 package com.bald.uriah.baldphone.screenshots;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -29,8 +30,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -209,7 +210,7 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
         }
 
         public void setType(int type) {
-            @ColorRes final int colorRes;
+            @AttrRes final int colorAttr;
             @DrawableRes final int drawableRes;
             @StringRes final int stringRes;
             switch (type) {
@@ -217,37 +218,41 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
                 case ANSWERED_EXTERNALLY_TYPE:
                     drawableRes = R.drawable.call_received_on_button;
                     stringRes = R.string.received;
-                    colorRes = R.color.received;
+                    colorAttr = R.attr.bald_brand;
                     break;
                 case MISSED_TYPE:
                 case REJECTED_TYPE:
                     drawableRes = R.drawable.call_missed_on_button;
                     stringRes = R.string.missed;
-                    colorRes = R.color.missed;
+                    colorAttr = R.attr.bald_danger;
                     break;
                 case OUTGOING_TYPE:
                     drawableRes = R.drawable.call_made_on_button;
                     stringRes = R.string.outgoing;
-                    colorRes = R.color.outgoing;
+                    colorAttr = R.attr.bald_info;
                     break;
                 case VOICEMAIL_TYPE:
                     drawableRes = R.drawable.voicemail_on_button;
                     stringRes = R.string.voice_mail;
-                    colorRes = R.color.other;
+                    colorAttr = R.attr.bald_text_secondary;
                     break;
                 case BLOCKED_TYPE:
                     drawableRes = R.drawable.blocked_on_button;
                     stringRes = R.string.blocked;
-                    colorRes = R.color.other;
+                    colorAttr = R.attr.bald_text_secondary;
                     break;
                 default:
                     drawableRes = R.drawable.error_on_background;
                     stringRes = R.string.empty;
-                    colorRes = R.color.other;
+                    colorAttr = R.attr.bald_text_secondary;
             }
             tv_type.setText(stringRes);
+            final TypedValue typedValue = new TypedValue();
+            activity.getTheme().resolveAttribute(colorAttr, typedValue, true);
+            final int color = typedValue.data;
+            tv_type.setTextColor(color);
+            iv_type.setImageTintList(ColorStateList.valueOf(color));
             iv_type.setImageResource(drawableRes);
-            this.ll_contact_only.setBackgroundResource(colorRes);
 
         }
 

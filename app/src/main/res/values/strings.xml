@@ -21,7 +21,7 @@
     <string name="accidental_touches_settings_subtext">The guard blocks touches while the phone is covered.\nIf it
         causes problems, you can turn it off here.
     </string>
-    <string name="accidental_touches_subtext">An accidental touch was detected.\nTap \"Understood\" to keep using the
+    <string name="accidental_touches_subtext">An accidental touch was detected.\nTap “Understood” to keep using the
         phone.\nIf this message keeps appearing, you can turn the guard off in accessibility settings.
     </string>
     <string name="acknowledgments">Acknowledgments</string>
@@ -176,7 +176,7 @@
     <string name="less">Decrease</string>
     <string name="morning">Morning</string>
     <string name="name">Name</string>
-    <string name="named__">\"%1$s\"</string>
+    <string name="named__">“%1$s”</string>
     <string name="new_alarm___was_created">Alarm%1$s created.</string>
     <string name="nfc">NFC</string>
     <string name="no">No</string>
@@ -187,8 +187,10 @@
 
     <string name="of">of</string>
     <string name="off">Off</string>
+    <string name="off_short">Off</string>
     <string name="ok">OK</string>
     <string name="on">On</string>
+    <string name="on_short">On</string>
 
     <string name="only_once">Only once</string>
 
@@ -247,7 +249,7 @@
     <string name="settings">Settings</string>
     <string name="settings_permission">Change system settings</string>
     <string name="share">Share</string>
-    <string name="share_actual_text">Hi, I\'m using an app called \"GranPhone\" — it makes the phone\'s
+    <string name="share_actual_text">Hi, I’m using an app called “GranPhone” — it makes the phone’s
         interface big, simple and friendly.\nInterested?\nYou can download it for free!\nCheck out the link
         below for more information:\n\nhttps://github.com/dvinerlove/GranPhone
     </string>
@@ -303,7 +305,7 @@
     <string name="yesterday">Yesterday</string>
     <string name="nothing">Nothing here yet</string>
     <string name="no_contacts_found">No contacts match — check the spelling.</string>
-    <string name="no_alarms">No alarms.\nTap \"Alarm\" or \"Timer\"\nbelow to create one.</string>
+    <string name="no_alarms">No alarms.\nTap “Alarm” or “Timer”\nbelow to create one.</string>
     <string name="no_pills">No pills yet.\nTap the button below\nto add one.</string>
     <string name="clear_all_notifications">Clear All Notifications</string>
     <string name="clear_all_notifications_subtext">All notifications will be removed.</string>

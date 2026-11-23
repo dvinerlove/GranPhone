@@ -15,7 +15,7 @@
   -->
 
 <!-- Alarm row card: bald_card fill + 16dp corners + 1dp border (dialog_screen_card).
-     Big time + Да/Нет switch on top, name + repeat summary secondary,
+     Big time + Вкл/Выкл state switch on top, name + repeat summary secondary,
      worded edit/delete actions at the bottom end. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -50,9 +50,9 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            app:no="@string/no"
+            app:no="@string/off_short"
             app:size="@dimen/medium"
-            app:yes="@string/yes" />
+            app:yes="@string/on_short" />
     </LinearLayout>
 
     <TextView

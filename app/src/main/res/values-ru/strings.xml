@@ -181,8 +181,10 @@
 
     <string name="of">из</string>
     <string name="off">Выключить</string>
+    <string name="off_short">Выкл</string>
     <string name="ok">OK</string>
     <string name="on">Включить</string>
+    <string name="on_short">Вкл</string>
 
     <string name="only_once">Только один раз</string>
 
