@@ -21,7 +21,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.media.Ringtone;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
@@ -37,7 +36,6 @@ import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +69,6 @@ import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
-import androidx.recyclerview.widget.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,12 +132,6 @@ public class SettingsActivity extends BaldActivity {
 
         recyclerView = findViewById(R.id.child);
 
-        final TypedValue typedValue = new TypedValue();
-        final Resources.Theme theme = getTheme();
-        theme.resolveAttribute(R.attr.bald_stroke_color, typedValue, true);
-        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(getDrawable(R.drawable.settings_divider));
-        recyclerView.addItemDecoration(dividerItemDecoration);
         populateSettingsList();
         recyclerView.setAdapter(new SettingsRecyclerViewAdapter());
     }
@@ -253,6 +244,7 @@ public class SettingsActivity extends BaldActivity {
 
     private void populateSettingsList() {
         // User layer: the safe rows an elderly user can change directly.
+        mainCategory.add(new Header(R.string.settings_for_user));
         setupAlarmVolume();
         mainCategory.add(new RunnableSettingsItem(R.string.brightness,
                 v -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)), R.drawable.brightness_on_button));
@@ -278,6 +270,7 @@ public class SettingsActivity extends BaldActivity {
                         R.string.light, R.string.dark),
                 R.drawable.brush_on_button
         ));
+        mainCategory.add(new Header(R.string.settings_for_helper));
         mainCategory.add(helperCategory);
 
         // Helper layer: everything operational or dangerous stays behind the PIN gate.
@@ -433,7 +426,7 @@ public class SettingsActivity extends BaldActivity {
                                 .setSubText(R.string.device_memory_subtext)
                                 .setPositiveButtonListener(params -> true)
                                 .setExtraView(buildMemoryStatusView())
-                        , R.drawable.tech_info_on_button)
+                        , R.drawable.sim_on_button)
         );
         helperCategory.add(
                 new RunnableSettingsItem(R.string.technical_information,
@@ -562,10 +555,16 @@ public class SettingsActivity extends BaldActivity {
             layoutInflater = (LayoutInflater) SettingsActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
+        @Override
+        public int getItemViewType(int position) {
+            return currentCategory.get(position) instanceof Header ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
+        }
+
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ViewHolder(layoutInflater.inflate(R.layout.settings_item, parent, false));
+            return new ViewHolder(layoutInflater.inflate(
+                    viewType == VIEW_TYPE_HEADER ? R.layout.settings_header : R.layout.settings_item, parent, false));
         }
 
         @Override
@@ -590,6 +589,10 @@ public class SettingsActivity extends BaldActivity {
             }
 
             public void update(SettingsItem settingsItem) {
+                if (settingsItem instanceof Header) {
+                    ((TextView) this.itemView).setText(settingsItem.textResId);
+                    return;
+                }
                 this.textView.setText(settingsItem.textResId);
                 this.setting_icon.setImageResource(settingsItem.drawableResId);
                 this.itemView.setOnClickListener(settingsItem);
@@ -598,6 +601,9 @@ public class SettingsActivity extends BaldActivity {
     }
 
     //OOP
+    private static final int VIEW_TYPE_ITEM = 0;
+    private static final int VIEW_TYPE_HEADER = 1;
+
     public abstract class SettingsItem implements View.OnClickListener {
         public final @StringRes
         int textResId;
@@ -647,6 +653,18 @@ public class SettingsActivity extends BaldActivity {
                 BaldToast.from(v.getContext()).setText(R.string.an_error_has_occurred).setType(BaldToast.TYPE_ERROR).show();
                 BaldToast.from(v.getContext()).setText(e.getMessage()).setType(BaldToast.TYPE_ERROR).show();
             }
+        }
+    }
+
+    /** Non-clickable section label («Для пользователя» / «Для помощника»). */
+    public class Header extends SettingsItem {
+        Header(@StringRes int textResId) {
+            super(textResId, 0);
+        }
+
+        @Override
+        public void onClick(View v) {
+            // decorative
         }
     }
 
