@@ -132,7 +132,7 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
             day = container.findViewById(R.id.day);
             ll_contact_only.setOnClickListener(this);
             // this line shows the raw phone number for unknown callers — keep digits LTR in RTL locales
-            contact_name.setTextDirection(View.TEXT_DIRECTION_LTR);
+            contact_name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
         }
 
         public void update(int index) {

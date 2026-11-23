@@ -121,7 +121,7 @@ public class SOSActivity extends BaldActivity {
         names = new TextView[]{findViewById(R.id.ec1_name), findViewById(R.id.ec2_name)};
         // a pinned contact can be named by its number — keep digits LTR in RTL locales
         for (final TextView name : names)
-            name.setTextDirection(View.TEXT_DIRECTION_LTR);
+            name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
         btAddContact = findViewById(R.id.bt_add_contact);
         btAddContact.getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 

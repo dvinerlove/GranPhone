@@ -99,21 +99,30 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
      */
     private void applyVariant(int variant) {
         final int variantAttr = variant == 1 ? R.attr.bald_brand : variant == 2 ? R.attr.bald_danger : R.attr.bald_info;
-        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_clicked, R.attr.bald_button_disabled, R.attr.bald_text_on_variant});
+        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_disabled, R.attr.bald_text_on_variant, R.attr.bald_text_primary});
         final int color = themeColors.getColor(0, 0);
-        final int clickedColor = themeColors.getColor(1, color);
-        final int disabledColor = themeColors.getColor(2, color);
-        final int onColor = themeColors.getColor(3, Color.WHITE);
+        final int disabledColor = themeColors.getColor(1, color);
+        final int onColor = themeColors.getColor(2, Color.WHITE);
+        final int disabledTextColor = themeColors.getColor(3, onColor);
         themeColors.recycle();
+
+        // Pressed = darkened variant fill so onColor keeps its contrast (neutral
+        // bald_button_clicked gave ~1.4-1.9:1 label flashes on variant buttons).
+        final int pressedColor = Color.rgb(
+                (int) (Color.red(color) * 0.8f), (int) (Color.green(color) * 0.8f), (int) (Color.blue(color) * 0.8f));
 
         setBackgroundTintList(new ColorStateList(
                 new int[][]{
                         new int[]{-android.R.attr.state_enabled},
                         new int[]{android.R.attr.state_pressed},
                         new int[]{}},
-                new int[]{disabledColor, clickedColor, color}));
-        textView.setTextColor(onColor);
-        imageView.setImageTintList(ColorStateList.valueOf(onColor));
+                new int[]{disabledColor, pressedColor, color}));
+        textView.setTextColor(new ColorStateList(
+                new int[][]{new int[]{-android.R.attr.state_enabled}, new int[]{}},
+                new int[]{disabledTextColor, onColor}));
+        imageView.setImageTintList(new ColorStateList(
+                new int[][]{new int[]{-android.R.attr.state_enabled}, new int[]{}},
+                new int[]{disabledTextColor, onColor}));
     }
 
     public void setText(CharSequence text) {

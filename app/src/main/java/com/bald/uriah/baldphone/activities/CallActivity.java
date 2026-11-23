@@ -111,7 +111,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         tv_number = findViewById(R.id.tv_number);
         tv_status = findViewById(R.id.tv_status);
         // caller name/number can be raw digits — keep them LTR in RTL locales
-        tv_name.setTextDirection(View.TEXT_DIRECTION_LTR);
+        tv_name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
         tv_number.setTextDirection(View.TEXT_DIRECTION_LTR);
         incomingButtons = findViewById(R.id.incoming_buttons);
         ongoingButtons = findViewById(R.id.ongoing_buttons);

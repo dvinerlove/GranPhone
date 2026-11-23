@@ -282,7 +282,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             this.tv_image_letter = container.findViewById(R.id.image_letter);
 
             // phone numbers read digit-by-digit LTR even in RTL locales
-            this.tv_contact_name.setTextDirection(View.TEXT_DIRECTION_LTR);
+            this.tv_contact_name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
             this.tv_contact_number.setTextDirection(View.TEXT_DIRECTION_LTR);
 
             this.tv_letter.setOnClickListener((v) -> {

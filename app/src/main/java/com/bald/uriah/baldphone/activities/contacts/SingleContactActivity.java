@@ -205,7 +205,7 @@ public class SingleContactActivity extends BaldActivity {
         image_letter = findViewById(R.id.image_letter);
         tv_contact_name = findViewById(R.id.tv_contact_name);
         // name can be a raw phone number — keep digits LTR in RTL locales
-        tv_contact_name.setTextDirection(View.TEXT_DIRECTION_LTR);
+        tv_contact_name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
         sos_switch = findViewById(R.id.sos_switch);
         home_pin_switch = findViewById(R.id.home_pin_switch);
         bt_call = findViewById(R.id.bt_call);

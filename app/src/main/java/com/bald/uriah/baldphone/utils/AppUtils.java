@@ -367,7 +367,10 @@ public class AppUtils {
     public static String firstGlyph(@Nullable CharSequence s) {
         if (s == null || s.length() == 0)
             return "?";
-        return new String(Character.toChars(Character.codePointAt(s, 0))).toUpperCase();
+        final int cp = Character.codePointAt(s, 0);
+        if (cp >= 0xD800 && cp <= 0xDFFF) // lone surrogate — corrupt data
+            return "?";
+        return new String(Character.toChars(cp)).toUpperCase();
     }
 
     /**
