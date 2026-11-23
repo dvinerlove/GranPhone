@@ -46,8 +46,7 @@ import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.activities.HomeScreenActivity;
 import com.bald.uriah.baldphone.activities.media.PhotosActivity;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
@@ -490,17 +489,15 @@ public class AddContactActivity extends BaldActivity {
     }
 
     private void showExitMessage() {
-        DialogBuilder.from(this)
-                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                .setSubText(R.string.do_you_want_to_save_your_changes)
-                .setOptions(R.string.save, R.string.discard)
-                .setPositiveButtonListener(params -> {
-                    if (params[0].equals(1))
+        DialogScreen.select(this, R.string.do_you_want_to_save_your_changes,
+                0,
+                index -> {
+                    if (index == 1)
                         finish();
                     else
                         save();
-                    return true;
-                }).show();
+                },
+                R.string.save, R.string.discard);
     }
 
     static class PhotoAdder extends SimpleTarget<Bitmap> {

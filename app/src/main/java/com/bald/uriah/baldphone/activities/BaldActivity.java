@@ -42,8 +42,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
@@ -314,17 +313,16 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
         if (touches > accidentalMinTouches) {
             touches = -1;
             handler.removeCallbacks(touchesDecreaser);
-            DialogBuilder.from(this)
-                    .setTitle(R.string.accidental_touches)
-                    .setSubText(R.string.accidental_touches_subtext)
-                    .addFlag(DialogFlags.FLAG_NOT_CANCELABLE | DialogFlags.FLAG_OK)
-                    .setPositiveButtonListener(params -> {
-                        touches = 0;
-                        accidentalMinTouches += 2;
-                        accidentalTime /= 2;
-                        return true;
-                    })
-                    .show();
+            // non-cancelable: only «Понятно» dismisses → counters reset on dismissal
+            final DialogScreen dialog = DialogScreen.info(this,
+                    R.string.accidental_touches,
+                    R.string.accidental_touches_subtext);
+            dialog.setCancelable(false);
+            dialog.setOnDismissListener(d -> {
+                touches = 0;
+                accidentalMinTouches += 2;
+                accidentalTime /= 2;
+            });
 
         }
     }

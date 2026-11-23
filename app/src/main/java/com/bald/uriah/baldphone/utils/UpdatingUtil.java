@@ -100,24 +100,19 @@ public class UpdatingUtil {
                             try {
                                 final BaldUpdateObject baldUpdateObject = BaldUpdateObject.parseMessage(response);
                                 if (updatePending(baldUpdateObject)) {
-                                    DialogBuilder.from(activity)
-                                            .setTitle(R.string.pending_update)
-                                            .setSubText(R.string.a_new_update_is_available)
-                                            .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                                            .setPositiveButtonListener(params -> {
-                                                activity.startActivity(
-                                                        new Intent(activity, UpdatesActivity.class)
-                                                                .putExtra(UpdatesActivity.EXTRA_BALD_UPDATE_OBJECT, baldUpdateObject));
-                                                return true;
-                                            })
-                                            .setNegativeButtonListener(params -> {
-                                                BPrefs.get(activity)
-                                                        .edit()
-                                                        .putLong(BPrefs.LAST_UPDATE_ASKED_VERSION_KEY, System.currentTimeMillis())
-                                                        .apply();
-                                                return true;
-                                            })
-                                            .show();
+                                    final DialogScreen dialog = DialogScreen.confirm(activity,
+                                            R.string.pending_update,
+                                            R.string.a_new_update_is_available,
+                                            R.string.install,
+                                            () -> activity.startActivity(
+                                                    new Intent(activity, UpdatesActivity.class)
+                                                            .putExtra(UpdatesActivity.EXTRA_BALD_UPDATE_OBJECT, baldUpdateObject)));
+                                    // dismissing («Отмена», back-press) snoozes the prompt for LAST_UPDATE_ASKED_VERSION_KEY
+                                    dialog.setOnCancelListener(d ->
+                                            BPrefs.get(activity)
+                                                    .edit()
+                                                    .putLong(BPrefs.LAST_UPDATE_ASKED_VERSION_KEY, System.currentTimeMillis())
+                                                    .apply());
                                 } else {
                                     if (retAnswer)
                                         BaldToast

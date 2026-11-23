@@ -27,8 +27,7 @@ import androidx.annotation.Nullable;
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.AppUtils;
@@ -83,53 +82,33 @@ public class TechnicalInfoActivity extends BaldActivity {
             return;
         setContentView(R.layout.activity_tech_info);
         ((TextView) findViewById(R.id.tv_info)).setText(getTechnicalInfo());
-        findViewById(R.id.bt_clear_cache).setOnClickListener(v -> {
-            DialogBuilder.from(this)
-                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
-                    .setTitle(R.string.clear_cache)
-                    .setSubText(R.string.clear_cache_subtext)
-                    .setPositiveButtonListener(params -> {
-                        deleteCache(this);
-                        BPrefs.get(this).edit().remove(BPrefs.CUSTOM_APP_KEY).apply();
-                        if (BuildConfig.FLAVOR.equals("baldUpdates"))
-                            UpdatesActivity.removeUpdatesInfo(this);
-                        BaldToast.simple(this, R.string.cache_cleared_successfully);
-                        return true;
-                    })
-                    .show();
+        findViewById(R.id.bt_clear_cache).setOnClickListener(v ->
+                DialogScreen.confirm(this,
+                        R.string.clear_cache,
+                        R.string.clear_cache_subtext,
+                        R.string.clear,
+                        () -> {
+                            deleteCache(this);
+                            BPrefs.get(this).edit().remove(BPrefs.CUSTOM_APP_KEY).apply();
+                            if (BuildConfig.FLAVOR.equals("baldUpdates"))
+                                UpdatesActivity.removeUpdatesInfo(this);
+                            BaldToast.simple(this, R.string.cache_cleared_successfully);
+                        }));
 
-        });
-
-        findViewById(R.id.bt_clear_data).
-
-                setOnClickListener(v ->
-
-                {
-                    DialogBuilder.from(this)
-                            .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
-                            .setTitle(R.string.clear_data)
-                            .setSubText(R.string.clear_data_subtext)
-                            .setPositiveButtonListener(params -> {
-                                DialogBuilder.from(this)
-                                        .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
-                                        .setTitle(R.string.clear_data)
-                                        .setSubText(R.string.clear_data_subtext2)
-                                        .setPositiveButtonListener(params2 -> {
-                                            DialogBuilder.from(this)
-                                                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
-                                                    .setTitle(R.string.clear_data)
-                                                    .setSubText(R.string.clear_data_subtext3)
-                                                    .setPositiveButtonListener(params3 -> {
-                                                        ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
-                                                        return true;
-                                                    }).show();
-                                            return true;
-                                        })
-                                        .show();
-                                return true;
-                            })
-                            .show();
-                });
+        findViewById(R.id.bt_clear_data).setOnClickListener(v ->
+                DialogScreen.confirm(this,
+                        R.string.clear_data,
+                        R.string.clear_data_subtext,
+                        R.string.clear,
+                        () -> DialogScreen.confirm(this,
+                                R.string.clear_data,
+                                R.string.clear_data_subtext2,
+                                R.string.clear,
+                                () -> DialogScreen.confirm(this,
+                                        R.string.clear_data,
+                                        R.string.clear_data_subtext3,
+                                        R.string.clear,
+                                        () -> ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData()))));
     }
 
     @Override

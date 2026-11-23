@@ -46,8 +46,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.FirstRunDefaults;
@@ -266,20 +265,13 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
             final PhoneAccount account = telecomManager == null ? null : telecomManager.getPhoneAccount(handles.get(i));
             names[i] = account != null && !TextUtils.isEmpty(account.getLabel()) ? account.getLabel() : "SIM " + (i + 1);
         }
-        DialogBuilder.from(this)
-                .setTitle(R.string.choose_sim)
-                .setSubText(R.string.choose_sim_subtext)
-                .setOptions(names)
-                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL | DialogFlags.FLAG_NOT_CANCELABLE)
-                .setPositiveButtonListener(params -> {
-                    call.phoneAccountSelected(finalHandles.get((Integer) params[0]), false);
-                    return true;
-                })
-                .setNegativeButtonListener(params -> {
-                    call.disconnect();
-                    return true;
-                })
-                .show();
+        // «Назад» (and only it) cancels the dialog → hangs up; picking a SIM dismisses without cancelling
+        final DialogScreen simPicker = DialogScreen.select(this, R.string.choose_sim,
+                0,
+                index -> call.phoneAccountSelected(finalHandles.get(index), false),
+                names);
+        simPicker.setCancelable(false);
+        simPicker.setOnCancelListener(d -> call.disconnect());
     }
 
     private void showButtons(boolean incoming, boolean ongoing) {

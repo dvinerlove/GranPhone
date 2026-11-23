@@ -117,6 +117,7 @@
     <string name="enter_contact_or_phone_number">Enter contact name:</string>
     <string name="enter_phone_number">Enter a phone number</string>
     <string name="evening">Evening</string>
+    <string name="exit">Exit</string>
     <string name="example_of_different_text_sizes">Example of different text sizes\nShould be readable and not
         overflow.
     </string>
@@ -300,14 +301,14 @@
     <string name="clear_cache_subtext">Are you sure you want to delete the cache contents? Deleting temporary files may solve some GranPhone app malfunctions, but also shortcuts created in the Home screen will be removed.</string>
     <string name="permissions_calm">Hi, GranPhone must have the following permissions in order to run. Some of them
         sound scary, but it is the only way GranPhone can replace the phone\'s interface. No data is taken and it causes
-        no harm. Press OK to grant the permissions or no to exit GranPhone.
+        no harm. Press Exit to leave GranPhone or Cancel to grant the permissions.
     </string>
     <string name="pending_update">Pending Update</string>
     <string name="download">Download</string>
     <string name="install_updates">Install Updates</string>
     <string name="install_updates_subtext">This Permission is required in order to update GranPhone</string>
     <string name="a_new_update_is_available">A new update is available!\nUpdates are important to keep GranPhone running
-        smoothly.\nPress OK to download.
+        smoothly.\nPress Install to download.
     </string>
     <string name="current_version">Current Version:\n</string>
     <string name="new_version">New Version:\n</string>

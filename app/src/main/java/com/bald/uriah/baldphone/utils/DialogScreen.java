@@ -81,9 +81,14 @@ public class DialogScreen extends Dialog {
      */
     public static DialogScreen confirm(@NonNull Context context, @StringRes int titleRes, @StringRes int messageRes,
                                        @StringRes int actionRes, @NonNull Runnable onAction) {
+        return confirm(context, context.getText(titleRes), context.getText(messageRes), actionRes, onAction);
+    }
+
+    public static DialogScreen confirm(@NonNull Context context, @NonNull CharSequence title, @NonNull CharSequence message,
+                                       @StringRes int actionRes, @NonNull Runnable onAction) {
         final DialogScreen dialog = new DialogScreen(context);
-        dialog.title = context.getText(titleRes);
-        dialog.message = context.getText(messageRes);
+        dialog.title = title;
+        dialog.message = message;
         dialog.primaryText = context.getText(actionRes);
         dialog.secondaryText = context.getText(R.string.cancel);
         dialog.onPrimary = onAction;
@@ -103,8 +108,13 @@ public class DialogScreen extends Dialog {
 
     public static DialogScreen select(@NonNull Context context, @StringRes int titleRes, int selectedIndex,
                                       @NonNull OnOptionSelectedListener listener, @NonNull CharSequence... options) {
+        return select(context, context.getText(titleRes), selectedIndex, listener, options);
+    }
+
+    public static DialogScreen select(@NonNull Context context, @NonNull CharSequence title, int selectedIndex,
+                                      @NonNull OnOptionSelectedListener listener, @NonNull CharSequence... options) {
         final DialogScreen dialog = new DialogScreen(context);
-        dialog.title = context.getText(titleRes);
+        dialog.title = title;
         dialog.options = options;
         dialog.selectedIndex = selectedIndex;
         dialog.onOptionSelected = listener;
@@ -149,14 +159,19 @@ public class DialogScreen extends Dialog {
             bt_secondary.setVisibility(View.GONE);
         } else {
             bt_secondary.setText(secondaryText);
-            bt_secondary.setOnClickListener(v -> dismiss());
+            // cancel() (not dismiss()) so a set OnCancelListener fires — same as a back-press cancel
+            bt_secondary.setOnClickListener(v -> cancel());
         }
 
         bt_primary.setText(primaryText);
         bt_primary.setOnClickListener(v -> {
-            if (onPrimary != null)
+            if (onPrimary != null) {
                 onPrimary.run();
-            dismiss();
+                dismiss();
+            } else {
+                // SELECT's «Назад» / INFO's «Понятно» are dismissals, not actions — route through cancel()
+                cancel();
+            }
         });
         if (primaryIsTextButton) {
             bt_primary.setBackgroundResource(R.drawable.style_for_buttons_transparent);

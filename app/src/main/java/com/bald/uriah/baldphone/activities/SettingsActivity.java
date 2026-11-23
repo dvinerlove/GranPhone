@@ -169,6 +169,7 @@ public class SettingsActivity extends BaldActivity {
     private void showHelperPinDialog() {
         final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
         final String saved = helperPin();
+        // keeps DialogBuilder: DialogScreen has no EditText payload
         DialogBuilder.from(this)
                 .setTitle(R.string.helper_settings)
                 .setSubText(saved == null ? R.string.helper_pin_create_subtext : R.string.helper_pin_enter_subtext)
@@ -197,6 +198,7 @@ public class SettingsActivity extends BaldActivity {
         if (!KioskManager.isDeviceOwner(this)) {
             DialogScreen.info(this, R.string.kiosk_mode, R.string.kiosk_not_device_owner_subtext);
         } else if (!KioskManager.isEnabled(this)) {
+            // keeps DialogBuilder: DialogScreen has no EditText payload
             DialogBuilder.from(this)
                     .setTitle(R.string.kiosk_mode)
                     .setSubText(R.string.kiosk_enable_subtext)
@@ -215,6 +217,7 @@ public class SettingsActivity extends BaldActivity {
                     })
                     .show();
         } else {
+            // keeps DialogBuilder: DialogScreen has no EditText payload
             DialogBuilder.from(this)
                     .setTitle(R.string.kiosk_mode)
                     .setSubText(R.string.kiosk_disable_subtext)
@@ -256,35 +259,24 @@ public class SettingsActivity extends BaldActivity {
         mainCategory.add(new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button));
         mainCategory.add(new RunnableSettingsItem(R.string.accessibility_level, v -> startActivity(new Intent(this, AccessibilityLevelChangerActivity.class)), R.drawable.accessibility_on_button));
         mainCategory.add(
-                new BDBSettingsItem(R.string.vibrate,
-                        DialogBuilder.from(this)
-                                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                                .setTitle(R.string.vibrate)
-                                .setSubText(R.string.vibration_feedback_subtext)
-                                .setOptions(R.string.yes, R.string.no)
-                                .setPositiveButtonListener(params -> {
-                                    editor.putBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, params[0].equals(0)).apply();
+                new RunnableSettingsItem(R.string.vibrate,
+                        v -> DialogScreen.select(this, R.string.vibrate,
+                                sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, index == 0).apply();
                                     this.recreate();
-                                    return true;
-                                })
-                                .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE) ? 0 : 1),
+                                },
+                                R.string.yes, R.string.no),
                         R.drawable.vibration_on_background));
-        mainCategory.add(new BDBSettingsItem(R.string.theme_settings,
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                        .setTitle(R.string.theme_settings)
-                        .setSubText(R.string.theme_settings_subtext)
-                        .setOptions(R.string.light, R.string.dark)
-                        .setPositiveButtonListener(params -> {
-                            editor.putInt(BPrefs.THEME_KEY, (Integer) params[0] == 1 ? BPrefs.Themes.DARK : BPrefs.Themes.LIGHT).apply();
+        mainCategory.add(new RunnableSettingsItem(R.string.theme_settings,
+                v -> DialogScreen.select(this, R.string.theme_settings,
+                        Math.max(0, Math.min(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE), BPrefs.Themes.THEMES.length - 1)) == BPrefs.Themes.DARK ? 1 : 0,
+                        index -> {
+                            editor.putInt(BPrefs.THEME_KEY, index == 1 ? BPrefs.Themes.DARK : BPrefs.Themes.LIGHT).apply();
                             this.recreate();
-                            return true;
-                        })
-                        .setOptionsStartingIndex(() -> {
-                            final int stored = sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE);
-                            final int clamped = Math.max(0, Math.min(stored, BPrefs.Themes.THEMES.length - 1));
-                            return clamped == BPrefs.Themes.DARK ? 1 : 0;
-                        }), R.drawable.brush_on_button
+                        },
+                        R.string.light, R.string.dark),
+                R.drawable.brush_on_button
         ));
         mainCategory.add(helperCategory);
 
@@ -308,16 +300,14 @@ public class SettingsActivity extends BaldActivity {
 
         helperCategory.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));
         if (KioskManager.isDeviceOwner(this) && !KioskManager.isEnabled(this))
-            helperCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogBuilder.from(this)
-                    .setTitle(R.string.remove_device_owner)
-                    .setSubText(R.string.remove_device_owner_subtext)
-                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_NO)
-                    .setPositiveButtonListener(params -> {
+            helperCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogScreen.confirm(this,
+                    R.string.remove_device_owner,
+                    R.string.remove_device_owner_subtext,
+                    R.string.delete,
+                    () -> {
                         KioskManager.removeDeviceOwner(this);
                         this.recreate();
-                        return true;
-                    })
-                    .show(), R.drawable.blocked_on_button));
+                    }), R.drawable.blocked_on_button));
 
         helperCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
 
@@ -330,114 +320,88 @@ public class SettingsActivity extends BaldActivity {
         personalizationCategory.add(new RunnableSettingsItem(R.string.edit_home_screen, v -> startActivity(new Intent(this, Page1EditorActivity.class)), R.drawable.edit_on_button));
 
         accessibilityCategory.add(
-                new BDBSettingsItem(R.string.accidental_touches, DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL).setTitle(R.string.accidental_touches)
-                        .setSubText(R.string.accidental_touches_settings_subtext)
-                        .setOptions(R.string.on, R.string.off)
-                        .setPositiveButtonListener(params -> {
-                            editor.putBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, params[0].equals(0)).apply();
-                            this.recreate();
-                            return true;
-                        })
-                        .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE) ? 0 : 1), R.drawable.blocked_on_button));
-        accessibilityCategory.add(
-                new BDBSettingsItem(R.string.strong_hand,
-                        DialogBuilder.from(this)
-                                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                                .setTitle(R.string.strong_hand)
-                                .setSubText(R.string.strong_hand_subtext)
-                                .setOptions(R.string.left_handed, R.string.right_handed)
-                                .setPositiveButtonListener(params -> {
-                                    editor.putBoolean(BPrefs.RIGHT_HANDED_KEY, params[0].equals(1)).apply();
+                new RunnableSettingsItem(R.string.accidental_touches,
+                        v -> DialogScreen.select(this, R.string.accidental_touches,
+                                sharedPreferences.getBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, index == 0).apply();
                                     this.recreate();
-                                    return true;
-                                })
-                                .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE) ? 1 : 0), R.drawable.hand_on_button
+                                },
+                                R.string.on, R.string.off),
+                        R.drawable.blocked_on_button));
+        accessibilityCategory.add(
+                new RunnableSettingsItem(R.string.strong_hand,
+                        v -> DialogScreen.select(this, R.string.strong_hand,
+                                sharedPreferences.getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE) ? 1 : 0,
+                                index -> {
+                                    editor.putBoolean(BPrefs.RIGHT_HANDED_KEY, index == 1).apply();
+                                    this.recreate();
+                                },
+                                R.string.left_handed, R.string.right_handed),
+                        R.drawable.hand_on_button
                 )
         );
-        personalizationCategory.add(new BDBSettingsItem(R.string.status_bar_settings,
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                        .setTitle(R.string.status_bar_settings)
-                        .setSubText(R.string.status_bar_settings_subtext)
-                        .setOptions(R.string.nowhere, R.string.only_home_screen, R.string.everywhere)
-                        .setPositiveButtonListener(params -> {
-                            editor.putInt(BPrefs.STATUS_BAR_KEY, (Integer) params[0]).apply();
+        personalizationCategory.add(new RunnableSettingsItem(R.string.status_bar_settings,
+                v -> DialogScreen.select(this, R.string.status_bar_settings,
+                        sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE),
+                        index -> {
+                            editor.putInt(BPrefs.STATUS_BAR_KEY, index).apply();
                             this.recreate();
-                            return true;
-                        })
-                        .setOptionsStartingIndex(() -> sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE)),
+                        },
+                        R.string.nowhere, R.string.only_home_screen, R.string.everywhere),
                 R.drawable.status_bar_on_button
         ));
 
-        personalizationCategory.add(new BDBSettingsItem(R.string.dialer_sounds,
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                        .setTitle(R.string.dialer_sounds)
-                        .setSubText(R.string.dialer_sounds_subtext)
-                        .setOptions(R.string.yes, R.string.no)
-                        .setPositiveButtonListener(params -> {
-                            editor.putBoolean(BPrefs.DIALER_SOUNDS_KEY, (Integer) params[0] == 0).apply();
+        personalizationCategory.add(new RunnableSettingsItem(R.string.dialer_sounds,
+                v -> DialogScreen.select(this, R.string.dialer_sounds,
+                        sharedPreferences.getBoolean(BPrefs.DIALER_SOUNDS_KEY, BPrefs.DIALER_SOUNDS_DEFAULT_VALUE) ? 0 : 1,
+                        index -> {
+                            editor.putBoolean(BPrefs.DIALER_SOUNDS_KEY, index == 0).apply();
                             this.recreate();
-                            return true;
-                        })
-                        .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.DIALER_SOUNDS_KEY, BPrefs.DIALER_SOUNDS_DEFAULT_VALUE) ? 0 : 1),
+                        },
+                        R.string.yes, R.string.no),
                 R.drawable.phone_on_button
         ));
-        personalizationCategory.add(new BDBSettingsItem(R.string.dual_sim,
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                        .setTitle(R.string.dual_sim)
-                        .setSubText(R.string.dual_sim_subtext)
-                        .setOptions(R.string.show_options, R.string.use_default)
-                        .setPositiveButtonListener(params -> {
-                            editor.putBoolean(BPrefs.DUAL_SIM_KEY, (Integer) params[0] == 0).apply();
+        personalizationCategory.add(new RunnableSettingsItem(R.string.dual_sim,
+                v -> DialogScreen.select(this, R.string.dual_sim,
+                        sharedPreferences.getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE) ? 0 : 1,
+                        index -> {
+                            editor.putBoolean(BPrefs.DUAL_SIM_KEY, index == 0).apply();
                             this.recreate();
-                            return true;
-                        })
-                        .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE) ? 0 : 1),
+                        },
+                        R.string.show_options, R.string.use_default),
                 R.drawable.sim_on_button
         ));
         personalizationCategory.add(
-                new BDBSettingsItem(R.string.apps_sort_method,
-                        DialogBuilder.from(this)
-                                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL).setTitle(R.string.apps_sort_method)
-                                .setSubText(R.string.apps_sort_method_subtext)
-                                .setOptions(R.string.one_grid, R.string.groups)
-                                .setPositiveButtonListener(params -> {
-                                    editor.putBoolean(BPrefs.APPS_ONE_GRID_KEY, params[0].equals(0)).apply();
+                new RunnableSettingsItem(R.string.apps_sort_method,
+                        v -> DialogScreen.select(this, R.string.apps_sort_method,
+                                sharedPreferences.getBoolean(BPrefs.APPS_ONE_GRID_KEY, BPrefs.APPS_ONE_GRID_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.APPS_ONE_GRID_KEY, index == 0).apply();
                                     this.recreate();
-                                    return true;
-                                })
-                                .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.APPS_ONE_GRID_KEY, BPrefs.APPS_ONE_GRID_DEFAULT_VALUE) ? 0 : 1),
+                                },
+                                R.string.one_grid, R.string.groups),
                         R.drawable.apps_on_button));
 
         personalizationCategory.add(
-                new BDBSettingsItem(R.string.colorful,
-                        DialogBuilder.from(this)
-                                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL).setTitle(R.string.apps_sort_method)
-                                .setSubText(R.string.colorful_subtext)
-                                .setOptions(R.string.yes, R.string.no)
-                                .setPositiveButtonListener(params -> {
-                                    editor.putBoolean(BPrefs.COLORFUL_KEY, params[0].equals(0)).apply();
+                new RunnableSettingsItem(R.string.colorful,
+                        v -> DialogScreen.select(this, R.string.colorful,
+                                sharedPreferences.getBoolean(BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE) ? 0 : 1,
+                                index -> {
+                                    editor.putBoolean(BPrefs.COLORFUL_KEY, index == 0).apply();
                                     this.recreate();
-                                    return true;
-                                })
-                                .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE) ? 0 : 1),
+                                },
+                                R.string.yes, R.string.no),
                         R.drawable.colors_on_button));
 
-        personalizationCategory.add(new BDBSettingsItem(R.string.low_battery_alert,
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                        .setTitle(R.string.low_battery_alert)
-                        .setSubText(R.string.low_battery_alert_subtext)
-                        .setOptions(R.string.yes, R.string.no)
-                        .setPositiveButtonListener(params -> {
-                            editor.putBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, (Integer) params[0] == 0).apply();
+        personalizationCategory.add(new RunnableSettingsItem(R.string.low_battery_alert,
+                v -> DialogScreen.select(this, R.string.low_battery_alert,
+                        sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE) ? 0 : 1,
+                        index -> {
+                            editor.putBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, index == 0).apply();
                             this.recreate();
-                            return true;
-                        })
-                        .setOptionsStartingIndex(() -> sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE) ? 0 : 1),
+                        },
+                        R.string.yes, R.string.no),
                 R.drawable.low_battery_alert_on_button
         ));
         //connections
@@ -462,6 +426,7 @@ public class SettingsActivity extends BaldActivity {
 
         helperCategory.add(
                 new BDBSettingsItem(R.string.device_memory,
+                        // keeps DialogBuilder: DialogScreen can't carry the storage/RAM extraView
                         DialogBuilder.from(this)
                                 .addFlag(DialogFlags.FLAG_OK)
                                 .setTitle(R.string.device_memory)
@@ -570,6 +535,7 @@ public class SettingsActivity extends BaldActivity {
             }
         });
 
+        // keeps DialogBuilder: DialogScreen can't carry the volume SeekBar extraView
         final SettingsItem alarmVolumeSettingsItem = new BDBSettingsItem(R.string.alarm_volume,
                 DialogBuilder.from(this)
                         .addFlag(DialogFlags.FLAG_OK)

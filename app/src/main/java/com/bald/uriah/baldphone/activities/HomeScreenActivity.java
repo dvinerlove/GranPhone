@@ -59,8 +59,7 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.BaldPagerAdapter;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldHomeWatcher;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
@@ -296,15 +295,11 @@ public class HomeScreenActivity extends BaldActivity {
             if (percent < (100 + (onStartCounter - 20) * 5))
                 if (percent % 3 == 1 && !isActivityDefault()) { // one in 3 chance
                     onStartCounter = 0;
-                    DialogBuilder.from(this)
-                            .setTitle(R.string.set_home_screen)
-                            .setSubText(R.string.set_home_screen_subtext)
-                            .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_NO)
-                            .setPositiveButtonListener(params -> {
-                                FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this);
-                                return true;
-                            })
-                            .show();
+                    DialogScreen.confirm(this,
+                            R.string.set_home_screen,
+                            R.string.set_home_screen_subtext,
+                            R.string.set_home_screen,
+                            () -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this));
                 } else if (percent > 95) {
                     //noinspection ConstantConditions
                     if (BuildConfig.FLAVOR.equals("baldUpdates"))

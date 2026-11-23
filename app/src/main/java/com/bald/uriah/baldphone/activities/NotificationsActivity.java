@@ -32,8 +32,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.NotificationRecyclerViewAdapter;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 
 import static com.bald.uriah.baldphone.services.NotificationListenerService.ACTION_REGISTER_ACTIVITY;
@@ -90,17 +88,12 @@ public class NotificationsActivity extends BaldActivity {
 
         final String enabledListeners = Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners");
         if (enabledListeners == null || !enabledListeners.contains(getApplicationContext().getPackageName())) {
-            DialogBuilder.from(this)
-                    .setTitle(R.string.enable_notification_access)
-                    .setSubText(R.string.enable_notification_access_subtext)
-                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                    .setPositiveButtonListener(params -> {
-                        getApplicationContext().startActivity(new Intent(
-                                "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
-                        return true;
-                    })
-                    .setNegativeButtonListener(params -> true)
-                    .show();
+            DialogScreen.confirm(this,
+                    R.string.enable_notification_access,
+                    R.string.enable_notification_access_subtext,
+                    R.string.allow,
+                    () -> getApplicationContext().startActivity(new Intent(
+                            "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")));
         }
 
     }

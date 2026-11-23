@@ -39,8 +39,7 @@ import androidx.annotation.Nullable;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
@@ -190,15 +189,11 @@ public class UpdatesActivity extends BaldActivity {
                         if (networkInfo.isConnected()) {
                             onDownloadButtonClick(newVersion);
                         } else {
-                            DialogBuilder.from(this)
-                                    .setTitle(R.string.data_warning)
-                                    .setSubText(R.string.data_warning_subtext)
-                                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
-                                    .setPositiveButtonListener(params -> {
-                                        onDownloadButtonClick(newVersion);
-                                        return true;
-                                    })
-                                    .show();
+                            DialogScreen.confirm(this,
+                                    R.string.data_warning,
+                                    R.string.data_warning_subtext,
+                                    R.string.download,
+                                    () -> onDownloadButtonClick(newVersion));
                         }
                     } else {
                         notConnectedToast.show();

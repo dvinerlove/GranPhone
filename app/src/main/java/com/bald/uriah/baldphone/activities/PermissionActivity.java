@@ -34,8 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
@@ -92,16 +91,11 @@ public class PermissionActivity extends BaldActivity {
 
     private void calmyBDB() {
         if (isTaskRoot()) {
-            DialogBuilder.from(this)
-                    .setTitle(R.string.permissions_part)
-                    .setSubText(R.string.permissions_calm)
-                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_NO)
-                    .setPositiveButtonListener(params -> true)
-                    .setNegativeButtonListener(params -> {
-                        FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this);
-                        return true;
-                    })
-                    .show();
+            DialogScreen.confirm(this,
+                    R.string.permissions_part,
+                    R.string.permissions_calm,
+                    R.string.exit,
+                    () -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this));
         } else
             finish();
     }

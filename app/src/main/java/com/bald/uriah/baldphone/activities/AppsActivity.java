@@ -31,8 +31,7 @@ import com.bald.uriah.baldphone.adapters.AppsRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.apps.App;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
 import com.bald.uriah.baldphone.utils.AppUtils;
 
@@ -130,15 +129,11 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
                         viewHolder.pic.setImageResource(R.drawable.delete_on_button);
                         viewHolder.text.setText(R.string.uninstall);
                         viewHolder.itemView.setOnClickListener(v1 -> {
-                            DialogBuilder.from(AppsActivity.this)
-                                    .setTitle(String.format("%s %s", getText(R.string.uninstall), app.getLabel()))
-                                    .setSubText(String.format(getString(R.string.uninstall_subtext), app.getLabel(), app.getLabel()))
-                                    .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
-                                    .setPositiveButtonListener(params -> {
-                                        uninstallApp(app);
-                                        return true;
-                                    })
-                                    .show();
+                            DialogScreen.confirm(AppsActivity.this,
+                                    String.format("%s %s", getText(R.string.uninstall), app.getLabel()),
+                                    String.format(getString(R.string.uninstall_subtext), app.getLabel(), app.getLabel()),
+                                    R.string.uninstall,
+                                    () -> uninstallApp(app));
                             popupWindow.dismiss();
                         });
                         break;

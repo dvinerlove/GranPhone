@@ -46,8 +46,6 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
@@ -118,15 +116,10 @@ public class DialerActivity extends BaldActivity {
                     for (int i = 0; i < activeSubscriptionInfoList.size(); i++) {
                         simNames[i] = activeSubscriptionInfoList.get(i).getDisplayName();
                     }
-                    DialogBuilder.from(context)
-                            .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
-                            .setTitle(R.string.choose_sim)
-                            .setSubText(R.string.choose_sim_subtext)
-                            .setOptions(simNames)
-                            .setPositiveButtonListener(params -> {
-                                call(number, context, activeSubscriptionInfoList.get((Integer) params[0]));
-                                return true;
-                            }).show();
+                    DialogScreen.select(context, R.string.choose_sim,
+                            0,
+                            index -> call(number, context, activeSubscriptionInfoList.get(index)),
+                            simNames);
                 } else
                     call(number, context, null);
             } else

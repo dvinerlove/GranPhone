@@ -52,8 +52,7 @@ import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.calls.Call;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.RandomColorMaker;
@@ -323,11 +322,7 @@ public class SingleContactActivity extends BaldActivity {
             if (isChecked) {
                 if (!SOSActivity.PinHelper.pinContact(this, contact.getLookupKey())) {
                     sos_switch.setChecked(false);
-                    DialogBuilder.from(this)
-                            .setTitle(R.string.sos_is_full)
-                            .setSubText(R.string.sos_is_full_subtext)
-                            .addFlag(DialogFlags.FLAG_OK)
-                            .show();
+                    DialogScreen.info(this, R.string.sos_is_full, R.string.sos_is_full_subtext);
                 }
             } else {
                 SOSActivity.PinHelper.removeContact(this, contact.getLookupKey());
@@ -394,14 +389,7 @@ public class SingleContactActivity extends BaldActivity {
                 new Intent(this, AddContactActivity.class)
                         .putExtra(CONTACT_LOOKUP_KEY, contact.getLookupKey());
         final View.OnClickListener deleteListener = (v) ->
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
-                        .setSubText(String.format(getString(R.string.are_you_sure_you_want_to_delete___), contact.getName()))
-                        .setPositiveButtonListener(params -> {
-                            deleteContact();
-                            return true;
-                        })
-                        .show();
+                AppUtils.showAreYouSureYouWantToDelete(contact.getName(), this, this::deleteContact);
         findViewById(R.id.bt_delete).setOnClickListener(deleteListener);
         findViewById(R.id.bt_edit).setOnClickListener(v -> v.getContext().startActivity(editIntent));
 

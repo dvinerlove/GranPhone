@@ -88,17 +88,13 @@ public class AppUtils {
     }
 
     public static void shareGranPhone(@NonNull final BaldActivity baldActivity) {
-        DialogBuilder.from(baldActivity)
-                .setTitle(R.string.share_GranPhone)
-                .setSubText(R.string.share_granphone_subtext)
-                .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_NO)
-                .setPositiveButtonListener(params -> {
-                    AppUtils.share(baldActivity, new Intent(Intent.ACTION_SEND)
-                            .setType("text/plain")
-                            .putExtra(Intent.EXTRA_TEXT, baldActivity.getString(R.string.share_actual_text)));
-                    return true;
-                })
-                .show();
+        DialogScreen.confirm(baldActivity,
+                R.string.share_GranPhone,
+                R.string.share_granphone_subtext,
+                R.string.share,
+                () -> AppUtils.share(baldActivity, new Intent(Intent.ACTION_SEND)
+                        .setType("text/plain")
+                        .putExtra(Intent.EXTRA_TEXT, baldActivity.getString(R.string.share_actual_text))));
     }
 
     public static void hideKeyboard(@NonNull Activity activity) {
@@ -246,18 +242,12 @@ public class AppUtils {
     }
 
     public static void showAreYouSureYouWantToDelete(@NonNull final String what, @NonNull final BaldActivity baldActivity, @NonNull final Runnable deleteRunnable) {
-        final CharSequence title = String.format(baldActivity.getString(R.string.delete___), what);
-        final CharSequence message = String.format(baldActivity.getString(R.string.are_you_sure_you_want_to_delete___), what);
-        DialogBuilder.from(baldActivity)
-                .setTitle(title)
-                .setSubText(message)
-                .setPositiveButtonListener((params -> {
-                    deleteRunnable.run();
-                    return true;
-                }))
-                .addFlag(DialogFlags.FLAG_YES | DialogFlags.FLAG_CANCEL)
-                .setBaldActivityToAutoDismiss(baldActivity)
-                .show();
+        // confirm() auto-dismisses with the activity — DialogScreen.present() handles BaldActivity itself
+        DialogScreen.confirm(baldActivity,
+                String.format(baldActivity.getString(R.string.delete___), what),
+                String.format(baldActivity.getString(R.string.are_you_sure_you_want_to_delete___), what),
+                R.string.delete,
+                deleteRunnable::run);
     }
 
     public static Uri fileToUriCompat(final File file, final Context context) {

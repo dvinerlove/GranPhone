@@ -45,8 +45,7 @@ import com.bald.uriah.baldphone.activities.contacts.AddContactActivity;
 import com.bald.uriah.baldphone.activities.contacts.SingleContactActivity;
 import com.bald.uriah.baldphone.databases.calls.Call;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.RandomColorMaker;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
@@ -273,26 +272,23 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
                 );
             } else {
                 if (!call.isPrivate())
-                    DialogBuilder.from(activity)
-                            .setSubText(String.format(activity.getString(R.string.what_do_you_want_to_do_with___), call.phoneNumber))
-                            .setOptions(R.string.call, R.string.add_contact, R.string.message)
-                            .addFlag(DialogFlags.FLAG_OK)
-                            .setPositiveButtonListener(params -> {
-                                final int option = (int) params[0];
-                                switch (option) {
+                    DialogScreen.select(activity,
+                            String.format(activity.getString(R.string.what_do_you_want_to_do_with___), call.phoneNumber),
+                            0,
+                            index -> {
+                                switch (index) {
                                     case 0:
                                         DialerActivity.call(call.phoneNumber, activity, false);
-                                        return true;
+                                        break;
                                     case 1:
                                         activity.startActivity(new Intent(activity, AddContactActivity.class).putExtra(AddContactActivity.CONTACT_NUMBER, call.phoneNumber));
-                                        return true;
+                                        break;
                                     case 2:
                                         AppUtils.sendMessage(call.phoneNumber, activity);
-                                        return true;
+                                        break;
                                 }
-                                throw new IllegalArgumentException("option must be 0 or 1");
-                            })
-                            .show();
+                            },
+                            activity.getText(R.string.call), activity.getText(R.string.add_contact), activity.getText(R.string.message));
             }
         }
     }
