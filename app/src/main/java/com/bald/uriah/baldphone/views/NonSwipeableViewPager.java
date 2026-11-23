@@ -24,6 +24,7 @@ import android.widget.Scroller;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.duolingo.open.rtlviewpager.RtlViewPager;
 
 import java.lang.reflect.Field;
@@ -62,13 +63,17 @@ public class NonSwipeableViewPager extends RtlViewPager {
     }
 
     public static class MyScroller extends Scroller {
+        private final Context context;
+
         public MyScroller(Context context) {
             super(context, new DecelerateInterpolator());
+            this.context = context;
         }
 
         @Override
         public void startScroll(int startX, int startY, int dx, int dy, int duration) {
-            super.startScroll(startX, startY, dx, dy, 450 /*1 secs*/);
+            super.startScroll(startX, startY, dx, dy,
+                    AppUtils.animationsDisabled(context) ? 0 : 300);
         }
     }
 }

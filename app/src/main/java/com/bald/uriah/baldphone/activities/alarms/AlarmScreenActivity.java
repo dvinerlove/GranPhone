@@ -93,7 +93,8 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         if (key == -1) throw new AssertionError();
         alarm = AlarmsDatabase.getInstance(this).alarmsDatabaseDao().getByKey(key);
         if (alarm == null) {
-            AppUtils.logImportant("alarm == null!, returning");
+            AppUtils.logImportant("alarm == null!, finishing");
+            finish(); // don't leave a dead ring screen with live buttons
             return;
         }
 
@@ -159,6 +160,8 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         if (vibrator != null)
             vibrator.vibrate(Const.vibetime);
         AlarmScheduler.scheduleSnooze(alarm, this);
+        // back-press also lands here — always confirm the snooze happened
+        BaldToast.simple(this, R.string.snooze);
         finish();
     }
 

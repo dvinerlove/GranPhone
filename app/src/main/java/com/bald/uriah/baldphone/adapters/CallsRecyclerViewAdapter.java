@@ -131,6 +131,8 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
             line = container.findViewById(R.id.line);
             day = container.findViewById(R.id.day);
             ll_contact_only.setOnClickListener(this);
+            // this line shows the raw phone number for unknown callers — keep digits LTR in RTL locales
+            contact_name.setTextDirection(View.TEXT_DIRECTION_LTR);
         }
 
         public void update(int index) {
@@ -142,11 +144,7 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
             final MiniContact miniContact = call.getMiniContact(activity);
             if (miniContact != null) {
                 if (miniContact.photo == null) {
-                    image_letter.setText(miniContact.name != null ?
-                            miniContact.name.length() >= 1 ?
-                                    miniContact.name.substring(0, 1).toUpperCase() :
-                                    null :
-                            null);
+                    image_letter.setText(miniContact.name == null ? null : AppUtils.firstGlyph(miniContact.name));
                     image_letter.setVisibility(View.VISIBLE);
                     Glide.with(profile_pic).load(
                             activity.colorful ?

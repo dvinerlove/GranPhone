@@ -177,6 +177,8 @@ public class HomePage1 extends HomeView {
                     final TextView name = tile.findViewById(R.id.et_name);
                     name.setMaxLines(2);
                     name.setEllipsize(TextUtils.TruncateAt.END);
+                    // a pin can be named by its number — keep digits LTR in RTL locales
+                    name.setTextDirection(View.TEXT_DIRECTION_LTR);
                 } else {
                     row.addView(new Space(activity), lp);
                 }

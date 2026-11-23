@@ -208,6 +208,7 @@ public class DialogScreen extends Dialog {
             if (i == selectedIndex) {
                 check.setVisibility(View.VISIBLE);
                 text.setTextColor(brandColor);
+                row.setSelected(true); // TalkBack announces the selected state
             }
             row.setOnClickListener(v -> {
                 onOptionSelected.onOptionSelected(index);

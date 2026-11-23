@@ -66,7 +66,8 @@ public class PillScreenActivity extends TimedBaldActivity {
         if (key == -1) throw new AssertionError();
         reminder = RemindersDatabase.getInstance(this).remindersDatabaseDao().getById(key);
         if (reminder == null) {
-            AppUtils.logImportant("reminder == null!, returning");
+            AppUtils.logImportant("reminder == null!, finishing");
+            finish(); // don't leave a dead ring screen with live buttons
             return;
         }
 
@@ -137,6 +138,8 @@ public class PillScreenActivity extends TimedBaldActivity {
         if (vibrator != null)
             vibrator.vibrate(Const.vibetime);
         ReminderScheduler.scheduleSnooze(reminder, this);
+        // back-press also lands here — always confirm the snooze happened
+        BaldToast.simple(this, R.string.snooze);
         finish();
     }
 

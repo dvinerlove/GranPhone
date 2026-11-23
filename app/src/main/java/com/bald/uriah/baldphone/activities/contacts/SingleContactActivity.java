@@ -204,6 +204,8 @@ public class SingleContactActivity extends BaldActivity {
         contact_image = findViewById(R.id.contact_image);
         image_letter = findViewById(R.id.image_letter);
         tv_contact_name = findViewById(R.id.tv_contact_name);
+        // name can be a raw phone number — keep digits LTR in RTL locales
+        tv_contact_name.setTextDirection(View.TEXT_DIRECTION_LTR);
         sos_switch = findViewById(R.id.sos_switch);
         home_pin_switch = findViewById(R.id.home_pin_switch);
         bt_call = findViewById(R.id.bt_call);
@@ -239,6 +241,7 @@ public class SingleContactActivity extends BaldActivity {
                     pair.first,
                     "Custom"));
             tv_value.setText(pair.second);
+            tv_value.setTextDirection(View.TEXT_DIRECTION_LTR);
             layout.setOnClickListener(v -> DialerActivity.call(pair.second, this, false));
 
             ll_phones.addView(layout);
@@ -302,12 +305,16 @@ public class SingleContactActivity extends BaldActivity {
         final ContentValues UNSTAR = new ContentValues();
         UNSTAR.put(ContactsContract.Contacts.STARRED, 0);
         baldTitleBar.setGold(contact.isFavorite());
+        favorite.setContentDescription(getString(contact.isFavorite() ?
+                R.string.remove_from_favorite : R.string.add_to_favorite));
         Toggeler.newAdvancedImageToggeler(
                 favorite,
                 favorite,
                 new int[]{R.drawable.star_on_button, R.drawable.star_remove_on_button},
                 index -> {
                     final boolean fav = index == 1;
+                    favorite.setContentDescription(getString(fav ?
+                            R.string.remove_from_favorite : R.string.add_to_favorite));
                     contentResolver.update(
                             ContactsContract.Contacts.CONTENT_URI,
                             fav ? STAR : UNSTAR,

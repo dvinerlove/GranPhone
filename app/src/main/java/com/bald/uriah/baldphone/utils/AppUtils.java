@@ -358,4 +358,25 @@ public class AppUtils {
     public static Intent getPhoneIntent(Context context) {
         return new Intent(Intent.ACTION_DIAL).addCategory(Intent.CATEGORY_DEFAULT);
     }
+
+    /**
+     * First glyph of {@code s}: a whole unicode code point, upper-cased.
+     * {@code substring(0,1)}/{@code charAt(0)} return a lone half-surrogate (renders �)
+     * for names starting with an emoji or other supplementary character.
+     */
+    public static String firstGlyph(@Nullable CharSequence s) {
+        if (s == null || s.length() == 0)
+            return "?";
+        return new String(Character.toChars(Character.codePointAt(s, 0))).toUpperCase();
+    }
+
+    /**
+     * True when the user turned animations off ({@code animator_duration_scale == 0}).
+     * View {@link android.view.animation.Animation}s ignore that scale, so check by hand.
+     */
+    public static boolean animationsDisabled(@NonNull Context context) {
+        return android.provider.Settings.Global.getFloat(
+                context.getContentResolver(),
+                android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f;
+    }
 }

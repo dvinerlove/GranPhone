@@ -230,6 +230,8 @@ public class DialerActivity extends BaldActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         tv_number = findViewById(R.id.tv_number);
+        // typed digits always read LTR
+        tv_number.setTextDirection(View.TEXT_DIRECTION_LTR);
         t9_chip = findViewById(R.id.t9_chip);
         numpad = new View[]{
                 findViewById(R.id.b_0),

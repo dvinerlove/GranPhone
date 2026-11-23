@@ -90,8 +90,10 @@ public class AddPillActivity extends BaldActivity {
                 colors[INDEX_CUSTOM].setImageTintList(ColorStateList.valueOf(Color.rgb(customColor[0] & 0xFF, customColor[1] & 0xFF, customColor[2] & 0xFF)));
 
                 colors[selectedColor].setBackgroundResource(R.drawable.style_for_buttons_transparent);
+                colors[selectedColor].setSelected(false);
                 selectedColor = INDEX_CUSTOM;
                 colors[selectedColor].setBackgroundResource(R.drawable.btn_selected);
+                colors[selectedColor].setSelected(true);
             }
 
             if (reminder.getTextualContent() != null)
@@ -136,6 +138,7 @@ public class AddPillActivity extends BaldActivity {
         };
 
         every_day.setChecked(true);
+        colors[selectedColor].setSelected(true); // the XML pre-selects the first swatch — mirror that for a11y
 
     }
 
@@ -237,8 +240,10 @@ public class AddPillActivity extends BaldActivity {
             colors[i].setOnClickListener(v -> {
                 if (selectedColor != finalI) {
                     colors[selectedColor].setBackgroundResource(R.drawable.style_for_buttons_transparent);
+                    colors[selectedColor].setSelected(false);
                     selectedColor = finalI;
                     colors[selectedColor].setBackgroundResource(R.drawable.btn_selected);
+                    colors[selectedColor].setSelected(true);
                 }
             });
         }

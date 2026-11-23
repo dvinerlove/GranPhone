@@ -46,6 +46,8 @@ import com.bald.uriah.baldphone.activities.SOSActivity;
 import com.bald.uriah.baldphone.activities.contacts.ShareActivity;
 import com.bald.uriah.baldphone.activities.contacts.SingleContactActivity;
 import com.bald.uriah.baldphone.fragments_and_dialogs.LetterChooserDialog;
+import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.RandomColorMaker;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 import com.bumptech.glide.Glide;
@@ -118,9 +120,9 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToPosition(i);
             final String displayName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-            tmpThis = (displayName == null || displayName.isEmpty()) ? " " : displayName.substring(0, 1).toUpperCase();
+            tmpThis = (displayName == null || displayName.isEmpty()) ? " " : AppUtils.firstGlyph(displayName);
             if (!tmpThis.equals(previousFirstLetter)) {
-                letterToPosition.append(tmpThis.charAt(0), i);
+                letterToPosition.append(tmpThis.codePointAt(0), i);
             }
             previousFirstLetter = tmpThis;
         }
@@ -161,7 +163,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
 
         holder.lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.LOOKUP_KEY));
         final String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-        final String letter = (name == null || name.isEmpty()) ? "?" : name.substring(0, 1).toUpperCase();
+        final String letter = AppUtils.firstGlyph(name);
         holder.setFavorite(cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.STARRED)) == 1);
         holder.tv_contact_name.setText(name);
 
@@ -182,7 +184,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             final boolean moved = cursor.moveToPosition(position - 1);
             if (moved) {
                 final String prevName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-                final String prevNameFirstLetter = (prevName == null || prevName.isEmpty()) ? "?" : prevName.substring(0, 1).toUpperCase();
+                final String prevNameFirstLetter = AppUtils.firstGlyph(prevName);
                 if (!prevNameFirstLetter.equals(letter)) {
                     holder.setLetter(letter);
                 } else
@@ -210,9 +212,9 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
         final String[] words = name.trim().split("\\s+");
         final StringBuilder ret = new StringBuilder(2);
         for (final String word : words) {
-            if (word.isEmpty() || ret.length() == 2)
+            if (word.isEmpty() || ret.length() >= 2)
                 break;
-            ret.append(Character.toUpperCase(word.charAt(0)));
+            ret.append(AppUtils.firstGlyph(word));
         }
         return ret.length() == 0 ? "?" : ret.toString();
     }
@@ -279,6 +281,10 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             this.line = container.findViewById(R.id.line);
             this.tv_image_letter = container.findViewById(R.id.image_letter);
 
+            // phone numbers read digit-by-digit LTR even in RTL locales
+            this.tv_contact_name.setTextDirection(View.TEXT_DIRECTION_LTR);
+            this.tv_contact_number.setTextDirection(View.TEXT_DIRECTION_LTR);
+
             this.tv_letter.setOnClickListener((v) -> {
                 final LetterChooserDialog letterChooserDialog =
                         new LetterChooserDialog(activity, letterToPosition,
@@ -327,6 +333,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             if (f == favorite)
                 return;
             favorite = f;
+            ll_contact_only.setSelected(favorite);
             ll_contact_only.setBackgroundResource(favorite ? R.drawable.style_for_buttons_rectangle_gold : R.drawable.style_for_buttons_rectangle);
             tv_contact_name.setTextColor(favorite ? textColorOnGold : textColorOnButton);
             tv_contact_number.setTextColor(favorite ? textColorOnGold : textColorSecondary);
@@ -344,8 +351,10 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
                     activity.startActivityForResult(intent, SingleContactActivity.REQUEST_CHECK_CHANGE);
                     break;
                 case MODE_SOS:
-                    SOSActivity.PinHelper.pinContact(v.getContext(), lookupKey);
-                    activity.finish();
+                    if (SOSActivity.PinHelper.pinContact(v.getContext(), lookupKey))
+                        activity.finish();
+                    else
+                        DialogScreen.info(activity, R.string.sos_is_full, R.string.sos_is_full_subtext);
                     break;
                 case MODE_SHARE:
                     ((ShareActivity) activity).whatsappShare(lookupKey);

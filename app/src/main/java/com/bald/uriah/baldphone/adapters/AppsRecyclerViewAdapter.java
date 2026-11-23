@@ -38,6 +38,7 @@ import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.databases.apps.App;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
 import com.bald.uriah.baldphone.fragments_and_dialogs.LetterChooserDialog;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 
@@ -78,10 +79,10 @@ public class AppsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<
         String lastChar = "";
         String disChar;
         for (int i = 0; i < appList.size(); i++) {
-            disChar = appList.get(i).getLabel().substring(0, 1).toUpperCase();
+            disChar = AppUtils.firstGlyph(appList.get(i).getLabel());
             if (!appsOneGrid && !disChar.equals(lastChar)) {
                 dataList.add(new AppStickyHeader(disChar));
-                letterToPosition.append(disChar.charAt(0), dataList.size() - 1);
+                letterToPosition.append(disChar.codePointAt(0), dataList.size() - 1);
             }
             dataList.add(appList.get(i));
             lastChar = disChar;

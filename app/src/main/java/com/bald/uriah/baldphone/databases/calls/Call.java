@@ -106,6 +106,8 @@ public class Call {
     }
 
     public boolean isPrivate() {
+        if (phoneNumber == null || phoneNumber.trim().isEmpty())
+            return true;
         for (final String privateNumber : PRIVATE_NUMBERS) {
             if (privateNumber.equals(phoneNumber))
                 return true;

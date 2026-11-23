@@ -110,6 +110,9 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         tv_name = findViewById(R.id.tv_name);
         tv_number = findViewById(R.id.tv_number);
         tv_status = findViewById(R.id.tv_status);
+        // caller name/number can be raw digits — keep them LTR in RTL locales
+        tv_name.setTextDirection(View.TEXT_DIRECTION_LTR);
+        tv_number.setTextDirection(View.TEXT_DIRECTION_LTR);
         incomingButtons = findViewById(R.id.incoming_buttons);
         ongoingButtons = findViewById(R.id.ongoing_buttons);
         bt_speaker = findViewById(R.id.bt_speaker);
@@ -329,7 +332,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         if (TextUtils.isEmpty(name) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             name = details == null ? null : details.getCallerDisplayName();
 
-        tv_initial.setText(TextUtils.isEmpty(name) ? "?" : name.substring(0, 1).toUpperCase(Locale.getDefault()));
+        tv_initial.setText(AppUtils.firstGlyph(name));
         if (TextUtils.isEmpty(name)) {
             tv_name.setText(number.isEmpty() ? getString(R.string.unknown_number) : number);
             tv_number.setVisibility(View.GONE);

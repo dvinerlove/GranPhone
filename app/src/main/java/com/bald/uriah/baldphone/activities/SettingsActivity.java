@@ -107,6 +107,7 @@ public class SettingsActivity extends BaldActivity {
     private RecyclerView recyclerView;
     private BaldPrefsUtils baldPrefsUtils;
     private BaldTitleBar baldTitleBar;
+    private boolean layoutAnimationPlayed;
 
     {
         categorySparseArray = new SparseArray<>();
@@ -463,7 +464,11 @@ public class SettingsActivity extends BaldActivity {
     private void newCategory(Category category) {
         this.currentCategory = category;
         recyclerView.getAdapter().notifyDataSetChanged();
-        recyclerView.scheduleLayoutAnimation();
+        // the fall-down stagger is a first-entry flourish — not per drill-in/out
+        if (!layoutAnimationPlayed && !AppUtils.animationsDisabled(this)) {
+            layoutAnimationPlayed = true;
+            recyclerView.scheduleLayoutAnimation();
+        }
         baldTitleBar.setTitle(category.textResId);
 
     }
