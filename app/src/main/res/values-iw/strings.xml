@@ -15,15 +15,8 @@
   -->
 
 <resources>
-    <string name="about">אודות</string>
-    <string name="about_subtext">הפרוייקט נולד מפגישה עם חבר שחלה בפרקינסון. עזרתי לו עם בעיה כלשהי בטלפון, והבחנתי עד
-        כמה הוא מתקשה לבצע פעולות, שעד אז חשבתי שהן פשוטות ומובנות מאליהן.\nהייתי בן 15, תלמיד במגמת מחשבים בכפר הירוק,
-        והחלטתי שזו תהיה המשימה שלי לחופשת הקיץ. GranPhone הוא תוצר של מעל אלף שעות פיתוח. אני מקווה שבעזרתו מאות, ואולי
-        אלפי האנשים שזקוקים לו, יצליחו להינות משימוש נוח במכשיר שמותאם להם.\nפיתוח הממשק נעשה תוך כדי קבלת משוב צמוד.
-        ניסיתי לענות על מגוון רחב של בעיות וצרכים. אם זאת, כדי להמשיך לשפר וסייע אשמח לקבל משוב, תגובות
-        והערות.\nהGranPhone הוא חינמי ופתוח לכל. מקווה שתהנו.\nשלכם,\nאוריה שאול מנדל\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">רמת נגישות</string>
+
+<string name="accessibility_level">רמת נגישות</string>
     <string name="accessibility_settings">נגישות</string>
     <string name="accidental_touches">חוסם הלחיצות המקריות</string>
     <string name="accidental_touches_settings_subtext">חוסם הלחיצות המקריות חוסם מגע בטלפון כאשר המסך מכוסה\nאם אתה חווה
@@ -156,8 +149,7 @@
     <string name="left_handed">לשמאליים</string>
     <string name="light">בהיר</string>
     <string name="location">מיקום</string>
-    <string name="emergency_services">מגן דוד אדום</string>
-    <string name="mail">אימייל</string>
+<string name="mail">אימייל</string>
     <string name="maps">מפות</string>
 
 
@@ -381,8 +373,7 @@
     <!--For Tests:-->
     <string name="medication_1">אלטרוקסין 100</string>
     <string name="medication_2">אלטרוקסין 150</string>
-    <string name="donate">תרומה</string>
-    <string name="emergency_button">כפתור חירום</string>
+<string name="emergency_button">כפתור חירום</string>
     <string name="emergency_settings_subtext">בחר האם להוסיף כפתור חירום למסך הבית</string>
     <string name="private_number">מספר חסוי</string>
     <string name="swipe_left_or_right">החלק לימין או לשמאל</string>

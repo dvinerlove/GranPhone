@@ -15,12 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Σχετικά</string>
-    <string name="about_subtext">Γειά σας!\nΤο όνομα μου είναι Uriah Shaul Mandel, και είμαι ο προγραμματιστής αυτής της πλατφόρμας\n
-        Έχω αφιερώσει τον περισσότερο χρόνο από την \"ενήλικη\" ζωή μου αναπτύσσοντας αυτή την πλατφόρμα. Την έδωσα σε κυκλοφορία δωρεάν, για να 
-        μπορούν να την χρησιμοποιήσουν όλοι.\nΜπορείτε να επικοινωνήσετε μαζί μου στο email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Επίπεδο Προσβασιμότητας</string>
+
+<string name="accessibility_level">Επίπεδο Προσβασιμότητας</string>
     <string name="accessibility_settings">Προσβασιμότητα</string>
     <string name="accidental_touches">Ασπίδα Λάθος Πατημάτων</string>
     <string name="accidental_touches_settings_subtext">Αυτή η \"ασπίδα\" μπλοκάρει τα κατά λάθος πατήματα όταν το τηλέφωνο είναι
@@ -152,8 +148,7 @@
     <string name="left_handed">Αριστερόχειρες</string>
     <string name="light">Ανοιχτό</string>
     <string name="location">Τοποθεσία</string>
-    <string name="emergency_services">Υπηρεσίες Έκτακτης Ανάγκης</string>
-    <string name="mail">Αλληλογραφία</string>
+<string name="mail">Αλληλογραφία</string>
     <string name="maps">Χάρτες</string>
 
 
@@ -378,8 +373,7 @@
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Δωρεά</string>
-    <string name="emergency_button">Κουμπί άμεσης ανάγκης</string>
+<string name="emergency_button">Κουμπί άμεσης ανάγκης</string>
     <string name="emergency_settings_subtext">Επιλέξτε αν θέλετε το κουμπί άμεσης ανάγκης να είναι στην αρχική οθόνη.</string>
     <string name="private_number">Ιδιωτικός Αριθμός</string>
     <string name="swipe_left_or_right">Σύρετε προς τα αριστερά ή προς τα δεξιά</string>

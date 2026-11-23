@@ -15,10 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Sobre</string>
-    <string name="about_subtext">Olá!\nMeu nome é Uriah Shaul Mandel, e sou o desenvolvedor deste aplicativo.\nMoro na cidade de Tel Aviv, em Israel. \nFoi necessário muito tempo e esforço para criar este aplicativo e agora estou o disponibilizando de forma gratuita para que qualquer pessoa possa utilizá-lo.\nSinta-se livre para me contatar através do meu e-mail:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Nível de Acessibilidade</string>
+
+<string name="accessibility_level">Nível de Acessibilidade</string>
     <string name="accessibility_settings">Acessibilidade</string>
     <string name="accidental_touches">Proteção contra Toques Acidentais</string>
     <string name="accidental_touches_settings_subtext">Essa proteção impede toques acidentais quando o telefone estiver em seu bolso.\nCaso essa funcionalidade esteja causando problemas, você pode desligá-la aqui.
@@ -141,8 +139,7 @@ Todos os dados do aplicativo serão apagados!</string>
     <string name="left_handed">Canhoto</string>
     <string name="light">Claro</string>
     <string name="location">Localização</string>
-    <string name="emergency_services">Serviços de Emergência</string>
-    <string name="mail">E-mail</string>
+<string name="mail">E-mail</string>
     <string name="maps">Mapas</string>
 
 
@@ -352,8 +349,7 @@ Toque em \"+ Medicamento\" abaixo.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxina 100</string>
     <string name="medication_2">Eltroxina 150</string>
-    <string name="donate">Doar</string>
-    <string name="emergency_button">Botão de Emergência</string>
+<string name="emergency_button">Botão de Emergência</string>
     <string name="emergency_settings_subtext">Selecione se deseja ter o Botão de Emergência na Pagina Inicial.</string>
     <string name="private_number">Número Privado</string>
     <string name="swipe_left_or_right">Deslize para a direita ou para a esquerda</string>
@@ -401,13 +397,12 @@ Toque em \"+ Medicamento\" abaixo.</string>
 
     <string name="mail_application_not_found">Nenhum aplicativo de e-mail encontrado!</string>
     <string name="get_involved">Participe</string>
-    <string name="emergency_number">Número de Emergência</string>
-    <string name="emergency_number_subtext">Escolha para qual número o botão de emergência da tela SOS vai ligar.</string>
-    <string name="emergency_samu">SAMU (ambulância) - 192</string>
-    <string name="emergency_firefighters">Bombeiros - 193</string>
-    <string name="emergency_police">Polícia - 190</string>
-    <string name="emergency_international">Emergência internacional - 112</string>
-    <string name="answer_call">ATENDER</string>
+
+
+
+
+
+<string name="answer_call">ATENDER</string>
     <string name="decline_call">RECUSAR</string>
     <string name="hang_up">DESLIGAR</string>
     <string name="speaker_turn_on">Viva-voz</string>

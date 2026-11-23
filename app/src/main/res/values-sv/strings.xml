@@ -15,10 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Information</string>
-    <string name="about_subtext">Hej!\nJag heter Uriah Shaul Mandel och det är jag som utvecklar den här appen.\nJag har spenderat merparten av mitt "vuxna" liv på arbetet med appen och har låtit den vara fri att använda kostnadsfritt.\nDu får gärna kontakta mig via epost:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Tillgängligetsbehov</string>
+
+<string name="accessibility_level">Tillgängligetsbehov</string>
     <string name="accessibility_settings">Tillgänglighet</string>
     <string name="accidental_touches">Skydd mot oavsiktligt pekande</string>
     <string name="accidental_touches_settings_subtext">Skyddet förhindrar pekningar när telefonen är övertäckt. Den går att\nstänga av om den orsakar problem.
@@ -143,8 +141,7 @@ All data försvinner!</string>
     <string name="left_handed">Vänsterhänt</string>
     <string name="light">Ljus</string>
     <string name="location">Plats</string>
-    <string name="emergency_services">Ring Larmcentral</string>
-    <string name="mail">Epost</string>
+<string name="mail">Epost</string>
     <string name="maps">Kartor</string>
 
 
@@ -366,8 +363,7 @@ Tryck på \"+ Läkemedel\" nedan.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donera</string>
-    <string name="emergency_button">Nödanrop</string>
+<string name="emergency_button">Nödanrop</string>
     <string name="emergency_settings_subtext">Välj om du vill visa en nödknapp på hemskärmen.</string>
     <string name="private_number">Privat nummer</string>
     <string name="swipe_left_or_right">Svep åt vänster eller höger</string>

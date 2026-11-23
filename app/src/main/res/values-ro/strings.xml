@@ -15,12 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Despre</string>
-    <string name="about_subtext">Hi!\nMy name is Uriah Shaul Mandel, and I\'m the developer of this platform.\n
-        I\'ve spent most of my \"adult\" life making this platform, and I\'ve released it for free, for all to
-        use.\nYou are more than welcome to contact me by email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Nivel accesibilitate</string>
+
+<string name="accessibility_level">Nivel accesibilitate</string>
     <string name="accessibility_settings">Accesibilitate</string>
     <string name="accidental_touches">Protecție atingere aleatorie</string>
     <string name="accidental_touches_settings_subtext">Această protecție blochează atingerile atunci când telefonul este acoperit\n
@@ -147,8 +143,7 @@ Toate datele vor fi șterse</string>
     <string name="left_handed">Stângaci</string>
     <string name="light">Luminos</string>
     <string name="location">Locație</string>
-    <string name="emergency_services">Servicii de urgență</string>
-    <string name="mail">Mail</string>
+<string name="mail">Mail</string>
     <string name="maps">Hărți</string>
 
 
@@ -365,8 +360,7 @@ Apăsați \"+ Medicament\" mai jos.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donati</string>
-    <string name="emergency_button">Buton urgența</string>
+<string name="emergency_button">Buton urgența</string>
     <string name="emergency_settings_subtext">Alegeți dacă doriți un buton de urgență pe pagina principală.</string>
     <string name="private_number">Număr privat</string>
     <string name="swipe_left_or_right">Trageți în stânga sau în dreaptat</string>

@@ -15,9 +15,8 @@
   -->
 
 <resources>
-    <string name="about">O platformi</string>
-    <string name="about_subtext">Zdravo!\nMoje ime je Uriah Shaul Mandel, i ja sam programer ove platforme.\n Proveo sam većinu mog \"zrelog\" životnog doba praveći ovu platformu, i izbacio sam je besplatno na korišćenje svima.\nViše nego dobrodošli ste da me kontaktirate na emailu:\nGranPhone.contact@gmail.com</string>
-    <string name="accessibility_level">Nivo pristupačnosti</string>
+
+<string name="accessibility_level">Nivo pristupačnosti</string>
     <string name="accessibility_settings">Pristupačnost</string>
     <string name="accidental_touches">Zaštita od slučajnog dodira</string>
     <string name="accidental_touches_settings_subtext">Ova opcija štiti vaš telefon od slučajnog dodira kada je telefon prekriven\nUkoliko imate probleme sa njom, možete da je isključite</string>
@@ -136,8 +135,7 @@ svi podaci će biti obrisani!</string>
     <string name="left_handed">Levoruk</string>
     <string name="light">Mali</string>
     <string name="location">Lokacija</string>
-    <string name="emergency_services">Hitan poziv</string>
-    <string name="mail">Pošta</string>
+<string name="mail">Pošta</string>
     <string name="maps">Mape</string>
 
 
@@ -344,8 +342,7 @@ Pritisnite \"+ Lek\" ispod.</string>
     <!--For Tests:-->
     <string name="medication_1">Euthyrox 100</string>
     <string name="medication_2">Euthyrox  150</string>
-    <string name="donate">Donirajte</string>
-    <string name="emergency_button">Dugme za hitne slučajeve</string>
+<string name="emergency_button">Dugme za hitne slučajeve</string>
     <string name="emergency_settings_subtext">Izaberite ukoliko želite da imate Dugme za hitne slučajeve na početnom ekranu.</string>
     <string name="private_number">Privatan broj</string>
     <string name="swipe_left_or_right">Prevucite ulive ili udesno</string>

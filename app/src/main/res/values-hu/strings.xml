@@ -15,10 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Az alkalmazásról</string>
-    <string name="about_subtext">Szia!
-A nevem Uriah Shaul Mandel, és én fejlesztettem ezt a felületet amit használsz. Sok időt töltöttem vele, ha kérdésed van nyugodtan írj nekem emailt a GranPhone.contact@gmail.com címen. (Kérlek angolul írj)</string>
-    <string name="accessibility_level">Akadálymentesítési szint</string>
+
+<string name="accessibility_level">Akadálymentesítési szint</string>
     <string name="accessibility_settings">Akadálymentes kezelés</string>
     <string name="accidental_touches">Véletlen érintés elleni védelem</string>
     <string name="accidental_touches_settings_subtext">Blokkolja a véletlen érintéseket olyan esetekben, ha a telefon le van takarva. Hasznos, ha zsebben tartva a telefon bekapcsol.</string>
@@ -138,8 +136,7 @@ Megérkezett a GranPhone NAGY billentyűzete!</string>
     <string name="left_handed">Bal-kezes</string>
     <string name="light">Könnyű</string>
     <string name="location">Helymeghatározás</string>
-    <string name="emergency_services">Segélyhívás</string>
-    <string name="mail">Levél</string>
+<string name="mail">Levél</string>
     <string name="maps">Térkép</string>
 
 
@@ -345,8 +342,7 @@ https://github.com/dvinerlove/GranPhone</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Adomány</string>
-    <string name="emergency_button">Vészhívó gomb</string>
+<string name="emergency_button">Vészhívó gomb</string>
     <string name="emergency_settings_subtext">Válaszd ki, hogy akarsz-e vészjívó gombot a kezdőképernyőn</string>
     <string name="private_number">Privát Szám</string>
     <string name="swipe_left_or_right">Húzd jobbra vagy balra</string>

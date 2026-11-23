@@ -15,8 +15,7 @@
   -->
 
 <resources>
-    <string name="about"> Game da</string>
-    <string name="accessibility_settings">Samun dama</string>
+<string name="accessibility_settings">Samun dama</string>
     <string name="acknowledgments">Amincewa</string>
     <string name="add_alarm">Kara Kararrawa</string>
     <string name="add_emergency_contact">Kara</string>

@@ -15,11 +15,8 @@
   -->
 
 <resources>
-    <string name="about">關於</string>
-    <string name="about_subtext">你好！\n我的名字是 Uriah Shaul Mandel，是這個平台的開發者。\n
-        我成年後大部份時間都在製作這個平台，我把它免費發布，供每個人使用。\n歡迎你以電子郵件聯絡我：\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">輔助功能程度</string>
+
+<string name="accessibility_level">輔助功能程度</string>
     <string name="accessibility_settings">輔助功能設定</string>
     <string name="accidental_touches">防誤觸功能</string>
     <string name="accidental_touches_settings_subtext">此功能可以在你電話蓋上時阻止任何輸入\n如果正常使用時有問題的話，可以把這個功能關上
@@ -145,8 +142,7 @@
     <string name="left_handed">左手</string>
     <string name="light">淺色</string>
     <string name="location">位置</string>
-    <string name="emergency_services">緊急服務</string>
-    <string name="mail">電郵</string>
+<string name="mail">電郵</string>
     <string name="maps">地圖</string>
 
 
@@ -361,8 +357,7 @@
     <!--For Tests:-->
     <string name="medication_1">昂特欣錠 100微克</string>
     <string name="medication_2">昂特欣錠 150微克</string>
-    <string name="donate">贊助</string>
-    <string name="emergency_button">緊急按鈕</string>
+<string name="emergency_button">緊急按鈕</string>
     <string name="emergency_settings_subtext">你可以選擇添加緊急按鈕到桌面。</string>
     <string name="private_number">私人號碼</string>
     <string name="swipe_left_or_right">撥動向左或向右</string>

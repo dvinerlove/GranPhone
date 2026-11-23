@@ -15,12 +15,8 @@
   -->
 
 <resources>
-    <string name="about">O aplikaci</string>
-    <string name="about_subtext">Ahoj!\nJmenuji se Uriah Shaul Mandel a jsem vývojář této platformy.\n
-        Většinu svého \"dospělého\" života jsem strávit tvorbou této platformy a rozhodl jsem se ji vydat zadarmo, a to pro
-        všechny.\nJste více než vítáni kontaktovat mě na email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Úroveň přistupnosti</string>
+
+<string name="accessibility_level">Úroveň přistupnosti</string>
     <string name="accessibility_settings">Přístupnost</string>
     <string name="accidental_touches">Ochrana proti nechtěnému dotyku</string>
     <string name="accidental_touches_settings_subtext">Ochrana blokuje telefon před dotykovým vstupem, pokud je telefon
@@ -152,8 +148,7 @@ Všechna data budou vymazána!</string>
     <string name="left_handed">Levoruký</string>
     <string name="light">Světlý</string>
     <string name="location">Umístění</string>
-    <string name="emergency_services">Tísňové služby</string>
-    <string name="mail">Zprávy</string>
+<string name="mail">Zprávy</string>
     <string name="maps">Mapy</string>
 
 
@@ -377,8 +372,7 @@ Stiskněte \"+ Pilulka\" níže.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donate</string>
-    <string name="emergency_button">Emergency Button</string>
+<string name="emergency_button">Emergency Button</string>
     <string name="emergency_settings_subtext">Choose if you want to have an Emergency Button on the home screen.</string>
     <string name="private_number">Private Number</string>
     <string name="swipe_left_or_right">Swipe left or right</string>

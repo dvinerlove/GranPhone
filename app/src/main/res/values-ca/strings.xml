@@ -15,13 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Sobre</string>
-    <string name="about_subtext">Hola!\nEl meu nom és Uriah Shaul Mandel i sóc el desenvolupador d\'aquesta plataforma.\n
-	He passat la major part de la meva vida "adulta" fent aquesta plataforma, i l\'he llançat gratis, perquè tots la usin.\n
-	Són benvinguts a contactar-me per correu electrònic:\n
-	GranPhone.contact@gmail.com
-</string>
-    <string name="accessibility_level">Nivell d\'Accessibilitat</string>
+
+<string name="accessibility_level">Nivell d\'Accessibilitat</string>
     <string name="accessibility_settings">Accessibilitat</string>
     <string name="accidental_touches">Protecció de toc accidental</string>
     <string name="accidental_touches_settings_subtext">El protector bloqueja el seu telèfon d\'entrada tàctil quan el
@@ -156,8 +151,7 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="left_handed">Esquerrà</string>
     <string name="light">Llum</string>
     <string name="location">Ubicació</string>
-    <string name="emergency_services">Serveis d\'Emergència</string>
-    <string name="mail">Bústia</string>
+<string name="mail">Bústia</string>
     <string name="maps">Mapa</string>
 
 
@@ -395,8 +389,7 @@ No es veuran canvis si la barra d\'estat està oculta.
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donació</string>
-    <string name="emergency_button">Botó emergència</string>
+<string name="emergency_button">Botó emergència</string>
     <string name="emergency_settings_subtext">Trieu si voleu tenir un botó emergència a la pantalla inici.</string>
     <string name="private_number">Número privat</string>
     <string name="swipe_left_or_right">Swipe esquerra o dreta</string>

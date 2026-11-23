@@ -15,11 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Over</string>
-    <string name="about_subtext">Hallo! \n Mijn naam is Uriah Shaul Mandel en ik ben de ontwikkelaar van dit platform.\n 
-Ik heb het grootste deel van mijn \"volwassen\" leven besteed aan het maken van dit platform, en ik heb het gratis vrijgegeven zodat iedereen
-het kan gebruiken.\n U bent meer dan welkom om contact met mij op te nemen via e-mail:  \n GranPhone.contact@gmail.com</string>
-    <string name="accessibility_level">Toegankelijkheidsniveau</string>
+
+<string name="accessibility_level">Toegankelijkheidsniveau</string>
     <string name="accessibility_settings">Toegankelijkheid</string>
     <string name="accidental_touches">Onbedoelde aanrakingsbeveiliging</string>
     <string name="accidental_touches_settings_subtext">De beveiliging blokkeert je telefoon tegen onbedoelde acties wanneer de telefoon bedekt is. Indien het problemen veroorzaakt kan het uitgeschakeld worden.</string>
@@ -139,8 +136,7 @@ alle gegevens worden verwijderd!</string>
     <string name="left_handed">Linkshandig</string>
     <string name="light">Licht</string>
     <string name="location">Locatie</string>
-    <string name="emergency_services">Spoedgevallendiensten</string>
-    <string name="mail">Mail</string>
+<string name="mail">Mail</string>
     <string name="maps">Maps</string>
 
 
@@ -352,8 +348,7 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Doneer</string>
-    <string name="emergency_button">Noodknop</string>
+<string name="emergency_button">Noodknop</string>
     <string name="emergency_settings_subtext">Kies of u een noodknop op het startscherm wilt hebben.</string>
     <string name="private_number">Privénummer</string>
     <string name="swipe_left_or_right">Veeg naar links of rechts</string>

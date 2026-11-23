@@ -15,11 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Teave</string>
-    <string name="about_subtext">Tere.\nMinu nimi on Uriah Shaul Mandel, ma olen selle rakenduse looja.\n
-         Olen seda rakendust arendanud terve oma täiskasvanu ea. Programm on kõigile kasutamiseks tasuta.\nKui soovite võite minuga, inglise keeles, ühendust võtta: nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Hõlbustuse tase</string>
+
+<string name="accessibility_level">Hõlbustuse tase</string>
     <string name="accessibility_settings">Hõlbustusfunktsioonid</string>
     <string name="accidental_touches">Juhusliku puudutuse kaitse</string>
     <string name="accidental_touches_settings_subtext">Kui telefon on kaetud, siis kaitse funktsioon blokeerib ekraani puudutused.\n
@@ -150,8 +147,7 @@ kõik andmed kustutatakse.</string>
     <string name="left_handed">Vasakukäeline</string>
     <string name="light">Kerge</string>
     <string name="location">Asukoht</string>
-    <string name="emergency_services">Hädaabi teenused</string>
-    <string name="mail">Postkast</string>
+<string name="mail">Postkast</string>
     <string name="maps">Kaardid</string>
 
 
@@ -371,8 +367,7 @@ Toksake \"+ Tablett\" allpool.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Anneta</string>
-    <string name="emergency_button">Hädaabinupp</string>
+<string name="emergency_button">Hädaabinupp</string>
     <string name="emergency_settings_subtext">Valige, kui soovite avakuvale hädaabinuppu.</string>
     <string name="private_number">Varjatud number</string>
     <string name="swipe_left_or_right">Lohista vasakule või paremale</string>

@@ -15,9 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Honi buruz</string>
-    <string name="about_subtext">Kaixo!\nNire izena Uriah Shaul Mandel da, eta plataforma honen sustatzailea naiz.\n Nire bizitza \"helduaren\" zatirik handiena plataforma hau egiten eman dut, eta dohainik argitaratu dut, edonorrek erabili dezan.\nOngi etorria zara nirekin posta elektronikoz harremanetan jartzeko:\nGranPhone.contact@gmail.com</string>
-    <string name="accessibility_level">Erabilerraztasun maila</string>
+
+<string name="accessibility_level">Erabilerraztasun maila</string>
     <string name="accessibility_settings">Erabilerraztasuna</string>
     <string name="accidental_touches">Ustekabeko utzitzen aurkako babesa</string>
     <string name="accidental_touches_settings_subtext">Babesleak telefonoaren ukipen-sarrera oztopatzen du telefonoa estalita dagoenean.\nHarekin arazorik baduzu, itzali egin dezakezu.</string>
@@ -137,8 +136,7 @@ Datu guztiak ezabatuko dira!</string>
     <string name="left_handed">Ezkerti</string>
     <string name="light">Argia</string>
     <string name="location">Kokapena</string>
-    <string name="emergency_services">Larrialdi zerbitzuak</string>
-    <string name="mail">Posta</string>
+<string name="mail">Posta</string>
     <string name="maps">Mapak</string>
 
 

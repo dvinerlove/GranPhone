@@ -15,12 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Относно</string>
-    <string name="about_subtext">Здрвейте!\nКазвам се Uriah Shaul Mandel и съм разработчикът на тази платформа.\n
-        Посветих голяма част от зрелия си живот на създаването на тази платформа и я предоставих за безплатно ползване на
-        всички.\nЧувствайте се добре дошли да се свържете с мен на електонната ми поща:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Ниво на достъпност</string>
+
+<string name="accessibility_level">Ниво на достъпност</string>
     <string name="accessibility_settings">Достъпност</string>
     <string name="accidental_touches">Защита срещу случаен допир</string>
     <string name="accidental_touches_settings_subtext">Защитата предпазва телефонът ви от реакция на случаен допир, когато
@@ -152,8 +148,7 @@
     <string name="left_handed">Използващ лява ръка</string>
     <string name="light">Светлина</string>
     <string name="location">Местоположение</string>
-    <string name="emergency_services">Спешни случаи</string>
-    <string name="mail">Електрона поща</string>
+<string name="mail">Електрона поща</string>
     <string name="maps">Карти</string>
 
 
@@ -376,8 +371,7 @@
     <!--For Tests:-->
     <string name="medication_1">Елтроксин 100</string>
     <string name="medication_2">Елтроксин 150</string>
-    <string name="donate">Дарете</string>
-    <string name="emergency_button">Бутон за спешни случаи</string>
+<string name="emergency_button">Бутон за спешни случаи</string>
     <string name="emergency_settings_subtext">Изберете дали желаете да имате бутон за спешни случаи на Начален екран.</string>
     <string name="private_number">Личен номер</string>
     <string name="swipe_left_or_right">Плъзване наляво или надясно</string>

@@ -15,11 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Tentang</string>
-    <string name="about_subtext">Hai!\nNama saya Uriah Shaul Mandel, pengembang piranti lunak ini.\n
-        Saya menghabiskan sebagian besar masa \"dewasa\" saya untuk membuat GranPhone, dan merilisnya secara gratis agar Anda semua bisa menggunakannya.\nAnda bisa menghubungi saya melalui email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Tingkat Aksesibilitas</string>
+
+<string name="accessibility_level">Tingkat Aksesibilitas</string>
     <string name="accessibility_settings">Aksesibilitas</string>
     <string name="accidental_touches">Pencegah Sentuhan Tidak Disengaja</string>
     <string name="accidental_touches_settings_subtext">Pencegah menjaga telepon Anda dari sentuhan tidak disengaja ketika telepon ditutup.
@@ -148,8 +145,7 @@ Semua data akan dihapus!</string>
     <string name="left_handed">Kidal</string>
     <string name="light">Cahaya</string>
     <string name="location">Lokasi</string>
-    <string name="emergency_services">Layanan Darurat</string>
-    <string name="mail">Surat</string>
+<string name="mail">Surat</string>
     <string name="maps">Peta</string>
 
 
@@ -373,8 +369,7 @@ Tekan \"+ Pil\" di bawah.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Sumbangan</string>
-    <string name="emergency_button">Tombol Darurat</string>
+<string name="emergency_button">Tombol Darurat</string>
     <string name="emergency_settings_subtext">Pilih jika Anda menginginkan tombol darurat di layar beranda.</string>
     <string name="private_number">Nomor Pribadi</string>
     <string name="swipe_left_or_right">Geser ke kiri atau kanan</string>

@@ -15,12 +15,8 @@
   -->
 
 <resources>
-    <string name="about">बारे में</string>
-    <string name="about_subtext">नमस्ते!\nमेरा नाम उरिय्याह शॉल मंडेल है, और मैं इस मंच का विकासकर्ता हूँ।\n
-        मैंने अपना अधिकांश \"वयस्क\" जीवन इस प्लेटफॉर्म को बनाने में बिताया है, और मैंने इसे सभी के लिए मुफ्त में जारी किया है।
-        उपयोग करें।\nआपका स्वागत है मुझसे ईमेल द्वारा संपर्क करने के लिए:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">अभिगम्यता स्तर</string>
+
+<string name="accessibility_level">अभिगम्यता स्तर</string>
     <string name="accessibility_settings">सरल उपयोग</string>
     <string name="accidental_touches">एक्सीडेंटल टच गार्ड</string>
     <string name="accidental_touches_settings_subtext">जब फोन होता है तो गार्ड आपके फोन को टच इनपुट से ब्लॉक कर देता है
@@ -151,8 +147,7 @@
     <string name="left_handed">बाएं हाथ से काम करने वाला</string>
     <string name="light">रोशनी</string>
     <string name="location">स्थान</string>
-    <string name="emergency_services">आपातकालीन सेवाएं</string>
-    <string name="mail">मेल</string>
+<string name="mail">मेल</string>
     <string name="maps">नक्शा</string>
 
 
@@ -375,8 +370,7 @@
     <!--For Tests:-->
     <string name="medication_1">एल्ट्रोक्सिन 100</string>
     <string name="medication_2">एल्ट्रोक्सिन 150</string>
-    <string name="donate">दान </string>
-    <string name="emergency_button">आपातकालीन बटन</string>
+<string name="emergency_button">आपातकालीन बटन</string>
     <string name="emergency_settings_subtext">चुनें कि क्या आप होम स्क्रीन पर आपातकालीन बटन रखना चाहते हैं.</string>
     <string name="private_number">निजी संख्या</string>
     <string name="swipe_left_or_right">बाएं या दाएं स्वाइप करें</string>

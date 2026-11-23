@@ -15,11 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Om denne app</string>
-    <string name="about_subtext">Hej!\nMit navn er Uriah Shaul Mandel. Jeg er udvikleren bag denne app.\n
-        Jeg har brugt det meste af mit \"voksenliv\" på at lave denne app. Jeg har gjort den gratis, så alle kan få gavn af den.\nDu er mere end velkommen til at kontakte mig på  email (skriv på engelsk):\nGranPhone.contact@gmail.com\nDen danske oversættelse er lavet af en tilfreds bruger, så hans mormor også kan få gavn af app\'en &lt;3\nFejl i oversættelsen? Send rettelsen til GranPhone@fam-petersen.eu
-    </string>
-    <string name="accessibility_level">Tilgængelighedsniveau</string>
+
+<string name="accessibility_level">Tilgængelighedsniveau</string>
     <string name="accessibility_settings">Tilgængelighedsindstillinger</string>
     <string name="accidental_touches">Beskyttelse mod utilsigtede berøringer</string>
     <string name="accidental_touches_settings_subtext">Denne indstilling sørger for, at din telefon ikke registrerer utilsigtede berøringer, når telefonen f.eks. er i lommen eller under et lukket cover.\nHvis du har problemer med, at ikke alle berøringer registreres, så slå denne beskyttelse fra.</string>
@@ -138,8 +135,7 @@ ALT brugerdata slettes og app\'en mister alle dine indstillinger!</string>
     <string name="left_handed">Venstrehåndet</string>
     <string name="light">Let</string>
     <string name="location">Lokation</string>
-    <string name="emergency_services">Alarmcentralen</string>
-    <string name="mail">Email</string>
+<string name="mail">Email</string>
     <string name="maps">Kort</string>
 
 
@@ -341,8 +337,7 @@ Tryk på \"+ Pille\" nedenfor.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donate</string>
-    <string name="emergency_button">Emergency Button</string>
+<string name="emergency_button">Emergency Button</string>
     <string name="emergency_settings_subtext">Choose if you want to have an Emergency Button on the home screen.</string>
     <string name="private_number">Private Number</string>
     <string name="swipe_left_or_right">Swipe left or right</string>

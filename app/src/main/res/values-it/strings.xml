@@ -15,9 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Informazioni</string>
-    <string name="about_subtext">Ciao! Il mio nome è Uriah Shaul Mandel e sono lo sviluppatore di questa app.\nHo speso una gran parte della mia vita \"adulta\" per realizzare questo software e l\'ho rilasciato come Open Source affinché tutti lo possano utilizzare liberamente.\nSe vuoi contattarmi via email, sei il benvenuto:\nGranPhone.contact@gmail.com</string>
-    <string name="accessibility_level">Livello di accessibilità</string>
+
+<string name="accessibility_level">Livello di accessibilità</string>
     <string name="accessibility_settings">Accessibilità</string>
     <string name="accidental_touches">Protezione contro i tocchi accidentali</string>
     <string name="accidental_touches_settings_subtext">La protezione dai tocchi accidentali evita che ci siano tocchi indesiderati quando il telefono è
@@ -141,8 +140,7 @@ Tutti i dati verranno eliminati!</string>
     <string name="left_handed">Sinistra</string>
     <string name="light">Chiaro</string>
     <string name="location">Geolocalizzazione</string>
-    <string name="emergency_services">112 Numero di Emergenza</string>
-    <string name="mail">Mail</string>
+<string name="mail">Mail</string>
     <string name="maps">Mappe</string>
 
 
@@ -359,8 +357,7 @@ Tocca \"+ Pillola\" in basso.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Dona</string>
-    <string name="emergency_button">Pulsante emergenza</string>
+<string name="emergency_button">Pulsante emergenza</string>
     <string name="emergency_settings_subtext">Scegli se vuoi avere il pulsante emergenza nella schermata Home.</string>
     <string name="private_number">Private Number</string>
     <string name="swipe_left_or_right">Striscia verso sinistra o destra</string>

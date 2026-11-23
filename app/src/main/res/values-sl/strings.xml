@@ -15,12 +15,8 @@
   -->
 
 <resources>
-    <string name="about">O aplikaciji</string>
-    <string name="about_subtext">Zdravo!\nMoje ime je Uriah Shaul Mandel in sem razvijalec te platforme.
-		\nVečino svojega odraslega življenja sem preživel z ustvarjanjem te platforme in sem jo izdal brezplačno za vse.
-        \nSte več kot dobrodošli, da me v angleškem jeziku kontaktirate na e-pošto:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Stopnja dostopnosti</string>
+
+<string name="accessibility_level">Stopnja dostopnosti</string>
     <string name="accessibility_settings">Nastavitve dostopnosti</string>
     <string name="accidental_touches">Zaščita pred neželenim dotikom</string>
     <string name="accidental_touches_settings_subtext">Zaščita prepreči telefonu vnos preko dotika, ko je telefon pokrit.
@@ -147,8 +143,7 @@ Vsi podatki bodo odstranjeni!</string>
     <string name="left_handed">Levičar</string>
     <string name="light">Svetla</string>
     <string name="location">Lokacija</string>
-    <string name="emergency_services">Klic v sili</string>
-    <string name="mail">Pošta</string>
+<string name="mail">Pošta</string>
     <string name="maps">Zemljevidi</string>
 
 
@@ -369,8 +364,7 @@ Kliknite \"+ Zdravilo\" spodaj.</string>
     <!--For Tests:-->
     <string name="medication_1">Lekadol 500</string>
     <string name="medication_2">Naklofen 75</string>
-    <string name="donate">Prostovoljni prispevki</string>
-    <string name="emergency_button">Gumb za klic v sili</string>
+<string name="emergency_button">Gumb za klic v sili</string>
     <string name="emergency_settings_subtext">Ali želite na domačem zaslonu imeti gumb za klic v sili?</string>
     <string name="private_number">Zasebna številka</string>
     <string name="swipe_left_or_right">Podrsaj levo ali desno</string>

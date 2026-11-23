@@ -15,11 +15,8 @@
   -->
 
 <resources>
-    <string name="about">აპლიკაციის შესახებ</string>
-    <string name="about_subtext">სალამი!\nმე მქვია ურია შეულ მენდელი და მე ვარ ამ პლატფორმის GranPhone(მელოტი ტელეფონის) დეველოპერი.\n
-        მე მთელი ჩემი (ზრდასრული) ცხოვრება ამ პლატფორმას ვაკეთებდი და გადავწყვიტე გამეზიარებინა ყველასთვის,სრულიად უფასოდ.\nმოხარული ვიქნები თუ დამიკავშირდებით :\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">წვდომის დონე</string>
+
+<string name="accessibility_level">წვდომის დონე</string>
     <string name="accessibility_settings">სპეციალური შესაძლებლობები</string>
     <string name="accidental_touches">შემთხვევითი შეხების გუშაგი</string>
     <string name="accidental_touches_settings_subtext">შემთხვევითი შეხების გუშაგი ახდენს ბლოკირებას,როდესაც ტელეფონი დაფარულია.\nთუ თქვენ მასთან პრობლემა შეგექმნათ შეგიძლიათ გათიშოთ.
@@ -145,8 +142,7 @@
     <string name="left_handed">ცაცია</string>
     <string name="light">სინათლე</string>
     <string name="location">მდებარეობა</string>
-    <string name="emergency_services">სასწრაფო დახმარება</string>
-    <string name="mail">ელფოსტა</string>
+<string name="mail">ელფოსტა</string>
     <string name="maps">რუკები</string>
 
 
@@ -356,8 +352,7 @@
     <!--For Tests:-->
     <string name="medication_1">ანალგინი 100</string>
     <string name="medication_2">ანალგინი 150</string>
-    <string name="donate">შემოწირულობები</string>
-    <string name="emergency_button">სასწრაფო ღილაკი</string>
+<string name="emergency_button">სასწრაფო ღილაკი</string>
     <string name="emergency_settings_subtext">აირჩიეთ თუ გინდა გქონდეთ სასწრაფოს ღილაკი მთავარ ეკრანზე.</string>
     <string name="private_number">კერძო ნომერი</string>
     <string name="swipe_left_or_right">გაუსვით მარცხნივ ან მარჯვნივ</string>

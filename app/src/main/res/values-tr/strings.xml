@@ -15,12 +15,8 @@
   -->
 
 <resources>
-    <string name="about">About</string>
-    <string name="about_subtext">Hi!\nMy name is Uriah Shaul Mandel, and I\'m the developer of this platform.\n
-        I\'ve spent most of my \"adult\" life making this platform, and I\'ve released it for free, for all to
-        use.\nYou are more than welcome to contact me by email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Erişilebilirlik Seviyesi</string>
+
+<string name="accessibility_level">Erişilebilirlik Seviyesi</string>
     <string name="accessibility_settings">Erişilebilirlik</string>
     <string name="accidental_touches">Istenmeden Dokunma Ayarı</string>
     <string name="accidental_touches_settings_subtext">But ayar telefonunuz örtülü olduğu zaman, dokunuşlari algılamıyor. Sorun yaşıyorsanız, bu ayarı kapatın.
@@ -146,8 +142,7 @@ Bütün bilgileriniz silinecek!</string>
     <string name="left_handed">Solak</string>
     <string name="light">Parlak</string>
     <string name="location">Konum</string>
-    <string name="emergency_services">Acil/SOS servisleri</string>
-    <string name="mail">posta</string>
+<string name="mail">posta</string>
     <string name="maps">Haritalar</string>
 
 
@@ -355,8 +350,7 @@ Aşağıdaki \"+ İlaç\"a basın.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Bağış yap</string>
-    <string name="emergency_button">Acil durum butonu</string>
+<string name="emergency_button">Acil durum butonu</string>
     <string name="emergency_settings_subtext">Acil durum butonunun ekranda olmasını istiyorsanız seçiniz.</string>
     <string name="private_number">Özel numara</string>
     <string name="swipe_left_or_right">Sağa ve ya Sola kaydırın</string>

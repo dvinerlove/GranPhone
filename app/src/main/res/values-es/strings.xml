@@ -15,13 +15,8 @@
   -->
 
 <resources>
-    <string name="about">Acerca de</string>
-    <string name="about_subtext">
-        ¡Hola, buenos días!\n
-        Me llamo Uriah Shaul Mandel y soy el desarrollador de esta plataforma. He pasado la mayor parte de mi vida «adulta» desarrollando esta plataforma, y la he lanzado gratis para beneficio de todos. Si tienes alguna duda o sugerencia he aquí mi correo electrónico:\n
-        GranPhone.contact@gmail.com (si me escribes, mejor en inglés)
-    </string>
-    <string name="accessibility_level">Nivel de accesibilidad</string>
+
+<string name="accessibility_level">Nivel de accesibilidad</string>
     <string name="accessibility_settings">Accesibilidad</string>
     <string name="accidental_touches">Protección de toque accidental</string>
     <string name="accidental_touches_settings_subtext">El protector bloquea la pantalla táctil al cubrir el teléfono. Si te causa problemas puedes desactivarlo, no pasa nada.
@@ -145,8 +140,7 @@
     <string name="left_handed">Zurdo</string>
     <string name="light">Claro</string>
     <string name="location">Ubicación</string>
-    <string name="emergency_services">Servicios de emergencia</string>
-    <string name="mail">Correo electrónico</string>
+<string name="mail">Correo electrónico</string>
     <string name="maps">Mapas</string>
 
 
@@ -369,8 +363,7 @@ Pulsa «+ Pastilla» abajo.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donar</string>
-    <string name="emergency_button">Botón de emergencia</string>
+<string name="emergency_button">Botón de emergencia</string>
     <string name="emergency_settings_subtext">Elige si quieres tener un botón de emergencia en la pantalla principal.</string>
     <string name="private_number">Número privado</string>
     <string name="swipe_left_or_right">Desliza el dedo hacia la izquierda o a la derecha</string>

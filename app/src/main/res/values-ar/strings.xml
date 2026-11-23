@@ -15,8 +15,7 @@
   -->
 
 <resources>
-    <string name="about">مقدمة</string>
-    <string name="accidental_touches">حماية من اللمس غير المقصود</string>
+<string name="accidental_touches">حماية من اللمس غير المقصود</string>
     <string name="adaptive">تلقائي</string>
     <string name="add_alarm">إضافة منبه</string>
     <string name="add_alarm_quickly">إضافة مؤقت</string>
@@ -94,8 +93,7 @@
     <string name="language">لغة</string>
     <string name="language_settings">اللغة</string>
     <string name="location">الموقع</string>
-    <string name="emergency_services">خدمات الطوارئ</string>
-    <string name="maps">الخرائط</string>
+<string name="maps">الخرائط</string>
 
 
     <string name="medium">متوسط</string>
@@ -159,8 +157,7 @@
     <string name="choose_language_for_keyboard">اختر لغة</string>
     <string name="search">بحث</string>
     <string name="next">التالي</string>
-    <string name="donate">تبرع</string>
-    <string name="emergency_button">زر الطوارئ</string>
+<string name="emergency_button">زر الطوارئ</string>
     <string name="do_you_want_to_save_your_changes">هل تريد حفظ التغييرات؟</string>
     <string name="discard">إلغاء</string>
     <string name="no_recent_calls">لا توجد مكالمات جديدة</string>

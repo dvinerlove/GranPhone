@@ -15,12 +15,8 @@
   -->
 
 <resources>
-    <string name="about">O programie</string>
-    <string name="about_subtext">Cześć !\nMam na imie Uriah Shaul Mandel, jestem developerem tej platformy.\n
-        Spędziłem większość swojego \"dorosłego\" życia tworząc tą platformę, i wypuściłem ją za darmo, dla każdego do użytku.
-        \nMożesz spokojnie do mnie napisać na ten adres email: \nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Poziom dostępności</string>
+
+<string name="accessibility_level">Poziom dostępności</string>
     <string name="accessibility_settings">Dostępność</string>
     <string name="accidental_touches">Zapobiegaj przypadkowym dotknięciom</string>
     <string name="accidental_touches_settings_subtext">Ta funkcja blokuje enran dotykowy kiedy telefon jest przykryty,
@@ -143,8 +139,7 @@ wszystkie dane zostaną wyczyszczone!</string>
     <string name="left_handed">Leworęczny</string>
     <string name="light">Jasny</string>
     <string name="location">Lokalizacja</string>
-    <string name="emergency_services">Służby ratownicze</string>
-    <string name="mail">E-Mail</string>
+<string name="mail">E-Mail</string>
     <string name="maps">Mapy</string>
 
 
@@ -360,8 +355,7 @@ Naciśnij \"+ Tabletka\" poniżej.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donate</string>
-    <string name="emergency_button">Emergency Button</string>
+<string name="emergency_button">Emergency Button</string>
     <string name="emergency_settings_subtext">Choose if you want to have an Emergency Button on the home screen.</string>
     <string name="private_number">Private Number</string>
     <string name="swipe_left_or_right">Swipe left or right</string>

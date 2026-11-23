@@ -15,11 +15,8 @@
   -->
 
 <resources>
-    <string name="about">À propos</string>
-    <string name="about_subtext">Bonjour\nJe m\'appelle Uriah Shaul Mandel et je suis le développeur de cette plateforme.\nJe vis à
-        Tel Aviv.\nBeaucoup de temps et d\'efforts ont été nécessaires pour créer cette plateforme et pour qu\'elle soit gratuite à utiliser pour tout le monde.\nVous pouvez me contacter avec plaisir par e-mail :\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Niveau d\'accessibilité</string>
+
+<string name="accessibility_level">Niveau d\'accessibilité</string>
     <string name="accessibility_settings">Accessibilité</string>
     <string name="accidental_touches">Blocage appuis accidentels</string>
     <string name="accidental_touches_settings_subtext">Activer une protection pour bloquer les appuis accidentels quand le téléphone est couvert par un étui.\nDésactivez si vous recontrez des problèmes.
@@ -145,8 +142,7 @@ Toutes les données seront effacées !</string>
     <string name="left_handed">Gauché(e)</string>
     <string name="light">Clair</string>
     <string name="location">Localisation</string>
-    <string name="emergency_services">Services d\'Urgence</string>
-    <string name="mail">E-mail</string>
+<string name="mail">E-mail</string>
     <string name="maps">Cartographie</string>
 
 
@@ -361,8 +357,7 @@ Appuyez sur \"+ Médicament\" en bas.</string>
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donner</string>
-    <string name="emergency_button">Bouton d\'urgence</string>
+<string name="emergency_button">Bouton d\'urgence</string>
     <string name="emergency_settings_subtext">Choisissez si vous désirez afficher un bouton d\'urgence sur l\'écran d\'accueil.</string>
     <string name="private_number">Numéro privé</string>
     <string name="swipe_left_or_right">Glissez à gauche ou à droite</string>
