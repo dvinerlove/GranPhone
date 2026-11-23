@@ -80,6 +80,8 @@ public class ScrollingHelper extends ConstraintLayout {
             gone,
             arrowsVisible = true,
             horizontalScrolling = false;
+    private View upArrow, downArrow;
+    private final android.view.ViewTreeObserver.OnScrollChangedListener scrollChangedListener = this::updateArrowsVisibility;
 
     @IdRes
     private int childId;
@@ -215,11 +217,18 @@ public class ScrollingHelper extends ConstraintLayout {
     private void updateArrowsVisibility() {
         if (child == null || gone || whereBar == TOP_AND_BOTTOM)
             return;
-        final boolean show = child.canScrollVertically(-1) || child.canScrollVertically(1);
+        final boolean canUp = child.canScrollVertically(-1);
+        final boolean canDown = child.canScrollVertically(1);
+        final boolean show = canUp || canDown;
         if (show != arrowsVisible) {
             arrowsVisible = show;
             setArrowsVisibility(show);
         }
+        // each arrow dims at its edge — "nothing more this way" is the state users need to see
+        if (upArrow != null)
+            upArrow.setAlpha(canUp ? 1f : 0.25f);
+        if (downArrow != null)
+            downArrow.setAlpha(canDown ? 1f : 0.25f);
     }
 
     private void setArrowsVisibility(boolean visible) {
@@ -382,6 +391,8 @@ public class ScrollingHelper extends ConstraintLayout {
             } else {
                 final View up = layoutInflater.inflate(R.layout.scrolling_helper_up, container, false);
                 final View down = layoutInflater.inflate(R.layout.scrolling_helper_down, container, false);
+                upArrow = up;
+                downArrow = down;
                 container.addView(up, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
                 container.addView(down, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
                 up.setOnClickListener(onClickListener);
@@ -491,12 +502,14 @@ public class ScrollingHelper extends ConstraintLayout {
         });
 
         getViewTreeObserver().addOnGlobalLayoutListener(arrowsVisibilityListener);
+        getViewTreeObserver().addOnScrollChangedListener(scrollChangedListener);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         getViewTreeObserver().removeOnGlobalLayoutListener(arrowsVisibilityListener);
+        getViewTreeObserver().removeOnScrollChangedListener(scrollChangedListener);
     }
 
     @IntDef({RIGHT, LEFT, UP, DOWN, NO})

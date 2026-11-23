@@ -100,7 +100,7 @@
     <string name="contact_must_has_name">Enter a name for the contact.</string>
     <string name="contact_not_created">Couldn\'t save the contact. Check the fields and try again.</string>
     <string name="contacts">Contacts</string>
-    <string name="contacts_read_subtext">This permission is required in order to read contacts.</string>
+    <string name="contacts_read_subtext">This permission is required in order to show and call your contacts.</string>
     <string name="contacts_subtext">This permission is required in order to add new contacts.</string>
     <string name="crash">GranPhone hit a problem and will restart.\nYour data is safe.</string>
     <string name="current_time">Current Time</string>
@@ -427,7 +427,7 @@
     <string name="choose_sim_subtext">Choose the sim you want to make the call from</string>
     <string name="website">Website</string>
     <string name="appear_on_top">Appear on top</string>
-    <string name="appear_on_top_subtext">This permission is required on new version of android in order to show alarms and reminders when the screen is closed</string>
+    <string name="appear_on_top_subtext">This permission is required on newer versions of Android in order to show alarms and reminders when the screen is closed.</string>
 
     <string name="mail_application_not_found">No mail app is installed, so the message can\'t be sent.</string>
     <string name="get_involved">Get Involved</string>

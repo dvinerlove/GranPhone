@@ -93,7 +93,7 @@ Alle Daten werden gelöscht!</string>
     <string name="contact_must_has_name">Der Kontakt muss einen Namen haben!</string>
     <string name="contact_not_created">Der Kontakt wurde nicht angelegt!</string>
     <string name="contacts">Adressbuch</string>
-    <string name="contacts_read_subtext">Diese Erlaubnis wird benötigt, um Kontakte lesen zu können.</string>
+    <string name="contacts_read_subtext">Diese Erlaubnis wird benötigt, um Kontakte anzuzeigen und anzurufen.</string>
     <string name="contacts_subtext">Diese Erlaubnis wird benötigt, um neue Kontakte hinzuzufügen.</string>
     <string name="crash">Oops!\nBei GranPhone ist ein Problem aufgetreten, es wird jetzt neu starten.</string>
     <string name="current_time">Aktuelle Uhrzeit</string>

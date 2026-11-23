@@ -25,7 +25,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -93,14 +93,6 @@ public class BaldTitleBar extends LinearLayout {
         if (showBack)
             tv_back = (TextView) inflater.inflate(R.layout.bald_title_back_text, this, false);
         tv_title.setText(title);
-        // selected is what makes the marquee scroll; it must be set after the first layout
-        tv_title.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                tv_title.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                tv_title.setSelected(true);
-            }
-        });
         updateView();
 
     }

@@ -97,7 +97,7 @@
     <string name="contact_must_has_name">Введите имя контакта.</string>
     <string name="contact_not_created">Не удалось сохранить контакт. Проверьте поля и попробуйте ещё раз.</string>
     <string name="contacts">Контакты</string>
-    <string name="contacts_read_subtext">Это разрешение требуется для чтения контактов.</string>
+    <string name="contacts_read_subtext">Это разрешение нужно, чтобы показывать контакты и звонить им.</string>
     <string name="contacts_subtext">Это разрешение требуется для добавления новых контактов.</string>
     <string name="crash">GranPhone столкнулся с ошибкой и перезапустится.\nВаши данные в порядке.</string>
     <string name="current_time">Текущее время</string>
@@ -430,7 +430,7 @@
     <string name="choose_sim_subtext">Выберите SIM-карту для звонка</string>
     <string name="website">Сайт</string>
     <string name="appear_on_top">Поверх других окон</string>
-    <string name="appear_on_top_subtext">Это разрешение нужно, чтобы показывать будильники и напоминания поверх экрана блокировки</string>
+    <string name="appear_on_top_subtext">Это разрешение нужно, чтобы показывать будильники и напоминания поверх экрана блокировки.</string>
     <string name="mail_application_not_found">На телефоне нет почтового приложения, поэтому отзыв отправить нельзя.</string>
     <string name="get_involved">Помочь проекту</string>
     <string name="close">Закрыть</string>

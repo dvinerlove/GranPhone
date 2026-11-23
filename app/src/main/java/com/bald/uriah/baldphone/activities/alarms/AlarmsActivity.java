@@ -97,6 +97,8 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
     public void refreshViews() {
         alarmList = AlarmsDatabase.getInstance(this).alarmsDatabaseDao().getAllSortedByTime();
         adapter.notifyDataSetChanged();
+        if (bt_cancel_all_alarms != null)
+            bt_cancel_all_alarms.setVisibility(alarmList.isEmpty() ? View.GONE : View.VISIBLE);
     }
 
     private void attachXml() {

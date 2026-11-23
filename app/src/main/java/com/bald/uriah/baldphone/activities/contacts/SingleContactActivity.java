@@ -133,7 +133,7 @@ public class SingleContactActivity extends BaldActivity {
             return;
         }
 
-        baldTitleBar.setTitle("");
+        baldTitleBar.setTitle(contact.getName());
         tv_contact_name.setText(contact.getName());
         setupBar();
 

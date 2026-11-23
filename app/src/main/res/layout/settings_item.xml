@@ -17,6 +17,7 @@
 <!-- Settings row: wave-4 card (bald_card + border via dialer_key_background selector,
      which keeps a pressed state). -->
 <com.bald.uriah.baldphone.views.BaldFrameLayoutButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:layout_marginStart="12dp"
@@ -39,5 +40,8 @@
         android:layout_height="match_parent"
         android:layout_marginStart="72dp"
         android:gravity="center_vertical"
-        android:paddingEnd="16dp" />
+        android:maxLines="2"
+        android:paddingEnd="16dp"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="12sp" />
 </com.bald.uriah.baldphone.views.BaldFrameLayoutButton>

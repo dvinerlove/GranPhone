@@ -31,17 +31,22 @@ public class ModularScrollView extends ScrollView implements Modular {
 
     public ModularScrollView(Context context) {
         super(context);
-        touchEnabled = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getBoolean(BPrefs.TOUCH_NOT_HARD_KEY, false);
+        init(context);
     }
 
     public ModularScrollView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        touchEnabled = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getBoolean(BPrefs.TOUCH_NOT_HARD_KEY, false);
+        init(context);
     }
 
     public ModularScrollView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init(context);
+    }
+
+    private void init(Context context) {
         touchEnabled = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getBoolean(BPrefs.TOUCH_NOT_HARD_KEY, false);
+        setVerticalScrollBarEnabled(false);
     }
 
     @Override
