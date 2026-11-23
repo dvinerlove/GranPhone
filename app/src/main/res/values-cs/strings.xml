@@ -411,4 +411,9 @@ Stiskněte \"+ Pilulka\" níže.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Zpět</string>
+    <string name="exit">Ukončit</string>
+    <string name="stay">Zůstat</string>
+    <string name="settings_for_user">Pro uživatele</string>
+    <string name="settings_for_helper">Pro pomocníka</string>
 </resources>

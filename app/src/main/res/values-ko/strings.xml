@@ -366,4 +366,9 @@
     <string name="edit_home_screen">Edit Home Screen</string>
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">뒤로</string>
+    <string name="exit">종료</string>
+    <string name="stay">머물기</string>
+    <string name="settings_for_user">사용자용</string>
+    <string name="settings_for_helper">도우미용</string>
 </resources>

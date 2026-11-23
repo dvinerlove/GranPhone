@@ -406,4 +406,9 @@ Pritisnite \"+ Pilula\" ispod.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Natrag</string>
+    <string name="exit">Izađi</string>
+    <string name="stay">Ostani</string>
+    <string name="settings_for_user">Za korisnika</string>
+    <string name="settings_for_helper">Za pomagača</string>
 </resources>

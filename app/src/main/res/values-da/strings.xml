@@ -383,4 +383,9 @@ Tryk på \"+ Pille\" nedenfor.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Tilbage</string>
+    <string name="exit">Afslut</string>
+    <string name="stay">Bliv</string>
+    <string name="settings_for_user">Til brugeren</string>
+    <string name="settings_for_helper">Til hjælperen</string>
 </resources>

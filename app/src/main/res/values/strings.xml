@@ -118,6 +118,7 @@ This will delete all data!</string>
     <string name="enter_contact_or_phone_number">Enter contact name:</string>
     <string name="enter_phone_number">Enter a phone number</string>
     <string name="evening">Evening</string>
+    <string name="stay">Stay</string>
     <string name="exit">Exit</string>
     <string name="example_of_different_text_sizes">Example of different text sizes\nShould be readable and not
         overflow.

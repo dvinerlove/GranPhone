@@ -169,4 +169,9 @@
 
     <string name="russian">الروسية</string>
     <string name="understood">فهمت</string>
+    <string name="back">رجوع</string>
+    <string name="exit">خروج</string>
+    <string name="stay">البقاء</string>
+    <string name="settings_for_user">للمستخدم</string>
+    <string name="settings_for_helper">للمساعد</string>
 </resources>

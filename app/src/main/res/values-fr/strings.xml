@@ -395,4 +395,9 @@ Appuyez sur \"+ Médicament\" en bas.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Retour</string>
+    <string name="exit">Quitter</string>
+    <string name="stay">Rester</string>
+    <string name="settings_for_user">Pour l’utilisateur</string>
+    <string name="settings_for_helper">Pour l’assistant</string>
 </resources>

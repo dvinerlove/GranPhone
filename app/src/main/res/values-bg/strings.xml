@@ -423,4 +423,9 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Назад</string>
+    <string name="exit">Изход</string>
+    <string name="stay">Останете</string>
+    <string name="settings_for_user">За потребителя</string>
+    <string name="settings_for_helper">За помощника</string>
 </resources>

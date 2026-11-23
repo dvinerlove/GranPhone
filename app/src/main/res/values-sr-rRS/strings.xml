@@ -391,4 +391,9 @@ Pritisnite \"+ Lek\" ispod.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Назад</string>
+    <string name="exit">Излаз</string>
+    <string name="stay">Остани</string>
+    <string name="settings_for_user">За корисника</string>
+    <string name="settings_for_helper">За помоћника</string>
 </resources>

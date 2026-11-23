@@ -394,4 +394,9 @@ Naciśnij \"+ Tabletka\" poniżej.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Wstecz</string>
+    <string name="exit">Wyjdź</string>
+    <string name="stay">Zostań</string>
+    <string name="settings_for_user">Dla użytkownika</string>
+    <string name="settings_for_helper">Dla opiekuna</string>
 </resources>

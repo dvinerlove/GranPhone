@@ -407,4 +407,9 @@ Tekan \"+ Pil\" di bawah.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Kembali</string>
+    <string name="exit">Keluar</string>
+    <string name="stay">Tetap</string>
+    <string name="settings_for_user">Untuk pengguna</string>
+    <string name="settings_for_helper">Untuk pendamping</string>
 </resources>

@@ -399,4 +399,9 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Terug</string>
+    <string name="exit">Afsluiten</string>
+    <string name="stay">Blijven</string>
+    <string name="settings_for_user">Voor de gebruiker</string>
+    <string name="settings_for_helper">Voor de helper</string>
 </resources>

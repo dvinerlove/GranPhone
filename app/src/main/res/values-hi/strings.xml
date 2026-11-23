@@ -422,4 +422,9 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">वापस</string>
+    <string name="exit">बाहर निकलें</string>
+    <string name="stay">रहें</string>
+    <string name="settings_for_user">उपयोगकर्ता के लिए</string>
+    <string name="settings_for_helper">सहायक के लिए</string>
 </resources>

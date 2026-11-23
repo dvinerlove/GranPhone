@@ -387,4 +387,9 @@ https://github.com/dvinerlove/GranPhone</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Vissza</string>
+    <string name="exit">Kilépés</string>
+    <string name="stay">Maradok</string>
+    <string name="settings_for_user">A felhasználónak</string>
+    <string name="settings_for_helper">A segítőnek</string>
 </resources>

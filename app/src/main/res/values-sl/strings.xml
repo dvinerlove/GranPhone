@@ -416,4 +416,9 @@ Kliknite \"+ Zdravilo\" spodaj.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Nazaj</string>
+    <string name="exit">Izhod</string>
+    <string name="stay">Ostani</string>
+    <string name="settings_for_user">Za uporabnika</string>
+    <string name="settings_for_helper">Za pomočnika</string>
 </resources>

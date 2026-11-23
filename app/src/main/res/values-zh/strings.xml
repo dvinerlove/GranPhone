@@ -409,4 +409,9 @@
     <bool name="is_right_to_left">false</bool>
     <string name="understood">明白了</string>
 
+    <string name="back">返回</string>
+    <string name="exit">退出</string>
+    <string name="stay">留下</string>
+    <string name="settings_for_user">用户设置</string>
+    <string name="settings_for_helper">协助者设置</string>
 </resources>

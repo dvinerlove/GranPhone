@@ -91,11 +91,15 @@ public class PermissionActivity extends BaldActivity {
 
     private void calmyBDB() {
         if (isTaskRoot()) {
-            DialogScreen.confirm(this,
+            DialogScreen.select(this,
                     R.string.permissions_part,
                     R.string.permissions_calm,
-                    R.string.exit,
-                    () -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this));
+                    -1,
+                    index -> {
+                        if (index == 1)
+                            FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this);
+                    },
+                    getText(R.string.stay), getText(R.string.exit));
         } else
             finish();
     }

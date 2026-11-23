@@ -408,4 +408,9 @@ Tippe auf \"+ Tablette\" unten.</string>
     <bool name="is_right_to_left">false</bool>
     <string name="understood">Verstanden</string>
 
+    <string name="back">Zurück</string>
+    <string name="exit">Beenden</string>
+    <string name="stay">Bleiben</string>
+    <string name="settings_for_user">Für den Nutzer</string>
+    <string name="settings_for_helper">Für den Helfer</string>
 </resources>

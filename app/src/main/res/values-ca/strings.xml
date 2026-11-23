@@ -437,4 +437,9 @@ No es veuran canvis si la barra d\'estat està oculta.
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Enrere</string>
+    <string name="exit">Surt</string>
+    <string name="stay">Romandre</string>
+    <string name="settings_for_user">Per a l’usuari</string>
+    <string name="settings_for_helper">Per a l’ajudant</string>
 </resources>

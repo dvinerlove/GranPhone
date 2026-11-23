@@ -388,4 +388,9 @@ Toque em \"+ Medicamento\" abaixo.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Voltar</string>
+    <string name="exit">Sair</string>
+    <string name="stay">Ficar</string>
+    <string name="settings_for_user">Para o utilizador</string>
+    <string name="settings_for_helper">Para o ajudante</string>
 </resources>

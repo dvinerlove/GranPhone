@@ -249,4 +249,9 @@ Datu guztiak ezabatuko dira!</string>
 
     <string name="russian">Errusiera</string>
     <string name="understood">Ulertuta</string>
+    <string name="back">Atzera</string>
+    <string name="exit">Irten</string>
+    <string name="stay">Gelditu</string>
+    <string name="settings_for_user">Erabiltzailearentzat</string>
+    <string name="settings_for_helper">Laguntzailearentzat</string>
 </resources>

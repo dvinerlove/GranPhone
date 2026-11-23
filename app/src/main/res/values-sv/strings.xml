@@ -413,4 +413,9 @@ Tryck på \"+ Läkemedel\" nedan.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Tillbaka</string>
+    <string name="exit">Avsluta</string>
+    <string name="stay">Stanna</string>
+    <string name="settings_for_user">För användaren</string>
+    <string name="settings_for_helper">För hjälparen</string>
 </resources>

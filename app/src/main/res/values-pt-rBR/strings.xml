@@ -433,4 +433,9 @@ Toque em \"+ Medicamento\" abaixo.</string>
     <string name="kiosk_disabled">Modo quiosque desativado.</string>
     <string name="remove_device_owner">Remover o GranPhone como administrador</string>
     <string name="remove_device_owner_subtext">O modo quiosque deixa de funcionar e o GranPhone pode ser desinstalado. Para voltar, é preciso rodar o comando no computador de novo.</string>
+    <string name="back">Voltar</string>
+    <string name="exit">Sair</string>
+    <string name="stay">Ficar</string>
+    <string name="settings_for_user">Para o usuário</string>
+    <string name="settings_for_helper">Para o ajudante</string>
 </resources>

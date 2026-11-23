@@ -391,4 +391,9 @@ Aşağıdaki \"+ İlaç\"a basın.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Geri</string>
+    <string name="exit">Çık</string>
+    <string name="stay">Kal</string>
+    <string name="settings_for_user">Kullanıcı için</string>
+    <string name="settings_for_helper">Yardımcı için</string>
 </resources>

@@ -431,4 +431,9 @@
     <bool name="is_right_to_left">false</bool>
     <string name="understood">הבנתי</string>
 
+    <string name="back">חזרה</string>
+    <string name="exit">יציאה</string>
+    <string name="stay">הישאר</string>
+    <string name="settings_for_user">למשתמש</string>
+    <string name="settings_for_helper">לעוזר</string>
 </resources>

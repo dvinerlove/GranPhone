@@ -426,4 +426,9 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Πίσω</string>
+    <string name="exit">Έξοδος</string>
+    <string name="stay">Μείνετε</string>
+    <string name="settings_for_user">Για τον χρήστη</string>
+    <string name="settings_for_helper">Για τον βοηθό</string>
 </resources>

@@ -417,4 +417,9 @@ Pulsa «+ Pastilla» abajo.</string>
     <bool name="is_right_to_left">false</bool>
     <string name="understood">Entendido</string>
 
+    <string name="back">Atrás</string>
+    <string name="exit">Salir</string>
+    <string name="stay">Quedarse</string>
+    <string name="settings_for_user">Para el usuario</string>
+    <string name="settings_for_helper">Para el asistente</string>
 </resources>

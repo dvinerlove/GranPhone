@@ -414,4 +414,9 @@ Toksake \"+ Tablett\" allpool.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Tagasi</string>
+    <string name="exit">Välju</string>
+    <string name="stay">Jää</string>
+    <string name="settings_for_user">Kasutajale</string>
+    <string name="settings_for_helper">Abilisele</string>
 </resources>

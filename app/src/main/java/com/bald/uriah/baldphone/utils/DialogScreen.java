@@ -111,6 +111,23 @@ public class DialogScreen extends Dialog {
         return select(context, context.getText(titleRes), selectedIndex, listener, options);
     }
 
+    /**
+     * SELECT with a message line — for choices that need a sentence of explanation.
+     */
+    public static DialogScreen select(@NonNull Context context, @StringRes int titleRes, @StringRes int messageRes,
+                                      int selectedIndex, @NonNull OnOptionSelectedListener listener,
+                                      @NonNull CharSequence... options) {
+        final DialogScreen dialog = new DialogScreen(context);
+        dialog.title = context.getText(titleRes);
+        dialog.message = context.getText(messageRes);
+        dialog.options = options;
+        dialog.selectedIndex = selectedIndex;
+        dialog.onOptionSelected = listener;
+        dialog.primaryText = context.getText(R.string.back);
+        dialog.primaryIsTextButton = true;
+        return dialog.present();
+    }
+
     public static DialogScreen select(@NonNull Context context, @NonNull CharSequence title, int selectedIndex,
                                       @NonNull OnOptionSelectedListener listener, @NonNull CharSequence... options) {
         final DialogScreen dialog = new DialogScreen(context);

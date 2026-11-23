@@ -399,4 +399,9 @@ Apăsați \"+ Medicament\" mai jos.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Înapoi</string>
+    <string name="exit">Ieși</string>
+    <string name="stay">Rămâi</string>
+    <string name="settings_for_user">Pentru utilizator</string>
+    <string name="settings_for_helper">Pentru ajutor</string>
 </resources>
