@@ -26,7 +26,7 @@
     <string name="accidental_touches_settings_subtext">Suojaus estää puhelimen kosketuskäytön, kun puhelin on
         peitettynä\nJos sen kanssa on ongelmia, voit kytkeä sen pois
     </string>
-    <string name="accidental_touches_subtext">Tahaton kosketus havaittiin\nPaina OK jatkaaksesi puhelimen käyttöä\nJos
+    <string name="accidental_touches_subtext">Tahaton kosketus havaittiin\nPaina \"Ymmärretty\" jatkaaksesi puhelimen käyttöä\nJos
         ilmoitus tulee toistuvasti, voit poistaa sen käytöstä esteettömyysasetuksista
     </string>
     <string name="acknowledgments">Kiitollisuudenosoitukset</string>
@@ -196,6 +196,7 @@ ja muuttaa kirkkautta.</string>
     <string name="pill_added">Lääkitys lisätty!</string>
     <string name="pill_name">Lääkenimi</string>
     <string name="pills">Lääkkeet</string>
+    <string name="pill">Lääke</string>
     <string name="press_longer">Paina pidempään!</string>
     <string name="timer">Ajastin</string>
     <string name="read_call_log">Lue puheluhistoria</string>
@@ -283,8 +284,11 @@ ja muuttaa kirkkautta.</string>
     <string name="yesterday">Eilen</string>
     <string name="nothing">Ei mitään</string>
     <string name="no_contacts_found">Yhteystietoja ei löydy!</string>
-    <string name="no_alarms">Ei hälytyksiä\nLuo uusi painamalla\n\"Lisää hälytys\"\ntai\n\"Lisää ajastin\"</string>
-    <string name="no_pills">Ei lääkityksiä\nLisää uusi painamalla\n\"Lisää lääkitys\"</string>
+    <string name="no_alarms">Ei hälytyksiä.
+Paina \"Hälytys\" tai
+\"Ajastin\" alla.</string>
+    <string name="no_pills">Ei lääkityksiä.
+Paina \"+ Lääke\" alla.</string>
     <string name="clear_all_notifications">Poista kaikki muistutukset</string>
     <string name="clear_cache_subtext">Haluatko varmasti poistaa välimuistin sisällön? Väliaikaistiedostojen poistaminen voi ratkaista joitain GranPhone-sovelluksen toimintahäiriöitä, mutta myös aloitusnäytölle luodut pikakuvakkeet poistetaan.</string>
     <string name="permissions_calm">Hei, GranPhone tarvitsee seuraavat oikeudet toimiakseen. Osa voi kuulostaa
@@ -349,6 +353,8 @@ ja muuttaa kirkkautta.</string>
     <string name="choose_language_for_keyboard">Valitse kieli</string>
     <string name="hebrew">Heprea</string>
     <string name="english">Englanti</string>
+    <string name="russian">Venäjä</string>
+    <string name="understood">Ymmärretty</string>
 
     <string name="search">Hae</string>
     <string name="next">Seuraava</string>

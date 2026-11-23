@@ -23,7 +23,7 @@
     <string name="accidental_touches">Skydd mot oavsiktligt pekande</string>
     <string name="accidental_touches_settings_subtext">Skyddet förhindrar pekningar när telefonen är övertäckt. Den går att\nstänga av om den orsakar problem.
     </string>
-    <string name="accidental_touches_subtext">Pekning upptäcktes\nTryck på OK för att fortsätta använda telefonen.\n om detta meddelande upprepas kan du stänga av funktionen i inställningarna tillgänglighet
+    <string name="accidental_touches_subtext">Pekning upptäcktes\nTryck på \"Förstått\" för att fortsätta använda telefonen.\n om detta meddelande upprepas kan du stänga av funktionen i inställningarna tillgänglighet
     </string>
     <string name="acknowledgments">Utvecklarens tack</string>
     <string name="adaptive">Adaptiv</string>
@@ -189,6 +189,7 @@
     <string name="pill_added">Läkemedel tillagt!</string>
     <string name="pill_name">Namn på läkemedel</string>
     <string name="pills">Läkemedel</string>
+    <string name="pill">Läkemedel</string>
     <string name="press_longer">Längre tryck krävs!</string>
     <string name="timer">Timer</string>
     <string name="read_call_log">Se samtalshistorik</string>
@@ -274,10 +275,11 @@
     <string name="yesterday">Igår</string>
     <string name="nothing">Ingenting</string>
     <string name="no_contacts_found">Inga Kontakter Hittades!</string>
-    <string name="no_alarms">Inga alarm tillagda\n\nSkapa alarm genom att klicka på\n\n\"Lägg till alarm"\n\neller\n\n\"Lägg till Timer\"
-    </string>
-    <string name="no_pills">Inga läkemedel tillagda\n\nLägg till genom att klicka på \n\n\"Lägg till läkemedel\"
-    </string>
+    <string name="no_alarms">Inga alarm tillagda.
+Tryck på \"Alarm\" eller
+\"Timer\" nedan.</string>
+    <string name="no_pills">Inga läkemedel tillagda.
+Tryck på \"+ Läkemedel\" nedan.</string>
     <string name="clear_all_notifications">Rensa alla aviseringar</string>
     <string name="clear_cache_subtext">Är du säker på att du vill rensa cachen?\n Även appgenvägar kommer att rensas!
     </string>
@@ -340,6 +342,8 @@
     <string name="choose_language_for_keyboard">Välj Språk</string>
     <string name="hebrew">Hebreiska</string>
     <string name="english">Engelska</string>
+    <string name="russian">Ryska</string>
+    <string name="understood">Förstått</string>
 
     <string name="search">Sök</string>
     <string name="next">Nästa</string>

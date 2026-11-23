@@ -21,7 +21,7 @@
     <string name="accessibility_settings">접근 가능</string>
     <string name="accidental_touches">오작동 방지 필터</string>
     <string name="accidental_touches_settings_subtext">보호대는 전화기에 문제가있는 경우 전화기를 덮을 때 터치 입력을 차단합니다.</string>
-    <string name="accidental_touches_subtext">오작동 터치가 감지되었습니다.이 메시지가 계속 나타나면 확인을 눌러 전화를 계속 사용하십시오. 접근성 설정에서 비활성화 할 수 있습니다.</string>
+    <string name="accidental_touches_subtext">오작동 터치가 감지되었습니다.이 메시지가 계속 나타나면 \"알겠습니다\"를 눌러 전화를 계속 사용하십시오. 접근성 설정에서 비활성화 할 수 있습니다.</string>
     <string name="acknowledgments">승인</string>
     <string name="adaptive">적용 가능</string>
     <string name="add_alarm">알람 추가</string>
@@ -181,6 +181,7 @@
     <string name="pill_added">알약 추가</string>
     <string name="pill_name">알약 이름</string>
     <string name="pills">알약 목록</string>
+    <string name="pill">알약</string>
     <string name="press_longer">길게 누르시오!</string>
     <string name="timer">타이머</string>
     <string name="read_call_log">통화 내역 읽기</string>
@@ -260,8 +261,11 @@
     <string name="yesterday">어제</string>
     <string name="nothing">없음</string>
     <string name="no_contacts_found">연락처를 찾지 못했습니다!</string>
-    <string name="no_alarms">알람 없음 알람 추가 또는 타이머 추가를 클릭하여 알람 생성</string>
-    <string name="no_pills">알약 없음 알약 추가를 클릭하여 생성하십시오</string>
+    <string name="no_alarms">알람 없음.
+아래 \"알람\" 또는
+\"타이머\"를 누르세요.</string>
+    <string name="no_pills">알약 없음.
+아래 \"+ 알약\"을 누르세요.</string>
     <string name="clear_all_notifications">모든 알람 지우기</string>
     <string name="clear_cache_subtext">캐시를 지우길 원하십니까? 앱 바로가기도 제거됩니다1</string>
     <string name="permissions_calm">안녕하세요, GranPhone을 사용하려면 다음 권한이 있어야합니다. 그들 중 일부는 무섭게 들리지만 GranPhone이 전화기의 인터페이스를 대체 할 수있는 유일한 방법입니다. 데이터가 수집되지 않으며 피해를주지 않습니다. OK를 눌러 권한을 부여하거나 No를 눌러 GranPhone을 종료하십시오.</string>
@@ -317,6 +321,8 @@
     <string name="choose_language_for_keyboard">언어 선택</string>
     <string name="hebrew">헤브라이어</string>
     <string name="english">영어</string>
+    <string name="russian">러시아어</string>
+    <string name="understood">알겠습니다</string>
 
     <string name="search">검색</string>
     <string name="next">다음</string>

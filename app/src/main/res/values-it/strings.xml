@@ -23,7 +23,7 @@
     <string name="accidental_touches_settings_subtext">La protezione dai tocchi accidentali evita che ci siano tocchi indesiderati quando il telefono è
         coperto.\nSe riscontri qualche problema puoi disattivarlo.
     </string>
-    <string name="accidental_touches_subtext">È stato rilevato un tocco accidentale.\nPremi OK per continuare ad usare il telefono.\nSe
+    <string name="accidental_touches_subtext">È stato rilevato un tocco accidentale.\nPremi \"Capito\" per continuare ad usare il telefono.\nSe
         questo messaggio continua a comparire puoi disattivarlo dalle impostazioni di accessibilità.
     </string>
     <string name="acknowledgments">Ringraziamenti</string>
@@ -187,6 +187,7 @@
     <string name="pill_added">Pillola aggiunta</string>
     <string name="pill_name">Nome della pillola</string>
     <string name="pills">Pillole</string>
+    <string name="pill">Pillola</string>
     <string name="press_longer">Tocca più a lungo</string>
     <string name="timer">Timer</string>
     <string name="read_call_log">Lettura chiamate recenti</string>
@@ -270,8 +271,11 @@
     <string name="yesterday">Ieri</string>
     <string name="nothing">Nessun contenuto</string>
     <string name="no_contacts_found">Nessun contatto trovato!</string>
-    <string name="no_alarms">Nessuna sveglia impostata.\nPuoi crearne una toccando \"Aggiungi sveglia\" oppure \"Aggiungi timer\".</string>
-    <string name="no_pills">Nessuna pillola definita.\nPuoi crearne una toccando \"Aggiungi pillola\".</string>
+    <string name="no_alarms">Nessuna sveglia impostata.
+Tocca \"Sveglia\" o
+\"Timer\" in basso.</string>
+    <string name="no_pills">Nessuna pillola definita.
+Tocca \"+ Pillola\" in basso.</string>
     <string name="clear_all_notifications">Elimina tutte le notifiche</string>
     <string name="clear_cache_subtext">Vuoi eliminare il contenuto della cache?\nEliminare i file temporanei può risolvere alcuni malfunzionamenti della app, ma verranno eliminate anche le scorciatoie create nella Home.
     </string>
@@ -335,6 +339,7 @@
     <string name="choose_language_for_keyboard">Scegli la lingua</string>
     <string name="hebrew">Ebraico</string>
     <string name="english">Inglese</string>
+    <string name="russian">Russo</string>
 
     <string name="search">Cerca</string>
     <string name="next">Prossimo</string>

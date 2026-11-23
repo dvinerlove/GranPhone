@@ -25,7 +25,7 @@
     <string name="accidental_touches_settings_subtext">Kui telefon on kaetud, siis kaitse funktsioon blokeerib ekraani puudutused.\n
         Kui see funktsioon valmistab probleeme, siis võite selle välja lülitada
     </string>
-    <string name="accidental_touches_subtext">Programm tuvastas juhusliku ekraani puudutuse,\ntelefoni kasutamiseks vajutage OK.\n
+    <string name="accidental_touches_subtext">Programm tuvastas juhusliku ekraani puudutuse,\ntelefoni kasutamiseks vajutage \"Sain aru\".\n
         Kui see teade ilmub korduvalt, saate selle keelata hõlbustusfunktsioonide seadetes</string>
     <string name="acknowledgments">Tänusõnad</string>
     <string name="adaptive">Kohanduv</string>
@@ -195,6 +195,7 @@
     <string name="pill_added">Tablett lisatud.</string>
     <string name="pill_name">Tableti nimi</string>
     <string name="pills">Tabletid</string>
+    <string name="pill">Tablett</string>
     <string name="press_longer">Hoia all kauem.</string>
     <string name="timer">Taimer</string>
     <string name="read_call_log">Kõneajalugu</string>
@@ -281,8 +282,11 @@
     <string name="yesterday">Eile</string>
     <string name="nothing">Mitte midagi</string>
     <string name="no_contacts_found">Kontakte ei ole.</string>
-    <string name="no_alarms">Äratusi ei ole\nÄratuse saate lisada toksates\n\"Lisa äratus\"\nvõi\n\"Lisa taimer</string>
-    <string name="no_pills">Tablette ei ole\nTableti saate lisada toksates\n\"Lisa tablett\"</string>
+    <string name="no_alarms">Äratusi ei ole.
+Toksake \"Äratus\" või
+\"Taimer\" allpool.</string>
+    <string name="no_pills">Tablette ei ole.
+Toksake \"+ Tablett\" allpool.</string>
     <string name="clear_all_notifications">Kustuta kõik teavitused</string>
     <string name="clear_cache_subtext">Kas olete kindel, et soovite vahemälu sisu kustutada? Ajutiste failide kustutamine vahemälust võib lahendada mõned GranPhone\'is ilmnevad vead, aga ka avakuvale loodud otseteed eemaldatakse. </string>
     <string name="permissions_calm">Tere. GranPhone\'i sujuvaks töötamiseks peate andma järgnevad juurdepääsuload.
@@ -346,6 +350,8 @@
     <string name="choose_language_for_keyboard">Vali keel</string>
     <string name="hebrew">Heebrea</string>
     <string name="english">Inglise</string>
+    <string name="russian">Vene</string>
+    <string name="understood">Sain aru</string>
 
     <string name="search">Otsi</string>
     <string name="next">Järgmine</string>

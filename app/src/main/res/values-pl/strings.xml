@@ -26,7 +26,7 @@
     <string name="accidental_touches_settings_subtext">Ta funkcja blokuje enran dotykowy kiedy telefon jest przykryty,
     	\njeśli to sprawi problemy możesz to wyłączyć
     </string>
-    <string name="accidental_touches_subtext">Wykryto przypadkowe dostnięcie\nnaciśnij OK aby odblokować dotyk\njeśli
+    <string name="accidental_touches_subtext">Wykryto przypadkowe dostnięcie\nnaciśnij \"Rozumiem\" aby odblokować dotyk\njeśli
         ta wiadomość się powtarza możesz wyłączyc tą funkcję w ustawieniach dostępności
     </string>
     <string name="acknowledgments">Podziękowania</string>
@@ -189,6 +189,7 @@
     <string name="pill_added">PTabletka dodana</string>
     <string name="pill_name">Nazwa tabletki</string>
     <string name="pills">Tabletki</string>
+    <string name="pill">Tabletka</string>
     <string name="press_longer">Przytrzymaj dłużej</string>
     <string name="timer">Tajmer</string>
     <string name="read_call_log">Wyświetl rejestr połączeń</string>
@@ -271,8 +272,11 @@
     <string name="yesterday">Wczoraj</string>
     <string name="nothing">Nic</string>
     <string name="no_contacts_found">Nie znaleziono kontaktów</string>
-    <string name="no_alarms">Brak alarmów\nUtwórz nowy przez kliknięcie\n\"Dodaj Alarm\"\nlub\n\"Dodaj Timer\"</string>
-    <string name="no_pills">Brak tabletek\nDoda nową klikając\n\"Dodaj tabletkę\"</string>
+    <string name="no_alarms">Brak alarmów.
+Naciśnij \"Alarm\" lub
+\"Tajmer\" poniżej.</string>
+    <string name="no_pills">Brak tabletek.
+Naciśnij \"+ Tabletka\" poniżej.</string>
     <string name="clear_all_notifications">Wyczyść wszystkie powiadomienia</string>
     <string name="clear_cache_subtext">Napewno chcesz uzunąć cały cachce ?\nSkróty aplikacji zostaną usunięte w wyniku tej operacji
     </string>
@@ -335,6 +339,8 @@
     <string name="choose_language_for_keyboard">Wybbierz język</string>
     <string name="hebrew">Hebrajski</string>
     <string name="english">Angielski</string>
+    <string name="russian">Rosyjski</string>
+    <string name="understood">Rozumiem</string>
 
     <string name="search">Szukaj</string>
     <string name="next">Następny</string>

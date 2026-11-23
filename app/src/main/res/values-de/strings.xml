@@ -24,7 +24,7 @@
     <string name="accidental_touches">Schutz vor versehentlichem Berühren</string>
     <string name="accidental_touches_settings_subtext">Der Schutz verhindert, dass dein Handy auf Berührungen reagiert, wenn es zugedeckt ist.\nWenn der Schutz Probleme bereitet, kannst du ihn ausschalten.
     </string>
-    <string name="accidental_touches_subtext">Eine Berührung wurde als unbeabsichtigt erkannt\ndrücke OK, um dein Handy weiter zu benutzen\nwenn diese Nachricht weiterhin angezeigt wird kannst du sie in den Einstellungen zur Barrierefreiheit ausschalten
+    <string name="accidental_touches_subtext">Eine Berührung wurde als unbeabsichtigt erkannt\ndrücke \"Verstanden\", um dein Handy weiter zu benutzen\nwenn diese Nachricht weiterhin angezeigt wird kannst du sie in den Einstellungen zur Barrierefreiheit ausschalten
     </string>
     <string name="acknowledgments">Danksagungen</string>
     <string name="adaptive">Angepasst</string>
@@ -191,6 +191,7 @@
     <string name="pill_added">Medikament wurde hinzugefügt!</string>
     <string name="pill_name">Name des Medikaments</string>
     <string name="pills">Medikamente</string>
+    <string name="pill">Tablette</string>
     <string name="press_longer">Länger drücken!</string>
     <string name="timer">Eieruhr</string>
     <string name="read_call_log">Anrufliste einlesen</string>
@@ -274,8 +275,11 @@
     <string name="yesterday">Gestern</string>
     <string name="nothing">Nichts</string>
     <string name="no_contacts_found">Es wurden keine Kontakte gefunden!</string>
-    <string name="no_alarms">Keine Wecker vorhanden.\nLege einen Wecker an, indem du auf\n\"Alarm hinzufügen\"\nOder\n\"Eieruhr hinzufügen\" drückst.</string>
-    <string name="no_pills">Keine Medikamente vorhanden\nLege welche an, indem du auf\n\"Medikamente hinzufügen\" drückst</string>
+    <string name="no_alarms">Keine Wecker vorhanden.
+Tippe auf \"Wecker\" oder
+\"Eieruhr\" unten.</string>
+    <string name="no_pills">Keine Medikamente vorhanden.
+Tippe auf \"+ Tablette\" unten.</string>
     <string name="clear_all_notifications">Alle Benachrichtigungen löschen</string>
     <string name="clear_cache_subtext">Bist du dir sicher, dass du den gesamten Cache leeren willst?\nAuch die Schnellwahltasten für die Apps werden gelöscht!
     </string>
@@ -336,6 +340,7 @@
     <string name="choose_language_for_keyboard">Wähle die Tastatursprache</string>
     <string name="hebrew">Hebräisch</string>
     <string name="english">Englisch</string>
+    <string name="russian">Russisch</string>
 
     <string name="search">Suche</string>
     <string name="next">Nächster</string>

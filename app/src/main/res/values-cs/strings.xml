@@ -26,7 +26,7 @@
     <string name="accidental_touches_settings_subtext">Ochrana blokuje telefon před dotykovým vstupem, pokud je telefon
         zakrytý\nPokud máte problémy můžete vypnout
     </string>
-    <string name="accidental_touches_subtext">Nechtěný dotyk byl detekován\nStiskněte OK pro pokračování v používání telefonu\n
+    <string name="accidental_touches_subtext">Nechtěný dotyk byl detekován\nStiskněte \"Rozumím\" pro pokračování v používání telefonu\n
         Zobrazuje-li se tato zpráva neustále, můžete ji vypnout v nastavení přístupnosti
     </string>
     <string name="acknowledgments">Poděkování</string>
@@ -198,6 +198,7 @@
     <string name="pill_added">Pilulka přidána!</string>
     <string name="pill_name">Jméno pilulky</string>
     <string name="pills">Pilulky</string>
+    <string name="pill">Pilulka</string>
     <string name="press_longer">Držte déle!</string>
     <string name="timer">Časovač</string>
     <string name="read_call_log">Přečíst historii telefonátů</string>
@@ -285,8 +286,11 @@
     <string name="yesterday">Včera</string>
     <string name="nothing">Nic</string>
     <string name="no_contacts_found">Žádné kontakty nebyly nalezeny!</string>
-    <string name="no_alarms">Žádné alarmy nejsou!\nVytvořte jeden kliknutím na\n\"Přidat alarm\"\nNebo\n\"Přidat časovač\"</string>
-    <string name="no_pills">Žádné pilulky nejsou!\nVytvořte kliknutím na\n\"Přidat pilulku\"</string>
+    <string name="no_alarms">Žádné alarmy.
+Stiskněte \"Alarm\" nebo
+\"Časovač\" níže.</string>
+    <string name="no_pills">Žádné pilulky.
+Stiskněte \"+ Pilulka\" níže.</string>
     <string name="clear_all_notifications">Vyčistit všechna upozornění</string>
     <string name="clear_cache_subtext">Jste si jistí že chcete smazat všechna dočastná data?\nZkratky aplikací budou smazány také!
     </string>
@@ -352,6 +356,8 @@
     <string name="choose_language_for_keyboard">Vybrat jazyk</string>
     <string name="hebrew">Hebrew</string>
     <string name="english">Angličtina</string>
+    <string name="russian">Ruština</string>
+    <string name="understood">Rozumím</string>
 
     <string name="search">Hledat</string>
     <string name="next">Další</string>

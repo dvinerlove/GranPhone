@@ -23,7 +23,7 @@
     <string name="accidental_touches">Proteção contra Toques Acidentais</string>
     <string name="accidental_touches_settings_subtext">Essa proteção impede toques acidentais quando o telefone estiver em seu bolso.\nCaso essa funcionalidade esteja causando problemas, você pode desligá-la aqui.
     </string>
-    <string name="accidental_touches_subtext">Toque acidental detectado.\nToque em OK para continuar a usar o telefone\ncaso
+    <string name="accidental_touches_subtext">Toque acidental detectado.\nToque em \"Entendi\" para continuar a usar o telefone\ncaso
      essa mensagem continue a aparecer, você pode desligá-la nas configurações de acessibilidade.
     </string>
     <string name="acknowledgments">Agradecimentos</string>
@@ -187,6 +187,7 @@
     <string name="pill_added">Medicamento adicionado!</string>
     <string name="pill_name">Nome do medicamento</string>
     <string name="pills">Medicamento</string>
+    <string name="pill">Medicamento</string>
     <string name="press_longer">Pressione por mais tempo!</string>
     <string name="timer">Cronômetro</string>
     <string name="read_call_log">Ver histórico de chamadas</string>
@@ -268,8 +269,11 @@
     <string name="yesterday">Ontem</string>
     <string name="nothing">Vazio</string>
     <string name="no_contacts_found">Não há Contatos!</string>
-    <string name="no_alarms">Nenhum Alarme\nCrie um tocando em \n\"Adicionar Alarme\"\nou\n\"Adicionar Cronômetro\"</string>
-    <string name="no_pills">Nenhum medicamento.\nAdicione um tocando em \n\"Adicionar Medicamento\"</string>
+    <string name="no_alarms">Nenhum alarme.
+Toque em \"Alarme\" ou
+\"Cronômetro\" abaixo.</string>
+    <string name="no_pills">Nenhum medicamento.
+Toque em \"+ Medicamento\" abaixo.</string>
     <string name="clear_all_notifications">Limpar Todas as Notificações</string>
     <string name="clear_cache_subtext">Tem a certeza que deseja apagar o cache?\nOs Aplicativos e Atalhos também serão removidos!
     </string>
@@ -326,6 +330,8 @@
     <string name="choose_language_for_keyboard">Escolha o Idioma</string>
     <string name="hebrew">Hebraico</string>
     <string name="english">Inglês</string>
+    <string name="russian">Russo</string>
+    <string name="understood">Entendi</string>
 
     <string name="search">Procurar</string>
     <string name="next">Próximo</string>

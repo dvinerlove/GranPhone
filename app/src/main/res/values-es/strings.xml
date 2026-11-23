@@ -26,7 +26,7 @@
     <string name="accidental_touches">Protección de toque accidental</string>
     <string name="accidental_touches_settings_subtext">El protector bloquea la pantalla táctil al cubrir el teléfono. Si te causa problemas puedes desactivarlo, no pasa nada.
     </string>
-    <string name="accidental_touches_subtext">Parece que hemos detectado un toque accidental. No pasa nada, pulsa «aceptar» para continuar usando el teléfono. Si este mensaje sigue apareciendo puedes desactivarlo en las opciones de accesibilidad.
+    <string name="accidental_touches_subtext">Parece que hemos detectado un toque accidental. No pasa nada, pulsa «Entendido» para continuar usando el teléfono. Si este mensaje sigue apareciendo puedes desactivarlo en las opciones de accesibilidad.
     </string>
     <string name="acknowledgments">Agradecimientos</string>
     <string name="adaptive">Adaptable</string>
@@ -192,6 +192,7 @@
     <string name="pill_added">La pastilla se ha añadido correctamente.</string>
     <string name="pill_name">Nombre de la pastilla</string>
     <string name="pills">Pastillas</string>
+    <string name="pill">Pastilla</string>
     <string name="press_longer">Mantén pulsado el botón un poco más…</string>
     <string name="timer">Temporizador</string>
     <string name="read_call_log">Leer el historial de llamadas</string>
@@ -275,8 +276,11 @@
     <string name="yesterday">Ayer</string>
     <string name="nothing">Nada</string>
     <string name="no_contacts_found">No se ha encontrado ningún contacto.</string>
-    <string name="no_alarms">Parece que todavía no hay ninguna alarma, puedes crear una pulsando «añadir alarma» o «añadir temporizador».</string>
-    <string name="no_pills">Parece que todavía no hay ninguna pastilla registrada, añade alguna pulsando el botón de «añadir pastilla».</string>
+    <string name="no_alarms">No hay alarmas.
+Pulsa «Alarma» o
+«Temporizador» abajo.</string>
+    <string name="no_pills">No hay pastillas.
+Pulsa «+ Pastilla» abajo.</string>
     <string name="clear_all_notifications">Quitar todas las notificaciones</string>
     <string name="clear_cache_subtext">¿Seguro que quieres borrar del todo la memoria caché de GranPhone? Puede que borrar los archivos temporales solucione algunos problemas, pero los enlaces directos de la pantalla de inicio también desaparecerán.
     </string>
@@ -345,6 +349,7 @@
     <string name="choose_language_for_keyboard">Elige un idioma</string>
     <string name="hebrew">Hebreo</string>
     <string name="english">Inglés</string>
+    <string name="russian">Ruso</string>
 
     <string name="search">Buscar</string>
     <string name="next">Siguiente</string>

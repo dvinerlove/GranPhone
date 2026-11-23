@@ -42,7 +42,7 @@ public class YoutubeActivity extends BaldActivity {
     public static final String EXTRA_ID = "EXTRA_ID";
     private static final float VERTICAL_BIAS_AFTER = 0.8f;
     private static final float VERTICAL_BIAS_BEFORE = 1f;
-    private final static long ANIMATION_DURATION = Const.MILLISECOND * 800;
+    private final static long ANIMATION_DURATION = Const.MILLISECOND * 300;
 
     private Space bottom;
     private String url;

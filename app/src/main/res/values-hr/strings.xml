@@ -26,7 +26,7 @@
     <string name="accidental_touches_settings_subtext">Ova zaštita štiti od nenamjernog dodira ekrana kad je zaslon prekriven
     \nukoliko imate problema, možete isključiti ovu opciju.
     </string>
-    <string name="accidental_touches_subtext">Otkriven slučajni dodir\nodaberite OK za nastavak korištenja uređaja\nukoliko
+    <string name="accidental_touches_subtext">Otkriven slučajni dodir\nodaberite \"Razumijem\" za nastavak korištenja uređaja\nukoliko
     se ova poruka nastavlja prikazivati možete ju isključiti u postavkama pristupačnosti.
     </string>
     <string name="acknowledgments">Zahvalnice</string>
@@ -193,6 +193,7 @@
     <string name="pill_added">Pilula dodana!</string>
     <string name="pill_name">Ime Pilule</string>
     <string name="pills">Pilule</string>
+    <string name="pill">Pilula</string>
     <string name="press_longer">Klikni Duže!</string>
     <string name="timer">Kronometar</string>
     <string name="read_call_log">Čitaj Popis Poziva</string>
@@ -275,8 +276,11 @@
     <string name="yesterday">Jučer</string>
     <string name="nothing">Ništa</string>
     <string name="no_contacts_found">Nije pronađen nijedan kontakt!</string>
-    <string name="no_alarms">Nema Alarma\nDodajte klikom na\n\"Dodaj Alarm\"\nIli\n\"Dodaj Mjerač Vremena\"</string>
-    <string name="no_pills">Nema Pilula\nDodajte klikom na\n\"Dodaj Pilulu\"</string>
+    <string name="no_alarms">Nema alarma.
+Pritisnite \"Alarm\" ili
+\"Kronometar\" ispod.</string>
+    <string name="no_pills">Nema pilula.
+Pritisnite \"+ Pilula\" ispod.</string>
     <string name="clear_all_notifications">Ukloni Sve Obavijesti</string>
     <string name="clear_cache_subtext">Jeste li sigurni da želiste izbrisati podatke predmemorije? Brisanjem privremenih datoteka može popraviti greške aplikacije GranPhone, no briše i sve prečace stvorene na Početnom Zaslonu.</string>
     <string name="permissions_calm">Bok, GranPhone mora imati slijedeće dozvole za pokretanje. Poneke mogu zvučati strašno no to je jedini način da GranPhone zamijeni trenutno sučelje uređaja. Nikakvi podaci se ne sakupljaju na taj način niti se šteti Vama ili uređaju. Kliknite OK za odobravanje dozvola ili Ne za izlazak iz aplikacije GranPhone.
@@ -334,6 +338,8 @@
     <string name="choose_language_for_keyboard">Odaberi Jezik</string>
     <string name="hebrew">Hebrejski</string>
     <string name="english">Engleski</string>
+    <string name="russian">Ruski</string>
+    <string name="understood">Razumijem</string>
 
     <string name="search">Pretraživanje</string>
     <string name="next">Dalje</string>

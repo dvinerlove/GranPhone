@@ -25,7 +25,7 @@
     <string name="accidental_touches">Istenmeden Dokunma Ayarı</string>
     <string name="accidental_touches_settings_subtext">But ayar telefonunuz örtülü olduğu zaman, dokunuşlari algılamıyor. Sorun yaşıyorsanız, bu ayarı kapatın.
     </string>
-    <string name="accidental_touches_subtext">Istenmeden Dokunma algılandı. Telefonu kullanmak için tamama basınız. Bu mesaj devamıyla gelirse, \"erişilebilirlik ayarları\" altında kapatabilirsiniz.
+    <string name="accidental_touches_subtext">Istenmeden Dokunma algılandı. Telefonu kullanmak için \"Anladım\" düğmesine basınız. Bu mesaj devamıyla gelirse, \"erişilebilirlik ayarları\" altında kapatabilirsiniz.
     </string>
     <string name="acknowledgments">Uyarılar</string>
     <string name="adaptive">Adaptiv</string>
@@ -192,6 +192,7 @@
     <string name="pill_added">İlaç eklendi!</string>
     <string name="pill_name">İlaç ismi</string>
     <string name="pills">İlaçlar</string>
+    <string name="pill">İlaç</string>
     <string name="press_longer">Daha uzun basınız!</string>
     <string name="timer">Zaman ölçer</string>
     <string name="read_call_log">Arama geçmişi</string>
@@ -273,8 +274,11 @@
     <string name="yesterday">Dün</string>
     <string name="nothing">Hiçbir şey</string>
     <string name="no_contacts_found">Hiçbir kişi bulunamadı!</string>
-    <string name="no_alarms">Alarmınız yok\nŞuraya basarak birini yaratın\n\"Alarm yarat\"\nve ya\n\"Zaman ölçer ekle\"</string>
-    <string name="no_pills">Listede hiç bir ilacınız yok \nŞuraya basarak birini yaratın\n\"İlaç ekle\"</string>
+    <string name="no_alarms">Alarmınız yok.
+Aşağıdaki \"Alarm\" veya
+\"Zaman ölçer\"e basın.</string>
+    <string name="no_pills">Hiç ilacınız yok.
+Aşağıdaki \"+ İlaç\"a basın.</string>
     <string name="clear_all_notifications">Tüm bildirimleri temizle</string>
     <string name="clear_cache_subtext">Önbelleyi temizlemek istediğinize emin misiniz?\nUygulama kısayolları kaldırılacak!</string>
     <string name="permissions_calm">Merhaba, GranPhone\'un düzgün çalışması için aşağıdakı izinleri vermelisiniz. Bazı izinler korkunç seslene bilir, ama GranPhone\'un telefonunuzun arayüzünün yerini almasının başka bir yolu yok. Bu işlem tamamen zararsızdır ve hiç bir bilginiz ele geçirilmeyecek. Tamama basarak şu izinleri veriniz.</string>
@@ -330,6 +334,8 @@
     <string name="choose_language_for_keyboard">Dil seçiniz</string>
     <string name="hebrew">İbranice</string>
     <string name="english">İngilizce</string>
+    <string name="russian">Rusça</string>
+    <string name="understood">Anladım</string>
 
     <string name="search">Arama</string>
     <string name="next">Sonraki</string>

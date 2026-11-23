@@ -25,7 +25,7 @@
     <string name="accidental_touches_settings_subtext">Pencegah menjaga telepon Anda dari sentuhan tidak disengaja ketika telepon ditutup.
         \nJika Anda keberatan dengan hal ini, Anda dapat menonaktifkannya.
     </string>
-    <string name="accidental_touches_subtext">Sentuhan tidak disengaja terdeteksi\ntekan OK untuk terus menggunakan telepon\nJika
+    <string name="accidental_touches_subtext">Sentuhan tidak disengaja terdeteksi\ntekan \"Mengerti\" untuk terus menggunakan telepon\nJika
         pesan ini terus muncul Anda dapat menonaktifkannya di pengaturan aksesibilitas
     </string>
     <string name="acknowledgments">Ucapan Terima Kasih</string>
@@ -194,6 +194,7 @@
     <string name="pill_added">Pil ditambahkan!</string>
     <string name="pill_name">Nama Pil</string>
     <string name="pills">Pil-pil</string>
+    <string name="pill">Pil</string>
     <string name="press_longer">Tekan Lebih Lama!</string>
     <string name="timer">Pewaktu</string>
     <string name="read_call_log">Baca Riwayat Panggilan</string>
@@ -281,8 +282,11 @@
     <string name="yesterday">Kemarin</string>
     <string name="nothing">Tidak Ada</string>
     <string name="no_contacts_found">Kontak Tidak Ditemukan!</string>
-    <string name="no_alarms">Tidak Ada Alarm\nBuat dengan mengklik\n\"Tambah Alarm\"\nAtau\n\"Tambah Pewaktu\"</string>
-    <string name="no_pills">Tidak Ada Pil\nBuat dengan cara mengklik\n\"Tambah Pil\"</string>
+    <string name="no_alarms">Tidak ada alarm.
+Tekan \"Alarm\" atau
+\"Pewaktu\" di bawah.</string>
+    <string name="no_pills">Tidak ada pil.
+Tekan \"+ Pil\" di bawah.</string>
     <string name="clear_all_notifications">Kosongkan Semua Pemberitahuan</string>
     <string name="clear_cache_subtext">Anda yakin ingin menghapus cache?\nAplikasi pintasan juga akan dihapus!
     </string>
@@ -348,6 +352,8 @@
     <string name="choose_language_for_keyboard">Pilih Bahasa</string>
     <string name="hebrew">Ibrani</string>
     <string name="english">Inggris</string>
+    <string name="russian">Rusia</string>
+    <string name="understood">Mengerti</string>
 
     <string name="search">Cari</string>
     <string name="next">Berikutnya</string>

@@ -24,7 +24,7 @@
     <string name="accidental_touches">შემთხვევითი შეხების გუშაგი</string>
     <string name="accidental_touches_settings_subtext">შემთხვევითი შეხების გუშაგი ახდენს ბლოკირებას,როდესაც ტელეფონი დაფარულია.\nთუ თქვენ მასთან პრობლემა შეგექმნათ შეგიძლიათ გათიშოთ.
     </string>
-    <string name="accidental_touches_subtext">აღმოჩენილია შემთხვევითი შეხება.\დააჭირეთ დიახ-ს ტელეფონის გამოყენების გასაგრძელებლად.\nთუ ეს შეტყობინება გამოდის ხშირად, თქვენ შეგიძლიათ გათიშოთ სპეციალური შესაძლებლობებიდან(accessibility settings).
+    <string name="accidental_touches_subtext">აღმოჩენილია შემთხვევითი შეხება.\nდააჭირეთ \"გავიგე\"-ს ტელეფონის გამოყენების გასაგრძელებლად.\nთუ ეს შეტყობინება გამოდის ხშირად, თქვენ შეგიძლიათ გათიშოთ სპეციალური შესაძლებლობებიდან(accessibility settings).
     </string>
     <string name="acknowledgments">მადლიერებები</string>
     <string name="adaptive">ადაპტიური</string>
@@ -191,6 +191,7 @@
     <string name="pill_added">აბი დამატებულია!</string>
     <string name="pill_name">აბის სახელი</string>
     <string name="pills">აბები</string>
+    <string name="pill">აბი</string>
     <string name="press_longer">დიდხანს დააჭირეთ!</string>
     <string name="timer">ტაიმერი</string>
     <string name="read_call_log">ზარების ისტორიის წაკითხვა</string>
@@ -274,8 +275,11 @@
     <string name="yesterday">გუშინ</string>
     <string name="nothing">არაფერი</string>
     <string name="no_contacts_found">კონტაქტები ნაპოვნი არაა!</string>
-    <string name="no_alarms">მაღვიძარები არაა.\შექმენით დაჭერით \n\"მაღვიძარას დამატება\"\nან\n\"ტაიმერის დამატება\"</string>
-    <string name="no_pills">აბები არაა\nშექმენით დაჭერით\n\"აბის დამატება\"</string>
+    <string name="no_alarms">მაღვიძარები არაა.
+დააჭირეთ \"მაღვიძარა\" ან
+\"ტაიმერი\" ქვემოთ.</string>
+    <string name="no_pills">აბები არაა.
+დააჭირეთ \"+ აბი\" ქვემოთ.</string>
     <string name="clear_all_notifications">ყველა გაფრთხილების წაშლა</string>
     <string name="clear_cache_subtext">დარწმუნებული ხართ რომ გსურთ წაშალოთ ქეშის კონტენტი? დროებითი ფაილების წაშლამ შესაძლოა გამოასწოროს ზოგიერთი შეცდომა,მაგრამ მთავარ ეკრანზე შექმნილი მალსახმობები წაიშლება.</string>
     <string name="permissions_calm">სალამი,GranPhone-ს სჭირდება შემდეგი ნებართვები გასაშვებად. ზოგიერთი საშიშად მოგეჩვენებათ,მაგრამ ეს ერთადერთი გზაა ტელეფონის ინტერფეისის შესაცვლელად.თქვენი მონაცემები არ იქნება მოპარული და არ მოგადგებათ ზიანი. დააჭირეთ OK ნებართვის მისაცემად ან უარს(no) რომ გამოხვიდეთ GranPhone-დან.
@@ -334,6 +338,8 @@
 
     <string name="choose_language_for_keyboard">ენის არჩევა</string>
     <string name="hebrew">ებრაული</string>
+    <string name="russian">რუსული</string>
+    <string name="understood">გავიგე</string>
     <string name="go">მიდი</string>
 
 

@@ -26,7 +26,7 @@
     <string name="accidental_touches_settings_subtext">Această protecție blochează atingerile atunci când telefonul este acoperit\n
       Poate fi dezactivată dacă întâmpinați dificultăți.
     </string>
-    <string name="accidental_touches_subtext">O atingere accidentală a fost detectată\nApăsați OK pentru a continua\nDacă acest mesaj apare în continuare îl puteți dezactiva în setările de accesibilitate.
+    <string name="accidental_touches_subtext">O atingere accidentală a fost detectată\nApăsați \"Am înțeles\" pentru a continua\nDacă acest mesaj apare în continuare îl puteți dezactiva în setările de accesibilitate.
     </string>
     <string name="acknowledgments">Recunoașteri</string>
     <string name="adaptive">Adaptiv</string>
@@ -192,6 +192,7 @@
     <string name="pill_added">Medicament adăugat!</string>
     <string name="pill_name">Nume medicament</string>
     <string name="pills">Medicamente</string>
+    <string name="pill">Medicament</string>
     <string name="press_longer">Ține apăsat!</string>
     <string name="timer">Temporizator</string>
     <string name="read_call_log">Citește istoric apeluriy</string>
@@ -278,8 +279,11 @@
     <string name="yesterday">Ieri</string>
     <string name="nothing">Nimic</string>
     <string name="no_contacts_found">Nici un conctact nu a fost găsit!</string>
-    <string name="no_alarms">Nici o alarmă\nCreați una apasând pe\n\"Adaugă alarmă\"\nsau\n\"Adaugă temporizator\"</string>
-    <string name="no_pills">Nici un medicament\nAdaugă unul apasând pe\n\"Adaugă medicament\"</string>
+    <string name="no_alarms">Nicio alarmă.
+Apăsați \"Alarmă\" sau
+\"Temporizator\" mai jos.</string>
+    <string name="no_pills">Niciun medicament.
+Apăsați \"+ Medicament\" mai jos.</string>
     <string name="clear_all_notifications">Stergeți toate notificările</string>
     <string name="clear_cache_subtext">Sunteți sigur că vreți să stergeți datele cache?\nScurtăturilor vor fi de asemenea șterse!
     </string>
@@ -340,6 +344,8 @@
     <string name="choose_language_for_keyboard">Alegeți limba</string>
     <string name="hebrew">Hebrew</string>
     <string name="english">English</string>
+    <string name="russian">Rusă</string>
+    <string name="understood">Am înțeles</string>
 
     <string name="search">Căutați</string>
     <string name="next">Urmatorul</string>

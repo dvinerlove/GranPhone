@@ -121,6 +121,7 @@
     <string name="pill_added">تم إضافة دواء!</string>
     <string name="pill_name">إسم الدواء</string>
     <string name="pills">الأدوية</string>
+    <string name="pill">دواء</string>
     <string name="press_longer">إضغط مدة أطول</string>
     <string name="timer">مؤقت</string>
     <string name="received">مستلمة</string>
@@ -166,4 +167,6 @@
     <string name="choose_sim_subtext">أختر الخط الذي تريد الأتصال منه</string>
     <bool name="is_right_to_left">true</bool>
 
+    <string name="russian">الروسية</string>
+    <string name="understood">فهمت</string>
 </resources>

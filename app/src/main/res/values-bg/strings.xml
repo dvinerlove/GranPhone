@@ -26,7 +26,7 @@
     <string name="accidental_touches_settings_subtext">Защитата предпазва телефонът ви от реакция на случаен допир, когато
         екранът е покрит\nпри проблем можете да я изключите
     </string>
-    <string name="accidental_touches_subtext">Беше отбелязан случаен допир\nнатиснете OK за да продължите да ползвате телефона\nако
+    <string name="accidental_touches_subtext">Беше отбелязан случаен допир\nнатиснете \"Разбрано\" за да продължите да ползвате телефона\nако
          съобщението продължава да се появява, можете да го изключите в настройките за достъпност
     </string>
     <string name="acknowledgments">Благодарности</string>
@@ -198,6 +198,7 @@
     <string name="pill_added">Добавено е лекарство!</string>
     <string name="pill_name">Име на лекарството</string>
     <string name="pills">Лекарства</string>
+    <string name="pill">Лекарство</string>
     <string name="press_longer">Натиснете по-продължително!</string>
     <string name="timer">Таймер</string>
     <string name="read_call_log">Прочетете История на обажданията</string>
@@ -285,8 +286,11 @@
     <string name="yesterday">Вчера</string>
     <string name="nothing">Нищо</string>
     <string name="no_contacts_found">Не е намерен контакт!</string>
-    <string name="no_alarms">Няма аларми\nСъздайте нова като натиснете\n\"Добавяне на аларма\"\nили\n\"Добавяне на таймер\"</string>
-    <string name="no_pills">Няма лекрства\nСъздайте ново като натиснете\n\"Добавяне на лекарство\"</string>
+    <string name="no_alarms">Няма аларми.
+Натиснете \"Аларма\" или
+\"Таймер\" по-долу.</string>
+    <string name="no_pills">Няма лекарства.
+Натиснете \"+ Лекарство\" по-долу.</string>
     <string name="clear_all_notifications">Изтриване на всички известия</string>
     <string name="clear_cache_subtext">Сигурни ли сте, че желаете да изтриете съдържанието на кеш паметта? Изтриването на временните файлове може да разреши някои функционални проблеми на GranPhone, но също така ще изтрие от началния екран създадените преки пътища.</string>
     <string name="permissions_calm">Здравейте, за да работи GranPhone трябва да има следните разрешения. Някои
@@ -351,6 +355,8 @@
     <string name="choose_language_for_keyboard">Избор на език</string>
     <string name="hebrew">Иврит</string>
     <string name="english">Английски</string>
+    <string name="russian">Руски</string>
+    <string name="understood">Разбрано</string>
 
     <string name="search">Търсене</string>
     <string name="next">Следващ</string>

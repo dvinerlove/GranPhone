@@ -25,7 +25,7 @@
     <string name="accidental_touches">Protecção de Toques Acidenteis</string>
     <string name="accidental_touches_settings_subtext">Esta protecção impede toques acidentais quando o seu telefone está tapado.\nCaso esta funcionalidade esteja a dar problemas, pode optar por desligá-la.
     </string>
-    <string name="accidental_touches_subtext">Toque acidental detectado.\ncarregue em OK para continuar a utilizar o telefone\ncaso
+    <string name="accidental_touches_subtext">Toque acidental detectado.\ncarregue em \"Entendido\" para continuar a utilizar o telefone\ncaso
         esta mensagem continue a aparecer pode desligá-la nas definições de acessibilidade.
     </string>
     <string name="acknowledgments">Agradecimentos</string>
@@ -189,6 +189,7 @@
     <string name="pill_added">Medicação Adicionada!</string>
     <string name="pill_name">Nome da Medicação</string>
     <string name="pills">Medicação</string>
+    <string name="pill">Medicamento</string>
     <string name="press_longer">Pressione durante mais tempo!</string>
     <string name="timer">Temporizador</string>
     <string name="read_call_log">Ver histórico de chamadas</string>
@@ -270,8 +271,11 @@
     <string name="yesterday">Ontem</string>
     <string name="nothing">Nada</string>
     <string name="no_contacts_found">Não existem Contactos!</string>
-    <string name="no_alarms">Não existem Alarmes\nCrie um novo carregando em \n\"Criar Alarme\"\nOu\n\"Adicionar Temporizador\"</string>
-    <string name="no_pills">Sem Medicação\nAdicione Medicação carregando em\n\"Adicionar Medicação\"</string>
+    <string name="no_alarms">Não existem alarmes.
+Toque em \"Alarme\" ou
+\"Temporizador\" abaixo.</string>
+    <string name="no_pills">Sem medicação.
+Toque em \"+ Medicamento\" abaixo.</string>
     <string name="clear_all_notifications">Limpar Todas as Notificações</string>
     <string name="clear_cache_subtext">Tem a certeza que pretende apagar a cashe?\nAplicações e Atalhos serão removidos também!
     </string>
@@ -328,6 +332,8 @@
     <string name="choose_language_for_keyboard">Escolher Idioma</string>
     <string name="hebrew">Hebrew</string>
     <string name="english">English</string>
+    <string name="russian">Russo</string>
+    <string name="understood">Entendido</string>
 
     <string name="search">Procurar</string>
     <string name="next">Próximo</string>

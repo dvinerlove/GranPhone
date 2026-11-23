@@ -28,7 +28,7 @@
 	telèfon està cobert\nSi té problemes amb ell, pot desactivar-lo
 </string>
     <string name="accidental_touches_subtext">Toc accidental detectat\n
-	Premi OK per a continuar usant el telèfon\n
+	Premi \"Entès\" per a continuar usant el telèfon\n
 	Si aquest missatge continua apareixent pot desactivar-lo en les opcions d\'accessibilitat
 </string>
     <string name="acknowledgments">Agraïments</string>
@@ -202,6 +202,7 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="pill_added">Pastilla afegida!</string>
     <string name="pill_name">Nom Pastilla</string>
     <string name="pills">Pastilles</string>
+    <string name="pill">Pastilla</string>
     <string name="press_longer">Pressioni més temps!</string>
     <string name="timer">Temporitzador</string>
     <string name="read_call_log">Llegir historial de Trucades</string>
@@ -293,8 +294,11 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="yesterday">Ahir</string>
     <string name="nothing">Res</string>
     <string name="no_contacts_found">No s\'han trobat contactes!</string>
-    <string name="no_alarms">Sense Alarmes\nCrea una prement\n\"Afegir Alarma\"\no\n\"Afegir Temporitzador\"</string>
-    <string name="no_pills">Sense Pastilles\nCrea una prement\n\"Afegir Pastilla\"</string>
+    <string name="no_alarms">Sense alarmes.
+Premeu \"Alarma\" o
+\"Temporitzador\" a sota.</string>
+    <string name="no_pills">Sense pastilles.
+Premeu \"+ Pastilla\" a sota.</string>
     <string name="clear_all_notifications">Treure totes les Notificacions</string>
     <string name="clear_cache_subtext">De veritat voleu esborrar per complet la caché?\nEls enllaços directes també s\'esborraran!
 </string>
@@ -368,6 +372,8 @@ Premi OK per a descarregar-la.
     <string name="choose_language_for_keyboard">Trieu un Idioma</string>
     <string name="hebrew">Hebreu</string>
     <string name="english">Anglès</string>
+    <string name="russian">Rus</string>
+    <string name="understood">Entès</string>
 
     <string name="search">Buscar</string>
     <string name="next">Següent</string>

@@ -21,7 +21,7 @@
     <string name="accidental_touches_settings_subtext">The guard blocks your phone from touch input when the phone is
         covered\nif you have problems with it you can turn it off
     </string>
-    <string name="accidental_touches_subtext">Accidental touch was detected\npress OK to continue using the phone\nif
+    <string name="accidental_touches_subtext">Accidental touch was detected\npress \"Understood\" to continue using the phone\nif
         this message keeps appearing you can disable it in the accessibility settings
     </string>
     <string name="acknowledgments">Acknowledgments</string>

@@ -26,7 +26,7 @@
     <string name="accidental_touches_settings_subtext">Zaščita prepreči telefonu vnos preko dotika, ko je telefon pokrit.
         \nČe imate s tem težave, lahko zaščito izklopite.
     </string>
-    <string name="accidental_touches_subtext">Nenamerni dotik je bil zaznan\nPritisni Ok da nadaljuješ z uporabo telefona\nČe
+    <string name="accidental_touches_subtext">Nenamerni dotik je bil zaznan\nPritisni \"Razumem\" da nadaljuješ z uporabo telefona\nČe
         se to sporočilo pojavlja znova, ga lahko izključite v nastavitvah dostopnosti.
     </string>
     <string name="acknowledgments">Priznanja</string>
@@ -193,6 +193,7 @@
     <string name="pill_added">Zdravilo dodano!</string>
     <string name="pill_name">Ime zdravila</string>
     <string name="pills">Zdravila</string>
+    <string name="pill">Zdravilo</string>
     <string name="press_longer">Drži pritisk dlje časa!</string>
     <string name="timer">Štoparica</string>
     <string name="read_call_log">Preberi dnevnik klicev</string>
@@ -278,8 +279,11 @@
     <string name="yesterday">Včeraj</string>
     <string name="nothing">Nič</string>
     <string name="no_contacts_found">Stiki niso bili najdeni!</string>
-    <string name="no_alarms">Ni budilk.\nUstvari jih tako, da klikneš\n\'Dodaj budilko\'\nali\n\'Dodaj štoparico\'</string>
-    <string name="no_pills">Ni zdravil.\nDodaj novo s tem, da klikneš\n\'Dodaj zdravilo\'</string>
+    <string name="no_alarms">Ni budilk.
+Kliknite \"Budilka\" ali
+\"Štoparica\" spodaj.</string>
+    <string name="no_pills">Ni zdravil.
+Kliknite \"+ Zdravilo\" spodaj.</string>
     <string name="clear_all_notifications">Počisti vsa obvestila</string>
     <string name="clear_cache_subtext">Ali ste prepričani, da želite počistiti celoten predpomnilnik?\nOdstranjene bodo tudi bližnjice aplikacij!</string>
     <string name="permissions_calm">Pozdravljeni, GranPhone potrebuje sledeča dovoljenja da lahko deluje pravilno. Nekatera izmed teh zvenijo
@@ -343,6 +347,8 @@
     <string name="choose_language_for_keyboard">Izberi jezik</string>
     <string name="hebrew">Hebrew</string>
     <string name="english">English</string>
+    <string name="russian">Ruščina</string>
+    <string name="understood">Razumem</string>
 
     <string name="search">Išči</string>
     <string name="next">Naslednje</string>

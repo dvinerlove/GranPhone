@@ -29,7 +29,7 @@
     <string name="accidental_touches_settings_subtext">חוסם הלחיצות המקריות חוסם מגע בטלפון כאשר המסך מכוסה\nאם אתה חווה
         בעיות עם חוסם זה ניתן לבטל אותו
     </string>
-    <string name="accidental_touches_subtext">לחיצה מקרית זוהתה\nלחץ על אישור על מנת להמשיך להשתמש בטלפון\nאם הודעה זו
+    <string name="accidental_touches_subtext">לחיצה מקרית זוהתה\nלחץ על \"הבנתי\" על מנת להמשיך להשתמש בטלפון\nאם הודעה זו
         חוזרת על עצמה יותר מדי ניתן לבטל את החסימה בהגדרות הנגישות
     </string>
     <string name="acknowledgments">תודות</string>
@@ -203,6 +203,7 @@
     <string name="pill_added">תרופה הוספה!</string>
     <string name="pill_name">שם תרופה</string>
     <string name="pills">תרופות</string>
+    <string name="pill">תרופה</string>
     <string name="press_longer">לחיצה ארוכה</string>
     <string name="timer">טיימר</string>
     <string name="read_call_log">גישה לשיחות האחרונות</string>
@@ -293,8 +294,11 @@
     <string name="yesterday">אתמול</string>
     <string name="nothing">לא נמצא כלום</string>
     <string name="no_contacts_found">איש קשר לא נמצא!</string>
-    <string name="no_alarms">אין שעונים\nהוסף אחד על ידי לחיצה על\n\"הוסף שעון מעורר\"\nאו\n\"הוסף טיימר\"</string>
-    <string name="no_pills">אין תרופות\nהוסף אחת על ידי לחיצה על\n\"הוסף תרופה\"</string>
+    <string name="no_alarms">אין שעונים מעוררים.
+לחץ על \"שעון מעורר\"
+או \"טיימר\" למטה.</string>
+    <string name="no_pills">אין תרופות.
+לחץ על \"+ תרופה\" למטה.</string>
     <string name="clear_all_notifications">ניקוי כל ההתראות</string>
     <string name="clear_cache_subtext">האם אתה בטוח שאתה רוצה למחוק את כל המטמון?\nיישומים מוצמדים יפסיקו להיות
         מוצמדים
@@ -361,6 +365,7 @@
     <string name="choose_language_for_keyboard">בחר שפת מקלדת</string>
     <string name="hebrew">עברית</string>
     <string name="english">אנגלית</string>
+    <string name="russian">רוסית</string>
 
     <string name="search">חפש</string>
     <string name="next">עבור הלאה</string>

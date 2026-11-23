@@ -23,7 +23,7 @@ het kan gebruiken.\n U bent meer dan welkom om contact met mij op te nemen via e
     <string name="accessibility_settings">Toegankelijkheid</string>
     <string name="accidental_touches">Onbedoelde aanrakingsbeveiliging</string>
     <string name="accidental_touches_settings_subtext">De beveiliging blokkeert je telefoon tegen onbedoelde acties wanneer de telefoon bedekt is. Indien het problemen veroorzaakt kan het uitgeschakeld worden.</string>
-    <string name="accidental_touches_subtext">Onbedoelde invoer was gedetecteerd \nDruk op OK om de telefoon te blijven gebruiken \nals
+    <string name="accidental_touches_subtext">Onbedoelde invoer was gedetecteerd \nDruk op \"Begrepen\" om de telefoon te blijven gebruiken \nals
 dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankelijkheidsinstellingen</string>
     <string name="acknowledgments">Erkenningen</string>
     <string name="adaptive">Adaptief</string>
@@ -185,6 +185,7 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="pill_added">Medicatie toegevoegd!</string>
     <string name="pill_name">Naam medicatie</string>
     <string name="pills">Medicatie</string>
+    <string name="pill">Pil</string>
     <string name="press_longer">Druk langer!</string>
     <string name="timer">Timer</string>
     <string name="read_call_log">Inzien van de oproepgeschiedenis</string>
@@ -267,8 +268,11 @@ Deel het met hen!\"</string>
     <string name="yesterday">Gisteren</string>
     <string name="nothing">Niets</string>
     <string name="no_contacts_found">Geen contacten gevonden!</string>
-    <string name="no_alarms">Geen alarmen\nMaak er een door op\n\"Alarm toevoegen\"\nof\n\\"Timer toevoegen\" te klikken</string>
-    <string name="no_pills">Geen medicatie ingesteld\nMaak er een door op\n\"Medicatie toevoegen\" te klikken</string>
+    <string name="no_alarms">Geen alarmen.
+Tik op \"Alarm\" of
+\"Timer\" hieronder.</string>
+    <string name="no_pills">Geen medicatie ingesteld.
+Tik op \"+ Pil\" hieronder.</string>
     <string name="clear_all_notifications">Wis alle notificaties</string>
     <string name="clear_cache_subtext">Weet u zeker dat u de cache-inhoud wilt verwijderen? Het verwijderen van tijdelijke bestanden kan enkele storingen in de GranPhone-app oplossen, maar ook snelkoppelingen die in het startscherm zijn gemaakt zullen worden verwijderd.</string>
     <string name="permissions_calm">Hallo, GranPhone moet de volgende bevoegdheden hebben om goed te kunnen werken. Sommigen van hen
@@ -327,6 +331,8 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
     <string name="choose_language_for_keyboard">Kies Taal</string>
     <string name="hebrew">Hebreeuws</string>
     <string name="english">Engels</string>
+    <string name="russian">Russisch</string>
+    <string name="understood">Begrepen</string>
 
     <string name="search">Zoeken</string>
     <string name="next">Volgende</string>

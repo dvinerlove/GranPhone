@@ -21,7 +21,7 @@
     <string name="accessibility_settings">Pristupačnost</string>
     <string name="accidental_touches">Zaštita od slučajnog dodira</string>
     <string name="accidental_touches_settings_subtext">Ova opcija štiti vaš telefon od slučajnog dodira kada je telefon prekriven\nUkoliko imate probleme sa njom, možete da je isključite</string>
-    <string name="accidental_touches_subtext">Detektovan je slučajan dodir\npritisnite OK da biste nastavili sa korišćenjem telefona\nukoliko vam ova poruka smeta, možete je isključiti u podešavanjima pristupačnosti.</string>
+    <string name="accidental_touches_subtext">Detektovan je slučajan dodir\npritisnite \"Razumem\" da biste nastavili sa korišćenjem telefona\nukoliko vam ova poruka smeta, možete je isključiti u podešavanjima pristupačnosti.</string>
     <string name="acknowledgments">Zahvalnice</string>
     <string name="adaptive">Prilagodljiv</string>
     <string name="add_alarm">Kreiraj alarm</string>
@@ -182,6 +182,7 @@
     <string name="pill_added">Dodat lek!</string>
     <string name="pill_name">Ime leka</string>
     <string name="pills">Lekovi</string>
+    <string name="pill">Lek</string>
     <string name="press_longer">Pritisnite duže!</string>
     <string name="timer">Tajmer</string>
     <string name="read_call_log">Otvori istoriju poziva</string>
@@ -262,8 +263,11 @@
     <string name="yesterday">Juče</string>
     <string name="nothing">Ništa</string>
     <string name="no_contacts_found">Nije pronadjen nijedan kontakt!</string>
-    <string name="no_alarms">Nemate Alarme\nKreirajte jedan pritiskom na\n\"Dodaj alarm\"\nIli\n\"Dodaj Tajmer\"</string>
-    <string name="no_pills">Nema lekova\nDodajte lek pritiskom dugmeta\n\"Dodaj lek\"</string>
+    <string name="no_alarms">Nemate alarme.
+Pritisnite \"Alarm\" ili
+\"Tajmer\" ispod.</string>
+    <string name="no_pills">Nema lekova.
+Pritisnite \"+ Lek\" ispod.</string>
     <string name="clear_all_notifications">Obriši sva obeveštenja</string>
     <string name="clear_cache_subtext">Da li ste sigurni da želite da obrišete keširan sadržaj? Brisanje privremenih datoteka može rešiti neke kvarove BoldPhone aplikacije, ali će takodje biti uklonjene i prečice kreirane na početnom ekranu.</string>
     <string name="permissions_calm">Zdravo, GranPhone mora imate sledeće dozvole kako bi radio. Neke od izgledaju zastrašujuće ali su neophodne kako bi GranPhone zamenio interfejs telefona. Vaši podaci su bezbedni i ostaju privatni. Pritisnite OK da biste odobrili dozvole ili ne za izlazak iz GranPhone-a.</string>
@@ -319,6 +323,8 @@
     <string name="choose_language_for_keyboard">Izaberite jezik</string>
     <string name="hebrew">Hebrejski</string>
     <string name="english">Engleski</string>
+    <string name="russian">Ruski</string>
+    <string name="understood">Razumem</string>
 
     <string name="search">Pretraga</string>
     <string name="next">Dalje</string>

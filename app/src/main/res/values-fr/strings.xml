@@ -24,7 +24,7 @@
     <string name="accidental_touches">Blocage appuis accidentels</string>
     <string name="accidental_touches_settings_subtext">Activer une protection pour bloquer les appuis accidentels quand le téléphone est couvert par un étui.\nDésactivez si vous recontrez des problèmes.
     </string>
-    <string name="accidental_touches_subtext">Un appui accidentel a été détecté.\nAppuyez sur OK pour continuer à utiliser le téléphone.\nSi ce message apparaît à nouveau, vous pouvez désactiver la fonctionnalité dans les paramètres d\'accessibilité.
+    <string name="accidental_touches_subtext">Un appui accidentel a été détecté.\nAppuyez sur \"Compris\" pour continuer à utiliser le téléphone.\nSi ce message apparaît à nouveau, vous pouvez désactiver la fonctionnalité dans les paramètres d\'accessibilité.
     </string>
     <string name="acknowledgments">Remerciements</string>
     <string name="adaptive">Adaptatif</string>
@@ -191,6 +191,7 @@
     <string name="pill_added">Médicament ajouté !</string>
     <string name="pill_name">Nom du médicament</string>
     <string name="pills">Médicaments</string>
+    <string name="pill">Médicament</string>
     <string name="press_longer">Appuyez plus longtemps !</string>
     <string name="timer">Minuteur</string>
     <string name="read_call_log">Lire l\'historique des appels</string>
@@ -274,8 +275,11 @@
     <string name="yesterday">Hier</string>
     <string name="nothing">Rien</string>
     <string name="no_contacts_found">Aucun contact trouvé !</string>
-    <string name="no_alarms">Aucune alarme\nCréez-en une en appuyant sur\n\"Ajouter une alarme"\"\nOu\n\"Ajouter un minuteur\"</string>
-    <string name="no_pills">Aucun médicament\nCréez-en un en appuyant sur\n\"Ajouter un médicament\"</string>
+    <string name="no_alarms">Aucune alarme.
+Appuyez sur \"Alarme\" ou
+\"Minuteur\" en bas.</string>
+    <string name="no_pills">Aucun médicament.
+Appuyez sur \"+ Médicament\" en bas.</string>
     <string name="clear_all_notifications">Effacer toutes les notifications</string>
     <string name="clear_cache_subtext">Êtes-vous sûr(e) de vouloir effacer tout le cache ?\nLes raccourcis d\'applications seront aussi supprimés !
     </string>
@@ -336,6 +340,8 @@
     <string name="choose_language_for_keyboard">Choisissez la langue</string>
     <string name="hebrew">Hébreux</string>
     <string name="english">Anglais</string>
+    <string name="russian">Russe</string>
+    <string name="understood">Compris</string>
 
     <string name="search">Chercher</string>
     <string name="next">Prochaine</string>

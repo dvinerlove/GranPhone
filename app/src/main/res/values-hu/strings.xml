@@ -22,7 +22,7 @@ A nevem Uriah Shaul Mandel, és én fejlesztettem ezt a felületet amit használ
     <string name="accessibility_settings">Akadálymentes kezelés</string>
     <string name="accidental_touches">Véletlen érintés elleni védelem</string>
     <string name="accidental_touches_settings_subtext">Blokkolja a véletlen érintéseket olyan esetekben, ha a telefon le van takarva. Hasznos, ha zsebben tartva a telefon bekapcsol.</string>
-    <string name="accidental_touches_subtext">Véletlen érintés érzékelve.\nNyomd meg az OK gombot a folytatáshoz.\nHa ez az üzenet többször megjelenik, a beállításokban kikapcsolható a véletlen érintés elleni védelem.</string>
+    <string name="accidental_touches_subtext">Véletlen érintés érzékelve.\nNyomd meg az \"Értem\" gombot a folytatáshoz.\nHa ez az üzenet többször megjelenik, a beállításokban kikapcsolható a véletlen érintés elleni védelem.</string>
     <string name="acknowledgments">Köszönetnyilvánítás</string>
     <string name="adaptive">Adaptív</string>
     <string name="add_alarm">Ébresztő hozzáadása</string>
@@ -184,6 +184,7 @@ Megérkezett a GranPhone NAGY billentyűzete!</string>
     <string name="pill_added">Gyógyszer hozzáadva!</string>
     <string name="pill_name">Gyógyszer neve</string>
     <string name="pills">Gyógyszerek</string>
+    <string name="pill">Gyógyszer</string>
     <string name="press_longer">Hosszan nyomd!</string>
     <string name="timer">Időzítő</string>
     <string name="read_call_log">Hívási előrmények olvasása</string>
@@ -323,6 +324,8 @@ https://github.com/dvinerlove/GranPhone</string>
     <string name="choose_language_for_keyboard">Nyelv választása</string>
     <string name="hebrew">Héber</string>
     <string name="english">Angol</string>
+    <string name="russian">Orosz</string>
+    <string name="understood">Értem</string>
 
     <string name="search">Keresés</string>
     <string name="next">Következő</string>

@@ -24,7 +24,7 @@
     <string name="accidental_touches">防誤觸功能</string>
     <string name="accidental_touches_settings_subtext">此功能可以在你電話蓋上時阻止任何輸入\n如果正常使用時有問題的話，可以把這個功能關上
     </string>
-    <string name="accidental_touches_subtext">防誤觸功能已啓動\n按確定以繼續使用電話\n如果常常看到這個訊息，你可以到輔助功能設定關掉它
+    <string name="accidental_touches_subtext">防誤觸功能已啓動\n按「明白了」以繼續使用電話\n如果常常看到這個訊息，你可以到輔助功能設定關掉它
     </string>
     <string name="acknowledgments">鳴謝</string>
     <string name="adaptive">自動轉換</string>
@@ -191,6 +191,7 @@
     <string name="pill_added">藥物已添加!</string>
     <string name="pill_name">藥名</string>
     <string name="pills">藥物</string>
+    <string name="pill">藥物</string>
     <string name="press_longer">按久一點!</string>
     <string name="timer">倒數計時器</string>
     <string name="read_call_log">查看通話記錄</string>
@@ -274,8 +275,11 @@
     <string name="yesterday">昨天</string>
     <string name="nothing">無</string>
     <string name="no_contacts_found">找不到聯絡人!</string>
-    <string name="no_alarms">無任何鬧鐘\n按一下\n\"新增鬧鐘\"\n或者\n\"新增倒數計時器\"\n新增鬧鐘</string>
-    <string name="no_pills">無藥物\n按一下\n\"新增藥物\"新增記錄</string>
+    <string name="no_alarms">無任何鬧鐘。
+按一下下方「鬧鐘」
+或「倒數計時器」。</string>
+    <string name="no_pills">無藥物。
+按一下下方「+ 藥物」。</string>
     <string name="clear_all_notifications">清除所有通知</string>
     <string name="clear_cache_subtext">你肯定要清除緩存？\n所有捷徑也會移除!
     </string>
@@ -337,6 +341,7 @@
     <string name="choose_language_for_keyboard">選擇語言</string>
     <string name="hebrew">希伯來文</string>
     <string name="english">英文</string>
+    <string name="russian">俄語</string>
 
     <string name="search">搜尋</string>
     <string name="next">下頁</string>

@@ -21,7 +21,7 @@
     <string name="accessibility_settings">Erabilerraztasuna</string>
     <string name="accidental_touches">Ustekabeko utzitzen aurkako babesa</string>
     <string name="accidental_touches_settings_subtext">Babesleak telefonoaren ukipen-sarrera oztopatzen du telefonoa estalita dagoenean.\nHarekin arazorik baduzu, itzali egin dezakezu.</string>
-    <string name="accidental_touches_subtext">Nahi gabe ukitu dela nabaritu da.\nAdos sakatu telefonoa erabiltzen jarraitzeko.\nMezu hau etengabe agertzen bazaizu, erabilerraztasun ezarpenetan uka dezakezu.</string>
+    <string name="accidental_touches_subtext">Nahi gabe ukitu dela nabaritu da.\n\"Ulertuta\" sakatu telefonoa erabiltzen jarraitzeko.\nMezu hau etengabe agertzen bazaizu, erabilerraztasun ezarpenetan uka dezakezu.</string>
     <string name="acknowledgments">Eskerrak</string>
     <string name="adaptive">Moldagarria</string>
     <string name="add_alarm">Alarma gehitu</string>
@@ -177,6 +177,7 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
     <string name="pill_added">Pilula gehituta!</string>
     <string name="pill_name">Pilularen izena</string>
     <string name="pills">Pilulak</string>
+    <string name="pill">Pilula</string>
     <string name="press_longer">Luzeago sakatu!</string>
     <string name="read_call_log">Deien historia irakurri</string>
     <string name="read_call_log_subtext">Baimen hau derrigorrezkoa da deien historia ikusteko.</string>
@@ -245,4 +246,6 @@ letra-tipoaren tamaina eta distira aldatzeko.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="russian">Errusiera</string>
+    <string name="understood">Ulertuta</string>
 </resources>

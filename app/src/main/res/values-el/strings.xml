@@ -26,7 +26,7 @@
     <string name="accidental_touches_settings_subtext">Αυτή η \"ασπίδα\" μπλοκάρει τα κατά λάθος πατήματα όταν το τηλέφωνο είναι
         καλυμμένο.\nΑν έχετε κάποιο πρόβλημα μπορείτε να την απενεργοποιήσετε.
     </string>
-    <string name="accidental_touches_subtext">Εντοπίστηκε κατά λάθος πάτημα \nπατήστε Ναι για να συνεχίσετε\nαν
+    <string name="accidental_touches_subtext">Εντοπίστηκε κατά λάθος πάτημα \nπατήστε \"Κατάλαβα\" για να συνεχίσετε\nαν
         αυτό το μήνυμα συνεχίζει να εμφανίζεται μπορείτε να το κλείσετε από τις ρυθμίσεις προσβασιμότητας.
     </string>
     <string name="acknowledgments">Ευχαριστίες</string>
@@ -198,6 +198,7 @@
     <string name="pill_added">Το χάπι προστέθηκε!</string>
     <string name="pill_name">Όνομα Χαπιού</string>
     <string name="pills">Χάπια</string>
+    <string name="pill">Χάπι</string>
     <string name="press_longer">Πατήστε παρατεταμένα!</string>
     <string name="timer">Χρονόμετρο</string>
     <string name="read_call_log">Εμφάνιση Ιστορικού Κλήσεων</string>
@@ -285,8 +286,11 @@
     <string name="yesterday">Τετάρτη</string>
     <string name="nothing">Τίποτα</string>
     <string name="no_contacts_found">Δεν βρέθηκαν επαφές!</string>
-    <string name="no_alarms">Καμία Αφύπνιση\nπροσθέστε μία επιλέγοντας \n\"Νέα Αφύπνιση\"\nή\n\"Νέο Χρονόμετρο\"</string>
-    <string name="no_pills">Κανένα Χάπι\nπροσθέστε ένα επιλέγοντας\n\"Νέο Χάπι\"</string>
+    <string name="no_alarms">Καμία αφύπνιση.
+Πατήστε \"Ξυπνητήρι\" ή
+\"Χρονόμετρο\" παρακάτω.</string>
+    <string name="no_pills">Κανένα χάπι.
+Πατήστε \"+ Χάπι\" παρακάτω.</string>
     <string name="clear_all_notifications">Διαγραφή Ειδοποιήσεων</string>
     <string name="clear_cache_subtext">Είστε σίγουροι ότι θέλετε να σβήσετε την μνήμη cache?\nΠροσωρινά αρχεία και συντομεύσεις θα διαγραφούν!
     </string>
@@ -352,6 +356,8 @@
     <string name="choose_language_for_keyboard">Επιλέξτε Γλώσσα</string>
     <string name="hebrew">Εβραϊκά</string>
     <string name="english">Αγγλικά</string>
+    <string name="russian">Ρωσικά</string>
+    <string name="understood">Κατάλαβα</string>
 
     <string name="search">Αναζήτηση</string>
     <string name="next">Επόμενο</string>
