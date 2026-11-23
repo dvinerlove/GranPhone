@@ -12,7 +12,7 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         app:title="@string/sos"
         app:show_back="true" />
 
@@ -39,7 +39,8 @@
         <LinearLayout
             android:id="@+id/bt_sos"
             android:layout_width="match_parent"
-            android:layout_height="112dp"
+            android:layout_height="wrap_content"
+            android:minHeight="112dp"
             android:background="@drawable/style_for_buttons"
             android:clickable="true"
             android:contentDescription="@string/sos_button_description"
@@ -74,6 +75,7 @@
                     android:id="@+id/sos_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:accessibilityLiveRegion="polite"
                     android:gravity="center"
                     android:text="@string/sos_call_help"
                     android:textColor="?attr/bald_text_on_variant"

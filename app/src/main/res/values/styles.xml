@@ -26,7 +26,7 @@
         <item name="bald_button_gold">@color/gold</item>
         <item name="bald_text_on_gold">@color/on_gold</item>
         <item name="android:actionBarStyle">@style/BaldActionBar</item>
-        <item name="colorAccent">#fff</item>
+        <item name="colorAccent">?attr/bald_brand</item>
     </style>
 
 

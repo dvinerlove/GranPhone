@@ -62,8 +62,8 @@
 
     <View
         android:id="@+id/notifications_counter"
-        android:layout_width="@dimen/small"
-        android:layout_height="@dimen/small"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:background="@drawable/notifications_pill"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@id/space"

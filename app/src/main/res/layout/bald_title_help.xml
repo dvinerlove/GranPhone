@@ -17,6 +17,7 @@
 <com.bald.uriah.baldphone.views.BaldImageButton xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bar_help"
+                android:focusable="true"
     android:contentDescription="@string/help"
     android:layout_width="48dp"
     android:layout_height="match_parent"

@@ -14,6 +14,15 @@
             <solid android:color="?attr/bald_button_clicked" />
         </shape>
     </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <solid android:color="?attr/bald_card" />
+            <stroke
+                android:width="3dp"
+                android:color="?attr/bald_decoration_on_background" />
+        </shape>
+    </item>
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="28dp" />

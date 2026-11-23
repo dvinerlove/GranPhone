@@ -494,4 +494,18 @@
     <string name="sos_calling_in">Calling in %d…</string>
     <string name="sos_confirm_call">Call emergency services now?</string>
     <string name="sos_button_description">SOS — call for help</string>
+    <!-- accessibility labels for icon-only controls -->
+    <string name="cd_previous_page">Previous page</string>
+    <string name="cd_next_page">Next page</string>
+    <string name="cd_space">Space</string>
+    <string name="cd_numbers">Numbers</string>
+    <string name="cd_letters">Letters</string>
+    <string name="cd_play_pause">Play or pause</string>
+    <string name="cd_media_item">Photo or video</string>
+    <string name="cd_pill_blue">Blue</string>
+    <string name="cd_pill_red">Red</string>
+    <string name="cd_pill_gray">Gray</string>
+    <string name="cd_pill_yellow">Yellow</string>
+    <string name="cd_pill_green">Green</string>
+    <string name="cd_pill_custom">Custom color</string>
 </resources>

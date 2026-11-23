@@ -25,7 +25,7 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         app:show_back="true"
         app:title="@string/add_alarm_quickly" />
 
@@ -80,6 +80,7 @@
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/bt_dec"
+                android:focusable="true"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/style_for_buttons"
@@ -100,6 +101,7 @@
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/bt_add"
+                android:focusable="true"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/style_for_buttons"

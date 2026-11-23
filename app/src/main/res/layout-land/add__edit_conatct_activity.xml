@@ -57,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
+                    android:labelFor="@id/et_name"
                     android:text="@string/name"
                     android:textColor="?bald_text_primary"
                     android:textSize="18sp" />
@@ -90,6 +91,7 @@
 
                         <com.bald.uriah.baldphone.views.BaldImageButton
                             android:id="@+id/iv_image"
+                android:focusable="true"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/style_for_buttons"
@@ -99,6 +101,7 @@
 
                         <com.bald.uriah.baldphone.views.BaldImageButton
                             android:id="@+id/iv_delete"
+                android:focusable="true"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="bottom|end"
@@ -126,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="20dp"
+                    android:labelFor="@id/et_mobile_number"
                     android:text="@string/mobile_phone_number"
                     android:textColor="?bald_text_primary"
                     android:textSize="18sp" />
@@ -150,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="20dp"
+                    android:labelFor="@id/et_home_number"
                     android:text="@string/home_phone_number"
                     android:textColor="?bald_text_primary"
                     android:textSize="18sp" />
@@ -180,6 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
+                    android:labelFor="@id/et_address"
                     android:text="@string/address"
                     android:textColor="?bald_text_primary"
                     android:textSize="18sp" />
@@ -204,6 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="20dp"
+                    android:labelFor="@id/et_mail"
                     android:text="@string/mail"
                     android:textColor="?bald_text_primary"
                     android:textSize="18sp" />

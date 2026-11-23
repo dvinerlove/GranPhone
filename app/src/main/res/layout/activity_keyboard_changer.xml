@@ -21,7 +21,7 @@
     android:background="?bald_background">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         android:id="@+id/bald_title_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

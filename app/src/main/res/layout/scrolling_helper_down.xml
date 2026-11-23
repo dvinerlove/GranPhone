@@ -20,5 +20,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/style_for_buttons_transparent"
     android:contentDescription="@string/down"
+    android:focusable="true"
     android:padding="14dp"
     app:srcCompat="@drawable/arrow_down_on_background" />

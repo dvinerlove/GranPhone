@@ -37,6 +37,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/style_for_buttons_half_transparent"
+        android:contentDescription="@string/cd_play_pause"
+        android:focusable="true"
         android:src="@drawable/play_on_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

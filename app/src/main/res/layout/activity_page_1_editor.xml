@@ -24,7 +24,7 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         app:title="@string/edit_home_screen"
         app:show_back="true" />
 

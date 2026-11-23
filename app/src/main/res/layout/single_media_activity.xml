@@ -25,7 +25,7 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -57,6 +57,7 @@
 
             <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
                 android:id="@+id/share"
+                android:focusable="true"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -83,6 +84,7 @@
 
             <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
                 android:id="@+id/delete"
+                android:focusable="true"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -111,6 +113,7 @@
 
         <com.bald.uriah.baldphone.views.BaldFrameLayoutButton
             android:id="@+id/more"
+                android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:layout_gravity="start"

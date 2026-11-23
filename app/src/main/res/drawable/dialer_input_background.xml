@@ -18,6 +18,6 @@
     android:shape="rectangle">
     <stroke
         android:width="?bald_stroke_size"
-        android:color="?bald_decoration_on_background" />
+        android:color="?bald_card_border" />
     <corners android:radius="?bald_button_corners_radius" />
 </shape>

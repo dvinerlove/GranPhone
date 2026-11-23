@@ -17,6 +17,7 @@
 <com.bald.uriah.baldphone.views.BaldImageButton xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/iv_close"
+                android:focusable="true"
     android:contentDescription="@string/close"
     android:layout_width="60dp"
     android:layout_height="60dp"

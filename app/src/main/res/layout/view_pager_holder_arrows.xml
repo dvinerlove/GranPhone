@@ -26,6 +26,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/style_for_buttons_transparent"
+        android:contentDescription="@string/cd_previous_page"
+        android:focusable="true"
         app:srcCompat="@drawable/arrow_start_on_background" />
 
     <com.bald.uriah.baldphone.views.BaldImageButton
@@ -34,6 +36,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/style_for_buttons_transparent"
+        android:contentDescription="@string/cd_next_page"
+        android:focusable="true"
         app:srcCompat="@drawable/arrow_end_on_background" />
 
 </LinearLayout>

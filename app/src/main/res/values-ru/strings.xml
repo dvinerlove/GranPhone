@@ -486,4 +486,18 @@ adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.b
     <string name="sos_calling_in">Звонок через %d…</string>
     <string name="sos_confirm_call">Позвонить в экстренные службы?</string>
     <string name="sos_button_description">SOS — вызвать помощь</string>
+    <!-- accessibility labels for icon-only controls -->
+    <string name="cd_previous_page">Предыдущая страница</string>
+    <string name="cd_next_page">Следующая страница</string>
+    <string name="cd_space">Пробел</string>
+    <string name="cd_numbers">Цифры</string>
+    <string name="cd_letters">Буквы</string>
+    <string name="cd_play_pause">Воспроизвести или поставить на паузу</string>
+    <string name="cd_media_item">Фото или видео</string>
+    <string name="cd_pill_blue">Синий</string>
+    <string name="cd_pill_red">Красный</string>
+    <string name="cd_pill_gray">Серый</string>
+    <string name="cd_pill_yellow">Жёлтый</string>
+    <string name="cd_pill_green">Зелёный</string>
+    <string name="cd_pill_custom">Свой цвет</string>
 </resources>

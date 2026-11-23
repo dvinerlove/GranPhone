@@ -6,6 +6,15 @@
             <corners android:radius="28dp" />
         </shape>
     </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#1565c0" />
+            <stroke
+                android:width="3dp"
+                android:color="?bald_decoration_on_background" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
     <item>
         <shape android:shape="rectangle">
             <solid android:color="#1565c0" />

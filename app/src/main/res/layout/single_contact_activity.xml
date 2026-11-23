@@ -25,7 +25,7 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         app:show_back="true"
         app:title="" />
 
@@ -89,6 +89,7 @@
                         android:layout_marginStart="8dp"
                         android:background="@drawable/style_for_buttons_transparent"
                         android:contentDescription="@string/add_to_favorite"
+                        android:focusable="true"
                         android:padding="8dp"
                         android:src="@drawable/star_on_button" />
                 </LinearLayout>

@@ -22,6 +22,7 @@
     <ImageView
         android:id="@+id/signal"
         android:contentDescription="@string/signal_strength"
+        android:focusable="true"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="10dp"
@@ -35,6 +36,7 @@
     <com.bald.uriah.baldphone.views.BatteryView
         android:id="@+id/battery"
         android:contentDescription="@string/battery"
+        android:focusable="true"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/style_for_buttons_transparent"
@@ -49,6 +51,7 @@
     <com.bald.uriah.baldphone.views.BaldImageButton
         android:id="@+id/sound"
         android:contentDescription="@string/sound"
+        android:focusable="true"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/style_for_buttons_transparent"
@@ -62,6 +65,7 @@
     <com.bald.uriah.baldphone.views.BaldImageButton
         android:id="@+id/notifications"
         android:contentDescription="@string/notifications"
+        android:focusable="true"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/style_for_buttons_transparent"

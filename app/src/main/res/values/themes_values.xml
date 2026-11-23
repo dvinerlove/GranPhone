@@ -61,12 +61,12 @@
     <color name="bald_button_dark">#22272E</color>
     <color name="bald_button_clicked_dark">#3D4754</color>
     <dimen name="bald_button_corners_radius_dark">16dp</dimen>
-    <color name="bald_button_disabled_dark">#d6d6d6</color>
+    <color name="bald_button_disabled_dark">#171B20</color>
     <dimen name="bald_button_pill_corners_radius_dark">500dp</dimen>
     <color name="bald_decoration_on_background_dark">@color/bald_text_on_background_dark</color>
     <color name="bald_decoration_on_button_dark">@color/bald_text_on_button_dark</color>
     <color name="bald_decoration_on_key_dark">@color/bald_text_on_key_dark</color>
-    <color name="bald_hint_on_button_dark">#868686</color>
+    <color name="bald_hint_on_button_dark">#8E8E8E</color>
     <color name="bald_hint_on_background_dark">@color/bald_hint_on_button_dark</color>
     <color name="bald_keyboard_key_background_dark">@color/bald_button_dark</color>
     <color name="bald_keyboard_key_pressed_background_dark">#F38630</color>
