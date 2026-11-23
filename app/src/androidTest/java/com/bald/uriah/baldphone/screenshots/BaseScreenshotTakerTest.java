@@ -19,6 +19,7 @@ package com.bald.uriah.baldphone.screenshots;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.os.Environment;
 import android.view.View;
 
 import androidx.test.rule.ActivityTestRule;
@@ -62,23 +63,24 @@ public abstract class BaseScreenshotTakerTest<T extends Activity> {
         test();
         getInstrumentation().waitForIdleSync();
         Thread.sleep(1000);
-        File screenshotsFolder = new File("/sdcard/Pictures/screenshots");
-        if (!screenshotsFolder.exists())
-            screenshotsFolder.mkdir();
-        try (FileOutputStream out = new FileOutputStream("/sdcard/Pictures/screenshots/" + getClass().getSimpleName() + "_" +
-                (localesStr[localeIndex].equals("pt-br") ? "pt-rBR" : localesStr[localeIndex])
-                + ".png")) {
+        final String locale = localesStr[localeIndex % localesStr.length];
+        localeIndex++;
+        // scoped storage blocks /sdcard/Pictures writes; app-private dir needs no permission
+        File dir = mActivityTestRule.getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (dir == null)
+            dir = mActivityTestRule.getActivity().getFilesDir();
+        final File screenshotsFolder = new File(dir, "screenshots");
+        //noinspection ResultOfMethodCallIgnored
+        screenshotsFolder.mkdirs();
+        try (FileOutputStream out = new FileOutputStream(new File(screenshotsFolder,
+                getClass().getSimpleName() + "_" + ("pt-br".equals(locale) ? "pt-rBR" : locale) + ".png"))) {
             final Bitmap bitmap = screenShot(mActivityTestRule.getActivity().getWindow().getDecorView().getRootView());
             if (bitmap == null)
                 throw new AssertionError("Bitmap literally can't be null wtf");
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            localeIndex++;
         }
-        localeIndex = localeIndex % locales.length;
-
     }
 
     public Bitmap screenShot(View view) {
