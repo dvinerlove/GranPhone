@@ -206,6 +206,7 @@ This will delete all data!</string>
     <string name="timer">Timer</string>
     <string name="read_call_log">Read Call History</string>
     <string name="read_call_log_subtext">This permission is required in order to view the call history.</string>
+    <string name="write_call_log_subtext">This permission is required in order to view and manage the call history.</string>
     <string name="read_contacts">Read contacts</string>
     <string name="received">Received</string>
     <string name="recent">Recent</string>

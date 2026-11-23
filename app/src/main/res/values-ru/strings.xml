@@ -200,6 +200,7 @@
     <string name="timer">Таймер</string>
     <string name="read_call_log">Чтение Истории Вызовов</string>
     <string name="read_call_log_subtext">Это разрешение требуется для просмотра журнала звонков.</string>
+    <string name="write_call_log_subtext">Это разрешение требуется для просмотра и управления журналом звонков.</string>
     <string name="read_contacts">Чтение контактов</string>
     <string name="received">Получен</string>
     <string name="recent">Недавние</string>

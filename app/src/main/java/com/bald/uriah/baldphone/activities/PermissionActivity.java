@@ -171,7 +171,7 @@ public class PermissionActivity extends BaldActivity {
                     totalSteps++;
                     if (ActivityCompat.checkSelfPermission(this, WRITE_CALL_LOG) != PERMISSION_GRANTED)
                         permissionItemList.add(
-                                new SimplePermissionItem(WRITE_CALL_LOG, getString(R.string.read_call_log), getString(R.string.read_call_log_subtext)));
+                                new SimplePermissionItem(WRITE_CALL_LOG, getString(R.string.read_call_log), getString(R.string.write_call_log_subtext)));
                     else if (ActivityCompat.checkSelfPermission(this, READ_CALL_LOG) != PERMISSION_GRANTED)
                         permissionItemList.add(
                                 new SimplePermissionItem(READ_CALL_LOG, getString(R.string.read_call_log), getString(R.string.read_call_log_subtext)));
