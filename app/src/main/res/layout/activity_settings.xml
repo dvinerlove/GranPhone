@@ -45,6 +45,7 @@
             style="@style/ScrollStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:requiresFadingEdge="none"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/spacing_md"
             android:layoutAnimation="@anim/layout_animation_fall_down"
