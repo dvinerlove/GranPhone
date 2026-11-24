@@ -17,9 +17,9 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="48dp"
     android:height="48dp"
-    android:viewportWidth="24.0"
-    android:viewportHeight="24.0">
-    <path
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+        <path
         android:fillColor="?bald_decoration_on_button"
-        android:pathData="M15.5,1h-8C6.12,1 5,2.12 5,3.5v17C5,21.88 6.12,23 7.5,23h8c1.38,0 2.5,-1.12 2.5,-2.5v-17C18,2.12 16.88,1 15.5,1zM11.5,22c-0.83,0 -1.5,-0.67 -1.5,-1.5s0.67,-1.5 1.5,-1.5 1.5,0.67 1.5,1.5 -0.67,1.5 -1.5,1.5zM16,18L7,18L7,4h9v14z" />
+        android:pathData="M280,920Q247,920 223.5,896.5Q200,873 200,840L200,120Q200,87 223.5,63.5Q247,40 280,40L680,40Q713,40 736.5,63.5Q760,87 760,120L760,840Q760,873 736.5,896.5Q713,920 680,920L280,920ZM280,720L680,720L680,240L280,240L280,720Z" />
 </vector>
