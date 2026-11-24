@@ -103,6 +103,7 @@ public class HomeScreenActivity extends BaldActivity {
             SOUND_TEXTS = {R.string.mute, R.string.vibrate, R.string.sound};
 
     private static final IntentFilter BATTERY_FILTER = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    private static final String KEY_HOME_PAGE = "home_page";
     private static final int SPEECH_REQUEST_CODE = 7;
 
     private static int onStartCounter = 0;
@@ -119,6 +120,8 @@ public class HomeScreenActivity extends BaldActivity {
     private SharedPreferences sharedPreferences;
     private BaldPrefsUtils baldPrefsUtils;
     private HomePage1 homePage1;
+    private RtlViewPager homePager;
+    private int restoredHomePage;
     private BatteryView batteryView;
     private boolean lowBatteryAlert;
     /**
@@ -217,6 +220,8 @@ public class HomeScreenActivity extends BaldActivity {
         super.onCreate(savedInstanceState);
         AppUtils.logImportant("HomeScreenActivity was started!");
         sharedPreferences = BPrefs.get(this);
+        if (savedInstanceState != null)
+            restoredHomePage = savedInstanceState.getInt(KEY_HOME_PAGE, 0);
 
         if (!sharedPreferences.getBoolean(BPrefs.AFTER_TUTORIAL_KEY, false) && !testing) {
             startActivity(new Intent(this, TutorialActivity.class));
@@ -400,6 +405,13 @@ public class HomeScreenActivity extends BaldActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (homePager != null)
+            outState.putInt(KEY_HOME_PAGE, homePager.getCurrentItem());
+    }
+
+    @Override
     protected void onPause() {
         //read https://stackoverflow.com/questions/6165070/receiver-not-registered-exception-error
         //android platform may unregister the receiver without asking anyone, and this is the best solution.
@@ -445,7 +457,7 @@ public class HomeScreenActivity extends BaldActivity {
 
     private void attachToXml() {
         setContentView(R.layout.home_screen);
-        final RtlViewPager homePager = findViewById(R.id.home_pager);
+        homePager = findViewById(R.id.home_pager);
         final View mainPage = LayoutInflater.from(this).inflate(R.layout.home_page_main, homePager, false);
         homePage1 = (HomePage1) mainPage;
 
@@ -467,6 +479,9 @@ public class HomeScreenActivity extends BaldActivity {
         } else {
             homePager.setAdapter(new HomePagerAdapter(mainPage));
         }
+        // Land on the page the user left — recreate/process-kill must not dump them back on page 1.
+        if (restoredHomePage > 0)
+            homePager.setCurrentItem(restoredHomePage, false);
 
         // Bottom-row labels: one fixed size for all three — autosize made each label a different size.
         for (final int id : new int[]{R.id.bt_home_sos, R.id.bt_home_apps, R.id.bt_home_settings}) {
