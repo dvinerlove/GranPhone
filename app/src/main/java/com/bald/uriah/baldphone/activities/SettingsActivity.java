@@ -208,7 +208,8 @@ public class SettingsActivity extends BaldActivity {
                 .setTitle(R.string.helper_settings)
                 .setSubText(saved == null ? R.string.helper_pin_create_subtext : R.string.helper_pin_enter_subtext)
                 .setInputType(pinInputType)
-                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                .setPinLength(saved == null ? KioskManager.MIN_PIN_LENGTH : saved.length())
+                .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
                 .setPositiveButtonListener(params -> {
                     final String pin = String.valueOf(params[0]).trim();
                     if (saved == null) {
@@ -236,7 +237,8 @@ public class SettingsActivity extends BaldActivity {
                 .setTitle(R.string.kiosk_mode)
                 .setSubText(R.string.helper_pin_repeat_subtext)
                 .setInputType(pinInputType)
-                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                .setPinLength(pin.length())
+                .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
                 .setPositiveButtonListener(params -> {
                     if (!pin.equals(String.valueOf(params[0]).trim())) {
                         BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.helper_pin_mismatch).show();
@@ -257,7 +259,8 @@ public class SettingsActivity extends BaldActivity {
                 .setTitle(R.string.helper_settings)
                 .setSubText(R.string.helper_pin_repeat_subtext)
                 .setInputType(pinInputType)
-                .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                .setPinLength(pin.length())
+                .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
                 .setPositiveButtonListener(params -> {
                     if (!pin.equals(String.valueOf(params[0]).trim())) {
                         BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.helper_pin_mismatch).show();
@@ -281,7 +284,7 @@ public class SettingsActivity extends BaldActivity {
                     .setTitle(R.string.kiosk_mode)
                     .setSubText(R.string.kiosk_enable_subtext)
                     .setInputType(pinInputType)
-                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                    .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
                     .setPositiveButtonListener(params -> {
                         final String pin = String.valueOf(params[0]).trim();
                         if (pin.length() < KioskManager.MIN_PIN_LENGTH || !android.text.TextUtils.isDigitsOnly(pin)) {
@@ -298,7 +301,8 @@ public class SettingsActivity extends BaldActivity {
                     .setTitle(R.string.kiosk_mode)
                     .setSubText(R.string.kiosk_disable_subtext)
                     .setInputType(pinInputType)
-                    .addFlag(DialogFlags.FLAG_OK | DialogFlags.FLAG_CANCEL)
+                    .setPinLength(KioskManager.savedPin(this).length())
+                    .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
                     .setPositiveButtonListener(params -> {
                         if (!KioskManager.checkPin(this, String.valueOf(params[0]).trim())) {
                             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();

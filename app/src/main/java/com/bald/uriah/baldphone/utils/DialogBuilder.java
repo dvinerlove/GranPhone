@@ -49,6 +49,7 @@ public class DialogBuilder {
     @Nullable
     CharSequence positiveCustomText;
     int flags;
+    int pinLength = 4;
 
     private DialogBuilder() {
     }
@@ -136,6 +137,12 @@ public class DialogBuilder {
 
     public DialogBuilder addFlag(int flags) {
         this.flags |= flags;
+        return this;
+    }
+
+    /** Expected PIN length for {@link DialogFlags#FLAG_PIN} — the saved PIN's length, or 4 when creating one. */
+    public DialogBuilder setPinLength(int pinLength) {
+        this.pinLength = pinLength;
         return this;
     }
 

@@ -16,14 +16,20 @@
 
 package com.bald.uriah.baldphone.utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -56,7 +62,8 @@ public class DialogFlags extends Dialog {
             FLAG_CUSTOM_NEGATIVE = FLAG_NEGATIVE | 1 << 6,
             FLAG_CUSTOM_POSITIVE = FLAG_POSITIVE | 1 << 7,
             FLAG_OPTIONS = 1 << 9,
-            FLAG_NOT_CANCELABLE = 1 << 10;
+            FLAG_NOT_CANCELABLE = 1 << 10,
+            FLAG_PIN = 1 << 11;
     private static final float DIM_LEVEL = 0.9f;
     private final Context context;
     private final CharSequence title;
@@ -68,6 +75,7 @@ public class DialogFlags extends Dialog {
     private final int flags;
     private final CharSequence negativeCustomText;
     private final CharSequence positiveCustomText;
+    private final int pinLength;
     @Nullable
     private final View extraView;
     //Views
@@ -88,7 +96,8 @@ public class DialogFlags extends Dialog {
                     final @Nullable View extraView,
                     final @Nullable CharSequence negativeCustomText,
                     final @Nullable CharSequence positiveCustomText,
-                    final int flags) {
+                    final int flags,
+                    final int pinLength) {
         super(context);
         this.context = context;
         this.options = options;
@@ -101,6 +110,7 @@ public class DialogFlags extends Dialog {
         this.extraView = extraView;
         this.negativeCustomText = negativeCustomText;
         this.positiveCustomText = positiveCustomText;
+        this.pinLength = pinLength;
 
         this.flags = flags;
     }
@@ -109,7 +119,7 @@ public class DialogFlags extends Dialog {
         if (bdb.context == null || bdb.title == null || bdb.subText == null)
             throw new NullPointerException("bdb.activity, bdb.dialogState, bdb.title, bdb.subText cannot be null! perhaps forgot to setContext() on DialogBuilder");
 
-        final DialogFlags bDialog = DialogFlags.newInstance(bdb.context, bdb.title, bdb.subText, bdb.options, bdb.positiveButtonListener, bdb.negativeButtonListener, bdb.inputType, bdb.startingIndexChooser, bdb.extraView, bdb.negativeCustomText, bdb.positiveCustomText, bdb.flags);
+        final DialogFlags bDialog = DialogFlags.newInstance(bdb.context, bdb.title, bdb.subText, bdb.options, bdb.positiveButtonListener, bdb.negativeButtonListener, bdb.inputType, bdb.startingIndexChooser, bdb.extraView, bdb.negativeCustomText, bdb.positiveCustomText, bdb.flags, bdb.pinLength);
         if (bdb.baldActivityToAutoDismiss != null) {
             bdb.baldActivityToAutoDismiss.autoDismiss(bDialog);
         }
@@ -127,9 +137,10 @@ public class DialogFlags extends Dialog {
                                       final @Nullable View extraView,
                                       final @Nullable CharSequence negativeCustomText,
                                       final @Nullable CharSequence positiveCustomText,
-                                      final int flags
+                                      final int flags,
+                                      final int pinLength
     ) {
-        final DialogFlags baldDialogBox = new DialogFlags(context, title, subText, options, positive, negative, inputType, startingIndexChooser, extraView, negativeCustomText, positiveCustomText, flags);
+        final DialogFlags baldDialogBox = new DialogFlags(context, title, subText, options, positive, negative, inputType, startingIndexChooser, extraView, negativeCustomText, positiveCustomText, flags, pinLength);
         baldDialogBox.show();
         Window window = baldDialogBox.getWindow();
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -183,6 +194,8 @@ public class DialogFlags extends Dialog {
                         cancel();
                     else if (positive.activate(editText.getText()))
                         cancel();
+                    else if (containFlag(FLAG_PIN))
+                        editText.setText("");
 
                 });
             } else {
@@ -212,6 +225,42 @@ public class DialogFlags extends Dialog {
         } else {
             bt_negative.setVisibility(View.GONE);
             setLeftMargin(bt_positive);
+        }
+
+        if (containFlag(FLAG_PIN)) {
+            // lock-screen style: fixed-length digits, auto-submit on the last
+            // one — no OK button; the X stays, the Cancel text hides while the
+            // IME is open
+            bt_positive.setVisibility(View.GONE);
+            editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(pinLength)});
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (s.length() >= pinLength)
+                        bt_positive.performClick();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
+            });
+            if (context instanceof Activity) {
+                final View activityDecor = ((Activity) context).getWindow().getDecorView();
+                final int imeThreshold = (int) (context.getResources().getDisplayMetrics().heightPixels * 0.15);
+                final ViewTreeObserver.OnGlobalLayoutListener imeListener = () -> {
+                    final Rect r = new Rect();
+                    activityDecor.getWindowVisibleDisplayFrame(r);
+                    bt_negative.setVisibility(activityDecor.getRootView().getHeight() - r.bottom > imeThreshold
+                            ? View.GONE : View.VISIBLE);
+                };
+                activityDecor.getViewTreeObserver().addOnGlobalLayoutListener(imeListener);
+                setOnDismissListener(d ->
+                        activityDecor.getViewTreeObserver().removeOnGlobalLayoutListener(imeListener));
+            }
         }
 
         if (containFlag(FLAG_OPTIONS)) {
@@ -282,7 +331,7 @@ public class DialogFlags extends Dialog {
         boolean activate(@NonNull Object... params);
     }
 
-    @IntDef({FLAG_POSITIVE, FLAG_NEGATIVE, FLAG_INPUT, FLAG_OPTIONS, FLAG_OK, FLAG_YES, FLAG_CANCEL, FLAG_NO, FLAG_CUSTOM_NEGATIVE, FLAG_CUSTOM_POSITIVE, FLAG_NOT_CANCELABLE})
+    @IntDef({FLAG_POSITIVE, FLAG_NEGATIVE, FLAG_INPUT, FLAG_OPTIONS, FLAG_OK, FLAG_YES, FLAG_CANCEL, FLAG_NO, FLAG_CUSTOM_NEGATIVE, FLAG_CUSTOM_POSITIVE, FLAG_NOT_CANCELABLE, FLAG_PIN})
     @Retention(RetentionPolicy.SOURCE)
     private @interface BDFlags {
     }
