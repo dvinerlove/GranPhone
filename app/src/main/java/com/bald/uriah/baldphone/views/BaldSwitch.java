@@ -16,7 +16,8 @@
 
 package com.bald.uriah.baldphone.views;
 
-import android.animation.ValueAnimator;
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -26,7 +27,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.PathInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.ColorUtils;
 
 import com.bald.uriah.baldphone.R;
 
@@ -199,13 +201,13 @@ public class BaldSwitch extends FrameLayout {
 
         final boolean animate = getWidth() > 0;
         syncThumbBackground(checked ? R.drawable.btn_selected_no_border : R.drawable.btn_disabled_no_border, animate);
-        setTextColorAnimated(tv_yes, enabled && checked ? textColorOnSelected : textColorOnButton, animate);
-        setTextColorAnimated(tv_no, textColorOnButton, animate);
         syncThumb(animate);
     }
 
     private boolean thumbBound;
     private int thumbBgRes;
+    private Animator thumbAnim;
+    private float txNo, txYes;
 
     private void syncThumbBackground(int resId, boolean animate) {
         if (resId == thumbBgRes)
@@ -244,40 +246,64 @@ public class BaldSwitch extends FrameLayout {
             lp.setMargins(inset, inset, inset, inset);
             thumb.setLayoutParams(lp);
         }
-        final View target = checked ? tv_yes : tv_no;
         // laid position comes from lp margins (gravity START), not getLeft() —
         // getLeft() is stale in the same pass that mutates the params
         final int laidLeft = getLayoutDirection() == LAYOUT_DIRECTION_RTL
                 ? getWidth() - lp.getMarginEnd() - lp.width
                 : lp.getMarginStart();
-        final float tx = row.getLeft() + target.getLeft() + inset - laidLeft;
-        thumb.animate().cancel();
+        txNo = row.getLeft() + tv_no.getLeft() + inset - laidLeft;
+        txYes = row.getLeft() + tv_yes.getLeft() + inset - laidLeft;
+        final float tx = checked ? txYes : txNo;
+        tv_no.setTextColor(textColorOnButton);
         if (animate) {
-            thumb.animate()
-                    .translationX(tx)
-                    .setDuration(THUMB_ANIM_MS)
-                    .setInterpolator(new DecelerateInterpolator(1.5f))
-                    .start();
+            startThumbAnim(tx);
         } else {
+            cancelThumbAnim();
             thumb.setTranslationX(tx);
+            applyThumbState();
         }
         thumbBound = true;
     }
 
-    private void setTextColorAnimated(final TextView tv, @ColorInt final int to, boolean animate) {
-        final int from = tv.getCurrentTextColor();
-        if (!animate || from == to) {
-            tv.setTextColor(to);
-            return;
-        }
-        final ValueAnimator anim = ValueAnimator.ofArgb(from, to).setDuration(THUMB_ANIM_MS);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+    private void startThumbAnim(final float tx) {
+        cancelThumbAnim();
+        // ObjectAnimator from current position so a mid-flight retarget keeps
+        // velocity direction; ViewPropertyAnimator.cancel() snaps to end instead
+        final ObjectAnimator anim = ObjectAnimator.ofFloat(thumb, TRANSLATION_X, thumb.getTranslationX(), tx);
+        anim.setDuration(THUMB_ANIM_MS);
+        anim.setInterpolator(new PathInterpolator(0.2f, 0f, 0f, 1f));
+        anim.addUpdateListener(new android.animation.ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                tv.setTextColor((Integer) animation.getAnimatedValue());
+            public void onAnimationUpdate(android.animation.ValueAnimator a) {
+                applyThumbState();
+            }
+        });
+        anim.addListener(new android.animation.AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator a) {
+                applyThumbState();
             }
         });
         anim.start();
+        thumbAnim = anim;
+    }
+
+    private void cancelThumbAnim() {
+        if (thumbAnim != null) {
+            thumbAnim.cancel();
+            thumbAnim = null;
+        }
+    }
+
+    // Text color is driven by thumb *position*, not a parallel clock,
+    // so "Yes" only turns light once the green fill is actually under it.
+    private void applyThumbState() {
+        final float span = txYes - txNo;
+        final float p = span == 0 ? (checked ? 1f : 0f)
+                : Math.min(1f, Math.max(0f, (thumb.getTranslationX() - txNo) / span));
+        tv_yes.setTextColor(enabled
+                ? ColorUtils.blendARGB(textColorOnButton, textColorOnSelected, p)
+                : textColorOnButton);
     }
 
     @Override
