@@ -18,11 +18,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bar_back"
                 android:focusable="true"
-    android:contentDescription="@string/close"
+    android:contentDescription="@string/back"
     android:layout_width="@dimen/title_bar_height"
     android:layout_height="match_parent"
     android:minWidth="@dimen/title_bar_height"
     android:alpha="0.75"
     android:background="@drawable/bald_ghost_button_background"
     android:tint="?bald_text_on_variant"
-    app:srcCompat="@drawable/close_on_background" />
+    app:srcCompat="@drawable/chevron_start_on_background" />
