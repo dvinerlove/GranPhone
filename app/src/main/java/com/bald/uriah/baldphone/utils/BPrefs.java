@@ -98,7 +98,7 @@ public final class BPrefs {
     public static final boolean APPS_ONE_GRID_DEFAULT_VALUE = false;
 
     public static final String COLORFUL_KEY = "COLORFUL_KEY";
-    public static final boolean COLORFUL_DEFAULT_VALUE = false;
+    public static final boolean COLORFUL_DEFAULT_VALUE = true;
 
     public static final String HIDE_BOTTOM_ROW_KEY = "HIDE_BOTTOM_ROW_KEY";
     public static final boolean HIDE_BOTTOM_ROW_DEFAULT_VALUE = false;

@@ -44,7 +44,7 @@ Source of truth: `app/src/main/java/com/bald/uriah/baldphone/utils/BPrefs.java`.
 | `USE_ACCIDENTAL_GUARD_KEY` | boolean | `true` | Master switch for the accidental-touch guard. |
 | `CRASH_REPORTS_KEY` | boolean | `true` | Declared, currently unused — never read (sole occurrence `BPrefs.java:93`). |
 | `APPS_ONE_GRID_KEY` | boolean | `false` | Apps screen: one tall grid vs paginated. |
-| `COLORFUL_KEY` | boolean | `false` | Colorful app icons vs uniform. |
+| `COLORFUL_KEY` | boolean | `true` | Colorful generated contact-avatar backgrounds (contacts list, calls, single contact, SOS) vs neutral card color. |
 | `HIDE_BOTTOM_ROW_KEY` | boolean | `false` | Home screen: hide the fixed SOS/Apps/Settings row. When on, home gains a second page (swipe left) with the same three buttons plus quick settings (brightness, font, theme, vibration). Set via Settings → helper layer. |
 | `LANGUAGE_KEY` | String | `""` | Per-app UI locale (`""` = follow system). BCP-47-ish tag matching shipped `values-*` dirs (e.g. `ru`, `pt-rBR`). Applied in `BaldActivity.attachBaseContext`; activities recreate on change. |
 | `LAST_CRASH_KEY` | long | `-1` | Timestamp of last crash (`BaldUncaughtExceptionHandler`). Within `LAST_CRASH_TIME_OK` (12s, `12 * Const.SECOND`) = crash loop → `System.exit`. Not a user pref. |

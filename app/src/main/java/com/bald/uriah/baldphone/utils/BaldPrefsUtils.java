@@ -33,6 +33,8 @@ import static com.bald.uriah.baldphone.utils.BPrefs.CUSTOM_PHOTOS_KEY;
 import static com.bald.uriah.baldphone.utils.BPrefs.CUSTOM_PILLS_KEY;
 import static com.bald.uriah.baldphone.utils.BPrefs.CUSTOM_RECENTS_KEY;
 import static com.bald.uriah.baldphone.utils.BPrefs.CUSTOM_SETTINGS_KEY;
+import static com.bald.uriah.baldphone.utils.BPrefs.COLORFUL_DEFAULT_VALUE;
+import static com.bald.uriah.baldphone.utils.BPrefs.COLORFUL_KEY;
 import static com.bald.uriah.baldphone.utils.BPrefs.CUSTOM_VIDEOS_KEY;
 import static com.bald.uriah.baldphone.utils.BPrefs.EMERGENCY_BUTTON_VISIBLE_DEFAULT_VALUE;
 import static com.bald.uriah.baldphone.utils.BPrefs.EMERGENCY_BUTTON_VISIBLE_KEY;
@@ -55,7 +57,7 @@ import static com.bald.uriah.baldphone.utils.BPrefs.VIBRATION_FEEDBACK_KEY;
 
 public class BaldPrefsUtils {
     private final int theme;
-    private final boolean vibrationFeedback, touchNoHard, longPresses, notes, lowBatteryAlert, sos, hideBottomRow;
+    private final boolean vibrationFeedback, touchNoHard, longPresses, notes, lowBatteryAlert, sos, hideBottomRow, colorful;
     private final int swipingEffect, statusBar;
     private final String CUSTOM_APP;
     private final String CUSTOM_RECENTS;
@@ -71,7 +73,7 @@ public class BaldPrefsUtils {
     private final String CUSTOM_ALARMS;
     private final String CUSTOM_SETTINGS;
 
-    private BaldPrefsUtils(int theme, boolean vibrationFeedback, boolean touchNoHard, boolean longPresses, int swipingEffect, boolean notes, int statusBar, boolean lowBatteryAlert, boolean sos, String custom_app, String custom_recents, String custom_dialer, String custom_contacts, String custom_assistant, String custom_messages, String custom_photos, String custom_camera, String custom_videos, String custom_pills, String custom_apps, String custom_alarms, String custom_settings, boolean hideBottomRow) {
+    private BaldPrefsUtils(int theme, boolean vibrationFeedback, boolean touchNoHard, boolean longPresses, int swipingEffect, boolean notes, int statusBar, boolean lowBatteryAlert, boolean sos, String custom_app, String custom_recents, String custom_dialer, String custom_contacts, String custom_assistant, String custom_messages, String custom_photos, String custom_camera, String custom_videos, String custom_pills, String custom_apps, String custom_alarms, String custom_settings, boolean hideBottomRow, boolean colorful) {
         this.theme = theme;
         this.vibrationFeedback = vibrationFeedback;
         this.touchNoHard = touchNoHard;
@@ -95,6 +97,7 @@ public class BaldPrefsUtils {
         CUSTOM_ALARMS = custom_alarms;
         CUSTOM_SETTINGS = custom_settings;
         this.hideBottomRow = hideBottomRow;
+        this.colorful = colorful;
     }
 
     public static BaldPrefsUtils newInstance(Context context) {
@@ -128,7 +131,8 @@ public class BaldPrefsUtils {
                 sharedPreferences.getString(CUSTOM_APPS_KEY, null),
                 sharedPreferences.getString(CUSTOM_ALARMS_KEY, null),
                 sharedPreferences.getString(CUSTOM_SETTINGS_KEY, null),
-                sharedPreferences.getBoolean(HIDE_BOTTOM_ROW_KEY, HIDE_BOTTOM_ROW_DEFAULT_VALUE)
+                sharedPreferences.getBoolean(HIDE_BOTTOM_ROW_KEY, HIDE_BOTTOM_ROW_DEFAULT_VALUE),
+                sharedPreferences.getBoolean(COLORFUL_KEY, COLORFUL_DEFAULT_VALUE)
         );
     }
 
@@ -163,11 +167,12 @@ public class BaldPrefsUtils {
                 Objects.equals(CUSTOM_APPS, that.CUSTOM_APPS) &&
                 Objects.equals(CUSTOM_ALARMS, that.CUSTOM_ALARMS) &&
                 Objects.equals(CUSTOM_SETTINGS, that.CUSTOM_SETTINGS) &&
-                hideBottomRow == that.hideBottomRow;
+                hideBottomRow == that.hideBottomRow &&
+                colorful == that.colorful;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(theme, vibrationFeedback, touchNoHard, longPresses, notes, lowBatteryAlert, sos, swipingEffect, statusBar, CUSTOM_APP, CUSTOM_RECENTS, CUSTOM_DIALER, CUSTOM_CONTACTS, CUSTOM_ASSISTANT, CUSTOM_MESSAGES, CUSTOM_PHOTOS, CUSTOM_CAMERA, CUSTOM_VIDEOS, CUSTOM_PILLS, CUSTOM_APPS, CUSTOM_ALARMS, CUSTOM_SETTINGS, hideBottomRow);
+        return Objects.hash(theme, vibrationFeedback, touchNoHard, longPresses, notes, lowBatteryAlert, sos, swipingEffect, statusBar, CUSTOM_APP, CUSTOM_RECENTS, CUSTOM_DIALER, CUSTOM_CONTACTS, CUSTOM_ASSISTANT, CUSTOM_MESSAGES, CUSTOM_PHOTOS, CUSTOM_CAMERA, CUSTOM_VIDEOS, CUSTOM_PILLS, CUSTOM_APPS, CUSTOM_ALARMS, CUSTOM_SETTINGS, hideBottomRow, colorful);
     }
 }
