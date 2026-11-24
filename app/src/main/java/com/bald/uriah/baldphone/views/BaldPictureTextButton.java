@@ -148,11 +148,12 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
         }
         final int variantAttr = variant == 1 ? R.attr.bald_brand : variant == 2 ? R.attr.bald_danger : variant == 3 ? R.attr.bald_info : R.attr.bald_brand_tint;
         final int onAttr = variant == 4 ? R.attr.bald_text_primary : R.attr.bald_text_on_variant;
-        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_disabled, onAttr, R.attr.bald_text_primary});
+        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_disabled, onAttr, R.attr.bald_text_primary, R.attr.bald_decoration_on_background});
         final int color = themeColors.getColor(0, 0);
         final int disabledColor = themeColors.getColor(1, color);
         final int onColor = themeColors.getColor(2, Color.WHITE);
         final int disabledTextColor = themeColors.getColor(3, onColor);
+        final int focusStrokeColor = themeColors.getColor(4, onColor);
         themeColors.recycle();
 
         // Pressed = darkened variant fill so onColor keeps its contrast (neutral
@@ -160,18 +161,31 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
         final int pressedColor = Color.rgb(
                 (int) (Color.red(color) * 0.8f), (int) (Color.green(color) * 0.8f), (int) (Color.blue(color) * 0.8f));
 
-        setBackgroundTintList(new ColorStateList(
-                new int[][]{
-                        new int[]{-android.R.attr.state_enabled},
-                        new int[]{android.R.attr.state_pressed},
-                        new int[]{}},
-                new int[]{disabledColor, pressedColor, color}));
+        // backgroundTintList on a <selector> only reaches the <stroke> on old APIs,
+        // leaving a white fill + colored frame — build explicit state shapes instead.
+        final float radius = getResources().getDimension(R.dimen.radius_button);
+        final android.graphics.drawable.StateListDrawable bg = new android.graphics.drawable.StateListDrawable();
+        bg.addState(new int[]{-android.R.attr.state_enabled}, variantShape(disabledColor, radius, 0, 0));
+        bg.addState(new int[]{android.R.attr.state_pressed}, variantShape(pressedColor, radius, 0, 0));
+        bg.addState(new int[]{android.R.attr.state_focused}, variantShape(color, radius,
+                getResources().getDimensionPixelSize(R.dimen.border_width_selected), focusStrokeColor));
+        bg.addState(new int[]{}, variantShape(color, radius, 0, 0));
+        setBackground(bg);
         textView.setTextColor(new ColorStateList(
                 new int[][]{new int[]{-android.R.attr.state_enabled}, new int[]{}},
                 new int[]{disabledTextColor, onColor}));
         imageView.setImageTintList(new ColorStateList(
                 new int[][]{new int[]{-android.R.attr.state_enabled}, new int[]{}},
                 new int[]{disabledTextColor, onColor}));
+    }
+
+    private static android.graphics.drawable.Drawable variantShape(int color, float radius, int strokeWidth, int strokeColor) {
+        final android.graphics.drawable.GradientDrawable d = new android.graphics.drawable.GradientDrawable();
+        d.setCornerRadius(radius);
+        d.setColor(color);
+        if (strokeWidth > 0)
+            d.setStroke(strokeWidth, strokeColor);
+        return d;
     }
 
     // Empty label/icon is GONE, not blank-VISIBLE — a zero-content weighted child
