@@ -66,26 +66,24 @@
 
         <com.bald.uriah.baldphone.views.BaldButton
             android:id="@+id/dialog_screen_button_secondary"
-            style="@style/ButtonsText.Large"
+            style="@style/ButtonsText"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dialog_button_height"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
             android:background="@drawable/bald_button_background"
-            app:autoSizeMaxTextSize="@dimen/large"
-            app:autoSizeMinTextSize="@dimen/small"
-            app:autoSizeTextType="uniform" />
+            android:minHeight="@dimen/dialog_button_height"
+            android:maxLines="2" />
 
         <com.bald.uriah.baldphone.views.BaldButton
             android:id="@+id/dialog_screen_button_primary"
-            style="@style/ButtonsText.Large"
+            style="@style/ButtonsText"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dialog_button_height"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_sm"
             android:layout_weight="1"
             android:background="@drawable/bald_button_background"
-            app:autoSizeMaxTextSize="@dimen/large"
-            app:autoSizeMinTextSize="@dimen/small"
-            app:autoSizeTextType="uniform" />
+            android:minHeight="@dimen/dialog_button_height"
+            android:maxLines="2" />
     </LinearLayout>
 </LinearLayout>

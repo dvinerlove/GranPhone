@@ -305,7 +305,7 @@ public class HomeScreenActivity extends BaldActivity {
                     DialogScreen.confirm(this,
                             R.string.set_home_screen,
                             R.string.set_home_screen_subtext,
-                            R.string.set_home_screen,
+                            R.string.install,
                             () -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this));
                 } else if (percent > 95) {
                     //noinspection ConstantConditions
