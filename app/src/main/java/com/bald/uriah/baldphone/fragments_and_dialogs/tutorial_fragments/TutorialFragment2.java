@@ -17,30 +17,18 @@
 package com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.os.Vibrator;
-import android.util.TypedValue;
 import android.view.View;
-import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.TutorialActivity;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.Const;
 
 public class TutorialFragment2 extends TutorialFragment {
-    private Vibrator vibrator;
-    private TextView[] presses = new TextView[3];
+    private View[] presses = new View[3];
     private View[] selected = new View[3];
 
     private SharedPreferences sharedPreferences;
-    @ColorInt
-    private int textColorOnSelected, textColorOnButton;
     private int longPressesFlag = 2;//2 is most 1 is medium 0 is regular
     private boolean recreateActivityOnSelect = true;
 
@@ -56,25 +44,10 @@ public class TutorialFragment2 extends TutorialFragment {
         longPressesFlag = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE) ? sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE) ? 1 : 2 : 0;
         applyDuoToFlag();
 
-        vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-
-        final TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = getActivity().getTheme();
-        theme.resolveAttribute(R.attr.bald_text_on_selected, typedValue, true);
-        textColorOnSelected = typedValue.data;
-        theme.resolveAttribute(R.attr.bald_text_on_button, typedValue, true);
-        textColorOnButton = typedValue.data;
-
-        applyDuoToFlag();
-
-        presses[2].setOnLongClickListener((v) -> {
-            clickedEffect((TextView) v);
-            vibrator.vibrate(Const.vibetime);
-            return true;
-        });
-        presses[2].setOnClickListener((v) -> BaldToast.from(v.getContext()).setText(R.string.press_longer).show());
-        presses[1].setOnClickListener(v -> clickedEffect((TextView) v));
-        presses[0].setOnClickListener(v -> clickedEffect((TextView) v));
+        // Cards are BaldFrameLayoutButtons: they already gate taps behind the
+        // currently-saved press mode and show the "press longer" toast themselves.
+        for (final View press : presses)
+            press.setOnClickListener(this::clickedEffect);
     }
 
     @Override
@@ -92,7 +65,7 @@ public class TutorialFragment2 extends TutorialFragment {
         selected[0] = root.findViewById(R.id.short_presses_selected);
     }
 
-    private void clickedEffect(TextView v) {
+    private void clickedEffect(View v) {
         longPressesFlag = (int) v.getTag();
         applyDuoToFlag();
         sharedPreferences.edit()
@@ -115,8 +88,6 @@ public class TutorialFragment2 extends TutorialFragment {
             final boolean isSelected = longPressesFlag == i;
             selected[i].setVisibility(isSelected ? View.VISIBLE : View.INVISIBLE);
             presses[i].setSelected(isSelected);
-            presses[i].setBackgroundResource(isSelected ? R.drawable.btn_selected : R.drawable.style_for_buttons);
-            presses[i].setTextColor(isSelected ? textColorOnSelected : textColorOnButton);
         }
 
     }

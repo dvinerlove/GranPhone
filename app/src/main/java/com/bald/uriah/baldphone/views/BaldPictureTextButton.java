@@ -77,6 +77,10 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
                 attributeSet.getAttributeIntValue("http://schemas.android.com/apk/res/android", "orientation", HORIZONTAL);
         setOrientation(orientation);
         setGravity(Gravity.CENTER);
+        // Uniform vertical inset for every button instance — keeps icon+label centered
+        // and identical across rows. Horizontal padding stays caller-controlled.
+        final int padV = getResources().getDimensionPixelSize(R.dimen.spacing_sm);
+        setPadding(getPaddingLeft(), padV, getPaddingRight(), padV);
         final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.BaldPictureTextButton);
         final float pxSize = styleAttributesArray.getDimension(R.styleable.BaldPictureTextButton__size, 0);
         final Drawable pic = styleAttributesArray.getDrawable(R.styleable.BaldPictureTextButton__src);
@@ -85,13 +89,13 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
         styleAttributesArray.recycle();
 
         imageView = (ImageView) layoutInflater.inflate(R.layout.bald_picture_text_button_picture, this, false);
-        imageView.setImageDrawable(pic);
+        setImageDrawable(pic);
         if (orientation == VERTICAL)
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
         addView(imageView);
 
         textView = (TextView) layoutInflater.inflate(R.layout.bald_picture_text_button_text, this, false);
-        textView.setText(text);
+        setText(text);
         if (orientation == HORIZONTAL)
             // Icon+label must center as one group — weight-1 text centers only itself.
             textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -124,11 +128,27 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
 
     /**
      * Tints the stateful background solid with the variant color and the icon/text with
-     * {@code bald_text_on_variant}. variant: 1=brand, 2=danger, 3=info (0=neutral never gets here).
+     * {@code bald_text_on_variant} — {@code bald_text_primary} for the light {@code tinted}
+     * variant. variant: 1=brand, 2=danger, 3=info, 4=tinted (0=neutral never gets here).
      */
     private void applyVariant(int variant) {
-        final int variantAttr = variant == 1 ? R.attr.bald_brand : variant == 2 ? R.attr.bald_danger : R.attr.bald_info;
-        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_disabled, R.attr.bald_text_on_variant, R.attr.bald_text_primary});
+        if (variant == 5) {
+            // danger_outline: neutral surface (keeps the default button bg), red ink.
+            // Reserved for secondary destructive actions like Delete.
+            final TypedArray c = context.obtainStyledAttributes(new int[]{R.attr.bald_danger, R.attr.bald_text_primary});
+            final int danger = c.getColor(0, 0);
+            final int disabledText = c.getColor(1, danger);
+            c.recycle();
+            final ColorStateList ink = new ColorStateList(
+                    new int[][]{new int[]{-android.R.attr.state_enabled}, new int[]{}},
+                    new int[]{disabledText, danger});
+            textView.setTextColor(ink);
+            imageView.setImageTintList(ink);
+            return;
+        }
+        final int variantAttr = variant == 1 ? R.attr.bald_brand : variant == 2 ? R.attr.bald_danger : variant == 3 ? R.attr.bald_info : R.attr.bald_brand_tint;
+        final int onAttr = variant == 4 ? R.attr.bald_text_primary : R.attr.bald_text_on_variant;
+        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_disabled, onAttr, R.attr.bald_text_primary});
         final int color = themeColors.getColor(0, 0);
         final int disabledColor = themeColors.getColor(1, color);
         final int onColor = themeColors.getColor(2, Color.WHITE);
@@ -154,24 +174,30 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
                 new int[]{disabledTextColor, onColor}));
     }
 
+    // Empty label/icon is GONE, not blank-VISIBLE — a zero-content weighted child
+    // would still eat half the height and shove the other child off-center.
     public void setText(CharSequence text) {
         textView.setText(text);
+        textView.setVisibility(text == null || text.length() == 0 ? GONE : VISIBLE);
     }
 
     public void setText(@StringRes int resId) {
-        textView.setText(resId);
+        setText(getContext().getText(resId));
     }
 
     public void setImageDrawable(@Nullable Drawable drawable) {
         imageView.setImageDrawable(drawable);
+        imageView.setVisibility(drawable == null ? GONE : VISIBLE);
     }
 
     public void setImageBitmap(Bitmap bitmap) {
         imageView.setImageBitmap(bitmap);
+        imageView.setVisibility(bitmap == null ? GONE : VISIBLE);
     }
 
     public void setImageResource(@DrawableRes int resId) {
         imageView.setImageResource(resId);
+        imageView.setVisibility(resId == 0 ? GONE : VISIBLE);
     }
 
     public ImageView getImageView() {

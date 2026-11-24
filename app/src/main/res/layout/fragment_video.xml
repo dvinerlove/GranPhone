@@ -31,11 +31,11 @@
 
     <com.bald.uriah.baldphone.views.BaldImageButton
         android:id="@+id/play_stop"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="@dimen/button_height_large"
+        android:layout_height="@dimen/button_height_large"
+        android:layout_marginStart="@dimen/spacing_sm"
+        android:layout_marginEnd="@dimen/spacing_sm"
+        android:layout_marginBottom="@dimen/spacing_sm"
         android:background="@drawable/style_for_buttons_half_transparent"
         android:contentDescription="@string/cd_play_pause"
         android:focusable="true"

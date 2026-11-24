@@ -28,34 +28,29 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"
-        app:layout_constraintDimensionRatio="5"
+        app:layout_constraintDimensionRatio="6.25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/home_scroll"
+    <com.duolingo.open.rtlviewpager.RtlViewPager
+        android:id="@+id/home_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottom_row"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_bar">
-
-        <com.bald.uriah.baldphone.views.home.HomePage1
-            android:id="@+id/home_page_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
 
     <LinearLayout
         android:id="@+id/bottom_row"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/home_bottom_bar_height"
+        android:layout_height="@dimen/button_height_large"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_marginBottom="@dimen/spacing_md"
         android:orientation="horizontal"
-        android:padding="6dp"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -63,12 +58,11 @@
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_home_sos"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/home_bottom_bar_height"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="4dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons"
+            android:background="@drawable/bald_button_background"
             app:_src="@drawable/emergency_on_button"
             app:_text="@string/sos"
             app:variant="danger" />
@@ -76,24 +70,21 @@
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_home_apps"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/home_bottom_bar_height"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="4dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons"
-            app:_src="@drawable/apps_on_background"
+            android:background="@drawable/bald_button_background"
+            app:_src="@drawable/apps_on_button"
             app:_text="@string/apps" />
 
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_home_settings"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/home_bottom_bar_height"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons"
+            android:background="@drawable/bald_button_background"
             app:_src="@drawable/settings_on_button"
             app:_text="@string/settings" />
     </LinearLayout>

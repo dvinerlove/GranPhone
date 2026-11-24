@@ -19,18 +19,13 @@
 <string name="accessibility_level">Tilgængelighedsniveau</string>
     <string name="accessibility_settings">Tilgængelighedsindstillinger</string>
     <string name="accidental_touches">Beskyttelse mod utilsigtede berøringer</string>
-    <string name="accidental_touches_settings_subtext">Denne indstilling sørger for, at din telefon ikke registrerer utilsigtede berøringer, når telefonen f.eks. er i lommen eller under et lukket cover.\nHvis du har problemer med, at ikke alle berøringer registreres, så slå denne beskyttelse fra.</string>
     <string name="accidental_touches_subtext">En utilsigtet berøring blev registreret.\nTryk \"Forstået\" for at fortsætte med at bruge telefonen.\nHvis denne advarsel kommer op hele tiden, kan du slå "Beskyttelse mod utilsigtede berøringer" fra under "Tilgængelighedsindstillinger".</string>
-    <string name="acknowledgments">Tak til</string>
-    <string name="adaptive">Adaptiv</string>
     <string name="add_alarm">Tilføj alarm</string>
     <string name="add_alarm_quickly">Tilføj stopur</string>
     <string name="add_contact">Tilføj kontakt</string>
     <string name="add_emergency_contact">Tilføj</string>
     <string name="add_pill">Tilføj pille</string>
-    <string name="add_shortcut">Tilføj genvej</string>
     <string name="add_to_favorite">Tilføj til favoritter</string>
-    <string name="add_to_home">Tilføj til Forside</string>
     <string name="add_to_sos">Tilføj til SOS</string>
     <string name="address">Adresse</string>
     <string name="advanced_options">Avancerede indstillinger</string>
@@ -50,7 +45,6 @@
 
     <string name="apps">Apps</string>
     <string name="are_you_sure_you_want_to_delete___">Er du sikker på, at du vil slette %s?</string>
-    <string name="assistant">Assistent</string>
     <string name="at_least_one_day_must_be_selected">Du skal vælge mindst én dag!</string>
     <string name="auto_brightness">Automatisk\nlysstyrke</string>
     <string name="backspace">Slet</string>
@@ -58,7 +52,6 @@
     <string name="blocked">Blokeret</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Lysstyrke</string>
-    <string name="brightness_subtext">Ændr lysstyrke.</string>
     <string name="cache_cleared_successfully">Midlertidig hukommelse blev ryddet op!</string>
     <string name="call">Opkald</string>
     <string name="calling">Ringer op</string>
@@ -68,7 +61,6 @@
     <string name="camera">Kamera</string>
     <string name="camera_subtext">Denne rettighed er nødvendig for, at du kan tænde lommelygten.</string>
     <string name="cancel">Annullér</string>
-    <string name="change_pills_time">Skift tidspunkt for piller</string>
     <string name="change_system_settings_subtext">Tillad at GranPhone ændrer indstillinger, såsom at øge skriftstørrelsen og ændre lysstyrken.</string>
     <string name="choose_friday">Fredag</string>
     <string name="choose_monday">Mandag</string>
@@ -98,23 +90,17 @@ ALT brugerdata slettes og app\'en mister alle dine indstillinger!</string>
     <string name="dark">Mørk</string>
     <string name="delete">Slet</string>
     <string name="delete___">Slet %s?</string>
-    <string name="delete_all_alarms">Slet alle alarmer</string>
     <string name="dialer">Ring op</string>
     <string name="display_settings">Skærm</string>
     <string name="done">Færdig</string>
     <string name="down">Ned</string>
     <string name="edit">Ændr</string>
-    <string name="email">Email:</string>
     <string name="enable_notification_access">Giv adgang til notifikationer</string>
     <string name="enable_notification_access_subtext">Du er nødt til at give GranPhone adgang til dine notifikationer.</string>
     <string name="enter">Indtast</string>
-    <string name="enter_contact_or_phone_number">Indtast navn på kontakten:</string>
     <string name="evening">Aften</string>
     <string name="example_of_different_text_sizes">Eksempel på forskellige tekststørrelser.\nSkal være læslige og ikke forsvinde ud over skærmen.</string>
     <string name="external_storage_subtext">Denne rettighed er nødvendig for at kunne gemme billeder.</string>
-    <string name="feedback">Send feedback</string>
-    <string name="feedback_cannot_be_empty">Du skal skrive noget feedback!</string>
-    <string name="feedback_sent_successfully">Feedback blev sendt!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Vælg tilgængelighedsniveau</string>
     <string name="font_size">Skriftstørrelse</string>
     <string name="friday">Fredag</string>
@@ -126,7 +112,6 @@ ALT brugerdata slettes og app\'en mister alle dine indstillinger!</string>
     <string name="home_phone_number">Hjemmetelefonnummer</string>
     <string name="hour">Time</string>
     <string name="huge">Meget stor</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Aktiveret om:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">En sidste ting:\nDet anbefales kraftigt at bruge GranPhone\'s \"skrivebord\" i stedet for telefonens eget.</string>
     <string name="language">sprog</string>
@@ -136,7 +121,6 @@ ALT brugerdata slettes og app\'en mister alle dine indstillinger!</string>
     <string name="light">Let</string>
     <string name="location">Lokation</string>
 <string name="mail">Email</string>
-    <string name="maps">Kort</string>
 
 
     <string name="medium">Medium</string>
@@ -157,8 +141,6 @@ ALT brugerdata slettes og app\'en mister alle dine indstillinger!</string>
     <string name="nfc">NFC</string>
     <string name="no">Nej</string>
     <string name="notes">Noter</string>
-    <string name="notes_settings">Indstillinger for Noter</string>
-    <string name="notes_settings_subtext">Vælg om du vil have et ekstra skrivebord til at tage noter. Swipe til siden efter du har aktiveret denne indstilling for at finde det.</string>
     <string name="notifications">Notifikationer</string>
 
     <string name="of">af</string>
@@ -192,9 +174,6 @@ ALT brugerdata slettes og app\'en mister alle dine indstillinger!</string>
     <string name="regular_level">Normalt niveau</string>
 
     <string name="remove_from_favorite">Fjern fra Favoritter</string>
-    <string name="remove_from_home">Fjern fra \"skrivebord\"</string>
-    <string name="remove_from_sos">Fjern fra SOS</string>
-    <string name="remove_shortcut">Fjern genvej</string>
     <string name="removed_all_alarms">Alle alarmer blev slettet.</string>
     <string name="repeats_every_day">Hver dag</string>
     <string name="right_handed">Højrehåndet</string>
@@ -227,24 +206,21 @@ ALT brugerdata slettes og app\'en mister alle dine indstillinger!</string>
     <string name="speak">Tal</string>
     <string name="speech_to_text">Tale-til-tekst</string>
     <string name="strong_hand">Dominerende hånd</string>
-    <string name="strong_hand_subtext">Vælg hvilken hånd der er din dominerende for at tilpasse udseendet af GranPhone efter dette.</string>
-    <string name="submit">Indsend</string>
     <string name="sunday">Søndag</string>
     <string name="technical_information">Teknisk information</string>
     <string name="theme_settings">Tema</string>
-    <string name="theme_settings_subtext">Vælg et tema</string>
 
     <string name="thursday">Torsdag</string>
     <string name="time_changer">Ændr tid for pilletagning</string>
     <string name="tiny">Meget lille</string>
-    <string name="to___days_and___hours_from_now">til %d dage og %d timer fra nu</string>
-    <string name="to___hours_and___minutes_from_now">til %d timer og %d minutter fra nu</string>
+    <string name="to___days_and___hours_from_now">til %1$d dage og %2$d timer fra nu</string>
+    <string name="to___hours_and___minutes_from_now">til %1$d timer og %2$d minutter fra nu</string>
     <string name="to___minuets_from_now">til %d minutter fra nu</string>
     <string name="today">I dag</string>
     <string name="took">Er taget!</string>
     <string name="tuesday">Tirsdag</string>
     <string name="uninstall">Afinstallér</string>
-    <string name="uninstall_subtext">Er du sikker på, at du vil afinstallere %s?\n%s\'s data vil blive permanent slettet!</string>
+    <string name="uninstall_subtext">Er du sikker på, at du vil afinstallere %1$s?\n%2$s\'s data vil blive permanent slettet!</string>
     <string name="up">Op</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Videoinstruktioner</string>
@@ -297,21 +273,15 @@ Tryk på \"+ Pille\" nedenfor.</string>
     <string name="try_now">Prøv nu</string>
     <string name="download_progress">Downloadens status</string>
     <string name="what_do_you_want_to_do_with___">Hvad vil du gerne gøre med %s?</string>
-    <string name="crash_reports">Rapportér fejl</string>
-    <string name="crash_reports_subtext">Fejlrapporter hjælper med at gøre oplevelsen af GranPhone bedre.\nRapporterne bliver kund brugt til at udbedre fejl\; kun den nødvendige information for dette, bliver anvendt fra dem.</string>
     <string name="custom_app">Valgfri app</string>
-    <string name="custom_app_subtext">Vælg en valgfri app, som du vil have en genvej til på \"skrivebordet\".</string>
-    <string name="no_app_was_found">Ingen app der passede blev fundet!</string>
     <string name="alarm">Alarm</string>
     <string name="no_new_notifications">Ingen nye notifikationer</string>
     <string name="sound">Lyd</string>
     <string name="mute">Lydløs</string>
     <string name="vibrate">Vibration</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Din telefon har ikke Google Assistant installeret.</string>
 
 
     <string name="status_bar_settings">Statusbjælke</string>
-    <string name="status_bar_settings_subtext">Hvor skal statusbjælken vises?</string>
     <string name="only_home_screen">Kun på \"skrivebordet\"</string>
     <string name="nowhere">Ingen steder</string>
     <string name="everywhere">Alle steder</string>
@@ -325,48 +295,32 @@ Tryk på \"+ Pille\" nedenfor.</string>
     <string name="next">Næste</string>
     <string name="go">Go</string>
     <string name="dialer_sounds">Ringetoner</string> <!-- Tjek navn -->
-    <string name="dialer_sounds_subtext">Vælg om du vil have ringetoner(?? usikker på denne oversættelse…)</string> <!-- Tjek navn - what\'s this? -->
 
     <string name="low_battery_alert">Advarsel om lavt batteriniveau</string>
-    <string name="low_battery_alert_subtext">Vælg om du vil have statusbjælken farvet rød på \"skrivebordet\", hvis batteriniveauet på telefonen er under 20 \%\nVær opmærksom på, at du ikke kan se statusbjælken, hvis den er skjult af en app.</string>
 
-    <string name="also_available_at">Også tilgængelig via\nGranPhone.contact@gmail.com\nFeedback skal gives på engelsk eller hebræisk!</string>
     <string name="grant_all_permissions">Tildel alle rettigheder</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-<string name="emergency_button">Emergency Button</string>
-    <string name="emergency_settings_subtext">Choose if you want to have an Emergency Button on the home screen.</string>
     <string name="private_number">Private Number</string>
     <string name="swipe_left_or_right">Swipe left or right</string>
     <string name="press_next_or_back_buton">Press next or back arrow</string>
-    <string name="click_delay">Click Delay</string>
-    <string name="no_delay">No Delay</string>
-    <string name="scrolling">Scrolling</string>
-    <string name="arrows">Arrows</string>
-    <string name="swipe">Swipe</string>
-    <string name="_long">Long</string>
-    <string name="_short">Short</string>
     <string name="do_you_want_to_save_your_changes">Do you want to save your changes?</string>
     <string name="discard">Discard</string>
     <string name="no_recent_calls">No Recent Calls</string>
     <string name="apps_sort_method">Apps Sort Method</string>
-    <string name="apps_sort_method_subtext">Choose whether you want to sort the apps in one grid or to have them divided into different groups via letters</string>
     <string name="groups">Groups</string>
     <string name="one_grid">One Grid</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
     <string name="dual_sim">Dual Sim</string>
-    <string name="dual_sim_subtext">Choose how you want to manage dual sim\nNote: If you choose Show Options, you\'ll need to allow another permission</string>
     <string name="use_default">Use Default</string>
     <string name="show_options">Show Options</string>
     <string name="read_phone_state">Read Phone State</string>
     <string name="read_phone_state_subtext">This permission is required in order to call from the second sim</string>
     <string name="choose_sim">Choose Sim</string>
-    <string name="choose_sim_subtext">Choose the sim you want to make the call from</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>
         <item>Abraham Lincoln</item>

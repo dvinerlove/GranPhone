@@ -37,12 +37,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
+        android:paddingStart="@dimen/spacing_xl"
+        android:paddingEnd="@dimen/spacing_xl"
         android:text="@string/and_welcome_to_GranPhone"
-        android:textSize="40sp"
-        app:autoSizeMaxTextSize="40sp"
-        app:autoSizeMinTextSize="14sp"
+        android:textSize="@dimen/giant"
+        app:autoSizeMaxTextSize="@dimen/giant"
+        app:autoSizeMinTextSize="@dimen/tiny"
         app:autoSizeTextType="uniform"
         android:visibility="gone" />
 
@@ -52,7 +52,7 @@
         android:layout_width="220dp"
         android:layout_height="90dp"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="24dp"
-        android:background="@drawable/style_for_buttons"
+        android:layout_margin="@dimen/spacing_xl"
+        android:background="@drawable/bald_button_background"
         android:text="@string/next" />
 </LinearLayout>

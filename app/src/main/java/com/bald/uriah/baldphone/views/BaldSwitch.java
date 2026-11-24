@@ -163,8 +163,9 @@ public class BaldSwitch extends LinearLayout {
                 tv_no.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
             }
 
-            addView(tv_yes);
+            // "Нет" слева, "Да" справа — подтверждающее действие у края
             addView(tv_no);
+            addView(tv_yes);
         }
 
         tv_yes.setEnabled(enabled);
@@ -184,10 +185,12 @@ public class BaldSwitch extends LinearLayout {
                 tv_no.setTextColor(textColorOnButton);
 
             } else {
+                // "off" is emphasised with a neutral gray, never the brand color —
+                // green is reserved for the active "yes" only.
                 tv_yes.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_no_border));
-                tv_no.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_selected_no_border));
+                tv_no.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_disabled_no_border));
                 tv_yes.setTextColor(textColorOnButton);
-                tv_no.setTextColor(textColorOnSelected);
+                tv_no.setTextColor(textColorOnButton);
             }
 
         } else {

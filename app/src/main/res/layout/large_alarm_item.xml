@@ -14,20 +14,20 @@
   ~ limitations under the License.
   -->
 
-<!-- Alarm row card: bald_card fill + 16dp corners + 1dp border (dialog_screen_card).
+<!-- Alarm row card: bald_card fill + 16dp corners + 1dp border (bald_card_background).
      Big time + On/Off state switch on top, name + repeat summary secondary,
      worded edit/delete actions at the bottom end. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="6dp"
-    android:background="@drawable/dialog_screen_card"
+    android:layout_marginStart="@dimen/spacing_md"
+    android:layout_marginTop="@dimen/spacing_sm"
+    android:layout_marginEnd="@dimen/spacing_md"
+    android:layout_marginBottom="@dimen/spacing_sm"
+    android:background="@drawable/bald_card_background"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_lg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="?attr/bald_text_primary"
-            android:textSize="40sp"
+            android:textSize="@dimen/giant"
             android:textStyle="bold" />
 
         <!-- weight-fill whatever the time label leaves over: the switch must
@@ -48,7 +48,7 @@
         <com.bald.uriah.baldphone.views.BaldSwitch
             android:id="@+id/alarm_switch"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height_default"
             android:layout_weight="1"
             app:no="@string/off_short"
             app:size="@dimen/medium"
@@ -59,7 +59,7 @@
         android:id="@+id/alarm_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/spacing_xs"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="?attr/bald_text_primary"
@@ -69,27 +69,27 @@
         android:id="@+id/repeating_days"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/spacing_xs"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="?attr/bald_text_secondary"
         android:textSize="@dimen/small"
-        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMinTextSize="@dimen/tiny"
         app:autoSizeTextType="uniform" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/spacing_md"
         android:orientation="vertical">
 
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_edit"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/style_for_buttons"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:layout_height="@dimen/button_height_default"
+            android:background="@drawable/bald_button_background"
+            android:paddingStart="@dimen/spacing_sm"
+            android:paddingEnd="@dimen/spacing_sm"
             app:_size="@dimen/medium"
             app:_src="@drawable/edit_on_button"
             app:_text="@string/edit" />
@@ -97,11 +97,11 @@
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_delete"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/style_for_buttons"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:layout_height="@dimen/button_height_default"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:background="@drawable/bald_button_background"
+            android:paddingStart="@dimen/spacing_sm"
+            android:paddingEnd="@dimen/spacing_sm"
             app:_size="@dimen/medium"
             app:_src="@drawable/delete_on_button"
             app:_text="@string/delete" />

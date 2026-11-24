@@ -20,9 +20,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layoutDirection="locale"
-    android:paddingStart="28dp"
-    android:paddingTop="18dp"
-    android:paddingEnd="16dp"
-    android:paddingBottom="8dp"
+    android:paddingStart="@dimen/spacing_xl"
+    android:paddingTop="@dimen/spacing_lg"
+    android:paddingEnd="@dimen/spacing_lg"
+    android:paddingBottom="@dimen/spacing_sm"
     android:textColor="?bald_text_secondary"
     android:textSize="@dimen/small" />

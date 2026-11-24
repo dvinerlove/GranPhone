@@ -21,22 +21,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/contact_row_linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="88dp"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="6dp"
+    android:layout_height="@dimen/list_row_height_tall"
+    android:layout_marginStart="@dimen/spacing_md"
+    android:layout_marginTop="@dimen/spacing_sm"
+    android:layout_marginEnd="@dimen/spacing_md"
+    android:layout_marginBottom="@dimen/spacing_sm"
     android:orientation="vertical">
 
     <com.bald.uriah.baldphone.views.BaldButton
         android:id="@+id/day"
         style="@style/BackgroundText.Medium"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="@dimen/list_header_height"
         android:background="@android:color/transparent"
         android:gravity="center_vertical|start"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingStart="@dimen/spacing_lg"
+        android:paddingEnd="@dimen/spacing_lg"
         android:textColor="?bald_text_secondary"
         android:textSize="@dimen/large"
         android:textStyle="bold"
@@ -46,23 +46,23 @@
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider"
         android:background="@android:color/transparent"
         android:visibility="gone" />
 
     <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
         android:id="@+id/ll_contact_only"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
-        android:background="@drawable/style_for_buttons_rectangle"
+        android:layout_height="@dimen/list_row_height_tall"
+        android:background="@drawable/bald_card_background"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <FrameLayout
             android:id="@+id/pic_holder"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp">
+            android:layout_width="@dimen/avatar_md"
+            android:layout_height="@dimen/avatar_md"
+            android:layout_marginStart="@dimen/spacing_lg">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_pic"
@@ -83,7 +83,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/spacing_lg"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -96,27 +96,27 @@
                 android:textColor="?bald_text_primary"
                 android:textSize="@dimen/large"
                 android:transitionName="bald_bar_title_animation"
-                app:autoSizeMinTextSize="14sp"
+                app:autoSizeMinTextSize="@dimen/tiny"
                 app:autoSizeTextType="uniform" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/iv_call_type"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="@dimen/icon_sm"
+                    android:layout_height="@dimen/icon_sm"
                     android:importantForAccessibility="no" />
 
                 <TextView
                     android:id="@+id/tv_call_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/spacing_sm"
                     android:textSize="@dimen/small" />
             </LinearLayout>
         </LinearLayout>
@@ -125,8 +125,8 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:layout_marginEnd="@dimen/spacing_lg"
             android:textColor="?bald_text_secondary"
             android:textSize="@dimen/small" />
     </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>

@@ -21,10 +21,10 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:paddingStart="12dp"
-    android:paddingTop="4dp"
-    android:paddingEnd="12dp"
-    android:paddingBottom="12dp"
+    android:paddingStart="@dimen/spacing_md"
+    android:paddingTop="@dimen/spacing_xs"
+    android:paddingEnd="@dimen/spacing_md"
+    android:paddingBottom="@dimen/spacing_md"
     android:weightSum="5.2"
     tools:ignore="HardcodedText">
 
@@ -122,102 +122,42 @@
         android:layout_weight="1.2"
         android:orientation="horizontal">
 
-        <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/b_clear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="6dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons"
+            android:background="@drawable/bald_button_background"
             android:contentDescription="@string/clear"
-            android:gravity="center"
             android:orientation="vertical"
-            android:paddingTop="6dp"
-            android:paddingBottom="4dp">
+            app:_src="@drawable/delete_on_button"
+            app:_text="@string/clear" />
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/delete_on_button" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="@string/clear"
-                android:textColor="?bald_text_on_button"
-                app:autoSizeMaxTextSize="@dimen/medium"
-                app:autoSizeMinTextSize="10sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform" />
-        </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
-
-        <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/b_call"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="6dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1.4"
-            android:background="@drawable/style_for_buttons_green"
+            android:background="@drawable/bald_button_background"
             android:contentDescription="@string/call"
-            android:gravity="center"
             android:orientation="vertical"
-            android:paddingTop="6dp"
-            android:paddingBottom="4dp">
+            app:_src="@drawable/phone_on_button"
+            app:_text="@string/call"
+            app:variant="brand" />
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/phone_on_button"
-                android:tint="?bald_text_on_variant" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="@string/call"
-                android:textColor="?bald_text_on_variant"
-                app:autoSizeMaxTextSize="@dimen/medium"
-                app:autoSizeMinTextSize="10sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform" />
-        </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
-
-        <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/b_backspace"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="6dp"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons"
+            android:background="@drawable/bald_button_background"
             android:contentDescription="@string/backspace"
-            android:gravity="center"
             android:orientation="vertical"
-            android:paddingTop="6dp"
-            android:paddingBottom="4dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/backspace_on_button" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="@string/delete"
-                android:textColor="?bald_text_on_button"
-                app:autoSizeMaxTextSize="@dimen/medium"
-                app:autoSizeMinTextSize="10sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform" />
-        </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
+            app:_src="@drawable/backspace_on_button"
+            app:_text="@string/delete"
+            app:variant="danger" />
     </LinearLayout>
 
 </LinearLayout>

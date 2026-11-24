@@ -22,8 +22,8 @@
     android:ellipsize="end"
     android:gravity="center"
     android:maxLines="2"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
+    android:paddingStart="@dimen/spacing_lg"
+    android:paddingEnd="@dimen/spacing_lg"
     app:autoSizeMaxTextSize="@dimen/medium"
-    app:autoSizeMinTextSize="14sp"
+    app:autoSizeMinTextSize="@dimen/tiny"
     app:autoSizeTextType="uniform" />

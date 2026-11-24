@@ -132,7 +132,7 @@ abstract class BaseContactsActivity extends BaldActivity {
     protected void viewsInit() {
         if (bt_favorite != null)
             Toggeler.newBackgroundToggeler(bt_favorite, bt_favorite, new int[]{
-                    R.drawable.btn_selected, R.drawable.style_for_buttons
+                    R.drawable.btn_selected, R.drawable.bald_button_background
             }, new android.view.View.OnClickListener[]{
                     v -> {
                         favorite = true;

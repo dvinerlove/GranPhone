@@ -19,19 +19,14 @@
 <string name="accessibility_level">Toegankelijkheidsniveau</string>
     <string name="accessibility_settings">Toegankelijkheid</string>
     <string name="accidental_touches">Onbedoelde aanrakingsbeveiliging</string>
-    <string name="accidental_touches_settings_subtext">De beveiliging blokkeert je telefoon tegen onbedoelde acties wanneer de telefoon bedekt is. Indien het problemen veroorzaakt kan het uitgeschakeld worden.</string>
     <string name="accidental_touches_subtext">Onbedoelde invoer was gedetecteerd \nDruk op \"Begrepen\" om de telefoon te blijven gebruiken \nals
 dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankelijkheidsinstellingen</string>
-    <string name="acknowledgments">Erkenningen</string>
-    <string name="adaptive">Adaptief</string>
     <string name="add_alarm">Alarm toevoegen</string>
     <string name="add_alarm_quickly">Timer toevoegen</string>
     <string name="add_contact">Contact toevoegen</string>
     <string name="add_emergency_contact">Toevoegen</string>
     <string name="add_pill">Pil toevoegen</string>
-    <string name="add_shortcut">Snelkoppeling toevoegen</string>
     <string name="add_to_favorite">Toevoegen aan favorieten</string>
-    <string name="add_to_home">Toevoegen aan startpagina</string>
     <string name="add_to_sos">Toevoegen aan SOS</string>
     <string name="address">Adres</string>
     <string name="advanced_options">Geavanceerde opties</string>
@@ -51,7 +46,6 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
 
     <string name="apps">Apps</string>
     <string name="are_you_sure_you_want_to_delete___">Weet u zeker dat u %s wilt verwijderen?</string>
-    <string name="assistant">Assistent</string>
     <string name="at_least_one_day_must_be_selected">Er moet minimaal één dag zijn geselecteerd!</string>
     <string name="auto_brightness">Automatische\nHelderheid</string>
     <string name="backspace">backspace</string>
@@ -59,7 +53,6 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="blocked">Geblokkeerd</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Helderheid</string>
-    <string name="brightness_subtext">Verander de helderheid.</string>
     <string name="cache_cleared_successfully">Cache succesvol gewist!</string>
     <string name="call">Bel</string>
     <string name="calling">Aan het bellen</string>
@@ -69,7 +62,6 @@ dit bericht blijft verschijnen dan kan het uitgeschakeld worden in de toegankeli
     <string name="camera">Camera</string>
     <string name="camera_subtext">Deze bevoegdheid is vereist om de zaklamp aan te zetten.</string>
     <string name="cancel">Annuleren</string>
-    <string name="change_pills_time">Verander tijd van de medicijnen</string>
     <string name="change_system_settings_subtext">Geef a.u.b. toestemming aan GranPhone om de instellingen te wijzigen, zoals het vergroten van het lettertype</string>
     <string name="choose_friday">Vr</string>
     <string name="choose_monday">Ma</string>
@@ -99,23 +91,17 @@ alle gegevens worden verwijderd!</string>
     <string name="dark">Donker</string>
     <string name="delete">Verwijderen</string>
     <string name="delete___">%s verwijderen?</string>
-    <string name="delete_all_alarms">Alle alarmen verwijderen</string>
     <string name="dialer">Kiesscherm</string>
     <string name="display_settings">Beeld</string>
     <string name="done">Gedaan</string>
     <string name="down">Naar beneden</string>
     <string name="edit">Bewerken</string>
-    <string name="email">Email:</string>
     <string name="enable_notification_access">Notificatietoestemming geven</string>
     <string name="enable_notification_access_subtext">Geef GranPhone notificatietoestemming.</string>
     <string name="enter">Enter</string>
-    <string name="enter_contact_or_phone_number">Voer contactnaam in:</string>
     <string name="evening">Avond</string>
     <string name="example_of_different_text_sizes">Voorbeeld van verschillende tekstgroottes\nMoet leesbaar zijn en niet overlopen.</string>
     <string name="external_storage_subtext">Deze bevoegdheid is vereist om afbeeldingen op te slaan.</string>
-    <string name="feedback">Feedback verzenden</string>
-    <string name="feedback_cannot_be_empty">Feedback mag niet leeg zijn!</string>
-    <string name="feedback_sent_successfully">Feedback succesvol verzonden!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Selecteer het toegankelijkheidsniveau</string>
     <string name="font_size">Lettertypegrootte</string>
     <string name="friday">Vrijdag</string>
@@ -127,7 +113,6 @@ alle gegevens worden verwijderd!</string>
     <string name="home_phone_number">Huistelefoonnummer</string>
     <string name="hour">Uur</string>
     <string name="huge">Reusachtig</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Ingeroepen in:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Nog een ding:\nHet is sterk aanbevolen om het startscherm van GranPhone als het standaard startprogramma in te schakelen</string>
     <string name="language">taal</string>
@@ -137,7 +122,6 @@ alle gegevens worden verwijderd!</string>
     <string name="light">Licht</string>
     <string name="location">Locatie</string>
 <string name="mail">Mail</string>
-    <string name="maps">Maps</string>
 
 
     <string name="medium">Gemiddeld</string>
@@ -158,8 +142,6 @@ alle gegevens worden verwijderd!</string>
     <string name="nfc">NFC</string>
     <string name="no">Nee</string>
     <string name="notes">Notities</string>
-    <string name="notes_settings">Notities</string>
-    <string name="notes_settings_subtext">Kies of u een notitiepagina op het startscherm wilt hebben.</string>
     <string name="notifications">Notificaties</string>
 
     <string name="of">van</string>
@@ -193,9 +175,6 @@ alle gegevens worden verwijderd!</string>
     <string name="regular_level">Gemiddeld niveau</string>
 
     <string name="remove_from_favorite">Verwijderen uit Favorieten</string>
-    <string name="remove_from_home">Verwijderen uit de Startpagina</string>
-    <string name="remove_from_sos">Verwijderen uit SOS</string>
-    <string name="remove_shortcut">Snelkoppeling verwijderen</string>
     <string name="removed_all_alarms">Alle alarmen zijn verwijderd!</string>
     <string name="repeats_every_day">Elke dag</string>
     <string name="right_handed">Rechtshandig</string>
@@ -230,24 +209,21 @@ Deel het met hen!\"</string>
     <string name="speak">Spreken</string>
     <string name="speech_to_text">Spraak naar tekst</string>
     <string name="strong_hand">Dominante Hand</string>
-    <string name="strong_hand_subtext">Kies uw dominante hand om de gebruikersinterface aan te passen.</string>
-    <string name="submit">Verzenden</string>
     <string name="sunday">Zondag</string>
     <string name="technical_information">Technische informatie</string>
     <string name="theme_settings">Thema</string>
-    <string name="theme_settings_subtext">Kies een thema</string>
 
     <string name="thursday">Donderdag</string>
     <string name="time_changer">Medicatietijdveranderaar</string>
     <string name="tiny">Klein</string>
-    <string name="to___days_and___hours_from_now">tot %d dagen en %d uur vanaf nu</string>
-    <string name="to___hours_and___minutes_from_now">tot %d uur en %d minuten vanaf nu</string>
+    <string name="to___days_and___hours_from_now">tot %1$d dagen en %2$d uur vanaf nu</string>
+    <string name="to___hours_and___minutes_from_now">tot %1$d uur en %2$d minuten vanaf nu</string>
     <string name="to___minuets_from_now">tot %d minuten vanaf nu</string>
     <string name="today">Vandaag</string>
     <string name="took">Genomen!</string>
     <string name="tuesday">Dinsdag</string>
     <string name="uninstall">Deïnstalleren</string>
-    <string name="uninstall_subtext">Weet u zeker dat u %s wilt verwijderen?\n%s\'s gegevens zullen voor voor altijd worden verwijderd!</string>
+    <string name="uninstall_subtext">Weet u zeker dat u %1$s wilt verwijderen?\n%2$s\'s gegevens zullen voor voor altijd worden verwijderd!</string>
     <string name="up">Omhoog</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video-uitleg</string>
@@ -303,21 +279,15 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
     <string name="try_now">Probeer Nu</string>
     <string name="download_progress">Voortgang downloaden</string>
     <string name="what_do_you_want_to_do_with___">Wat wilt u doen met %s?</string>
-    <string name="crash_reports">Crashrapporten</string>
-    <string name="crash_reports_subtext">Crashrapporten helpen om GranPhone te verbeteren\nZe worden alleen gebruikt om bugs op te lossen en er wordt geen andere informatie verstuurd dan dat wat nodig is om de bug op te lossen.</string>
     <string name="custom_app">Aangepaste App</string>
-    <string name="custom_app_subtext">Kies een aangepaste app die op het startscherm zal verschijnen.</string>
-    <string name="no_app_was_found">Er is geen overeenkomende app gevonden!</string>
     <string name="alarm">Alarm</string>
     <string name="no_new_notifications">Geen Nieuwe Notificaties</string>
     <string name="sound">Geluid</string>
     <string name="mute">Geluid dempen</string>
     <string name="vibrate">Trillen</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Er is geen assistent op uw apparaat geïnstalleerd.</string>
 
 
     <string name="status_bar_settings">Statusbalk</string>
-    <string name="status_bar_settings_subtext">Waar wil je dat de statusbalk wordt weergegeven?</string>
     <string name="only_home_screen">Alleen op het startscherm</string>
     <string name="nowhere">Nergens</string>
     <string name="everywhere">Overal</string>
@@ -337,47 +307,31 @@ als u in het buitenland bent, kost u dit mogelijk geld.\ nWilt u doorgaan met he
 
 
     <string name="dialer_sounds">Toetsgeluiden</string>
-    <string name="dialer_sounds_subtext">Kies dit als je toetsgeluiden wilt hebben.</string>
     <string name="low_battery_alert">Waarschuwing lage batterij</string>
-    <string name="low_battery_alert_subtext">Kies dit als u wilt dat de statusbalk rood wordt op het startscherm wanneer de batterij onder de 20% is\nLet op: Wanneer de statusbalk verborgen is wordt dit niet weergegeven.</string>
 
-    <string name="also_available_at">Ook bereikbaar op \nGranPhone.contact@gmail.com\nFeedback moet echter wel in het Engels / Hebreeuws zijn!</string>
     <string name="grant_all_permissions">Verleen alle bevoegdheden</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-<string name="emergency_button">Noodknop</string>
-    <string name="emergency_settings_subtext">Kies of u een noodknop op het startscherm wilt hebben.</string>
     <string name="private_number">Privénummer</string>
     <string name="swipe_left_or_right">Veeg naar links of rechts</string>
     <string name="press_next_or_back_buton">Druk op volgende of terug</string>
-    <string name="click_delay">Drukvertraging</string>
-    <string name="no_delay">Geen vertraging</string>
-    <string name="scrolling">Scrollen</string>
-    <string name="arrows">Pijlen</string>
-    <string name="swipe">Veeg</string>
-    <string name="_long">Lang</string>
-    <string name="_short">Kort</string>
     <string name="do_you_want_to_save_your_changes">Wilt u de wijzigingen opslaan?</string>
     <string name="discard">Veranderingen ongedaan maken</string>
     <string name="no_recent_calls">Geen recente oproepen</string>
     <string name="apps_sort_method">Sorteermethode voor Apps</string>
-    <string name="apps_sort_method_subtext">Kies of je de apps in één raster wilt sorteren of ze wilt groeperen aan de hand van letters.</string>
     <string name="groups">Groepen</string>
     <string name="one_grid">Eén raster</string>
     <string name="colorful">Kleurrijk</string>
-    <string name="colorful_subtext">Wilt u GranPhone kleurrijker maken?</string>
     <string name="edit_home_screen">Startscherm aanpassen</string>
     <string name="dual_sim">Dual Sim</string>
-    <string name="dual_sim_subtext">Kies hoe je dual sim wilt beheren\nAls je Toon Opties kiest, moet je ook nog een andere bevoegdheid geven</string>
     <string name="use_default">Gebruik standaardinstellingen</string>
     <string name="show_options">Toon Opties</string>
     <string name="read_phone_state">Telefoonstatus inzien</string>
     <string name="read_phone_state_subtext">Deze bevoegdheid is vereist om met de tweede sim te kunnen bellen</string>
     <string name="choose_sim">Kies simkaart</string>
-    <string name="choose_sim_subtext">Kies de simkaart waarmee je wilt bellen</string>
     <string name="website">Website</string>
     <string name="appear_on_top">Bovenaan tonen</string>
     <string name="appear_on_top_subtext">Deze bevoegdheid is vereist op de nieuwe versie van Android om alarmen en herinneringen weer te geven wanneer het scherm uit staat.</string>

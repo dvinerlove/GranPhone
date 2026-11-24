@@ -38,6 +38,8 @@ public class FirstPageAppIcon extends BaldFrameLayoutButton {
     public ImageView imageView;
     public TextView textView;
     public View badge;
+    private Drawable defaultDrawable;
+    private CharSequence defaultText;
 
     public FirstPageAppIcon(Context context) {
         super(context);
@@ -68,8 +70,10 @@ public class FirstPageAppIcon extends BaldFrameLayoutButton {
 
         if (attributeSet != null) {
             final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.FirstPageAppIcon);
-            setImageDrawable(styleAttributesArray.getDrawable(R.styleable.FirstPageAppIcon___src));
-            setText(styleAttributesArray.getString(R.styleable.FirstPageAppIcon___text));
+            defaultDrawable = styleAttributesArray.getDrawable(R.styleable.FirstPageAppIcon___src);
+            defaultText = styleAttributesArray.getString(R.styleable.FirstPageAppIcon___text);
+            setImageDrawable(defaultDrawable);
+            setText(defaultText);
             styleAttributesArray.recycle();
         }
 
@@ -103,5 +107,15 @@ public class FirstPageAppIcon extends BaldFrameLayoutButton {
 
     public void setText(@StringRes int resId) {
         textView.setText(resId);
+    }
+
+    public CharSequence getDefaultText() {
+        return defaultText;
+    }
+
+    /** Restores the icon/label declared in XML — used when a slot reverts from a custom app/contact to its default. */
+    public void resetToDefault() {
+        imageView.setImageDrawable(defaultDrawable);
+        textView.setText(defaultText);
     }
 }

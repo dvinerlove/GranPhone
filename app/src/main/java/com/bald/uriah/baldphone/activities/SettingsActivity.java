@@ -35,15 +35,12 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -66,7 +63,9 @@ import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.KioskManager;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.PageDragHelper;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
+import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 
@@ -82,22 +81,31 @@ import static android.content.Intent.ACTION_VIEW;
 public class SettingsActivity extends BaldActivity {
     private static final String TAG = SettingsActivity.class.getSimpleName();
     public static final float[] FONT_SIZES = new float[]{0.8f, 0.9f, 1.0f, 1.1f, 1.3f, 1.5f, 1.7f};
-    public static final String SAVEABLE_HISTORY_KEY = "SAVEABLE_HISTORY_KEY";
+    // parallel to FONT_SIZES — ends repeat: the 5 names predate the extended 7-stop scale
+    private static final int[] FONT_SIZE_NAMES = new int[]{
+            R.string.tiny, R.string.tiny, R.string.small, R.string.medium, R.string.large, R.string.huge, R.string.huge};
+    private static final int VOLUME_MAX = 5;
+    /** static so it survives leaving the activity; dies with the process — fine for a 5-min grace. */
+    private static final long HELPER_PIN_GRACE = 5 * 60 * Const.SECOND;
+    private static long helperUnlockedAt;
 
     private final Category
             mainCategory = new Category(R.string.settings, R.drawable.settings_on_button, -1),
-            connectionCategory = new Category(R.string.connection_settings, R.drawable.wifi_on_button, 0),
-            accessibilityCategory = new Category(R.string.accessibility_settings, R.drawable.accessibility_on_button, 1),
-            displayCategory = new Category(R.string.display_settings, R.drawable.screen_on_button, 2),
-            personalizationCategory = new Category(R.string.personalization_settings, R.drawable.brush_on_button, 3),
-            helperCategory = new Category(R.string.helper_settings, R.drawable.settings_on_button, 4) {
+            helperCategory = new Category(R.string.helper_settings, R.drawable.settings_on_button, 0) {
                 @Override
                 public void onClick(View v) {
-                    showHelperPinDialog();
+                    if (System.currentTimeMillis() - helperUnlockedAt < HELPER_PIN_GRACE) {
+                        helperUnlockedAt = System.currentTimeMillis();
+                        newCategory(helperCategory);
+                    } else {
+                        showHelperPinDialog();
+                    }
                 }
-            };
-    private final Category[] categoriesArray = new Category[]{mainCategory, connectionCategory, accessibilityCategory, displayCategory, displayCategory, personalizationCategory, helperCategory};
-    private final SparseArray<Category> categorySparseArray;
+            },
+            screenCategory = new Category(R.string.screen_and_appearance, R.drawable.screen_on_button, 1),
+            convenienceCategory = new Category(R.string.convenience_accessibility, R.drawable.accessibility_on_button, 2),
+            connectionCategory = new Category(R.string.connection_settings, R.drawable.wifi_on_button, 3),
+            systemCategory = new Category(R.string.system_settings, R.drawable.settings_on_button, 4);
     private Category currentCategory = mainCategory;
 
     private Ringtone ringtone;
@@ -107,14 +115,8 @@ public class SettingsActivity extends BaldActivity {
     private RecyclerView recyclerView;
     private BaldPrefsUtils baldPrefsUtils;
     private BaldTitleBar baldTitleBar;
+    private PageDragHelper pageDrag;
     private boolean layoutAnimationPlayed;
-
-    {
-        categorySparseArray = new SparseArray<>();
-        for (final Category category : categoriesArray) {
-            categorySparseArray.append(category.id, category);
-        }
-    }
 
     @SuppressLint("CommitPrefEdits")
     @Override
@@ -135,6 +137,22 @@ public class SettingsActivity extends BaldActivity {
 
         populateSettingsList();
         recyclerView.setAdapter(new SettingsRecyclerViewAdapter());
+
+        // root page drag toward the start edge = turn back to the home page
+        final boolean rtl = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+        pageDrag = new PageDragHelper(this, findViewById(R.id.root), rtl ? -1 : 1,
+                () -> {
+                    finish();
+                    overridePendingTransition(0, rtl ? R.anim.slide_out_left : R.anim.slide_out_right);
+                }).carousel();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (pageDrag != null && pageDrag.dispatch(ev,
+                currentCategory == mainCategory, !AppUtils.animationsDisabled(this)))
+            return true;
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
@@ -142,6 +160,8 @@ public class SettingsActivity extends BaldActivity {
         super.onResume();
         if (baldPrefsUtils.hasChanged(this))
             recreate();
+        else if (recyclerView != null) // refresh live subtitles (system brightness, font scale…)
+            recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
@@ -180,6 +200,7 @@ public class SettingsActivity extends BaldActivity {
                         BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();
                         return false;
                     }
+                    helperUnlockedAt = System.currentTimeMillis();
                     newCategory(helperCategory);
                     return true;
                 })
@@ -221,6 +242,7 @@ public class SettingsActivity extends BaldActivity {
                         return false;
                     }
                     editor.putString(BPrefs.HELPER_PIN_KEY, pin).apply();
+                    helperUnlockedAt = System.currentTimeMillis();
                     newCategory(helperCategory);
                     return true;
                 })
@@ -269,20 +291,6 @@ public class SettingsActivity extends BaldActivity {
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(SAVEABLE_HISTORY_KEY, currentCategory.id);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        int id = savedInstanceState.getInt(SAVEABLE_HISTORY_KEY);
-        if (id != -1)
-            newCategory(categorySparseArray.get(id));
-    }
-
     private static final String[] LANGUAGE_CODES = {
             "", "ar", "bg", "ca", "cs", "da", "de", "el", "en", "es", "et", "eu", "fi", "fr",
             "ha", "hi", "hr", "hu", "id", "it", "iw", "ka", "ko", "nl", "pl", "pt", "pt-rBR",
@@ -315,19 +323,25 @@ public class SettingsActivity extends BaldActivity {
         mainCategory.add(new Header(R.string.settings_for_user));
         setupAlarmVolume();
         mainCategory.add(new RunnableSettingsItem(R.string.brightness,
-                v -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)), R.drawable.brightness_on_button));
-        mainCategory.add(new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button));
-        mainCategory.add(new RunnableSettingsItem(R.string.accessibility_level, v -> startActivity(new Intent(this, AccessibilityLevelChangerActivity.class)), R.drawable.accessibility_on_button));
-        mainCategory.add(
-                new RunnableSettingsItem(R.string.vibrate,
-                        v -> DialogScreen.select(this, R.string.vibrate,
-                                sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.yes, R.string.no),
-                        R.drawable.vibration_on_background));
+                v -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)), R.drawable.brightness_on_button) {
+            @Override
+            public CharSequence getSubtitle() {
+                return brightnessSubtitle(SettingsActivity.this);
+            }
+        });
+        mainCategory.add(new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button) {
+            @Override
+            public CharSequence getSubtitle() {
+                return fontSizeName(SettingsActivity.this);
+            }
+        });
+        mainCategory.add(new SwitchSettingsItem(R.string.vibrate, R.drawable.vibration_on_background,
+                BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE) {
+            @Override
+            protected void onPrefChanged(boolean checked) {
+                vibrator = checked ? (Vibrator) getSystemService(VIBRATOR_SERVICE) : null;
+            }
+        });
         mainCategory.add(new RunnableSettingsItem(R.string.theme_settings,
                 v -> DialogScreen.select(this, R.string.theme_settings,
                         Math.max(0, Math.min(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE), BPrefs.Themes.THEMES.length - 1)) == BPrefs.Themes.DARK ? 1 : 0,
@@ -337,57 +351,27 @@ public class SettingsActivity extends BaldActivity {
                         },
                         R.string.light, R.string.dark),
                 R.drawable.brush_on_button
-        ));
-        mainCategory.add(new RunnableSettingsItem(R.string.language_settings, v -> showLanguageDialog(), R.drawable.translate_on_button));
+        ) {
+            @Override
+            public CharSequence getSubtitle() {
+                return getText(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE) == BPrefs.Themes.DARK
+                        ? R.string.dark : R.string.light);
+            }
+        });
         mainCategory.add(new Header(R.string.settings_for_helper));
         mainCategory.add(helperCategory);
 
-        // Helper layer: everything operational or dangerous stays behind the PIN gate.
-        // One flat scannable list — headers instead of nested category pages.
-        helperCategory.add(new Header(R.string.personalization_settings));
-        helperCategory.add(
-                new RunnableSettingsItem(R.string.hide_bottom_row,
-                        v -> DialogScreen.select(this, R.string.hide_bottom_row,
-                                sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.yes, R.string.no),
-                        R.drawable.keyboard_hide_on_button));
-        helperCategory.add(new RunnableSettingsItem(R.string.time_changer, v -> startActivity(new Intent(this, PillTimeSetterActivity.class)), R.drawable.pill));
-        helperCategory.add(new RunnableSettingsItem(R.string.edit_home_screen, v -> startActivity(new Intent(this, Page1EditorActivity.class)), R.drawable.edit_on_button));
-        helperCategory.add(new RunnableSettingsItem(R.string.status_bar_settings,
-                v -> DialogScreen.select(this, R.string.status_bar_settings,
-                        sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE),
-                        index -> {
-                            editor.putInt(BPrefs.STATUS_BAR_KEY, index).apply();
-                            this.recreate();
-                        },
-                        R.string.nowhere, R.string.only_home_screen, R.string.everywhere),
-                R.drawable.status_bar_on_button
-        ));
-        helperCategory.add(new RunnableSettingsItem(R.string.dialer_sounds,
-                v -> DialogScreen.select(this, R.string.dialer_sounds,
-                        sharedPreferences.getBoolean(BPrefs.DIALER_SOUNDS_KEY, BPrefs.DIALER_SOUNDS_DEFAULT_VALUE) ? 0 : 1,
-                        index -> {
-                            editor.putBoolean(BPrefs.DIALER_SOUNDS_KEY, index == 0).apply();
-                            this.recreate();
-                        },
-                        R.string.yes, R.string.no),
-                R.drawable.phone_on_button
-        ));
-        helperCategory.add(new RunnableSettingsItem(R.string.dual_sim,
-                v -> DialogScreen.select(this, R.string.dual_sim,
-                        sharedPreferences.getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE) ? 0 : 1,
-                        index -> {
-                            editor.putBoolean(BPrefs.DUAL_SIM_KEY, index == 0).apply();
-                            this.recreate();
-                        },
-                        R.string.show_options, R.string.use_default),
-                R.drawable.sim_on_button
-        ));
-        helperCategory.add(
+        // Helper layer: everything operational or dangerous stays behind the PIN gate,
+        // grouped into four drill-in sub-screens (modern settings idiom).
+        helperCategory.add(screenCategory);
+        helperCategory.add(convenienceCategory);
+        helperCategory.add(connectionCategory);
+        helperCategory.add(systemCategory);
+
+        screenCategory.add(new RunnableSettingsItem(R.string.edit_home_screen, v -> startActivity(new Intent(this, Page1EditorActivity.class)), R.drawable.edit_on_button));
+        screenCategory.add(new SwitchSettingsItem(R.string.hide_bottom_row, R.drawable.keyboard_hide_on_button,
+                BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE));
+        screenCategory.add(
                 new RunnableSettingsItem(R.string.apps_sort_method,
                         v -> DialogScreen.select(this, R.string.apps_sort_method,
                                 sharedPreferences.getBoolean(BPrefs.APPS_ONE_GRID_KEY, BPrefs.APPS_ONE_GRID_DEFAULT_VALUE) ? 0 : 1,
@@ -397,40 +381,41 @@ public class SettingsActivity extends BaldActivity {
                                 },
                                 R.string.one_grid, R.string.groups),
                         R.drawable.apps_on_button));
-        helperCategory.add(
-                new RunnableSettingsItem(R.string.colorful,
-                        v -> DialogScreen.select(this, R.string.colorful,
-                                sharedPreferences.getBoolean(BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.COLORFUL_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.yes, R.string.no),
-                        R.drawable.colors_on_button));
-        helperCategory.add(new RunnableSettingsItem(R.string.low_battery_alert,
-                v -> DialogScreen.select(this, R.string.low_battery_alert,
-                        sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE) ? 0 : 1,
+        screenCategory.add(new RunnableSettingsItem(R.string.status_bar_settings,
+                v -> DialogScreen.select(this, R.string.status_bar_settings,
+                        sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE),
                         index -> {
-                            editor.putBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, index == 0).apply();
+                            editor.putInt(BPrefs.STATUS_BAR_KEY, index).apply();
                             this.recreate();
                         },
-                        R.string.yes, R.string.no),
-                R.drawable.low_battery_alert_on_button
+                        R.string.nowhere, R.string.only_home_screen, R.string.everywhere),
+                R.drawable.status_bar_on_button
         ));
+        screenCategory.add(new SwitchSettingsItem(R.string.colorful, R.drawable.colors_on_button,
+                BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE));
+        screenCategory.add(new RunnableSettingsItem(R.string.language_settings, v -> showLanguageDialog(), R.drawable.translate_on_button) {
+            @Override
+            public CharSequence getSubtitle() {
+                final String code = sharedPreferences.getString(BPrefs.LANGUAGE_KEY, BPrefs.LANGUAGE_DEFAULT_VALUE);
+                if (code.isEmpty())
+                    return getText(R.string.system_default);
+                final java.util.Locale locale = java.util.Locale.forLanguageTag(code.replace("-r", "-"));
+                return locale.getDisplayName(locale);
+            }
+        });
 
-        helperCategory.add(new Header(R.string.accessibility_settings));
-        helperCategory.add(new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button));
-        helperCategory.add(
-                new RunnableSettingsItem(R.string.accidental_touches,
-                        v -> DialogScreen.select(this, R.string.accidental_touches,
-                                sharedPreferences.getBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.on, R.string.off),
-                        R.drawable.blocked_on_button));
-        helperCategory.add(
+        convenienceCategory.add(new RunnableSettingsItem(R.string.accessibility_level, v -> startActivity(new Intent(this, AccessibilityLevelChangerActivity.class)), R.drawable.accessibility_on_button) {
+            @Override
+            public CharSequence getSubtitle() {
+                // same flag math as TutorialFragment2: 2=high, 1=medium, 0=regular
+                final int flag = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE)
+                        ? (sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE) ? 1 : 2) : 0;
+                return getText(flag == 2 ? R.string.high_level : flag == 1 ? R.string.medium_level : R.string.regular_level);
+            }
+        });
+        convenienceCategory.add(new SwitchSettingsItem(R.string.accidental_touches, R.drawable.blocked_on_button,
+                BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE));
+        convenienceCategory.add(
                 new RunnableSettingsItem(R.string.strong_hand,
                         v -> DialogScreen.select(this, R.string.strong_hand,
                                 sharedPreferences.getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE) ? 1 : 0,
@@ -442,16 +427,22 @@ public class SettingsActivity extends BaldActivity {
                         R.drawable.hand_on_button
                 )
         );
+        convenienceCategory.add(new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button));
+        convenienceCategory.add(new SwitchSettingsItem(R.string.dialer_sounds, R.drawable.phone_on_button,
+                BPrefs.DIALER_SOUNDS_KEY, BPrefs.DIALER_SOUNDS_DEFAULT_VALUE));
+        convenienceCategory.add(new SwitchSettingsItem(R.string.low_battery_alert, R.drawable.low_battery_alert_on_button,
+                BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE));
+        convenienceCategory.add(new RunnableSettingsItem(R.string.time_changer, v -> startActivity(new Intent(this, PillTimeSetterActivity.class)), R.drawable.pill));
 
-        helperCategory.add(new Header(R.string.connection_settings));
-        helperCategory.add(new RunnableSettingsItem(R.string.airplane_mode, v -> startActivity(new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS)), R.drawable.airplane_mode_on_button));
-        helperCategory.add(new RunnableSettingsItem(R.string.wifi, v -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)), R.drawable.wifi_on_button));
-        helperCategory.add(new RunnableSettingsItem(R.string.bluetooth, v -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)), R.drawable.bluetooth_on_button));
+        connectionCategory.add(new RunnableSettingsItem(R.string.wifi, v -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)), R.drawable.wifi_on_button));
+        connectionCategory.add(new RunnableSettingsItem(R.string.bluetooth, v -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)), R.drawable.bluetooth_on_button));
+        connectionCategory.add(new RunnableSettingsItem(R.string.airplane_mode, v -> startActivity(new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS)), R.drawable.airplane_mode_on_button));
+        connectionCategory.add(new RunnableSettingsItem(R.string.location, v -> startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)), R.drawable.location_on_button));
 
         final NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
         final NfcAdapter adapter = manager == null ? null : manager.getDefaultAdapter();
         if (adapter != null)
-            helperCategory.add(new RunnableSettingsItem(R.string.nfc, v -> {
+            connectionCategory.add(new RunnableSettingsItem(R.string.nfc, v -> {
                 try {
                     startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
                 } catch (ActivityNotFoundException e) {
@@ -461,25 +452,38 @@ public class SettingsActivity extends BaldActivity {
 
                 }
             }, R.drawable.nfc_on_button));
-        helperCategory.add(new RunnableSettingsItem(R.string.location, v -> startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)), R.drawable.location_on_button));
+        if (hasMultipleSims())
+            connectionCategory.add(new RunnableSettingsItem(R.string.dual_sim,
+                    v -> DialogScreen.select(this, R.string.dual_sim,
+                            sharedPreferences.getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE) ? 0 : 1,
+                            index -> {
+                                editor.putBoolean(BPrefs.DUAL_SIM_KEY, index == 0).apply();
+                                this.recreate();
+                            },
+                            R.string.show_options, R.string.use_default),
+                    R.drawable.sim_on_button
+            ));
 
-        helperCategory.add(new Header(R.string.system_settings));
-        helperCategory.add(
+        if (!checkPermissions(this, -1))
+            systemCategory.add(
+                    new RunnableSettingsItem(R.string.grant_all_permissions,
+                            v -> startActivity(new Intent(this, PermissionActivity.class)),
+                            R.drawable.grant_all_permissions_on_button)
+            );
+        systemCategory.add(
                 new RunnableSettingsItem(R.string.set_home_screen,
                         v -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this)
                         , R.drawable.home_on_button)
         );
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            helperCategory.add(
+            systemCategory.add(
                     new RunnableSettingsItem(R.string.use_granphone_for_calls,
                             v -> CallManager.requestDefaultDialer(this)
                             , R.drawable.phone_on_button)
             );
-
-        helperCategory.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));
+        systemCategory.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));
         if (KioskManager.isDeviceOwner(this) && !KioskManager.isEnabled(this))
-            helperCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogScreen.confirm(this,
+            systemCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogScreen.confirm(this,
                     R.string.remove_device_owner,
                     R.string.remove_device_owner_subtext,
                     R.string.delete,
@@ -487,8 +491,8 @@ public class SettingsActivity extends BaldActivity {
                         KioskManager.removeDeviceOwner(this);
                         this.recreate();
                     }), R.drawable.blocked_on_button));
-
-        helperCategory.add(
+        systemCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
+        systemCategory.add(
                 new BDBSettingsItem(R.string.device_memory,
                         // keeps DialogBuilder: DialogScreen can't carry the storage/RAM extraView
                         DialogBuilder.from(this)
@@ -497,42 +501,58 @@ public class SettingsActivity extends BaldActivity {
                                 .setSubText(R.string.device_memory_subtext)
                                 .setPositiveButtonListener(params -> true)
                                 .setExtraView(buildMemoryStatusView())
-                        , R.drawable.sim_on_button)
+                        , R.drawable.storage_on_button)
         );
-        helperCategory.add(
+        systemCategory.add(
                 new RunnableSettingsItem(R.string.technical_information,
                         v -> startActivity(new Intent(this, TechnicalInfoActivity.class)),
                         R.drawable.tech_info_on_button)
         );
-        if (!checkPermissions(this, -1))
-            helperCategory.add(
-                    new RunnableSettingsItem(R.string.grant_all_permissions,
-                            v -> startActivity(new Intent(this, PermissionActivity.class)),
-                            R.drawable.grant_all_permissions_on_button)
-            );
-        helperCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
         if (BuildConfig.FLAVOR.equals("baldUpdates"))
-            helperCategory.add(
+            systemCategory.add(
                     new RunnableSettingsItem(R.string.check_for_updates,
                             v -> UpdatingUtil.checkForUpdates(this, true),
                             R.drawable.updates_on_button)
             );
     }
 
-    /**
-     * @return true if succeeded
-     */
+    /** pref 0..VOLUME_MAX -> real % of alarm stream (AlarmScreenActivity uses (v+6)/10, Android clamps at max). */
+    private static String volumePercent(int v) {
+        return Math.min((v + 6) * 10, 100) + "%";
+    }
+
+    /** true when the device provably has 2+ active SIMs; no permission or API<22 = treated as single-SIM. */
+    private boolean hasMultipleSims() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1)
+            return false;
+        if (androidx.core.app.ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE)
+                != android.content.pm.PackageManager.PERMISSION_GRANTED)
+            return false;
+        try {
+            final android.telephony.SubscriptionManager sm = (android.telephony.SubscriptionManager)
+                    getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+            final List<android.telephony.SubscriptionInfo> list = sm == null ? null : sm.getActiveSubscriptionInfoList();
+            return list != null && list.size() > 1;
+        } catch (SecurityException e) {
+            return false;
+        }
+    }
+
     private boolean goBack() {
         if (currentCategory == mainCategory)
             return false;
         if (vibrator != null)
             vibrator.vibrate(Const.vibetime);
-
-        newCategory(mainCategory);
+        final Category parent = currentCategory.parent;
+        newCategory(parent == null ? mainCategory : parent, false);
         return true;
     }
 
     private void newCategory(Category category) {
+        newCategory(category, true);
+    }
+
+    private void newCategory(Category category, boolean forward) {
         this.currentCategory = category;
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scrollToPosition(0);
@@ -542,7 +562,14 @@ public class SettingsActivity extends BaldActivity {
             recyclerView.scheduleLayoutAnimation();
         }
         baldTitleBar.setTitle(category.textResId);
-
+        recyclerView.animate().cancel();
+        if (AppUtils.animationsDisabled(this)) {
+            recyclerView.setTranslationX(0);
+            return;
+        }
+        final int dir = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL ? -1 : 1;
+        recyclerView.setTranslationX(forward ? recyclerView.getWidth() * dir : -recyclerView.getWidth() * 0.3f * dir);
+        recyclerView.animate().translationX(0).setDuration(250).start();
     }
 
     private View buildMemoryStatusView() {
@@ -570,10 +597,9 @@ public class SettingsActivity extends BaldActivity {
     }
 
     private void setupAlarmVolume() {
-        final SeekBar volumeSeekBar = (SeekBar) LayoutInflater.from(this).inflate(R.layout.volume_seek_bar, null, false);
-        final SharedPreferences sharedPreferences = BPrefs.get(this);
-        int volume = sharedPreferences.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE);
-        volumeSeekBar.setProgress(volume);
+        final SharedPreferences prefs = BPrefs.get(this);
+        final View control = LayoutInflater.from(this).inflate(R.layout.volume_buttons, null, false);
+        final TextView tvVolume = control.findViewById(R.id.tv_volume);
         final Handler handler = new Handler();
         final Runnable closeRingtone = () -> {
             final Ringtone r = ringtone;
@@ -582,41 +608,67 @@ public class SettingsActivity extends BaldActivity {
             r.stop();
             ringtone = null;
         };
+        final Runnable refresh = () -> tvVolume.setText(
+                volumePercent(prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE)));
+        refresh.run();
+        final View.OnClickListener step = v -> {
+            final int volume = prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE)
+                    + (v.getId() == R.id.bt_volume_up ? 1 : -1);
+            if (volume < 0 || volume > VOLUME_MAX)
+                return;
+            prefs.edit().putInt(BPrefs.ALARM_VOLUME_KEY, volume).apply();
+            handler.removeCallbacks(closeRingtone);
+            closeRingtone.run();
+            ringtone = AlarmScreenActivity.getRingtone(this);
+            if (ringtone != null)
+                ringtone.play();
+            handler.postDelayed(closeRingtone, 4 * Const.SECOND);
+            refresh.run();
+        };
+        control.findViewById(R.id.bt_volume_down).setOnClickListener(step);
+        control.findViewById(R.id.bt_volume_up).setOnClickListener(step);
 
-        volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                handler.removeCallbacks(closeRingtone);
-                closeRingtone.run();
-
-                sharedPreferences.edit().putInt(BPrefs.ALARM_VOLUME_KEY, progress).apply();
-                ringtone = AlarmScreenActivity.getRingtone(SettingsActivity.this);
-                if (ringtone != null)
-                    ringtone.play();
-                handler.postDelayed(closeRingtone, 4 * Const.SECOND);
-
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        // keeps DialogBuilder: DialogScreen can't carry the volume SeekBar extraView
+        // keeps DialogBuilder: DialogScreen can't carry the volume controls extraView
         final SettingsItem alarmVolumeSettingsItem = new BDBSettingsItem(R.string.alarm_volume,
                 DialogBuilder.from(this)
                         .addFlag(DialogFlags.FLAG_OK)
                         .setTitle(R.string.alarm_volume)
                         .setSubText(R.string.alarm_volume_subtext)
                         .setPositiveButtonListener(params -> true)
-                        .setExtraView(volumeSeekBar), R.drawable.clock_on_background
+                        .setExtraView(control), R.drawable.clock_on_background
 
-        );
+        ) {
+            @Override
+            public CharSequence getSubtitle() {
+                return volumePercent(prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE));
+            }
+        };
         mainCategory.add(alarmVolumeSettingsItem);
 
+    }
+
+    public static CharSequence fontSizeName(Context context) {
+        float scale;
+        try {
+            scale = Settings.System.getFloat(context.getContentResolver(), Settings.System.FONT_SCALE);
+        } catch (Settings.SettingNotFoundException e) {
+            scale = 1.0f;
+        }
+        int nearest = 0;
+        for (int i = 1; i < FONT_SIZES.length; i++)
+            if (Math.abs(FONT_SIZES[i] - scale) < Math.abs(FONT_SIZES[nearest] - scale))
+                nearest = i;
+        return context.getText(FONT_SIZE_NAMES[nearest]);
+    }
+
+    public static CharSequence brightnessSubtitle(Context context) {
+        // int 0-255 on most devices, float 0-1 where SCREEN_BRIGHTNESS_FLOAT wrote it
+        final float b = Settings.System.getFloat(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, -1f);
+        if (b < 0)
+            return null;
+        // SCREEN_BRIGHTNESS is linear output; gamma 2.2 maps it to the perceptual scale
+        final float linear = b <= 1f ? b : b / 255f;
+        return Math.round((float) Math.pow(linear, 1f / 2.2f) * 100) + "%";
     }
 
     @Override
@@ -657,12 +709,16 @@ public class SettingsActivity extends BaldActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             TextView textView;
+            TextView subtitleView;
             ImageView setting_icon;
+            ViewGroup trailing;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 textView = itemView.findViewById(R.id.tv_setting_name);
+                subtitleView = itemView.findViewById(R.id.tv_setting_subtitle);
                 setting_icon = itemView.findViewById(R.id.setting_icon);
+                trailing = itemView.findViewById(R.id.setting_trailing);
             }
 
             public void update(SettingsItem settingsItem) {
@@ -672,6 +728,12 @@ public class SettingsActivity extends BaldActivity {
                 }
                 this.textView.setText(settingsItem.textResId);
                 this.setting_icon.setImageResource(settingsItem.drawableResId);
+                final CharSequence subtitle = settingsItem.getSubtitle();
+                this.subtitleView.setVisibility(subtitle == null ? View.GONE : View.VISIBLE);
+                if (subtitle != null)
+                    this.subtitleView.setText(subtitle);
+                this.trailing.removeAllViews();
+                settingsItem.bindTrailing(this.trailing);
                 this.itemView.setOnClickListener(settingsItem);
             }
         }
@@ -692,6 +754,16 @@ public class SettingsActivity extends BaldActivity {
             this.drawableResId = drawableResId;
         }
 
+        /** Current value shown under the title (e.g. "Large"); null = no subtitle. */
+        @Nullable
+        public CharSequence getSubtitle() {
+            return null;
+        }
+
+        /** Add a trailing widget (e.g. BaldSwitch) into the row's end slot. Default: none. */
+        public void bindTrailing(@NonNull ViewGroup container) {
+        }
+
     }
 
     public class BDBSettingsItem extends SettingsItem {
@@ -705,6 +777,49 @@ public class SettingsActivity extends BaldActivity {
         @Override
         public void onClick(View v) {
             bdb.show();
+        }
+    }
+
+    /** Row with an inline {@link BaldSwitch} in the trailing slot; row tap toggles it. */
+    public class SwitchSettingsItem extends SettingsItem {
+        private final String key;
+        private final boolean defaultValue;
+        private BaldSwitch baldSwitch;
+
+        SwitchSettingsItem(@StringRes int textResId, @DrawableRes int drawableResId, String key, boolean defaultValue) {
+            super(textResId, drawableResId);
+            this.key = key;
+            this.defaultValue = defaultValue;
+        }
+
+        /** Hook for side effects beyond the pref write (e.g. updating the vibrator field). */
+        protected void onPrefChanged(boolean checked) {
+        }
+
+        private void apply(boolean checked) {
+            editor.putBoolean(key, checked).apply();
+            onPrefChanged(checked);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (baldSwitch == null)
+                return;
+            // BaldSwitch.setChecked doesn't fire the change listener — apply manually.
+            baldSwitch.setChecked(!baldSwitch.isChecked());
+            apply(baldSwitch.isChecked());
+        }
+
+        @Override
+        public void bindTrailing(@NonNull ViewGroup container) {
+            final Context ctx = container.getContext();
+            baldSwitch = new BaldSwitch(ctx);
+            baldSwitch.setLayoutParams(new ViewGroup.LayoutParams(
+                    ctx.getResources().getDimensionPixelSize(R.dimen.switch_width),
+                    ctx.getResources().getDimensionPixelSize(R.dimen.switch_height)));
+            baldSwitch.setChecked(sharedPreferences.getBoolean(key, defaultValue));
+            baldSwitch.setOnChangeListener(this::apply);
+            container.addView(baldSwitch);
         }
     }
 
@@ -748,6 +863,7 @@ public class SettingsActivity extends BaldActivity {
     public class Category extends SettingsItem {
         public final List<SettingsItem> settingsItemList;
         public final int id;
+        private Category parent;
 
         public Category(int stringRes, int drawableRes, int id) {
             super(stringRes, drawableRes);
@@ -756,6 +872,8 @@ public class SettingsActivity extends BaldActivity {
         }
 
         public void add(SettingsItem settingsItem) {
+            if (settingsItem instanceof Category)
+                ((Category) settingsItem).parent = this;
             settingsItemList.add(settingsItem);
         }
 
@@ -770,6 +888,18 @@ public class SettingsActivity extends BaldActivity {
         @Override
         public void onClick(View v) {
             newCategory(this);
+        }
+
+        @Override
+        public void bindTrailing(@NonNull ViewGroup container) {
+            // chevron marks drill-in rows (same idiom as system Settings)
+            final Context ctx = container.getContext();
+            final ImageView chevron = new ImageView(ctx);
+            final int size = ctx.getResources().getDimensionPixelSize(R.dimen.icon_sm);
+            chevron.setLayoutParams(new ViewGroup.LayoutParams(size, size));
+            chevron.setImageResource(R.drawable.arrow_end_on_button);
+            chevron.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+            container.addView(chevron);
         }
     }
 

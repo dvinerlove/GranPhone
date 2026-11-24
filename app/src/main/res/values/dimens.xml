@@ -18,6 +18,7 @@
     <!-- Type scale (DESIGN.md §3): tiny 14 caption, small 18 label,
          medium 20 body, large 24 title, huge 28 display; heroes are inline sp. -->
     <dimen name="huge">28sp</dimen>
+    <dimen name="giant">40sp</dimen>
     <dimen name="large">24sp</dimen>
     <dimen name="medium">20sp</dimen>
     <dimen name="small">18sp</dimen>
@@ -29,9 +30,54 @@
     <dimen name="recycler_view_margin_right_size">10dp</dimen>
     <dimen name="home_screen_padding">10dp</dimen>
     <dimen name="home_tile_row_height">110dp</dimen>
-    <dimen name="home_pin_tile_margin">4dp</dimen>
     <dimen name="home_bottom_bar_height">72dp</dimen>
     <dimen name="padding_dividers">14dp</dimen>
     <dimen name="divider">2dp</dimen>
     <dimen name="key_radius">7dp</dimen>
+
+    <!-- Design tokens (DESIGN.md): spacing -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">24dp</dimen>
+    <!-- Design tokens: radius -->
+    <dimen name="radius_card">16dp</dimen>
+    <dimen name="radius_button">14dp</dimen>
+    <dimen name="radius_dialog">20dp</dimen>
+    <!-- Design tokens: sizes -->
+    <dimen name="touch_min">64dp</dimen>
+    <dimen name="button_height_default">64dp</dimen>
+    <dimen name="button_height_large">80dp</dimen>
+    <dimen name="switch_height">48dp</dimen>
+    <dimen name="switch_width">112dp</dimen>
+    <dimen name="icon_sm">24dp</dimen>
+    <dimen name="icon_md">32dp</dimen>
+    <dimen name="icon_lg">40dp</dimen>
+    <dimen name="icon_xl">48dp</dimen>
+    <dimen name="border_width">1.5dp</dimen>
+    <dimen name="border_width_selected">2.5dp</dimen>
+    <!-- Design tokens: avatars -->
+    <dimen name="avatar_sm">44dp</dimen>
+    <dimen name="avatar_md">56dp</dimen>
+    <dimen name="avatar_lg">72dp</dimen>
+    <dimen name="avatar_xl">144dp</dimen>
+    <!-- Design tokens: lists -->
+    <dimen name="list_row_height">80dp</dimen>
+    <dimen name="list_row_height_tall">88dp</dimen>
+    <dimen name="list_header_height">48dp</dimen>
+    <!-- Design tokens: chrome -->
+    <dimen name="title_bar_height">48dp</dimen>
+    <dimen name="button_height_small">48dp</dimen>
+    <dimen name="dialog_button_height">72dp</dimen>
+    <dimen name="dialog_action_inset">44dp</dimen>
+    <dimen name="dialog_actions_reserve">124dp</dimen>
+    <dimen name="dialog_close_inset">34dp</dimen>
+    <dimen name="progress_height">16dp</dimen>
+    <dimen name="elevation_low">5dp</dimen>
+    <!-- Design tokens: keyboard -->
+    <dimen name="key_padding">1dp</dimen>
+    <dimen name="key_text_size">30sp</dimen>
+    <dimen name="keyboard_height">350dp</dimen>
+    <dimen name="dialer_display">32sp</dimen>
 </resources>

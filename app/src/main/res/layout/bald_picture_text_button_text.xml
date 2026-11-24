@@ -23,5 +23,5 @@
     android:ellipsize="end"
     android:gravity="center"
     android:maxLines="2"
-    android:paddingStart="4dp"
-    android:paddingEnd="6dp" />
+    android:paddingStart="@dimen/spacing_xs"
+    android:paddingEnd="@dimen/spacing_xs" />

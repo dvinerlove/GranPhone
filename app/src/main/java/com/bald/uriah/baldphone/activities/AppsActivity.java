@@ -31,6 +31,7 @@ import com.bald.uriah.baldphone.adapters.AppsRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.apps.App;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
+import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
 import com.bald.uriah.baldphone.utils.AppUtils;
@@ -128,12 +129,14 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
                         });
                         break;
                     case 1:
-                        viewHolder.pic.setImageResource(app.isPinned() ? R.drawable.remove_on_button : R.drawable.pin_on_button);
-                        viewHolder.text.setText(app.isPinned() ? R.string.unpin_from_home : R.string.pin_to_home);
+                        final boolean pinned = HomeScreenPinHelper.isAppPinned(AppsActivity.this, app.getFlattenComponentName());
+                        viewHolder.pic.setImageResource(pinned ? R.drawable.remove_on_button : R.drawable.pin_on_button);
+                        viewHolder.text.setText(pinned ? R.string.unpin_from_home : R.string.pin_to_home);
                         viewHolder.itemView.setOnClickListener(v1 -> {
-                            appsDatabase.appsDatabaseDao().update(app.getId(), !app.isPinned());
-                            app.setPinned(!app.isPinned());
-                            appsRecyclerViewAdapter.notifyItemChanged(appsRecyclerViewAdapter.index);
+                            if (pinned)
+                                HomeScreenPinHelper.unpinApp(AppsActivity.this, app.getFlattenComponentName());
+                            else if (!HomeScreenPinHelper.pinApp(AppsActivity.this, app.getFlattenComponentName()))
+                                DialogScreen.info(AppsActivity.this, R.string.home_screen_is_full, R.string.home_screen_is_full_subtext);
                             popupWindow.dismiss();
                             showDropDown(index);
                         });

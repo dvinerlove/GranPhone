@@ -22,6 +22,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,19 +131,18 @@ public class BaldTitleBar extends LinearLayout {
 
         bt_help.setOnClickListener(v -> BaldToast.from(context).setText(R.string.coming_soon).show());
         final boolean rightHanded = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE).getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE);
-        addView(rightHanded ? bt_help : backView);
-        addView(tv_title);
-        addView(rightHanded ? backView : bt_help);
-        // GranPhone: the help button opened video tutorials in English / Hebrew; hidden, but keeps the title centered
-        bt_help.setVisibility(INVISIBLE);
-        // the invisible spacer must match the visible back control's real width or the title sits off-center
-        backView.post(() -> {
-            final ViewGroup.LayoutParams lp = bt_help.getLayoutParams();
-            if (lp.width != backView.getWidth()) {
-                lp.width = backView.getWidth();
-                bt_help.setLayoutParams(lp);
-            }
-        });
+        // Title hugs the edge opposite the back control and spans all free width —
+        // a symmetric spacer squeezed long titles into "Приложен..." ellipses.
+        if (rightHanded) {
+            addView(tv_title);
+            addView(backView);
+        } else {
+            addView(backView);
+            addView(tv_title);
+        }
+        final int pad = context.getResources().getDimensionPixelSize(R.dimen.spacing_md);
+        tv_title.setPadding(rightHanded ? pad : 0, 0, rightHanded ? 0 : pad, 0);
+        tv_title.setGravity(Gravity.CENTER_VERTICAL | (rightHanded ? Gravity.START : Gravity.END));
         added = true;
 
     }

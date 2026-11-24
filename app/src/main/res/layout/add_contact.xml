@@ -19,11 +19,11 @@
     android:id="@+id/bt_add_contact"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/style_for_buttons_transparent"
+    android:background="@drawable/bald_ghost_button_background"
     android:gravity="center"
     android:orientation="horizontal"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
+    android:paddingStart="@dimen/spacing_lg"
+    android:paddingEnd="@dimen/spacing_lg"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/bald_title_bar">
@@ -40,7 +40,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:maxLines="1"
-        android:paddingStart="8dp"
+        android:paddingStart="@dimen/spacing_sm"
         android:paddingEnd="0dp"
         android:text="@string/add_contact"
         app:autoSizeTextType="uniform" />

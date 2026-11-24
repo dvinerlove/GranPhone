@@ -24,10 +24,10 @@
     android:background="?attr/bald_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingStart="24dp"
-    android:paddingTop="48dp"
-    android:paddingEnd="24dp"
-    android:paddingBottom="24dp">
+    android:paddingStart="@dimen/spacing_md"
+    android:paddingTop="@dimen/spacing_xl"
+    android:paddingEnd="@dimen/spacing_md"
+    android:paddingBottom="@dimen/spacing_md">
 
     <TextClock
         android:id="@+id/textClock"
@@ -43,7 +43,7 @@
         android:id="@+id/alarm_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/spacing_lg"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="3"
@@ -59,8 +59,8 @@
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/snooze"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
-        android:background="@drawable/style_for_buttons"
+        android:layout_height="@dimen/button_height_large"
+        android:background="@drawable/bald_button_background"
         app:_size="@dimen/large"
         app:_src="@drawable/clock_on_background"
         app:_text="@string/snooze" />
@@ -68,9 +68,9 @@
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/alarm_cancel"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/style_for_buttons"
+        android:layout_height="@dimen/button_height_large"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:background="@drawable/bald_button_background"
         app:_size="@dimen/large"
         app:_src="@drawable/alarm_off_on_button"
         app:_text="@string/turn_off"

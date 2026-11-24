@@ -145,7 +145,6 @@
 
         <activity
             android:name=".activities.SettingsActivity"
-
             android:enabled="${fullApp}"
             android:label="@string/settings" />
         <activity

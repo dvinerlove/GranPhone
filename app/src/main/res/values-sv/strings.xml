@@ -19,20 +19,14 @@
 <string name="accessibility_level">Tillgängligetsbehov</string>
     <string name="accessibility_settings">Tillgänglighet</string>
     <string name="accidental_touches">Skydd mot oavsiktligt pekande</string>
-    <string name="accidental_touches_settings_subtext">Skyddet förhindrar pekningar när telefonen är övertäckt. Den går att\nstänga av om den orsakar problem.
-    </string>
     <string name="accidental_touches_subtext">Pekning upptäcktes\nTryck på \"Förstått\" för att fortsätta använda telefonen.\n om detta meddelande upprepas kan du stänga av funktionen i inställningarna tillgänglighet
     </string>
-    <string name="acknowledgments">Utvecklarens tack</string>
-    <string name="adaptive">Adaptiv</string>
     <string name="add_alarm">Lägg till Alarm</string>
     <string name="add_alarm_quickly">Lägg till Timer</string>
     <string name="add_contact">Lägg till Kontakt</string>
     <string name="add_emergency_contact">Ny Nödkontakt</string>
     <string name="add_pill">Lägg till läkemedel</string>
-    <string name="add_shortcut">Skapa genväg</string>
     <string name="add_to_favorite">Lägg till som favorit</string>
-    <string name="add_to_home">Fäst på hemskärmen</string>
     <string name="add_to_sos">Ange som nödkontakt</string>
     <string name="address">Adress</string>
     <string name="advanced_options">Avancerade alternativ</string>
@@ -52,7 +46,6 @@
 
     <string name="apps">Appar</string>
     <string name="are_you_sure_you_want_to_delete___">Är du säker på att du vill ta bort %s?</string>
-    <string name="assistant">Assistent</string>
     <string name="at_least_one_day_must_be_selected">Minst en dag måste anges!</string>
     <string name="auto_brightness">Automatisk Ljusstyrka</string>
     <string name="backspace">backsteg</string>
@@ -60,7 +53,6 @@
     <string name="blocked">Blockerad</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Ljusstyrka</string>
-    <string name="brightness_subtext">Ändra Ljusstyrka.</string>
     <string name="cache_cleared_successfully">Cachen rensades!</string>
     <string name="call">Ring</string>
     <string name="calling">Ring</string>
@@ -70,7 +62,6 @@
     <string name="camera">Kamera</string>
     <string name="camera_subtext">Den här rättigheten krävs för att starta ficklampan med GranPhone.</string>
     <string name="cancel">Avbryt</string>
-    <string name="change_pills_time">Ändra Läkemedelstider</string>
     <string name="change_system_settings_subtext">Ger GranPhone tillåtelse att ändra telefonens inställningar</string>
     <string name="choose_friday">Fre</string>
     <string name="choose_monday">Mån</string>
@@ -100,24 +91,18 @@ All data försvinner!</string>
     <string name="dark">Mörk</string>
     <string name="delete">Ta bort</string>
     <string name="delete___">Ta bort %s?</string>
-    <string name="delete_all_alarms">Ta bort alla alarm</string>
     <string name="dialer">Ring</string>
     <string name="display_settings">Skärm</string>
     <string name="done">Klar</string>
     <string name="down">Ner</string>
     <string name="edit">Ändra</string>
-    <string name="email">Epost:</string>
     <string name="enable_notification_access">Tillåt hantering av aviseringar</string>
     <string name="enable_notification_access_subtext">Tillåter att GranPhone att hantera aviseringar.</string>
     <string name="enter">Ange</string>
-    <string name="enter_contact_or_phone_number">Ange namn på kontakt:</string>
     <string name="evening">Kväll</string>
     <string name="example_of_different_text_sizes">Exempel på olika teckenstorlekar\n Tecknen bör vara läsbara och inte försvinna ur \nsynligt fält:
     </string>
     <string name="external_storage_subtext">Den här rättigheten krävs för att spara bilder med GranPhone.</string>
-    <string name="feedback">Skicka återkoppling</string>
-    <string name="feedback_cannot_be_empty">Återkoppling kan inte vara tom!</string>
-    <string name="feedback_sent_successfully">Återkoppling skickades!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Ange behov av\nanpassning
     </string>
     <string name="font_size">Teckenstorlek</string>
@@ -131,7 +116,6 @@ All data försvinner!</string>
     <string name="home_phone_number">Telefon hem</string>
     <string name="hour">Timma</string>
     <string name="huge">Jättestor</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Alarm ringer om</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Slutligen:\n Det är högst rekommenderat att låta GranPhone köras när telefonen startar upp.
     </string>
@@ -142,7 +126,6 @@ All data försvinner!</string>
     <string name="light">Ljus</string>
     <string name="location">Plats</string>
 <string name="mail">Epost</string>
-    <string name="maps">Kartor</string>
 
 
     <string name="medium">Normal</string>
@@ -163,8 +146,6 @@ All data försvinner!</string>
     <string name="nfc">NFC</string>
     <string name="no">Nej</string>
     <string name="notes">Anteckningar</string>
-    <string name="notes_settings">Anteckningar</string>
-    <string name="notes_settings_subtext">Vill du ha en skärm för anteckningar på hemmaskärmen?</string>
     <string name="notifications">Aviseringar</string>
 
     <string name="of">av</string>
@@ -198,9 +179,6 @@ All data försvinner!</string>
     <string name="regular_level">Standard</string>
 
     <string name="remove_from_favorite">Ta bort från favoriter</string>
-    <string name="remove_from_home">Ta bort från hemskärmen</string>
-    <string name="remove_from_sos">Ta bort från nödkontakt</string>
-    <string name="remove_shortcut">Ta bort genväg</string>
     <string name="removed_all_alarms">Alla alarm togs bort!</string>
     <string name="repeats_every_day">Dagligen</string>
     <string name="right_handed">Högerhänt</string>
@@ -238,24 +216,21 @@ All data försvinner!</string>
     <string name="speak">Prata</string>
     <string name="speech_to_text">Tal Till Text</string>
     <string name="strong_hand">Dominant Hand</string>
-    <string name="strong_hand_subtext">Välj din dominanta hand för att anpassa appen</string>
-    <string name="submit">Spara</string>
     <string name="sunday">Söndag</string>
     <string name="technical_information">Teknisk Information</string>
     <string name="theme_settings">Teman</string>
-    <string name="theme_settings_subtext">Välj ett tema</string>
 
     <string name="thursday">Torsdag</string>
     <string name="time_changer">Läkemedelstider</string>
     <string name="tiny">Mini</string>
-    <string name="to___days_and___hours_from_now">om %d dagar och %d timmar</string>
-    <string name="to___hours_and___minutes_from_now">om %d timmar och %d minuter</string>
+    <string name="to___days_and___hours_from_now">om %1$d dagar och %2$d timmar</string>
+    <string name="to___hours_and___minutes_from_now">om %1$d timmar och %2$d minuter</string>
     <string name="to___minuets_from_now">om %d minuter</string>
     <string name="today">Idag</string>
     <string name="took">Took!</string>
     <string name="tuesday">Tisdag</string>
     <string name="uninstall">Avinstallera</string>
-    <string name="uninstall_subtext">Är du säker på att du vill avinstallera %s?\n%s data rensas!</string>
+    <string name="uninstall_subtext">Är du säker på att du vill avinstallera %1$s?\n%2$s data rensas!</string>
     <string name="up">Upp</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Videoinstruktioner</string>
@@ -313,23 +288,15 @@ Tryck på \"+ Läkemedel\" nedan.</string>
     <string name="try_now">Försök Nu</string>
     <string name="download_progress">Hämtningsstatus</string>
     <string name="what_do_you_want_to_do_with___">Vad vill du göra med %s?</string>
-    <string name="crash_reports">Krashrapporter</string>
-    <string name="crash_reports_subtext">Krashrapporter hjälper till att förbättra upplevelsen med GranPhone.\n\nRapporterna innehåller enbart information nödvändig för att åtgärda fel.
-    </string>
     <string name="custom_app">Annan App</string>
-    <string name="custom_app_subtext">Välj en app att placera på hemskärmen.</string>
-    <string name="no_app_was_found">Hittade ingen lämplig app!</string>
     <string name="alarm">Alarm</string>
     <string name="no_new_notifications">Inga nya aviseringar</string>
     <string name="sound">Ljud på</string>
     <string name="mute">Tyst</string>
     <string name="vibrate">Vibrera</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Din telefon har ingen assistent installerad.
-    </string>
 
 
     <string name="status_bar_settings">Statuslisten</string>
-    <string name="status_bar_settings_subtext">Var ska statuslisten visas?</string>
     <string name="only_home_screen">Endast på hemskärmen</string>
     <string name="nowhere">Ingenstans</string>
     <string name="everywhere">Överallt</string>
@@ -349,50 +316,31 @@ Tryck på \"+ Läkemedel\" nedan.</string>
 
 
     <string name="dialer_sounds">Knappljud Telefon</string>
-    <string name="dialer_sounds_subtext">Vill du höra knappljud när du slår ett nummer för att ringa?
-    </string>
     <string name="low_battery_alert">Batterivarning</string>
-    <string name="low_battery_alert_subtext">Välj om du vill att statuslisten ska visas röd när batterinivån är lägre än 20%\n Observera att statuslisten måste vara synlig för att det ska märkas.
-    </string>
 
-    <string name="also_available_at">Återkoppling måste skrivas på engelska eller hebreiska!\n\nDu kan även skicka ett epost till\nGranPhone.contact@gmail.com
-    </string>
     <string name="grant_all_permissions">Tillåt alla rättigheter</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-<string name="emergency_button">Nödanrop</string>
-    <string name="emergency_settings_subtext">Välj om du vill visa en nödknapp på hemskärmen.</string>
     <string name="private_number">Privat nummer</string>
     <string name="swipe_left_or_right">Svep åt vänster eller höger</string>
     <string name="press_next_or_back_buton">Använd pilarna för att navigera</string>
-    <string name="click_delay">Pekfördröjning</string>
-    <string name="no_delay">Ingen fördröjning</string>
-    <string name="scrolling">Bläddrande</string>
-    <string name="arrows">Pilar</string>
-    <string name="swipe">Svep</string>
-    <string name="_long">Lång</string>
-    <string name="_short">Kort</string>
     <string name="do_you_want_to_save_your_changes">Vill du spara dina ändringar?</string>
     <string name="discard">Avfärda</string>
     <string name="no_recent_calls">Inga Nya Samtal</string>
     <string name="apps_sort_method">Visning av appar</string>
-    <string name="apps_sort_method_subtext">Ange om du vill visa appar i ett rutmönster eller gruppera dem på första bokstaven i appens namn.</string>
     <string name="groups">Gruppera</string>
     <string name="one_grid">Rutmönster</string>
     <string name="colorful">Färgglad</string>
-    <string name="colorful_subtext">Vill du att GranPhone ska visas med fler färger?</string>
     <string name="edit_home_screen">Anpassa Hemskärmen</string>
     <string name="dual_sim">Dubbel SIM</string>
-    <string name="dual_sim_subtext">Välj hur du vill hantera dubbel SIM\nObs! Om du väljer Visa alternativ måste du tillåta annan rättighet</string>
     <string name="use_default">Använd standard</string>
     <string name="show_options">Visa alternativ</string>
     <string name="read_phone_state">Läs telefonens tillstånd</string>
     <string name="read_phone_state_subtext">Den här rättighet krävs för att kunna ringa från den andra SIM</string>
     <string name="choose_sim">Välj SIM</string>
-    <string name="choose_sim_subtext">Välj den SIM du vill ringa från</string>
     <string name="website">Webbplats</string>
     <string name="appear_on_top">Visas på toppen</string>
     <string name="appear_on_top_subtext">Den här rättighet krävs för ny version av Android för att visa larm och påminnelser när skärmen är stängd</string>

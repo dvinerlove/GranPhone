@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingBottom="12dp"
+            android:paddingBottom="@dimen/spacing_md"
             android:layoutAnimation="@anim/layout_animation_fall_down"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </com.bald.uriah.baldphone.views.ScrollingHelper>

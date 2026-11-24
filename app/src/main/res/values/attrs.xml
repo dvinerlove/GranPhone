@@ -63,7 +63,14 @@
             <enum name="brand" value="1" />
             <enum name="danger" value="2" />
             <enum name="info" value="3" />
+            <enum name="tinted" value="4" />
+            <enum name="danger_outline" value="5" />
         </attr>
+    </declare-styleable>
+
+    <declare-styleable name="BaldScreen">
+        <attr name="title" />
+        <attr name="show_back" />
     </declare-styleable>
 
 

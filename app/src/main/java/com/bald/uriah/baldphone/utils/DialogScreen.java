@@ -191,7 +191,7 @@ public class DialogScreen extends Dialog {
             }
         });
         if (primaryIsTextButton) {
-            bt_primary.setBackgroundResource(R.drawable.style_for_buttons_transparent);
+            bt_primary.setBackgroundResource(R.drawable.bald_ghost_button_background);
             bt_primary.setTextColor(resolveThemeColor(R.attr.bald_brand));
         }
     }

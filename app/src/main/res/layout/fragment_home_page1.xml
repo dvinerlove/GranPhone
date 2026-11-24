@@ -24,17 +24,19 @@
     android:orientation="vertical"
     android:paddingStart="@dimen/home_screen_padding"
     android:paddingEnd="@dimen/home_screen_padding"
+    android:paddingBottom="@dimen/spacing_md"
     android:visibility="visible">
 
     <LinearLayout
+        android:id="@+id/clock_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/dialog_screen_card"
+        android:background="@drawable/bald_card_background"
         android:gravity="top|center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="@dimen/spacing_lg"
+        android:paddingBottom="@dimen/spacing_sm">
 
         <TextClock
             android:id="@+id/clock"
@@ -62,15 +64,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/pins_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/home_screen_padding"
-        android:layout_marginBottom="@dimen/home_screen_padding"
-        android:orientation="vertical"
-        android:visibility="gone" />
-
-    <LinearLayout
         android:id="@+id/phone_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
@@ -84,7 +77,7 @@
 
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/history_on_background"
             app:__text="@string/recent" />
@@ -96,7 +89,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/phone_on_background"
             app:__text="@string/dialer" />
@@ -108,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/human_on_background"
             app:__text="@string/contacts" />
@@ -129,7 +122,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/emergency_on_button"
             app:__text="@string/sos" />
@@ -141,7 +134,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/flashlight_off_on_background"
             app:__text="@string/flashlight" />
@@ -153,7 +146,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/message_on_background"
             app:__text="@string/messages" />
@@ -173,7 +166,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/photo_on_background"
             app:__text="@string/photos" />
@@ -185,7 +178,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/camera_on_background"
             app:__text="@string/camera" />
@@ -197,7 +190,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/movie_on_background"
             app:__text="@string/videos" />
@@ -219,7 +212,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/pill"
             app:__text="@string/pills" />
@@ -231,7 +224,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/apps_on_background"
             app:__text="@string/apps" />
@@ -243,7 +236,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
+            android:background="@drawable/bald_ghost_button_background"
             android:visibility="visible"
             app:__src="@drawable/clock_on_background"
             app:__text="@string/alarms" />

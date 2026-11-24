@@ -84,7 +84,7 @@ public class SingleContactActivity extends BaldActivity {
     private String contactKeyExtra;
     private BaldTitleBar baldTitleBar;
     private ImageView contact_image;
-    private TextView tv_contact_name, image_letter;
+    private TextView tv_contact_name, tv_no_phone, image_letter;
     private LinearLayout ll_phones, ll_dynamic;
     private BaldSwitch sos_switch, home_pin_switch;
     private View bt_call, bt_sms;
@@ -133,7 +133,7 @@ public class SingleContactActivity extends BaldActivity {
             return;
         }
 
-        baldTitleBar.setTitle(contact.getName());
+        baldTitleBar.setTitle(R.string.contact);
         tv_contact_name.setText(contact.getName());
         setupBar();
 
@@ -210,13 +210,14 @@ public class SingleContactActivity extends BaldActivity {
         tv_contact_name = findViewById(R.id.tv_contact_name);
         // name can be a raw phone number — keep digits LTR in RTL locales
         tv_contact_name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
+        tv_no_phone = findViewById(R.id.tv_no_phone);
         sos_switch = findViewById(R.id.sos_switch);
         home_pin_switch = findViewById(R.id.home_pin_switch);
         bt_call = findViewById(R.id.bt_call);
         bt_sms = findViewById(R.id.bt_sms);
 
         ((BaldPictureTextButton) bt_call).getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
-        for (int id : new int[]{R.id.bt_sms, R.id.bt_edit, R.id.bt_share, R.id.bt_delete})
+        for (int id : new int[]{R.id.bt_sms, R.id.bt_edit, R.id.bt_delete})
             ((BaldPictureTextButton) findViewById(id)).getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
     }
 
@@ -344,10 +345,14 @@ public class SingleContactActivity extends BaldActivity {
 
         home_pin_switch.setChecked(HomeScreenPinHelper.isPinned(this, contact.getLookupKey()));
         home_pin_switch.setOnChangeListener(isChecked -> {
-            if (isChecked)
-                HomeScreenPinHelper.pinContact(this, contact.getLookupKey());
-            else
+            if (isChecked) {
+                if (!HomeScreenPinHelper.pinContact(this, contact.getLookupKey())) {
+                    home_pin_switch.setChecked(false);
+                    DialogScreen.info(this, R.string.home_screen_is_full, R.string.home_screen_is_full_subtext);
+                }
+            } else {
                 HomeScreenPinHelper.removeContact(this, contact.getLookupKey());
+            }
         });
     }
 
@@ -414,26 +419,16 @@ public class SingleContactActivity extends BaldActivity {
         findViewById(R.id.bt_delete).setOnClickListener(deleteListener);
         findViewById(R.id.bt_edit).setOnClickListener(v -> v.getContext().startActivity(editIntent));
 
-        final Uri vcardUri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, contact.getLookupKey());
-        final Intent shareIntent = new Intent(Intent.ACTION_SEND)
-                .setType(ContactsContract.Contacts.CONTENT_VCARD_TYPE)
-                .putExtra(Intent.EXTRA_STREAM, vcardUri)
-                .putExtra(Intent.EXTRA_SUBJECT, contact.getName());
-
-        findViewById(R.id.bt_share).setOnClickListener(v -> {
-                    changed = true;
-                    AppUtils.share(this, shareIntent);
-                }
-        );
-
         if (contact.hasPhone()) {
             final String primary = contact.getMobilePhone() != null ?
                     contact.getMobilePhone() : contact.getPhoneList().get(0).second;
+            tv_no_phone.setVisibility(View.GONE);
             bt_call.setVisibility(View.VISIBLE);
             bt_call.setOnClickListener(v -> DialerActivity.call(primary, this, false));
             bt_sms.setVisibility(View.VISIBLE);
             bt_sms.setOnClickListener(v -> AppUtils.sendMessage(primary, this));
         } else {
+            tv_no_phone.setVisibility(View.VISIBLE);
             bt_call.setVisibility(View.GONE);
             bt_sms.setVisibility(View.GONE);
         }

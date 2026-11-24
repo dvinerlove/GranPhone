@@ -19,26 +19,19 @@
 <string name="accessibility_level">רמת נגישות</string>
     <string name="accessibility_settings">נגישות</string>
     <string name="accidental_touches">חוסם הלחיצות המקריות</string>
-    <string name="accidental_touches_settings_subtext">חוסם הלחיצות המקריות חוסם מגע בטלפון כאשר המסך מכוסה\nאם אתה חווה
-        בעיות עם חוסם זה ניתן לבטל אותו
-    </string>
     <string name="accidental_touches_subtext">לחיצה מקרית זוהתה\nלחץ על \"הבנתי\" על מנת להמשיך להשתמש בטלפון\nאם הודעה זו
         חוזרת על עצמה יותר מדי ניתן לבטל את החסימה בהגדרות הנגישות
     </string>
-    <string name="acknowledgments">תודות</string>
-    <string name="adaptive">משתנה</string>
     <string name="add_alarm">הוסף שעון מעורר</string>
     <string name="add_alarm_quickly">הוסף טיימר</string>
     <string name="add_contact">הוסף איש קשר</string>
     <string name="add_emergency_contact">הוסף מספר</string>
     <string name="add_pill">הוסף תרופה</string>
     <string name="edit_pill">ערוך תרופה</string>
-    <string name="add_shortcut">הוסף קיצור-דרך</string>
     <string name="add_to_favorite">הוסף למועדפים</string>
-    <string name="add_to_home">הוסף למסך הבית</string>
     <string name="add_to_sos">הוסף ל SOS</string>
     <string name="address">כתובת</string>
-    <string name="advanced_options">הגדרות מתקדמות</string>
+    <string name="advanced_options">הגדרות מערכת אנדרויד</string>
     <string name="afternoon">צהריים</string>
     <string name="airplane_mode">מצב טיסה</string>
     <string name="alarm_name">שם שעון מעורר</string>
@@ -55,7 +48,6 @@
 
     <string name="apps">יישומים</string>
     <string name="are_you_sure_you_want_to_delete___">האם ברצונך למחוק את %s?</string>
-    <string name="assistant">סיוע קולי</string>
     <string name="at_least_one_day_must_be_selected">לפחות יום אחד חייב להיות מסומן!</string>
     <string name="auto_brightness">בהירות אוטומטית</string>
     <string name="backspace">מחיקה</string>
@@ -65,8 +57,8 @@
     <string name="blocked">חסום</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">בהירות</string>
-    <string name="brightness_subtext">שינוי בהירות</string>
     <string name="cache_cleared_successfully">מטמון נוקה בהצלחה!</string>
+    <string name="contact_no_number">לא צוין מספר טלפון</string>
     <string name="call">התקשר</string>
     <string name="calling">ביצוע שיחות</string>
 
@@ -76,7 +68,6 @@
     <string name="camera_subtext">אנא אשר ל GranPhone את הרשאת המצלמה, שמאפשרת להפעיל את הפנס. תמונות לעולם לא יצולמו.
     </string>
     <string name="cancel">ביטול</string>
-    <string name="change_pills_time">שינוי זמן תרופות</string>
     <string name="change_system_settings_subtext">אנא אפשר לGranPhone לשנות הגדרות כמו בהירות וגודל גופן</string>
     <string name="choose_friday">ו</string>
     <string name="choose_monday">ב</string>
@@ -97,6 +88,7 @@
     <string name="contact_must_has_name">לאיש קשר חייב להיות שם!</string>
     <string name="contact_not_created">איש קשר לא נוצר!</string>
     <string name="contacts">אנשי קשר</string>
+    <string name="contact">איש קשר</string>
     <string name="contacts_read_subtext">אנא אפשר לGranPhone לקרוא את אנשי הקשר</string>
     <string name="contacts_subtext">אנא אפשר לGranPhone ליצור אנשי קשר חדשים</string>
     <string name="crash">אופס!\nאירעה שגיאת מערכת,\nהמערכת מיד תופעל מחדש</string>
@@ -105,27 +97,21 @@
     <string name="dark">כהה</string>
     <string name="delete">מחק</string>
     <string name="delete___">מחיקת %s?</string>
-    <string name="delete_all_alarms">הסר את כל השעונים</string>
     <string name="dialer">חיוג למספר</string>
     <string name="display_settings">תצוגה</string>
     <string name="done">סיים</string>
     <string name="down">למטה</string>
     <string name="edit">ערוך</string>
-    <string name="email">אימייל:</string>
     <string name="enable_notification_access">אפשר להציג התראות שמתקבלות</string>
     <string name="enable_notification_access_subtext">אנא אפשר ל GranPhone להציג התראות שמתקבלות, במסך ההתראות. שום מידע
         לא נאסף.
     </string>
     <string name="enter">אישור</string>
-    <string name="enter_contact_or_phone_number">הקלד שם</string>
     <string name="evening">ערב</string>
     <string name="example_of_different_text_sizes">דוגמות לגדלי טקסט שונים ברחבי האפליקציה.\nצריכות להיות קריאות ובו
         בזמן לא לצאת מהתחום שלהן.
     </string>
     <string name="external_storage_subtext">אנא אפשר לGranPhone לגשת לתמונות ולסרטים ולקבצי עדכון</string>
-    <string name="feedback">משוב</string>
-    <string name="feedback_cannot_be_empty">המשוב אינו יכול להיות ריק!</string>
-    <string name="feedback_sent_successfully">המשוב נשלח בהצלחה!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">יש לבחור רמת נגישות</string>
     <string name="font_size">גודל גופן</string>
     <string name="friday">שישי</string>
@@ -139,7 +125,6 @@
     <string name="home_phone_number">בית</string>
     <string name="hour">שעה</string>
     <string name="huge">ענק</string>
-    <string name="internet">אינטרנט</string>
     <string name="invoked_in">צלצול יופעל בעוד</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">ולסיום אנא החלף
         את מסך הבית של הטלפון\nהתהליך הפיך לחלוטין וניתן לשינוי בהגדרות האפליקציה
@@ -151,7 +136,6 @@
     <string name="light">בהיר</string>
     <string name="location">מיקום</string>
 <string name="mail">אימייל</string>
-    <string name="maps">מפות</string>
 
 
     <string name="medium">בינוני</string>
@@ -172,8 +156,6 @@
     <string name="nfc">NFC</string>
     <string name="no">לא</string>
     <string name="notes">רשימות</string>
-    <string name="notes_settings">הגדרות פתקים</string>
-    <string name="notes_settings_subtext">בחר האם להוסיף מסך רשימות למסך הבית</string>
     <string name="notifications">התראות</string>
 
     <string name="of">מתוך</string>
@@ -208,9 +190,6 @@
     <string name="regular_level">רמה רגילה</string>
 
     <string name="remove_from_favorite">הסר ממועדפים</string>
-    <string name="remove_from_home">הסר ממסך הבית</string>
-    <string name="remove_from_sos">הסר מ SOS</string>
-    <string name="remove_shortcut">הסר קיצור דרך</string>
     <string name="removed_all_alarms">כל השעונים הוסרו!</string>
     <string name="repeats_every_day">כל יום</string>
     <string name="right_handed">לימניים</string>
@@ -247,29 +226,28 @@
     <string name="small">קטן</string>
     <string name="snooze">נודניק</string>
     <string name="sos">SOS</string>
+    <string name="home_screen_is_full">מסך הבית מלא</string>
+    <string name="home_screen_is_full_subtext">אין אריחים פנויים במסך הבית. הסתירו או הסירו אריח כדי להצמיד איש קשר.</string>
     <string name="sos_is_full">SOS מלא!</string>
     <string name="sos_is_full_subtext">יש מקום ל-2 אנשי קשר בלבד. נא למחוק איש קשר לפני שמוסיפים חדש</string>
     <string name="speak">דבר</string>
     <string name="speech_to_text">דיבור לטקסט</string>
     <string name="strong_hand">יד חזקה</string>
-    <string name="strong_hand_subtext">בחר את היד החזקה שלך.\nסידור המסך ישתנה בהתאם</string>
-    <string name="submit">אישור</string>
     <string name="sunday">ראשון</string>
     <string name="technical_information">מידע טכני</string>
     <string name="theme_settings">ערכת תצוגה</string>
-    <string name="theme_settings_subtext">בחר ערכת עיצוב</string>
 
     <string name="thursday">חמישי</string>
-    <string name="time_changer">שינוי זמן תרופות</string>
+    <string name="time_changer">לוח זמני תרופות</string>
     <string name="tiny">קטנטן</string>
-    <string name="to___days_and___hours_from_now">ל%d ימים ו%d שעות מעכשיו</string>
-    <string name="to___hours_and___minutes_from_now">ל%d שעות ו%d דקות מעכשיו</string>
+    <string name="to___days_and___hours_from_now">ל%1$d ימים ו%2$d שעות מעכשיו</string>
+    <string name="to___hours_and___minutes_from_now">ל%1$d שעות ו%2$d דקות מעכשיו</string>
     <string name="to___minuets_from_now">ל%d דקות מעכשיו</string>
     <string name="today">היום</string>
     <string name="took">לקחתי!</string>
     <string name="tuesday">שלישי</string>
     <string name="uninstall">מחיקת יישום</string>
-    <string name="uninstall_subtext">האם ברצונך למחוק את %s? כל המידע של %s יימחק!</string>
+    <string name="uninstall_subtext">האם ברצונך למחוק את %1$s? כל המידע של %2$s יימחק!</string>
     <string name="up">למעלה</string>
     <string name="video">סרט</string>
     <string name="video_tutorials">סרטוני הדרכה</string>
@@ -329,23 +307,15 @@
     <string name="try_now">נסה עכשיו</string>
     <string name="download_progress">תהליך הורדה</string>
     <string name="what_do_you_want_to_do_with___">מה ברצונך לעשות עם %s?</string>
-    <string name="crash_reports">דיווח על קריסות</string>
-    <string name="crash_reports_subtext">דיווח על קריסות עוזר לי לתקן אותן במהירות\nnהמידע שנשלח הוא רק המידע ההכרחי על
-        מנת לתקן את התקלה, ולא נלקח שום מידע אישי
-    </string>
     <string name="custom_app">יישום מועדף</string>
-    <string name="custom_app_subtext">בחר יישום מועדף להצמדה למסך הבית.</string>
-    <string name="no_app_was_found">לא נמצא יישום מתאים!</string>
     <string name="alarm">שעון מעורר</string>
     <string name="no_new_notifications">אין התראות חדשות</string>
     <string name="sound">שמע</string>
     <string name="mute">שקט</string>
     <string name="vibrate">רטט</string>
-    <string name="your_phone_doesnt_have_assistant_installed">אין במכשיר זה סיוע קולי</string>
 
 
     <string name="status_bar_settings">שורת מצב</string>
-    <string name="status_bar_settings_subtext">איפה להראות את שורת המצב?</string>
     <string name="only_home_screen">רק במסך הבית</string>
     <string name="nowhere">בשום מסך</string>
     <string name="everywhere">בכל מסך</string>
@@ -364,52 +334,34 @@
 
 
     <string name="dialer_sounds">צלילי חייגן</string>
-    <string name="dialer_sounds_subtext">בחר האם בלחיצה על כפתורי החייגן יישמע צליל</string>
     <string name="low_battery_alert">חיווי סוללה נמוכה</string>
-    <string name="low_battery_alert_subtext">בחר האם במסך הבית, כאשר הבטרייה מתחת לעשרים אחוזים, שורת המצב תיראה אדומה\nחשוב לציין שלא ניתן יהיה לראות את השינוי אם שורת המצב מוסתרת.</string>
 
-    <string name="also_available_at">ניתן ליצור קשר גם ב\nGranPhone.contact@gmail.com</string>
     <string name="grant_all_permissions">אפשר את כל ההרשאות</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">אלטרוקסין 100</string>
     <string name="medication_2">אלטרוקסין 150</string>
-<string name="emergency_button">כפתור חירום</string>
-    <string name="emergency_settings_subtext">בחר האם להוסיף כפתור חירום למסך הבית</string>
     <string name="private_number">מספר חסוי</string>
     <string name="swipe_left_or_right">החלק לימין או לשמאל</string>
     <string name="press_next_or_back_buton">לחץ על קדימה או על אחורה</string>
-    <string name="click_delay">השהיית לחיצה</string>
-    <string name="no_delay">ללא השהייה</string>
-    <string name="scrolling">גלילה</string>
-    <string name="arrows">חצים</string>
-    <string name="swipe">החלק</string>
-    <string name="_long">ארוכה</string>
-    <string name="_short">קצרה</string>
     <string name="do_you_want_to_save_your_changes">האם ברצונך לשמור את השינויים?</string>
     <string name="discard">התעלם</string>
     <string name="no_recent_calls">אין שיחות אחרונות</string>
     <string name="apps_sort_method">סידור יישומים</string>
-    <string name="apps_sort_method_subtext">בחר האם ברצונך לסדר את היישומים בטבלה אחת או בקבוצות שונות ע\"פ הא\"ב</string>
     <string name="groups">קבוצות</string>
     <string name="one_grid">טבלה אחת</string>
     <string name="colorful">צבעים</string>
-    <string name="colorful_subtext">האם ברצונך להפוך את GranPhone ליותר צבעוני?</string>
     <string name="edit_home_screen">עריכת מסך הבית</string>
     <string name="dual_sim">סים כפול</string>
-    <string name="dual_sim_subtext">בחר כיצד להשתמש בסים כפול\nאם תבחר ב הצגת אפשרויות תצטרך לאשר הרשאה נוספת</string>
     <string name="use_default">השתמש בברירת מחדל</string>
     <string name="show_options">הצגת אפשרויות</string>
     <string name="read_phone_state">גישה למצב טלפון</string>
     <string name="read_phone_state_subtext">אנא אפשר לGranPhone לגשת למצב הטלפון על מנת לתפעל סים כפול</string>
     <string name="choose_sim">בחר סים</string>
-    <string name="choose_sim_subtext">יש לבחור את הסים ממנו אתה רוצה לבצע את השיחה</string>
     <string name="website">אתר</string>
     <string name="appear_on_top">גישה להצגה מעל</string>
     <string name="appear_on_top_subtext">יש לאפשר גישה זו בגרסאות חדשות של אנדרואיד, על מנת להציג שעון מעורר ותזכורות</string>
-    <string name="mail_application_not_found">לא נמצאה תוכנת מייל!</string>
-    <string name="get_involved">השתתף בפיתוח GranPhone</string>
 
 
     <string-array name="names_for_screenshots">
@@ -447,5 +399,9 @@
     <string name="cd_pill_custom">צבע מותאם</string>
     <string name="helper_pin_repeat_subtext">הזן שוב את אותה סיסמה.</string>
     <string name="helper_pin_mismatch">הסיסמאות לא תואמות.</string>
+    <string name="screen_and_appearance">מסך ומראה</string>
+    <string name="convenience_accessibility">נוחות ונגישות</string>
+    <string name="volume_up">+</string>
+    <string name="volume_down">−</string>
 </resources>
 

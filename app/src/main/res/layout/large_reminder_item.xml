@@ -19,13 +19,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="6dp"
-    android:background="@drawable/dialog_screen_card"
+    android:layout_marginStart="@dimen/spacing_md"
+    android:layout_marginTop="@dimen/spacing_sm"
+    android:layout_marginEnd="@dimen/spacing_md"
+    android:layout_marginBottom="@dimen/spacing_sm"
+    android:background="@drawable/bald_card_background"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_lg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,14 +36,14 @@
         <ImageView
         android:importantForAccessibility="no"
             android:id="@+id/iv_pill"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="@dimen/avatar_md"
+            android:layout_height="@dimen/avatar_md"
             android:src="@drawable/pill" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/spacing_lg"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -56,31 +56,31 @@
                 android:textColor="?attr/bald_text_primary"
                 android:textSize="@dimen/large"
                 android:textStyle="bold"
-                app:autoSizeMinTextSize="14sp"
+                app:autoSizeMinTextSize="@dimen/tiny"
                 app:autoSizeTextType="uniform" />
 
             <TextView
                 android:id="@+id/reminder_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="?attr/bald_text_primary"
                 android:textSize="@dimen/medium"
-                app:autoSizeMinTextSize="14sp"
+                app:autoSizeMinTextSize="@dimen/tiny"
                 app:autoSizeTextType="uniform" />
 
             <TextView
                 android:id="@+id/repeating_days"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="?attr/bald_text_secondary"
                 android:textSize="@dimen/small"
-                app:autoSizeMinTextSize="12sp"
+                app:autoSizeMinTextSize="@dimen/tiny"
                 app:autoSizeTextType="uniform" />
         </LinearLayout>
     </LinearLayout>
@@ -88,19 +88,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/spacing_md"
         android:gravity="end"
         android:orientation="horizontal">
 
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_edit"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height_default"
             android:layout_weight="1"
             android:minWidth="110dp"
-            android:background="@drawable/style_for_buttons"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:background="@drawable/bald_button_background"
+            android:paddingStart="@dimen/spacing_sm"
+            android:paddingEnd="@dimen/spacing_sm"
             app:_size="@dimen/medium"
             app:_src="@drawable/edit_on_button"
             app:_text="@string/edit" />
@@ -108,13 +108,13 @@
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_delete"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height_default"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/spacing_sm"
             android:minWidth="110dp"
-            android:background="@drawable/style_for_buttons"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:background="@drawable/bald_button_background"
+            android:paddingStart="@dimen/spacing_sm"
+            android:paddingEnd="@dimen/spacing_sm"
             app:_size="@dimen/medium"
             app:_src="@drawable/delete_on_button"
             app:_text="@string/delete" />

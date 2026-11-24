@@ -16,15 +16,12 @@
 
 <resources>
 <string name="accidental_touches">حماية من اللمس غير المقصود</string>
-    <string name="adaptive">تلقائي</string>
     <string name="add_alarm">إضافة منبه</string>
     <string name="add_alarm_quickly">إضافة مؤقت</string>
     <string name="add_contact">إضافة جهة اتصال</string>
     <string name="add_emergency_contact">إضافة</string>
     <string name="add_pill">إضافة دواء</string>
-    <string name="add_shortcut">إضافة إختصار</string>
     <string name="add_to_favorite">إضافة إلي المفضلة</string>
-    <string name="add_to_home">إضافة إلي الرئيسية</string>
     <string name="add_to_sos">إضافة إلي الطوارئ</string>
     <string name="address">عنوان</string>
     <string name="advanced_options">الاعدادات المتقدمة</string>
@@ -43,14 +40,12 @@
     <string name="an_error_has_occurred">حدث خطأ</string>
     <string name="apps">التطبيقات</string>
     <string name="are_you_sure_you_want_to_delete___">هل انت متأكد انك تريد حذف ‍%s ؟</string>
-    <string name="assistant">المساعد</string>
     <string name="at_least_one_day_must_be_selected">يجب ان تحدد يوم واحد علي اللأقل</string>
     <string name="auto_brightness">مستوي إضائة تلقائي</string>
     <string name="GranPhone_bla_allow_permission">من فضلك السماح للصلاحيات الأتية:</string>
     <string name="blocked">محظور</string>
     <string name="bluetooth">بلوتوث</string>
     <string name="brightness">مستوي السطوع</string>
-    <string name="brightness_subtext">تغيير مستوي السطوع</string>
     <string name="cache_cleared_successfully">تم تنظيف الذاكرة المؤقتة بنجاح!</string>
     <string name="call">إتصل</string>
     <string name="calling">يتم الإتصال</string>
@@ -60,7 +55,6 @@
     <string name="camera">الكاميرا</string>
     <string name="camera_subtext">هذا الإذن مطلوب لتشغيل الفلاش</string>
     <string name="cancel">إلغاء</string>
-    <string name="change_pills_time">تغيير ميعاد الدواء</string>
     <string name="clear">مسح</string>
     <string name="clear_cache">مسح الذاكرة المؤقتة</string>
     <string name="clock">الساعة</string>
@@ -71,16 +65,11 @@
     <string name="current_time">الوقت الحالي</string>
     <string name="delete">حذف</string>
     <string name="delete___">حذف %s ؟</string>
-    <string name="delete_all_alarms">حذف كل المنبهات؟</string>
     <string name="dialer">إتصال برقم</string>
     <string name="display_settings">الشاشة</string>
     <string name="done">تم</string>
     <string name="edit">تعديل</string>
-    <string name="enter_contact_or_phone_number">إدخل اسم جهة الإتصال</string>
     <string name="evening">مساء</string>
-    <string name="feedback">إرسال تعليق</string>
-    <string name="feedback_cannot_be_empty">التعليق لايمكن ان يكون فارغ!</string>
-    <string name="feedback_sent_successfully">تم إرسال التعليق بنجاح!</string>
     <string name="font_size">حجم الخط</string>
     <string name="friday">الجمعة</string>
     <string name="hello">مرحبا</string>
@@ -89,11 +78,9 @@
     <string name="home_phone_number">رقم هاتف المنزل</string>
     <string name="hour">ساعة</string>
     <string name="install">تثبيت</string>
-    <string name="internet">الإنترنت</string>
     <string name="language">لغة</string>
     <string name="language_settings">اللغة</string>
     <string name="location">الموقع</string>
-<string name="maps">الخرائط</string>
 
 
     <string name="medium">متوسط</string>
@@ -108,7 +95,6 @@
     <string name="new_alarm___was_created">منبه جديد %s تم إنشائه!</string>
     <string name="no">لا</string>
     <string name="notes">الملاحظات</string>
-    <string name="notes_settings">الملاحظات</string>
     <string name="notifications">الإشعارات</string>
 
     <string name="only_once">مرة واحدة فقط</string>
@@ -127,8 +113,6 @@
     <string name="received">مستلمة</string>
     <string name="recent">جديد</string>
     <string name="remove_from_favorite">حذف من المفضلة</string>
-    <string name="remove_from_home">حذف من الرئيسية</string>
-    <string name="remove_from_sos">حذف من الطوارئ</string>
     <string name="removed_all_alarms">تم حذف كل المنبهات!</string>
     <string name="repeats_every_day">كل يوم</string>
     <string name="saturday">السبت</string>
@@ -157,13 +141,11 @@
     <string name="choose_language_for_keyboard">اختر لغة</string>
     <string name="search">بحث</string>
     <string name="next">التالي</string>
-<string name="emergency_button">زر الطوارئ</string>
     <string name="do_you_want_to_save_your_changes">هل تريد حفظ التغييرات؟</string>
     <string name="discard">إلغاء</string>
     <string name="no_recent_calls">لا توجد مكالمات جديدة</string>
     <string name="dual_sim">خطين</string>
     <string name="choose_sim">اختر خط</string>
-    <string name="choose_sim_subtext">أختر الخط الذي تريد الأتصال منه</string>
     <bool name="is_right_to_left">true</bool>
 
     <string name="russian">الروسية</string>

@@ -20,11 +20,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginEnd="12dp"
-    android:background="@drawable/dialog_screen_card"
+    android:layout_marginStart="@dimen/spacing_md"
+    android:layout_marginEnd="@dimen/spacing_md"
+    android:background="@drawable/bald_card_background"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_lg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,14 +35,14 @@
         <ImageView
         android:importantForAccessibility="no"
             android:id="@+id/small_icon"
-            android:layout_width="28dp"
-            android:layout_height="28dp" />
+            android:layout_width="@dimen/icon_md"
+            android:layout_height="@dimen/icon_md" />
 
         <TextView
             android:id="@+id/app_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/spacing_md"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
@@ -53,7 +53,7 @@
             android:id="@+id/time_stamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/spacing_md"
             android:textColor="?bald_text_secondary"
             android:textSize="@dimen/small" />
     </LinearLayout>
@@ -61,7 +61,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:gravity="top"
         android:orientation="horizontal">
 
@@ -85,7 +85,7 @@
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:textColor="?bald_text_primary"
                 android:textSize="@dimen/small" />
         </LinearLayout>
@@ -93,19 +93,18 @@
         <ImageView
             android:id="@+id/large_icon"
             android:importantForAccessibility="no"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="12dp" />
+            android:layout_width="@dimen/icon_xl"
+            android:layout_height="@dimen/icon_xl"
+            android:layout_marginStart="@dimen/spacing_md" />
     </LinearLayout>
 
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/clear"
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
+        android:layout_height="@dimen/button_height_default"
         android:layout_gravity="end"
-        android:layout_marginTop="10dp"
-        android:minWidth="120dp"
-        android:background="@drawable/style_for_buttons"
+        android:layout_marginTop="@dimen/spacing_sm"
+                android:background="@drawable/bald_button_background"
         app:_src="@drawable/delete_on_button"
         app:_text="@string/clear" />
 </LinearLayout>

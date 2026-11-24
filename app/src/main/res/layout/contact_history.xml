@@ -17,18 +17,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:background="@drawable/dialog_screen_card"
+    android:layout_marginTop="@dimen/spacing_sm"
+    android:background="@drawable/bald_card_background"
     android:orientation="vertical"
-    android:paddingTop="8dp">
+    android:paddingTop="@dimen/spacing_sm">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="8dp">
+        android:paddingStart="@dimen/spacing_lg"
+        android:paddingEnd="@dimen/spacing_sm">
 
         <TextView
             android:id="@+id/textView"
@@ -36,16 +36,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:minHeight="56dp"
+            android:minHeight="@dimen/touch_min"
             android:text="@string/call_log"
             android:textColor="?bald_text_primary"
             android:textSize="@dimen/medium" />
 
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_show"
-            android:layout_width="140dp"
-            android:layout_height="56dp"
-            android:background="@drawable/style_for_buttons"
+            android:layout_width="@dimen/avatar_xl"
+            android:layout_height="@dimen/touch_min"
+            android:background="@drawable/bald_button_background"
             app:_src="@drawable/drop_down_on_button"
             app:_text="@string/show" />
     </LinearLayout>
@@ -54,7 +54,7 @@
         android:id="@+id/scrolling_helper"
         android:layout_width="match_parent"
         android:layout_height="360dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:visibility="gone">
 
         <com.bald.uriah.baldphone.views.ModularRecyclerView

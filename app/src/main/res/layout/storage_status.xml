@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_lg">
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,8 +17,8 @@
         android:id="@+id/pb_storage"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="14dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/progress_height"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:max="100"
         android:progressDrawable="@drawable/storage_progress" />
 
@@ -26,14 +26,14 @@
         android:id="@+id/tv_storage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/spacing_xs"
         android:textColor="?attr/bald_text_on_background"
         android:textSize="@dimen/small" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/spacing_xl"
         android:text="@string/ram"
         android:textColor="?attr/bald_text_on_background"
         android:textSize="@dimen/medium"
@@ -43,8 +43,8 @@
         android:id="@+id/pb_ram"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="14dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/progress_height"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:max="100"
         android:progressDrawable="@drawable/storage_progress" />
 
@@ -52,7 +52,7 @@
         android:id="@+id/tv_ram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/spacing_xs"
         android:textColor="?attr/bald_text_on_background"
         android:textSize="@dimen/small" />
 

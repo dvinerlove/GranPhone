@@ -89,14 +89,14 @@ public class BaldMultipleSelection extends LinearLayout {
         textColorOnButton = typedValue.data;
 
         if (attrs == null) {
-            defaultDrawable = ContextCompat.getDrawable(context, R.drawable.style_for_buttons);
+            defaultDrawable = ContextCompat.getDrawable(context, R.drawable.bald_button_background);
             defaultDrawableSelected = ContextCompat.getDrawable(context, R.drawable.btn_selected);
             setOrientation(HORIZONTAL);
         } else {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaldMultipleSelection);
             setOrientation((typedArray.getBoolean(R.styleable.BaldMultipleSelection_is_vertical, false)) ? VERTICAL : HORIZONTAL);
             Drawable drawable = typedArray.getDrawable(R.styleable.BaldMultipleSelection_background_default);
-            defaultDrawable = drawable != null ? drawable : ContextCompat.getDrawable(context, R.drawable.style_for_buttons);
+            defaultDrawable = drawable != null ? drawable : ContextCompat.getDrawable(context, R.drawable.bald_button_background);
             Drawable drawableSelected = typedArray.getDrawable(R.styleable.BaldMultipleSelection_background_selected);
             if (drawableSelected != null)
                 defaultDrawableSelected = drawableSelected;

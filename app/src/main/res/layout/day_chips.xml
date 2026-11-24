@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<!-- 56dp capsule day toggles: checked = brand fill + on-variant text,
+<!-- 64dp capsule day toggles: checked = brand fill + on-variant text,
      unchecked = card fill + border. Ids sunday..saturday are the contract. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -30,8 +30,8 @@
         <CheckBox
             android:id="@+id/sunday"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_margin="4dp"
+            android:layout_height="@dimen/button_height_default"
+            android:layout_margin="@dimen/spacing_xs"
             android:layout_weight="1"
             android:background="@drawable/day_chip"
             android:button="@null"
@@ -41,13 +41,13 @@
             android:textSize="@dimen/small"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="10sp" />
+            app:autoSizeMinTextSize="@dimen/tiny" />
 
         <CheckBox
             android:id="@+id/monday"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_margin="4dp"
+            android:layout_height="@dimen/button_height_default"
+            android:layout_margin="@dimen/spacing_xs"
             android:layout_weight="1"
             android:background="@drawable/day_chip"
             android:button="@null"
@@ -57,13 +57,13 @@
             android:textSize="@dimen/small"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="10sp" />
+            app:autoSizeMinTextSize="@dimen/tiny" />
 
         <CheckBox
             android:id="@+id/tuesday"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_margin="4dp"
+            android:layout_height="@dimen/button_height_default"
+            android:layout_margin="@dimen/spacing_xs"
             android:layout_weight="1"
             android:background="@drawable/day_chip"
             android:button="@null"
@@ -73,13 +73,13 @@
             android:textSize="@dimen/small"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="10sp" />
+            app:autoSizeMinTextSize="@dimen/tiny" />
 
         <CheckBox
             android:id="@+id/wednesday"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_margin="4dp"
+            android:layout_height="@dimen/button_height_default"
+            android:layout_margin="@dimen/spacing_xs"
             android:layout_weight="1"
             android:background="@drawable/day_chip"
             android:button="@null"
@@ -89,7 +89,7 @@
             android:textSize="@dimen/small"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="10sp" />
+            app:autoSizeMinTextSize="@dimen/tiny" />
     </LinearLayout>
 
     <LinearLayout
@@ -100,8 +100,8 @@
         <CheckBox
             android:id="@+id/thursday"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_margin="4dp"
+            android:layout_height="@dimen/button_height_default"
+            android:layout_margin="@dimen/spacing_xs"
             android:layout_weight="1"
             android:background="@drawable/day_chip"
             android:button="@null"
@@ -111,13 +111,13 @@
             android:textSize="@dimen/small"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="10sp" />
+            app:autoSizeMinTextSize="@dimen/tiny" />
 
         <CheckBox
             android:id="@+id/friday"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_margin="4dp"
+            android:layout_height="@dimen/button_height_default"
+            android:layout_margin="@dimen/spacing_xs"
             android:layout_weight="1"
             android:background="@drawable/day_chip"
             android:button="@null"
@@ -127,13 +127,13 @@
             android:textSize="@dimen/small"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="10sp" />
+            app:autoSizeMinTextSize="@dimen/tiny" />
 
         <CheckBox
             android:id="@+id/saturday"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_margin="4dp"
+            android:layout_height="@dimen/button_height_default"
+            android:layout_margin="@dimen/spacing_xs"
             android:layout_weight="1"
             android:background="@drawable/day_chip"
             android:button="@null"
@@ -143,12 +143,12 @@
             android:textSize="@dimen/small"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="10sp" />
+            app:autoSizeMinTextSize="@dimen/tiny" />
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_margin="4dp"
+            android:layout_height="@dimen/divider"
+            android:layout_margin="@dimen/spacing_xs"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

@@ -346,7 +346,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
                 return;
             favorite = f;
             ll_contact_only.setSelected(favorite);
-            ll_contact_only.setBackgroundResource(favorite ? R.drawable.style_for_buttons_rectangle_gold : R.drawable.style_for_buttons_rectangle);
+            ll_contact_only.setBackgroundResource(favorite ? R.drawable.style_for_buttons_rectangle_gold : R.drawable.bald_card_background);
             tv_contact_name.setTextColor(favorite ? textColorOnGold : textColorOnButton);
             tv_contact_number.setTextColor(favorite ? textColorOnGold : textColorSecondary);
 

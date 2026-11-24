@@ -19,18 +19,13 @@
 <string name="accessibility_level">접근 가능한 수준</string>
     <string name="accessibility_settings">접근 가능</string>
     <string name="accidental_touches">오작동 방지 필터</string>
-    <string name="accidental_touches_settings_subtext">보호대는 전화기에 문제가있는 경우 전화기를 덮을 때 터치 입력을 차단합니다.</string>
     <string name="accidental_touches_subtext">오작동 터치가 감지되었습니다.이 메시지가 계속 나타나면 \"알겠습니다\"를 눌러 전화를 계속 사용하십시오. 접근성 설정에서 비활성화 할 수 있습니다.</string>
-    <string name="acknowledgments">승인</string>
-    <string name="adaptive">적용 가능</string>
     <string name="add_alarm">알람 추가</string>
     <string name="add_alarm_quickly">타이머 추가</string>
     <string name="add_contact">연락처 추가</string>
     <string name="add_emergency_contact">추가</string>
     <string name="add_pill">알약 추가</string>
-    <string name="add_shortcut">바로가기 추가</string>
     <string name="add_to_favorite">좋아하는 것 추가</string>
-    <string name="add_to_home">집 추가</string>
     <string name="add_to_sos">비상 연락망 추가</string>
     <string name="address">주소</string>
     <string name="advanced_options">상향된 옵션</string>
@@ -50,7 +45,6 @@
 
     <string name="apps">앱스</string>
     <string name="are_you_sure_you_want_to_delete___">삭제하길 원하십니까 %s?</string>
-    <string name="assistant">보조</string>
     <string name="at_least_one_day_must_be_selected">하루 이상의 날짜가 선택되었습니다!</string>
     <string name="auto_brightness">자동 밝기</string>
     <string name="backspace">지우기</string>
@@ -58,7 +52,6 @@
     <string name="blocked">잠금</string>
     <string name="bluetooth">블루투스</string>
     <string name="brightness">밝기</string>
-    <string name="brightness_subtext">밝기 조절.</string>
     <string name="cache_cleared_successfully">캐시가 성공적으로 삭제되었습니다!</string>
     <string name="call">전화</string>
     <string name="calling">통화중</string>
@@ -68,7 +61,6 @@
     <string name="camera">카메라</string>
     <string name="camera_subtext">플래시를 사용하려면 허가가 필요합니다.</string>
     <string name="cancel">취소</string>
-    <string name="change_pills_time">알약 시간 변경</string>
     <string name="change_system_settings_subtext">GranPhone에서 글꼴 크기 늘리기 및 밝기 변경과 같은 설정을 변경할 수 있도록하십시오.</string>
     <string name="choose_friday">금</string>
     <string name="choose_monday">월</string>
@@ -97,23 +89,17 @@
     <string name="dark">어두운</string>
     <string name="delete">삭제</string>
     <string name="delete___">삭제하시겠습니까 %s?</string>
-    <string name="delete_all_alarms">모든 알람 삭제</string>
     <string name="dialer">다이얼</string>
     <string name="display_settings">Display</string>
     <string name="done">완료</string>
     <string name="down">다운</string>
     <string name="edit">수정</string>
-    <string name="email">이메일:</string>
     <string name="enable_notification_access">알람 접근 활성화</string>
     <string name="enable_notification_access_subtext">GranPhone에 알림에 대한 접근 권한을 부여하십시오.</string>
     <string name="enter">입력</string>
-    <string name="enter_contact_or_phone_number">연락처 이름 입력:</string>
     <string name="evening">저녁</string>
     <string name="example_of_different_text_sizes">다른 텍스트 크기의 예는 읽을 수 있고 오버플로되지 않아야합니다.</string>
     <string name="external_storage_subtext">사진을 저장하기 위해서 허가가 필요합니다.</string>
-    <string name="feedback">피드백 보내기</string>
-    <string name="feedback_cannot_be_empty">피드백은 비워둘 수 없습니다!</string>
-    <string name="feedback_sent_successfully">피드백이 성공적으로 전송되었습니다!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">접근 정도를 설정하십시오</string>
     <string name="font_size">글자 크기</string>
     <string name="friday">금요일</string>
@@ -125,7 +111,6 @@
     <string name="home_phone_number">집 전화번호</string>
     <string name="hour">시간</string>
     <string name="huge">거대한</string>
-    <string name="internet">인터넷</string>
     <string name="invoked_in">호출:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">마지막 : GranPhone의 홈 화면을 기본 홈으로 사용하는 것이 좋습니다.</string>
     <string name="language">언어</string>
@@ -135,7 +120,6 @@
     <string name="light">가벼운</string>
     <string name="location">위치</string>
 <string name="mail">메일</string>
-    <string name="maps">지도</string>
 
 
     <string name="medium">중간</string>
@@ -156,8 +140,6 @@
     <string name="nfc">NFC</string>
     <string name="no">아니오</string>
     <string name="notes">노트</string>
-    <string name="notes_settings">노트 설정</string>
-    <string name="notes_settings_subtext">홈 화면에 메모 페이지를 만들려면 선택하십시오.</string>
     <string name="notifications">알림</string>
 
     <string name="of">of</string>
@@ -190,9 +172,6 @@
     <string name="regular_level">보통 수준</string>
 
     <string name="remove_from_favorite">좋아하는 것 삭제</string>
-    <string name="remove_from_home">홈 삭제</string>
-    <string name="remove_from_sos">SOS 삭제</string>
-    <string name="remove_shortcut">바로가기 삭제</string>
     <string name="removed_all_alarms">모든 알람 삭제!</string>
     <string name="repeats_every_day">매일</string>
     <string name="right_handed">오른손잡이</string>
@@ -224,24 +203,21 @@
     <string name="speak">말하기</string>
     <string name="speech_to_text">텍스트 음성</string>
     <string name="strong_hand">주로 사용하는 손</string>
-    <string name="strong_hand_subtext">주로 사용하는 손을 선택하여 사용자 인터페이스를 조정하십시오.</string>
-    <string name="submit">제출</string>
     <string name="sunday">일요일</string>
     <string name="technical_information">기술 정보</string>
     <string name="theme_settings">테마</string>
-    <string name="theme_settings_subtext">테마 선택</string>
 
     <string name="thursday">목요일</string>
     <string name="time_changer">약 시간 변경</string>
     <string name="tiny">작은</string>
-    <string name="to___days_and___hours_from_now">지금부터 %d 일 %d 시간</string>
-    <string name="to___hours_and___minutes_from_now">지금부터 %d 시간 %d 분</string>
+    <string name="to___days_and___hours_from_now">지금부터 %1$d 일 %2$d 시간</string>
+    <string name="to___hours_and___minutes_from_now">지금부터 %1$d 시간 %2$d 분</string>
     <string name="to___minuets_from_now">지금부터 %d 분</string>
     <string name="today">오늘</string>
     <string name="took">완료!</string>
     <string name="tuesday">화요일</string>
     <string name="uninstall">제거</string>
-    <string name="uninstall_subtext">정말로 제거하시겠습니까 %s? %s의 데이터는 영원히 사라집니다!</string>
+    <string name="uninstall_subtext">정말로 제거하시겠습니까 %1$s? %2$s의 데이터는 영원히 사라집니다!</string>
     <string name="up">위로</string>
     <string name="video">비디오</string>
     <string name="video_tutorials">비디오 튜토리얼</string>
@@ -294,21 +270,15 @@
     <string name="try_now">지금 시도하시오</string>
     <string name="download_progress">다운로드 진행상황</string>
     <string name="what_do_you_want_to_do_with___">당신은 %s와 무엇을 같이하고 싶나요?</string>
-    <string name="crash_reports">충돌 리포트</string>
-    <string name="crash_reports_subtext">충돌 리포트는 GranPhone를 완벽하게 만드는데 도움이 됩니다. 버그를 수정하는데만 사용되며 버그를 수정하는데 필요한 정보 이외의 정보는 수집되지 않습니다.</string>
     <string name="custom_app">사용자 지정 앱</string>
-    <string name="custom_app_subtext">홈 화면에 표시 할 사용자 지정 앱을 선택하십시오.</string>
-    <string name="no_app_was_found">알맞는 앱을 찾지 못했습니다!</string>
     <string name="alarm">알람</string>
     <string name="no_new_notifications">새로운 알림이 없습니다</string>
     <string name="sound">소리</string>
     <string name="mute">음소거</string>
     <string name="vibrate">진동</string>
-    <string name="your_phone_doesnt_have_assistant_installed">휴대 전화에 보조기기가 설치되어 있지 않습니다.</string>
 
 
     <string name="status_bar_settings">상태 표시줄</string>
-    <string name="status_bar_settings_subtext">상태 표시 줄을 어디에 표시 하시겠습니까?</string>
     <string name="only_home_screen">홈 화면만</string>
     <string name="nowhere">아무데도 없음</string>
     <string name="everywhere">어디에서나</string>
@@ -328,38 +298,24 @@
 
 
     <string name="dialer_sounds">다이얼 소리</string>
-    <string name="dialer_sounds_subtext">다이얼 소리를 정하시오.</string>
     <string name="low_battery_alert">배터리 부족 경고</string>
-    <string name="low_battery_alert_subtext">배터리가 20% 미만일 때 홈 화면에서 상태 표시 줄을 빨간색으로 표시하려면 선택하십시오. 알림 시스템 상태 표시 줄이 숨겨져 있으면 표시되지 않습니다.</string>
 
-    <string name="also_available_at">또한 GranPhone.contact@gmail.com 이 주소로 English/Hebrew 언어를 사용하여 피드백이 가능합니다!</string>
     <string name="grant_all_permissions">모든 허가 승인</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-<string name="emergency_button">비상 버튼</string>
-    <string name="emergency_settings_subtext">홈 화면에 비상 버튼이 있는지 선택하십시오.</string>
     <string name="private_number">개인 번호</string>
     <string name="swipe_left_or_right">왼쪽에서 오른쪽으로 밀어넘기기</string>
     <string name="press_next_or_back_buton">다음 또는 뒤로 화살표를 누르십시오</string>
-    <string name="click_delay">Click Delay</string>
-    <string name="no_delay">No Delay</string>
-    <string name="scrolling">Scrolling</string>
-    <string name="arrows">화살표</string>
-    <string name="swipe">Touch</string>
-    <string name="_long">긴</string>
-    <string name="_short">짧은</string>
     <string name="do_you_want_to_save_your_changes">변경된 사항을 저장하시겠습니까?</string>
     <string name="discard">연결 끊김</string>
     <string name="no_recent_calls">최근 전화 없음</string>
     <string name="apps_sort_method">앱 정렬 방법</string>
-    <string name="apps_sort_method_subtext">앱을 하나의 격자로 정렬할지 또는 문자를 통해 다른 그룹으로 나눌 지 선택하세요</string>
     <string name="groups">그룹</string>
     <string name="one_grid">하나의 그리드</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
     <bool name="is_right_to_left">false</bool>
 

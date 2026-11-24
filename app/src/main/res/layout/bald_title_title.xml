@@ -22,11 +22,11 @@
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:alpha="0.85"
-    android:gravity="center"
+    android:gravity="center_vertical"
     android:textColor="?bald_text_on_variant"
     android:maxLines="1"
     android:ellipsize="end"
     app:autoSizeTextType="uniform"
-    app:autoSizeMinTextSize="10sp"
+    app:autoSizeMinTextSize="@dimen/tiny"
     app:autoSizeMaxTextSize="@dimen/large"
     android:transitionName="bald_bar_title_animation" />

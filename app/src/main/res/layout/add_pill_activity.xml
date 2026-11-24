@@ -44,15 +44,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="24dp">
+            android:paddingStart="@dimen/spacing_md"
+            android:paddingTop="@dimen/spacing_sm"
+            android:paddingEnd="@dimen/spacing_md"
+            android:paddingBottom="@dimen/spacing_xl">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="@dimen/spacing_xs"
                 android:labelFor="@id/reminder_edit_name"
                 android:text="@string/pill_name"
                 android:textColor="?attr/bald_text_primary"
@@ -62,21 +62,21 @@
                 android:id="@+id/reminder_edit_name"
                 style="@style/BackgroundText.Large"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/style_for_buttons"
+                android:layout_height="@dimen/button_height_default"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:background="@drawable/bald_button_background"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:maxLines="1"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                android:paddingStart="@dimen/spacing_lg"
+                android:paddingEnd="@dimen/spacing_lg"
                 android:textColorHint="?attr/bald_hint_on_background" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:text="@string/time"
                 android:textColor="?attr/bald_text_primary"
                 android:textSize="@dimen/small" />
@@ -85,15 +85,15 @@
                 android:id="@+id/multiple_selection"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 app:is_vertical="true"
                 app:text_size="@dimen/medium" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:text="@string/color"
                 android:textColor="?attr/bald_text_primary"
                 android:textSize="@dimen/small" />
@@ -101,84 +101,84 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:orientation="horizontal">
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/blue"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_marginEnd="@dimen/spacing_xs"
                     android:layout_weight="1"
                     android:background="@drawable/btn_selected"
                     android:contentDescription="@string/cd_pill_blue"
                     android:focusable="true"
-                    android:padding="8dp"
+                    android:padding="@dimen/spacing_sm"
                     android:src="@drawable/pill"
                     android:tint="@color/blue" />
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/red"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_marginEnd="@dimen/spacing_xs"
                     android:layout_weight="1"
-                    android:background="@drawable/style_for_buttons_transparent"
+                    android:background="@drawable/bald_ghost_button_background"
                     android:contentDescription="@string/cd_pill_red"
                     android:focusable="true"
-                    android:padding="8dp"
+                    android:padding="@dimen/spacing_sm"
                     android:src="@drawable/pill"
                     android:tint="@color/red" />
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/gray"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_marginEnd="@dimen/spacing_xs"
                     android:layout_weight="1"
-                    android:background="@drawable/style_for_buttons_transparent"
+                    android:background="@drawable/bald_ghost_button_background"
                     android:contentDescription="@string/cd_pill_gray"
                     android:focusable="true"
-                    android:padding="8dp"
+                    android:padding="@dimen/spacing_sm"
                     android:src="@drawable/pill"
                     android:tint="@color/gray" />
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/yellow"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_marginEnd="@dimen/spacing_xs"
                     android:layout_weight="1"
-                    android:background="@drawable/style_for_buttons_transparent"
+                    android:background="@drawable/bald_ghost_button_background"
                     android:contentDescription="@string/cd_pill_yellow"
                     android:focusable="true"
-                    android:padding="8dp"
+                    android:padding="@dimen/spacing_sm"
                     android:src="@drawable/pill"
                     android:tint="@color/yellow" />
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/green"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_marginEnd="@dimen/spacing_xs"
                     android:layout_weight="1"
-                    android:background="@drawable/style_for_buttons_transparent"
+                    android:background="@drawable/bald_ghost_button_background"
                     android:contentDescription="@string/cd_pill_green"
                     android:focusable="true"
-                    android:padding="8dp"
+                    android:padding="@dimen/spacing_sm"
                     android:src="@drawable/pill"
                     android:tint="@color/green" />
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/custom"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_marginEnd="@dimen/spacing_xs"
                     android:layout_weight="1"
-                    android:background="@drawable/style_for_buttons_transparent"
+                    android:background="@drawable/bald_ghost_button_background"
                     android:contentDescription="@string/cd_pill_custom"
                     android:focusable="true"
-                    android:padding="8dp"
+                    android:padding="@dimen/spacing_sm"
                     android:src="@drawable/pill"
                     android:visibility="gone" />
             </LinearLayout>
@@ -186,8 +186,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:text="@string/repeat"
                 android:textColor="?attr/bald_text_primary"
                 android:textSize="@dimen/small" />
@@ -195,42 +195,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/dialog_screen_card"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:background="@drawable/bald_card_background"
                 android:orientation="vertical"
-                android:paddingStart="8dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="12dp">
+                android:paddingStart="@dimen/spacing_sm"
+                android:paddingTop="@dimen/spacing_sm"
+                android:paddingEnd="@dimen/spacing_sm"
+                android:paddingBottom="@dimen/spacing_md">
 
                 <RadioButton
                     android:id="@+id/rb_every_day"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="56dp"
-                    android:background="@drawable/style_for_buttons_transparent"
+                    android:minHeight="@dimen/touch_min"
+                    android:background="@drawable/bald_ghost_button_background"
                     android:button="@null"
                     android:checked="true"
                     android:drawableStart="@drawable/radio_circle"
-                    android:drawablePadding="16dp"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
+                    android:drawablePadding="@dimen/spacing_lg"
+                    android:paddingStart="@dimen/spacing_sm"
+                    android:paddingEnd="@dimen/spacing_sm"
                     android:text="@string/repeats_every_day"
                     android:textColor="?attr/bald_text_primary"
                     android:textSize="@dimen/medium" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_height="@dimen/divider"
+                    android:layout_marginTop="@dimen/spacing_xs"
                     android:background="?attr/bald_card_border" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginStart="@dimen/spacing_sm"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:layout_marginBottom="@dimen/spacing_xs"
                     android:text="@string/specific_days"
                     android:textColor="?attr/bald_text_secondary"
                     android:textSize="@dimen/small" />
@@ -245,34 +245,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:padding="@dimen/spacing_md">
 
         <com.bald.uriah.baldphone.views.BaldButton
             android:id="@+id/bt_cancel"
             style="@style/ButtonsText.Large"
             android:layout_width="0dp"
-            android:layout_height="88dp"
-            android:layout_marginEnd="6dp"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="12sp"
+            app:autoSizeMinTextSize="@dimen/tiny"
             app:autoSizeMaxTextSize="@dimen/large"
-            android:background="@drawable/style_for_buttons"
+            android:background="@drawable/bald_button_background"
             android:text="@string/cancel" />
 
         <com.bald.uriah.baldphone.views.BaldButton
             android:id="@+id/bt_submit"
             style="@style/ButtonsText.Large"
             android:layout_width="0dp"
-            android:layout_height="88dp"
-            android:layout_marginStart="6dp"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_marginStart="@dimen/spacing_sm"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="12sp"
+            app:autoSizeMinTextSize="@dimen/tiny"
             app:autoSizeMaxTextSize="@dimen/large"
             android:background="@drawable/call_button_green"
             android:backgroundTint="?attr/bald_brand"

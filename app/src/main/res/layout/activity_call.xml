@@ -10,19 +10,19 @@
     android:background="?bald_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="@dimen/spacing_sm">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="@dimen/title_bar_height"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <FrameLayout
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:layout_marginEnd="12dp">
+            android:layout_marginEnd="@dimen/spacing_md">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_photo"
@@ -38,7 +38,7 @@
                 android:importantForAccessibility="no"
                 android:maxLines="1"
                 android:textColor="?bald_background"
-                android:textSize="40sp"
+                android:textSize="@dimen/giant"
                 android:textStyle="bold" />
         </FrameLayout>
 
@@ -56,14 +56,14 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:textColor="?bald_text_on_background"
-                android:textSize="36sp"
+                android:textSize="@dimen/giant"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
@@ -76,10 +76,10 @@
         android:id="@+id/tv_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:gravity="center"
         android:textColor="?bald_text_on_background"
-        android:textSize="30sp" />
+        android:textSize="@dimen/huge" />
 
     <Space
         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
             android:id="@+id/bt_decline"
             style="@style/CallButton"
             android:layout_height="96dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_sm"
             android:background="@drawable/call_button_red"
             android:drawableStart="@drawable/ic_call_end_white"
             android:maxLines="1"
@@ -129,14 +129,14 @@
             android:drawableStart="@drawable/ic_volume_up_white"
             android:maxLines="1"
             android:text="@string/speaker_turn_on"
-            android:textSize="30sp"
+            android:textSize="@dimen/huge"
             app:autoSizeTextType="uniform" />
 
         <Button
             android:id="@+id/bt_hangup"
             style="@style/CallButton"
             android:layout_height="120dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_sm"
             android:background="@drawable/call_button_red"
             android:drawableStart="@drawable/ic_call_end_white"
             android:maxLines="1"

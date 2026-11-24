@@ -19,22 +19,15 @@
 <string name="accessibility_level">Úroveň přistupnosti</string>
     <string name="accessibility_settings">Přístupnost</string>
     <string name="accidental_touches">Ochrana proti nechtěnému dotyku</string>
-    <string name="accidental_touches_settings_subtext">Ochrana blokuje telefon před dotykovým vstupem, pokud je telefon
-        zakrytý\nPokud máte problémy můžete vypnout
-    </string>
     <string name="accidental_touches_subtext">Nechtěný dotyk byl detekován\nStiskněte \"Rozumím\" pro pokračování v používání telefonu\n
         Zobrazuje-li se tato zpráva neustále, můžete ji vypnout v nastavení přístupnosti
     </string>
-    <string name="acknowledgments">Poděkování</string>
-    <string name="adaptive">Adaptivní</string>
     <string name="add_alarm">Přidat budík</string>
     <string name="add_alarm_quickly">Přidat časovač</string>
     <string name="add_contact">Přidat kontakt</string>
     <string name="add_emergency_contact">Přidat</string>
     <string name="add_pill">Přidat pilulku</string>
-    <string name="add_shortcut">Přidat zkratku</string>
     <string name="add_to_favorite">Přidat do oblíbených</string>
-    <string name="add_to_home">Přidat na domovskou obrazovku</string>
     <string name="add_to_sos">Přidat do SOS</string>
     <string name="address">Adresa</string>
     <string name="advanced_options">Pokročilé nastavení</string>
@@ -54,7 +47,6 @@
 
     <string name="apps">Aplikace</string>
     <string name="are_you_sure_you_want_to_delete___">Jste si jisté že chcete smazat %s?</string>
-    <string name="assistant">Asistent</string>
     <string name="at_least_one_day_must_be_selected">Aspoň jedno musí být vybráno!</string>
     <string name="auto_brightness">Automatický\njas</string>
     <string name="backspace">backspace</string>
@@ -62,7 +54,6 @@
     <string name="blocked">Zablokováno</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Jas</string>
-    <string name="brightness_subtext">Změnit jas.</string>
     <string name="cache_cleared_successfully">Mezipaměť vyčištěna úspěšně!</string>
     <string name="call">Zavolat</string>
     <string name="calling">Volám</string>
@@ -72,7 +63,6 @@
     <string name="camera">Fotoaparát</string>
     <string name="camera_subtext">Toto oprávnění je nutné k používání svítilny.</string>
     <string name="cancel">Zrušit</string>
-    <string name="change_pills_time">Změnit čas pilulky</string>
     <string name="change_system_settings_subtext">Prosím povolte GranPhone změnu nastavení, jako například
     zvětšení písma a změnu jasu.
     </string>
@@ -104,25 +94,19 @@ Všechna data budou vymazána!</string>
     <string name="dark">Tmavý</string>
     <string name="delete">Smazat</string>
     <string name="delete___">Smazat %s?</string>
-    <string name="delete_all_alarms">Smazat všechny budíky</string>
     <string name="dialer">Vytáčení</string>
     <string name="display_settings">Displej</string>
     <string name="done">Hotovo</string>
     <string name="down">Dolů</string>
     <string name="edit">Upravit</string>
-    <string name="email">Email:</string>
     <string name="enable_notification_access">Povolit Přístup K Upozorněním</string>
     <string name="enable_notification_access_subtext">Prosím povolte GranPhone přístup k upozorněním.</string>
     <string name="enter">Zadat</string>
-    <string name="enter_contact_or_phone_number">Zadejte jméno kontaktu:</string>
     <string name="evening">Večer</string>
     <string name="example_of_different_text_sizes">Příklad různých velikostí textu\nMěl by být
     čitelný a nepřetékat
     </string>
     <string name="external_storage_subtext">Toto oprávnění je nutné k ukládání obrázků.</string>
-    <string name="feedback">Poslat zpětnou vazbu</string>
-    <string name="feedback_cannot_be_empty">Zpětná vazba nemůže být prázdná!</string>
-    <string name="feedback_sent_successfully">Zpětná vazba poslána úspěšně!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Vyberte úroveň přístupnosti
     </string>
     <string name="font_size">Písmo</string>
@@ -137,7 +121,6 @@ Všechna data budou vymazána!</string>
     <string name="home_phone_number">Číslo telefonu domů</string>
     <string name="hour">Hodina</string>
     <string name="huge">Obrovský</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Vyvoláno v:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Jedna poslední věc:
     \nJe velice doboručeno, že použijete GranPhone jako výchozí domovskou obrazovku
@@ -149,7 +132,6 @@ Všechna data budou vymazána!</string>
     <string name="light">Světlý</string>
     <string name="location">Umístění</string>
 <string name="mail">Zprávy</string>
-    <string name="maps">Mapy</string>
 
 
     <string name="medium">Střední</string>
@@ -170,8 +152,6 @@ Všechna data budou vymazána!</string>
     <string name="nfc">NFC</string>
     <string name="no">Ne</string>
     <string name="notes">Poznámky</string>
-    <string name="notes_settings">Poznámky</string>
-    <string name="notes_settings_subtext">Vyberte jestli chcete mít stránku s poznámkami na domovské obrazovce.</string>
     <string name="notifications">Upozornění</string>
 
     <string name="of">z</string>
@@ -205,9 +185,6 @@ Všechna data budou vymazána!</string>
     <string name="regular_level">Normální úroveň</string>
 
     <string name="remove_from_favorite">Odebrat z oblíbených</string>
-    <string name="remove_from_home">Odebrat z domu</string>
-    <string name="remove_from_sos">Odebrat z SOS</string>
-    <string name="remove_shortcut">Odstaranit zkratku</string>
     <string name="removed_all_alarms">Všechny alarmy byly odstraněny!</string>
     <string name="repeats_every_day">každý den</string>
     <string name="right_handed">pravoruký</string>
@@ -247,24 +224,21 @@ Všechna data budou vymazána!</string>
     <string name="speak">Mluvit</string>
     <string name="speech_to_text">Řeč do textu</string>
     <string name="strong_hand">Dominantní ruka</string>
-    <string name="strong_hand_subtext">Vyberte dominantní ruku pro úpravu uživatelského prostředí.</string>
-    <string name="submit">Potvrdit</string>
     <string name="sunday">Neděle</string>
     <string name="technical_information">Technické informace</string>
     <string name="theme_settings">Téma</string>
-    <string name="theme_settings_subtext">Vyberte téma</string>
 
     <string name="thursday">Čtvrtek</string>
     <string name="time_changer">Měnič času pilulky</string>
     <string name="tiny">Malinký</string>
-    <string name="to___days_and___hours_from_now">Do %d dnů a %d hodin od teď</string>
-    <string name="to___hours_and___minutes_from_now">do %d hodin a %d minut od teď</string>
+    <string name="to___days_and___hours_from_now">Do %1$d dnů a %2$d hodin od teď</string>
+    <string name="to___hours_and___minutes_from_now">do %1$d hodin a %2$d minut od teď</string>
     <string name="to___minuets_from_now">do %d minut od teď</string>
     <string name="today">Dnes</string>
     <string name="took">Měl jsem!</string>
     <string name="tuesday">Úterý</string>
     <string name="uninstall">Odinstalovat</string>
-    <string name="uninstall_subtext">Jste si jistí, že chcete odistalovat %s?\n%s\'s data budou smazány!</string>
+    <string name="uninstall_subtext">Jste si jistí, že chcete odistalovat %1$s?\n%2$s\'s data budou smazány!</string>
     <string name="up">Nahoru</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video Tutoriál</string>
@@ -325,23 +299,15 @@ Stiskněte \"+ Pilulka\" níže.</string>
     <string name="try_now">Zkuste nyní</string>
     <string name="download_progress">Průběh stahování</string>
     <string name="what_do_you_want_to_do_with___">Co chcete dělat s %s?</string>
-    <string name="crash_reports">Zprávy o havárii</string>
-    <string name="crash_reports_subtext">Zprávy o havárii pomáhají dělat prostředí GranPhone bezchybné\nJsou používány pouze
-        k opravě chyb a žádné jiné informace, než to co je potřeba k opravě chyb, není posíláno.
-    </string>
     <string name="custom_app">Vlastní aplikace</string>
-    <string name="custom_app_subtext">Vyberte vlastní aplikace, která bude na domovské obrazovce.</string>
-    <string name="no_app_was_found">Nebyla nalezena žádná odpovídající aplikace!</string>
     <string name="alarm">Alarm</string>
     <string name="no_new_notifications">Žádná nová upozornění</string>
     <string name="sound">Zvuk</string>
     <string name="mute">Ztlumený</string>
     <string name="vibrate">Vibrace</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Váš telefon nemá naistalovaného asistenta</string>
 
 
     <string name="status_bar_settings">Stavový řádek</string>
-    <string name="status_bar_settings_subtext">Kde chcete ukázat stavový řádek?</string>
     <string name="only_home_screen">Pouze domovská obrazovka</string>
     <string name="nowhere">Nikde</string>
     <string name="everywhere">Všude</string>
@@ -361,38 +327,24 @@ Stiskněte \"+ Pilulka\" níže.</string>
 
 
     <string name="dialer_sounds">Zvuky vytáčení</string>
-    <string name="dialer_sounds_subtext">Zvolte pokud chcete zvuk vytáčení.</string>
     <string name="low_battery_alert">Pozor, nízká baterie</string>
-    <string name="low_battery_alert_subtext">Zvolte, pokud chcete, aby stavový řádek byl na domovské obrazovce červený, když je baterie méně než 20% \nPoznámka se nezobrazí, pokud je stavový řádek systému skrytý.</string>
 
-    <string name="also_available_at">Also available at\nGranPhone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
     <string name="grant_all_permissions">Grant All Permissions</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-<string name="emergency_button">Emergency Button</string>
-    <string name="emergency_settings_subtext">Choose if you want to have an Emergency Button on the home screen.</string>
     <string name="private_number">Private Number</string>
     <string name="swipe_left_or_right">Swipe left or right</string>
     <string name="press_next_or_back_buton">Stiskněte šipku další nebo zpět</string>
-    <string name="click_delay">Prodleva klepnutí</string>
-    <string name="no_delay">Bez prodlevy</string>
-    <string name="scrolling">Posouvání</string>
-    <string name="arrows">Šipky</string>
-    <string name="swipe">Touch</string>
-    <string name="_long">Dlouhá</string>
-    <string name="_short">Krátká</string>
     <string name="do_you_want_to_save_your_changes">Do you want to save your changes?</string>
     <string name="discard">Discard</string>
     <string name="no_recent_calls">No Recent Calls</string>
     <string name="apps_sort_method">Apps Sort Method</string>
-    <string name="apps_sort_method_subtext">Choose whether you want to sort the apps in one grid or to have them divided into different groups via letters</string>
     <string name="groups">Groups</string>
     <string name="one_grid">One Grid</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>

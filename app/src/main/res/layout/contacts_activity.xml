@@ -32,9 +32,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_marginEnd="@dimen/spacing_md"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -42,28 +42,28 @@
             android:id="@+id/et_search"
             style="@style/BackgroundText.Large"
             android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="@dimen/touch_min"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
-            android:background="@drawable/style_for_buttons"
+            android:background="@drawable/bald_button_background"
             android:drawableStart="@drawable/search_on_button"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/spacing_sm"
             android:hint="@string/search"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:paddingStart="@dimen/spacing_lg"
+            android:paddingEnd="@dimen/spacing_lg"
             android:textColorHint="?bald_hint_on_background" />
 
         <ImageView
             android:id="@+id/bt_favorite"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="@drawable/style_for_buttons"
+            android:layout_width="@dimen/touch_min"
+            android:layout_height="@dimen/touch_min"
+            android:background="@drawable/bald_button_background"
             android:contentDescription="@string/add_to_favorite"
             android:focusable="true"
-            android:padding="14dp"
+            android:padding="@dimen/spacing_md"
             android:src="@drawable/star_gold" />
     </LinearLayout>
 
@@ -72,15 +72,15 @@
         layout="@layout/contacts_search"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:layout_weight="1" />
 
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/bt_add_contact"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/style_for_buttons_green"
+        android:layout_height="@dimen/button_height_large"
+        android:layout_margin="@dimen/spacing_md"
+        android:background="@drawable/bald_button_background"
         app:_src="@drawable/add_on_button"
         app:_text="@string/add_contact"
         app:variant="brand" />

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- LauncherCard background: set android:selected="true" (or view.setSelected) for the
+     brand selected border. Use bald_card_tinted_background for accent blocks. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_card" />
+            <solid android:color="?bald_card" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?bald_brand" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_card" />
+            <solid android:color="?bald_button_clicked" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="?bald_card_border" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_card" />
+            <solid android:color="?bald_card" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?bald_decoration_on_background" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_card" />
+            <solid android:color="?bald_card" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="?bald_card_border" />
+        </shape>
+    </item>
+</selector>

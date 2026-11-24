@@ -14,28 +14,28 @@
   ~ limitations under the License.
   -->
 
-<!-- Contact row card: letter section header + card row (dialog_screen_card
-     via style_for_buttons_rectangle). Card separation replaces the divider. -->
+<!-- Contact row card: letter section header + card row (bald_card_background;
+     the adapter swaps in the gold rectangle for favorites). Card gaps replace the divider. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contact_row_linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="6dp"
+    android:layout_height="@dimen/list_row_height"
+    android:layout_marginStart="@dimen/spacing_md"
+    android:layout_marginTop="@dimen/spacing_xs"
+    android:layout_marginEnd="@dimen/spacing_md"
+    android:layout_marginBottom="@dimen/spacing_xs"
     android:orientation="vertical">
 
     <com.bald.uriah.baldphone.views.BaldButton
         android:id="@+id/letter"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:background="@drawable/style_for_buttons_transparent"
+        android:layout_height="@dimen/list_header_height"
+        android:background="@drawable/bald_ghost_button_background"
         android:gravity="center_vertical|start"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingStart="@dimen/spacing_lg"
+        android:paddingEnd="@dimen/spacing_lg"
         android:textColor="?bald_text_secondary"
         android:textSize="@dimen/huge"
         android:textStyle="bold"
@@ -45,22 +45,22 @@
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider"
         android:background="@android:color/transparent"
         android:visibility="gone" />
 
     <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
         android:id="@+id/ll_contact_only"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/style_for_buttons_rectangle"
+        android:layout_height="@dimen/list_row_height"
+        android:background="@drawable/bald_card_background"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <FrameLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp">
+            android:layout_width="@dimen/avatar_md"
+            android:layout_height="@dimen/avatar_md"
+            android:layout_marginStart="@dimen/spacing_lg">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_pic"
@@ -82,8 +82,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/spacing_lg"
+            android:layout_marginEnd="@dimen/spacing_lg"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -94,7 +94,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="12sp"
+                app:autoSizeMinTextSize="@dimen/tiny"
                 app:autoSizeMaxTextSize="@dimen/large"
                 tools:text="Contact Name"
                 android:textColor="?bald_text_primary"
@@ -105,7 +105,7 @@
                 android:id="@+id/contact_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="@dimen/spacing_xs"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="?bald_text_secondary"

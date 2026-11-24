@@ -46,7 +46,10 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="@dimen/spacing_md"
+            android:paddingTop="@dimen/spacing_lg"
+            android:paddingEnd="@dimen/spacing_md"
+            android:paddingBottom="@dimen/spacing_lg">
 
             <TextView
                 android:id="@+id/tv_current_time"
@@ -61,13 +64,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/bald_text_primary"
-                android:textSize="40sp" />
+                android:textSize="@dimen/giant" />
 
             <TextView
                 android:id="@+id/alarm_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/spacing_xl"
                 android:text="@string/invoked_in"
                 android:textColor="?attr/bald_text_secondary"
                 android:textSize="@dimen/small" />
@@ -75,18 +78,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/spacing_sm"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/bt_dec"
                 android:focusable="true"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/style_for_buttons"
+                    android:layout_width="@dimen/button_height_large"
+                    android:layout_height="@dimen/button_height_large"
+                    android:background="@drawable/bald_button_background"
                     android:contentDescription="@string/less"
-                    android:padding="16dp"
+                    android:padding="@dimen/spacing_lg"
                     android:src="@drawable/remove_on_button" />
 
                 <TextView
@@ -98,17 +101,17 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textColor="?attr/bald_text_primary"
-                    android:textSize="40sp"
+                    android:textSize="@dimen/giant"
                     android:textStyle="bold" />
 
                 <com.bald.uriah.baldphone.views.BaldImageButton
                     android:id="@+id/bt_add"
                 android:focusable="true"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/style_for_buttons"
+                    android:layout_width="@dimen/button_height_large"
+                    android:layout_height="@dimen/button_height_large"
+                    android:background="@drawable/bald_button_background"
                     android:contentDescription="@string/more"
-                    android:padding="16dp"
+                    android:padding="@dimen/spacing_lg"
                     android:src="@drawable/add_on_button" />
             </LinearLayout>
 
@@ -116,14 +119,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:orientation="horizontal">
 
                 <com.bald.uriah.baldphone.views.BaldButton
                     android:id="@+id/preset_1"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_margin="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_margin="@dimen/spacing_xs"
                     android:layout_weight="1"
                     android:background="@drawable/day_chip"
                     android:gravity="center"
@@ -133,8 +136,8 @@
                 <com.bald.uriah.baldphone.views.BaldButton
                     android:id="@+id/preset_5"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_margin="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_margin="@dimen/spacing_xs"
                     android:layout_weight="1"
                     android:background="@drawable/day_chip"
                     android:gravity="center"
@@ -144,8 +147,8 @@
                 <com.bald.uriah.baldphone.views.BaldButton
                     android:id="@+id/preset_10"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_margin="4dp"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_margin="@dimen/spacing_xs"
                     android:layout_weight="1"
                     android:background="@drawable/day_chip"
                     android:gravity="center"
@@ -160,34 +163,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:padding="@dimen/spacing_md">
 
         <com.bald.uriah.baldphone.views.BaldButton
             android:id="@+id/bt_cancel"
             style="@style/ButtonsText.Large"
             android:layout_width="0dp"
-            android:layout_height="88dp"
-            android:layout_marginEnd="6dp"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="12sp"
+            app:autoSizeMinTextSize="@dimen/tiny"
             app:autoSizeMaxTextSize="@dimen/large"
-            android:background="@drawable/style_for_buttons"
+            android:background="@drawable/bald_button_background"
             android:text="@string/cancel" />
 
         <com.bald.uriah.baldphone.views.BaldButton
             android:id="@+id/bt_alarm_submit"
             style="@style/ButtonsText.Large"
             android:layout_width="0dp"
-            android:layout_height="88dp"
-            android:layout_marginStart="6dp"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_marginStart="@dimen/spacing_sm"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
             app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="12sp"
+            app:autoSizeMinTextSize="@dimen/tiny"
             app:autoSizeMaxTextSize="@dimen/large"
             android:background="@drawable/call_button_green"
             android:backgroundTint="?attr/bald_brand"

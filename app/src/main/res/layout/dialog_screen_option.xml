@@ -16,18 +16,18 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
-    android:background="@drawable/style_for_buttons_transparent"
+    android:layout_height="@dimen/button_height_default"
+    android:background="@drawable/bald_ghost_button_background"
     android:focusable="true"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:paddingStart="@dimen/spacing_lg"
+    android:paddingEnd="@dimen/spacing_lg">
 
     <ImageView
         android:id="@+id/dialog_screen_option_check"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/icon_sm"
+        android:layout_height="@dimen/icon_sm"
         android:importantForAccessibility="no"
         android:src="@drawable/check_on_button"
         android:tint="?bald_brand"
@@ -37,7 +37,7 @@
         android:id="@+id/dialog_screen_option_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/spacing_lg"
         android:layout_weight="1"
         android:textColor="?bald_text_primary"
         android:textSize="@dimen/medium" />

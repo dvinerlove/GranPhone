@@ -49,7 +49,7 @@
         <item name="bald_background_transparent">@color/bald_background_transparent_light</item>
         <item name="bald_button">@color/bald_button_light</item>
         <item name="bald_button_clicked">@color/bald_button_clicked_light</item>
-        <item name="bald_button_corners_radius">@dimen/bald_button_corners_radius_light</item>
+        <item name="bald_button_corners_radius">@dimen/radius_button</item>
         <item name="bald_button_disabled">@color/bald_button_disabled_light</item>
         <item name="bald_button_pill_corners_radius">@dimen/bald_button_pill_corners_radius_light
         </item>
@@ -65,7 +65,7 @@
         <item name="bald_keyboard_key_pressed_background">
             @color/bald_keyboard_key_pressed_background_light
         </item>
-        <item name="bald_stroke_size">@dimen/bald_stroke_size_light</item>
+        <item name="bald_stroke_size">@dimen/border_width</item>
         <item name="bald_text_on_background">@color/bald_text_on_background_light</item>
         <item name="bald_text_on_button">@color/bald_text_on_button_light</item>
         <item name="bald_text_on_key">@color/bald_text_on_key_light</item>
@@ -89,7 +89,7 @@
         <item name="bald_background_transparent">@color/bald_background_transparent_dark</item>
         <item name="bald_button">@color/bald_button_dark</item>
         <item name="bald_button_clicked">@color/bald_button_clicked_dark</item>
-        <item name="bald_button_corners_radius">@dimen/bald_button_corners_radius_dark</item>
+        <item name="bald_button_corners_radius">@dimen/radius_button</item>
         <item name="bald_button_disabled">@color/bald_button_disabled_dark</item>
         <item name="bald_button_pill_corners_radius">@dimen/bald_button_pill_corners_radius_dark
         </item>
@@ -105,7 +105,7 @@
         </item>
         <item name="bald_stroke_color">@color/bald_stroke_color_dark</item>
         <item name="bald_keyboard_key_background">@color/bald_keyboard_key_background_dark</item>
-        <item name="bald_stroke_size">@dimen/bald_stroke_size_dark</item>
+        <item name="bald_stroke_size">@dimen/border_width</item>
         <item name="bald_text_on_background">@color/bald_text_on_background_dark</item>
         <item name="bald_text_on_button">@color/bald_text_on_button_dark</item>
         <item name="bald_text_on_key">@color/bald_text_on_key_dark</item>
@@ -189,13 +189,13 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_margin">6dp</item>
+        <item name="android:layout_margin">@dimen/spacing_sm</item>
         <item name="android:background">@drawable/dialer_key_background</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">?attr/bald_text_primary</item>
         <item name="android:textSize">@dimen/huge</item>
         <item name="autoSizeTextType">uniform</item>
-        <item name="autoSizeMinTextSize">14sp</item>
+        <item name="autoSizeMinTextSize">@dimen/tiny</item>
     </style>
 
     <style name="BaldActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
@@ -205,13 +205,13 @@
     <!-- Very large buttons used on the call screen (activity_call.xml) -->
     <style name="CallButton">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:drawablePadding">16dp</item>
+        <item name="android:drawablePadding">@dimen/spacing_lg</item>
         <item name="android:gravity">center</item>
-        <item name="android:paddingStart">32dp</item>
-        <item name="android:paddingEnd">32dp</item>
+        <item name="android:paddingStart">@dimen/spacing_xl</item>
+        <item name="android:paddingEnd">@dimen/spacing_xl</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/call_button_text</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">@dimen/giant</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>

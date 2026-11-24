@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Single button background for the whole app: radius_button + border_width.
+     Variants recolor via backgroundTintList (BaldPictureTextButton). -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="?bald_button_disabled" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="?bald_stroke_color" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="?bald_button_clicked" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="?bald_stroke_color" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="?bald_button" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?bald_decoration_on_background" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="?bald_button" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="?bald_stroke_color" />
+        </shape>
+    </item>
+</selector>

@@ -44,11 +44,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="16dp">
+                android:paddingStart="@dimen/spacing_md"
+                android:paddingTop="@dimen/spacing_sm"
+                android:paddingEnd="@dimen/spacing_md"
+                android:paddingBottom="@dimen/spacing_md">
 
+                <!-- Compact header: avatar | name + primary number | favorite star -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,63 +60,77 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                        <!-- SquaredCircleImageView renders at half its layout size: 192dp -> 96dp -->
+                        <!-- SquaredCircleImageView renders at half its layout size: 144dp -> 72dp -->
                         <com.bald.uriah.baldphone.views.SquaredCircleImageView
                             android:id="@+id/contact_image"
-                            android:layout_width="192dp"
-                            android:layout_height="192dp"
+                            android:layout_width="@dimen/avatar_xl"
+                            android:layout_height="@dimen/avatar_xl"
                             android:transitionName="prof_pic_contacts_animation" />
 
                         <TextView
                             android:id="@+id/image_letter"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
+                            android:layout_width="@dimen/avatar_lg"
+                            android:layout_height="@dimen/avatar_lg"
                             android:gravity="center"
                             android:textColor="?bald_text_on_background"
-                            android:textSize="40sp"
+                            android:textSize="@dimen/huge"
                             android:textStyle="bold"
                             android:visibility="gone" />
                     </FrameLayout>
 
-                    <Space
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_contact_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:textColor="?bald_text_on_background"
+                            android:textSize="@dimen/huge"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/bt_favorite"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_marginStart="8dp"
-                        android:background="@drawable/style_for_buttons_transparent"
+                        android:layout_width="@dimen/touch_min"
+                        android:layout_height="@dimen/touch_min"
+                        android:layout_marginStart="@dimen/spacing_sm"
+                        android:background="@drawable/bald_ghost_button_background"
                         android:contentDescription="@string/add_to_favorite"
                         android:focusable="true"
-                        android:padding="8dp"
+                        android:padding="@dimen/spacing_sm"
                         android:src="@drawable/star_on_button" />
                 </LinearLayout>
-
-                <!-- Full-width row so the name can only wrap at word boundaries -->
-                <TextView
-                    android:id="@+id/tv_contact_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:gravity="start"
-                    android:maxLines="2"
-                    android:textColor="?bald_text_on_background"
-                    android:textSize="@dimen/huge"
-                    android:textStyle="bold" />
 
                 <com.bald.uriah.baldphone.views.BaldPictureTextButton
                     android:id="@+id/bt_call"
                     android:layout_width="match_parent"
-                    android:layout_height="88dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/style_for_buttons_green"
+                    android:layout_height="@dimen/button_height_large"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:background="@drawable/bald_button_background"
                     app:_src="@drawable/ic_call_white"
                     app:_text="@string/call"
                     app:variant="brand" />
+
+                <TextView
+                    android:id="@+id/tv_no_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height_large"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:background="@drawable/bald_button_background"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="@string/contact_no_number"
+                    android:textColor="?bald_text_secondary"
+                    android:textSize="@dimen/medium"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/ll_phones"
@@ -126,96 +141,107 @@
                 <com.bald.uriah.baldphone.views.BaldPictureTextButton
                     android:id="@+id/bt_sms"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/style_for_buttons"
+                    android:layout_height="@dimen/button_height_large"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:background="@drawable/bald_button_background"
                     app:_src="@drawable/message_on_button"
                     app:_text="@string/message"
-                    app:variant="info" />
-
-                <com.bald.uriah.baldphone.views.BaldPictureTextButton
-                    android:id="@+id/bt_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/style_for_buttons"
-                    app:_src="@drawable/edit_on_button"
-                    app:_text="@string/edit" />
-
-                <com.bald.uriah.baldphone.views.BaldPictureTextButton
-                    android:id="@+id/bt_share"
-                    android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/style_for_buttons"
-                    app:_src="@drawable/share_on_button"
-                    app:_text="@string/share" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/dialog_screen_card"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_to_sos"
-                        android:textColor="?bald_text_primary"
-                        android:textSize="@dimen/medium" />
-
-                    <com.bald.uriah.baldphone.views.BaldSwitch
-                        android:id="@+id/sos_switch"
-                        android:layout_width="180dp"
-                        android:layout_height="56dp"
-                        android:layout_marginTop="8dp"
-                        app:no="@string/no"
-                        app:size="@dimen/small"
-                        app:yes="@string/yes" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/dialog_screen_card"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pin_to_home"
-                        android:textColor="?bald_text_primary"
-                        android:textSize="@dimen/medium" />
-
-                    <com.bald.uriah.baldphone.views.BaldSwitch
-                        android:id="@+id/home_pin_switch"
-                        android:layout_width="180dp"
-                        android:layout_height="56dp"
-                        android:layout_marginTop="8dp"
-                        app:no="@string/no"
-                        app:size="@dimen/small"
-                        app:yes="@string/yes" />
-                </LinearLayout>
-
-                <com.bald.uriah.baldphone.views.BaldPictureTextButton
-                    android:id="@+id/bt_delete"
-                    android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/style_for_buttons"
-                    app:_src="@drawable/delete_on_button"
-                    app:_text="@string/delete"
-                    app:variant="danger" />
+                    app:variant="tinted" />
 
                 <LinearLayout
                     android:id="@+id/ll_dynamic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
+
+                <!-- Contact settings: compact one-line rows, switches on the right -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_lg"
+                    android:text="@string/settings"
+                    android:textColor="?bald_text_secondary"
+                    android:textSize="@dimen/medium" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:background="@drawable/bald_card_background"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/touch_min"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/spacing_md"
+                    android:paddingTop="@dimen/spacing_sm"
+                    android:paddingEnd="@dimen/spacing_md"
+                    android:paddingBottom="@dimen/spacing_sm">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/add_to_sos"
+                        android:textColor="?bald_text_primary"
+                        android:textSize="@dimen/medium" />
+
+                    <com.bald.uriah.baldphone.views.BaldSwitch
+                        android:id="@+id/sos_switch"
+                        android:layout_width="@dimen/avatar_xl"
+                        android:layout_height="@dimen/switch_height"
+                        app:no="@string/no"
+                        app:size="@dimen/small"
+                        app:yes="@string/yes" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:background="@drawable/bald_card_background"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/touch_min"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/spacing_md"
+                    android:paddingTop="@dimen/spacing_sm"
+                    android:paddingEnd="@dimen/spacing_md"
+                    android:paddingBottom="@dimen/spacing_sm">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/pin_to_home"
+                        android:textColor="?bald_text_primary"
+                        android:textSize="@dimen/medium" />
+
+                    <com.bald.uriah.baldphone.views.BaldSwitch
+                        android:id="@+id/home_pin_switch"
+                        android:layout_width="@dimen/avatar_xl"
+                        android:layout_height="@dimen/switch_height"
+                        app:no="@string/no"
+                        app:size="@dimen/small"
+                        app:yes="@string/yes" />
+                </LinearLayout>
+
+                <com.bald.uriah.baldphone.views.BaldPictureTextButton
+                    android:id="@+id/bt_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height_large"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:background="@drawable/bald_button_background"
+                    app:_src="@drawable/edit_on_button"
+                    app:_text="@string/edit" />
+
+                <!-- Secondary destructive action: outline style, confirm dialog in code -->
+                <com.bald.uriah.baldphone.views.BaldPictureTextButton
+                    android:id="@+id/bt_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height_default"
+                    android:layout_marginTop="@dimen/spacing_lg"
+                    android:background="@drawable/bald_button_background"
+                    app:_src="@drawable/delete_on_button"
+                    app:_text="@string/delete"
+                    app:variant="danger_outline" />
             </LinearLayout>
         </com.bald.uriah.baldphone.views.ModularScrollView>
     </com.bald.uriah.baldphone.views.ScrollingHelper>

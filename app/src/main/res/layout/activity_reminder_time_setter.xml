@@ -50,9 +50,9 @@
                     android:id="@+id/multiple_selection"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/spacing_md"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:layout_marginEnd="@dimen/spacing_md"
                     app:is_vertical="true"
                     app:text_size="@dimen/medium" />
 
@@ -70,8 +70,8 @@
                         layout="@layout/hour_and_minute_choosers"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp" />
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:layout_marginEnd="@dimen/spacing_md" />
                 </LinearLayout>
             </LinearLayout>
         </com.bald.uriah.baldphone.views.ModularScrollView>

@@ -19,13 +19,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="4dp"
-    android:background="@drawable/dialog_screen_card"
+    android:layout_marginStart="@dimen/spacing_md"
+    android:layout_marginTop="@dimen/spacing_sm"
+    android:layout_marginEnd="@dimen/spacing_md"
+    android:layout_marginBottom="@dimen/spacing_xs"
+    android:background="@drawable/bald_card_background"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_lg">
 
     <TextView
         android:id="@+id/title"
@@ -39,16 +39,16 @@
         android:id="@+id/explanation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:textColor="?bald_text_secondary"
         android:textSize="@dimen/small" />
 
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/allow"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="14dp"
-        android:background="@drawable/style_for_buttons"
+        android:layout_height="@dimen/button_height_large"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:background="@drawable/bald_button_background"
         app:_size="@dimen/large"
         app:_src="@drawable/check_on_button"
         app:_text="@string/allow"

@@ -35,18 +35,20 @@ import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.ScrollView;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
@@ -55,6 +57,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.viewpager.widget.PagerAdapter;
+
+import com.duolingo.open.rtlviewpager.RtlViewPager;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
@@ -70,6 +75,7 @@ import com.bald.uriah.baldphone.utils.KioskManager;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldImageButton;
@@ -112,7 +118,6 @@ public class HomeScreenActivity extends BaldActivity {
     private String torchCameraId;
     private SharedPreferences sharedPreferences;
     private BaldPrefsUtils baldPrefsUtils;
-    private ScrollView homeScroll;
     private HomePage1 homePage1;
     private BatteryView batteryView;
     private boolean lowBatteryAlert;
@@ -423,22 +428,18 @@ public class HomeScreenActivity extends BaldActivity {
         super.onDestroy();
     }
 
-    /**
-     * Refreshes the pinned-app data and scrolls the single home page back to the top
-     * (the equivalent of the old "jump back to page 1").
-     */
+    /** Re-binds tile slots from preferences (pins/customizations made elsewhere). */
     private void refreshHome() {
         // BaldHomeWatcher/onStart can fire before attachToXml() binds homePage1.
-        if (homePage1 == null)
-            return;
-        homePage1.populatePins();
-        homeScroll.smoothScrollTo(0, 0);
+        if (homePage1 != null)
+            homePage1.refreshTiles();
     }
 
     private void attachToXml() {
         setContentView(R.layout.home_screen);
-        homeScroll = findViewById(R.id.home_scroll);
-        homePage1 = findViewById(R.id.home_page_1);
+        final RtlViewPager homePager = findViewById(R.id.home_pager);
+        final View mainPage = LayoutInflater.from(this).inflate(R.layout.home_page_main, homePager, false);
+        homePage1 = (HomePage1) mainPage;
 
         findViewById(R.id.bt_home_sos).setOnClickListener(v -> startActivity(new Intent(this, SOSActivity.class)));
         findViewById(R.id.bt_home_apps).setOnClickListener(v -> {
@@ -447,18 +448,23 @@ public class HomeScreenActivity extends BaldActivity {
             else
                 startActivity(new Intent(this, AppsActivity.class));
         });
-        findViewById(R.id.bt_home_settings).setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
+        findViewById(R.id.bt_home_settings).setOnClickListener(v ->
+                startActivity(new Intent(this, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
 
         if (sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE)) {
             findViewById(R.id.bottom_row).setVisibility(View.GONE);
-            attachSettingsSwipe();
+            final View settingsPage = LayoutInflater.from(this).inflate(R.layout.home_settings_page, homePager, false);
+            wireSettingsPage(settingsPage);
+            homePager.setAdapter(new HomePagerAdapter(mainPage, settingsPage));
+        } else {
+            homePager.setAdapter(new HomePagerAdapter(mainPage));
         }
 
-        // Bottom-row labels must never wrap mid-word at large font scales — shrink to one line instead.
+        // Bottom-row labels: one fixed size for all three — autosize made each label a different size.
         for (final int id : new int[]{R.id.bt_home_sos, R.id.bt_home_apps, R.id.bt_home_settings}) {
             final android.widget.TextView label = ((com.bald.uriah.baldphone.views.BaldPictureTextButton) findViewById(id)).getTextView();
             label.setMaxLines(1);
-            androidx.core.widget.TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(label, 8, 20, 1, TypedValue.COMPLEX_UNIT_SP);
+            label.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.tiny));
         }
 
         final ViewGroup top_bar = findViewById(R.id.top_bar);
@@ -474,35 +480,90 @@ public class HomeScreenActivity extends BaldActivity {
         notificationsButton = top_bar.findViewById(R.id.notifications);
     }
 
-    private GestureDetector settingsSwipeDetector;
-
-    /**
-     * With the bottom row hidden, a left swipe acts as a "next page" — Settings
-     * slides in from the right like an adjacent home page.
-     */
-    private void attachSettingsSwipe() {
-        settingsSwipeDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                if (e1 == null || e2 == null)
-                    return false;
-                final float dx = e2.getX() - e1.getX();
-                final float dy = e2.getY() - e1.getY();
-                if (dx < -120 && Math.abs(dx) > 2 * Math.abs(dy)) {
-                    startActivity(new Intent(HomeScreenActivity.this, SettingsActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.nothing);
-                    return true;
-                }
-                return false;
-            }
+    /** Second home page (only when the bottom row is hidden): nav buttons + quick settings. */
+    private void wireSettingsPage(final View page) {
+        page.findViewById(R.id.bt_page_sos).setOnClickListener(v -> startActivity(new Intent(this, SOSActivity.class)));
+        page.findViewById(R.id.bt_page_apps).setOnClickListener(v -> {
+            if (!finishedUpdatingApps)
+                launchAppsActivity = true;
+            else
+                startActivity(new Intent(this, AppsActivity.class));
         });
+        page.findViewById(R.id.bt_page_settings).setOnClickListener(v ->
+                startActivity(new Intent(this, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+
+        final ViewGroup container = page.findViewById(R.id.quick_settings_container);
+        addQuickSetting(container, R.drawable.brightness_on_button, R.string.brightness,
+                SettingsActivity.brightnessSubtitle(this),
+                () -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)));
+        addQuickSetting(container, R.drawable.font_on_button, R.string.font_size,
+                SettingsActivity.fontSizeName(this),
+                () -> startActivity(new Intent(this, FontChangerActivity.class)));
+        addQuickSetting(container, R.drawable.brush_on_button, R.string.theme_settings,
+                getText(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE) == BPrefs.Themes.DARK
+                        ? R.string.dark : R.string.light),
+                () -> DialogScreen.select(this, R.string.theme_settings,
+                        Math.max(0, Math.min(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE),
+                                BPrefs.Themes.THEMES.length - 1)) == BPrefs.Themes.DARK ? 1 : 0,
+                        index -> {
+                            sharedPreferences.edit().putInt(BPrefs.THEME_KEY,
+                                    index == 1 ? BPrefs.Themes.DARK : BPrefs.Themes.LIGHT).apply();
+                            this.recreate();
+                        },
+                        R.string.light, R.string.dark));
+        final View vibrateRow = addQuickSetting(container, R.drawable.vibration_on_background, R.string.vibrate, null, null);
+        final Switch sw = new Switch(this);
+        sw.setChecked(sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE));
+        sw.setOnCheckedChangeListener((b, checked) ->
+                sharedPreferences.edit().putBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, checked).apply());
+        ((ViewGroup) vibrateRow.findViewById(R.id.setting_trailing)).addView(sw);
+        vibrateRow.setOnClickListener(v -> sw.toggle());
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (settingsSwipeDetector != null)
-            settingsSwipeDetector.onTouchEvent(ev);
-        return super.dispatchTouchEvent(ev);
+    private View addQuickSetting(final ViewGroup container, final int iconRes, final int titleRes,
+                                 final CharSequence subtitle, final Runnable onClick) {
+        final View row = LayoutInflater.from(this).inflate(R.layout.settings_item, container, false);
+        ((ImageView) row.findViewById(R.id.setting_icon)).setImageResource(iconRes);
+        ((TextView) row.findViewById(R.id.tv_setting_name)).setText(titleRes);
+        if (subtitle != null) {
+            final TextView sub = row.findViewById(R.id.tv_setting_subtitle);
+            sub.setText(subtitle);
+            sub.setVisibility(View.VISIBLE);
+        }
+        if (onClick != null)
+            row.setOnClickListener(v -> onClick.run());
+        container.addView(row);
+        return row;
+    }
+
+    private static class HomePagerAdapter extends PagerAdapter {
+        private final View[] pages;
+
+        HomePagerAdapter(View... pages) {
+            this.pages = pages;
+        }
+
+        @Override
+        public int getCount() {
+            return pages.length;
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            container.addView(pages[position]);
+            return pages[position];
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            container.removeView((View) object);
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
+        }
     }
 
     @Override

@@ -36,10 +36,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.text.TextUtils;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Space;
 
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -54,6 +51,7 @@ import com.bald.uriah.baldphone.activities.RecentActivity;
 import com.bald.uriah.baldphone.activities.SOSActivity;
 import com.bald.uriah.baldphone.activities.alarms.AlarmsActivity;
 import com.bald.uriah.baldphone.activities.contacts.ContactsActivity;
+import com.bald.uriah.baldphone.activities.contacts.SingleContactActivity;
 import com.bald.uriah.baldphone.activities.media.PhotosActivity;
 import com.bald.uriah.baldphone.activities.media.VideosActivity;
 import com.bald.uriah.baldphone.activities.pills.PillsActivity;
@@ -61,6 +59,7 @@ import com.bald.uriah.baldphone.databases.apps.App;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
 import com.bald.uriah.baldphone.databases.calls.CallLogsHelper;
+import com.bald.uriah.baldphone.databases.contacts.MiniContact;
 import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.DialogScreen;
@@ -68,13 +67,11 @@ import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
-import com.bald.uriah.baldphone.views.BaldLinearLayoutButton;
 import com.bald.uriah.baldphone.views.FirstPageAppIcon;
-import com.bald.uriah.baldphone.views.HomeScreenAppView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -87,7 +84,7 @@ import static com.bald.uriah.baldphone.services.NotificationListenerService.NOTI
 public class HomePage1 extends HomeView {
     public static final String TAG = HomePage1.class.getSimpleName();
     private final static String WHATSAPP_PACKAGE_NAME = "com.whatsapp";
-    private final static String HIDDEN_TILE = "__HIDDEN__";
+    private final static String HIDDEN_TILE = HomeScreenPinHelper.HIDDEN_TILE;
     private final static String TILES_SEEDED_KEY = "HOME_TILES_SEEDED";
     private final static ComponentName WHATSAPP_COMPONENT_NAME =
             new ComponentName(WHATSAPP_PACKAGE_NAME, WHATSAPP_PACKAGE_NAME + ".Main");
@@ -139,9 +136,7 @@ public class HomePage1 extends HomeView {
 
         attachXml();
         genOnClickListeners();
-        populatePins();
-        shrinkToFit(view.findViewById(R.id.clock));
-        shrinkToFit(view.findViewById(R.id.date));
+        installClockCardFit();
         return view;
     }
 
@@ -151,67 +146,62 @@ public class HomePage1 extends HomeView {
      * Only ever shrinks (never grows): at extreme system fontScale the clock/date
      * stay fully readable instead of ellipsizing into uselessness.
      */
-    private static void shrinkToFit(final TextView tv) {
-        tv.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
-            final View parent = (View) v.getParent();
-            final float avail = parent.getWidth() - parent.getPaddingStart() - parent.getPaddingEnd();
-            final CharSequence text = ((TextView) v).getText();
-            if (avail <= 0 || text == null || text.length() == 0)
+    /**
+     * Shrinks clock/date ONLY when the card is squeezed by visible tile rows —
+     * with 1–3 rows the base sizes stay untouched, and hiding rows restores
+     * them, since every pass recomputes from the base size rather than
+     * shrinking further. The clock always yields room for the date, so the
+     * date can never get pushed out of the card.
+     */
+    private void installClockCardFit() {
+        final View card = view.findViewById(R.id.clock_card);
+        final TextView clock = card.findViewById(R.id.clock);
+        final TextView date = card.findViewById(R.id.date);
+        final float clockBase = clock.getTextSize();
+        final float dateBase = date.getTextSize();
+        final float clockFloor = getResources().getDimension(R.dimen.huge);
+        final float dateFloor = getResources().getDimension(R.dimen.tiny);
+        card.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
+            final float availW = card.getWidth() - card.getPaddingStart() - card.getPaddingEnd();
+            final float availH = card.getHeight() - card.getPaddingTop() - card.getPaddingBottom();
+            if (availW <= 0 || availH <= 0)
                 return;
-            final float wanted = ((TextView) v).getPaint().measureText(text.toString());
-            if (wanted > avail)
-                ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                        ((TextView) v).getTextSize() * (avail / wanted) * 0.98f);
+            fitText(date, dateBase, availW, availH - clockFloor, dateFloor);
+            fitText(clock, clockBase, availW, availH - date.getHeight(), clockFloor);
         });
     }
 
+    /** Sizes {@code tv} to the largest size ≤ {@code base} that fits width and height, never below {@code floor}. */
+    private static void fitText(final TextView tv, final float base, final float availW,
+                                final float availH, final float floor) {
+        final CharSequence text = tv.getText();
+        if (availH <= 0 || text == null || text.length() == 0)
+            return;
+        final android.text.TextPaint paint = tv.getPaint();
+        final float prevSize = paint.getTextSize();
+        paint.setTextSize(base);
+        float scale = 1f;
+        final float wantedW = paint.measureText(text.toString());
+        if (wantedW > availW)
+            scale = availW / wantedW;
+        final float lineH = paint.descent() - paint.ascent();
+        if (lineH > availH)
+            scale = Math.min(scale, availH / lineH);
+        paint.setTextSize(prevSize);
+        final float target = Math.max(floor, base * scale * 0.98f);
+        if (Math.abs(target - tv.getTextSize()) > 1f)
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, target);
+    }
+
     /**
-     * Re-reads {@link HomeScreenPinHelper#getAll} and renders pinned contacts/apps as
-     * 2-column tile rows below the clock. The section stays hidden when there are no pins.
+     * Re-binds every tile slot from preferences — called when the home screen
+     * resumes so pins made elsewhere (SingleContactActivity, AppsActivity,
+     * Page1EditorActivity) show up without recreating the view.
      */
-    public void populatePins() {
-        // view exists only after onCreateView — refreshHome can fire earlier.
+    public void refreshTiles() {
         if (view == null)
             return;
-        final LinearLayout pinsContainer = view.findViewById(R.id.pins_container);
-        pinsContainer.removeAllViews();
-        final List<HomeScreenPinHelper.HomeScreenPinnable> pins = homeScreen == null ?
-                Collections.emptyList() : HomeScreenPinHelper.getAll(activity);
-        if (pins.isEmpty()) {
-            pinsContainer.setVisibility(GONE);
-            return;
-        }
-        pinsContainer.setVisibility(VISIBLE);
-        final int tileHeight = getResources().getDimensionPixelSize(R.dimen.home_tile_row_height);
-        final int tileMargin = getResources().getDimensionPixelSize(R.dimen.home_pin_tile_margin);
-        final LayoutInflater inflater = LayoutInflater.from(activity);
-        for (int i = 0; i < pins.size(); i += 2) {
-            final LinearLayout row = new LinearLayout(activity);
-            row.setOrientation(LinearLayout.HORIZONTAL);
-            for (int j = i; j < i + 2; j++) {
-                final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, tileHeight, 1);
-                lp.setMargins(tileMargin, 0, tileMargin, 0);
-                if (j < pins.size()) {
-                    final BaldLinearLayoutButton tile = (BaldLinearLayoutButton)
-                            inflater.inflate(R.layout.home_screen_app_view, row, false);
-                    row.addView(tile, lp);
-                    pins.get(j).applyToHomeScreenAppView(new HomeScreenAppView(tile));
-                    // Names must stay readable — allow two lines with ellipsis instead of clipping.
-                    final TextView name = tile.findViewById(R.id.et_name);
-                    name.setMaxLines(2);
-                    name.setEllipsize(TextUtils.TruncateAt.END);
-                    // a pin can be named by its number — keep digits LTR in RTL locales
-                    name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
-                } else {
-                    row.addView(new Space(activity), lp);
-                }
-            }
-            final LinearLayout.LayoutParams rowLp = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            if (i + 2 < pins.size())
-                rowLp.bottomMargin = tileMargin * 2;
-            pinsContainer.addView(row, rowLp);
-        }
+        genOnClickListeners();
     }
 
     @Override
@@ -284,6 +274,7 @@ public class HomePage1 extends HomeView {
     private void genOnClickListeners() {
         sharedPreferences = BPrefs.get(activity);
         seedHiddenTiles();
+        HomeScreenPinHelper.migrateLegacyPins(activity);
         setupButton(BPrefs.CUSTOM_RECENTS_KEY, bt_recent, v -> homeScreen.startActivity(new Intent(homeScreen, RecentActivity.class)));
         setupButton(BPrefs.CUSTOM_DIALER_KEY, bt_dialer, v -> homeScreen.startActivity(new Intent(homeScreen, DialerActivity.class)));
         setupButton(BPrefs.CUSTOM_CONTACTS_KEY, bt_contacts, v -> homeScreen.startActivity(new Intent(homeScreen, ContactsActivity.class)));
@@ -338,16 +329,33 @@ public class HomePage1 extends HomeView {
 
     private void hideRowIfEmpty(int id) {
         final ViewGroup row = view.findViewById(id);
+        int firstVisible = -1, lastVisible = -1;
         for (int i = 0; i < row.getChildCount(); i++) {
             final View child = row.getChildAt(i);
-            if (child instanceof FirstPageAppIcon && child.getVisibility() == View.VISIBLE)
-                return;
+            if (child instanceof FirstPageAppIcon && child.getVisibility() == View.VISIBLE) {
+                if (firstVisible == -1)
+                    firstVisible = i;
+                lastVisible = i;
+            }
         }
-        row.setVisibility(View.GONE);
+        if (firstVisible == -1) {
+            row.setVisibility(View.GONE);
+            return;
+        }
+        // dividers are plain <View> includes — show one only between two visible icons
+        for (int i = 0; i < row.getChildCount(); i++) {
+            final View child = row.getChildAt(i);
+            if (child.getClass() == View.class)
+                child.setVisibility(i > firstVisible && i < lastVisible ? View.VISIBLE : View.GONE);
+        }
     }
 
     private void updateFlashIcon() {
         if (homeScreen == null)
+            return;
+        // only while the slot shows its default flashlight tile — an assigned
+        // app/contact owns the icon and the posted call must not clobber it.
+        if (sharedPreferences.getString(BPrefs.CUSTOM_ASSISTANT_KEY, null) != null)
             return;
         bt_assistant.setImageResource(homeScreen.isFlashOn()
                 ? R.drawable.flashlight_on_background
@@ -364,9 +372,25 @@ public class HomePage1 extends HomeView {
             }
             bt.setAlpha(0.3f);
         }
+        final MiniContact pinContact;
+        if (prefValue != null && prefValue.startsWith(HomeScreenPinHelper.CONTACT_TILE_PREFIX)) {
+            pinContact = HomeScreenPinHelper.resolveContact(activity,
+                    prefValue.substring(HomeScreenPinHelper.CONTACT_TILE_PREFIX.length()));
+            if (pinContact == null) {
+                // contact was deleted — free the slot instead of leaving a dead tile
+                sharedPreferences.edit().putString(bPrefsKey, HIDDEN_TILE).apply();
+                if (homeScreen != null) {
+                    bt.setVisibility(View.GONE);
+                    return;
+                }
+            }
+        } else pinContact = null;
+
         final App app;
         boolean phone = false;
-        if (bt == bt_whatsapp && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(bPrefsKey)) {
+        if (pinContact != null) {
+            app = null;
+        } else if (bt == bt_whatsapp && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(bPrefsKey)) {
             app = AppsDatabase.getInstance(homeScreen).appsDatabaseDao().findByFlattenComponentName(baldComponentNameBeginning + Page1EditorActivity.class.getName());
         } else if (bt == bt_recent && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(bPrefsKey)) {
             app = null;
@@ -377,12 +401,26 @@ public class HomePage1 extends HomeView {
                 sharedPreferences.edit().remove(bPrefsKey).apply();
         } else app = null;
         if (homeScreen != null) {
-            if (app == null) {
+            bt.setVisibility(View.VISIBLE); // slot may have been GONE from a previous bind
+            if (pinContact != null) {
+                bt.resetToDefault();
+                bt.setText(pinContact.name);
+                if (AppUtils.isValidContextForGlide(bt.imageView.getContext()))
+                    Glide.with(bt.imageView)
+                            .load(pinContact.photo)
+                            .apply(new RequestOptions().error(R.drawable.face_on_button))
+                            .into(bt.imageView);
+                bt.setOnClickListener(v -> activity.startActivity(
+                        new Intent(activity, SingleContactActivity.class)
+                                .putExtra(SingleContactActivity.CONTACT_LOOKUP_KEY, pinContact.lookupKey)));
+            } else if (app == null) {
                 if (phone) {
                     bt.setOnClickListener(v -> activity.startActivity(AppUtils.getPhoneIntent(activity)));
                     bt.setText(R.string.phone);
                     bt.setImageResource(R.drawable.phone_on_button);
                 } else {
+                    // slot reverted to its default — undo any app/contact leftovers
+                    bt.resetToDefault();
                     bt.setOnClickListener(onClickListener);
                 }
             } else {
@@ -393,8 +431,19 @@ public class HomePage1 extends HomeView {
             }
         } else {
             final Page1EditorActivity page1EditorActivity = (Page1EditorActivity) activity;
+            if (pinContact != null) {
+                bt.setText(pinContact.name);
+                if (AppUtils.isValidContextForGlide(bt.imageView.getContext()))
+                    Glide.with(bt.imageView)
+                            .load(pinContact.photo)
+                            .apply(new RequestOptions().error(R.drawable.face_on_button))
+                            .into(bt.imageView);
+            }
             final CharSequence initialAppName;
-            if (BuildConfig.FLAVOR.equals("gPlay")) {
+            if (pinContact != null) {
+                // option 0 restores the slot's default tile — label it accordingly
+                initialAppName = bt.getDefaultText();
+            } else if (BuildConfig.FLAVOR.equals("gPlay")) {
                 if (bt == bt_whatsapp) {
                     initialAppName = activity.getString(R.string.edit_home_screen);
                 } else if (bt == bt_recent)
@@ -404,7 +453,7 @@ public class HomePage1 extends HomeView {
                 initialAppName = bt.getText();
             }
             bt.setOnClickListener(v -> DialogScreen.select(activity, R.string.custom_app,
-                            hidden ? 2 : (sharedPreferences.contains(bPrefsKey) ? 1 : 0),
+                            hidden ? 2 : (pinContact != null ? 0 : (sharedPreferences.contains(bPrefsKey) ? 1 : 0)),
                             index -> {
                                 if (index == 0)
                                     sharedPreferences.edit().remove(bPrefsKey).apply();
