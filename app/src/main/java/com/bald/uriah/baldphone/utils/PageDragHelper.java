@@ -8,8 +8,9 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 
 /**
- * Finger-following horizontal "page turn" drag for the Home &harr; Settings
- * transition: the page translates 1:1 under the finger; once it crosses ~30%
+ * Finger-following horizontal "page turn" drag for the Settings back path
+ * (Settings &rarr; Home, and settings sub-page &rarr; parent category):
+ * the page translates 1:1 under the finger; once it crosses ~30%
  * (or a fast fling) it commits mid-drag so the other activity's window slide
  * completes the turn while the finger is still down. Short drags spring back.
  * One translationX per frame — deliberately cheap for weak devices.
@@ -62,6 +63,11 @@ public class PageDragHelper {
                     tracker.addMovement(ev);
                 final float dx = ev.getX() - downX;
                 if (!dragging) {
+                    // one commit per gesture: after a mid-drag commit the rest of
+                    // the stream is swallowed, else UP would fire onCommit again
+                    // (e.g. sub-page→main, then the same swipe exits the activity)
+                    if (committed)
+                        return true;
                     if (Math.abs(dx) <= touchSlop || Math.abs(dx) <= Math.abs(ev.getY() - downY))
                         return false;
                     dragging = true;

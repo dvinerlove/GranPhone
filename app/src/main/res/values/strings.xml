@@ -443,8 +443,8 @@
     <string name="free_of_total">Free %1$s of %2$s</string>
     <string name="fake_launcher_label">GranPhone setup</string>
     <string name="helper_settings">Helper settings</string>
-    <string name="settings_for_user">For the user</string>
-    <string name="settings_for_helper">For the helper</string>
+    <string name="settings_for_user">General</string>
+    <string name="settings_for_helper">Advanced</string>
     <string name="helper_pin_create_subtext">Set a password of at least 4 digits. It protects the helper settings.</string>
     <string name="helper_pin_enter_subtext">Enter the helper password.</string>
     <string name="helper_pin_repeat_subtext">Enter the same password again.</string>

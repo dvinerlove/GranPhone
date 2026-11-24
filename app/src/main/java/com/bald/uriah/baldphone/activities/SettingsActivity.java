@@ -142,12 +142,18 @@ public class SettingsActivity extends BaldActivity {
         if (getIntent().getBooleanExtra(EXTRA_OPEN_HELPER, false))
             helperCategory.onClick(null);
 
-        // root page drag toward the start edge = turn back to the home page
+        // drag toward the start edge = one page back: home on the root list,
+        // the parent category from a sub-page (also covers edge-swipe on ROMs
+        // that deliver it to the app instead of the system)
         final boolean rtl = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
         pageDrag = new PageDragHelper(this, findViewById(R.id.root), rtl ? -1 : 1,
                 () -> {
-                    finish();
-                    overridePendingTransition(0, rtl ? R.anim.slide_out_left : R.anim.slide_out_right);
+                    if (currentCategory == mainCategory) {
+                        finish();
+                        overridePendingTransition(0, rtl ? R.anim.slide_out_left : R.anim.slide_out_right);
+                    } else {
+                        goBack();
+                    }
                 });
     }
 
@@ -161,8 +167,8 @@ public class SettingsActivity extends BaldActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (pageDrag != null && pageDrag.dispatch(ev,
-                currentCategory == mainCategory, !AppUtils.animationsDisabled(this)))
+        if (pageDrag != null && pageDrag.dispatch(ev, true,
+                currentCategory == mainCategory && !AppUtils.animationsDisabled(this)))
             return true;
         return super.dispatchTouchEvent(ev);
     }
@@ -881,7 +887,7 @@ public class SettingsActivity extends BaldActivity {
         }
     }
 
-    /** Non-clickable section label («Для пользователя» / «Для помощника»). */
+    /** Non-clickable section label («Общие» / «Дополнительные»). */
     public class Header extends SettingsItem {
         Header(@StringRes int textResId) {
             super(textResId, 0);
