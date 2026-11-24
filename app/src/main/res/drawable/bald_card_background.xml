@@ -8,7 +8,7 @@
             <solid android:color="?bald_card" />
             <stroke
                 android:width="@dimen/border_width_selected"
-                android:color="?bald_brand_strong" />
+                android:color="?bald_brand" />
         </shape>
     </item>
     <item android:state_pressed="true">

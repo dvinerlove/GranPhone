@@ -33,7 +33,7 @@
         android:layout_height="@dimen/icon_sm"
         android:importantForAccessibility="no"
         android:src="@drawable/check_on_button"
-        android:tint="?bald_brand_strong"
+        android:tint="?bald_brand"
         android:visibility="invisible" />
 
     <TextView

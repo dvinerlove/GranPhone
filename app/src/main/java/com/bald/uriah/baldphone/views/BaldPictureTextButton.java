@@ -147,7 +147,7 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
             return;
         }
         final int variantAttr = variant == 1 ? R.attr.bald_brand : variant == 2 ? R.attr.bald_danger : variant == 3 ? R.attr.bald_info : R.attr.bald_brand_tint;
-        final int onAttr = variant == 4 ? R.attr.bald_text_primary : variant == 1 ? R.attr.bald_text_on_brand : R.attr.bald_text_on_variant;
+        final int onAttr = variant == 4 ? R.attr.bald_text_primary : R.attr.bald_text_on_variant;
         final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_disabled, onAttr, R.attr.bald_text_primary});
         final int color = themeColors.getColor(0, 0);
         final int disabledColor = themeColors.getColor(1, color);

@@ -47,13 +47,11 @@
     <attr name="bald_brand" format="reference|color" />
     <attr name="bald_brand_pressed" format="reference|color" />
     <attr name="bald_brand_tint" format="reference|color" />
-    <attr name="bald_brand_strong" format="reference|color" />
     <attr name="bald_danger" format="reference|color" />
     <attr name="bald_info" format="reference|color" />
     <attr name="bald_text_primary" format="reference|color" />
     <attr name="bald_text_secondary" format="reference|color" />
     <attr name="bald_text_on_variant" format="reference|color" />
-    <attr name="bald_text_on_brand" format="reference|color" />
 
 
     <declare-styleable name="BaldPictureTextButton">

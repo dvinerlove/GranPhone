@@ -11,13 +11,12 @@ Rule: extend the existing `bald_*` theme-attribute system (attrs declared in `re
 | `bald_surface` | #F2F4F7 | #101418 |
 | `bald_card` | #FFFFFF | #1C2126 |
 | `bald_card_border` | #E2E5E9 | #2E3439 |
-| `bald_brand` | #A5D6A7 (fill) · `bald_brand_strong` #248A3D (borders/icons/text) | #8FE0AA |
+| `bald_brand` | #2E7D32 | #4CAF50 |
 | `bald_danger` | #D32F2F | #E57373 |
 | `bald_info` | #1565C0 | #64B5F6 |
 | `bald_text_primary` | #14171A | #F2F4F7 |
 | `bald_text_secondary` | #4A5560 | #B0B8C0 |
-| `bald_text_on_variant` (danger/info fills) | #FFFFFF | #14171A |
-| `bald_text_on_brand` (brand fills) | #123B1C | #14171A |
+| `bald_text_on_variant` | #FFFFFF | #14171A |
 
 Contrast: ≥4.5:1 for all text, ≥3:1 for icons/borders.
 

@@ -12,7 +12,7 @@
                     <solid android:color="@android:color/transparent" />
                     <stroke
                         android:width="2dp"
-                        android:color="?attr/bald_brand_strong" />
+                        android:color="?attr/bald_brand" />
                 </shape>
             </item>
             <item
@@ -21,7 +21,7 @@
                 android:right="7dp"
                 android:top="7dp">
                 <shape android:shape="oval">
-                    <solid android:color="?attr/bald_brand_strong" />
+                    <solid android:color="?attr/bald_brand" />
                 </shape>
             </item>
         </layer-list>
