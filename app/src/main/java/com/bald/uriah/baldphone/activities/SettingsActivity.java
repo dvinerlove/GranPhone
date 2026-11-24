@@ -897,7 +897,7 @@ public class SettingsActivity extends BaldActivity {
             final ImageView chevron = new ImageView(ctx);
             final int size = ctx.getResources().getDimensionPixelSize(R.dimen.icon_sm);
             chevron.setLayoutParams(new ViewGroup.LayoutParams(size, size));
-            chevron.setImageResource(R.drawable.arrow_end_on_button);
+            chevron.setImageResource(R.drawable.chevron_end_on_button);
             chevron.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
             container.addView(chevron);
         }
