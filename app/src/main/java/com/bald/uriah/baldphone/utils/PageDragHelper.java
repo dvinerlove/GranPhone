@@ -28,7 +28,6 @@ public class PageDragHelper {
     private final Runnable onCommit;
     private boolean dragging;
     private boolean committed;
-    private boolean carousel;
     private float downX, downY;
     private VelocityTracker tracker;
 
@@ -38,16 +37,6 @@ public class PageDragHelper {
         this.dir = direction;
         this.onCommit = onCommit;
         this.touchSlop = ViewConfiguration.get(activity).getScaledTouchSlop();
-    }
-
-    /**
-     * Carousel mode: the dragged page pivots around the edge the next page enters
-     * from (rotationY + mild slide) — like cards on a drum — instead of sliding flat.
-     * Same single transform per frame, no extra compositing.
-     */
-    public PageDragHelper carousel() {
-        carousel = true;
-        return this;
     }
 
     /**
@@ -89,23 +78,14 @@ public class PageDragHelper {
                     final int w = target.getWidth();
                     if (Math.abs(t) > w)
                         t = dir * w;
-                    if (follow) {
-                        if (carousel) {
-                            final float p = Math.abs(t) / w;
-                            // pivot on the edge the next page enters from; the card folds away
-                            target.setPivotX(dir < 0 ? w : 0f);
-                            target.setRotationY(-dir * p * 55f);
-                            target.setTranslationX(t * 0.35f);
-                        } else {
-                            target.setTranslationX(t);
-                        }
-                    }
+                    if (follow)
+                        target.setTranslationX(t);
                     if (t * dir > w * COMMIT_FRACTION) {
                         // commit mid-drag: the incoming window slide finishes the page turn
                         committed = true;
                         dragging = false;
                         if (follow)
-                            target.animate().translationX(dir * w).rotationY(carousel ? -dir * 80f : 0f)
+                            target.animate().translationX(dir * w).rotationY(0f)
                                     .setDuration(200).start();
                         onCommit.run();
                     }

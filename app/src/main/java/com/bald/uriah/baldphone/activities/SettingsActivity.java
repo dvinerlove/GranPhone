@@ -144,7 +144,7 @@ public class SettingsActivity extends BaldActivity {
                 () -> {
                     finish();
                     overridePendingTransition(0, rtl ? R.anim.slide_out_left : R.anim.slide_out_right);
-                }).carousel();
+                });
     }
 
     @Override
