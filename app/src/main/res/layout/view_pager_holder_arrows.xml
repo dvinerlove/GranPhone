@@ -28,7 +28,7 @@
         android:background="@drawable/bald_ghost_button_background"
         android:contentDescription="@string/cd_previous_page"
         android:focusable="true"
-        app:srcCompat="@drawable/arrow_start_on_background" />
+        app:srcCompat="@drawable/chevron_start_on_background" />
 
     <com.bald.uriah.baldphone.views.BaldImageButton
         android:id="@+id/right_arrow"
@@ -38,6 +38,6 @@
         android:background="@drawable/bald_ghost_button_background"
         android:contentDescription="@string/cd_next_page"
         android:focusable="true"
-        app:srcCompat="@drawable/arrow_end_on_background" />
+        app:srcCompat="@drawable/chevron_end_on_background" />
 
 </LinearLayout>
