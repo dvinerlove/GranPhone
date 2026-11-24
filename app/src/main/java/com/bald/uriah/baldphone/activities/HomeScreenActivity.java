@@ -144,6 +144,8 @@ public class HomeScreenActivity extends BaldActivity {
     private int decorationColorOnBackground;
     private BaldImageButton notificationsButton, soundButton;
     private android.widget.ImageView signalView;
+    private TextView brightnessSubtitleView;
+    private TextView fontSubtitleView;
     private android.telephony.TelephonyManager telephonyManager;
     private final android.telephony.PhoneStateListener signalListener = new android.telephony.PhoneStateListener() {
         @Override
@@ -329,6 +331,7 @@ public class HomeScreenActivity extends BaldActivity {
         if (baldPrefsUtils.hasChanged(this)) {
             this.recreate();
         }
+        refreshQuickSettingSubtitles();
 
         soundButton.setImageResource(SOUND_DRAWABLES[audioManager.getRingerMode()]);
         try {
@@ -346,6 +349,14 @@ public class HomeScreenActivity extends BaldActivity {
 
         registerReceiver(batteryReceiver, BATTERY_FILTER);
         refreshBatteryView();
+    }
+
+    // Bound once at page creation; refresh on resume — brightness lives in system settings, outside hasChanged().
+    private void refreshQuickSettingSubtitles() {
+        if (brightnessSubtitleView != null)
+            brightnessSubtitleView.setText(SettingsActivity.brightnessSubtitle(this));
+        if (fontSubtitleView != null)
+            fontSubtitleView.setText(SettingsActivity.fontSizeName(this));
     }
 
     // Sticky broadcast is unreliable on this ROM — read the level directly once per resume.
@@ -493,12 +504,14 @@ public class HomeScreenActivity extends BaldActivity {
                 startActivity(new Intent(this, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
 
         final ViewGroup container = page.findViewById(R.id.quick_settings_container);
-        addQuickSetting(container, R.drawable.brightness_on_button, R.string.brightness,
+        brightnessSubtitleView = (TextView) addQuickSetting(container, R.drawable.brightness_on_button, R.string.brightness,
                 SettingsActivity.brightnessSubtitle(this),
-                () -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)));
-        addQuickSetting(container, R.drawable.font_on_button, R.string.font_size,
+                () -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)))
+                .findViewById(R.id.tv_setting_subtitle);
+        fontSubtitleView = (TextView) addQuickSetting(container, R.drawable.font_on_button, R.string.font_size,
                 SettingsActivity.fontSizeName(this),
-                () -> startActivity(new Intent(this, FontChangerActivity.class)));
+                () -> startActivity(new Intent(this, FontChangerActivity.class)))
+                .findViewById(R.id.tv_setting_subtitle);
         addQuickSetting(container, R.drawable.brush_on_button, R.string.theme_settings,
                 getText(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE) == BPrefs.Themes.DARK
                         ? R.string.dark : R.string.light),
