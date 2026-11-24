@@ -174,6 +174,10 @@ public class DialogFlags extends Dialog {
                 editText.setVisibility(View.VISIBLE);
                 if (inputType != 0)
                     editText.setInputType(inputType);
+                editText.setOnEditorActionListener((v, actionId, event) -> {
+                    bt_positive.performClick();
+                    return true;
+                });
                 bt_positive.setOnClickListener(v -> {
                     if (positive == null)
                         cancel();

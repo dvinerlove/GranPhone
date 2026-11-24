@@ -69,7 +69,7 @@
                     android:layout_height="@dimen/button_height_default"
                     android:layout_marginTop="@dimen/spacing_md"
                     android:background="@drawable/bald_button_background"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionGo"
                     android:paddingStart="@dimen/spacing_lg"
                     android:paddingEnd="@dimen/spacing_lg"
                     android:textColor="?bald_text_on_background"
