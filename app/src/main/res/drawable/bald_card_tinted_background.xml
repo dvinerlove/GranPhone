@@ -7,7 +7,7 @@
             <solid android:color="?bald_brand_tint" />
             <stroke
                 android:width="@dimen/border_width_selected"
-                android:color="?bald_brand" />
+                android:color="?bald_brand_strong" />
         </shape>
     </item>
     <item android:state_pressed="true">

@@ -192,13 +192,13 @@ public class DialogScreen extends Dialog {
         });
         if (primaryIsTextButton) {
             bt_primary.setBackgroundResource(R.drawable.bald_ghost_button_background);
-            bt_primary.setTextColor(resolveThemeColor(R.attr.bald_brand));
+            bt_primary.setTextColor(resolveThemeColor(R.attr.bald_brand_strong));
         }
     }
 
     private void inflateOptions() {
         final LayoutInflater inflater = LayoutInflater.from(context);
-        final int brandColor = resolveThemeColor(R.attr.bald_brand);
+        final int brandColor = resolveThemeColor(R.attr.bald_brand_strong);
         for (int i = 0; i < options.length; i++) {
             final int index = i;
             final View row = inflater.inflate(R.layout.dialog_screen_option, optionsContainer, false);

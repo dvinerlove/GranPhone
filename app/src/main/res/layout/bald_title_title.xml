@@ -23,7 +23,7 @@
     android:layout_weight="1"
     android:alpha="0.85"
     android:gravity="center_vertical"
-    android:textColor="?bald_text_on_variant"
+    android:textColor="?bald_text_on_brand"
     android:maxLines="1"
     android:ellipsize="end"
     app:autoSizeTextType="uniform"

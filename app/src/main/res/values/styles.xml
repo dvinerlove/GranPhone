@@ -26,7 +26,7 @@
         <item name="bald_button_gold">@color/gold</item>
         <item name="bald_text_on_gold">@color/on_gold</item>
         <item name="android:actionBarStyle">@style/BaldActionBar</item>
-        <item name="colorAccent">?attr/bald_brand</item>
+        <item name="colorAccent">?attr/bald_brand_strong</item>
     </style>
 
     <style name="Theme.AppCompat.NoActionBar.FullScreen" parent="Theme.AppCompat.NoActionBar">
@@ -39,7 +39,7 @@
         <item name="bald_button_gold">@color/gold</item>
         <item name="bald_text_on_gold">@color/on_gold</item>
         <item name="android:actionBarStyle">@style/BaldActionBar</item>
-        <item name="colorAccent">?attr/bald_brand</item>
+        <item name="colorAccent">?attr/bald_brand_strong</item>
     </style>
 
 
@@ -75,11 +75,13 @@
         <item name="bald_brand">@color/bald_brand_light</item>
         <item name="bald_brand_pressed">@color/bald_brand_pressed_light</item>
         <item name="bald_brand_tint">@color/bald_brand_tint_light</item>
+        <item name="bald_brand_strong">@color/bald_brand_strong_light</item>
         <item name="bald_danger">@color/bald_danger_light</item>
         <item name="bald_info">@color/bald_info_light</item>
         <item name="bald_text_primary">@color/bald_text_primary_light</item>
         <item name="bald_text_secondary">@color/bald_text_secondary_light</item>
         <item name="bald_text_on_variant">@color/bald_text_on_variant_light</item>
+        <item name="bald_text_on_brand">@color/bald_text_on_brand_light</item>
         <item name="bald_gold">@color/bald_gold_light</item>
     </style>
 
@@ -115,11 +117,13 @@
         <item name="bald_brand">@color/bald_brand_dark</item>
         <item name="bald_brand_pressed">@color/bald_brand_pressed_dark</item>
         <item name="bald_brand_tint">@color/bald_brand_tint_dark</item>
+        <item name="bald_brand_strong">@color/bald_brand_strong_dark</item>
         <item name="bald_danger">@color/bald_danger_dark</item>
         <item name="bald_info">@color/bald_info_dark</item>
         <item name="bald_text_primary">@color/bald_text_primary_dark</item>
         <item name="bald_text_secondary">@color/bald_text_secondary_dark</item>
         <item name="bald_text_on_variant">@color/bald_text_on_variant_dark</item>
+        <item name="bald_text_on_brand">@color/bald_text_on_brand_dark</item>
         <item name="bald_gold">@color/bald_gold_dark</item>
     </style>
 

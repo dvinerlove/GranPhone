@@ -169,7 +169,7 @@
                         android:layout_height="@dimen/icon_md"
                         android:importantForAccessibility="no"
                         android:src="@drawable/ic_call_white"
-                        android:tint="?attr/bald_brand" />
+                        android:tint="?attr/bald_brand_strong" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -223,7 +223,7 @@
                         android:layout_height="@dimen/icon_md"
                         android:importantForAccessibility="no"
                         android:src="@drawable/ic_call_white"
-                        android:tint="?attr/bald_brand" />
+                        android:tint="?attr/bald_brand_strong" />
                 </LinearLayout>
 
                 <com.bald.uriah.baldphone.views.BaldPictureTextButton

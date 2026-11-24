@@ -94,7 +94,7 @@
                         android:layout_marginStart="@dimen/spacing_md"
                         android:importantForAccessibility="no"
                         android:src="@drawable/check_on_button"
-                        android:tint="?bald_brand"
+                        android:tint="?bald_brand_strong"
                         android:visibility="invisible" />
                 </LinearLayout>
             </com.bald.uriah.baldphone.views.BaldFrameLayoutButton>
@@ -145,7 +145,7 @@
                         android:layout_marginStart="@dimen/spacing_md"
                         android:importantForAccessibility="no"
                         android:src="@drawable/check_on_button"
-                        android:tint="?bald_brand"
+                        android:tint="?bald_brand_strong"
                         android:visibility="invisible" />
                 </LinearLayout>
             </com.bald.uriah.baldphone.views.BaldFrameLayoutButton>
@@ -196,7 +196,7 @@
                         android:layout_marginStart="@dimen/spacing_md"
                         android:importantForAccessibility="no"
                         android:src="@drawable/check_on_button"
-                        android:tint="?bald_brand"
+                        android:tint="?bald_brand_strong"
                         android:visibility="invisible" />
                 </LinearLayout>
             </com.bald.uriah.baldphone.views.BaldFrameLayoutButton>

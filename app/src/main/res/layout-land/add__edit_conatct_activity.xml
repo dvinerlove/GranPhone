@@ -262,7 +262,7 @@
             android:background="@drawable/call_button_green"
             android:backgroundTint="?attr/bald_brand"
             android:text="@string/save"
-            android:textColor="?attr/bald_text_on_variant"
+            android:textColor="?attr/bald_text_on_brand"
             android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
