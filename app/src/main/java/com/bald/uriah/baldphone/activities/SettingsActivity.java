@@ -666,9 +666,9 @@ public class SettingsActivity extends BaldActivity {
         final float b = Settings.System.getFloat(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, -1f);
         if (b < 0)
             return null;
-        // SCREEN_BRIGHTNESS is linear output; gamma 2.2 maps it to the perceptual scale
+        // AOSP's linear->slider mapping is a spline ≈ fourth root (measured: 44->62, 60->70, 128->86)
         final float linear = b <= 1f ? b : b / 255f;
-        return Math.round((float) Math.pow(linear, 1f / 2.2f) * 100) + "%";
+        return Math.round((float) Math.pow(linear, 0.25f) * 100) + "%";
     }
 
     @Override
