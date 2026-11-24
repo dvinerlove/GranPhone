@@ -666,9 +666,30 @@ public class SettingsActivity extends BaldActivity {
         final float b = Settings.System.getFloat(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, -1f);
         if (b < 0)
             return null;
-        // AOSP's linear->slider mapping is a spline ≈ fourth root (measured: 44->62, 60->70, 128->86)
-        final float linear = b <= 1f ? b : b / 255f;
-        return Math.round((float) Math.pow(linear, 0.25f) * 100) + "%";
+        final float brightness = b <= 1f ? b * 255f : b;
+        return Math.round(linearToSliderPercent(context, brightness)) + "%";
+    }
+
+    // SettingsLib BrightnessUtils.convertLinearToGamma — the hybrid-log-gamma curve the
+    // system slider/notification shade uses, so our % reads 1:1 with them.
+    private static float linearToSliderPercent(Context context, float brightness) {
+        final float min = screenBrightnessBound(context, "getMinimumScreenBrightnessSetting", 10f);
+        final float max = screenBrightnessBound(context, "getMaximumScreenBrightnessSetting", 255f);
+        final float n = Math.max(0f, (brightness - min) / (max - min)) * 12f;
+        final float ret = n <= 1f
+                ? (float) Math.sqrt(n) * 0.5f
+                : 0.17883277f * (float) Math.log(n - 0.28466892f) + 0.55991073f;
+        return Math.max(0f, Math.min(1f, ret)) * 100f;
+    }
+
+    private static float screenBrightnessBound(Context context, String methodName, float fallback) {
+        // getMinimum/MaximumScreenBrightnessSetting are @SystemApi below API 33.
+        try {
+            final android.os.PowerManager pm = (android.os.PowerManager) context.getSystemService(POWER_SERVICE);
+            return (Integer) pm.getClass().getMethod(methodName).invoke(pm);
+        } catch (Exception e) {
+            return fallback;
+        }
     }
 
     @Override
