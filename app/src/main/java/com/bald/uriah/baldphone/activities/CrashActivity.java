@@ -50,6 +50,12 @@ public class CrashActivity extends BaldActivity {
         //Nope
     }
 
+    // blocked back must stay blocked on API 33+ too — a callback keeps the events
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
+    }
+
     @Override
     protected boolean backDragEnabled() {
         return false;

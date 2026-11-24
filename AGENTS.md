@@ -6,6 +6,7 @@ Launcher for elderly/low-vision users (fork of BaldPhone). Java + XML Views, no 
 
 - Gradle 6.7.1 (wrapper), AGP 4.2.2.
 - Builds require **JDK 11** — set `JAVA_HOME` to a JDK 11 before every `./gradlew` call. Newer JDKs (e.g. 25) break this Gradle/AGP combination. On the maintainer's machine: `JAVA_HOME="C:/Users/adrew/jdk11/jdk-11.0.33+10"` (machine-local — substitute your own JDK 11 path).
+- `compileSdk 34` needs build-tools 34 AAPT2 — AGP 4.2's bundled aapt2 crashes linking android-34 resources (`Unknown chunk type '200'`). `gradle.properties` carries `android.aapt2FromMavenOverride=<sdk>/build-tools/34.0.0/aapt2.exe` (machine-local path — adjust per machine; `android.aapt2Version` is ignored by AGP 4.2).
 - Flavors (`updating_mechanism` dimension): `baldUpdates`, `fDroid`, `gPlay` (`.gp` suffix, no recents), `gPlayRecentCalls` (`.gprc`, reduced feature set via `${fullApp}` manifest placeholders). Work in `fDroid` unless the task says otherwise.
 - ViewBinding is enabled; Room schemas export to `app/schemas/` (commit it — schema diffs are the migration contract).
 

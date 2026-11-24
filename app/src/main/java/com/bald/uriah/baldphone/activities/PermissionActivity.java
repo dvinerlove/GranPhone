@@ -233,6 +233,12 @@ public class PermissionActivity extends BaldActivity {
     public void onBackPressed() {
     }
 
+    // blocked back must stay blocked on API 33+ — a callback keeps the events
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
+    }
+
     // the swipe equals the title-bar Back button, not the (blocked) system back
     @Override
     protected void onSwipeBackCommit() {

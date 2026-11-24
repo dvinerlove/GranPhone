@@ -639,6 +639,12 @@ public class HomeScreenActivity extends BaldActivity {
         return false;
     }
 
+    // launcher consumes back (refreshHome); a callback keeps it on API 33+
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
+    }
+
     static class UpdateApps extends AsyncTask<Context, Void, Void> {
         final WeakReference<HomeScreenActivity> homeScreenWeakReference;
 

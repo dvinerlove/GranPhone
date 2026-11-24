@@ -48,6 +48,7 @@ import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.PageDragHelper;
+import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 
@@ -228,6 +229,10 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // predictive back: intercepted screens get the events; un-intercepted
+        // ones get the system's own predictive animation on Android 15
+        if (backDispatchIntercepted())
+            PredictiveBackHelper.register(this, this::onBackPressed);
         final SharedPreferences sharedPreferences = BPrefs.get(this);
         testing = sharedPreferences.getBoolean(BPrefs.TEST_KEY, BPrefs.TEST_DEFAULT_VALUE);
 
@@ -327,6 +332,15 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
         return true;
     }
 
+    /**
+     * Whether back is intercepted on API 33+ (predictive back): the callback
+     * then receives every back event — default back still goes through
+     * {@link #onBackPressed} which must never reach the dispatcher.
+     */
+    protected boolean backDispatchIntercepted() {
+        return false;
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (backDragEnabled()) {
@@ -345,7 +359,13 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     public void onBackPressed() {
         if (vibrator != null)
             vibrator.vibrate(Const.vibetime);
-        super.onBackPressed();
+        // on API 33+ back goes through OnBackInvokedDispatcher — calling super
+        // would re-enter it (registered callbacks invoke this method), so the
+        // chain bottoms out at finish() instead
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            finish();
+        else
+            super.onBackPressed();
         // every way out (button, system gesture, swipe) slides the page out toward
         // the end edge; the previous window stays put — it was already revealed
         final boolean rtl = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;

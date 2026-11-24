@@ -49,6 +49,12 @@ public abstract class TimedBaldActivity extends BaldActivity {
         return false;
     }
 
+    // back is intercepted (snooze), not a plain finish — callback needed on 33+
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
+    }
+
     protected abstract int screenTimeout();
 
     /** Called once when {@link #screenTimeout()} expires while the screen is still up. */

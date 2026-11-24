@@ -47,6 +47,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.DialogScreen;
+import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.FirstRunDefaults;
@@ -98,6 +99,8 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(AppUtils.getTheme(this));
         super.onCreate(savedInstanceState);
+        // keep the in-call back block on API 33+, where onBackPressed is bypassed
+        PredictiveBackHelper.register(this, this::onBackPressed);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
             setTurnScreenOn(true);
@@ -168,8 +171,13 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     @Override
     public void onBackPressed() {
         // Do not leave the call screen by mistake while a call is going on.
-        if (!CallManager.hasOngoingCall())
-            super.onBackPressed();
+        if (!CallManager.hasOngoingCall()) {
+            // on API 33+ the dispatcher would loop back into our registered callback
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                finish();
+            else
+                super.onBackPressed();
+        }
     }
 
     private void updateUi() {

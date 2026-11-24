@@ -464,6 +464,12 @@ public class AddContactActivity extends BaldActivity {
         }
     }
 
+    // the unsaved-changes guard intercepts back — a callback keeps it on API 33+
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
+    }
+
     private boolean safeToExit() {
         final String mobile_number = AppUtils.str(et_mobile_number.getText().toString());
         final String home_number = AppUtils.str(et_home_number.getText().toString());

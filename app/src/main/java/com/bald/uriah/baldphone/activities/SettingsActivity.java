@@ -106,6 +106,7 @@ public class SettingsActivity extends BaldActivity {
             connectionCategory = new Category(R.string.connection_settings, R.drawable.wifi_on_button, 3),
             systemCategory = new Category(R.string.system_settings, R.drawable.settings_on_button, 4);
     private Category currentCategory = mainCategory;
+    private Runnable predictiveBackUnregister;
 
     private Ringtone ringtone;
     private Vibrator vibrator;
@@ -169,7 +170,10 @@ public class SettingsActivity extends BaldActivity {
             return;
         }
         final View root = findViewById(android.R.id.content);
-        root.animate().translationX(backDragDir * root.getWidth()).setDuration(200)
+        // continue out the way the page was already moving (right-edge swipes go -x)
+        final int dir = root.getTranslationX() != 0
+                ? (root.getTranslationX() > 0 ? 1 : -1) : backDragDir;
+        root.animate().translationX(dir * root.getWidth()).setDuration(200)
                 .withEndAction(() -> {
                     goBack();
                     root.setTranslationX(0);
@@ -542,6 +546,7 @@ public class SettingsActivity extends BaldActivity {
 
     private void newCategory(Category category, boolean forward) {
         this.currentCategory = category;
+        updatePredictiveBack();
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scrollToPosition(0);
         // the fall-down stagger is a first-entry flourish — not per drill-in/out
@@ -558,6 +563,44 @@ public class SettingsActivity extends BaldActivity {
         final int dir = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL ? -1 : 1;
         recyclerView.setTranslationX(forward ? recyclerView.getWidth() * dir : -recyclerView.getWidth() * 0.3f * dir);
         recyclerView.animate().translationX(0).setDuration(250).start();
+    }
+
+    /**
+     * API 33+: on a sub-page the edge-back gesture drives the same in-app page
+     * turn as the mid-screen drag — the page tracks the gesture progress, then
+     * commits (or springs back) on release. At the root no callback exists, so
+     * the system plays its own predictive exit animation.
+     */
+    private void updatePredictiveBack() {
+        if (currentCategory == mainCategory) {
+            if (predictiveBackUnregister != null) {
+                predictiveBackUnregister.run();
+                predictiveBackUnregister = null;
+            }
+        } else if (predictiveBackUnregister == null) {
+            predictiveBackUnregister = PredictiveBackHelper.register(this, new PredictiveBackHelper.BackAnimation() {
+                @Override
+                public void onStarted() {
+                }
+
+                @Override
+                public void onProgressed(float progress) {
+                    final View root = findViewById(android.R.id.content);
+                    root.setTranslationX(progress * root.getWidth());
+                }
+
+                @Override
+                public void onInvoked() {
+                    onSwipeBackCommit();
+                }
+
+                @Override
+                public void onCancelled() {
+                    final View root = findViewById(android.R.id.content);
+                    root.animate().translationX(0).setDuration(200).start();
+                }
+            });
+        }
     }
 
     private View buildMemoryStatusView() {
