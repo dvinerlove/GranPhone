@@ -36,7 +36,6 @@ import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -63,7 +62,6 @@ import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.KioskManager;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
-import com.bald.uriah.baldphone.utils.PageDragHelper;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
@@ -117,7 +115,6 @@ public class SettingsActivity extends BaldActivity {
     private RecyclerView recyclerView;
     private BaldPrefsUtils baldPrefsUtils;
     private BaldTitleBar baldTitleBar;
-    private PageDragHelper pageDrag;
     private boolean layoutAnimationPlayed;
 
     @SuppressLint("CommitPrefEdits")
@@ -141,20 +138,6 @@ public class SettingsActivity extends BaldActivity {
         recyclerView.setAdapter(new SettingsRecyclerViewAdapter());
         if (getIntent().getBooleanExtra(EXTRA_OPEN_HELPER, false))
             helperCategory.onClick(null);
-
-        // drag toward the start edge = one page back: home on the root list,
-        // the parent category from a sub-page (also covers edge-swipe on ROMs
-        // that deliver it to the app instead of the system)
-        final boolean rtl = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-        pageDrag = new PageDragHelper(this, findViewById(R.id.root), rtl ? -1 : 1,
-                () -> {
-                    if (currentCategory == mainCategory) {
-                        finish();
-                        overridePendingTransition(0, rtl ? R.anim.slide_out_left : R.anim.slide_out_right);
-                    } else {
-                        goBack();
-                    }
-                });
     }
 
     @Override
@@ -165,12 +148,27 @@ public class SettingsActivity extends BaldActivity {
             helperCategory.onClick(null);
     }
 
+    /**
+     * On a sub-page the shared back-drag becomes an in-app page turn:
+     * the helper drives the whole content view off the end edge, and the
+     * parent category is revealed when the slide completes.
+     */
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (pageDrag != null && pageDrag.dispatch(ev, true,
-                currentCategory == mainCategory && !AppUtils.animationsDisabled(this)))
-            return true;
-        return super.dispatchTouchEvent(ev);
+    protected void onSwipeBackCommit() {
+        if (currentCategory == mainCategory) {
+            super.onSwipeBackCommit();
+            return;
+        }
+        if (AppUtils.animationsDisabled(this)) {
+            goBack();
+            return;
+        }
+        final View root = findViewById(android.R.id.content);
+        root.animate().translationX(backDragDir * root.getWidth()).setDuration(200)
+                .withEndAction(() -> {
+                    goBack();
+                    root.setTranslationX(0);
+                }).start();
     }
 
     @Override

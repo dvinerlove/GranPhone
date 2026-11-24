@@ -31,6 +31,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -46,6 +47,7 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.PageDragHelper;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 
@@ -101,6 +103,8 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     private boolean useAccidentalGuard = true;
     private Handler handler;
     private Runnable touchesDecreaser = () -> touches = (touches -= 1) < 0 ? 0 : touches;
+    private PageDragHelper pageDrag;
+    protected int backDragDir = 1; // +1 = pages leave toward +x (LTR), -1 in RTL
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -293,11 +297,44 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
         super.onPause();
     }
 
+    /**
+     * Horizontal back-drag, the same on every page-type screen: the page tracks
+     * the finger 1:1 and commits past a threshold, like the platform's back
+     * gesture. Screens with horizontal content (pagers) or a deliberately
+     * blocked back button opt out via {@link #backDragEnabled()}.
+     */
+    protected boolean backDragEnabled() {
+        return true;
+    }
+
+    /** What a committed back-drag runs; the default is exactly the back button. */
+    protected void onSwipeBackCommit() {
+        onBackPressed();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (backDragEnabled()) {
+            if (pageDrag == null) {
+                backDragDir = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL ? -1 : 1;
+                pageDrag = new PageDragHelper(this, findViewById(android.R.id.content), backDragDir, this::onSwipeBackCommit);
+            }
+            if (pageDrag.dispatch(ev, true, !AppUtils.animationsDisabled(this)))
+                return true;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
     @Override
     public void onBackPressed() {
         if (vibrator != null)
             vibrator.vibrate(Const.vibetime);
         super.onBackPressed();
+        // every way out (button, system gesture, swipe) slides the page out
+        // toward the end edge while the previous one slides back in
+        final boolean rtl = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+        overridePendingTransition(rtl ? R.anim.slide_in_left : R.anim.slide_in_right,
+                rtl ? R.anim.slide_out_left : R.anim.slide_out_right);
     }
 
     public void autoDismiss(Dialog dialog) {

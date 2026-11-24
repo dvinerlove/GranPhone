@@ -5,7 +5,9 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AbsSeekBar;
 
 /**
  * Finger-following horizontal "page turn" drag for the Settings back path
@@ -29,6 +31,7 @@ public class PageDragHelper {
     private final Runnable onCommit;
     private boolean dragging;
     private boolean committed;
+    private boolean skipped;         // gesture started on a horizontally-scrolling child
     private float downX, downY;
     private VelocityTracker tracker;
 
@@ -55,6 +58,7 @@ public class PageDragHelper {
                 downY = ev.getY();
                 dragging = false;
                 committed = false;
+                skipped = false;
                 tracker = VelocityTracker.obtain();
                 tracker.addMovement(ev);
                 break;
@@ -69,6 +73,10 @@ public class PageDragHelper {
                     if (committed)
                         return true;
                     if (Math.abs(dx) <= touchSlop || Math.abs(dx) <= Math.abs(ev.getY() - downY))
+                        return false;
+                    // let children that scroll horizontally (pagers, carousels)
+                    // keep their gesture instead of stealing it for back
+                    if (skipped || (skipped = scrollsHorizontally(window.getDecorView(), downX, downY)))
                         return false;
                     dragging = true;
                     // steal the gesture: children see CANCEL so no click/scroll fires
@@ -131,5 +139,26 @@ public class PageDragHelper {
             tracker.recycle();
             tracker = null;
         }
+    }
+
+    /** Deepest-first hit test: true when the touch point sits on a view that wants horizontal drags. */
+    private static boolean scrollsHorizontally(View parent, float x, float y) {
+        if (parent.getVisibility() != View.VISIBLE || !parent.isShown())
+            return false;
+        // SeekBar thumbs aren't "scrolling" but eat horizontal drags all the same
+        if (parent instanceof AbsSeekBar
+                || parent.canScrollHorizontally(-1) || parent.canScrollHorizontally(1))
+            return true;
+        if (!(parent instanceof ViewGroup))
+            return false;
+        final ViewGroup group = (ViewGroup) parent;
+        for (int i = group.getChildCount() - 1; i >= 0; i--) {
+            final View child = group.getChildAt(i);
+            if (x >= child.getLeft() && x <= child.getRight()
+                    && y >= child.getTop() && y <= child.getBottom()
+                    && scrollsHorizontally(child, x - child.getLeft(), y - child.getTop()))
+                return true;
+        }
+        return false;
     }
 }

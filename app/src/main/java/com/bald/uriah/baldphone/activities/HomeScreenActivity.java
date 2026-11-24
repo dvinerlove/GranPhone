@@ -255,7 +255,6 @@ public class HomeScreenActivity extends BaldActivity {
 
         notificationsButton.setOnClickListener((v) -> {
             startActivity(new Intent(this, NotificationsActivity.class));
-            overridePendingTransition(R.anim.slide_in_down, R.anim.nothing);
         });
         soundButton.setOnClickListener(v -> AppUtils.showDropDownPopup(this, getWindow().getDecorView().getWidth(), new DropDownRecyclerViewAdapter.DropDownListener() {
             @SuppressLint("InlinedApi")
@@ -632,6 +631,12 @@ public class HomeScreenActivity extends BaldActivity {
         if (vibrator != null)
             vibrator.vibrate(Const.vibetime);
         refreshHome();
+    }
+
+    // the home pager owns horizontal swipes; home is the back destination anyway
+    @Override
+    protected boolean backDragEnabled() {
+        return false;
     }
 
     static class UpdateApps extends AsyncTask<Context, Void, Void> {

@@ -245,12 +245,6 @@ public class SOSActivity extends BaldActivity {
         DialerActivity.call("112", this, true);//should work 99.99% of the times
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.nothing, R.anim.slide_out_up);
-    }
-
     public static class PinHelper {
         /**
          * @return true if succeeded

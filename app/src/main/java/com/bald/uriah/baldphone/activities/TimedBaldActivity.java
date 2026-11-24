@@ -43,6 +43,12 @@ public abstract class TimedBaldActivity extends BaldActivity {
 
     }
 
+    // alert-style screens (alarm, pill reminder) must not be swipe-dismissed
+    @Override
+    protected boolean backDragEnabled() {
+        return false;
+    }
+
     protected abstract int screenTimeout();
 
     /** Called once when {@link #screenTimeout()} expires while the screen is still up. */

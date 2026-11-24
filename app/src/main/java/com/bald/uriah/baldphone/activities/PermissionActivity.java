@@ -233,6 +233,11 @@ public class PermissionActivity extends BaldActivity {
     public void onBackPressed() {
     }
 
+    @Override
+    protected boolean backDragEnabled() {
+        return false;
+    }
+
     private class PermissionRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<PermissionRecyclerViewAdapter.ViewHolder> {
         final LayoutInflater layoutInflater;
 
