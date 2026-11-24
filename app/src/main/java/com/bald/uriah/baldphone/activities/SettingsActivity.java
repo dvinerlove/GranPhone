@@ -153,6 +153,12 @@ public class SettingsActivity extends BaldActivity {
      * the helper drives the whole content view off the end edge, and the
      * parent category is revealed when the slide completes.
      */
+    // no previous-activity reveal on sub-pages: the parent lives in this window
+    @Override
+    protected boolean backDragReveals() {
+        return currentCategory == mainCategory;
+    }
+
     @Override
     protected void onSwipeBackCommit() {
         if (currentCategory == mainCategory) {

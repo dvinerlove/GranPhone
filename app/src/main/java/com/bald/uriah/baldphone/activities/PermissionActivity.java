@@ -233,9 +233,10 @@ public class PermissionActivity extends BaldActivity {
     public void onBackPressed() {
     }
 
+    // the swipe equals the title-bar Back button, not the (blocked) system back
     @Override
-    protected boolean backDragEnabled() {
-        return false;
+    protected void onSwipeBackCommit() {
+        calmyBDB();
     }
 
     private class PermissionRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<PermissionRecyclerViewAdapter.ViewHolder> {
