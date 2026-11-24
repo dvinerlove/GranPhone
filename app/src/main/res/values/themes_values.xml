@@ -46,9 +46,9 @@
     <color name="bald_surface_light">#F2F4F7</color>
     <color name="bald_card_light">#FFFFFF</color>
     <color name="bald_card_border_light">#33000000</color>
-    <color name="bald_brand_light">#2E7D32</color>
-    <color name="bald_brand_pressed_light">#1B5E20</color>
-    <color name="bald_brand_tint_light">#D9E8DA</color>
+    <color name="bald_brand_light">#248A3D</color>
+    <color name="bald_brand_pressed_light">#1C6B30</color>
+    <color name="bald_brand_tint_light">#D8ECDD</color>
     <color name="bald_danger_light">#D32F2F</color>
     <color name="bald_info_light">#1565C0</color>
     <color name="bald_text_primary_light">#14171A</color>
@@ -84,9 +84,9 @@
     <color name="bald_surface_dark">#101418</color>
     <color name="bald_card_dark">#1C2126</color>
     <color name="bald_card_border_dark">#4Dcdd4db</color>
-    <color name="bald_brand_dark">#4CAF50</color>
-    <color name="bald_brand_pressed_dark">#388E3C</color>
-    <color name="bald_brand_tint_dark">#1D2B1E</color>
+    <color name="bald_brand_dark">#30D158</color>
+    <color name="bald_brand_pressed_dark">#27B04C</color>
+    <color name="bald_brand_tint_dark">#173421</color>
     <color name="bald_danger_dark">#E57373</color>
     <color name="bald_info_dark">#64B5F6</color>
     <color name="bald_text_primary_dark">#F2F4F7</color>
