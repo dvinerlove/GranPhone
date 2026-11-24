@@ -181,7 +181,16 @@ public class SettingsActivity extends BaldActivity {
             return;
         }
         if (AppUtils.animationsDisabled(this)) {
-            goBack();
+            // a peek mid-gesture may have left the page faded/scaled/swapped — restore instantly
+            final View content = findViewById(android.R.id.content);
+            content.animate().cancel();
+            content.setAlpha(1f);
+            content.setScaleX(1f);
+            content.setScaleY(1f);
+            peekSwapped = false;
+            if (!goBack())
+                super.onSwipeBackCommit();
+            endPeek();
             return;
         }
         final View root = findViewById(android.R.id.content);

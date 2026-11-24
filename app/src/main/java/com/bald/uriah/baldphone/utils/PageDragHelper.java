@@ -164,7 +164,6 @@ public class PageDragHelper {
                 }
                 return true;
             case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
                 if (!dragging) {
                     recycleTracker();
                     return false;
@@ -186,9 +185,22 @@ public class PageDragHelper {
                         settleUnderneath(true);
                     }
                     onCommit.run();
+                    // a commit consumed without exiting (blocked back, exit-confirm
+                    // dialog) must not leave the page slid off the translucent window
+                    if (!peekMode(reveal) && !activity.isFinishing() && !activity.isDestroyed())
+                        cancelDrag(follow, reveal);
                 } else {
                     cancelDrag(follow, reveal);
                 }
+                return true;
+            case MotionEvent.ACTION_CANCEL:
+                if (!dragging) {
+                    recycleTracker();
+                    return false;
+                }
+                dragging = false;
+                recycleTracker();
+                cancelDrag(follow, reveal);
                 return true;
         }
         return false;
