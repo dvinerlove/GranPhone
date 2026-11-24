@@ -24,13 +24,13 @@ Launcher for elderly/low-vision users (fork of BaldPhone). Java + XML Views, no 
 - `activities/` — screens (incl. `alarms/`, `contacts/`, `media/`, `pills/` subpackages)
 - `views/` — custom widgets (`Bald*Button`, `BaldTitleBar`, `views/home/` home pages)
 - `databases/` — Room DBs (`alarms`, `apps`, `calls`, `contacts`, `home_screen_pins`, `reminders`)
-- `utils/` — `BPrefs` (all SharedPreferences keys), `AppUtils`, `Const`, `DialogBuilder`, `DialogFlags`, `DialogScreen` (the redesign dialog component — new dialogs use its `info`/`confirm`/`select` factories), `BaldPrefsUtils` (change-detection snapshot), `KioskManager`, `CallManager`
+- `utils/` — `BPrefs` (all SharedPreferences keys), `AppUtils`, `Const`, `DialogScreen` (the only dialog component — `info`/`confirm`/`select`/`pin` factories), `BaldPrefsUtils` (change-detection snapshot), `KioskManager`, `CallManager`
 - `adapters/`, `broadcast_receivers/`, `services/`, `keyboard/` (IME), `fragments_and_dialogs/`, `content_providers/`
 - `BaldPhone.java` — Application class
 
 ## Rename map (commit 6315312)
 
-Old → new, all in `utils/`: **`S` → `AppUtils`**, **`D` → `Const`**, **`BDB` → `DialogBuilder`**, **`BDialog` → `DialogFlags`**. Use only the new names in code and docs.
+Old → new, all in `utils/`: **`S` → `AppUtils`**, **`D` → `Const`**, **`BDB`/`BDialog` → deleted** (legacy dialogs; use `DialogScreen`). Use only the new names in code and docs.
 
 ## Не ломать (do-not-break list)
 

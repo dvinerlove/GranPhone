@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Alarm-volume stepper for DialogBuilder extraView: big [- % +] controls,
+<!-- Alarm-volume stepper for DialogScreen extraView: big [- % +] controls,
      replaces the thin SeekBar. Value 0..VOLUME_MAX, shown as percent. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

@@ -49,11 +49,10 @@ import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.BuildConfig;
+import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.alarms.AlarmScreenActivity;
 import com.bald.uriah.baldphone.activities.pills.PillTimeSetterActivity;
-import com.bald.uriah.baldphone.utils.DialogBuilder;
-import com.bald.uriah.baldphone.utils.DialogFlags;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
@@ -201,17 +200,12 @@ public class SettingsActivity extends BaldActivity {
     }
 
     private void showHelperPinDialog() {
-        final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
         final String saved = helperPin();
-        // keeps DialogBuilder: DialogScreen has no EditText payload
-        DialogBuilder.from(this)
-                .setTitle(R.string.helper_settings)
-                .setSubText(saved == null ? R.string.helper_pin_create_subtext : R.string.helper_pin_enter_subtext)
-                .setInputType(pinInputType)
-                .setPinLength(saved == null ? KioskManager.MIN_PIN_LENGTH : saved.length())
-                .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
-                .setPositiveButtonListener(params -> {
-                    final String pin = String.valueOf(params[0]).trim();
+        DialogScreen.pin(this, R.string.helper_settings,
+                saved == null ? R.string.helper_pin_create_subtext : R.string.helper_pin_enter_subtext,
+                saved == null ? KioskManager.MIN_PIN_LENGTH : saved.length(),
+                text -> {
+                    final String pin = text.toString().trim();
                     if (saved == null) {
                         if (pin.length() < KioskManager.MIN_PIN_LENGTH || !android.text.TextUtils.isDigitsOnly(pin)) {
                             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_pin_too_short).show();
@@ -226,21 +220,14 @@ public class SettingsActivity extends BaldActivity {
                     helperUnlockedAt = System.currentTimeMillis();
                     newCategory(helperCategory);
                     return true;
-                })
-                .show();
+                });
     }
 
     /** Second step of kiosk PIN creation — a mistyped PIN could lock the device itself. */
     private void showKioskPinConfirmDialog(final String pin) {
-        final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
-        DialogBuilder.from(this)
-                .setTitle(R.string.kiosk_mode)
-                .setSubText(R.string.helper_pin_repeat_subtext)
-                .setInputType(pinInputType)
-                .setPinLength(pin.length())
-                .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
-                .setPositiveButtonListener(params -> {
-                    if (!pin.equals(String.valueOf(params[0]).trim())) {
+        DialogScreen.pin(this, R.string.kiosk_mode, R.string.helper_pin_repeat_subtext, pin.length(),
+                text -> {
+                    if (!pin.equals(text.toString().trim())) {
                         BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.helper_pin_mismatch).show();
                         return false;
                     }
@@ -248,21 +235,14 @@ public class SettingsActivity extends BaldActivity {
                         BaldToast.from(this).setText(R.string.kiosk_enabled).show();
                     this.recreate();
                     return true;
-                })
-                .show();
+                });
     }
 
     /** Second step of PIN creation — a mistyped PIN would lock the helper out of their own settings. */
     private void showHelperPinConfirmDialog(final String pin) {
-        final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
-        DialogBuilder.from(this)
-                .setTitle(R.string.helper_settings)
-                .setSubText(R.string.helper_pin_repeat_subtext)
-                .setInputType(pinInputType)
-                .setPinLength(pin.length())
-                .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
-                .setPositiveButtonListener(params -> {
-                    if (!pin.equals(String.valueOf(params[0]).trim())) {
+        DialogScreen.pin(this, R.string.helper_settings, R.string.helper_pin_repeat_subtext, pin.length(),
+                text -> {
+                    if (!pin.equals(text.toString().trim())) {
                         BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.helper_pin_mismatch).show();
                         return false;
                     }
@@ -270,41 +250,29 @@ public class SettingsActivity extends BaldActivity {
                     helperUnlockedAt = System.currentTimeMillis();
                     newCategory(helperCategory);
                     return true;
-                })
-                .show();
+                });
     }
 
     private void showKioskDialog() {
-        final int pinInputType = android.text.InputType.TYPE_CLASS_NUMBER | android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD;
         if (!KioskManager.isDeviceOwner(this)) {
             DialogScreen.info(this, R.string.kiosk_mode, R.string.kiosk_not_device_owner_subtext);
         } else if (!KioskManager.isEnabled(this)) {
-            // keeps DialogBuilder: DialogScreen has no EditText payload
-            DialogBuilder.from(this)
-                    .setTitle(R.string.kiosk_mode)
-                    .setSubText(R.string.kiosk_enable_subtext)
-                    .setInputType(pinInputType)
-                    .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
-                    .setPositiveButtonListener(params -> {
-                        final String pin = String.valueOf(params[0]).trim();
+            DialogScreen.pin(this, R.string.kiosk_mode, R.string.kiosk_enable_subtext,
+                    KioskManager.MIN_PIN_LENGTH,
+                    text -> {
+                        final String pin = text.toString().trim();
                         if (pin.length() < KioskManager.MIN_PIN_LENGTH || !android.text.TextUtils.isDigitsOnly(pin)) {
                             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_pin_too_short).show();
                             return false;
                         }
                         showKioskPinConfirmDialog(pin);
                         return true;
-                    })
-                    .show();
+                    });
         } else {
-            // keeps DialogBuilder: DialogScreen has no EditText payload
-            DialogBuilder.from(this)
-                    .setTitle(R.string.kiosk_mode)
-                    .setSubText(R.string.kiosk_disable_subtext)
-                    .setInputType(pinInputType)
-                    .setPinLength(KioskManager.savedPin(this).length())
-                    .addFlag(DialogFlags.FLAG_PIN | DialogFlags.FLAG_CANCEL)
-                    .setPositiveButtonListener(params -> {
-                        if (!KioskManager.checkPin(this, String.valueOf(params[0]).trim())) {
+            DialogScreen.pin(this, R.string.kiosk_mode, R.string.kiosk_disable_subtext,
+                    KioskManager.savedPin(this).length(),
+                    text -> {
+                        if (!KioskManager.checkPin(this, text.toString().trim())) {
                             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();
                             return false;
                         }
@@ -312,8 +280,7 @@ public class SettingsActivity extends BaldActivity {
                         BaldToast.from(this).setText(R.string.kiosk_disabled).show();
                         this.recreate();
                         return true;
-                    })
-                    .show();
+                    });
         }
     }
 
@@ -519,14 +486,9 @@ public class SettingsActivity extends BaldActivity {
                     }), R.drawable.blocked_on_button));
         systemCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
         systemCategory.add(
-                new BDBSettingsItem(R.string.device_memory,
-                        // keeps DialogBuilder: DialogScreen can't carry the storage/RAM extraView
-                        DialogBuilder.from(this)
-                                .addFlag(DialogFlags.FLAG_OK)
-                                .setTitle(R.string.device_memory)
-                                .setSubText(R.string.device_memory_subtext)
-                                .setPositiveButtonListener(params -> true)
-                                .setExtraView(buildMemoryStatusView())
+                new RunnableSettingsItem(R.string.device_memory,
+                        v -> DialogScreen.info(this, R.string.device_memory, R.string.device_memory_subtext,
+                                buildMemoryStatusView(), R.string.understood)
                         , R.drawable.storage_on_button)
         );
         systemCategory.add(
@@ -654,16 +616,10 @@ public class SettingsActivity extends BaldActivity {
         control.findViewById(R.id.bt_volume_down).setOnClickListener(step);
         control.findViewById(R.id.bt_volume_up).setOnClickListener(step);
 
-        // keeps DialogBuilder: DialogScreen can't carry the volume controls extraView
-        final SettingsItem alarmVolumeSettingsItem = new BDBSettingsItem(R.string.alarm_volume,
-                DialogBuilder.from(this)
-                        .addFlag(DialogFlags.FLAG_OK)
-                        .setTitle(R.string.alarm_volume)
-                        .setSubText(R.string.alarm_volume_subtext)
-                        .setPositiveButtonListener(params -> true)
-                        .setExtraView(control), R.drawable.clock_on_background
-
-        ) {
+        final SettingsItem alarmVolumeSettingsItem = new RunnableSettingsItem(R.string.alarm_volume,
+                v -> DialogScreen.info(this, R.string.alarm_volume, R.string.alarm_volume_subtext,
+                        control, R.string.back)
+                , R.drawable.clock_on_background) {
             @Override
             public CharSequence getSubtitle() {
                 return volumePercent(prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE));
@@ -811,20 +767,6 @@ public class SettingsActivity extends BaldActivity {
         public void bindTrailing(@NonNull ViewGroup container) {
         }
 
-    }
-
-    public class BDBSettingsItem extends SettingsItem {
-        private final DialogBuilder bdb;
-
-        BDBSettingsItem(@StringRes int textResId, DialogBuilder bdb, @DrawableRes int drawableResId) {
-            super(textResId, drawableResId);
-            this.bdb = bdb;
-        }
-
-        @Override
-        public void onClick(View v) {
-            bdb.show();
-        }
     }
 
     /** Row with an inline {@link BaldSwitch} in the trailing slot; row tap toggles it. */
