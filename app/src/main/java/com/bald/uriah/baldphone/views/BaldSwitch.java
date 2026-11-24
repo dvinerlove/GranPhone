@@ -16,6 +16,7 @@
 
 package com.bald.uriah.baldphone.views;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -25,6 +26,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,8 +37,9 @@ import androidx.core.content.ContextCompat;
 
 import com.bald.uriah.baldphone.R;
 
-public class BaldSwitch extends LinearLayout {
+public class BaldSwitch extends FrameLayout {
     private static final String TAG = BaldSwitch.class.getSimpleName();
+    private static final long THUMB_ANIM_MS = 160;
     private @ColorInt
     int textColorOnSelected;
     private @ColorInt
@@ -52,6 +56,9 @@ public class BaldSwitch extends LinearLayout {
     private CharSequence yes, no;
 
     private TextView tv_yes, tv_no;
+    private View thumb;
+    private LinearLayout row;
+    private int inset;
 
     public BaldSwitch(Context context) {
         super(context);
@@ -64,18 +71,17 @@ public class BaldSwitch extends LinearLayout {
     }
 
     public BaldSwitch(Context context, AttributeSet attributeSet, int defStyleAttr) {
-        super(context, attributeSet, defStyleAttr);
+        super(context, attributeSet);
         init(context, attributeSet);
     }
 
     public BaldSwitch(Context context, AttributeSet attributeSet, int defStyleAttr, int defStyleRes) {
-        super(context, attributeSet, defStyleAttr, defStyleRes);
+        super(context, attributeSet);
         init(context, attributeSet);
     }
 
     private void init(Context context, @Nullable AttributeSet attributeSet) {
         this.context = context;
-        setOrientation(LinearLayout.HORIZONTAL);
 
         final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.BaldSwitch);
         size = styleAttributesArray.getDimension(R.styleable.BaldSwitch_size, 0);
@@ -117,11 +123,17 @@ public class BaldSwitch extends LinearLayout {
         {
             final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            tv_yes = (TextView) inflater.inflate(R.layout.bald_switch_yes, this, false);
-            tv_no = (TextView) inflater.inflate(R.layout.bald_switch_no, this, false);
+            inset = getResources().getDimensionPixelSize(R.dimen.spacing_xs) / 2;
 
-            setPadding(2, 2, 2, 2);
-            setOrientation(HORIZONTAL);
+            thumb = new View(context);
+            addView(thumb);
+
+            row = new LinearLayout(context);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            addView(row, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+            tv_yes = (TextView) inflater.inflate(R.layout.bald_switch_yes, row, false);
+            tv_no = (TextView) inflater.inflate(R.layout.bald_switch_no, row, false);
 
             tv_yes.setText(yes);
             tv_yes.setOnClickListener(new OnClickListener() {
@@ -164,8 +176,8 @@ public class BaldSwitch extends LinearLayout {
             }
 
             // "Нет" слева, "Да" справа — подтверждающее действие у края
-            addView(tv_no);
-            addView(tv_yes);
+            row.addView(tv_no);
+            row.addView(tv_yes);
         }
 
         tv_yes.setEnabled(enabled);
@@ -176,30 +188,72 @@ public class BaldSwitch extends LinearLayout {
         tv_no.setSelected(!checked);
 
         if (enabled) {
-
             setBackground(ContextCompat.getDrawable(context, R.drawable.btn_enabled));
-            if (checked) {
-                tv_yes.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_selected_no_border));
-                tv_no.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_no_border));
-                tv_yes.setTextColor(textColorOnSelected);
-                tv_no.setTextColor(textColorOnButton);
-
-            } else {
-                // "off" is emphasised with a neutral gray, never the brand color —
-                // green is reserved for the active "yes" only.
-                tv_yes.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_no_border));
-                tv_no.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_disabled_no_border));
-                tv_yes.setTextColor(textColorOnButton);
-                tv_no.setTextColor(textColorOnButton);
-            }
-
+            thumb.setBackground(ContextCompat.getDrawable(context,
+                    checked ? R.drawable.btn_selected_no_border : R.drawable.btn_disabled_no_border));
+            tv_yes.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_transparent));
+            tv_no.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_transparent));
         } else {
             setBackground(ContextCompat.getDrawable(context, R.drawable.btn_disabled));
-            tv_yes.setBackground(ContextCompat.getDrawable(context, checked ? R.drawable.btn_disabled : android.R.color.transparent));
-            tv_no.setBackground(ContextCompat.getDrawable(context, !checked ? R.drawable.btn_disabled : android.R.color.transparent));
-
+            thumb.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_disabled_no_border));
+            tv_yes.setBackground(null);
+            tv_no.setBackground(null);
         }
 
+        final boolean animate = getWidth() > 0;
+        setTextColorAnimated(tv_yes, enabled && checked ? textColorOnSelected : textColorOnButton, animate);
+        setTextColorAnimated(tv_no, textColorOnButton, animate);
+        syncThumb(animate);
+    }
+
+    private void syncThumb(boolean animate) {
+        if (thumb == null)
+            return;
+        if (getWidth() == 0) {
+            post(new Runnable() {
+                @Override
+                public void run() {
+                    syncThumb(false);
+                }
+            });
+            return;
+        }
+        final LayoutParams lp = (LayoutParams) thumb.getLayoutParams();
+        final int w = getWidth() / 2 - 2 * inset;
+        if (lp.width != w || lp.height != LayoutParams.MATCH_PARENT) {
+            lp.width = w;
+            lp.height = LayoutParams.MATCH_PARENT;
+            lp.setMargins(inset, inset, inset, inset);
+            thumb.setLayoutParams(lp);
+        }
+        final View target = checked ? tv_yes : tv_no;
+        final float tx = row.getLeft() + target.getLeft() + inset - thumb.getLeft();
+        thumb.animate().cancel();
+        if (animate) {
+            thumb.animate()
+                    .translationX(tx)
+                    .setDuration(THUMB_ANIM_MS)
+                    .setInterpolator(new DecelerateInterpolator(1.5f))
+                    .start();
+        } else {
+            thumb.setTranslationX(tx);
+        }
+    }
+
+    private void setTextColorAnimated(final TextView tv, @ColorInt final int to, boolean animate) {
+        final int from = tv.getCurrentTextColor();
+        if (!animate || from == to) {
+            tv.setTextColor(to);
+            return;
+        }
+        final ValueAnimator anim = ValueAnimator.ofArgb(from, to).setDuration(THUMB_ANIM_MS);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                tv.setTextColor((Integer) animation.getAnimatedValue());
+            }
+        });
+        anim.start();
     }
 
     @Override
