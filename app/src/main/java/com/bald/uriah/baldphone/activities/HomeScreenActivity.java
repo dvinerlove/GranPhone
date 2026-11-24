@@ -127,18 +127,24 @@ public class HomeScreenActivity extends BaldActivity {
     private final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (batteryView != null) {
-                final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-                final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                final int batteryPct = scale > 0 ? Math.round(level / (float) scale * 100) : -1;
-                final int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
-                final boolean charged = chargePlug == BatteryManager.BATTERY_PLUGGED_AC || chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS || chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
-                batteryView.setLevel(batteryPct, charged);
-                if (lowBatteryAlert)
-                    getWindow().setStatusBarColor((batteryPct < Const.LOW_BATTERY_LEVEL && !charged) ? ContextCompat.getColor(context, R.color.battery_low) : Const.DEFAULT_STATUS_BAR_COLOR);
-            }
+            applyBatteryIntent(intent);
         }
     };
+
+    private void applyBatteryIntent(@Nullable Intent intent) {
+        if (intent == null || batteryView == null)
+            return;
+        final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        if (level < 0 || scale <= 0)
+            return;
+        final int batteryPct = Math.round(level / (float) scale * 100);
+        final int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        final boolean charged = chargePlug == BatteryManager.BATTERY_PLUGGED_AC || chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS || chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
+        batteryView.setLevel(batteryPct, charged);
+        if (lowBatteryAlert)
+            getWindow().setStatusBarColor((batteryPct < Const.LOW_BATTERY_LEVEL && !charged) ? ContextCompat.getColor(this, R.color.battery_low) : Const.DEFAULT_STATUS_BAR_COLOR);
+    }
     private int notificationCount = 0;
     @ColorInt
     private int decorationColorOnBackground;
@@ -358,17 +364,9 @@ public class HomeScreenActivity extends BaldActivity {
             fontSubtitleView.setText(SettingsActivity.fontSizeName(this));
     }
 
-    // Sticky broadcast is unreliable on this ROM — read the level directly once per resume.
+    // Receiver delivery of the sticky broadcast is unreliable on some ROMs — read it synchronously once per resume.
     private void refreshBatteryView() {
-        if (batteryView == null)
-            return;
-        final android.os.BatteryManager batteryManager =
-                (android.os.BatteryManager) getSystemService(BATTERY_SERVICE);
-        if (batteryManager == null)
-            return;
-        final int level = batteryManager.getIntProperty(android.os.BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        if (level >= 0)
-            batteryView.setLevel(level, batteryManager.isCharging());
+        applyBatteryIntent(registerReceiver(null, BATTERY_FILTER));
     }
 
     // Sticky immersive: nav bar hidden on the home screen; a bottom edge swipe reveals it briefly.

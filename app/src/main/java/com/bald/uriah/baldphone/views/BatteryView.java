@@ -27,6 +27,8 @@ import com.bald.uriah.baldphone.utils.Const;
 
 public class BatteryView extends BaldImageButton {
     public int percentage;
+    @DrawableRes
+    private int shownDrawable = 0;
 
     public BatteryView(Context context) {
         super(context);
@@ -78,6 +80,10 @@ public class BatteryView extends BaldImageButton {
             }
 
         }
-        setImageResource(drawableRes);
+        // Same icon must not reload the drawable — reloading flickers on every redundant broadcast.
+        if (drawableRes != shownDrawable) {
+            shownDrawable = drawableRes;
+            setImageResource(drawableRes);
+        }
     }
 }
