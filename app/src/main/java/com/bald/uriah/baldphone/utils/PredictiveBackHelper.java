@@ -44,7 +44,11 @@ public final class PredictiveBackHelper {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU)
             return () -> {
             };
-        return register33(activity, animation);
+        // OnBackAnimationCallback exists only on API 34+; on 33 fall back to a
+        // plain callback — Android 13 had no user-facing progress preview anyway
+        if (Build.VERSION.SDK_INT < 34)
+            return register33(activity, animation::onInvoked);
+        return register34(activity, animation);
     }
 
     @TargetApi(33)
@@ -55,8 +59,8 @@ public final class PredictiveBackHelper {
         return () -> dispatcher.unregisterOnBackInvokedCallback(callback);
     }
 
-    @TargetApi(33)
-    private static Runnable register33(Activity activity, BackAnimation animation) {
+    @TargetApi(34)
+    private static Runnable register34(Activity activity, BackAnimation animation) {
         final OnBackAnimationCallback callback = new OnBackAnimationCallback() {
             @Override
             public void onBackStarted(BackEvent backEvent) {

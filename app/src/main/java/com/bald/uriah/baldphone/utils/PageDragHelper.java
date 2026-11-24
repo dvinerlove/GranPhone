@@ -27,9 +27,22 @@ import android.widget.AbsSeekBar;
  * children so taps and scrolls don't misfire).
  */
 public class PageDragHelper {
+    /**
+     * Alternate drag visuals for in-app page turns (reveal == false): instead of
+     * sliding the page off, the screen reports normalized progress 0..1 and lets
+     * the activity drive the M3 scale-down + fade-through. The helper still owns
+     * gesture detection and the commit/cancel decision.
+     */
+    public interface DragVisual {
+        void onProgress(float progress);
+
+        void onCancelled();
+    }
+
     private static final int VELOCITY_COMMIT = 800; // px/s
     private static final float COMMIT_FRACTION = 0.4f;
     private static final float PARALLAX = 0.25f;    // revealed page trails like iOS
+    private DragVisual visual;
     private final Activity activity;
     private final Window window;
     private final View target;
@@ -67,6 +80,15 @@ public class PageDragHelper {
         this.underneath = underneath;
     }
 
+    /** Peek-mode visuals for in-app page turns; used only when reveal is false. */
+    public void setDragVisual(DragVisual visual) {
+        this.visual = visual;
+    }
+
+    private boolean peekMode(boolean reveal) {
+        return visual != null && !reveal;
+    }
+
     /**
      * @param active the gesture is currently meaningful (e.g. only on settings root page);
      *               horizontal drags are still swallowed when inactive so they can't
@@ -80,11 +102,6 @@ public class PageDragHelper {
     public boolean dispatch(MotionEvent ev, boolean active, boolean follow, boolean reveal) {
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                // a page caught mid-slide belongs to the new gesture:
-                // keep its offset so tracking continues without a jump
-                target.animate().cancel();
-                if (underneath != null)
-                    underneath.animate().cancel();
                 downX = ev.getX() - target.getTranslationX();
                 downY = ev.getY();
                 rawDownX = ev.getX();
@@ -98,7 +115,7 @@ public class PageDragHelper {
                 if (dragging) {
                     dragging = false;
                     recycleTracker();
-                    springBack(follow);
+                    cancelDrag(follow, reveal);
                     return true;
                 }
                 return false;
@@ -114,6 +131,12 @@ public class PageDragHelper {
                     if (skipped || (skipped = scrollsHorizontally(window.getDecorView(), rawDownX, downY)))
                         return false;
                     dragging = true;
+                    // a page caught mid-animation belongs to the new gesture —
+                    // cancel here, not on DOWN, so a plain tap can't freeze it
+                    target.animate().cancel();
+                    if (underneath != null)
+                        underneath.animate().cancel();
+                    downX = ev.getX() - target.getTranslationX();
                     // steal the gesture: children see CANCEL so no click/scroll fires
                     final MotionEvent cancel = MotionEvent.obtain(ev);
                     cancel.setAction(MotionEvent.ACTION_CANCEL);
@@ -130,9 +153,13 @@ public class PageDragHelper {
                     if (Math.abs(t) > w)
                         t = dir * w;
                     if (follow) {
-                        target.setTranslationX(t);
-                        if (revealed && underneath != null)
-                            underneath.setTranslationX((t * dir - w) * dir * PARALLAX);
+                        if (peekMode(reveal))
+                            visual.onProgress(t * dir / w);
+                        else {
+                            target.setTranslationX(t);
+                            if (revealed && underneath != null)
+                                underneath.setTranslationX((t * dir - w) * dir * PARALLAX);
+                        }
                     }
                 }
                 return true;
@@ -151,19 +178,27 @@ public class PageDragHelper {
                 }
                 recycleTracker();
                 final int w = target.getWidth();
-                final float settled = follow ? target.getTranslationX() : ev.getX() - downX;
+                final float settled = follow && !peekMode(reveal)
+                        ? target.getTranslationX() : ev.getX() - downX;
                 if (active && (settled * dir > w * COMMIT_FRACTION || vx * dir > VELOCITY_COMMIT)) {
-                    if (follow) {
+                    if (follow && !peekMode(reveal)) {
                         target.animate().translationX(dir * w).setDuration(200).start();
                         settleUnderneath(true);
                     }
                     onCommit.run();
                 } else {
-                    springBack(follow);
+                    cancelDrag(follow, reveal);
                 }
                 return true;
         }
         return false;
+    }
+
+    private void cancelDrag(boolean follow, boolean reveal) {
+        if (peekMode(reveal) && follow)
+            visual.onCancelled();
+        else
+            springBack(follow);
     }
 
     private void springBack(boolean follow) {

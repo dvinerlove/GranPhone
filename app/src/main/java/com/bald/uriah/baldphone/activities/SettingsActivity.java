@@ -49,6 +49,7 @@ import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.BuildConfig;
+import com.bald.uriah.baldphone.utils.PageDragHelper;
 import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.alarms.AlarmScreenActivity;
@@ -107,6 +108,17 @@ public class SettingsActivity extends BaldActivity {
             systemCategory = new Category(R.string.system_settings, R.drawable.settings_on_button, 4);
     private Category currentCategory = mainCategory;
     private Runnable predictiveBackUnregister;
+    // M3 predictive-back peek on sub-pages: scale-down + fade-through. The
+    // parent category is bound at the fade-through blackout (~35% progress) so
+    // no second list view is needed; peekChild lets a late cancel undo it.
+    private boolean peekInFlight;
+    private boolean peekSwapped;
+    private Category peekChild;
+    private static final float PEEK_SWAP = 0.35f;
+    private static final android.view.animation.Interpolator PEEK_DECELERATE =
+            new android.view.animation.PathInterpolator(0f, 0f, 0f, 1f);
+    private static final android.view.animation.Interpolator PEEK_EXIT =
+            new android.view.animation.PathInterpolator(.1f, .1f, 0f, 1f);
 
     private Ringtone ringtone;
     private Vibrator vibrator;
@@ -153,15 +165,18 @@ public class SettingsActivity extends BaldActivity {
      * the helper drives the whole content view off the end edge, and the
      * parent category is revealed when the slide completes.
      */
-    // no previous-activity reveal on sub-pages: the parent lives in this window
+    // no previous-activity reveal on sub-pages: the parent lives in this window;
+    // peekInFlight keeps the mode stable while a gesture already swapped categories
     @Override
     protected boolean backDragReveals() {
-        return currentCategory == mainCategory;
+        return currentCategory == mainCategory && !peekInFlight;
     }
 
     @Override
     protected void onSwipeBackCommit() {
-        if (currentCategory == mainCategory) {
+        // peekInFlight: the fade-through may already have rebound to the parent —
+        // deciding by currentCategory alone would read mainCategory and exit
+        if (currentCategory == mainCategory && !peekInFlight) {
             super.onSwipeBackCommit();
             return;
         }
@@ -170,14 +185,90 @@ public class SettingsActivity extends BaldActivity {
             return;
         }
         final View root = findViewById(android.R.id.content);
-        // continue out the way the page was already moving (right-edge swipes go -x)
-        final int dir = root.getTranslationX() != 0
-                ? (root.getTranslationX() > 0 ? 1 : -1) : backDragDir;
-        root.animate().translationX(dir * root.getWidth()).setDuration(200)
-                .withEndAction(() -> {
-                    goBack();
-                    root.setTranslationX(0);
-                }).start();
+        root.animate().cancel();
+        // the peek may already have swapped to the parent at the fade-through
+        // point — only bind it here when the commit came early (fling)
+        if (!peekSwapped)
+            goBack();
+        else if (vibrator != null)
+            vibrator.vibrate(Const.vibetime);
+        // settle the entering parent: fade/zoom in, fast-exit interpolator
+        root.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(180)
+                .setInterpolator(PEEK_EXIT)
+                .withEndAction(this::endPeek).start();
+    }
+
+    /**
+     * M3 full-screen-surface predictive back: the sub-page scales toward 90%
+     * and fades out over the first 35% of the gesture; at the blackout the
+     * parent category is bound and fades/scales in for the rest. Works for both
+     * the mid-screen drag ({@link #backDragVisual}) and the system edge gesture.
+     */
+    private void applyPeek(float progress) {
+        peekInFlight = true;
+        final View root = findViewById(android.R.id.content);
+        if (progress >= PEEK_SWAP) {
+            if (!peekSwapped) {
+                peekChild = currentCategory;
+                peekSwap(true);
+            }
+            final float t = PEEK_DECELERATE.getInterpolation(
+                    Math.min(1f, (progress - PEEK_SWAP) / (1f - PEEK_SWAP)));
+            root.setAlpha(t);
+            root.setScaleX(1.1f - 0.1f * t);
+            root.setScaleY(1.1f - 0.1f * t);
+        } else {
+            if (peekSwapped)
+                peekSwap(false);
+            final float t = Math.min(1f, progress / PEEK_SWAP);
+            root.setAlpha(1f - t);
+            root.setScaleX(1f - 0.1f * t);
+            root.setScaleY(1f - 0.1f * t);
+        }
+    }
+
+    /** Rebinds the list to the parent (or back to the child on cancel) without the back vibration. */
+    private void peekSwap(boolean toParent) {
+        peekSwapped = toParent;
+        newCategory(toParent
+                ? (currentCategory.parent == null ? mainCategory : currentCategory.parent)
+                : peekChild, !toParent);
+    }
+
+    /** Gesture released below the threshold — everything springs back, undoing a late swap too. */
+    private void cancelPeek() {
+        final View root = findViewById(android.R.id.content);
+        root.animate().cancel();
+        if (peekSwapped) {
+            root.animate().alpha(0f).setDuration(100).withEndAction(() -> {
+                peekSwap(false);
+                root.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(150)
+                        .withEndAction(this::endPeek).start();
+            }).start();
+        } else {
+            root.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(200)
+                    .withEndAction(this::endPeek).start();
+        }
+    }
+
+    private void endPeek() {
+        peekInFlight = false;
+        updatePredictiveBack();
+    }
+
+    @Override
+    protected PageDragHelper.DragVisual backDragVisual() {
+        return new PageDragHelper.DragVisual() {
+            @Override
+            public void onProgress(float progress) {
+                applyPeek(progress);
+            }
+
+            @Override
+            public void onCancelled() {
+                cancelPeek();
+            }
+        };
     }
 
     @Override
@@ -572,6 +663,10 @@ public class SettingsActivity extends BaldActivity {
      * the system plays its own predictive exit animation.
      */
     private void updatePredictiveBack() {
+        // mid-gesture the peek swaps categories — (un)registering now would
+        // tear the callback out from under the running edge gesture
+        if (peekInFlight)
+            return;
         if (currentCategory == mainCategory) {
             if (predictiveBackUnregister != null) {
                 predictiveBackUnregister.run();
@@ -581,12 +676,13 @@ public class SettingsActivity extends BaldActivity {
             predictiveBackUnregister = PredictiveBackHelper.register(this, new PredictiveBackHelper.BackAnimation() {
                 @Override
                 public void onStarted() {
+                    peekInFlight = true;
+                    findViewById(android.R.id.content).animate().cancel();
                 }
 
                 @Override
                 public void onProgressed(float progress) {
-                    final View root = findViewById(android.R.id.content);
-                    root.setTranslationX(progress * root.getWidth());
+                    applyPeek(Math.abs(progress));
                 }
 
                 @Override
@@ -596,8 +692,7 @@ public class SettingsActivity extends BaldActivity {
 
                 @Override
                 public void onCancelled() {
-                    final View root = findViewById(android.R.id.content);
-                    root.animate().translationX(0).setDuration(200).start();
+                    cancelPeek();
                 }
             });
         }

@@ -333,6 +333,16 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     }
 
     /**
+     * Peek-mode visuals for in-app page turns (used when {@link #backDragReveals}
+     * is false): M3 scale-down + fade-through instead of the slide-off. Null =
+     * keep the plain translate even without a reveal.
+     */
+    @Nullable
+    protected PageDragHelper.DragVisual backDragVisual() {
+        return null;
+    }
+
+    /**
      * Whether back is intercepted on API 33+ (predictive back): the callback
      * then receives every back event — default back still goes through
      * {@link #onBackPressed} which must never reach the dispatcher.
@@ -348,6 +358,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
                 backDragDir = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL ? -1 : 1;
                 pageDrag = new PageDragHelper(this, findViewById(android.R.id.content), backDragDir, this::onSwipeBackCommit);
                 pageDrag.setUnderneath(sPrevDecor == null ? null : sPrevDecor.get());
+                pageDrag.setDragVisual(backDragVisual());
             }
             if (pageDrag.dispatch(ev, true, !AppUtils.animationsDisabled(this), backDragReveals()))
                 return true;
