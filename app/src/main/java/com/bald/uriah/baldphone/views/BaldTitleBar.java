@@ -141,6 +141,11 @@ public class BaldTitleBar extends LinearLayout {
             addView(tv_title);
         }
         final int pad = context.getResources().getDimensionPixelSize(R.dimen.spacing_md);
+        final ViewGroup.MarginLayoutParams backLp = (ViewGroup.MarginLayoutParams) backView.getLayoutParams();
+        if (rightHanded)
+            backLp.setMarginEnd(pad);
+        else
+            backLp.setMarginStart(pad);
         tv_title.setPadding(rightHanded ? pad : 0, 0, rightHanded ? 0 : pad, 0);
         tv_title.setGravity(Gravity.CENTER_VERTICAL | (rightHanded ? Gravity.START : Gravity.END));
         added = true;
