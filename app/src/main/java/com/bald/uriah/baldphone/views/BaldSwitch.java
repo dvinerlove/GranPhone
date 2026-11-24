@@ -189,21 +189,38 @@ public class BaldSwitch extends FrameLayout {
 
         if (enabled) {
             setBackground(ContextCompat.getDrawable(context, R.drawable.btn_enabled));
-            thumb.setBackground(ContextCompat.getDrawable(context,
-                    checked ? R.drawable.btn_selected_no_border : R.drawable.btn_disabled_no_border));
             tv_yes.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_transparent));
             tv_no.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_transparent));
         } else {
             setBackground(ContextCompat.getDrawable(context, R.drawable.btn_disabled));
-            thumb.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_disabled_no_border));
             tv_yes.setBackground(null);
             tv_no.setBackground(null);
         }
 
         final boolean animate = getWidth() > 0;
+        syncThumbBackground(checked ? R.drawable.btn_selected_no_border : R.drawable.btn_disabled_no_border, animate);
         setTextColorAnimated(tv_yes, enabled && checked ? textColorOnSelected : textColorOnButton, animate);
         setTextColorAnimated(tv_no, textColorOnButton, animate);
         syncThumb(animate);
+    }
+
+    private boolean thumbBound;
+    private int thumbBgRes;
+
+    private void syncThumbBackground(int resId, boolean animate) {
+        if (resId == thumbBgRes)
+            return;
+        final android.graphics.drawable.Drawable next = ContextCompat.getDrawable(context, resId);
+        if (animate && thumbBgRes != 0) {
+            final android.graphics.drawable.Drawable prev = ContextCompat.getDrawable(context, thumbBgRes);
+            final android.graphics.drawable.TransitionDrawable td =
+                    new android.graphics.drawable.TransitionDrawable(new android.graphics.drawable.Drawable[]{prev, next});
+            thumb.setBackground(td);
+            td.startTransition((int) THUMB_ANIM_MS);
+        } else {
+            thumb.setBackground(next);
+        }
+        thumbBgRes = resId;
     }
 
     private void syncThumb(boolean animate) {
@@ -213,7 +230,8 @@ public class BaldSwitch extends FrameLayout {
             post(new Runnable() {
                 @Override
                 public void run() {
-                    syncThumb(false);
+                    if (!thumbBound)
+                        syncThumb(false);
                 }
             });
             return;
@@ -227,7 +245,12 @@ public class BaldSwitch extends FrameLayout {
             thumb.setLayoutParams(lp);
         }
         final View target = checked ? tv_yes : tv_no;
-        final float tx = row.getLeft() + target.getLeft() + inset - thumb.getLeft();
+        // laid position comes from lp margins (gravity START), not getLeft() —
+        // getLeft() is stale in the same pass that mutates the params
+        final int laidLeft = getLayoutDirection() == LAYOUT_DIRECTION_RTL
+                ? getWidth() - lp.getMarginEnd() - lp.width
+                : lp.getMarginStart();
+        final float tx = row.getLeft() + target.getLeft() + inset - laidLeft;
         thumb.animate().cancel();
         if (animate) {
             thumb.animate()
@@ -238,6 +261,7 @@ public class BaldSwitch extends FrameLayout {
         } else {
             thumb.setTranslationX(tx);
         }
+        thumbBound = true;
     }
 
     private void setTextColorAnimated(final TextView tv, @ColorInt final int to, boolean animate) {
