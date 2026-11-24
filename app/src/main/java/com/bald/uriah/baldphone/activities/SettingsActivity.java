@@ -85,6 +85,8 @@ public class SettingsActivity extends BaldActivity {
     private static final int[] FONT_SIZE_NAMES = new int[]{
             R.string.tiny, R.string.tiny, R.string.small, R.string.medium, R.string.large, R.string.huge, R.string.huge};
     private static final int VOLUME_MAX = 5;
+    /** Open straight into the PIN-gated helper category instead of the top list. */
+    public static final String EXTRA_OPEN_HELPER = "open_helper";
     /** static so it survives leaving the activity; dies with the process — fine for a 5-min grace. */
     private static final long HELPER_PIN_GRACE = 5 * 60 * Const.SECOND;
     private static long helperUnlockedAt;
@@ -137,6 +139,8 @@ public class SettingsActivity extends BaldActivity {
 
         populateSettingsList();
         recyclerView.setAdapter(new SettingsRecyclerViewAdapter());
+        if (getIntent().getBooleanExtra(EXTRA_OPEN_HELPER, false))
+            helperCategory.onClick(null);
 
         // root page drag toward the start edge = turn back to the home page
         final boolean rtl = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
@@ -145,6 +149,14 @@ public class SettingsActivity extends BaldActivity {
                     finish();
                     overridePendingTransition(0, rtl ? R.anim.slide_out_left : R.anim.slide_out_right);
                 });
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (intent.getBooleanExtra(EXTRA_OPEN_HELPER, false) && recyclerView != null)
+            helperCategory.onClick(null);
     }
 
     @Override

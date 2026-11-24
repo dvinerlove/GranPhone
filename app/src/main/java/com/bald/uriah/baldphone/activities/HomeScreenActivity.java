@@ -501,7 +501,9 @@ public class HomeScreenActivity extends BaldActivity {
                 startActivity(new Intent(this, AppsActivity.class));
         });
         page.findViewById(R.id.bt_page_settings).setOnClickListener(v ->
-                startActivity(new Intent(this, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+                startActivity(new Intent(this, SettingsActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                        .putExtra(SettingsActivity.EXTRA_OPEN_HELPER, true)));
 
         final ViewGroup container = page.findViewById(R.id.quick_settings_container);
         brightnessSubtitleView = (TextView) addQuickSetting(container, R.drawable.brightness_on_button, R.string.brightness,
