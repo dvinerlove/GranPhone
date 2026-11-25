@@ -360,7 +360,10 @@ public class HomeScreenActivity extends BaldActivity {
                         new Intent(ACTION_REGISTER_ACTIVITY)
                                 .putExtra(KEY_EXTRA_ACTIVITY, NOTIFICATIONS_HOME_SCREEN)), 200 * Const.MILLISECOND);
 
-        registerReceiver(batteryReceiver, BATTERY_FILTER);
+        if (android.os.Build.VERSION.SDK_INT >= 33)
+            registerReceiver(batteryReceiver, BATTERY_FILTER, Context.RECEIVER_NOT_EXPORTED);
+        else
+            registerReceiver(batteryReceiver, BATTERY_FILTER);
         refreshBatteryView();
     }
 
