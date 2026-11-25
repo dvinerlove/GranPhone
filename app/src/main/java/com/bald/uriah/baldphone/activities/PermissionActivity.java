@@ -236,6 +236,18 @@ public class PermissionActivity extends BaldActivity {
                 }
             }
         }
+        if ((requiredPermissions & PERMISSION_EXACT_ALARM) != 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                totalSteps++;
+                final android.app.AlarmManager alarmManager = (android.app.AlarmManager) getSystemService(ALARM_SERVICE);
+                if (!alarmManager.canScheduleExactAlarms()) {
+                    final Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,
+                            Uri.parse("package:" + getPackageName()));
+                    permissionItemList.add(
+                            new PermissionItem(v -> startActivityForResult(intent, REQUEST_CODES[3]), getString(R.string.allow_exact_alarms), getString(R.string.allow_exact_alarms_subtext)));
+                }
+            }
+        }
 
     }
 

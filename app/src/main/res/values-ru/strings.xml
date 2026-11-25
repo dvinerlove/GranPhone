@@ -396,6 +396,8 @@
     <string name="read_phone_state_subtext">Это разрешение нужно для звонков со второй SIM-карты</string>
     <string name="choose_sim">Выбор SIM-карты</string>
     <string name="website">Сайт</string>
+    <string name="allow_exact_alarms">Точные будильники</string>
+    <string name="allow_exact_alarms_subtext">Нужно, чтобы будильники и напоминания о таблетках срабатывали вовремя.</string>
     <string name="appear_on_top">Поверх других окон</string>
     <string name="appear_on_top_subtext">Это разрешение нужно, чтобы показывать будильники и напоминания поверх экрана блокировки.</string>
     <string name="close">Закрыть</string>

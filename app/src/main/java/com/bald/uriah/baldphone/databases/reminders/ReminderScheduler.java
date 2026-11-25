@@ -153,6 +153,13 @@ public class ReminderScheduler {
     public static void scheduleReminder(@NonNull Reminder reminder, @NonNull Context context) throws IllegalArgumentException {
         synchronized (LOCK) {
             final AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+            // exact alarms need SCHEDULE_EXACT_ALARM on API 31+ (enforced at least since Android 15);
+            // skipping must never crash the boot chain — the permission wizard re-gates on next UI entry
+            if (!AppUtils.canScheduleExactAlarms(alarmManager)) {
+                AppUtils.logImportant("cannot schedule exact alarms, skipping");
+                return;
+            }
             final long nextTimeReminderWillWorkInMs = nextTimeReminderWillWorkInMs(reminder, context);
             alarmManager.setAlarmClock(
                     new AlarmManager.AlarmClockInfo(
@@ -173,6 +180,13 @@ public class ReminderScheduler {
     public static void scheduleSnooze(@NonNull Reminder alarm, Context context) throws IllegalArgumentException {
         synchronized (LOCK) {
             final AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+            // exact alarms need SCHEDULE_EXACT_ALARM on API 31+ (enforced at least since Android 15);
+            // skipping must never crash the boot chain — the permission wizard re-gates on next UI entry
+            if (!AppUtils.canScheduleExactAlarms(alarmManager)) {
+                AppUtils.logImportant("cannot schedule exact alarms, skipping");
+                return;
+            }
             alarmManager.setAlarmClock(
                     new AlarmManager.AlarmClockInfo(
                             DateTime.now().getMillis() + SNOOZE_MILLIS,

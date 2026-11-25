@@ -379,4 +379,9 @@ public class AppUtils {
                 context.getContentResolver(),
                 android.provider.Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f;
     }
+
+    public static boolean canScheduleExactAlarms(android.app.AlarmManager alarmManager) {
+        return android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.S
+                || alarmManager.canScheduleExactAlarms();
+    }
 }

@@ -392,6 +392,8 @@
     <string name="read_phone_state_subtext">This permission is required in order to call from the second sim</string>
     <string name="choose_sim">Choose Sim</string>
     <string name="website">Website</string>
+    <string name="allow_exact_alarms">Allow exact alarms</string>
+    <string name="allow_exact_alarms_subtext">Needed so alarms and pill reminders fire at the exact time.</string>
     <string name="appear_on_top">Appear on top</string>
     <string name="appear_on_top_subtext">This permission is required on newer versions of Android in order to show alarms and reminders when the screen is closed.</string>
 
