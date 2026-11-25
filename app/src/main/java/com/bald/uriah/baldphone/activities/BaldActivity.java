@@ -57,7 +57,10 @@ import java.util.List;
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_CALL_LOG;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.READ_MEDIA_IMAGES;
+import static android.Manifest.permission.READ_MEDIA_VIDEO;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_CALL_LOG;
 import static android.Manifest.permission.WRITE_CONTACTS;
@@ -77,7 +80,9 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
             PERMISSION_DEFAULT_PHONE_HANDLER = 0b10,
             PERMISSION_READ_CONTACTS = 0b100 | PERMISSION_DEFAULT_PHONE_HANDLER,
             PERMISSION_WRITE_CONTACTS = 0b1000 | PERMISSION_DEFAULT_PHONE_HANDLER,
-            PERMISSION_CALL_PHONE = 0b10000 | PERMISSION_DEFAULT_PHONE_HANDLER | PERMISSION_READ_PHONE_STATE,
+            PERMISSION_POST_NOTIFICATIONS = 0b10000000000000,
+            // in-call UI is a notification (full-screen intent); without it calls are blind on API 33+
+            PERMISSION_CALL_PHONE = 0b10000 | PERMISSION_DEFAULT_PHONE_HANDLER | PERMISSION_READ_PHONE_STATE | PERMISSION_POST_NOTIFICATIONS,
             PERMISSION_READ_CALL_LOG = 0b10000000000 | PERMISSION_DEFAULT_PHONE_HANDLER,
             PERMISSION_WRITE_CALL_LOG = 0b100000 | PERMISSION_DEFAULT_PHONE_HANDLER | PERMISSION_READ_CALL_LOG,
             PERMISSION_CAMERA = 0b1000000,
@@ -182,8 +187,18 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
                 return false;
         }
         if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+            // WRITE_EXTERNAL_STORAGE is a no-op since API 33; media reads need the granular perms there
+            if (Build.VERSION.SDK_INT >= 33) {
+                if (ActivityCompat.checkSelfPermission(activity, READ_MEDIA_IMAGES) != PERMISSION_GRANTED
+                        || ActivityCompat.checkSelfPermission(activity, READ_MEDIA_VIDEO) != PERMISSION_GRANTED)
+                    return false;
+            } else if (ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
                 return false;
+        }
+        if ((requiredPermissions & PERMISSION_POST_NOTIFICATIONS) != 0) {
+            if (Build.VERSION.SDK_INT >= 33)
+                if (ActivityCompat.checkSelfPermission(activity, POST_NOTIFICATIONS) != PERMISSION_GRANTED)
+                    return false;
         }
         if ((requiredPermissions & PERMISSION_SYSTEM_ALERT_WINDOW) != 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)

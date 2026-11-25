@@ -113,6 +113,10 @@
     <string name="edit">Edit</string>
     <string name="enable_notification_access">Enable Notification Access</string>
     <string name="enable_notification_access_subtext">Please give GranPhone access to notifications.</string>
+    <string name="allow_notifications">Allow Notifications</string>
+    <string name="allow_notifications_subtext">So calls and reminders can reach you.</string>
+    <string name="allow_media_access">Allow Access to Photos and Videos</string>
+    <string name="allow_media_access_subtext">So you can browse your photos and videos.</string>
     <string name="enter">Enter</string>
     <string name="enter_phone_number">Enter a phone number</string>
     <string name="evening">Evening</string>

@@ -45,8 +45,11 @@ import java.util.List;
 
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
 import static android.Manifest.permission.READ_CALL_LOG;
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.READ_MEDIA_IMAGES;
+import static android.Manifest.permission.READ_MEDIA_VIDEO;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_CALL_LOG;
 import static android.Manifest.permission.WRITE_CONTACTS;
@@ -152,29 +155,29 @@ public class PermissionActivity extends BaldActivity {
                 totalSteps++;
                 if (ActivityCompat.checkSelfPermission(this, READ_CONTACTS) != PERMISSION_GRANTED)
                     permissionItemList.add(
-                            new SimplePermissionItem(READ_CONTACTS, getString(R.string.read_contacts), getString(R.string.contacts_read_subtext)));
+                            new SimplePermissionItem(getString(R.string.read_contacts), getString(R.string.contacts_read_subtext), READ_CONTACTS));
             }
             if ((requiredPermissions & PERMISSION_WRITE_CONTACTS) != 0) {
                 totalSteps++;
                 if (ActivityCompat.checkSelfPermission(this, WRITE_CONTACTS) != PERMISSION_GRANTED)
                     permissionItemList.add(
-                            new SimplePermissionItem(WRITE_CONTACTS, getString(R.string.write_contacts), getString(R.string.contacts_subtext)));
+                            new SimplePermissionItem(getString(R.string.write_contacts), getString(R.string.contacts_subtext), WRITE_CONTACTS));
             }
             if ((requiredPermissions & PERMISSION_CALL_PHONE) != 0) {
                 totalSteps++;
                 if (ActivityCompat.checkSelfPermission(this, CALL_PHONE) != PERMISSION_GRANTED)
                     permissionItemList.add(
-                            new SimplePermissionItem(CALL_PHONE, getString(R.string.calling), getString(R.string.call_subtext)));
+                            new SimplePermissionItem(getString(R.string.calling), getString(R.string.call_subtext), CALL_PHONE));
             }
             if ((requiredPermissions & PERMISSION_WRITE_CALL_LOG) != 0 || (requiredPermissions & PERMISSION_READ_CALL_LOG) != 0) {
                 if (!BuildConfig.FLAVOR.equals("gPlay")) {
                     totalSteps++;
                     if (ActivityCompat.checkSelfPermission(this, WRITE_CALL_LOG) != PERMISSION_GRANTED)
                         permissionItemList.add(
-                                new SimplePermissionItem(WRITE_CALL_LOG, getString(R.string.read_call_log), getString(R.string.write_call_log_subtext)));
+                                new SimplePermissionItem(getString(R.string.read_call_log), getString(R.string.write_call_log_subtext), WRITE_CALL_LOG));
                     else if (ActivityCompat.checkSelfPermission(this, READ_CALL_LOG) != PERMISSION_GRANTED)
                         permissionItemList.add(
-                                new SimplePermissionItem(READ_CALL_LOG, getString(R.string.read_call_log), getString(R.string.read_call_log_subtext)));
+                                new SimplePermissionItem(getString(R.string.read_call_log), getString(R.string.read_call_log_subtext), READ_CALL_LOG));
                 }
             }
             if ((requiredPermissions & PERMISSION_READ_PHONE_STATE) != 0) {
@@ -183,7 +186,7 @@ public class PermissionActivity extends BaldActivity {
                     totalSteps++;
                     if (ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) != PERMISSION_GRANTED)
                         permissionItemList.add(
-                                new SimplePermissionItem(READ_PHONE_STATE, getString(R.string.read_phone_state), getString(R.string.read_phone_state_subtext)));
+                                new SimplePermissionItem(getString(R.string.read_phone_state), getString(R.string.read_phone_state_subtext), READ_PHONE_STATE));
                 }
             }
 
@@ -192,7 +195,7 @@ public class PermissionActivity extends BaldActivity {
             totalSteps++;
             if (ActivityCompat.checkSelfPermission(this, CAMERA) != PERMISSION_GRANTED)
                 permissionItemList.add(
-                        new SimplePermissionItem(CAMERA, getString(R.string.camera), getString(R.string.camera_subtext)));
+                        new SimplePermissionItem(getString(R.string.camera), getString(R.string.camera_subtext), CAMERA));
         }
         if ((requiredPermissions & PERMISSION_REQUEST_INSTALL_PACKAGES) != 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && BuildConfig.FLAVOR.equals("baldUpdates")) {
@@ -205,9 +208,22 @@ public class PermissionActivity extends BaldActivity {
         }
         if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0) {
             totalSteps++;
-            if (ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+            if (Build.VERSION.SDK_INT >= 33) {
+                if (ActivityCompat.checkSelfPermission(this, READ_MEDIA_IMAGES) != PERMISSION_GRANTED
+                        || ActivityCompat.checkSelfPermission(this, READ_MEDIA_VIDEO) != PERMISSION_GRANTED)
+                    permissionItemList.add(
+                            new SimplePermissionItem(getString(R.string.allow_media_access), getString(R.string.allow_media_access_subtext), READ_MEDIA_IMAGES, READ_MEDIA_VIDEO));
+            } else if (ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
                 permissionItemList.add(
-                        new SimplePermissionItem(WRITE_EXTERNAL_STORAGE, getString(R.string.write_external_storage), getString(R.string.external_storage_subtext)));
+                        new SimplePermissionItem(getString(R.string.write_external_storage), getString(R.string.external_storage_subtext), WRITE_EXTERNAL_STORAGE));
+        }
+        if ((requiredPermissions & PERMISSION_POST_NOTIFICATIONS) != 0) {
+            if (Build.VERSION.SDK_INT >= 33) {
+                totalSteps++;
+                if (ActivityCompat.checkSelfPermission(this, POST_NOTIFICATIONS) != PERMISSION_GRANTED)
+                    permissionItemList.add(
+                            new SimplePermissionItem(getString(R.string.allow_notifications), getString(R.string.allow_notifications_subtext), POST_NOTIFICATIONS));
+            }
         }
         if ((requiredPermissions & PERMISSION_SYSTEM_ALERT_WINDOW) != 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -292,8 +308,8 @@ public class PermissionActivity extends BaldActivity {
     }
 
     private class SimplePermissionItem extends PermissionItem {
-        SimplePermissionItem(String permission, String title, String explanation) {
-            super((v) -> ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{permission}, 789),
+        SimplePermissionItem(String title, String explanation, String... permissions) {
+            super((v) -> ActivityCompat.requestPermissions(PermissionActivity.this, permissions, 789),
                     title,
                     explanation);
         }

@@ -155,7 +155,7 @@ public class AlarmScheduler {
             alarmManager.setAlarmClock(
                     new AlarmManager.AlarmClockInfo(
                             nextTimeAlarmWillWorkInMs,
-                            PendingIntent.getActivity(context, 0, new Intent(context, AlarmsActivity.class), 0)
+                            PendingIntent.getActivity(context, 0, new Intent(context, AlarmsActivity.class), PendingIntent.FLAG_IMMUTABLE)
                     ),
                     getIntent(context, alarm.getKey())
             );
@@ -165,7 +165,7 @@ public class AlarmScheduler {
     private static PendingIntent getIntent(Context context, int alarmKey) {
         Log.e(TAG, "getIntent: ");
         Intent intent = new Intent(context, AlarmReceiver.class).putExtra(Alarm.ALARM_KEY_VIA_INTENTS, alarmKey);
-        return PendingIntent.getBroadcast(context, alarmKey, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getBroadcast(context, alarmKey, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     public static void scheduleSnooze(@NonNull Alarm alarm, Context context) throws IllegalArgumentException {
@@ -174,7 +174,7 @@ public class AlarmScheduler {
             alarmManager.setAlarmClock(
                     new AlarmManager.AlarmClockInfo(
                             DateTime.now().getMillis() + SNOOZE_MILLIS,
-                            PendingIntent.getActivity(context, alarm.getKey(), new Intent(context, HomeScreenActivity.class), 0)//TODO??
+                            PendingIntent.getActivity(context, alarm.getKey(), new Intent(context, HomeScreenActivity.class), PendingIntent.FLAG_IMMUTABLE)//TODO??
                     ),
                     getIntent(context, alarm.getKey())
             );

@@ -111,6 +111,10 @@
     <string name="edit">Изменить</string>
     <string name="enable_notification_access">Включить доступ к уведомлениям</string>
     <string name="enable_notification_access_subtext">Пожалуйста, предоставьте GranPhone доступ к уведомлениям.</string>
+    <string name="allow_notifications">Разрешить уведомления</string>
+    <string name="allow_notifications_subtext">Чтобы звонки и напоминания доходили до вас.</string>
+    <string name="allow_media_access">Разрешить доступ к фото и видео</string>
+    <string name="allow_media_access_subtext">Чтобы вы могли смотреть свои фото и видео.</string>
     <string name="enter">Ввод</string>
     <string name="enter_phone_number">Введите номер телефона</string>
     <string name="evening">Вечер</string>
