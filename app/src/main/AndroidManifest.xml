@@ -149,6 +149,26 @@
             android:enabled="${fullApp}"
             android:label="@string/settings" />
         <activity
+            android:name=".activities.HelperSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/helper_settings" />
+        <activity
+            android:name=".activities.ScreenSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/screen_and_appearance" />
+        <activity
+            android:name=".activities.ConvenienceSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/convenience_accessibility" />
+        <activity
+            android:name=".activities.ConnectionSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/connection_settings" />
+        <activity
+            android:name=".activities.SystemSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/system_settings" />
+        <activity
             android:name=".activities.NotificationsActivity"
 
             android:enabled="${fullApp}"

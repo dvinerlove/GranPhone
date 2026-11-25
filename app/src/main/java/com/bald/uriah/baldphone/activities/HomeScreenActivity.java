@@ -35,6 +35,7 @@ import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.util.Log;
@@ -47,7 +48,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +79,7 @@ import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldImageButton;
+import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.BatteryView;
 import com.bald.uriah.baldphone.views.home.HomePage1;
 import com.bald.uriah.baldphone.views.home.NotesView;
@@ -153,8 +154,10 @@ public class HomeScreenActivity extends BaldActivity {
     private int decorationColorOnBackground;
     private BaldImageButton notificationsButton, soundButton;
     private android.widget.ImageView signalView;
+    private TextView alarmSubtitleView;
     private TextView brightnessSubtitleView;
     private TextView fontSubtitleView;
+    private SettingsActivity.AlarmVolumeControl alarmVolume;
     private android.telephony.TelephonyManager telephonyManager;
     private final android.telephony.PhoneStateListener signalListener = new android.telephony.PhoneStateListener() {
         @Override
@@ -363,6 +366,8 @@ public class HomeScreenActivity extends BaldActivity {
 
     // Bound once at page creation; refresh on resume — brightness lives in system settings, outside hasChanged().
     private void refreshQuickSettingSubtitles() {
+        if (alarmSubtitleView != null)
+            alarmSubtitleView.setText(SettingsActivity.AlarmVolumeControl.subtitle(this));
         if (brightnessSubtitleView != null)
             brightnessSubtitleView.setText(SettingsActivity.brightnessSubtitle(this));
         if (fontSubtitleView != null)
@@ -439,6 +444,8 @@ public class HomeScreenActivity extends BaldActivity {
     @Override
     protected void onStop() {
         baldHomeWatcher.stopWatch();
+        if (alarmVolume != null)
+            alarmVolume.stop();
         super.onStop();
     }
 
@@ -513,11 +520,16 @@ public class HomeScreenActivity extends BaldActivity {
                 startActivity(new Intent(this, AppsActivity.class));
         });
         page.findViewById(R.id.bt_page_settings).setOnClickListener(v ->
-                startActivity(new Intent(this, SettingsActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                        .putExtra(SettingsActivity.EXTRA_OPEN_HELPER, true)));
+                startActivity(new Intent(this, HelperSettingsActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
 
         final ViewGroup container = page.findViewById(R.id.quick_settings_container);
+        alarmVolume = new SettingsActivity.AlarmVolumeControl(this);
+        alarmSubtitleView = (TextView) addQuickSetting(container, R.drawable.clock_on_background, R.string.alarm_volume,
+                SettingsActivity.AlarmVolumeControl.subtitle(this),
+                () -> DialogScreen.info(this, R.string.alarm_volume, R.string.alarm_volume_subtext,
+                        alarmVolume.view, R.string.back))
+                .findViewById(R.id.tv_setting_subtitle);
         brightnessSubtitleView = (TextView) addQuickSetting(container, R.drawable.brightness_on_button, R.string.brightness,
                 SettingsActivity.brightnessSubtitle(this),
                 () -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)))
@@ -539,12 +551,23 @@ public class HomeScreenActivity extends BaldActivity {
                         },
                         R.string.light, R.string.dark));
         final View vibrateRow = addQuickSetting(container, R.drawable.vibration_on_background, R.string.vibrate, null, null);
-        final Switch sw = new Switch(this);
+        final BaldSwitch sw = new BaldSwitch(this);
+        sw.setLayoutParams(new ViewGroup.LayoutParams(
+                getResources().getDimensionPixelSize(R.dimen.switch_width),
+                getResources().getDimensionPixelSize(R.dimen.switch_height)));
         sw.setChecked(sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE));
-        sw.setOnCheckedChangeListener((b, checked) ->
-                sharedPreferences.edit().putBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, checked).apply());
+        sw.setOnChangeListener(this::applyVibrationPref);
         ((ViewGroup) vibrateRow.findViewById(R.id.setting_trailing)).addView(sw);
-        vibrateRow.setOnClickListener(v -> sw.toggle());
+        vibrateRow.setOnClickListener(v -> {
+            // BaldSwitch.setChecked doesn't fire the change listener — apply manually.
+            sw.setChecked(!sw.isChecked());
+            applyVibrationPref(sw.isChecked());
+        });
+    }
+
+    private void applyVibrationPref(boolean checked) {
+        sharedPreferences.edit().putBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, checked).apply();
+        vibrator = checked ? (Vibrator) getSystemService(VIBRATOR_SERVICE) : null;
     }
 
     private View addQuickSetting(final ViewGroup container, final int iconRes, final int titleRes,
@@ -643,13 +666,12 @@ public class HomeScreenActivity extends BaldActivity {
     public void onBackPressed() {
         if (vibrator != null)
             vibrator.vibrate(Const.vibetime);
+        // launcher convention: back on a secondary page slides home to page 0
+        if (homePager != null && homePager.getCurrentItem() > 0) {
+            homePager.setCurrentItem(0);
+            return;
+        }
         refreshHome();
-    }
-
-    // the home pager owns horizontal swipes; home is the back destination anyway
-    @Override
-    protected boolean backDragEnabled() {
-        return false;
     }
 
     // launcher consumes back (refreshHome); a callback keeps it on API 33+

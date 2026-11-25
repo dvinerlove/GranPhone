@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Full-page PIN screen (SettingsActivity overlay): lock-screen idiom — big
+     title + hint + dots + numpad. Back is the title-bar button; no Cancel. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?bald_background"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_xl">
+
+    <TextView
+        android:id="@+id/tv_pin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="?bald_text_primary"
+        android:textSize="@dimen/large"
+        tools:text="Helper settings" />
+
+    <TextView
+        android:id="@+id/tv_pin_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="?bald_text_secondary"
+        android:textSize="@dimen/medium"
+        tools:text="Enter the helper password." />
+
+    <include
+        android:id="@+id/pin_pad"
+        layout="@layout/pin_pad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_lg" />
+</LinearLayout>

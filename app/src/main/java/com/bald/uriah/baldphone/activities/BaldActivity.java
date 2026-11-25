@@ -31,7 +31,6 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -47,7 +46,6 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.Const;
-import com.bald.uriah.baldphone.utils.PageDragHelper;
 import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
@@ -96,10 +94,6 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     private String appliedLanguage;
     private List<WeakReference<Dialog>> dialogsToClose = new ArrayList<>(1);
     private List<WeakReference<PopupWindow>> popupWindowsToClose = new ArrayList<>(1);
-    // decor views of the top activity and the one beneath it — the latter is
-    // what a back-drag reveals; kept weak so dead windows don't leak
-    private static WeakReference<View> sTopDecor;
-    private static WeakReference<View> sPrevDecor;
     private SensorManager sensorManager;
     private Sensor proximitySensor;
     private boolean near;
@@ -108,8 +102,6 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     private boolean useAccidentalGuard = true;
     private Handler handler;
     private Runnable touchesDecreaser = () -> touches = (touches -= 1) < 0 ? 0 : touches;
-    private PageDragHelper pageDrag;
-    protected int backDragDir = 1; // +1 = pages leave toward +x (LTR), -1 in RTL
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -285,9 +277,6 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
         if (useAccidentalGuard)
             sensorManager.registerListener(this, proximitySensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
-        // the previous top becomes the window a back-drag can reveal underneath
-        sPrevDecor = sTopDecor;
-        sTopDecor = new WeakReference<>(getWindow().getDecorView());
     }
 
     @Override
@@ -310,60 +299,12 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     }
 
     /**
-     * Horizontal back-drag, the same on every page-type screen: the page tracks
-     * the finger 1:1 and commits past a threshold, like the platform's back
-     * gesture. Screens with horizontal content (pagers) or a deliberately
-     * blocked back button opt out via {@link #backDragEnabled()}.
-     */
-    protected boolean backDragEnabled() {
-        return true;
-    }
-
-    /** What a committed back-drag runs; the default is exactly the back button. */
-    protected void onSwipeBackCommit() {
-        onBackPressed();
-    }
-
-    /**
-     * Whether the drag reveals the previous activity underneath (iOS-style).
-     * False when the "previous page" lives inside this window (settings sub-pages).
-     */
-    protected boolean backDragReveals() {
-        return true;
-    }
-
-    /**
-     * Peek-mode visuals for in-app page turns (used when {@link #backDragReveals}
-     * is false): M3 scale-down + fade-through instead of the slide-off. Null =
-     * keep the plain translate even without a reveal.
-     */
-    @Nullable
-    protected PageDragHelper.DragVisual backDragVisual() {
-        return null;
-    }
-
-    /**
      * Whether back is intercepted on API 33+ (predictive back): the callback
      * then receives every back event — default back still goes through
      * {@link #onBackPressed} which must never reach the dispatcher.
      */
     protected boolean backDispatchIntercepted() {
         return false;
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (backDragEnabled()) {
-            if (pageDrag == null) {
-                backDragDir = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL ? -1 : 1;
-                pageDrag = new PageDragHelper(this, findViewById(android.R.id.content), backDragDir, this::onSwipeBackCommit);
-                pageDrag.setUnderneath(sPrevDecor == null ? null : sPrevDecor.get());
-                pageDrag.setDragVisual(backDragVisual());
-            }
-            if (pageDrag.dispatch(ev, true, !AppUtils.animationsDisabled(this), backDragReveals()))
-                return true;
-        }
-        return super.dispatchTouchEvent(ev);
     }
 
     @Override
@@ -377,10 +318,6 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
             finish();
         else
             super.onBackPressed();
-        // every way out (button, system gesture, swipe) slides the page out toward
-        // the end edge; the previous window stays put — it was already revealed
-        final boolean rtl = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-        overridePendingTransition(0, rtl ? R.anim.slide_out_left : R.anim.slide_out_right);
     }
 
     public void autoDismiss(Dialog dialog) {

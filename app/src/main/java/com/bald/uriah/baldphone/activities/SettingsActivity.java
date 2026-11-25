@@ -16,430 +16,77 @@
 
 package com.bald.uriah.baldphone.activities;
 
-import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Ringtone;
-import android.net.Uri;
-import android.nfc.NfcAdapter;
-import android.nfc.NfcManager;
-import android.app.ActivityManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.StatFs;
 import android.os.Vibrator;
 import android.provider.Settings;
-import android.text.format.Formatter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bald.uriah.baldphone.BuildConfig;
-import com.bald.uriah.baldphone.utils.PageDragHelper;
-import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.alarms.AlarmScreenActivity;
-import com.bald.uriah.baldphone.activities.pills.PillTimeSetterActivity;
-import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
-import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.CallManager;
-import com.bald.uriah.baldphone.utils.KioskManager;
 import com.bald.uriah.baldphone.utils.Const;
-import com.bald.uriah.baldphone.utils.AppUtils;
-import com.bald.uriah.baldphone.utils.UpdatingUtil;
-import com.bald.uriah.baldphone.views.BaldSwitch;
-import com.bald.uriah.baldphone.views.BaldTitleBar;
-import com.bald.uriah.baldphone.views.ModularRecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.content.Intent.ACTION_VIEW;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 
 /**
- * Settings Activity,
- * {{@link SettingsItem}} are generated programmatically because of the huge differences that lies between different settings.
+ * The root settings screen — the safe rows an elderly user can change
+ * directly. Drill-in screens are real activities ({@link SettingsPageActivity}
+ * subclasses); the task stack IS the back stack.
  */
-public class SettingsActivity extends BaldActivity {
-    private static final String TAG = SettingsActivity.class.getSimpleName();
+public class SettingsActivity extends SettingsPageActivity {
     public static final float[] FONT_SIZES = new float[]{0.8f, 0.9f, 1.0f, 1.1f, 1.3f, 1.5f, 1.7f};
     // parallel to FONT_SIZES — ends repeat: the 5 names predate the extended 7-stop scale
     private static final int[] FONT_SIZE_NAMES = new int[]{
             R.string.tiny, R.string.tiny, R.string.small, R.string.medium, R.string.large, R.string.huge, R.string.huge};
     private static final int VOLUME_MAX = 5;
-    /** Open straight into the PIN-gated helper category instead of the top list. */
-    public static final String EXTRA_OPEN_HELPER = "open_helper";
-    /** static so it survives leaving the activity; dies with the process — fine for a 5-min grace. */
-    private static final long HELPER_PIN_GRACE = 5 * 60 * Const.SECOND;
-    private static long helperUnlockedAt;
 
-    private final Category
-            mainCategory = new Category(R.string.settings, R.drawable.settings_on_button, -1),
-            helperCategory = new Category(R.string.helper_settings, R.drawable.settings_on_button, 0) {
-                @Override
-                public void onClick(View v) {
-                    if (System.currentTimeMillis() - helperUnlockedAt < HELPER_PIN_GRACE) {
-                        helperUnlockedAt = System.currentTimeMillis();
-                        newCategory(helperCategory);
-                    } else {
-                        showHelperPinDialog();
-                    }
-                }
-            },
-            screenCategory = new Category(R.string.screen_and_appearance, R.drawable.screen_on_button, 1),
-            convenienceCategory = new Category(R.string.convenience_accessibility, R.drawable.accessibility_on_button, 2),
-            connectionCategory = new Category(R.string.connection_settings, R.drawable.wifi_on_button, 3),
-            systemCategory = new Category(R.string.system_settings, R.drawable.settings_on_button, 4);
-    private Category currentCategory = mainCategory;
-    private Runnable predictiveBackUnregister;
-    // M3 predictive-back peek on sub-pages: scale-down + fade-through. The
-    // parent category is bound at the fade-through blackout (~35% progress) so
-    // no second list view is needed; peekChild lets a late cancel undo it.
-    private boolean peekInFlight;
-    private boolean peekSwapped;
-    private Category peekChild;
-    private static final float PEEK_SWAP = 0.35f;
-    private static final android.view.animation.Interpolator PEEK_DECELERATE =
-            new android.view.animation.PathInterpolator(0f, 0f, 0f, 1f);
-    private static final android.view.animation.Interpolator PEEK_EXIT =
-            new android.view.animation.PathInterpolator(.1f, .1f, 0f, 1f);
+    private AlarmVolumeControl alarmVolume;
 
-    private Ringtone ringtone;
-    private Vibrator vibrator;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private RecyclerView recyclerView;
-    private BaldPrefsUtils baldPrefsUtils;
-    private BaldTitleBar baldTitleBar;
-    private boolean layoutAnimationPlayed;
-
-    @SuppressLint("CommitPrefEdits")
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (!checkPermissions(this, requiredPermissions()))
-            return;
-        setContentView(R.layout.activity_settings);
-        sharedPreferences = getSharedPreferences(Const.BALD_PREFS, MODE_PRIVATE);
-        baldPrefsUtils = BaldPrefsUtils.newInstance(this);
-        editor = sharedPreferences.edit();
-
-        vibrator = (sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE)) ? (Vibrator) getSystemService(VIBRATOR_SERVICE) : null;
-        baldTitleBar = findViewById(R.id.bald_title_bar);
-        baldTitleBar.setBackListener((v) -> onBackPressed());
-
-        recyclerView = findViewById(R.id.child);
-
-        populateSettingsList();
-        recyclerView.setAdapter(new SettingsRecyclerViewAdapter());
-        if (getIntent().getBooleanExtra(EXTRA_OPEN_HELPER, false))
-            helperCategory.onClick(null);
+    protected int pageTitleRes() {
+        return R.string.settings;
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        if (intent.getBooleanExtra(EXTRA_OPEN_HELPER, false) && recyclerView != null)
-            helperCategory.onClick(null);
-    }
-
-    /**
-     * On a sub-page the shared back-drag becomes an in-app page turn:
-     * the helper drives the whole content view off the end edge, and the
-     * parent category is revealed when the slide completes.
-     */
-    // no previous-activity reveal on sub-pages: the parent lives in this window;
-    // peekInFlight keeps the mode stable while a gesture already swapped categories
-    @Override
-    protected boolean backDragReveals() {
-        return currentCategory == mainCategory && !peekInFlight;
-    }
-
-    @Override
-    protected void onSwipeBackCommit() {
-        // peekInFlight: the fade-through may already have rebound to the parent —
-        // deciding by currentCategory alone would read mainCategory and exit
-        if (currentCategory == mainCategory && !peekInFlight) {
-            super.onSwipeBackCommit();
-            return;
-        }
-        if (AppUtils.animationsDisabled(this)) {
-            // a peek mid-gesture may have left the page faded/scaled/swapped — restore instantly
-            final View content = findViewById(android.R.id.content);
-            content.animate().cancel();
-            content.setAlpha(1f);
-            content.setScaleX(1f);
-            content.setScaleY(1f);
-            peekSwapped = false;
-            if (!goBack())
-                super.onSwipeBackCommit();
-            endPeek();
-            return;
-        }
-        final View root = findViewById(android.R.id.content);
-        root.animate().cancel();
-        // the peek may already have swapped to the parent at the fade-through
-        // point — only bind it here when the commit came early (fling)
-        if (!peekSwapped)
-            goBack();
-        else if (vibrator != null)
-            vibrator.vibrate(Const.vibetime);
-        // settle the entering parent: fade/zoom in, fast-exit interpolator
-        root.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(180)
-                .setInterpolator(PEEK_EXIT)
-                .withEndAction(this::endPeek).start();
-    }
-
-    /**
-     * M3 full-screen-surface predictive back: the sub-page scales toward 90%
-     * and fades out over the first 35% of the gesture; at the blackout the
-     * parent category is bound and fades/scales in for the rest. Works for both
-     * the mid-screen drag ({@link #backDragVisual}) and the system edge gesture.
-     */
-    private void applyPeek(float progress) {
-        peekInFlight = true;
-        final View root = findViewById(android.R.id.content);
-        if (progress >= PEEK_SWAP) {
-            if (!peekSwapped) {
-                peekChild = currentCategory;
-                peekSwap(true);
-            }
-            final float t = PEEK_DECELERATE.getInterpolation(
-                    Math.min(1f, (progress - PEEK_SWAP) / (1f - PEEK_SWAP)));
-            root.setAlpha(t);
-            root.setScaleX(1.1f - 0.1f * t);
-            root.setScaleY(1.1f - 0.1f * t);
-        } else {
-            if (peekSwapped)
-                peekSwap(false);
-            final float t = Math.min(1f, progress / PEEK_SWAP);
-            root.setAlpha(1f - t);
-            root.setScaleX(1f - 0.1f * t);
-            root.setScaleY(1f - 0.1f * t);
-        }
-    }
-
-    /** Rebinds the list to the parent (or back to the child on cancel) without the back vibration. */
-    private void peekSwap(boolean toParent) {
-        peekSwapped = toParent;
-        newCategory(toParent
-                ? (currentCategory.parent == null ? mainCategory : currentCategory.parent)
-                : peekChild, !toParent);
-    }
-
-    /** Gesture released below the threshold — everything springs back, undoing a late swap too. */
-    private void cancelPeek() {
-        final View root = findViewById(android.R.id.content);
-        root.animate().cancel();
-        if (peekSwapped) {
-            root.animate().alpha(0f).setDuration(100).withEndAction(() -> {
-                peekSwap(false);
-                root.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(150)
-                        .withEndAction(this::endPeek).start();
-            }).start();
-        } else {
-            root.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(200)
-                    .withEndAction(this::endPeek).start();
-        }
-    }
-
-    private void endPeek() {
-        peekInFlight = false;
-        updatePredictiveBack();
-    }
-
-    @Override
-    protected PageDragHelper.DragVisual backDragVisual() {
-        return new PageDragHelper.DragVisual() {
-            @Override
-            public void onProgress(float progress) {
-                applyPeek(progress);
-            }
-
-            @Override
-            public void onCancelled() {
-                cancelPeek();
-            }
-        };
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (baldPrefsUtils.hasChanged(this))
-            recreate();
-        else if (recyclerView != null) // refresh live subtitles (system brightness, font scale…)
-            recyclerView.getAdapter().notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (ringtone != null)
-            ringtone.stop();
-    }
-
-    /** The kiosk PIN when one exists, else the helper PIN the helper set on first entry. */
-    @Nullable
-    private String helperPin() {
-        final String kioskPin = KioskManager.savedPin(this);
-        return kioskPin != null ? kioskPin : sharedPreferences.getString(BPrefs.HELPER_PIN_KEY, null);
-    }
-
-    private void showHelperPinDialog() {
-        final String saved = helperPin();
-        DialogScreen.pin(this, R.string.helper_settings,
-                saved == null ? R.string.helper_pin_create_subtext : R.string.helper_pin_enter_subtext,
-                saved == null ? KioskManager.MIN_PIN_LENGTH : saved.length(),
-                text -> {
-                    final String pin = text.toString().trim();
-                    if (saved == null) {
-                        if (pin.length() < KioskManager.MIN_PIN_LENGTH || !android.text.TextUtils.isDigitsOnly(pin)) {
-                            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_pin_too_short).show();
-                            return false;
-                        }
-                        showHelperPinConfirmDialog(pin);
-                        return true;
-                    } else if (!pin.equals(saved)) {
-                        BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();
-                        return false;
-                    }
-                    helperUnlockedAt = System.currentTimeMillis();
-                    newCategory(helperCategory);
-                    return true;
-                });
-    }
-
-    /** Second step of kiosk PIN creation — a mistyped PIN could lock the device itself. */
-    private void showKioskPinConfirmDialog(final String pin) {
-        DialogScreen.pin(this, R.string.kiosk_mode, R.string.helper_pin_repeat_subtext, pin.length(),
-                text -> {
-                    if (!pin.equals(text.toString().trim())) {
-                        BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.helper_pin_mismatch).show();
-                        return false;
-                    }
-                    if (KioskManager.enable(this, pin))
-                        BaldToast.from(this).setText(R.string.kiosk_enabled).show();
-                    this.recreate();
-                    return true;
-                });
-    }
-
-    /** Second step of PIN creation — a mistyped PIN would lock the helper out of their own settings. */
-    private void showHelperPinConfirmDialog(final String pin) {
-        DialogScreen.pin(this, R.string.helper_settings, R.string.helper_pin_repeat_subtext, pin.length(),
-                text -> {
-                    if (!pin.equals(text.toString().trim())) {
-                        BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.helper_pin_mismatch).show();
-                        return false;
-                    }
-                    editor.putString(BPrefs.HELPER_PIN_KEY, pin).apply();
-                    helperUnlockedAt = System.currentTimeMillis();
-                    newCategory(helperCategory);
-                    return true;
-                });
-    }
-
-    private void showKioskDialog() {
-        if (!KioskManager.isDeviceOwner(this)) {
-            DialogScreen.info(this, R.string.kiosk_mode, R.string.kiosk_not_device_owner_subtext);
-        } else if (!KioskManager.isEnabled(this)) {
-            DialogScreen.pin(this, R.string.kiosk_mode, R.string.kiosk_enable_subtext,
-                    KioskManager.MIN_PIN_LENGTH,
-                    text -> {
-                        final String pin = text.toString().trim();
-                        if (pin.length() < KioskManager.MIN_PIN_LENGTH || !android.text.TextUtils.isDigitsOnly(pin)) {
-                            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_pin_too_short).show();
-                            return false;
-                        }
-                        showKioskPinConfirmDialog(pin);
-                        return true;
-                    });
-        } else {
-            DialogScreen.pin(this, R.string.kiosk_mode, R.string.kiosk_disable_subtext,
-                    KioskManager.savedPin(this).length(),
-                    text -> {
-                        if (!KioskManager.checkPin(this, text.toString().trim())) {
-                            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.kiosk_wrong_pin).show();
-                            return false;
-                        }
-                        KioskManager.disable(this, this);
-                        BaldToast.from(this).setText(R.string.kiosk_disabled).show();
-                        this.recreate();
-                        return true;
-                    });
-        }
-    }
-
-    private static final String[] LANGUAGE_CODES = {
-            "", "ar", "bg", "ca", "cs", "da", "de", "el", "en", "es", "et", "eu", "fi", "fr",
-            "ha", "hi", "hr", "hu", "id", "it", "iw", "ka", "ko", "nl", "pl", "pt", "pt-rBR",
-            "ro", "ru", "sl", "sr", "sv", "tr", "zh"
-    };
-
-    private void showLanguageDialog() {
-        final String current = sharedPreferences.getString(BPrefs.LANGUAGE_KEY, BPrefs.LANGUAGE_DEFAULT_VALUE);
-        final CharSequence[] options = new CharSequence[LANGUAGE_CODES.length];
-        int selected = 0;
-        for (int i = 0; i < LANGUAGE_CODES.length; i++) {
-            if (i == 0) {
-                options[i] = getText(R.string.system_default);
-            } else {
-                final java.util.Locale locale = java.util.Locale.forLanguageTag(LANGUAGE_CODES[i].replace("-r", "-"));
-                options[i] = locale.getDisplayName(locale);
-            }
-            if (LANGUAGE_CODES[i].equals(current))
-                selected = i;
-        }
-        DialogScreen.select(this, R.string.language_settings, selected,
-                index -> {
-                    editor.putString(BPrefs.LANGUAGE_KEY, LANGUAGE_CODES[index]).apply();
-                    this.recreate();
-                }, options);
-    }
-
-    private void populateSettingsList() {
+    protected void populateItems() {
         // User layer: the safe rows an elderly user can change directly.
-        mainCategory.add(new Header(R.string.settings_for_user));
-        setupAlarmVolume();
-        mainCategory.add(new RunnableSettingsItem(R.string.brightness,
+        items.add(new Header(R.string.settings_for_user));
+        alarmVolume = new AlarmVolumeControl(this);
+        items.add(new RunnableSettingsItem(R.string.alarm_volume,
+                v -> DialogScreen.info(this, R.string.alarm_volume, R.string.alarm_volume_subtext,
+                        alarmVolume.view, R.string.back)
+                , R.drawable.clock_on_background) {
+            @Override
+            public CharSequence getSubtitle() {
+                return AlarmVolumeControl.subtitle(SettingsActivity.this);
+            }
+        });
+        items.add(new RunnableSettingsItem(R.string.brightness,
                 v -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)), R.drawable.brightness_on_button) {
             @Override
             public CharSequence getSubtitle() {
                 return brightnessSubtitle(SettingsActivity.this);
             }
         });
-        mainCategory.add(new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button) {
+        items.add(new RunnableSettingsItem(R.string.font_size, v -> startActivity(new Intent(this, FontChangerActivity.class)), R.drawable.font_on_button) {
             @Override
             public CharSequence getSubtitle() {
                 return fontSizeName(SettingsActivity.this);
             }
         });
-        mainCategory.add(new SwitchSettingsItem(R.string.vibrate, R.drawable.vibration_on_background,
+        items.add(new SwitchSettingsItem(R.string.vibrate, R.drawable.vibration_on_background,
                 BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE) {
             @Override
             protected void onPrefChanged(boolean checked) {
                 vibrator = checked ? (Vibrator) getSystemService(VIBRATOR_SERVICE) : null;
             }
         });
-        mainCategory.add(new RunnableSettingsItem(R.string.theme_settings,
+        items.add(new RunnableSettingsItem(R.string.theme_settings,
                 v -> DialogScreen.select(this, R.string.theme_settings,
                         Math.max(0, Math.min(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE), BPrefs.Themes.THEMES.length - 1)) == BPrefs.Themes.DARK ? 1 : 0,
                         index -> {
@@ -455,157 +102,15 @@ public class SettingsActivity extends BaldActivity {
                         ? R.string.dark : R.string.light);
             }
         });
-        mainCategory.add(new Header(R.string.settings_for_helper));
-        mainCategory.add(helperCategory);
+        items.add(new Header(R.string.settings_for_helper));
+        items.add(new Category(R.string.helper_settings, R.drawable.settings_on_button, HelperSettingsActivity.class));
+    }
 
-        // Helper layer: everything operational or dangerous stays behind the PIN gate,
-        // grouped into four drill-in sub-screens (modern settings idiom).
-        helperCategory.add(screenCategory);
-        helperCategory.add(convenienceCategory);
-        helperCategory.add(connectionCategory);
-        helperCategory.add(systemCategory);
-
-        screenCategory.add(new RunnableSettingsItem(R.string.edit_home_screen, v -> startActivity(new Intent(this, Page1EditorActivity.class)), R.drawable.edit_on_button));
-        screenCategory.add(new SwitchSettingsItem(R.string.hide_bottom_row, R.drawable.keyboard_hide_on_button,
-                BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE));
-        screenCategory.add(
-                new RunnableSettingsItem(R.string.apps_sort_method,
-                        v -> DialogScreen.select(this, R.string.apps_sort_method,
-                                sharedPreferences.getBoolean(BPrefs.APPS_ONE_GRID_KEY, BPrefs.APPS_ONE_GRID_DEFAULT_VALUE) ? 0 : 1,
-                                index -> {
-                                    editor.putBoolean(BPrefs.APPS_ONE_GRID_KEY, index == 0).apply();
-                                    this.recreate();
-                                },
-                                R.string.one_grid, R.string.groups),
-                        R.drawable.apps_on_button));
-        screenCategory.add(new RunnableSettingsItem(R.string.status_bar_settings,
-                v -> DialogScreen.select(this, R.string.status_bar_settings,
-                        sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE),
-                        index -> {
-                            editor.putInt(BPrefs.STATUS_BAR_KEY, index).apply();
-                            this.recreate();
-                        },
-                        R.string.nowhere, R.string.only_home_screen, R.string.everywhere),
-                R.drawable.status_bar_on_button
-        ));
-        screenCategory.add(new SwitchSettingsItem(R.string.colorful, R.drawable.colors_on_button,
-                BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE));
-        screenCategory.add(new RunnableSettingsItem(R.string.language_settings, v -> showLanguageDialog(), R.drawable.translate_on_button) {
-            @Override
-            public CharSequence getSubtitle() {
-                final String code = sharedPreferences.getString(BPrefs.LANGUAGE_KEY, BPrefs.LANGUAGE_DEFAULT_VALUE);
-                if (code.isEmpty())
-                    return getText(R.string.system_default);
-                final java.util.Locale locale = java.util.Locale.forLanguageTag(code.replace("-r", "-"));
-                return locale.getDisplayName(locale);
-            }
-        });
-
-        convenienceCategory.add(new RunnableSettingsItem(R.string.accessibility_level, v -> startActivity(new Intent(this, AccessibilityLevelChangerActivity.class)), R.drawable.accessibility_on_button) {
-            @Override
-            public CharSequence getSubtitle() {
-                // same flag math as TutorialFragment2: 2=high, 1=medium, 0=regular
-                final int flag = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE)
-                        ? (sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE) ? 1 : 2) : 0;
-                return getText(flag == 2 ? R.string.high_level : flag == 1 ? R.string.medium_level : R.string.regular_level);
-            }
-        });
-        convenienceCategory.add(new SwitchSettingsItem(R.string.accidental_touches, R.drawable.blocked_on_button,
-                BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE));
-        convenienceCategory.add(
-                new RunnableSettingsItem(R.string.strong_hand,
-                        v -> DialogScreen.select(this, R.string.strong_hand,
-                                sharedPreferences.getBoolean(BPrefs.RIGHT_HANDED_KEY, BPrefs.RIGHT_HANDED_DEFAULT_VALUE) ? 1 : 0,
-                                index -> {
-                                    editor.putBoolean(BPrefs.RIGHT_HANDED_KEY, index == 1).apply();
-                                    this.recreate();
-                                },
-                                R.string.left_handed, R.string.right_handed),
-                        R.drawable.hand_on_button
-                )
-        );
-        convenienceCategory.add(new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button));
-        convenienceCategory.add(new SwitchSettingsItem(R.string.dialer_sounds, R.drawable.phone_on_button,
-                BPrefs.DIALER_SOUNDS_KEY, BPrefs.DIALER_SOUNDS_DEFAULT_VALUE));
-        convenienceCategory.add(new SwitchSettingsItem(R.string.low_battery_alert, R.drawable.low_battery_alert_on_button,
-                BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE));
-        convenienceCategory.add(new RunnableSettingsItem(R.string.time_changer, v -> startActivity(new Intent(this, PillTimeSetterActivity.class)), R.drawable.pill));
-
-        connectionCategory.add(new RunnableSettingsItem(R.string.wifi, v -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)), R.drawable.wifi_on_button));
-        connectionCategory.add(new RunnableSettingsItem(R.string.bluetooth, v -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)), R.drawable.bluetooth_on_button));
-        connectionCategory.add(new RunnableSettingsItem(R.string.airplane_mode, v -> startActivity(new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS)), R.drawable.airplane_mode_on_button));
-        connectionCategory.add(new RunnableSettingsItem(R.string.location, v -> startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)), R.drawable.location_on_button));
-
-        final NfcManager manager = (NfcManager) getSystemService(Context.NFC_SERVICE);
-        final NfcAdapter adapter = manager == null ? null : manager.getDefaultAdapter();
-        if (adapter != null)
-            connectionCategory.add(new RunnableSettingsItem(R.string.nfc, v -> {
-                try {
-                    startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
-                } catch (ActivityNotFoundException e) {
-                    Log.e(TAG, e.getMessage());
-                    e.printStackTrace();
-                    BaldToast.from(this).setText(R.string.setting_does_not_exist).setType(BaldToast.TYPE_ERROR).show();
-
-                }
-            }, R.drawable.nfc_on_button));
-        if (hasMultipleSims())
-            connectionCategory.add(new RunnableSettingsItem(R.string.dual_sim,
-                    v -> DialogScreen.select(this, R.string.dual_sim,
-                            sharedPreferences.getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE) ? 0 : 1,
-                            index -> {
-                                editor.putBoolean(BPrefs.DUAL_SIM_KEY, index == 0).apply();
-                                this.recreate();
-                            },
-                            R.string.show_options, R.string.use_default),
-                    R.drawable.sim_on_button
-            ));
-
-        if (!checkPermissions(this, -1))
-            systemCategory.add(
-                    new RunnableSettingsItem(R.string.grant_all_permissions,
-                            v -> startActivity(new Intent(this, PermissionActivity.class)),
-                            R.drawable.grant_all_permissions_on_button)
-            );
-        systemCategory.add(
-                new RunnableSettingsItem(R.string.set_home_screen,
-                        v -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this)
-                        , R.drawable.home_on_button)
-        );
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            systemCategory.add(
-                    new RunnableSettingsItem(R.string.use_granphone_for_calls,
-                            v -> CallManager.requestDefaultDialer(this)
-                            , R.drawable.phone_on_button)
-            );
-        systemCategory.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));
-        if (KioskManager.isDeviceOwner(this) && !KioskManager.isEnabled(this))
-            systemCategory.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogScreen.confirm(this,
-                    R.string.remove_device_owner,
-                    R.string.remove_device_owner_subtext,
-                    R.string.delete,
-                    () -> {
-                        KioskManager.removeDeviceOwner(this);
-                        this.recreate();
-                    }), R.drawable.blocked_on_button));
-        systemCategory.add(new RunnableSettingsItem(R.string.advanced_options, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)), R.drawable.settings_on_button));
-        systemCategory.add(
-                new RunnableSettingsItem(R.string.device_memory,
-                        v -> DialogScreen.info(this, R.string.device_memory, R.string.device_memory_subtext,
-                                buildMemoryStatusView(), R.string.understood)
-                        , R.drawable.storage_on_button)
-        );
-        systemCategory.add(
-                new RunnableSettingsItem(R.string.technical_information,
-                        v -> startActivity(new Intent(this, TechnicalInfoActivity.class)),
-                        R.drawable.tech_info_on_button)
-        );
-        if (BuildConfig.FLAVOR.equals("baldUpdates"))
-            systemCategory.add(
-                    new RunnableSettingsItem(R.string.check_for_updates,
-                            v -> UpdatingUtil.checkForUpdates(this, true),
-                            R.drawable.updates_on_button)
-            );
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (alarmVolume != null)
+            alarmVolume.stop();
     }
 
     /** pref 0..VOLUME_MAX -> real % of alarm stream (AlarmScreenActivity uses (v+6)/10, Android clamps at max). */
@@ -613,167 +118,60 @@ public class SettingsActivity extends BaldActivity {
         return Math.min((v + 6) * 10, 100) + "%";
     }
 
-    /** true when the device provably has 2+ active SIMs; no permission or API<22 = treated as single-SIM. */
-    private boolean hasMultipleSims() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1)
-            return false;
-        if (androidx.core.app.ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE)
-                != android.content.pm.PackageManager.PERMISSION_GRANTED)
-            return false;
-        try {
-            final android.telephony.SubscriptionManager sm = (android.telephony.SubscriptionManager)
-                    getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-            final List<android.telephony.SubscriptionInfo> list = sm == null ? null : sm.getActiveSubscriptionInfoList();
-            return list != null && list.size() > 1;
-        } catch (SecurityException e) {
-            return false;
-        }
-    }
-
-    private boolean goBack() {
-        if (currentCategory == mainCategory)
-            return false;
-        if (vibrator != null)
-            vibrator.vibrate(Const.vibetime);
-        final Category parent = currentCategory.parent;
-        newCategory(parent == null ? mainCategory : parent, false);
-        return true;
-    }
-
-    private void newCategory(Category category) {
-        newCategory(category, true);
-    }
-
-    private void newCategory(Category category, boolean forward) {
-        this.currentCategory = category;
-        updatePredictiveBack();
-        recyclerView.getAdapter().notifyDataSetChanged();
-        recyclerView.scrollToPosition(0);
-        // the fall-down stagger is a first-entry flourish — not per drill-in/out
-        if (!layoutAnimationPlayed && !AppUtils.animationsDisabled(this)) {
-            layoutAnimationPlayed = true;
-            recyclerView.scheduleLayoutAnimation();
-        }
-        baldTitleBar.setTitle(category.textResId);
-        recyclerView.animate().cancel();
-        if (AppUtils.animationsDisabled(this)) {
-            recyclerView.setTranslationX(0);
-            return;
-        }
-        final int dir = getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL ? -1 : 1;
-        recyclerView.setTranslationX(forward ? recyclerView.getWidth() * dir : -recyclerView.getWidth() * 0.3f * dir);
-        recyclerView.animate().translationX(0).setDuration(250).start();
-    }
-
     /**
-     * API 33+: on a sub-page the edge-back gesture drives the same in-app page
-     * turn as the mid-screen drag — the page tracks the gesture progress, then
-     * commits (or springs back) on release. At the root no callback exists, so
-     * the system plays its own predictive exit animation.
+     * The ± stepper + live ringtone preview behind the Alarm Volume row's dialog.
+     * One instance per host activity (settings page and home quick-settings share it);
+     * call {@link #stop()} from onStop().
      */
-    private void updatePredictiveBack() {
-        // mid-gesture the peek swaps categories — (un)registering now would
-        // tear the callback out from under the running edge gesture
-        if (peekInFlight)
-            return;
-        if (currentCategory == mainCategory) {
-            if (predictiveBackUnregister != null) {
-                predictiveBackUnregister.run();
-                predictiveBackUnregister = null;
-            }
-        } else if (predictiveBackUnregister == null) {
-            predictiveBackUnregister = PredictiveBackHelper.register(this, new PredictiveBackHelper.BackAnimation() {
-                @Override
-                public void onStarted() {
-                    peekInFlight = true;
-                    findViewById(android.R.id.content).animate().cancel();
-                }
-
-                @Override
-                public void onProgressed(float progress) {
-                    applyPeek(Math.abs(progress));
-                }
-
-                @Override
-                public void onInvoked() {
-                    onSwipeBackCommit();
-                }
-
-                @Override
-                public void onCancelled() {
-                    cancelPeek();
-                }
-            });
-        }
-    }
-
-    private View buildMemoryStatusView() {
-        final View view = LayoutInflater.from(this).inflate(R.layout.storage_status, null, false);
-
-        final StatFs statFs = new StatFs(Environment.getDataDirectory().getPath());
-        final long storageTotal = statFs.getTotalBytes();
-        final long storageFree = statFs.getAvailableBytes();
-        ((ProgressBar) view.findViewById(R.id.pb_storage))
-                .setProgress((int) ((storageTotal - storageFree) * 100 / storageTotal));
-        ((TextView) view.findViewById(R.id.tv_storage))
-                .setText(getString(R.string.free_of_total,
-                        Formatter.formatFileSize(this, storageFree),
-                        Formatter.formatFileSize(this, storageTotal)));
-
-        final ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getMemoryInfo(memoryInfo);
-        ((ProgressBar) view.findViewById(R.id.pb_ram))
-                .setProgress((int) ((memoryInfo.totalMem - memoryInfo.availMem) * 100 / memoryInfo.totalMem));
-        ((TextView) view.findViewById(R.id.tv_ram))
-                .setText(getString(R.string.free_of_total,
-                        Formatter.formatFileSize(this, memoryInfo.availMem),
-                        Formatter.formatFileSize(this, memoryInfo.totalMem)));
-        return view;
-    }
-
-    private void setupAlarmVolume() {
-        final SharedPreferences prefs = BPrefs.get(this);
-        final View control = LayoutInflater.from(this).inflate(R.layout.volume_buttons, null, false);
-        final TextView tvVolume = control.findViewById(R.id.tv_volume);
-        final Handler handler = new Handler();
-        final Runnable closeRingtone = () -> {
+    public static class AlarmVolumeControl {
+        public final View view;
+        private final SharedPreferences prefs;
+        private final TextView tvVolume;
+        private final Handler handler = new Handler();
+        private Ringtone ringtone;
+        private final Runnable closeRingtone = () -> {
             final Ringtone r = ringtone;
             if (r == null)
                 return;
             r.stop();
             ringtone = null;
         };
-        final Runnable refresh = () -> tvVolume.setText(
-                volumePercent(prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE)));
-        refresh.run();
-        final View.OnClickListener step = v -> {
-            final int volume = prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE)
-                    + (v.getId() == R.id.bt_volume_up ? 1 : -1);
-            if (volume < 0 || volume > VOLUME_MAX)
-                return;
-            prefs.edit().putInt(BPrefs.ALARM_VOLUME_KEY, volume).apply();
-            handler.removeCallbacks(closeRingtone);
+
+        public AlarmVolumeControl(Context context) {
+            prefs = BPrefs.get(context);
+            view = LayoutInflater.from(context).inflate(R.layout.volume_buttons, null, false);
+            tvVolume = view.findViewById(R.id.tv_volume);
+            refresh();
+            final View.OnClickListener step = v -> {
+                final int volume = prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE)
+                        + (v.getId() == R.id.bt_volume_up ? 1 : -1);
+                if (volume < 0 || volume > VOLUME_MAX)
+                    return;
+                prefs.edit().putInt(BPrefs.ALARM_VOLUME_KEY, volume).apply();
+                handler.removeCallbacks(closeRingtone);
+                closeRingtone.run();
+                ringtone = AlarmScreenActivity.getRingtone(view.getContext());
+                if (ringtone != null)
+                    ringtone.play();
+                handler.postDelayed(closeRingtone, 4 * Const.SECOND);
+                refresh();
+            };
+            view.findViewById(R.id.bt_volume_down).setOnClickListener(step);
+            view.findViewById(R.id.bt_volume_up).setOnClickListener(step);
+        }
+
+        public void stop() {
             closeRingtone.run();
-            ringtone = AlarmScreenActivity.getRingtone(this);
-            if (ringtone != null)
-                ringtone.play();
-            handler.postDelayed(closeRingtone, 4 * Const.SECOND);
-            refresh.run();
-        };
-        control.findViewById(R.id.bt_volume_down).setOnClickListener(step);
-        control.findViewById(R.id.bt_volume_up).setOnClickListener(step);
+        }
 
-        final SettingsItem alarmVolumeSettingsItem = new RunnableSettingsItem(R.string.alarm_volume,
-                v -> DialogScreen.info(this, R.string.alarm_volume, R.string.alarm_volume_subtext,
-                        control, R.string.back)
-                , R.drawable.clock_on_background) {
-            @Override
-            public CharSequence getSubtitle() {
-                return volumePercent(prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE));
-            }
-        };
-        mainCategory.add(alarmVolumeSettingsItem);
+        private void refresh() {
+            tvVolume.setText(subtitle(view.getContext()));
+        }
 
+        public static CharSequence subtitle(Context context) {
+            return volumePercent(BPrefs.get(context)
+                    .getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE));
+        }
     }
 
     public static CharSequence fontSizeName(Context context) {
@@ -819,228 +217,5 @@ public class SettingsActivity extends BaldActivity {
         } catch (Exception e) {
             return fallback;
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (!goBack())
-            super.onBackPressed();
-    }
-
-    public class SettingsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<SettingsRecyclerViewAdapter.ViewHolder> {
-        final LayoutInflater layoutInflater;
-
-        SettingsRecyclerViewAdapter() {
-            layoutInflater = (LayoutInflater) SettingsActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            return currentCategory.get(position) instanceof Header ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ViewHolder(layoutInflater.inflate(
-                    viewType == VIEW_TYPE_HEADER ? R.layout.settings_header : R.layout.settings_item, parent, false));
-        }
-
-        @Override
-        public int getItemCount() {
-            return currentCategory.size();
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            super.onBindViewHolder(holder, position);
-            holder.update(currentCategory.get(position));
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            TextView textView;
-            TextView subtitleView;
-            ImageView setting_icon;
-            ViewGroup trailing;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                textView = itemView.findViewById(R.id.tv_setting_name);
-                subtitleView = itemView.findViewById(R.id.tv_setting_subtitle);
-                setting_icon = itemView.findViewById(R.id.setting_icon);
-                trailing = itemView.findViewById(R.id.setting_trailing);
-            }
-
-            public void update(SettingsItem settingsItem) {
-                if (settingsItem instanceof Header) {
-                    ((TextView) this.itemView).setText(settingsItem.textResId);
-                    return;
-                }
-                this.textView.setText(settingsItem.textResId);
-                this.setting_icon.setImageResource(settingsItem.drawableResId);
-                final CharSequence subtitle = settingsItem.getSubtitle();
-                this.subtitleView.setVisibility(subtitle == null ? View.GONE : View.VISIBLE);
-                if (subtitle != null)
-                    this.subtitleView.setText(subtitle);
-                this.trailing.removeAllViews();
-                settingsItem.bindTrailing(this.trailing);
-                this.itemView.setOnClickListener(settingsItem);
-            }
-        }
-    }
-
-    //OOP
-    private static final int VIEW_TYPE_ITEM = 0;
-    private static final int VIEW_TYPE_HEADER = 1;
-
-    public abstract class SettingsItem implements View.OnClickListener {
-        public final @StringRes
-        int textResId;
-        public final @DrawableRes
-        int drawableResId;
-
-        protected SettingsItem(@StringRes int textResId, @DrawableRes int drawableResId) {
-            this.textResId = textResId;
-            this.drawableResId = drawableResId;
-        }
-
-        /** Current value shown under the title (e.g. "Large"); null = no subtitle. */
-        @Nullable
-        public CharSequence getSubtitle() {
-            return null;
-        }
-
-        /** Add a trailing widget (e.g. BaldSwitch) into the row's end slot. Default: none. */
-        public void bindTrailing(@NonNull ViewGroup container) {
-        }
-
-    }
-
-    /** Row with an inline {@link BaldSwitch} in the trailing slot; row tap toggles it. */
-    public class SwitchSettingsItem extends SettingsItem {
-        private final String key;
-        private final boolean defaultValue;
-        private BaldSwitch baldSwitch;
-
-        SwitchSettingsItem(@StringRes int textResId, @DrawableRes int drawableResId, String key, boolean defaultValue) {
-            super(textResId, drawableResId);
-            this.key = key;
-            this.defaultValue = defaultValue;
-        }
-
-        /** Hook for side effects beyond the pref write (e.g. updating the vibrator field). */
-        protected void onPrefChanged(boolean checked) {
-        }
-
-        private void apply(boolean checked) {
-            editor.putBoolean(key, checked).apply();
-            onPrefChanged(checked);
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (baldSwitch == null)
-                return;
-            // BaldSwitch.setChecked doesn't fire the change listener — apply manually.
-            baldSwitch.setChecked(!baldSwitch.isChecked());
-            apply(baldSwitch.isChecked());
-        }
-
-        @Override
-        public void bindTrailing(@NonNull ViewGroup container) {
-            final Context ctx = container.getContext();
-            baldSwitch = new BaldSwitch(ctx);
-            baldSwitch.setLayoutParams(new ViewGroup.LayoutParams(
-                    ctx.getResources().getDimensionPixelSize(R.dimen.switch_width),
-                    ctx.getResources().getDimensionPixelSize(R.dimen.switch_height)));
-            baldSwitch.setChecked(sharedPreferences.getBoolean(key, defaultValue));
-            baldSwitch.setOnChangeListener(this::apply);
-            container.addView(baldSwitch);
-        }
-    }
-
-    public class RunnableSettingsItem extends SettingsItem {
-        private final View.OnClickListener onClickListener;
-
-        RunnableSettingsItem(@StringRes int textResId, View.OnClickListener onClickListener, @DrawableRes int drawableResId) {
-            super(textResId, drawableResId);
-            this.onClickListener = onClickListener;
-        }
-
-        @Override
-        public void onClick(View v) {
-            try {
-                onClickListener.onClick(v);
-            } catch (ActivityNotFoundException e) {
-                Log.e(TAG, e.getMessage());
-                e.printStackTrace();
-                BaldToast.from(v.getContext()).setText(R.string.setting_does_not_exist).setType(BaldToast.TYPE_ERROR).show();
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage());
-                e.printStackTrace();
-                BaldToast.from(v.getContext()).setText(R.string.an_error_has_occurred).setType(BaldToast.TYPE_ERROR).show();
-                BaldToast.from(v.getContext()).setText(e.getMessage()).setType(BaldToast.TYPE_ERROR).show();
-            }
-        }
-    }
-
-    /** Non-clickable section label («Общие» / «Дополнительные»). */
-    public class Header extends SettingsItem {
-        Header(@StringRes int textResId) {
-            super(textResId, 0);
-        }
-
-        @Override
-        public void onClick(View v) {
-            // decorative
-        }
-    }
-
-    public class Category extends SettingsItem {
-        public final List<SettingsItem> settingsItemList;
-        public final int id;
-        private Category parent;
-
-        public Category(int stringRes, int drawableRes, int id) {
-            super(stringRes, drawableRes);
-            this.settingsItemList = new ArrayList<>();
-            this.id = id;
-        }
-
-        public void add(SettingsItem settingsItem) {
-            if (settingsItem instanceof Category)
-                ((Category) settingsItem).parent = this;
-            settingsItemList.add(settingsItem);
-        }
-
-        public SettingsItem get(int index) {
-            return settingsItemList.get(index);
-        }
-
-        public int size() {
-            return settingsItemList.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            newCategory(this);
-        }
-
-        @Override
-        public void bindTrailing(@NonNull ViewGroup container) {
-            // chevron marks drill-in rows (same idiom as system Settings)
-            final Context ctx = container.getContext();
-            final ImageView chevron = new ImageView(ctx);
-            final int size = ctx.getResources().getDimensionPixelSize(R.dimen.icon_sm);
-            chevron.setLayoutParams(new ViewGroup.LayoutParams(size, size));
-            chevron.setImageResource(R.drawable.chevron_end_on_button);
-            chevron.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-            container.addView(chevron);
-        }
-    }
-
-    @Override
-    protected int requiredPermissions() {
-        return PERMISSION_WRITE_SETTINGS;
     }
 }

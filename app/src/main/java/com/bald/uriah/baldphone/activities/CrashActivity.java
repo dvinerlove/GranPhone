@@ -57,11 +57,6 @@ public class CrashActivity extends BaldActivity {
     }
 
     @Override
-    protected boolean backDragEnabled() {
-        return false;
-    }
-
-    @Override
     protected int requiredPermissions() {
         return PERMISSION_NONE;
     }

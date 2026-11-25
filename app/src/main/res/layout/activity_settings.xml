@@ -14,6 +14,9 @@
   ~ limitations under the License.
   -->
 
+<!-- Shared by every SettingsPageActivity: title bar + one list + the PIN
+     overlay. Each category is a real activity, so the system owns all
+     transitions — nothing here is animated by hand. -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
@@ -33,6 +36,7 @@
         app:show_back="true" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
+        android:id="@+id/content_area"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,4 +55,17 @@
             android:layoutAnimation="@anim/layout_animation_fall_down"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </com.bald.uriah.baldphone.views.ScrollingHelper>
+
+    <!-- PIN entry is a page, not a modal: opaque overlay hides the list while
+         a pin is asked; the title bar (and its Back affordance) stays above -->
+    <include
+        android:id="@+id/pin_page"
+        layout="@layout/pin_page"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bald_title_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

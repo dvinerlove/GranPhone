@@ -43,12 +43,6 @@ public abstract class TimedBaldActivity extends BaldActivity {
 
     }
 
-    // alert-style screens (alarm, pill reminder) must not be swipe-dismissed
-    @Override
-    protected boolean backDragEnabled() {
-        return false;
-    }
-
     // back is intercepted (snooze), not a plain finish — callback needed on 33+
     @Override
     protected boolean backDispatchIntercepted() {
