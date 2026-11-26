@@ -357,6 +357,8 @@
 
     <string name="dialer_sounds">Звуки набора номера</string>
     <string name="block_unknown_calls">Блокировать звонки от незнакомых</string>
+    <string name="confirm_outgoing_calls">Подтверждать исходящие звонки</string>
+    <string name="confirm_call_title">Позвонить по этому номеру?</string>
     <string name="low_battery_alert">Предупреждение о низком заряде батареи</string>
 
     <string name="grant_all_permissions">Предоставить все разрешения</string>

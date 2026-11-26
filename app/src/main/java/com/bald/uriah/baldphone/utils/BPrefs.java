@@ -128,6 +128,9 @@ public final class BPrefs {
 
     public static final String BLOCK_UNKNOWN_CALLERS_KEY = "BLOCK_UNKNOWN_CALLERS_KEY";
     public static final boolean BLOCK_UNKNOWN_CALLERS_DEFAULT_VALUE = false;
+
+    public static final String CONFIRM_OUTGOING_CALLS_KEY = "CONFIRM_OUTGOING_CALLS_KEY";
+    public static final boolean CONFIRM_OUTGOING_CALLS_DEFAULT_VALUE = false;
     public static final SparseIntArray PILLS_HOUR_DEFAULTS = new SparseIntArray(3);
     public static final SparseIntArray PILLS_MINUTE_DEFAULTS = new SparseIntArray(3);
 

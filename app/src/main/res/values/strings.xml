@@ -364,6 +364,8 @@
 
     <string name="dialer_sounds">Dialer Sounds</string>
     <string name="block_unknown_calls">Block calls from strangers</string>
+    <string name="confirm_outgoing_calls">Confirm outgoing calls</string>
+    <string name="confirm_call_title">Call this number?</string>
     <string name="low_battery_alert">Low battery alert</string>
 
     <string name="grant_all_permissions">Grant All Permissions</string>

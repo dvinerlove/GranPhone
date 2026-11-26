@@ -26,12 +26,13 @@ import android.database.Cursor;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
+import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
@@ -76,28 +78,41 @@ public class DialerActivity extends BaldActivity {
     private StringBuilder number = new StringBuilder();
     private boolean playDialSounds;
 
+    // the actual transport: placeCall when default dialer, ACTION_CALL only for non-emergency
+    // numbers otherwise (a non-default dialer can't ACTION_CALL emergency numbers — those fall
+    // back to a prefilled system dialer). EXTRA_PHONE_ACCOUNT_HANDLE rides along only when the
+    // user explicitly picked a SIM.
     @SuppressLint("NewApi")
-    private static void call(final CharSequence number, final Context context, SubscriptionInfo subscriptionInfo) {
+    private static void call(final CharSequence number, final Context context, @Nullable SubscriptionInfo subscriptionInfo) {
+        final Uri uri = telUri(number);
         try {
-            if (subscriptionInfo == null) {
-                context.startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(("tel:" + number).replace("#", Uri.encode("#")))));
-            } else {
-                final TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-                final List<PhoneAccountHandle> list = telecomManager.getCallCapablePhoneAccounts();
-                for (final PhoneAccountHandle phoneAccountHandle : list) {
-                    if (phoneAccountHandle.getId().contains(subscriptionInfo.getIccId())) {
-                        context.startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(("tel:" + number).replace("#", Uri.encode("#"))))
-                                .putExtra("android.telecom.extra.PHONE_ACCOUNT_HANDLE", (Parcelable) phoneAccountHandle));
-                        return;
-                    }
+            PhoneAccountHandle accountHandle = null;
+            if (subscriptionInfo != null) {
+                accountHandle = resolveAccountHandle(context, subscriptionInfo);
+                // fail closed: the user explicitly picked a SIM — silently calling on the wrong one is worse than not calling
+                if (accountHandle == null) {
+                    BaldToast.error(context);
+                    return;
                 }
-                BaldToast.error(context);
-
+            }
+            if (CallManager.isDefaultDialer(context)) {
+                final TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+                final Bundle extras = new Bundle();
+                if (accountHandle != null)
+                    extras.putParcelable(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, accountHandle);
+                telecomManager.placeCall(uri, extras);
+            } else if (!isEmergencyNumber(number)) {
+                final Intent intent = new Intent(Intent.ACTION_CALL).setData(uri);
+                if (accountHandle != null)
+                    intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, accountHandle);
+                context.startActivity(intent);
+            } else {
+                context.startActivity(new Intent(Intent.ACTION_DIAL).setData(uri));
             }
         } catch (SecurityException e) {
+            // e.g. the default-dialer role was revoked between check and placeCall — crashing the launcher mid-call-attempt helps no one
             Log.e(TAG, e.getMessage());
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            BaldToast.error(context);
         }
 
     }
@@ -107,12 +122,38 @@ public class DialerActivity extends BaldActivity {
             DialogScreen.info(context, R.string.phone, R.string.enter_phone_number);
             return;
         }
+        // the optional confirmation never gates emergency numbers or directly=true (SOS);
+        // a snapshot — the dialer's StringBuilder keeps mutating underneath the dialog
+        if (!directly && !isEmergencyNumber(number)
+                && BPrefs.get(context).getBoolean(BPrefs.CONFIRM_OUTGOING_CALLS_KEY, BPrefs.CONFIRM_OUTGOING_CALLS_DEFAULT_VALUE)) {
+            final String snapshot = number.toString();
+            DialogScreen.confirm(context, context.getText(R.string.confirm_call_title), snapshot,
+                    R.string.call, () -> startCall(snapshot, context, false));
+            return;
+        }
+        startCall(number, context, directly);
+    }
+
+    // confirmation (if any) is already behind us here: dual-SIM picker first, actual call after
+    private static void startCall(final CharSequence number, final Context context, final boolean directly) {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1 && !directly && BPrefs.get(context).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)) {
+            // the custom picker needs API 23+ (getCallCapablePhoneAccounts) and READ_PHONE_STATE to
+            // enumerate subscriptions/accounts at all — without either, fall back to a plain call
+            // with no explicit account rather than crashing or fake-offering a choice
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && !directly
+                    && BPrefs.get(context).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)
+                    && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
                 final SubscriptionManager subscriptionManager = (SubscriptionManager) context
                         .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-                final List<SubscriptionInfo> activeSubscriptionInfoList = subscriptionManager.getActiveSubscriptionInfoList();
-                if (activeSubscriptionInfoList != null && (activeSubscriptionInfoList.size() > 1)) {
+                final List<SubscriptionInfo> activeSubscriptionInfoList;
+                try {
+                    activeSubscriptionInfoList = subscriptionManager.getActiveSubscriptionInfoList();
+                } catch (SecurityException e) {
+                    // permission revoked between check and use — degrade to a plain call, no picker
+                    call(number, context, null);
+                    return;
+                }
+                if (activeSubscriptionInfoList != null && (activeSubscriptionInfoList.size() > 1) && subscriptionsResolvable(activeSubscriptionInfoList)) {
                     final CharSequence[] simNames = new CharSequence[activeSubscriptionInfoList.size()];
                     for (int i = 0; i < activeSubscriptionInfoList.size(); i++) {
                         simNames[i] = activeSubscriptionInfoList.get(i).getDisplayName();
@@ -126,8 +167,64 @@ public class DialerActivity extends BaldActivity {
             } else
                 call(number, context, null);
         } else
-            BaldToast.error(context);
+            // no direct-call permission at all — hand the prefilled number to the system dialer
+            context.startActivity(new Intent(Intent.ACTION_DIAL).setData(telUri(number)));
 
+    }
+
+    /**
+     * Whether a picked {@link SubscriptionInfo} can be mapped back to a {@link PhoneAccountHandle}
+     * on this build. API 30+ has {@code TelephonyManager.getSubscriptionId(handle)}; below that the
+     * ICCID match is the only mapping, and since API 29 SPL 2021-04-05 {@code getIccId()} is redacted
+     * to "" for unprivileged apps — and {@code contains("")} matches the first account, i.e. silently
+     * the wrong SIM. On patched API 29 there is no reliable public mapping at all: no picker.
+     */
+    private static boolean subscriptionsResolvable(final List<SubscriptionInfo> subscriptionInfoList) {
+        if (android.os.Build.VERSION.SDK_INT != android.os.Build.VERSION_CODES.Q)
+            return true;
+        for (final SubscriptionInfo subscriptionInfo : subscriptionInfoList) {
+            final String iccId = subscriptionInfo.getIccId();
+            if (iccId == null || iccId.isEmpty())
+                return false;
+        }
+        return true;
+    }
+
+    // maps the picked subscription to its phone account; null when unmappable — callers must fail
+    // closed, never default to the first account. READ_PHONE_STATE is guaranteed by the picker gate;
+    // a race is caught by the caller's SecurityException handler.
+    @Nullable
+    @SuppressLint("NewApi")
+    private static PhoneAccountHandle resolveAccountHandle(final Context context, final SubscriptionInfo subscriptionInfo) {
+        final TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        final List<PhoneAccountHandle> list = telecomManager.getCallCapablePhoneAccounts();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            final TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (telephonyManager != null) {
+                for (final PhoneAccountHandle phoneAccountHandle : list) {
+                    if (telephonyManager.getSubscriptionId(phoneAccountHandle) == subscriptionInfo.getSubscriptionId())
+                        return phoneAccountHandle;
+                }
+            }
+        }
+        // legacy mapping, only meaningful with a visible ICCID — an empty one would contains()-match the first account
+        final String iccId = subscriptionInfo.getIccId();
+        if (iccId != null && !iccId.isEmpty()) {
+            for (final PhoneAccountHandle phoneAccountHandle : list) {
+                if (phoneAccountHandle.getId().contains(iccId))
+                    return phoneAccountHandle;
+            }
+        }
+        return null;
+    }
+
+    private static Uri telUri(final CharSequence number) {
+        return Uri.parse(("tel:" + number).replace("#", Uri.encode("#")));
+    }
+
+    @SuppressWarnings("deprecation") // TelephonyManager.isEmergencyNumber needs API 29+; this one still delegates to the same radio/network check on every version
+    private static boolean isEmergencyNumber(final CharSequence number) {
+        return PhoneNumberUtils.isEmergencyNumber(number.toString());
     }
 
     // blocks empty/too-short input and MMI codes ('#', '*') that would surface a foreign system dialog

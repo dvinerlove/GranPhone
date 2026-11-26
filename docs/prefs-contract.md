@@ -38,6 +38,7 @@ Source of truth: `app/src/main/java/com/bald/uriah/baldphone/utils/BPrefs.java`.
 | `LOW_BATTERY_ALERT_KEY` | boolean | `true` | Low-battery alert (`BatteryView`). |
 | `DIALER_SOUNDS_KEY` | boolean | `true` | Dial-pad tones. |
 | `BLOCK_UNKNOWN_CALLERS_KEY` | boolean | `false` | Contacts-only mode: ringing calls from numbers not in contacts are declined in `BaldInCallService.shouldBlock`; logged as rejected, visible in Recent. |
+| `CONFIRM_OUTGOING_CALLS_KEY` | boolean | `false` | Optional confirmation dialog before outgoing calls in `DialerActivity.call` (confirmation → SIM picker → call). Never applies to emergency numbers or `directly=true`. |
 | `DUAL_SIM_KEY` | boolean | `false` | `true` = offer SIM choice when calling. |
 | `NOTE_KEY` | String | none | The home-screen note text. |
 | `AFTER_TUTORIAL_KEY` | boolean | `false` | Tutorial completed; written by `TutorialActivity`/`TutorialFragment4`, read by `HomeScreenActivity`. |
