@@ -536,6 +536,6 @@ public class AddContactActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_WRITE_CONTACTS | PERMISSION_READ_CONTACTS | PERMISSION_WRITE_EXTERNAL_STORAGE;
+        return PERMISSION_WRITE_CONTACTS | PERMISSION_READ_CONTACTS | PERMISSION_MEDIA_IMAGES;
     }
 }

@@ -19,6 +19,8 @@ package com.bald.uriah.baldphone;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.bald.uriah.baldphone.activities.UpdatesActivity;
@@ -38,6 +40,11 @@ public class BaldPhone extends Application {
     public void onCreate() {
         AppUtils.logImportant("GranPhone was started!");
         super.onCreate();
+        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= 35)
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectUnsafeIntentLaunch()
+                    .penaltyLog()
+                    .build());
         JodaTimeAndroid.init(this);
         AlarmScheduler.reStartAlarms(this);
         ReminderScheduler.reStartReminders(this);

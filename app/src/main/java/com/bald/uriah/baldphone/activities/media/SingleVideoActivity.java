@@ -57,6 +57,11 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
     }
 
     @Override
+    protected int requiredPermissions() {
+        return PERMISSION_MEDIA_VIDEO;
+    }
+
+    @Override
     protected void genListeners() {
         super.genListeners();
         viewPagerHolder.getViewPager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -84,25 +89,24 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
         }
 
         @Override
-        protected void delete(Activity activity) {
+        protected Uri getUri() {
             final int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri deleteUri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
+            return ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
+        }
+
+        @Override
+        protected void delete(Activity activity) {
             activity.getContentResolver().delete(
                     EXTERNAL,
                     MediaStore.MediaColumns.DATA + "=?",
-                    new String[]{getPath(deleteUri)});
+                    new String[]{getPath(getUri())});
 
         }
 
         @Override
         protected void deletePost29(Activity activity) throws SecurityException {
-            final int id =
-                    cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri deleteUri =
-                    ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
-
             activity.getContentResolver().delete(
-                    deleteUri,
+                    getUri(),
                     null,
                     null);
         }
@@ -131,11 +135,9 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
 
         @Override
         protected Intent share(Activity activity, Cursor cursor) {
-            final int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri uri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
             return new Intent(Intent.ACTION_SEND)
-                    .setTypeAndNormalize("image/*")
-                    .putExtra(Intent.EXTRA_STREAM, uri);
+                    .setTypeAndNormalize("video/*")
+                    .putExtra(Intent.EXTRA_STREAM, getUri());
         }
 
         @Override

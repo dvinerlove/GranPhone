@@ -16,6 +16,7 @@
 
 package com.bald.uriah.baldphone.activities.media;
 
+import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -158,7 +159,11 @@ public abstract class MediaScrollingActivity extends BaldActivity {
                 if (mediaChoose) {
                     cursor.moveToPosition(getAdapterPosition());
                     final Uri regularUri = getData(cursor);
-                    setResult(RESULT_OK, new Intent().setData(regularUri));
+                    final Intent result = new Intent()
+                            .setData(regularUri)
+                            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    result.setClipData(ClipData.newRawUri("", regularUri));
+                    setResult(RESULT_OK, result);
                     finish();
                 } else {
                     final Intent intent =
@@ -171,8 +176,4 @@ public abstract class MediaScrollingActivity extends BaldActivity {
 
     }
 
-    @Override
-    protected int requiredPermissions() {
-        return PERMISSION_WRITE_EXTERNAL_STORAGE;
-    }
 }

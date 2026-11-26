@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -65,6 +66,8 @@ public final class KioskManager {
             Manifest.permission.WRITE_CALL_LOG,
             Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_VIDEO,
     };
 
     private KioskManager() {
@@ -259,6 +262,14 @@ public final class KioskManager {
         allowed.addAll(packagesHandling(pm, new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)));
         allowed.addAll(packagesHandling(pm, new Intent(MediaStore.ACTION_IMAGE_CAPTURE)));
         allowed.addAll(packagesHandling(pm, new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)));
+        allowed.addAll(packagesHandling(pm, new Intent(MediaStore.ACTION_VIDEO_CAPTURE)));
+        final ProviderInfo mediaProvider = pm.resolveContentProvider(MediaStore.AUTHORITY, 0);
+        if (mediaProvider != null)
+            allowed.add(mediaProvider.packageName);
+        else {
+            allowed.add("com.android.providers.media");
+            allowed.add("com.google.android.providers.media");
+        }
         allowed.addAll(packagesHandling(pm, new Intent("android.content.pm.action.REQUEST_PERMISSIONS")));
         final String smsPackage = Telephony.Sms.getDefaultSmsPackage(context);
         if (smsPackage != null)

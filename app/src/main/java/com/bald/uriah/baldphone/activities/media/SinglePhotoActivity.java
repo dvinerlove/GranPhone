@@ -60,6 +60,11 @@ public class SinglePhotoActivity extends SingleMediaActivity implements Constant
         return getText(R.string.photo);
     }
 
+    @Override
+    protected int requiredPermissions() {
+        return PERMISSION_MEDIA_IMAGES;
+    }
+
     private static class PhotoPagerAdapter extends MediaPagerAdapter {
         private static final Uri EXTERNAL = MediaStore.Files.getContentUri("external");
 
@@ -67,31 +72,28 @@ public class SinglePhotoActivity extends SingleMediaActivity implements Constant
             super(activity);
         }
 
+        @Override
+        protected Uri getUri() {
+            final int id =
+                    cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
+            return ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
+        }
+
         @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         protected void deletePost29(Activity activity) throws SecurityException {
-            final int id =
-                    cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri deleteUri =
-                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
-
             activity.getContentResolver().delete(
-                    deleteUri,
+                    getUri(),
                     null,
                     null);
         }
 
         @Override
         protected void delete(Activity activity) {
-            final int id =
-                    cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri deleteUri =
-                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
-
             activity.getContentResolver().delete(
                     EXTERNAL,
                     MediaStore.MediaColumns.DATA + "=?",
-                    new String[]{getPath(deleteUri)});
+                    new String[]{getPath(getUri())});
         }
 
         private String getPath(Uri uri) {
@@ -104,11 +106,9 @@ public class SinglePhotoActivity extends SingleMediaActivity implements Constant
 
         @Override
         protected Intent share(Activity activity, Cursor cursor) {
-            final int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
             return new Intent(Intent.ACTION_SEND)
                     .setTypeAndNormalize("image/*")
-                    .putExtra(Intent.EXTRA_STREAM, uri);
+                    .putExtra(Intent.EXTRA_STREAM, getUri());
         }
 
         @Override

@@ -23,9 +23,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -41,6 +43,8 @@ import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ViewPagerHolder;
+
+import java.util.Collections;
 
 /**
  * Parent activity for {@link SinglePhotoActivity} and {@link SingleVideoActivity}.
@@ -110,7 +114,8 @@ public abstract class SingleMediaActivity extends BaldActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ALLOW_PHOTO_CODE && resultCode == RESULT_OK) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                mediaPagerAdapter.deletePost29(this);
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q)
+                    mediaPagerAdapter.deletePost29(this);
                 this.setResult(SHOULD_REFRESH);
                 this.finish();
             }
@@ -132,9 +137,25 @@ public abstract class SingleMediaActivity extends BaldActivity {
         @RequiresApi(api = Build.VERSION_CODES.Q)
         protected abstract void deletePost29(Activity activity) throws SecurityException;
 
+        protected abstract Uri getUri();
+
         private void delete(int position) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                cursor.moveToPosition(position);
+            cursor.moveToPosition(position);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                try {
+                    activity.startIntentSenderForResult(
+                            MediaStore.createTrashRequest(getContentResolver(), Collections.singletonList(getUri()), true).getIntentSender(),
+                            ALLOW_PHOTO_CODE,
+                            null,
+                            0,
+                            0,
+                            0);
+                } catch (IntentSender.SendIntentException | SecurityException | IllegalArgumentException e) {
+                    Log.e(TAG, AppUtils.str(e.getMessage()));
+                    e.printStackTrace();
+                    BaldToast.error(activity);
+                }
+            } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
                 try {
                     deletePost29(activity);
                     activity.setResult(SHOULD_REFRESH);
@@ -210,8 +231,4 @@ public abstract class SingleMediaActivity extends BaldActivity {
         }
     }
 
-    @Override
-    protected int requiredPermissions() {
-        return PERMISSION_WRITE_EXTERNAL_STORAGE;
-    }
 }

@@ -412,6 +412,11 @@ public class HomeScreenActivity extends BaldActivity {
         }
     }
 
+    public void requestCameraPermission() {
+        startActivity(new Intent(this, PermissionActivity.class)
+                .putExtra(PermissionActivity.EXTRA_REQUIRED_PERMISSIONS, PERMISSION_CAMERA));
+    }
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);

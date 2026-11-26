@@ -50,6 +50,7 @@ import static android.Manifest.permission.READ_CALL_LOG;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.READ_MEDIA_IMAGES;
 import static android.Manifest.permission.READ_MEDIA_VIDEO;
+import static android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_CALL_LOG;
 import static android.Manifest.permission.WRITE_CONTACTS;
@@ -206,13 +207,29 @@ public class PermissionActivity extends BaldActivity {
                                     ACTION_MANAGE_UNKNOWN_APP_SOURCES).setData(Uri.parse(String.format("package:%s", getPackageName()))), REQUEST_CODES[2]), getString(R.string.install_updates), getString(R.string.install_updates_subtext)));
             }
         }
-        if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0) {
+        if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0
+                && Build.VERSION.SDK_INT < 33) {
+            totalSteps++;
+            if (ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        new SimplePermissionItem(getString(R.string.write_external_storage), getString(R.string.external_storage_subtext), WRITE_EXTERNAL_STORAGE));
+        }
+        if ((requiredPermissions & (PERMISSION_MEDIA_IMAGES | PERMISSION_MEDIA_VIDEO)) != 0) {
             totalSteps++;
             if (Build.VERSION.SDK_INT >= 33) {
-                if (ActivityCompat.checkSelfPermission(this, READ_MEDIA_IMAGES) != PERMISSION_GRANTED
-                        || ActivityCompat.checkSelfPermission(this, READ_MEDIA_VIDEO) != PERMISSION_GRANTED)
+                final List<String> permissions = new ArrayList<>(2);
+                if ((requiredPermissions & PERMISSION_MEDIA_IMAGES) != 0
+                        && !mediaPermissionGranted(this, READ_MEDIA_IMAGES))
+                    permissions.add(READ_MEDIA_IMAGES);
+                if ((requiredPermissions & PERMISSION_MEDIA_VIDEO) != 0
+                        && !mediaPermissionGranted(this, READ_MEDIA_VIDEO))
+                    permissions.add(READ_MEDIA_VIDEO);
+                if (!permissions.isEmpty()) {
+                    if (Build.VERSION.SDK_INT >= 34)
+                        permissions.add(READ_MEDIA_VISUAL_USER_SELECTED);
                     permissionItemList.add(
-                            new SimplePermissionItem(getString(R.string.allow_media_access), getString(R.string.allow_media_access_subtext), READ_MEDIA_IMAGES, READ_MEDIA_VIDEO));
+                            new SimplePermissionItem(getString(R.string.allow_media_access), getString(R.string.allow_media_access_subtext), permissions.toArray(new String[0])));
+                }
             } else if (ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
                 permissionItemList.add(
                         new SimplePermissionItem(getString(R.string.write_external_storage), getString(R.string.external_storage_subtext), WRITE_EXTERNAL_STORAGE));

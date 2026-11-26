@@ -16,19 +16,20 @@
 
 package com.bald.uriah.baldphone.views.home;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Telephony;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
@@ -39,6 +40,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bald.uriah.baldphone.BuildConfig;
@@ -244,19 +246,24 @@ public class HomePage1 extends HomeView {
     }
 
     private Intent getCameraIntent() {
-        final Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        final ResolveInfo resolveInfo = activity.getPackageManager().resolveActivity(intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
-        if (resolveInfo == null)
-            return null;
-        final ActivityInfo activityInfo = resolveInfo.activityInfo;
-        final ComponentName name = new ComponentName(activityInfo.applicationInfo.packageName, activityInfo.name);
-        return new Intent(Intent.ACTION_MAIN)
-                .addCategory(Intent.CATEGORY_LAUNCHER)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                        Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
-                .setComponent(name);
+        for (final String action : new String[]{
+                MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA,
+                MediaStore.ACTION_IMAGE_CAPTURE,
+                MediaStore.ACTION_VIDEO_CAPTURE}) {
+            final Intent intent = new Intent(action);
+            if (activity.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null)
+                return intent;
+        }
+        return null;
+    }
 
+    private boolean cameraPermissionGranted() {
+        return ActivityCompat.checkSelfPermission(homeScreen, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private boolean captureIntent(Intent intent) {
+        return MediaStore.ACTION_IMAGE_CAPTURE.equals(intent.getAction())
+                || MediaStore.ACTION_VIDEO_CAPTURE.equals(intent.getAction());
     }
 
     private void seedHiddenTiles() {
@@ -291,15 +298,18 @@ public class HomePage1 extends HomeView {
                     BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_messages_app).show();
                     return;
                 }
-                final ResolveInfo resolveInfo =
-                        homeScreen.getPackageManager()
-                                .queryIntentActivities(
-                                        new Intent("android.intent.action.MAIN", null)
-                                                .setPackage(smsPackage)
-                                        , 0)
-                                .iterator()
-                                .next();
-                AppUtils.startComponentName(homeScreen, new ComponentName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name));
+                final Intent launchIntent = homeScreen.getPackageManager().getLaunchIntentForPackage(smsPackage);
+                if (launchIntent != null) {
+                    homeScreen.startActivity(launchIntent);
+                    return;
+                }
+                final Intent sendIntent = new Intent(Intent.ACTION_SENDTO)
+                        .setData(Uri.parse("smsto:"))
+                        .setPackage(smsPackage);
+                if (homeScreen.getPackageManager().resolveActivity(sendIntent, PackageManager.MATCH_DEFAULT_ONLY) != null)
+                    homeScreen.startActivity(sendIntent);
+                else
+                    BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_messages_app).show();
 
             } catch (Exception e) {
                 BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
@@ -307,11 +317,22 @@ public class HomePage1 extends HomeView {
         });
         setupButton(BPrefs.CUSTOM_PHOTOS_KEY, bt_photos, v -> homeScreen.startActivity(new Intent(homeScreen, PhotosActivity.class)));
         setupButton(BPrefs.CUSTOM_CAMERA_KEY, bt_camera, v -> {
-            final Intent intent = getCameraIntent();
-            if (intent != null)
-                homeScreen.startActivity(intent);
-            else
+            try {
+                final Intent intent = getCameraIntent();
+                if (intent == null)
+                    BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_camera_app).show();
+                else if (captureIntent(intent) && !cameraPermissionGranted())
+                    homeScreen.requestCameraPermission();
+                else
+                    homeScreen.startActivity(intent);
+            } catch (SecurityException e) {
+                if (!cameraPermissionGranted())
+                    homeScreen.requestCameraPermission();
+                else
+                    BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
+            } catch (ActivityNotFoundException e) {
                 BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_camera_app).show();
+            }
         });
         setupButton(BPrefs.CUSTOM_VIDEOS_KEY, bt_videos, v -> homeScreen.startActivity(new Intent(homeScreen, VideosActivity.class)));
         setupButton(BPrefs.CUSTOM_PILLS_KEY, bt_reminders, v -> homeScreen.startActivity(new Intent(homeScreen, PillsActivity.class)));

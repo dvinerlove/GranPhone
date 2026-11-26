@@ -21,14 +21,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -61,6 +64,7 @@ import static android.Manifest.permission.POST_NOTIFICATIONS;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.READ_MEDIA_IMAGES;
 import static android.Manifest.permission.READ_MEDIA_VIDEO;
+import static android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_CALL_LOG;
 import static android.Manifest.permission.WRITE_CONTACTS;
@@ -90,7 +94,9 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
             PERMISSION_NOTIFICATION_LISTENER = 0b100000000 | PERMISSION_WRITE_SETTINGS,
             PERMISSION_REQUEST_INSTALL_PACKAGES = 0b1000000000,
             PERMISSION_SYSTEM_ALERT_WINDOW = 0b1000000000000,
-            PERMISSION_EXACT_ALARM = 0b100000000000000;
+            PERMISSION_EXACT_ALARM = 0b100000000000000,
+            PERMISSION_MEDIA_IMAGES = 0b1000000000000000,
+            PERMISSION_MEDIA_VIDEO = 0b10000000000000000;
 
     public boolean testing = false;
     public boolean colorful;
@@ -187,11 +193,18 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
             if (ActivityCompat.checkSelfPermission(activity, CAMERA) != PERMISSION_GRANTED)
                 return false;
         }
-        if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0) {
-            // WRITE_EXTERNAL_STORAGE is a no-op since API 33; media reads need the granular perms there
+        // WRITE_EXTERNAL_STORAGE is a no-op since API 33; media-reading callers use the granular bits.
+        if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0
+                && Build.VERSION.SDK_INT < 33
+                && ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+            return false;
+        if ((requiredPermissions & (PERMISSION_MEDIA_IMAGES | PERMISSION_MEDIA_VIDEO)) != 0) {
             if (Build.VERSION.SDK_INT >= 33) {
-                if (ActivityCompat.checkSelfPermission(activity, READ_MEDIA_IMAGES) != PERMISSION_GRANTED
-                        || ActivityCompat.checkSelfPermission(activity, READ_MEDIA_VIDEO) != PERMISSION_GRANTED)
+                if ((requiredPermissions & PERMISSION_MEDIA_IMAGES) != 0
+                        && !mediaPermissionGranted(activity, READ_MEDIA_IMAGES))
+                    return false;
+                if ((requiredPermissions & PERMISSION_MEDIA_VIDEO) != 0
+                        && !mediaPermissionGranted(activity, READ_MEDIA_VIDEO))
                     return false;
             } else if (ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
                 return false;
@@ -236,6 +249,24 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     static boolean notificationListenerGranted(BaldActivity activity) {
         final String listeners = Settings.Secure.getString(activity.getContentResolver(), "enabled_notification_listeners");
         return listeners != null && listeners.contains(activity.getApplicationContext().getPackageName());
+    }
+
+    static boolean mediaPermissionGranted(BaldActivity activity, String mediaPermission) {
+        if (ActivityCompat.checkSelfPermission(activity, mediaPermission) == PERMISSION_GRANTED)
+            return true;
+        if (Build.VERSION.SDK_INT < 34
+                || ActivityCompat.checkSelfPermission(activity, READ_MEDIA_VISUAL_USER_SELECTED) != PERMISSION_GRANTED)
+            return false;
+        // USER_SELECTED is shared by photos and videos; a visible row is the only type-specific evidence MediaStore exposes.
+        final Uri collection = READ_MEDIA_IMAGES.equals(mediaPermission)
+                ? MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                : MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+        try (Cursor cursor = activity.getContentResolver().query(collection,
+                new String[]{MediaStore.MediaColumns._ID}, null, null, null)) {
+            return cursor != null && cursor.moveToFirst();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

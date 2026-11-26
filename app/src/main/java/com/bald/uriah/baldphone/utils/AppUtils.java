@@ -18,6 +18,7 @@ package com.bald.uriah.baldphone.utils;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -84,7 +85,27 @@ public class AppUtils {
     }
 
     public static void share(@NonNull final Context context, @NonNull final Intent intent) {
+        grantStreamRead(intent);
         context.startActivity(new Intent(context, ShareActivity.class).putExtra(ShareActivity.EXTRA_SHARABLE_URI, intent));
+    }
+
+    private static void grantStreamRead(@NonNull final Intent intent) {
+        if (Intent.ACTION_SEND.equals(intent.getAction())) {
+            final Uri stream = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if (stream == null)
+                return;
+            intent.setClipData(ClipData.newRawUri("", stream));
+        } else if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+            final ArrayList<Uri> streams = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+            if (streams == null || streams.isEmpty())
+                return;
+            final ClipData clipData = ClipData.newRawUri("", streams.get(0));
+            for (int i = 1; i < streams.size(); i++)
+                clipData.addItem(new ClipData.Item(streams.get(i)));
+            intent.setClipData(clipData);
+        } else
+            return;
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
     }
 
     public static void shareGranPhone(@NonNull final BaldActivity baldActivity) {
