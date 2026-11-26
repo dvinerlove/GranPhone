@@ -78,3 +78,8 @@ Full tour on `emulator-5554` (API 29, 480x800, ru locale), screenshots
 - Pre-existing (not wave-1): the kiosk dialog's `adb shell dpm
   set-device-owner` text still names `com.bald.uriah.baldphone` instead of
   `com.granphone.launcher` — stale string resource, same as wave 0.
+
+## Wave 0 toolchain smoke (2026-11-27)
+
+- Installed `app-fDroid-debug.apk` built with Gradle 8.13 / AGP 8.13.2 / JDK 17 on `emulator-5554` (API 23). Granted contacts/storage/phone/call-log runtime permissions, then cold-opened Home, Apps, Contacts, Photos, Alarms and Settings sequentially.
+- Result: no `FATAL EXCEPTION`, `NoClassDefFoundError`, `ClassNotFoundException`, or `java.util.function` failure in logcat. This is a smoke check only; full interaction/permission matrix was not run. API 21 emulator was not available in this session.
