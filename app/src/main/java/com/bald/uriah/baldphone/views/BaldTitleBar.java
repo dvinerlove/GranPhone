@@ -77,6 +77,9 @@ public class BaldTitleBar extends LinearLayout {
         this.context = context;
         setOrientation(LinearLayout.HORIZONTAL);
         setLayoutDirection(LAYOUT_DIRECTION_LTR);
+        // children are all match_parent in a wrap_content bar, so the height
+        // collapsed onto the text line (~42dp) — enforce the spec height
+        setMinimumHeight(context.getResources().getDimensionPixelSize(R.dimen.title_bar_height));
 
         setBackgroundResource(R.drawable.btn_enabled_rectangle);
 
