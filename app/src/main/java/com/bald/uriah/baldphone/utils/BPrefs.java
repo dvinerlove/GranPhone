@@ -125,6 +125,9 @@ public final class BPrefs {
 
     public static final String ALARM_VOLUME_KEY = "ALARM_VOLUME_KEY";
     public static final int ALARM_VOLUME_DEFAULT_VALUE = 4;
+
+    public static final String BLOCK_UNKNOWN_CALLERS_KEY = "BLOCK_UNKNOWN_CALLERS_KEY";
+    public static final boolean BLOCK_UNKNOWN_CALLERS_DEFAULT_VALUE = false;
     public static final SparseIntArray PILLS_HOUR_DEFAULTS = new SparseIntArray(3);
     public static final SparseIntArray PILLS_MINUTE_DEFAULTS = new SparseIntArray(3);
 

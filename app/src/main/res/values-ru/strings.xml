@@ -356,6 +356,7 @@
 
 
     <string name="dialer_sounds">Звуки набора номера</string>
+    <string name="block_unknown_calls">Блокировать звонки от незнакомых</string>
     <string name="low_battery_alert">Предупреждение о низком заряде батареи</string>
 
     <string name="grant_all_permissions">Предоставить все разрешения</string>

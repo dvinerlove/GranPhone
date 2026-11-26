@@ -363,6 +363,7 @@
 
 
     <string name="dialer_sounds">Dialer Sounds</string>
+    <string name="block_unknown_calls">Block calls from strangers</string>
     <string name="low_battery_alert">Low battery alert</string>
 
     <string name="grant_all_permissions">Grant All Permissions</string>

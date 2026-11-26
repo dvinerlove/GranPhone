@@ -59,6 +59,8 @@ public class ConvenienceSettingsActivity extends SettingsPageActivity {
         items.add(new RunnableSettingsItem(R.string.set_keyboard, v -> startActivity(new Intent(this, KeyboardChangerActivity.class)), R.drawable.keyboard_on_button));
         items.add(new SwitchSettingsItem(R.string.dialer_sounds, R.drawable.phone_on_button,
                 BPrefs.DIALER_SOUNDS_KEY, BPrefs.DIALER_SOUNDS_DEFAULT_VALUE));
+        items.add(new SwitchSettingsItem(R.string.block_unknown_calls, R.drawable.blocked_on_button,
+                BPrefs.BLOCK_UNKNOWN_CALLERS_KEY, BPrefs.BLOCK_UNKNOWN_CALLERS_DEFAULT_VALUE));
         items.add(new SwitchSettingsItem(R.string.low_battery_alert, R.drawable.low_battery_alert_on_button,
                 BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE));
         items.add(new RunnableSettingsItem(R.string.time_changer, v -> startActivity(new Intent(this, PillTimeSetterActivity.class)), R.drawable.pill));

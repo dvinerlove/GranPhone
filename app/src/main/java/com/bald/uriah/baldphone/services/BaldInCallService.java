@@ -14,11 +14,16 @@
 
 package com.bald.uriah.baldphone.services;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
@@ -28,6 +33,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.CallActivity;
+import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.CallManager;
 
 /**
@@ -62,12 +68,36 @@ public class BaldInCallService extends InCallService {
     @Override
     public void onCallAdded(Call call) {
         super.onCallAdded(call);
+        if (shouldBlock(call)) {
+            // reject() (not disconnect()) marks the call declined in telecom, so the
+            // system logs it as a rejected/missed call — visible in Recent
+            call.reject(false, null);
+            return;
+        }
         CallManager.addCall(call);
         try {
             // InCallService is allowed to start activities from the background.
             startActivity(CallActivity.newIntent(this));
         } catch (Exception e) {
             Log.e(TAG, "could not open the call screen", e);
+        }
+    }
+
+    /** Contacts-only mode: a ringing call from a number not in contacts gets declined. */
+    private boolean shouldBlock(Call call) {
+        if (!BPrefs.get(this).getBoolean(BPrefs.BLOCK_UNKNOWN_CALLERS_KEY, BPrefs.BLOCK_UNKNOWN_CALLERS_DEFAULT_VALUE))
+            return false;
+        if (call.getState() != Call.STATE_RINGING)
+            return false;
+        if (checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)
+            return false; // can't verify who calls — better let it ring than block everyone
+        final Uri handle = call.getDetails().getHandle();
+        // hidden/private numbers aren't in anyone's contacts — still blocked
+        final String number = handle == null ? "" : handle.getSchemeSpecificPart();
+        try (Cursor cursor = getContentResolver().query(
+                Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number)),
+                new String[]{ContactsContract.PhoneLookup._ID}, null, null, null)) {
+            return cursor == null || !cursor.moveToFirst();
         }
     }
 
