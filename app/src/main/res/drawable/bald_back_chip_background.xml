@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Back chip in the title bar: a visibly pressable tonal segment, not a
+     ghost label — elderly users must recognize the control before touching
+     it. Tonal fill = brand_pressed token; pressed state darkens 12% on top
+     (DESIGN.md pressed pattern); focused gets the standard focus stroke. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:state_enabled="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/radius_button" />
+                    <solid android:color="?bald_brand_pressed" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/radius_button" />
+                    <solid android:color="#1F000000" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_focused="true" android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="?bald_brand_pressed" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?bald_text_on_variant" />
+        </shape>
+    </item>
+    <item android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="?bald_brand_pressed" />
+        </shape>
+    </item>
+</selector>

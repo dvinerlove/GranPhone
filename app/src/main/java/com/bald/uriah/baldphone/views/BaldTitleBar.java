@@ -114,6 +114,10 @@ public class BaldTitleBar extends LinearLayout {
             if (backTextColorBeforeGold == -1)
                 backTextColorBeforeGold = tv_back.getCurrentTextColor();
             tv_back.setTextColor(gold ? onGoldColorInt : backTextColorBeforeGold);
+            // the back chip is brand-toned; on a gold bar it must follow suit
+            // or a green pill sits on yellow. gold_light is dark amber in both
+            // themes, and the bar tint is the same #ffcf40 in both.
+            tv_back.setBackgroundTintList(gold ? ColorStateList.valueOf(getContext().getResources().getColor(R.color.bald_gold_light)) : null);
         }
     }
 
