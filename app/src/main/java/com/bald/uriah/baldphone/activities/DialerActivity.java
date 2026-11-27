@@ -47,7 +47,9 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
+import com.bald.uriah.baldphone.utils.BaldExecutors;
 import com.bald.uriah.baldphone.utils.CallManager;
+import com.bald.uriah.baldphone.utils.GenerationGuard;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
@@ -76,6 +78,9 @@ public class DialerActivity extends BaldActivity {
     private View b_call, b_clear, b_hash, b_sulamit, b_backspace;
     private View[] numpad;
     private StringBuilder number = new StringBuilder();
+    private final GenerationGuard contactsGuard = new GenerationGuard();
+    private final android.os.Handler contactSearchHandler = new android.os.Handler(android.os.Looper.getMainLooper());
+    private Runnable pendingContactSearch;
     private boolean playDialSounds;
 
     // the actual transport: placeCall when default dialer, ACTION_CALL only for non-emergency
@@ -287,34 +292,51 @@ public class DialerActivity extends BaldActivity {
     }
 
     private void getContactsByNumberFilter() {
-        final Uri uri = number.length() == 0 ?
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI :
-                Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(number.toString()));
-        final Cursor contactsCursor = contentResolver.query(uri, PROJECTION, null, null, SORT_ORDER);
         final View sh = findViewById(R.id.scrolling_helper);
         if (sh instanceof ScrollingHelper) {
             ((ScrollingHelper) sh).setEmptyText(getString(number.length() == 0
                     ? R.string.no_contacts : R.string.no_contacts_found));
         }
-        updateT9Chip(contactsCursor);
-        if (contactRecyclerViewAdapter != null) {
-            contactRecyclerViewAdapter.changeCursor(contactsCursor);
-        } else {
-            contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(this, contactsCursor, recyclerView, ContactRecyclerViewAdapter.MODE_DEFAULT);
+        if (contactRecyclerViewAdapter == null) {
+            contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(this,
+                    java.util.Collections.<ContactRecyclerViewAdapter.ContactRow>emptyList(),
+                    recyclerView, ContactRecyclerViewAdapter.MODE_DEFAULT);
             recyclerView.setAdapter(contactRecyclerViewAdapter);
         }
+        final String numberSnapshot = number.toString();
+        final int generation = contactsGuard.next();
+        BaldExecutors.io().execute(() -> {
+            final Uri uri = numberSnapshot.length() == 0 ?
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI :
+                    Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(numberSnapshot));
+            java.util.List<ContactRecyclerViewAdapter.ContactRow> rows;
+            try {
+                rows = ContactRecyclerViewAdapter.loadRows(
+                        contentResolver.query(uri, PROJECTION, null, null, SORT_ORDER), contentResolver);
+            } catch (Exception e) {
+                rows = java.util.Collections.emptyList();
+            }
+            final java.util.List<ContactRecyclerViewAdapter.ContactRow> result = rows;
+            BaldExecutors.postToMain(() -> {
+                if (!contactsGuard.isCurrent(generation) || isFinishing() || isDestroyed())
+                    return;
+                contactRecyclerViewAdapter.submitList(result);
+                updateT9Chip(result);
+            });
+        });
     }
 
     // surfaces the first contact match as an «Имя — номер» chip under the number field
-    private void updateT9Chip(final Cursor contactsCursor) {
-        if (number.length() > 0 && contactsCursor != null && contactsCursor.moveToFirst()) {
-            final String name = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-            final String contactNumber = contactsCursor.getString(contactsCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            // name == contactNumber (nameless contacts) adds nothing over tv_number → hide
+    private void updateT9Chip(final java.util.List<ContactRecyclerViewAdapter.ContactRow> rows) {
+        if (number.length() > 0 && !rows.isEmpty()) {
+            final ContactRecyclerViewAdapter.ContactRow first = rows.get(0);
+            final String name = first.name;
+            final String contactNumber = first.number;
+            // name == contactNumber (nameless contacts) adds nothing over tv_number -> hide
             final String text = name == null ? contactNumber
                     : contactNumber == null ? name
                     : name.equals(contactNumber) ? null
-                    : name + " — " + contactNumber;
+                    : name + " \u2014 " + contactNumber;
             if (text == null) {
                 t9_chip.setVisibility(View.GONE);
             } else {
@@ -375,7 +397,10 @@ public class DialerActivity extends BaldActivity {
     }
 
     private void searchForContact() {
-        getContactsByNumberFilter();
+        if (pendingContactSearch != null)
+            contactSearchHandler.removeCallbacks(pendingContactSearch);
+        pendingContactSearch = this::getContactsByNumberFilter;
+        contactSearchHandler.postDelayed(pendingContactSearch, 200);
     }
 
     public void setNumber(@NonNull CharSequence charSequence) {

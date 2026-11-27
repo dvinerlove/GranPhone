@@ -20,6 +20,8 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.ImageView;
 
 import androidx.annotation.LayoutRes;
@@ -30,7 +32,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
+import com.bald.uriah.baldphone.utils.BaldExecutors;
+import com.bald.uriah.baldphone.utils.GenerationGuard;
 import com.bald.uriah.baldphone.utils.SoftInputAssist;
+
+import java.util.Collections;
+import java.util.List;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ScrollingHelper;
 
@@ -52,6 +59,9 @@ abstract class BaseContactsActivity extends BaldActivity {
 
     private String filter = "";
     private boolean favorite = false;
+    private final Handler filterHandler = new Handler(Looper.getMainLooper());
+    private final GenerationGuard contactsGuard = new GenerationGuard();
+    private Runnable pendingFilter;
     private SoftInputAssist softInputAssist;
     private ScrollingHelper scrollingHelper;
 
@@ -97,6 +107,9 @@ abstract class BaseContactsActivity extends BaldActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        contactsGuard.invalidate();
+        if (pendingFilter != null)
+            filterHandler.removeCallbacks(pendingFilter);
         if (softInputAssist != null)
             softInputAssist.onDestroy();
     }
@@ -147,7 +160,10 @@ abstract class BaseContactsActivity extends BaldActivity {
 
     protected void setFilter(String filter) {
         this.filter = filter == null ? "" : filter;
-        applyFilter();
+        if (pendingFilter != null)
+            filterHandler.removeCallbacks(pendingFilter);
+        pendingFilter = () -> applyFilter();
+        filterHandler.postDelayed(pendingFilter, 250);
     }
 
     protected abstract Cursor getCursorForFilter(String filter, boolean favorite);
@@ -157,18 +173,33 @@ abstract class BaseContactsActivity extends BaldActivity {
             scrollingHelper.setEmptyText(getString(filter.isEmpty()
                     ? R.string.no_contacts : R.string.no_contacts_found));
         }
-        if (contactRecyclerViewAdapter != null) {
-            contactRecyclerViewAdapter.changeCursor(getCursorForFilter(filter, favorite));
-        } else {
+        if (contactRecyclerViewAdapter == null) {
             contactRecyclerViewAdapter =
                     new ContactRecyclerViewAdapter(
                             BaseContactsActivity.this,
-                            getCursorForFilter(filter, favorite),
+                            Collections.<ContactRecyclerViewAdapter.ContactRow>emptyList(),
                             recyclerView,
                             mode);
             recyclerView.setAdapter(contactRecyclerViewAdapter);
         }
-
+        final String filterSnapshot = filter;
+        final boolean favoriteSnapshot = favorite;
+        final int generation = contactsGuard.next();
+        BaldExecutors.io().execute(() -> {
+            List<ContactRecyclerViewAdapter.ContactRow> rows;
+            try {
+                rows = ContactRecyclerViewAdapter.loadRows(
+                        getCursorForFilter(filterSnapshot, favoriteSnapshot), contentResolver);
+            } catch (Exception e) {
+                rows = Collections.emptyList();
+            }
+            final List<ContactRecyclerViewAdapter.ContactRow> result = rows;
+            BaldExecutors.postToMain(() -> {
+                if (!contactsGuard.isCurrent(generation) || isFinishing() || isDestroyed())
+                    return;
+                contactRecyclerViewAdapter.submitList(result);
+            });
+        });
     }
 
     @Override
