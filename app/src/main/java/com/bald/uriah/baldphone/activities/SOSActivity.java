@@ -147,7 +147,7 @@ public class SOSActivity extends BaldActivity {
         });
         // reached via performClick — quick taps routed above, TalkBack/switch-access/DPAD directly
         btSos.setOnClickListener(v -> DialogScreen.confirm(this,
-                R.string.sos, R.string.sos_confirm_call, R.string.call, this::callEmergencyNumber));
+                R.string.sos, R.string.sos_confirm_call, R.string.sos_call_help, this::callEmergencyNumber));
         setupYoutube(4);
     }
 

@@ -27,7 +27,7 @@ public final class PinPad {
             for (int i = 0; i < pinLength; i++)
                 s.append(i < n ? '●' : '○');
             dots.setText(s);
-            dots.setContentDescription(n + "/" + pinLength);
+            dots.setContentDescription(dots.getResources().getString(R.string.pin_digits_entered, n, pinLength));
         };
         redraw.run();
         final Runnable submit = () -> {

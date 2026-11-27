@@ -413,8 +413,8 @@
     <string name="answer_call">Принять</string>
     <string name="decline_call">Отклонить</string>
     <string name="hang_up">Завершить</string>
-    <string name="speaker_turn_on">Громкая связь: выкл.</string>
-    <string name="speaker_turn_off">Громкая связь: вкл.</string>
+    <string name="speaker_turn_on">Включить громкую связь</string>
+    <string name="speaker_turn_off">Выключить громкую связь</string>
     <string name="incoming_call">Входящий звонок</string>
     <string name="incoming_call_from">Входящий звонок от %1$s</string>
     <string name="call_status_calling">Звонок…</string>
@@ -437,10 +437,10 @@
 
 adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.broadcast_receivers.BaldDeviceAdminReceiver</string>
     <string name="kiosk_enable_subtext">Телефон останется внутри приложения: без шторки уведомлений, настроек Android и удаления приложений.
-Задайте цифровой пароль (минимум 4 цифры), чтобы потом выключить режим.</string>
-    <string name="kiosk_disable_subtext">Введите пароль, чтобы выключить режим киоска.</string>
-    <string name="kiosk_pin_too_short">Пароль должен быть минимум из 4 цифр.</string>
-    <string name="kiosk_wrong_pin">Неверный пароль.</string>
+Задайте 4-значный код, чтобы потом выключить эту блокировку.</string>
+    <string name="kiosk_disable_subtext">Введите 4-значный код, чтобы выключить режим киоска.</string>
+    <string name="kiosk_pin_too_short">Введите ровно 4 цифры.</string>
+    <string name="kiosk_wrong_pin">Это не тот 4-значный код, который вы задали. Попробуйте ещё раз.</string>
     <string name="kiosk_enabled">Режим киоска включён.</string>
     <string name="kiosk_disabled">Режим киоска выключен.</string>
     <string name="remove_device_owner">Убрать права администратора</string>
@@ -456,20 +456,21 @@ adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.b
     <string name="settings_lock">Блокировка настроек</string>
     <string name="settings_for_user">Общие</string>
     <string name="settings_for_helper">Дополнительные</string>
-    <string name="helper_pin_create_subtext">Придумайте пароль минимум из 4 цифр. Он защищает настройки помощника.</string>
-    <string name="helper_pin_enter_subtext">Введите пароль помощника.</string>
-    <string name="helper_pin_repeat_subtext">Введите тот же пароль ещё раз.</string>
-    <string name="helper_pin_mismatch">Пароли не совпадают.</string>
-    <string name="tutorial_helper_setup">Родственник или помощник может добавить ваши контакты и приложения и задать PIN-код в разделе «Настройки помощника».</string>
+    <string name="helper_pin_create_subtext">Придумайте 4-значный код. Он защищает настройки помощника.</string>
+    <string name="helper_pin_enter_subtext">Введите 4-значный код для настроек помощника.</string>
+    <string name="helper_pin_repeat_subtext">Введите тот же 4-значный код ещё раз.</string>
+    <string name="helper_pin_mismatch">Коды не совпадают.</string>
+    <string name="pin_digits_entered">Введено цифр: %1$d из %2$d</string>
+    <string name="tutorial_helper_setup">Родственник или помощник может добавить ваши контакты и приложения и задать 4-значный код в разделе «Настройки помощника».</string>
     <string name="tutorial_battery_huawei">Разрешите GranPhone работать в фоне: Настройки → Батарея → Запуск приложений → GranPhone → Управление вручную.</string>
     <string name="tutorial_battery_xiaomi">Разрешите GranPhone работать в фоне: Настройки → Приложения → GranPhone → включите автозапуск и выберите «Нет ограничений».</string>
     <string name="tutorial_battery_samsung">Разрешите GranPhone работать в фоне: Настройки → Батарея → Фоновые ограничения → добавьте GranPhone в исключения.</string>
     <string name="tutorial_battery_generic">Разрешите GranPhone работать в фоне, чтобы звонки и напоминания всегда доходили до вас.</string>
-    <string name="sos_hold_explanation">Нажмите и удерживайте кнопку SOS, чтобы вызвать помощь</string>
-    <string name="sos_call_help">Вызвать помощь</string>
+    <string name="sos_hold_explanation">Нажмите и удерживайте SOS 5 секунд, чтобы позвонить в экстренные службы.</string>
+    <string name="sos_call_help">Позвонить в экстренные службы</string>
     <string name="sos_calling_in">Звонок через %d…</string>
-    <string name="sos_confirm_call">Позвонить в экстренные службы?</string>
-    <string name="sos_button_description">SOS — вызвать помощь</string>
+    <string name="sos_confirm_call">Позвонить в экстренные службы сейчас?</string>
+    <string name="sos_button_description">SOS — позвонить в экстренные службы</string>
     <!-- accessibility labels for icon-only controls -->
     <string name="cd_previous_page">Предыдущая страница</string>
     <string name="cd_next_page">Следующая страница</string>
