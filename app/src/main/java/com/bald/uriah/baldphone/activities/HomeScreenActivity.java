@@ -186,6 +186,10 @@ public class HomeScreenActivity extends BaldActivity {
     private final Runnable shakeIt = new Runnable() {
         @Override
         public void run() {
+            // Honor the system animator scale: no start, no reschedule — the static
+            // notification-state icon stays as-is.
+            if (AppUtils.animationsDisabled(HomeScreenActivity.this))
+                return;
             final Drawable d = notificationsButton.getDrawable();
             if (d instanceof AnimatedVectorDrawable) {
                 final AnimatedVectorDrawable animatedVectorDrawable = (AnimatedVectorDrawable) d;
@@ -229,7 +233,8 @@ public class HomeScreenActivity extends BaldActivity {
             notificationsButton.setContentDescription(notificationsDescription);
 
             handler.removeCallbacks(shakeIt);
-            handler.postDelayed(shakeIt, 5 * Const.SECOND);
+            if (!AppUtils.animationsDisabled(context))
+                handler.postDelayed(shakeIt, 5 * Const.SECOND);
         }
     };
 
