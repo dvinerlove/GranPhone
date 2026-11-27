@@ -109,9 +109,6 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private static final int expandedSize = 133;
-        private static final int notExpandedSize = 88;
-
         final ImageView profile_pic, iv_type;
         final TextView tv_type, contact_name, tv_time, image_letter, day;
         final View line;
@@ -183,28 +180,12 @@ public class CallsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter
 
         public void setDay(final @Nullable String day) {
             if (day == null && expanded) {
-                RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) this.container.getLayoutParams();
-                layoutParams.height =
-                        (int) TypedValue.applyDimension(
-                                TypedValue.COMPLEX_UNIT_DIP,
-                                notExpandedSize,
-                                activity.getResources().getDisplayMetrics()
-                        );
-                this.container.setLayoutParams(layoutParams);
                 this.line.setVisibility(View.GONE);
                 this.day.setVisibility(View.GONE);
                 expanded = false;
             } else if (day != null && expanded) {
                 this.day.setText(day);
             } else if (day != null) {
-                final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) this.container.getLayoutParams();
-                layoutParams.height =
-                        (int) TypedValue.applyDimension(
-                                TypedValue.COMPLEX_UNIT_DIP,
-                                expandedSize,
-                                activity.getResources().getDisplayMetrics()
-                        );
-                this.container.setLayoutParams(layoutParams);
                 this.line.setVisibility(View.VISIBLE);
                 this.day.setVisibility(View.VISIBLE);
                 this.day.setText(day);

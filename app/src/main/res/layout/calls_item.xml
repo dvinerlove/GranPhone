@@ -21,7 +21,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/contact_row_linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_row_height_tall"
+    android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/spacing_md"
     android:layout_marginTop="@dimen/spacing_sm"
     android:layout_marginEnd="@dimen/spacing_md"
