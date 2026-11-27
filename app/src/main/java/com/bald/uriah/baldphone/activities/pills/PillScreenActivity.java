@@ -23,7 +23,6 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,7 +44,6 @@ import com.bald.uriah.baldphone.utils.MissedNotifications;
 public class PillScreenActivity extends TimedBaldActivity {
     private static final String TAG = PillScreenActivity.class.getSimpleName();
 
-    private static final int TIME_DELAYED_SCHEDULE = 100;
     private static final String MISSED_NOTIFICATION_TAG = "missed_pill";
 
     private TextView tv_textual_content;
@@ -72,6 +70,8 @@ public class PillScreenActivity extends TimedBaldActivity {
             finish(); // don't leave a dead ring screen with live buttons
             return;
         }
+        if (!intent.getBooleanExtra(ReminderScheduler.REMINDER_IS_SNOOZE_VIA_INTENTS, false))
+            ReminderScheduler.rescheduleAfterFired(key, this);
 
         final String textual_content = reminder.getTextualContent();
         if (textual_content == null) tv_textual_content.setVisibility(View.GONE);
@@ -98,13 +98,12 @@ public class PillScreenActivity extends TimedBaldActivity {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
         } catch (Exception e) {
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.sound_could_not_play);
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
 
         Animations.makeBiggerAndSmaller(this, iv_pill, null);
-        scheduleNextReminder();
     }
 
     @Override
@@ -145,9 +144,6 @@ public class PillScreenActivity extends TimedBaldActivity {
         finish();
     }
 
-    private void scheduleNextReminder() {
-        new Handler().postDelayed(() -> ReminderScheduler.scheduleReminder(reminder, this), TIME_DELAYED_SCHEDULE);
-    }
 
     @Override
     public void onBackPressed() {

@@ -48,6 +48,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         final Context appContext = context.getApplicationContext();
         appContext.startActivity(new Intent(appContext, AlarmScreenActivity.class)
                 .putExtra(Alarm.ALARM_KEY_VIA_INTENTS, key)
+                .putExtra(AlarmScheduler.ALARM_IS_SNOOZE_VIA_INTENTS,
+                        intent.getBooleanExtra(AlarmScheduler.ALARM_IS_SNOOZE_VIA_INTENTS, false))
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         );
     }

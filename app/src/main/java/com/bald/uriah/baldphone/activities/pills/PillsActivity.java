@@ -181,8 +181,8 @@ public class PillsActivity extends BaldActivity {
                         AppUtils.showAreYouSureYouWantToDelete(
                                 reminder.getTextualContent() == null ? getString(R.string.pill) : reminder.getTextualContent(),
                                 PillsActivity.this, () -> {
-                            ReminderScheduler.cancelReminder(reminder.getId(), PillsActivity.this);
                             RemindersDatabase.getInstance(PillsActivity.this).remindersDatabaseDao().removeReminders(reminder.getId());
+                            ReminderScheduler.cancelReminder(reminder.getId(), PillsActivity.this);
                             list.remove(reminder);
                             notifyDataSetChanged();
                         }));

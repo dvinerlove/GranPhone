@@ -20,7 +20,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -40,9 +39,9 @@ import java.util.List;
  *
  */
 public class ReminderScheduler {
-    private static final String TAG = ReminderScheduler.class.getSimpleName();
     public static final Object LOCK = new Object();
     public static final int SNOOZE_MILLIS = 5 * Const.MINUTE;
+    public static final String REMINDER_IS_SNOOZE_VIA_INTENTS = "reminder_is_snooze";
 
     /**
      * helper class should not be instantiate
@@ -50,10 +49,21 @@ public class ReminderScheduler {
     private ReminderScheduler() {
     }
 
-    //Helpers Doesn't need to be synchronized
+    static int snoozeRequestCode(int key) {
+        return -key;
+    }
+
+    /** Cancels both the regular reminder and any pending snooze for user-visible cancellation. */
     public static void cancelReminder(int key, Context context) {
         synchronized (LOCK) {
             _cancelReminder(key, context);
+            _cancelSnooze(key, context);
+        }
+    }
+
+    public static void cancelSnooze(int key, Context context) {
+        synchronized (LOCK) {
+            _cancelSnooze(key, context);
         }
     }
     // BaldDay -
@@ -150,6 +160,10 @@ public class ReminderScheduler {
         ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).cancel(getIntent(context, key));
     }
 
+    private static void _cancelSnooze(int key, Context context) {
+        ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).cancel(getSnoozeIntent(context, key));
+    }
+
     public static void scheduleReminder(@NonNull Reminder reminder, @NonNull Context context) throws IllegalArgumentException {
         synchronized (LOCK) {
             final AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -172,9 +186,15 @@ public class ReminderScheduler {
     }
 
     private static PendingIntent getIntent(Context context, int alarmKey) {
-        Log.e(TAG, "getIntent: ");
         Intent intent = new Intent(context, ReminderReceiver.class).putExtra(Reminder.REMINDER_KEY_VIA_INTENTS, alarmKey);
         return PendingIntent.getBroadcast(context, alarmKey, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    }
+
+    private static PendingIntent getSnoozeIntent(Context context, int alarmKey) {
+        Intent intent = new Intent(context, ReminderReceiver.class)
+                .putExtra(Reminder.REMINDER_KEY_VIA_INTENTS, alarmKey)
+                .putExtra(REMINDER_IS_SNOOZE_VIA_INTENTS, true);
+        return PendingIntent.getBroadcast(context, snoozeRequestCode(alarmKey), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     public static void scheduleSnooze(@NonNull Reminder alarm, Context context) throws IllegalArgumentException {
@@ -192,24 +212,41 @@ public class ReminderScheduler {
                             DateTime.now().getMillis() + SNOOZE_MILLIS,
                             PendingIntent.getActivity(context, alarm.getId(), new Intent(context, HomeScreenActivity.class), PendingIntent.FLAG_IMMUTABLE)//TODO??
                     ),
-                    getIntent(context, alarm.getId())
+                    getSnoozeIntent(context, alarm.getId())
             );
         }
     }
 
-    public static void reStartReminders(final Context context) {
+    /** Resolves the next regular reminder state after a regular, non-snooze reminder fired. */
+    public static void rescheduleAfterFired(final int id, final Context context) {
+        synchronized (LOCK) {
+            final RemindersDatabaseDao dao = RemindersDatabase.getInstance(context).remindersDatabaseDao();
+            final Reminder current = dao.getById(id);
+            if (current == null) {
+                cancelReminder(id, context);
+                return;
+            }
+            scheduleReminder(current, context);
+        }
+    }
+
+    public static boolean reStartReminders(final Context context) {
         AppUtils.logImportant("reStartReminders was called!");
         synchronized (LOCK) {
             AppUtils.logImportant("reStartReminders was started!");
-            final List<Reminder> alarmList =
-                    RemindersDatabase.getInstance(context)
-                            .remindersDatabaseDao().getAllReminders();
-            for (Reminder alarm :
-                    alarmList) {
-                ReminderScheduler.cancelReminder(alarm.getId(), context);
-                ReminderScheduler.scheduleReminder(alarm, context);
+            final RemindersDatabaseDao dao = RemindersDatabase.getInstance(context).remindersDatabaseDao();
+            final List<Reminder> alarmList = dao.getAllReminders();
+            for (Reminder snapshot : alarmList) {
+                if (Thread.currentThread().isInterrupted())
+                    return false;
+                final Reminder current = dao.getById(snapshot.getId());
+                if (current == null)
+                    cancelReminder(snapshot.getId(), context);
+                else
+                    scheduleReminder(current, context);
             }
             AppUtils.logImportant("reStartReminders has finished!");
+            return true;
         }
     }
 }

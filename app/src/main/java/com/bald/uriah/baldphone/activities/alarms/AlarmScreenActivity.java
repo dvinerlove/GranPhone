@@ -24,7 +24,6 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -48,7 +47,6 @@ import com.bald.uriah.baldphone.utils.MissedNotifications;
  */
 public class AlarmScreenActivity extends TimedBaldActivity {
     private static final String TAG = AlarmScreenActivity.class.getSimpleName();
-    private static final int TIME_DELAYED_SCHEDULE = 100;
     private static final String MISSED_NOTIFICATION_TAG = "missed_alarm";
     private static final AudioAttributes alarmAttributes =
             new AudioAttributes.Builder()
@@ -99,6 +97,8 @@ public class AlarmScreenActivity extends TimedBaldActivity {
             finish(); // don't leave a dead ring screen with live buttons
             return;
         }
+        if (!intent.getBooleanExtra(AlarmScheduler.ALARM_IS_SNOOZE_VIA_INTENTS, false))
+            AlarmScheduler.rescheduleAfterFired(key, this);
 
         final String name = alarm.getName();
         if (name == null) tv_name.setVisibility(View.GONE);
@@ -109,8 +109,10 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         cancel.setOnClickListener(v -> {
             if (vibrator != null)
                 vibrator.vibrate(Const.vibetime);
-            if (getString(R.string.timer).equals(alarm.getName()))
+            if (getString(R.string.timer).equals(alarm.getName())) {
                 AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
+                AlarmScheduler.cancelAlarm(alarm.getKey(), this);
+            }
             finish();
         });
 
@@ -120,7 +122,7 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         try {
             ringtone.play();
         } catch (Exception e) {
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.sound_could_not_play);
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
@@ -128,7 +130,6 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         Animations.makeBiggerAndSmaller(this, cancel, () -> {
             if (vibrator != null) vibrator.vibrate(Const.vibetime);
         });
-        scheduleNextAlarm();
     }
 
     @Override
@@ -167,19 +168,6 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         finish();
     }
 
-    private void scheduleNextAlarm() {
-        AlarmScheduler.cancelAlarm(alarm.getKey(), this);
-        new Handler().postDelayed(() -> {
-            if (alarm.isEnabled()) {
-                if (alarm.getDays() == -1) {
-                    AlarmsDatabase.getInstance(this)
-                            .alarmsDatabaseDao().update(alarm.getKey(), false);
-                } else {
-                    AlarmScheduler.scheduleAlarm(alarm, this);
-                }
-            }
-        }, TIME_DELAYED_SCHEDULE);
-    }
 
     @Override
     public void onBackPressed() {

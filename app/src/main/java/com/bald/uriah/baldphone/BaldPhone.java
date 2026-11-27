@@ -24,8 +24,6 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import com.bald.uriah.baldphone.activities.UpdatesActivity;
-import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
-import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.BaldUncaughtExceptionHandler;
 import com.bald.uriah.baldphone.utils.AppUtils;
@@ -46,8 +44,6 @@ public class BaldPhone extends Application {
                     .penaltyLog()
                     .build());
         JodaTimeAndroid.init(this);
-        AlarmScheduler.reStartAlarms(this);
-        ReminderScheduler.reStartReminders(this);
         if (BuildConfig.FLAVOR.equals("baldUpdates")) {
             UpdatesActivity.removeUpdatesInfo(this);
         }

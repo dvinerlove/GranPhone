@@ -64,6 +64,7 @@ import com.duolingo.open.rtlviewpager.RtlViewPager;
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
+import com.bald.uriah.baldphone.services.AlarmRecoveryJobService;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
@@ -242,6 +243,7 @@ public class HomeScreenActivity extends BaldActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppUtils.logImportant("HomeScreenActivity was started!");
+        AlarmRecoveryJobService.schedule(this);
         sharedPreferences = BPrefs.get(this);
         if (savedInstanceState != null)
             restoredHomePage = savedInstanceState.getInt(KEY_HOME_PAGE, 0);

@@ -20,7 +20,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -39,16 +38,28 @@ import java.util.List;
  *
  */
 public class AlarmScheduler {
-    private static final String TAG = AlarmScheduler.class.getSimpleName();
     public static final Object LOCK = new Object();
     public static final int SNOOZE_MILLIS = 5 * Const.MINUTE;
+    public static final String ALARM_IS_SNOOZE_VIA_INTENTS = "alarm_is_snooze";
 
     private AlarmScheduler() {
     }
 
+    static int snoozeRequestCode(int key) {
+        return -key;
+    }
+
+    /** Cancels both the regular alarm and any pending snooze for user-visible cancellation. */
     public static void cancelAlarm(int key, Context context) {
         synchronized (LOCK) {
             _cancelAlarm(key, context);
+            _cancelSnooze(key, context);
+        }
+    }
+
+    public static void cancelSnooze(int key, Context context) {
+        synchronized (LOCK) {
+            _cancelSnooze(key, context);
         }
     }
 
@@ -147,6 +158,10 @@ public class AlarmScheduler {
         ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).cancel(getIntent(context, key));
     }
 
+    private static void _cancelSnooze(int key, Context context) {
+        ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).cancel(getSnoozeIntent(context, key));
+    }
+
     public static void scheduleAlarm(@NonNull Alarm alarm, @NonNull Context context) throws IllegalArgumentException {
         synchronized (LOCK) {
             AppUtils.logImportant("Scheduling an alarm!");
@@ -170,9 +185,15 @@ public class AlarmScheduler {
     }
 
     private static PendingIntent getIntent(Context context, int alarmKey) {
-        Log.e(TAG, "getIntent: ");
         Intent intent = new Intent(context, AlarmReceiver.class).putExtra(Alarm.ALARM_KEY_VIA_INTENTS, alarmKey);
         return PendingIntent.getBroadcast(context, alarmKey, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    }
+
+    private static PendingIntent getSnoozeIntent(Context context, int alarmKey) {
+        Intent intent = new Intent(context, AlarmReceiver.class)
+                .putExtra(Alarm.ALARM_KEY_VIA_INTENTS, alarmKey)
+                .putExtra(ALARM_IS_SNOOZE_VIA_INTENTS, true);
+        return PendingIntent.getBroadcast(context, snoozeRequestCode(alarmKey), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     public static void scheduleSnooze(@NonNull Alarm alarm, Context context) throws IllegalArgumentException {
@@ -190,21 +211,47 @@ public class AlarmScheduler {
                             DateTime.now().getMillis() + SNOOZE_MILLIS,
                             PendingIntent.getActivity(context, alarm.getKey(), new Intent(context, HomeScreenActivity.class), PendingIntent.FLAG_IMMUTABLE)//TODO??
                     ),
-                    getIntent(context, alarm.getKey())
+                    getSnoozeIntent(context, alarm.getKey())
             );
         }
     }
 
-    public static void reStartAlarms(final Context context) {
+    /** Resolves the next regular alarm state after a regular, non-snooze alarm fired. */
+    public static void rescheduleAfterFired(final int key, final Context context) {
+        synchronized (LOCK) {
+            final AlarmsDatabaseDao dao = AlarmsDatabase.getInstance(context).alarmsDatabaseDao();
+            final Alarm current = dao.getByKey(key);
+            if (current == null) {
+                cancelAlarm(key, context);
+                return;
+            }
+            if (!current.isEnabled() || current.getDays() == -1) {
+                if (current.isEnabled())
+                    dao.update(key, false);
+                cancelAlarm(key, context);
+                return;
+            }
+            scheduleAlarm(current, context);
+        }
+    }
+
+    public static boolean reStartAlarms(final Context context) {
         AppUtils.logImportant("reStartAlarms was called!");
         synchronized (LOCK) {
             AppUtils.logImportant("reStartAlarms was started!");
-            final List<Alarm> alarmList = AlarmsDatabase.getInstance(context).alarmsDatabaseDao().getAllEnabled();
-            for (Alarm alarm : alarmList) {
-                AlarmScheduler.cancelAlarm(alarm.getKey(), context);
-                AlarmScheduler.scheduleAlarm(alarm, context);
+            final AlarmsDatabaseDao dao = AlarmsDatabase.getInstance(context).alarmsDatabaseDao();
+            final List<Alarm> alarmList = dao.getAll();
+            for (Alarm snapshot : alarmList) {
+                if (Thread.currentThread().isInterrupted())
+                    return false;
+                final Alarm current = dao.getByKey(snapshot.getKey());
+                if (current == null || !current.isEnabled())
+                    cancelAlarm(snapshot.getKey(), context);
+                else
+                    scheduleAlarm(current, context);
             }
             AppUtils.logImportant("reStartAlarms has finished!");
+            return true;
 
         }
     }

@@ -135,9 +135,9 @@ public class AddAlarmActivity extends com.bald.uriah.baldphone.activities.BaldAc
                     .alarmsDatabaseDao().insert(alarm);
             alarm.setKey(key);
         } else {
-            AlarmScheduler.cancelAlarm(alarmKeyToEdit, this);
             alarm.setKey(alarmKeyToEdit);
             AlarmsDatabase.getInstance(this).alarmsDatabaseDao().replace(alarm);
+            AlarmScheduler.cancelSnooze(alarmKeyToEdit, this);
         }
         AlarmScheduler.scheduleAlarm(alarm, this);
         setResult(Activity.RESULT_OK, new Intent()

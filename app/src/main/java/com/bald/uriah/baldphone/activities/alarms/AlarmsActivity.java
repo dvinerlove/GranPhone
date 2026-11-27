@@ -123,11 +123,10 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
     private void cancelAllAlarms() {
         final AlarmsDatabase alarmsDatabase = AlarmsDatabase.getInstance(this);
         final List<Alarm> alarmList = alarmsDatabase
-                .alarmsDatabaseDao().getAllEnabled();
+                .alarmsDatabaseDao().getAll();
+        alarmsDatabase.alarmsDatabaseDao().deleteAll();
         for (Alarm alarm : alarmList)
             AlarmScheduler.cancelAlarm(alarm.getKey(), this);
-
-        alarmsDatabase.alarmsDatabaseDao().deleteAll();
 
         refreshViews();
         BaldToast.from(this).setText(R.string.removed_all_alarms).show();
@@ -251,6 +250,7 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
                         AppUtils.showAreYouSureYouWantToDelete(alarm.getName(), AlarmsActivity.this, () -> {
                             AlarmsDatabase.getInstance(AlarmsActivity.this)
                                     .alarmsDatabaseDao().deleteByIds(alarm.getKey());
+                            AlarmScheduler.cancelAlarm(alarm.getKey(), AlarmsActivity.this);
                             AlarmsActivity.this.refreshViews();
                         }));
             }

@@ -21,8 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
-import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
+import com.bald.uriah.baldphone.services.AlarmRecoveryJobService;
 import com.bald.uriah.baldphone.utils.AppUtils;
 
 /**
@@ -40,7 +39,6 @@ public class ExactAlarmPermissionReceiver extends BroadcastReceiver {
         // the permission can be revoked again before this foreground broadcast is delivered
         if (alarmManager == null || !AppUtils.canScheduleExactAlarms(alarmManager))
             return;
-        AlarmScheduler.reStartAlarms(appContext);
-        ReminderScheduler.reStartReminders(appContext);
+        AlarmRecoveryJobService.schedule(appContext);
     }
 }

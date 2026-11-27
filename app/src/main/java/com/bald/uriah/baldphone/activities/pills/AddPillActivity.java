@@ -177,6 +177,7 @@ public class AddPillActivity extends BaldActivity {
         } else {
             reminder.setId(reminderIdToEdit);
             RemindersDatabase.getInstance(this).remindersDatabaseDao().replace(reminder);
+            ReminderScheduler.cancelSnooze(reminderIdToEdit, this);
         }
         ReminderScheduler.scheduleReminder(reminder, this);
 
