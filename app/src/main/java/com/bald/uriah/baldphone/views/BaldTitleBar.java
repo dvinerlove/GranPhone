@@ -82,6 +82,11 @@ public class BaldTitleBar extends LinearLayout {
         setMinimumHeight(context.getResources().getDimensionPixelSize(R.dimen.title_bar_height));
 
         setBackgroundResource(R.drawable.btn_enabled_rectangle);
+        if (getBackgroundTintList() == null) {
+            final TypedArray themeColors = context.obtainStyledAttributes(new int[]{R.attr.bald_brand});
+            setBackgroundTintList(ColorStateList.valueOf(themeColors.getColor(0, 0)));
+            themeColors.recycle();
+        }
 
         final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.BaldTitleBar);
         title = styleAttributesArray.getString(R.styleable.BaldTitleBar_title);

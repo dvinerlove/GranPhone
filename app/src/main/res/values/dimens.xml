@@ -67,7 +67,7 @@
     <dimen name="list_row_height_tall">88dp</dimen>
     <dimen name="list_header_height">48dp</dimen>
     <!-- Design tokens: chrome -->
-    <dimen name="title_bar_height">48dp</dimen>
+    <dimen name="title_bar_height">64dp</dimen>
     <dimen name="button_height_small">48dp</dimen>
     <dimen name="dialog_button_height">72dp</dimen>
     <dimen name="dialog_action_inset">44dp</dimen>
