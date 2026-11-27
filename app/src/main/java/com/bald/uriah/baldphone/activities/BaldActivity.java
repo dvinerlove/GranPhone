@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.hardware.Sensor;
@@ -272,6 +273,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // predictive back: intercepted screens get the events; un-intercepted
         // ones get the system's own predictive animation on Android 15
         if (backDispatchIntercepted())
