@@ -37,7 +37,8 @@ public class AccessibilityChecksTestRunner extends AndroidJUnitRunner {
     private void healTestDevice() {
         final UiAutomation automation = getUiAutomation();
         final String pkg = getTargetContext().getPackageName();
-        shell(automation, "cmd role add-role-holder android.app.role.HOME com.android.launcher3");
+        if (android.os.Build.VERSION.SDK_INT >= 29)
+            shell(automation, "cmd role add-role-holder android.app.role.HOME com.android.launcher3");
         shell(automation, "appops set " + pkg + " WRITE_SETTINGS allow");
         shell(automation, "appops set " + pkg + " SYSTEM_ALERT_WINDOW allow");
         shell(automation, "settings put secure enabled_notification_listeners "
