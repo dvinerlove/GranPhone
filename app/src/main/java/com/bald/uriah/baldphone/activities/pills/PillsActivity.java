@@ -180,7 +180,7 @@ public class PillsActivity extends BaldActivity {
                 bt_delete.setOnClickListener((v) ->
                         AppUtils.showAreYouSureYouWantToDelete(
                                 reminder.getTextualContent() == null ? getString(R.string.pill) : reminder.getTextualContent(),
-                                PillsActivity.this, () -> {
+                                PillsActivity.this, R.string.delete_pill, () -> {
                             RemindersDatabase.getInstance(PillsActivity.this).remindersDatabaseDao().removeReminders(reminder.getId());
                             ReminderScheduler.cancelReminder(reminder.getId(), PillsActivity.this);
                             list.remove(reminder);

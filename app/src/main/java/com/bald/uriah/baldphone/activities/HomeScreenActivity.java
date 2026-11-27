@@ -143,10 +143,8 @@ public class HomeScreenActivity extends BaldActivity {
         final int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
         final boolean charged = chargePlug == BatteryManager.BATTERY_PLUGGED_AC || chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS || chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
         batteryView.setLevel(batteryPct, charged);
-        // shortcut: plain label+percent composition drops the charging state and any
-        // locale-specific ordering — upgrade to a battery-level format key with a
-        // charging variant when the strings lane adds one.
-        batteryView.setContentDescription(getString(R.string.battery) + ": " + batteryPct + "%");
+        batteryView.setContentDescription(getString(
+                charged ? R.string.battery_level_desc_charging : R.string.battery_level_desc, batteryPct));
         if (lowBatteryAlert)
             getWindow().setStatusBarColor((batteryPct < Const.LOW_BATTERY_LEVEL && !charged) ? ContextCompat.getColor(this, R.color.battery_low) : Const.DEFAULT_STATUS_BAR_COLOR);
     }
@@ -218,11 +216,10 @@ public class HomeScreenActivity extends BaldActivity {
                 notificationsButton.setImageResource(R.drawable.error_on_background);
             }
 
-            // shortcut: count-after-colon composition — upgrade to a notifications-count
-            // plural when the strings lane adds one.
             final CharSequence notificationsDescription;
             if (notificationCount > 0)
-                notificationsDescription = getString(R.string.new_notifications) + ": " + notificationCount;
+                notificationsDescription = getResources().getQuantityString(
+                        R.plurals.new_notifications_count, notificationCount, notificationCount);
             else if (notificationCount == 0)
                 notificationsDescription = getString(R.string.no_new_notifications);
             else
@@ -657,7 +654,7 @@ public class HomeScreenActivity extends BaldActivity {
         } catch (Exception e) {
             Log.e(TAG, AppUtils.str(e.getMessage()));
             e.printStackTrace();
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.app_could_not_open);
         }
     }
 
@@ -683,7 +680,7 @@ public class HomeScreenActivity extends BaldActivity {
         } catch (ActivityNotFoundException e) {
             Log.e(TAG, AppUtils.str(e.getMessage()));
             e.printStackTrace();
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.voice_input_not_available);
         }
     }
 

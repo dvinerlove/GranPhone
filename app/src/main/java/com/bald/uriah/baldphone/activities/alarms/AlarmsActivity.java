@@ -109,7 +109,7 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
     }
 
     private void genOnClickListeners() {
-        bt_cancel_all_alarms.setOnClickListener(v -> AppUtils.showAreYouSureYouWantToDelete(getString(R.string.all_alarms), this, this::cancelAllAlarms));
+        bt_cancel_all_alarms.setOnClickListener(v -> AppUtils.showAreYouSureYouWantToDelete(getString(R.string.all_alarms), this, R.string.delete_all_alarms, this::cancelAllAlarms));
         bt_add_alarm.setOnClickListener(v ->
                 startActivityForResult(
                         new Intent(AlarmsActivity.this, AddAlarmActivity.class), ADD_ALARM_ACTIVITY_REQUEST_CODE)
@@ -132,6 +132,14 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
         BaldToast.from(this).setText(R.string.removed_all_alarms).show();
     }
 
+    private String goesOffIn(int major, int minor, int majorPlural, int minorPlural) {
+        final String majorText = getResources().getQuantityString(majorPlural, major, major);
+        return minor == 0
+                ? getString(R.string.goes_off_in, majorText)
+                : getString(R.string.goes_off_in_two_units, majorText,
+                        getResources().getQuantityString(minorPlural, minor, minor));
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -151,12 +159,18 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
                 BaldToast.from(this).setText(message).setType(BaldToast.TYPE_INFORMATIVE).show();
                 final long nextTimeAlarmWillWork = AlarmScheduler.nextTimeAlarmWillWorkInMsFromNow(newAlarm);
                 final String message2;
-                if (nextTimeAlarmWillWork < Const.HOUR)
-                    message2 = String.format(getString(R.string.to___minuets_from_now), nextTimeAlarmWillWork / Const.MINUTE);
-                else if (nextTimeAlarmWillWork < Const.DAY)
-                    message2 = String.format(getString(R.string.to___hours_and___minutes_from_now), nextTimeAlarmWillWork / Const.HOUR, (nextTimeAlarmWillWork % Const.HOUR) / Const.MINUTE);
+                if (nextTimeAlarmWillWork < Const.HOUR) {
+                    final int mins = (int) (nextTimeAlarmWillWork / Const.MINUTE);
+                    message2 = getString(R.string.goes_off_in,
+                            getResources().getQuantityString(R.plurals.duration_minutes, mins, mins));
+                } else if (nextTimeAlarmWillWork < Const.DAY)
+                    message2 = goesOffIn((int) (nextTimeAlarmWillWork / Const.HOUR),
+                            (int) ((nextTimeAlarmWillWork % Const.HOUR) / Const.MINUTE),
+                            R.plurals.duration_hours, R.plurals.duration_minutes);
                 else
-                    message2 = String.format(getString(R.string.to___days_and___hours_from_now), nextTimeAlarmWillWork / Const.DAY, (nextTimeAlarmWillWork % Const.DAY) / Const.HOUR);
+                    message2 = goesOffIn((int) (nextTimeAlarmWillWork / Const.DAY),
+                            (int) ((nextTimeAlarmWillWork % Const.DAY) / Const.HOUR),
+                            R.plurals.duration_days, R.plurals.duration_hours);
 
                 BaldToast.from(this).setText(message2).setType(BaldToast.TYPE_INFORMATIVE).show();
             }
@@ -247,7 +261,7 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
                         )
                 );
                 bt_delete.setOnClickListener((v) ->
-                        AppUtils.showAreYouSureYouWantToDelete(alarm.getName(), AlarmsActivity.this, () -> {
+                        AppUtils.showAreYouSureYouWantToDelete(alarm.getName(), AlarmsActivity.this, R.string.delete_alarm, () -> {
                             AlarmsDatabase.getInstance(AlarmsActivity.this)
                                     .alarmsDatabaseDao().deleteByIds(alarm.getKey());
                             AlarmScheduler.cancelAlarm(alarm.getKey(), AlarmsActivity.this);
