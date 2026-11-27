@@ -21,11 +21,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -152,21 +153,37 @@ public class SOSActivity extends BaldActivity {
     }
 
     /**
-     * same trick as {@link com.bald.uriah.baldphone.views.BaldPictureTextButton}'s variant tint:
-     * pressed state shows a 25% darker bald_danger
+     * Explicit shapes, same as {@link com.bald.uriah.baldphone.views.BaldPictureTextButton}'s
+     * variants: on API 23 tinting the shared selector composites through a rectangular
+     * saveLayer because its stroke is translucent. Pressed state is 25% darker bald_danger.
      */
     private void tintSosButton() {
-        final TypedArray themeColors = obtainStyledAttributes(new int[]{R.attr.bald_danger});
+        final TypedArray themeColors = obtainStyledAttributes(new int[]{R.attr.bald_danger, R.attr.bald_text_on_variant});
         final int danger = themeColors.getColor(0, Color.RED);
+        final int focusStrokeColor = themeColors.getColor(1, Color.WHITE);
         themeColors.recycle();
         final float[] hsv = new float[3];
         Color.colorToHSV(danger, hsv);
         hsv[2] *= 0.75f;
-        btSos.setBackgroundTintList(new ColorStateList(
-                new int[][]{
-                        new int[]{android.R.attr.state_pressed},
-                        new int[]{}},
-                new int[]{Color.HSVToColor(hsv), danger}));
+
+        final float radius = getResources().getDimension(R.dimen.radius_button);
+        final StateListDrawable background = new StateListDrawable();
+        background.addState(new int[]{android.R.attr.state_pressed},
+                sosButtonShape(Color.HSVToColor(hsv), radius, 0, 0));
+        background.addState(new int[]{android.R.attr.state_focused},
+                sosButtonShape(danger, radius,
+                        getResources().getDimensionPixelSize(R.dimen.border_width_selected), focusStrokeColor));
+        background.addState(new int[]{}, sosButtonShape(danger, radius, 0, 0));
+        btSos.setBackground(background);
+    }
+
+    private static GradientDrawable sosButtonShape(int color, float radius, int strokeWidth, int strokeColor) {
+        final GradientDrawable shape = new GradientDrawable();
+        shape.setCornerRadius(radius);
+        shape.setColor(color);
+        if (strokeWidth > 0)
+            shape.setStroke(strokeWidth, strokeColor);
+        return shape;
     }
 
     private void startHold() {
