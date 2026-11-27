@@ -215,10 +215,6 @@ public class SingleContactActivity extends BaldActivity {
         home_pin_switch = findViewById(R.id.home_pin_switch);
         bt_call = findViewById(R.id.bt_call);
         bt_sms = findViewById(R.id.bt_sms);
-
-        ((BaldPictureTextButton) bt_call).getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
-        for (int id : new int[]{R.id.bt_sms, R.id.bt_edit, R.id.bt_delete})
-            ((BaldPictureTextButton) findViewById(id)).getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
     }
 
     private void inflatePhones() {

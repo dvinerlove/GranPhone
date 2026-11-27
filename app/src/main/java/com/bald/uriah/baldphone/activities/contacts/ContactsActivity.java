@@ -24,13 +24,11 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
-import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 
 /**
  * Activity for viewing and adding {@link com.bald.uriah.baldphone.databases.contacts.Contact}.
@@ -52,7 +50,6 @@ public class ContactsActivity extends BaseContactsActivity {
     protected void viewsInit() {
         super.viewsInit();
         add_contact.setOnClickListener(v -> startActivity(new Intent(this, AddContactActivity.class)));
-        ((BaldPictureTextButton) add_contact).getTextView().setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 
         et_search.addTextChangedListener(new TextWatcher() {
             @Override

@@ -115,6 +115,7 @@
                     android:layout_height="@dimen/button_height_large"
                     android:layout_marginTop="@dimen/spacing_md"
                     android:background="@drawable/bald_button_background"
+                    app:_size="@dimen/huge"
                     app:_src="@drawable/ic_call_white"
                     app:_text="@string/call"
                     app:variant="brand" />
