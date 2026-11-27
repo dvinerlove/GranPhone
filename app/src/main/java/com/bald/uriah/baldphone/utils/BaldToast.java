@@ -17,6 +17,7 @@
 package com.bald.uriah.baldphone.utils;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
@@ -26,8 +27,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
@@ -49,23 +50,23 @@ public class BaldToast {
     @LayoutRes
     private final static int layout = R.layout.toast_layout;
     @DrawableRes
-    private static final int TYPE_DEFAULT_BACKGROUND_COLOR_RES_ID =
+    private static final int TYPE_DEFAULT_BACKGROUND_RES_ID =
             R.drawable.toast_default_background;
-    @ColorRes
-    private static final int TYPE_DEFAULT_FOREGROUND_COLOR_RES_ID =
-            R.color.toast_foreground_default;
+    @AttrRes
+    private static final int TYPE_DEFAULT_FOREGROUND_ATTR =
+            R.attr.bald_text_primary;
     @DrawableRes
-    private static final int TYPE_ERROR_BACKGROUND_COLOR_RES_ID =
+    private static final int TYPE_ERROR_BACKGROUND_RES_ID =
             R.drawable.toast_error_background;
-    @ColorRes
-    private static final int TYPE_ERROR_FOREGROUND_COLOR_RES_ID =
-            R.color.toast_foreground_error;
+    @AttrRes
+    private static final int TYPE_ERROR_FOREGROUND_ATTR =
+            R.attr.bald_text_on_variant;
     @DrawableRes
-    private static final int TYPE_INFORMATIVE_BACKGROUND_COLOR_RES_ID =
+    private static final int TYPE_INFORMATIVE_BACKGROUND_RES_ID =
             R.drawable.toast_informative_background;
-    @ColorRes
-    private static final int TYPE_INFORMATIVE_FOREGROUND_COLOR_RES_ID =
-            R.color.toast_foreground_informative;
+    @AttrRes
+    private static final int TYPE_INFORMATIVE_FOREGROUND_ATTR =
+            R.attr.bald_text_on_variant;
     private final Context context;
     @ToastType
     private int type = TYPE_DEFAULT;
@@ -76,7 +77,7 @@ public class BaldToast {
     private boolean built;
 
     private BaldToast(@NonNull Context context) {
-        this.context = new ContextThemeWrapper(context.getApplicationContext(), R.style.bald_light);
+        this.context = new ContextThemeWrapper(context.getApplicationContext(), AppUtils.getTheme(context));
     }
 
     public static BaldToast from(@NonNull Context context) {
@@ -134,6 +135,14 @@ public class BaldToast {
         }
     }
 
+    @ColorInt
+    private int resolveThemeColor(@AttrRes int attr) {
+        final TypedArray attributes = context.obtainStyledAttributes(new int[]{attr});
+        final int color = attributes.getColor(0, 0);
+        attributes.recycle();
+        return color;
+    }
+
     public BaldToast build() {
         //not sure why but removing this line crashes app! so don't
         final View toastView = LayoutInflater.from(context).inflate(layout, null);
@@ -142,25 +151,25 @@ public class BaldToast {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textView.getTextSize() * 2);
 
         final @DrawableRes int toastViewBackground;
-        final @ColorInt int textViewColor;
+        final @AttrRes int textViewColorAttr;
         switch (type) {
             case TYPE_DEFAULT:
-                toastViewBackground = TYPE_DEFAULT_BACKGROUND_COLOR_RES_ID;
-                textViewColor = context.getResources().getColor(TYPE_DEFAULT_FOREGROUND_COLOR_RES_ID);
+                toastViewBackground = TYPE_DEFAULT_BACKGROUND_RES_ID;
+                textViewColorAttr = TYPE_DEFAULT_FOREGROUND_ATTR;
                 break;
             case TYPE_ERROR:
-                toastViewBackground = TYPE_ERROR_BACKGROUND_COLOR_RES_ID;
-                textViewColor = context.getResources().getColor(TYPE_ERROR_FOREGROUND_COLOR_RES_ID);
+                toastViewBackground = TYPE_ERROR_BACKGROUND_RES_ID;
+                textViewColorAttr = TYPE_ERROR_FOREGROUND_ATTR;
                 break;
             case TYPE_INFORMATIVE:
-                toastViewBackground = TYPE_INFORMATIVE_BACKGROUND_COLOR_RES_ID;
-                textViewColor = context.getResources().getColor(TYPE_INFORMATIVE_FOREGROUND_COLOR_RES_ID);
+                toastViewBackground = TYPE_INFORMATIVE_BACKGROUND_RES_ID;
+                textViewColorAttr = TYPE_INFORMATIVE_FOREGROUND_ATTR;
                 break;
             default:
                 throw new IllegalArgumentException("type not supported!");
         }
 
-        textView.setTextColor(textViewColor);
+        textView.setTextColor(resolveThemeColor(textViewColorAttr));
         toastView.setBackground(ContextCompat.getDrawable(context, toastViewBackground));
 
         textView.setText(text);
