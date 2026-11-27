@@ -37,8 +37,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
+import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.BaldExecutors;
+import com.bald.uriah.baldphone.utils.GenerationGuard;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static com.bald.uriah.baldphone.activities.media.SingleMediaActivity.SHOULD_REFRESH;
 
@@ -53,9 +64,11 @@ public abstract class MediaScrollingActivity extends BaldActivity {
     protected boolean mediaChoose;
     protected BaldTitleBar baldTitleBar;
     protected RecyclerView recyclerView;
-    protected Cursor cursor;
     protected MediaRecyclerViewAdapter adapter;
     protected int width;
+    protected RequestOptions requestOptions;
+    private final GenerationGuard mediaGuard = new GenerationGuard();
+    private List<Uri> items = Collections.emptyList();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,22 +95,46 @@ public abstract class MediaScrollingActivity extends BaldActivity {
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, num, RecyclerView.VERTICAL, REVERSED);
 
         recyclerView.setLayoutManager(gridLayoutManager);
-        width = (int) ((recyclerView.getWidth() / 3) - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
-        cursor = cursor(getContentResolver());
+        width = (int) ((point.x / num) - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
+        requestOptions = new RequestOptions()
+                .override(width)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .error(R.drawable.error_on_background)
+                .lock();
 
-        setupBeforeAdapter();
         adapter = new MediaRecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
+        loadItems();
+    }
 
+    private void loadItems() {
+        final int generation = mediaGuard.next();
+        final ContentResolver resolver = getContentResolver();
+        BaldExecutors.io().execute(() -> {
+            final List<Uri> result = new ArrayList<>();
+            final Cursor c = cursor(resolver);
+            if (c != null) {
+                try {
+                    while (c.moveToNext())
+                        result.add(uriFor(c));
+                } finally {
+                    c.close();
+                }
+            }
+            BaldExecutors.postToMain(() -> {
+                if (!mediaGuard.isCurrent(generation) || isFinishing() || isDestroyed())
+                    return;
+                items = result;
+                adapter.notifyDataSetChanged();
+            });
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == resultCode && requestCode == SHOULD_REFRESH) {
-            cursor = cursor(getContentResolver());
-            adapter.notifyDataSetChanged();
-        }
+        if (requestCode == resultCode && requestCode == SHOULD_REFRESH)
+            loadItems();
 
     }
 
@@ -105,11 +142,11 @@ public abstract class MediaScrollingActivity extends BaldActivity {
 
     protected abstract Class<? extends SingleMediaActivity> singleActivity();
 
-    protected abstract void bindViewHolder(Cursor cursor, MediaRecyclerViewAdapter.ViewHolder viewHolder);
+    /** content uri for the row the cursor is positioned on - called on a background thread */
+    protected abstract Uri uriFor(Cursor cursor);
 
-    protected abstract Uri getData(Cursor cursor);
-
-    protected abstract void setupBeforeAdapter();
+    /** accessibility label for a media tile */
+    protected abstract CharSequence itemDescription();
 
     protected abstract CharSequence title();
 
@@ -122,7 +159,6 @@ public abstract class MediaScrollingActivity extends BaldActivity {
 
         public MediaRecyclerViewAdapter() {
             this.layoutInflater = LayoutInflater.from(MediaScrollingActivity.this);
-
         }
 
         @NonNull
@@ -134,13 +170,19 @@ public abstract class MediaScrollingActivity extends BaldActivity {
         @Override
         public void onBindViewHolder(final @NonNull ViewHolder holder, int position) {
             super.onBindViewHolder(holder, position);
-            cursor.moveToPosition(position);
-            MediaScrollingActivity.this.bindViewHolder(cursor, holder);
+            if (!AppUtils.isValidContextForGlide(holder.itemView.getContext()))
+                return;
+            // Glide decodes media-store thumbnails off the main thread; no manual decode here.
+            holder.itemView.setContentDescription(itemDescription());
+            Glide.with(holder.pic)
+                    .load(items.get(position))
+                    .apply(requestOptions)
+                    .into(holder.pic);
         }
 
         @Override
         public int getItemCount() {
-            return cursor.getCount();
+            return items.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -157,8 +199,7 @@ public abstract class MediaScrollingActivity extends BaldActivity {
             @Override
             public void onClick(View v) {
                 if (mediaChoose) {
-                    cursor.moveToPosition(getAdapterPosition());
-                    final Uri regularUri = getData(cursor);
+                    final Uri regularUri = items.get(getAdapterPosition());
                     final Intent result = new Intent()
                             .setData(regularUri)
                             .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
