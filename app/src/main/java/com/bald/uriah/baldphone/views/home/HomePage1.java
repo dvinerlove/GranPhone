@@ -312,7 +312,7 @@ public class HomePage1 extends HomeView {
                     BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_messages_app).show();
 
             } catch (Exception e) {
-                BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
+                BaldToast.error(homeScreen, R.string.messages_could_not_open);
             }
         });
         setupButton(BPrefs.CUSTOM_PHOTOS_KEY, bt_photos, v -> homeScreen.startActivity(new Intent(homeScreen, PhotosActivity.class)));
@@ -329,7 +329,7 @@ public class HomePage1 extends HomeView {
                 if (!cameraPermissionGranted())
                     homeScreen.requestCameraPermission();
                 else
-                    BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.an_error_has_occurred).show();
+                    BaldToast.error(homeScreen, R.string.camera_could_not_open);
             } catch (ActivityNotFoundException e) {
                 BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_camera_app).show();
             }

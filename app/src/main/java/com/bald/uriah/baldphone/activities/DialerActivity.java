@@ -91,7 +91,7 @@ public class DialerActivity extends BaldActivity {
                 accountHandle = resolveAccountHandle(context, subscriptionInfo);
                 // fail closed: the user explicitly picked a SIM — silently calling on the wrong one is worse than not calling
                 if (accountHandle == null) {
-                    BaldToast.error(context);
+                    BaldToast.error(context, R.string.call_could_not_be_placed);
                     return;
                 }
             }
@@ -112,7 +112,7 @@ public class DialerActivity extends BaldActivity {
         } catch (SecurityException e) {
             // e.g. the default-dialer role was revoked between check and placeCall — crashing the launcher mid-call-attempt helps no one
             Log.e(TAG, e.getMessage());
-            BaldToast.error(context);
+            BaldToast.error(context, R.string.call_could_not_be_placed);
         }
 
     }
@@ -246,7 +246,7 @@ public class DialerActivity extends BaldActivity {
         try {
             call(Contact.fromLookupKey(miniContact.lookupKey, context.getContentResolver()).getPhoneList().get(0).second, context, false);
         } catch (Exception e) {
-            BaldToast.error(context);
+            BaldToast.error(context, R.string.call_could_not_be_placed);
         }
     }
 

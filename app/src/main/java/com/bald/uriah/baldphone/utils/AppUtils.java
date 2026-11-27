@@ -369,7 +369,7 @@ public class AppUtils {
             context.startActivity(new Intent(Intent.ACTION_SENDTO)
                     .setData(Uri.parse("smsto:" + Uri.encode(number))));
         } catch (ActivityNotFoundException e) {
-            BaldToast.error(context);
+            BaldToast.error(context, R.string.no_messages_app);
         }
     }
 

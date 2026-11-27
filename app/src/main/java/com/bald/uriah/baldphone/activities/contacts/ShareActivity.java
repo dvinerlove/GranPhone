@@ -138,7 +138,7 @@ public class ShareActivity extends BaseContactsActivity {
         } catch (Contact.ContactNotFoundException e) {
             Log.e(TAG, AppUtils.str(e.getMessage()));
             e.printStackTrace();
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.contact_could_not_be_shared);
             finish();
             return;
         }

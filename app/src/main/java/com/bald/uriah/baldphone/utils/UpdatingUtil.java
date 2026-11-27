@@ -121,10 +121,8 @@ public class UpdatingUtil {
                                                 .show();
                                 }
                             } catch (JSONException e) {
-                                if (retAnswer) {
+                                if (retAnswer)
                                     BaldToast.from(activity).setType(BaldToast.TYPE_ERROR).setText(R.string.update_message_is_corrupted).show();
-                                    BaldToast.from(activity).setType(BaldToast.TYPE_ERROR).setText(AppUtils.str(e.getMessage())).show();
-                                }
                             }
                             lifecycle.removeObserver(observer);
                         },

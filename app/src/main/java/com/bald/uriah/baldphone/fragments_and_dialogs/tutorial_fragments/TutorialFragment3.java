@@ -107,7 +107,7 @@ public class TutorialFragment3 extends TutorialFragment {
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage());
                     e.printStackTrace();
-                    BaldToast.error(getContext());
+                    BaldToast.error(getContext(), R.string.keyboard_could_not_change);
                 }
             });
 

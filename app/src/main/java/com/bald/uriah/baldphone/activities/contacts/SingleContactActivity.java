@@ -473,7 +473,7 @@ public class SingleContactActivity extends BaldActivity {
         } catch (ActivityNotFoundException e) {
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.contact_action_failed);
         }
     }
 

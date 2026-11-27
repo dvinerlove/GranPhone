@@ -85,7 +85,11 @@ public class BaldToast {
     }
 
     public static void error(Context context) {
-        BaldToast.from(context).setText(R.string.an_error_has_occurred).setType(TYPE_ERROR).show();
+        BaldToast.from(context).setText(R.string.action_failed_try_again).setType(TYPE_ERROR).show();
+    }
+
+    public static void error(Context context, @StringRes int textRes) {
+        BaldToast.from(context).setText(textRes).setType(TYPE_ERROR).show();
     }
 
     public static void simple(Context context, CharSequence text) {

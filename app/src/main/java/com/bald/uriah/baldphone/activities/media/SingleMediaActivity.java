@@ -153,7 +153,7 @@ public abstract class SingleMediaActivity extends BaldActivity {
                 } catch (IntentSender.SendIntentException | SecurityException | IllegalArgumentException e) {
                     Log.e(TAG, AppUtils.str(e.getMessage()));
                     e.printStackTrace();
-                    BaldToast.error(activity);
+                    BaldToast.error(activity, R.string.media_could_not_be_deleted);
                 }
             } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
                 try {
@@ -174,7 +174,7 @@ public abstract class SingleMediaActivity extends BaldActivity {
                     } catch (IntentSender.SendIntentException ex) {
                         Log.e(TAG, AppUtils.str(ex.getMessage()));
                         ex.printStackTrace();
-                        BaldToast.error(activity);
+                        BaldToast.error(activity, R.string.media_could_not_be_deleted);
                     }
                 }
             } else {

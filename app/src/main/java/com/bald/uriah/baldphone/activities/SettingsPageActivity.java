@@ -399,8 +399,7 @@ public abstract class SettingsPageActivity extends BaldActivity {
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
                 e.printStackTrace();
-                BaldToast.from(v.getContext()).setText(R.string.an_error_has_occurred).setType(BaldToast.TYPE_ERROR).show();
-                BaldToast.from(v.getContext()).setText(e.getMessage()).setType(BaldToast.TYPE_ERROR).show();
+                BaldToast.error(v.getContext(), R.string.action_failed_try_again);
             }
         }
     }

@@ -433,7 +433,7 @@ public class AddContactActivity extends BaldActivity {
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
                 e.printStackTrace();
-                BaldToast.error(this);
+                BaldToast.error(this, R.string.photo_could_not_be_added);
             }
         }
         return true;

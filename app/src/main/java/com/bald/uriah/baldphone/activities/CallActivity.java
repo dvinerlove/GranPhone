@@ -298,7 +298,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
             }
         }
         if (handles == null || handles.isEmpty()) {
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.call_could_not_be_placed);
             call.disconnect();
             return;
         }

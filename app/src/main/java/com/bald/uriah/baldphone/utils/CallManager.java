@@ -217,7 +217,7 @@ public final class CallManager {
             }
         } catch (Exception ignored) {
         }
-        BaldToast.error(activity);
+        BaldToast.error(activity, R.string.granphone_could_not_be_phone_app);
     }
 
     public interface Listener {
