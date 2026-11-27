@@ -32,14 +32,14 @@ Extend the existing `bald_*` theme-attribute system rather than inventing a new 
 |---|---|---|
 | `bald_surface` | #F2F4F7 | #101418 |
 | `bald_card` | #FFFFFF | #1C2126 |
-| `bald_card_border` | #E2E5E9 | #2E3439 |
-| `bald_brand` | #1C6B30 | #30D158 |
+| `bald_card_border` | #667085 | #9AA4B2 |
+| `bald_brand` | #19632D | #30D158 |
 | `bald_danger` | #D32F2F | #E57373 |
 | `bald_info` | #1565C0 | #64B5F6 |
 | `bald_text_primary` | #14171A | #F2F4F7 |
 | `bald_text_secondary` | #4A5560 | #B0B8C0 |
 
-Contrast target: ≥4.5:1 for all text. Text on the light brand surface has a WCAG AAA target of ≥7:1; `#1C6B30` is the contract implementation value pending T11's final measurement. Non-text UI — icons, control borders, and focus indicators — must be ≥3:1. Radius: cards/buttons 16dp, small chips 28dp. Spacing grid: 8dp.
+Contrast target: ≥4.5:1 for all text. Text on the light brand surface has a WCAG AAA target of ≥7:1; `#19632D` meets it at 7.33:1. Non-text UI — icons, control borders, and focus indicators — must be ≥3:1. Radius: cards/buttons 16dp, small chips 28dp. Spacing grid: 8dp.
 
 ### Typography
 
