@@ -23,4 +23,4 @@
     android:background="@drawable/btn_clicked_no_border"
     android:gravity="center_vertical|center_horizontal"
     android:text="@string/no"
-    android:textColor="?bald_text_on_button" />
+    android:textColor="?bald_text_primary" />

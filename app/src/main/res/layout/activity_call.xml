@@ -72,7 +72,7 @@
                             android:ellipsize="end"
                             android:gravity="center"
                             android:maxLines="2"
-                            android:textColor="?bald_text_on_background"
+                            android:textColor="?bald_text_primary"
                             android:textSize="@dimen/giant"
                             android:textStyle="bold" />
 
@@ -84,7 +84,7 @@
                             android:ellipsize="end"
                             android:gravity="center"
                             android:maxLines="1"
-                            android:textColor="?bald_text_on_background"
+                            android:textColor="?bald_text_primary"
                             android:textSize="@dimen/large" />
                     </LinearLayout>
                 </LinearLayout>
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_sm"
                     android:gravity="center"
-                    android:textColor="?bald_text_on_background"
+                    android:textColor="?bald_text_primary"
                     android:textSize="@dimen/huge" />
             </LinearLayout>
         </com.bald.uriah.baldphone.views.ModularScrollView>

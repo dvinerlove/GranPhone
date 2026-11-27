@@ -72,7 +72,7 @@
         android:maxLines="1"
         android:padding="0dp"
         android:text="@string/current_time"
-        android:textColor="?bald_text_on_background"
+        android:textColor="?bald_text_primary"
         android:textSize="@dimen/large"
         app:autoSizeTextType="uniform"
         app:autoSizeMinTextSize="@dimen/tiny"

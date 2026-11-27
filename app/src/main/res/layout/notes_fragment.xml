@@ -86,7 +86,7 @@
                     android:enabled="false"
                     android:gravity="top|start"
                     android:padding="@dimen/spacing_lg"
-                    android:textColor="?bald_text_on_background"
+                    android:textColor="?bald_text_primary"
                     android:textSize="@dimen/medium" />
             </LinearLayout>
         </com.bald.uriah.baldphone.views.ModularScrollView>

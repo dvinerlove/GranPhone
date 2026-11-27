@@ -110,9 +110,9 @@ public class BaldSwitch extends FrameLayout {
         try {
             final TypedValue typedValue = new TypedValue();
             Resources.Theme theme = context.getTheme();
-            theme.resolveAttribute(R.attr.bald_text_on_selected, typedValue, true);
+            theme.resolveAttribute(R.attr.bald_text_on_variant, typedValue, true);
             textColorOnSelected = typedValue.data;
-            theme.resolveAttribute(R.attr.bald_text_on_button, typedValue, true);
+            theme.resolveAttribute(R.attr.bald_text_primary, typedValue, true);
             textColorOnButton = typedValue.data;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());

@@ -85,7 +85,7 @@ public class BaldMultipleSelection extends LinearLayout {
 
         final TypedValue typedValue = new TypedValue();
         Resources.Theme theme = context.getTheme();
-        theme.resolveAttribute(R.attr.bald_text_on_button, typedValue, true);
+        theme.resolveAttribute(R.attr.bald_text_primary, typedValue, true);
         textColorOnButton = typedValue.data;
         textColorOnSelected = textColorOnButton;
 

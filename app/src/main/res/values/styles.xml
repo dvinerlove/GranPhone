@@ -60,16 +60,12 @@
         <item name="bald_decoration_on_key">@color/bald_decoration_on_key_light</item>
         <item name="bald_hint_on_background">@color/bald_hint_on_background_light</item>
         <item name="bald_hint_on_button">@color/bald_hint_on_button_light</item>
-        <item name="bald_selected_on_background">@color/bald_selected_on_background_light</item>
-        <item name="bald_text_on_selected">@color/bald_text_on_selected_light</item>
         <item name="bald_stroke_color">@color/bald_stroke_color_light</item>
         <item name="bald_keyboard_key_background">@color/bald_keyboard_key_background_light</item>
         <item name="bald_keyboard_key_pressed_background">
             @color/bald_keyboard_key_pressed_background_light
         </item>
         <item name="bald_stroke_size">@dimen/border_width</item>
-        <item name="bald_text_on_background">@color/bald_text_on_background_light</item>
-        <item name="bald_text_on_button">@color/bald_text_on_button_light</item>
         <item name="bald_text_on_key">@color/bald_text_on_key_light</item>
         <item name="bald_surface">@color/bald_surface_light</item>
         <item name="bald_card">@color/bald_card_light</item>
@@ -100,16 +96,12 @@
         <item name="bald_decoration_on_key">@color/bald_decoration_on_key_dark</item>
         <item name="bald_hint_on_background">@color/bald_hint_on_background_dark</item>
         <item name="bald_hint_on_button">@color/bald_hint_on_button_dark</item>
-        <item name="bald_selected_on_background">@color/bald_selected_on_background_dark</item>
-        <item name="bald_text_on_selected">@color/bald_text_on_selected_dark</item>
         <item name="bald_keyboard_key_pressed_background">
             @color/bald_keyboard_key_pressed_background_dark
         </item>
         <item name="bald_stroke_color">@color/bald_stroke_color_dark</item>
         <item name="bald_keyboard_key_background">@color/bald_keyboard_key_background_dark</item>
         <item name="bald_stroke_size">@dimen/border_width</item>
-        <item name="bald_text_on_background">@color/bald_text_on_background_dark</item>
-        <item name="bald_text_on_button">@color/bald_text_on_button_dark</item>
         <item name="bald_text_on_key">@color/bald_text_on_key_dark</item>
         <item name="bald_surface">@color/bald_surface_dark</item>
         <item name="bald_card">@color/bald_card_dark</item>
@@ -137,7 +129,7 @@
 
     <style name="BackgroundText">
         <item name="android:textSize">@dimen/small</item>
-        <item name="android:textColor">?attr/bald_text_on_background</item>
+        <item name="android:textColor">?attr/bald_text_primary</item>
     </style>
 
     <style name="BackgroundText.Medium">
@@ -162,7 +154,7 @@
 
     <style name="ButtonsText">
         <item name="android:textSize">@dimen/small</item>
-        <item name="android:textColor">?attr/bald_text_on_button</item>
+        <item name="android:textColor">?attr/bald_text_primary</item>
         <item name="android:gravity">center</item>
     </style>
 

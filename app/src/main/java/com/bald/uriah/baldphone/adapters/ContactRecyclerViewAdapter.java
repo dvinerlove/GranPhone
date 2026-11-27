@@ -102,7 +102,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
         letterToPosition = new SparseIntArray();
         theme.resolveAttribute(R.attr.bald_text_on_gold, typedValue, true);
         textColorOnGold = typedValue.data;
-        theme.resolveAttribute(R.attr.bald_text_on_button, typedValue, true);
+        theme.resolveAttribute(R.attr.bald_text_primary, typedValue, true);
         textColorOnButton = typedValue.data;
         theme.resolveAttribute(R.attr.bald_text_secondary, typedValue, true);
         textColorSecondary = typedValue.data;

@@ -146,7 +146,7 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:gravity="center"
-                            android:textColor="?bald_text_on_background"
+                            android:textColor="?bald_text_primary"
                             android:textSize="@dimen/large"
                             android:textStyle="bold"
                             android:visibility="gone" />
@@ -200,7 +200,7 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:gravity="center"
-                            android:textColor="?bald_text_on_background"
+                            android:textColor="?bald_text_primary"
                             android:textSize="@dimen/large"
                             android:textStyle="bold"
                             android:visibility="gone" />
