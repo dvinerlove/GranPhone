@@ -416,10 +416,16 @@
     <string name="speaker_turn_on">Громкая связь: выкл.</string>
     <string name="speaker_turn_off">Громкая связь: вкл.</string>
     <string name="incoming_call">Входящий звонок</string>
+    <string name="incoming_call_from">Входящий звонок от %1$s</string>
     <string name="call_status_calling">Звонок…</string>
     <string name="in_call">В звонке</string>
+    <string name="in_call_with">Разговор с %1$s</string>
+    <string name="in_call_duration">Разговор • %1$s</string>
     <string name="on_hold">На удержании</string>
     <string name="call_ended">Звонок завершён</string>
+    <string name="speaker_state_on">Громкая связь включена</string>
+    <string name="speaker_state_off">Громкая связь выключена</string>
+    <string name="sim_fallback">SIM %1$d</string>
     <string name="unknown_number">Неизвестный номер</string>
     <string name="ongoing_call">Идёт звонок</string>
     <string name="tap_to_return_to_call">Нажмите, чтобы вернуться к звонку</string>

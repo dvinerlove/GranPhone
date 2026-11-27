@@ -81,6 +81,9 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     private Call simChooserShownFor;
     @Nullable
     private Call volumeRaisedFor;
+    @Nullable
+    private Call lastAnnouncedCall;
+    private int lastAnnouncedState = -1;
     private final Runnable ticker = new Runnable() {
         @Override
         public void run() {
@@ -136,7 +139,11 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         };
         findViewById(R.id.bt_decline).setOnClickListener(hangUp);
         findViewById(R.id.bt_hangup).setOnClickListener(hangUp);
-        bt_speaker.setOnClickListener(v -> CallManager.setSpeaker(!CallManager.isSpeakerOn()));
+        bt_speaker.setOnClickListener(v -> {
+            final boolean speakerOn = !CallManager.isSpeakerOn();
+            CallManager.setSpeaker(speakerOn);
+            bt_speaker.announceForAccessibility(getString(speakerOn ? R.string.speaker_state_on : R.string.speaker_state_off));
+        });
 
         final PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         if (powerManager != null && powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK))
@@ -204,7 +211,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
                 final Call.Details activeDetails = call.getDetails();
                 final long connectTime = activeDetails == null ? 0 : activeDetails.getConnectTimeMillis();
                 tv_status.setText(connectTime > 0
-                        ? getString(R.string.in_call) + "  " + formatDuration(System.currentTimeMillis() - connectTime)
+                        ? getString(R.string.in_call_duration, formatDuration(System.currentTimeMillis() - connectTime))
                         : getString(R.string.in_call));
                 showButtons(false, true);
                 setProximityScreenOff(true);
@@ -233,6 +240,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
                 setProximityScreenOff(true);
                 break;
         }
+        announceCallState(call, state);
         if (keepScreenOn)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         else
@@ -241,6 +249,34 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         final boolean speakerOn = CallManager.isSpeakerOn();
         bt_speaker.setText(speakerOn ? R.string.speaker_turn_off : R.string.speaker_turn_on);
         bt_speaker.setVariant(speakerOn ? BaldPictureTextButton.VARIANT_INFO : BaldPictureTextButton.VARIANT_NEUTRAL);
+    }
+
+    private void announceCallState(Call call, int state) {
+        // DISCONNECTING and DISCONNECTED are one user-visible state; don't announce it twice.
+        final int announcementState = state == Call.STATE_DISCONNECTING ? Call.STATE_DISCONNECTED : state;
+        if (call == lastAnnouncedCall && announcementState == lastAnnouncedState)
+            return;
+        final CharSequence announcement;
+        switch (state) {
+            case Call.STATE_RINGING:
+                announcement = getString(R.string.incoming_call_from, tv_name.getText());
+                break;
+            case Call.STATE_ACTIVE:
+                announcement = getString(R.string.in_call_with, tv_name.getText());
+                break;
+            case Call.STATE_HOLDING:
+                announcement = getString(R.string.on_hold);
+                break;
+            case Call.STATE_DISCONNECTING:
+            case Call.STATE_DISCONNECTED:
+                announcement = getString(R.string.call_ended);
+                break;
+            default:
+                return;
+        }
+        lastAnnouncedCall = call;
+        lastAnnouncedState = announcementState;
+        tv_status.announceForAccessibility(announcement);
     }
 
     @SuppressWarnings("deprecation")
@@ -274,7 +310,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         final CharSequence[] names = new CharSequence[handles.size()];
         for (int i = 0; i < handles.size(); i++) {
             final PhoneAccount account = telecomManager == null ? null : telecomManager.getPhoneAccount(handles.get(i));
-            names[i] = account != null && !TextUtils.isEmpty(account.getLabel()) ? account.getLabel() : "SIM " + (i + 1);
+            names[i] = account != null && !TextUtils.isEmpty(account.getLabel()) ? account.getLabel() : getString(R.string.sim_fallback, i + 1);
         }
         // «Назад» (and only it) cancels the dialog → hangs up; picking a SIM dismisses without cancelling
         final DialogScreen simPicker = DialogScreen.select(this, R.string.choose_sim,
