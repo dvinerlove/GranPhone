@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
+import com.bald.uriah.baldphone.utils.BaldExecutors;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
@@ -36,12 +37,15 @@ import java.io.File;
 
 public class TechnicalInfoActivity extends BaldActivity {
     public static void deleteCache(Context context) {
-        try {
-            deleteDir(context.getCacheDir());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        AppsDatabase.getInstance(context).appsDatabaseDao().deleteAll();
+        final Context appContext = context.getApplicationContext();
+        BaldExecutors.db().execute(() -> {
+            try {
+                deleteDir(appContext.getCacheDir());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            AppsDatabase.getInstance(appContext).appsDatabaseDao().deleteAll();
+        });
     }
 
     public static boolean deleteDir(File dir) {

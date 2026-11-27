@@ -31,7 +31,6 @@ import android.graphics.Point;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,8 +48,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -85,7 +82,6 @@ import com.bald.uriah.baldphone.views.BatteryView;
 import com.bald.uriah.baldphone.views.home.HomePage1;
 import com.bald.uriah.baldphone.views.home.NotesView;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -260,7 +256,16 @@ public class HomeScreenActivity extends BaldActivity {
             e.printStackTrace();
             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(getString(R.string.notification_service_fail)).show();
         }
-        new UpdateApps(this).execute(this.getApplicationContext());
+        AppsDatabaseHelper.updateDBAsync(getApplicationContext(), (success, apps) -> {
+            if (!success)
+                BaldToast.error(getApplicationContext(), R.string.apps_could_not_be_updated);
+            if (isFinishing() || isDestroyed())
+                return;
+            refreshHome();
+            finishedUpdatingApps = true;
+            if (launchAppsActivity)
+                startActivity(new Intent(this, AppsActivity.class));
+        });
         lowBatteryAlert = sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE);
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         final Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
@@ -707,37 +712,6 @@ public class HomeScreenActivity extends BaldActivity {
     @Override
     protected boolean backDispatchIntercepted() {
         return true;
-    }
-
-    static class UpdateApps extends AsyncTask<Context, Void, Void> {
-        final WeakReference<HomeScreenActivity> homeScreenWeakReference;
-
-        UpdateApps(HomeScreenActivity homeScreen) {
-            super();
-            homeScreenWeakReference = new WeakReference<>(homeScreen);
-        }
-
-        @Override
-        protected Void doInBackground(Context... contexts) {
-            try {
-                AppsDatabaseHelper.updateDB(contexts[0]);
-            } catch (Exception e) {
-                BaldToast.from(contexts[0].getApplicationContext()).setType(BaldToast.TYPE_ERROR).setLength(Toast.LENGTH_LONG).setText(e.getMessage());
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            HomeScreenActivity homeScreen = homeScreenWeakReference.get();
-            if (homeScreen != null) {
-                homeScreen.refreshHome();
-                homeScreen.finishedUpdatingApps = true;
-                if (homeScreen.launchAppsActivity)
-                    homeScreen.startActivity(new Intent(homeScreen, AppsActivity.class));
-            }
-        }
-
     }
 
     @Override

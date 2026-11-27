@@ -27,6 +27,8 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.AppsActivity;
@@ -39,6 +41,7 @@ import com.bald.uriah.baldphone.activities.media.PhotosActivity;
 import com.bald.uriah.baldphone.activities.media.VideosActivity;
 import com.bald.uriah.baldphone.activities.pills.PillsActivity;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.BaldExecutors;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -51,6 +54,15 @@ import java.util.Map;
  */
 public class AppsDatabaseHelper {
     private static final String TAG = AppsDatabaseHelper.class.getSimpleName();
+
+    /**
+     * Result of {@link #updateDBAsync}: {@code success} is the diff-sync outcome,
+     * {@code apps} is the post-sync list snapshot (null if even the read failed).
+     * Delivered on the main thread.
+     */
+    public interface AppsSyncCallback {
+        void onAppsSynced(boolean success, @Nullable List<App> apps);
+    }
 
     public static final String baldComponentNameBeginning = BuildConfig.APPLICATION_ID + "/";
     public static Map<String, Integer> baldComponentNames = new HashMap<>(9);
@@ -86,6 +98,34 @@ public class AppsDatabaseHelper {
         }
         componentNames.addAll(baldComponentNames.keySet());
         return componentNames;
+    }
+
+    /**
+     * Runs {@link #updateDB} (PackageManager scan + Room diff) on {@link BaldExecutors#db()},
+     * then reads the ordered snapshot there too and posts it to the callback on the main thread.
+     */
+    public static void updateDBAsync(Context context, @Nullable AppsSyncCallback callback) {
+        final Context appContext = context.getApplicationContext();
+        BaldExecutors.db().execute(() -> {
+            boolean success = true;
+            try {
+                updateDB(appContext);
+            } catch (Exception e) {
+                success = false;
+                Log.e(TAG, "app database refresh failed", e);
+            }
+            List<App> apps = null;
+            try {
+                apps = AppsDatabase.getInstance(appContext).appsDatabaseDao().getAllOrderedByABC();
+            } catch (Exception e) {
+                Log.e(TAG, "app database read failed", e);
+            }
+            if (callback != null) {
+                final boolean finalSuccess = success;
+                final List<App> finalApps = apps;
+                BaldExecutors.postToMain(() -> callback.onAppsSynced(finalSuccess, finalApps));
+            }
+        });
     }
 
     /**
@@ -161,6 +201,7 @@ public class AppsDatabaseHelper {
         if (app.getFlattenComponentName().startsWith(baldComponentNameBeginning))
             imageView.setImageResource(AppsDatabaseHelper.baldComponentNames.get(app.getFlattenComponentName()));
         else
-            Glide.with(imageView).load(AppUtils.byteArrayToBitmap(app.getIcon())).into(imageView);
+            // Glide decodes the byte[] off the main thread.
+            Glide.with(imageView).load(app.getIcon()).into(imageView);
     }
 }

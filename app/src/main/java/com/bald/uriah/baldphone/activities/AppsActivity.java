@@ -29,14 +29,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.AppsRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.apps.App;
-import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
 import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.GenerationGuard;
 
-import java.util.List;
+import java.util.Collections;
 import java.util.Objects;
 
 import static com.bald.uriah.baldphone.adapters.AppsRecyclerViewAdapter.TYPE_HEADER;
@@ -49,46 +49,66 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
     public static final int UNINSTALL_REQUEST_CODE = 52;
     private static final String SELECTED_APP_INDEX = "SELECTED_APP_INDEX";
 
-    private AppsDatabase appsDatabase;
-
     private RecyclerView recyclerView;
 
     private AppsRecyclerViewAdapter appsRecyclerViewAdapter;
     private String chooseKey;
+    private final GenerationGuard appsLoadGuard = new GenerationGuard();
+    private int restoredIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apps);
 
-        AppsDatabaseHelper.updateDB(this);
-
-        appsDatabase = AppsDatabase.getInstance(AppsActivity.this);
-        final List<App> appList = appsDatabase.appsDatabaseDao().getAllOrderedByABC();
         recyclerView = findViewById(R.id.rc_apps);
         chooseKey = getIntent().getStringExtra(CHOOSE_MODE);
         if (chooseKey != null)
             ((com.bald.uriah.baldphone.views.BaldTitleBar) findViewById(R.id.bald_title_bar)).setTitle(R.string.choose_another_app);
-        appsRecyclerViewAdapter = new AppsRecyclerViewAdapter(appList, this, chooseKey != null ? this::appChosen : this::showDropDown, recyclerView);
-        recyclerView.setAdapter(appsRecyclerViewAdapter);
+        loadApps();
+    }
+
+    private void loadApps() {
+        final int generation = appsLoadGuard.next();
+        AppsDatabaseHelper.updateDBAsync(this, (success, apps) -> {
+            if (!appsLoadGuard.isCurrent(generation) || isFinishing() || isDestroyed())
+                return;
+            appsRecyclerViewAdapter = new AppsRecyclerViewAdapter(
+                    apps != null ? apps : Collections.<App>emptyList(), this,
+                    chooseKey != null ? this::appChosen : this::showDropDown, recyclerView);
+            recyclerView.setAdapter(appsRecyclerViewAdapter);
+            restoreIndex(restoredIndex);
+        });
+    }
+
+    private void restoreIndex(int index) {
+        final AppsRecyclerViewAdapter adapter = appsRecyclerViewAdapter;
+        if (adapter == null || index <= 0 || index >= adapter.dataList.size() || adapter.dataList.get(index).type() == TYPE_HEADER)
+            return;
+        restoredIndex = -1;
+        adapter.index = index;
+        recyclerView.getLayoutManager().scrollToPosition(index);
+        recyclerView.post(() -> showDropDown(index));
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_APP_INDEX, ((AppsRecyclerViewAdapter) recyclerView.getAdapter()).index);
+        if (appsRecyclerViewAdapter != null)
+            outState.putInt(SELECTED_APP_INDEX, appsRecyclerViewAdapter.index);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        final int index = savedInstanceState.getInt(SELECTED_APP_INDEX);
-        final AppsRecyclerViewAdapter adapter = ((AppsRecyclerViewAdapter) recyclerView.getAdapter());
-        if (index < adapter.dataList.size() && index > 0 && adapter.dataList.get(index).type() != TYPE_HEADER) {
-            adapter.index = index;
-            recyclerView.getLayoutManager().scrollToPosition(index);
-            recyclerView.post(() -> showDropDown(index));
-        }
+        restoredIndex = savedInstanceState.getInt(SELECTED_APP_INDEX);
+        restoreIndex(restoredIndex);
+    }
+
+    @Override
+    protected void onDestroy() {
+        appsLoadGuard.invalidate();
+        super.onDestroy();
     }
 
     private void uninstallApp(App app) {
