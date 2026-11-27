@@ -185,6 +185,12 @@ public class ViewPagerHolder extends LinearLayout {
     @SuppressLint("ClickableViewAccessibility")
     public void setViewPagerAdapter(PagerAdapter pagerAdapter) {
         viewPager.setAdapter(pagerAdapter);
+        pagerAdapter.registerDataSetObserver(new android.database.DataSetObserver() {
+            @Override
+            public void onChanged() {
+                pageChangeHandler(viewPager.getCurrentItem());
+            }
+        });
         applyPage_of_();
         pageChangeHandler(viewPager.getCurrentItem());
 

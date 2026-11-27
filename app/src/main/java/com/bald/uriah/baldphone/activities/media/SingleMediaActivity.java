@@ -19,6 +19,7 @@ package com.bald.uriah.baldphone.activities.media;
 import android.app.Activity;
 import android.app.RecoverableSecurityException;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -44,7 +45,9 @@ import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ViewPagerHolder;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Parent activity for {@link SinglePhotoActivity} and {@link SingleVideoActivity}.
@@ -81,7 +84,7 @@ public abstract class SingleMediaActivity extends BaldActivity {
         final int mediaKey = getIntent().getIntExtra(MEDIA_KEY, -1);
         if (mediaKey == -1)
             throw new AssertionError(TAG + " must have a media key!");
-        viewPagerHolder.setCurrentItem(mediaKey);
+        mediaPagerAdapter.loadAsync(() -> viewPagerHolder.setCurrentItem(mediaKey));
 
     }
 
@@ -126,28 +129,76 @@ public abstract class SingleMediaActivity extends BaldActivity {
     }
 
     public abstract static class MediaPagerAdapter extends BaldViewAdapter {
+        protected static final class MediaRow {
+            final long id;
+            final String data;
+
+            MediaRow(long id, String data) {
+                this.id = id;
+                this.data = data;
+            }
+        }
+
         private final SingleMediaActivity activity;
-        protected final Cursor cursor;
+        private List<MediaRow> rows = Collections.emptyList();
         private final Pools.SimplePool<View> pool = new Pools.SimplePool<>(4);
+        private Uri pendingDeleteUri;
+        private String pendingDeleteData;
 
         public MediaPagerAdapter(SingleMediaActivity activity) {
             this.activity = activity;
-            this.cursor = cursor(activity);
         }
 
-        protected abstract void delete(Activity activity);
+        /**
+         * walks the subclass cursor into immutable rows on the io executor (cursor is
+         * closed there), then swaps them in and re-applies the starting page on main
+         */
+        public void loadAsync(final Runnable onLoaded) {
+            final Context appContext = activity.getApplicationContext();
+            com.bald.uriah.baldphone.utils.BaldExecutors.io().execute(() -> {
+                final List<MediaRow> loaded = new ArrayList<>();
+                try (Cursor cursor = cursor(appContext)) {
+                    if (cursor != null) {
+                        final int idIdx = cursor.getColumnIndex(MediaStore.MediaColumns._ID);
+                        final int dataIdx = cursor.getColumnIndex(MediaStore.MediaColumns.DATA);
+                        while (cursor.moveToNext())
+                            loaded.add(new MediaRow(
+                                    cursor.getLong(idIdx),
+                                    dataIdx >= 0 ? cursor.getString(dataIdx) : null));
+                    }
+                }
+                com.bald.uriah.baldphone.utils.BaldExecutors.postToMain(() -> {
+                    if (activity.isFinishing() || activity.isDestroyed())
+                        return;
+                    rows = loaded;
+                    notifyDataSetChanged();
+                    if (onLoaded != null)
+                        onLoaded.run();
+                });
+            });
+        }
+
+        protected abstract Uri contentUri();
+
+        /** mime type for the share intent, e.g. image star */
+        protected abstract String mimeType();
+
+        protected Uri uriAt(int position) {
+            return ContentUris.withAppendedId(contentUri(), rows.get(position).id);
+        }
 
         @RequiresApi(api = Build.VERSION_CODES.Q)
-        protected abstract void deletePost29(Activity activity) throws SecurityException;
-
-        protected abstract Uri getUri();
+        protected void deletePost29(Activity activity) throws SecurityException {
+            activity.getContentResolver().delete(pendingDeleteUri, null, null);
+        }
 
         private void delete(int position) {
-            cursor.moveToPosition(position);
+            pendingDeleteUri = uriAt(position);
+            pendingDeleteData = rows.get(position).data;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 try {
                     activity.startIntentSenderForResult(
-                            MediaStore.createTrashRequest(getContentResolver(), Collections.singletonList(getUri()), true).getIntentSender(),
+                            MediaStore.createTrashRequest(getContentResolver(), Collections.singletonList(pendingDeleteUri), true).getIntentSender(),
                             ALLOW_PHOTO_CODE,
                             null,
                             0,
@@ -182,8 +233,10 @@ public abstract class SingleMediaActivity extends BaldActivity {
                 }
             } else {
                 AppUtils.showAreYouSureYouWantToDelete(String.valueOf(activity.title()), activity, activity.deleteActionRes(), () -> {
-                    cursor.moveToPosition(position);
-                    delete(activity);
+                    activity.getContentResolver().delete(
+                            MediaStore.Files.getContentUri("external"),
+                            MediaStore.MediaColumns.DATA + "=?",
+                            new String[]{pendingDeleteData});
                     activity.setResult(SHOULD_REFRESH);
                     activity.finish();
                 });
@@ -192,16 +245,15 @@ public abstract class SingleMediaActivity extends BaldActivity {
 
         }
 
-        protected abstract Intent share(Activity activity, Cursor cursor);
-
         private Intent share(int position) {
-            cursor.moveToPosition(position);
-            return share(activity, cursor);
+            return new Intent(Intent.ACTION_SEND)
+                    .setTypeAndNormalize(mimeType())
+                    .putExtra(Intent.EXTRA_STREAM, uriAt(position));
         }
 
         protected abstract Cursor cursor(Context context);
 
-        protected abstract void bindView(View view, Cursor cursor, Context context);
+        protected abstract void bindView(View view, Uri uri, Context context);
 
         protected abstract View getView(Context context);
 
@@ -214,14 +266,13 @@ public abstract class SingleMediaActivity extends BaldActivity {
             View v = pool.acquire();
             if (v == null)
                 v = getView(activity);
-            cursor.moveToPosition(position);
-            bindView(v, cursor, activity);
+            bindView(v, uriAt(position), activity);
             return v;
         }
 
         @Override
         public int getCount() {
-            return cursor.getCount();
+            return rows.size();
         }
 
         @Override

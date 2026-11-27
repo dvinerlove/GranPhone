@@ -71,49 +71,19 @@ public class SinglePhotoActivity extends SingleMediaActivity implements Constant
     }
 
     private static class PhotoPagerAdapter extends MediaPagerAdapter {
-        private static final Uri EXTERNAL = MediaStore.Files.getContentUri("external");
 
         public PhotoPagerAdapter(SingleMediaActivity activity) {
             super(activity);
         }
 
         @Override
-        protected Uri getUri() {
-            final int id =
-                    cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            return ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
-        }
-
-        @RequiresApi(api = Build.VERSION_CODES.Q)
-        @Override
-        protected void deletePost29(Activity activity) throws SecurityException {
-            activity.getContentResolver().delete(
-                    getUri(),
-                    null,
-                    null);
+        protected Uri contentUri() {
+            return MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         }
 
         @Override
-        protected void delete(Activity activity) {
-            activity.getContentResolver().delete(
-                    EXTERNAL,
-                    MediaStore.MediaColumns.DATA + "=?",
-                    new String[]{getPath(getUri())});
-        }
-
-        private String getPath(Uri uri) {
-            try (Cursor cursor = getContentResolver().query(uri, PROJECTION, null, null, null)) {
-                final int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                return cursor.getString(column_index);
-            }
-        }
-
-        @Override
-        protected Intent share(Activity activity, Cursor cursor) {
-            return new Intent(Intent.ACTION_SEND)
-                    .setTypeAndNormalize("image/*")
-                    .putExtra(Intent.EXTRA_STREAM, getUri());
+        protected String mimeType() {
+            return "image/*";
         }
 
         @Override
@@ -127,13 +97,10 @@ public class SinglePhotoActivity extends SingleMediaActivity implements Constant
         }
 
         @Override
-        protected void bindView(View view, Cursor cursor, Context context) {
+        protected void bindView(View view, Uri uri, Context context) {
             final ImageView pic = view.findViewById(R.id.pic);
-            final int fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID);
-            final long id = cursor.getLong(fieldIndex);
-            final Uri imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
             if (AppUtils.isValidContextForGlide(pic.getContext()))
-                Glide.with(pic).load(imageUri).into(pic);
+                Glide.with(pic).load(uri).into(pic);
         }
 
         @Override
