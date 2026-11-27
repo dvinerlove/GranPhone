@@ -37,9 +37,16 @@ public class RecentActivity extends BaldActivity {
         setContentView(R.layout.activity_recent);
 
         recyclerView = findViewById(R.id.recycler_view);
-        final CallsRecyclerViewAdapter callsRecyclerViewAdapter = new CallsRecyclerViewAdapter(CallLogsHelper.getAllCalls(getContentResolver()), this);
-        CallLogsHelper.markAllAsRead(getContentResolver());
-        recyclerView.setAdapter(callsRecyclerViewAdapter);
+        final android.content.ContentResolver resolver = getContentResolver();
+        com.bald.uriah.baldphone.utils.BaldExecutors.io().execute(() -> {
+            final java.util.List<com.bald.uriah.baldphone.databases.calls.Call> calls = CallLogsHelper.getAllCalls(resolver);
+            CallLogsHelper.markAllAsRead(resolver);
+            com.bald.uriah.baldphone.utils.BaldExecutors.postToMain(() -> {
+                if (isFinishing() || isDestroyed())
+                    return;
+                recyclerView.setAdapter(new CallsRecyclerViewAdapter(calls, this));
+            });
+        });
 
         setupYoutube(3);
     }
