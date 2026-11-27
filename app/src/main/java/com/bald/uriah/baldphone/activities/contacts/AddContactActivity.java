@@ -160,19 +160,28 @@ public class AddContactActivity extends BaldActivity {
             tv_name_error.setVisibility(View.VISIBLE);
             tv_name_error.announceForAccessibility(tv_name_error.getText());
             et_name.requestFocus();
-        } else if (!(currentContact != null ? update() : insert())) {
-            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.contact_not_created).show();
         } else {
-            finishAffinity();
-            SingleContactActivity.newPictureAdded = true;//static vars are simpler and more rational in this case
+            com.bald.uriah.baldphone.utils.BaldExecutors.io().execute(() -> {
+                final boolean ok = currentContact != null ? update() : insert();
+                com.bald.uriah.baldphone.utils.BaldExecutors.postToMain(() -> {
+                    if (isFinishing() || isDestroyed())
+                        return;
+                    if (!ok) {
+                        BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.contact_not_created).show();
+                        return;
+                    }
+                    finishAffinity();
+                    SingleContactActivity.newPictureAdded = true;//static vars are simpler and more rational in this case
 
-            startActivity(new Intent(this, HomeScreenActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            startActivity(new Intent(this, ContactsActivity.class));
-            startActivity(
-                    new Intent(this, SingleContactActivity.class)
-                            .putExtra(SingleContactActivity.CONTACT_ID, String.valueOf(currentContact.getId()))
-                            .putExtra(SingleContactActivity.PIC_URI_EXTRA, newPhoto)
-            );
+                    startActivity(new Intent(this, HomeScreenActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    startActivity(new Intent(this, ContactsActivity.class));
+                    startActivity(
+                            new Intent(this, SingleContactActivity.class)
+                                    .putExtra(SingleContactActivity.CONTACT_ID, String.valueOf(currentContact.getId()))
+                                    .putExtra(SingleContactActivity.PIC_URI_EXTRA, newPhoto)
+                    );
+                });
+            });
         }
     }
 

@@ -124,14 +124,29 @@ public class SingleContactActivity extends BaldActivity {
         ll_phones.removeAllViews();
         ll_dynamic.removeAllViews();
 
-        try {
-            contact = viaId ?
-                    Contact.fromId(contactKeyExtra, contentResolver) :
-                    Contact.fromLookupKey(contactKeyExtra, contentResolver);
-        } catch (Contact.ContactNotFoundException e) {
-            finish();
-            return;
-        }
+        com.bald.uriah.baldphone.utils.BaldExecutors.io().execute(() -> {
+            final Contact loaded;
+            try {
+                loaded = viaId ?
+                        Contact.fromId(contactKeyExtra, contentResolver) :
+                        Contact.fromLookupKey(contactKeyExtra, contentResolver);
+            } catch (Contact.ContactNotFoundException e) {
+                com.bald.uriah.baldphone.utils.BaldExecutors.postToMain(this::finish);
+                return;
+            }
+            final List<Call> callList =
+                    CallLogsHelper.getForSpecificContact(contentResolver, loaded);
+            com.bald.uriah.baldphone.utils.BaldExecutors.postToMain(() -> {
+                if (isFinishing() || isDestroyed())
+                    return;
+                contact = loaded;
+                bindContact(callList);
+            });
+        });
+    }
+
+    private void bindContact(final List<Call> callList) {
+        {
 
         baldTitleBar.setTitle(R.string.contact);
         tv_contact_name.setText(contact.getName());
@@ -183,11 +198,10 @@ public class SingleContactActivity extends BaldActivity {
 
         setupActions();
 
-        final List<Call> callList =
-                CallLogsHelper.getForSpecificContact(contentResolver, contact);
         if (!callList.isEmpty())
             inflateHistory(callList);
 
+        }
     }
 
     @Override
