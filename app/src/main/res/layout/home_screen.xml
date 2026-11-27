@@ -45,7 +45,8 @@
     <LinearLayout
         android:id="@+id/bottom_row"
         android:layout_width="0dp"
-        android:layout_height="@dimen/button_height_large"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/button_height_large"
         android:layout_marginTop="@dimen/spacing_sm"
         android:layout_marginBottom="@dimen/spacing_md"
         android:orientation="horizontal"
@@ -58,7 +59,7 @@
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_home_sos"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
@@ -70,7 +71,7 @@
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_home_apps"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
@@ -81,7 +82,7 @@
         <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_home_settings"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
             android:background="@drawable/bald_button_background"

@@ -498,13 +498,6 @@ public class HomeScreenActivity extends BaldActivity {
         if (restoredHomePage > 0)
             homePager.setCurrentItem(restoredHomePage, false);
 
-        // Bottom-row labels: one fixed size for all three — autosize made each label a different size.
-        for (final int id : new int[]{R.id.bt_home_sos, R.id.bt_home_apps, R.id.bt_home_settings}) {
-            final android.widget.TextView label = ((com.bald.uriah.baldphone.views.BaldPictureTextButton) findViewById(id)).getTextView();
-            label.setMaxLines(1);
-            label.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.tiny));
-        }
-
         final ViewGroup top_bar = findViewById(R.id.top_bar);
         int tmpPadding = Math.min(screenSize.x, screenSize.y) / 45;
         for (int i = 0; i < top_bar.getChildCount(); i++) {

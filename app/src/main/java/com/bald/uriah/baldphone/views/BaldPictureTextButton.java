@@ -93,8 +93,10 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
         imageView = (ImageView) layoutInflater.inflate(R.layout.bald_picture_text_button_picture, this, false);
         imageView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         setImageDrawable(pic);
-        if (orientation == VERTICAL)
-            imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
+        if (orientation == VERTICAL) {
+            final int iconSize = getResources().getDimensionPixelSize(R.dimen.icon_md);
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(iconSize, iconSize));
+        }
         addView(imageView);
 
         textView = (TextView) layoutInflater.inflate(R.layout.bald_picture_text_button_text, this, false);
@@ -123,7 +125,7 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
                         Math.max(floor, textView.getTextSize() * (avail / wanted) * 0.95f));
         });
         if (orientation == VERTICAL)
-            textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
+            textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         addView(textView);
 
         if (variant != 0)
