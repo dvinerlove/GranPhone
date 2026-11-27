@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.bald.uriah.baldphone.views.DialogMaxHeightLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,15 +27,18 @@
         android:id="@+id/dialog_screen_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
         android:gravity="center"
+        android:maxLines="3"
         android:textColor="?bald_text_primary"
         android:textSize="@dimen/large" />
 
-    <com.bald.uriah.baldphone.views.MaxHeightScrollView
+    <ScrollView
         android:id="@+id/dialog_screen_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_md">
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
         </LinearLayout>
-    </com.bald.uriah.baldphone.views.MaxHeightScrollView>
+    </ScrollView>
 
     <!-- interactive payloads stay pinned below the scroll — they are the point
          of the dialog and must never scroll out of reach -->
@@ -95,4 +98,4 @@
             android:minHeight="@dimen/dialog_button_height"
             android:maxLines="2" />
     </LinearLayout>
-</LinearLayout>
+</com.bald.uriah.baldphone.views.DialogMaxHeightLayout>
