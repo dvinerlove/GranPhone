@@ -27,7 +27,9 @@
         android:layout_width="@dimen/icon_md"
         android:layout_height="@dimen/icon_md"
         android:importantForAccessibility="no"
+        android:layout_marginBottom="@dimen/spacing_xs"
         app:layout_constraintBottom_toTopOf="@+id/tv"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
