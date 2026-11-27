@@ -46,7 +46,7 @@ public class SystemSettingsActivity extends SettingsPageActivity {
 
     @Override
     protected void populateItems() {
-        if (!checkPermissions(this, -1))
+        if (!checkPermissions(this, PERMISSION_ALL))
             items.add(
                     new RunnableSettingsItem(R.string.grant_all_permissions,
                             v -> startActivity(new Intent(this, PermissionActivity.class)),

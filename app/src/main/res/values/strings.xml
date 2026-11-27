@@ -117,6 +117,8 @@
     <string name="allow_notifications_subtext">So calls and reminders can reach you.</string>
     <string name="allow_media_access">Allow Access to Photos and Videos</string>
     <string name="allow_media_access_subtext">So you can browse your photos and videos.</string>
+    <string name="permission_permanently_denied_subtext">Access is turned off. Open app settings and allow it there.</string>
+    <string name="open_app_settings">Open settings</string>
     <string name="enter">Enter</string>
     <string name="enter_phone_number">Enter a phone number</string>
     <string name="evening">Evening</string>

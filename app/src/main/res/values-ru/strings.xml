@@ -115,6 +115,8 @@
     <string name="allow_notifications_subtext">Чтобы звонки и напоминания доходили до вас.</string>
     <string name="allow_media_access">Разрешить доступ к фото и видео</string>
     <string name="allow_media_access_subtext">Чтобы вы могли смотреть свои фото и видео.</string>
+    <string name="permission_permanently_denied_subtext">Доступ выключен. Откройте настройки приложения и разрешите его там.</string>
+    <string name="open_app_settings">Открыть настройки</string>
     <string name="enter">Ввод</string>
     <string name="enter_phone_number">Введите номер телефона</string>
     <string name="evening">Вечер</string>

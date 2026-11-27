@@ -52,6 +52,8 @@ import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.CallManager;
+import com.bald.uriah.baldphone.utils.PermissionContract;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 
 import java.lang.ref.WeakReference;
@@ -78,26 +80,27 @@ import static com.bald.uriah.baldphone.activities.PermissionActivity.EXTRA_INTEN
  */
 public abstract class BaldActivity extends AppCompatActivity implements SensorEventListener {
     private static final String TAG = BaldActivity.class.getSimpleName();
+    // Keep the caller-facing names here; their bit contract lives in PermissionContract.
     protected static final int
-            PERMISSION_NONE = 0,
-            PERMISSION_READ_PHONE_STATE = 0b100000000000,
-            PERMISSION_WRITE_SETTINGS = 0b1,
-            PERMISSION_DEFAULT_PHONE_HANDLER = 0b10,
-            PERMISSION_READ_CONTACTS = 0b100 | PERMISSION_DEFAULT_PHONE_HANDLER,
-            PERMISSION_WRITE_CONTACTS = 0b1000 | PERMISSION_DEFAULT_PHONE_HANDLER,
-            PERMISSION_POST_NOTIFICATIONS = 0b10000000000000,
-            // in-call UI is a notification (full-screen intent); without it calls are blind on API 33+
-            PERMISSION_CALL_PHONE = 0b10000 | PERMISSION_DEFAULT_PHONE_HANDLER | PERMISSION_READ_PHONE_STATE | PERMISSION_POST_NOTIFICATIONS,
-            PERMISSION_READ_CALL_LOG = 0b10000000000 | PERMISSION_DEFAULT_PHONE_HANDLER,
-            PERMISSION_WRITE_CALL_LOG = 0b100000 | PERMISSION_DEFAULT_PHONE_HANDLER | PERMISSION_READ_CALL_LOG,
-            PERMISSION_CAMERA = 0b1000000,
-            PERMISSION_WRITE_EXTERNAL_STORAGE = 0b10000000,
-            PERMISSION_NOTIFICATION_LISTENER = 0b100000000 | PERMISSION_WRITE_SETTINGS,
-            PERMISSION_REQUEST_INSTALL_PACKAGES = 0b1000000000,
-            PERMISSION_SYSTEM_ALERT_WINDOW = 0b1000000000000,
-            PERMISSION_EXACT_ALARM = 0b100000000000000,
-            PERMISSION_MEDIA_IMAGES = 0b1000000000000000,
-            PERMISSION_MEDIA_VIDEO = 0b10000000000000000;
+            PERMISSION_NONE = PermissionContract.PERMISSION_NONE,
+            PERMISSION_READ_PHONE_STATE = PermissionContract.PERMISSION_READ_PHONE_STATE,
+            PERMISSION_WRITE_SETTINGS = PermissionContract.PERMISSION_WRITE_SETTINGS,
+            PERMISSION_DEFAULT_PHONE_HANDLER = PermissionContract.PERMISSION_DEFAULT_PHONE_HANDLER,
+            PERMISSION_READ_CONTACTS = PermissionContract.PERMISSION_READ_CONTACTS,
+            PERMISSION_WRITE_CONTACTS = PermissionContract.PERMISSION_WRITE_CONTACTS,
+            PERMISSION_POST_NOTIFICATIONS = PermissionContract.PERMISSION_POST_NOTIFICATIONS,
+            PERMISSION_CALL_PHONE = PermissionContract.PERMISSION_CALL_PHONE,
+            PERMISSION_READ_CALL_LOG = PermissionContract.PERMISSION_READ_CALL_LOG,
+            PERMISSION_WRITE_CALL_LOG = PermissionContract.PERMISSION_WRITE_CALL_LOG,
+            PERMISSION_CAMERA = PermissionContract.PERMISSION_CAMERA,
+            PERMISSION_WRITE_EXTERNAL_STORAGE = PermissionContract.PERMISSION_WRITE_EXTERNAL_STORAGE,
+            PERMISSION_NOTIFICATION_LISTENER = PermissionContract.PERMISSION_NOTIFICATION_LISTENER,
+            PERMISSION_REQUEST_INSTALL_PACKAGES = PermissionContract.PERMISSION_REQUEST_INSTALL_PACKAGES,
+            PERMISSION_SYSTEM_ALERT_WINDOW = PermissionContract.PERMISSION_SYSTEM_ALERT_WINDOW,
+            PERMISSION_EXACT_ALARM = PermissionContract.PERMISSION_EXACT_ALARM,
+            PERMISSION_MEDIA_IMAGES = PermissionContract.PERMISSION_MEDIA_IMAGES,
+            PERMISSION_MEDIA_VIDEO = PermissionContract.PERMISSION_MEDIA_VIDEO,
+            PERMISSION_ALL = PermissionContract.PERMISSION_ALL;
 
     public boolean testing = false;
     public boolean colorful;
@@ -147,84 +150,71 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
      * @return true if all permissions are granted.
      */
     public static boolean checkPermissions(BaldActivity activity, final int requiredPermissions) {
-        if (requiredPermissions == PERMISSION_NONE)
+        final int permissions = PermissionContract.normalizeRequiredPermissions(requiredPermissions);
+        if (permissions == PERMISSION_NONE)
             return true;
-        if ((requiredPermissions & PERMISSION_DEFAULT_PHONE_HANDLER) != 0) {
-            if (!defaultDialerGranted(activity))
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_DEFAULT_DIALER)
+                && !defaultDialerGranted(activity))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_WRITE_SETTINGS)
+                && !writeSettingsGranted(activity))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_NOTIFICATION_LISTENER)
+                && !notificationListenerGranted(activity))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_READ_CONTACTS)
+                && ActivityCompat.checkSelfPermission(activity, READ_CONTACTS) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_WRITE_CONTACTS)
+                && ActivityCompat.checkSelfPermission(activity, WRITE_CONTACTS) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_CALL_PHONE)
+                && ActivityCompat.checkSelfPermission(activity, CALL_PHONE) != PERMISSION_GRANTED)
+            return false;
+        if (!BuildConfig.FLAVOR.equals("gPlay")) {
+            if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_WRITE_CALL_LOG)
+                    && ActivityCompat.checkSelfPermission(activity, WRITE_CALL_LOG) != PERMISSION_GRANTED)
+                return false;
+            if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_READ_CALL_LOG)
+                    && ActivityCompat.checkSelfPermission(activity, READ_CALL_LOG) != PERMISSION_GRANTED)
                 return false;
         }
-
-        if ((requiredPermissions & PERMISSION_WRITE_SETTINGS) != 0) {
-            if (!writeSettingsGranted(activity))
-                return false;
-            else if ((requiredPermissions & PERMISSION_NOTIFICATION_LISTENER) == PERMISSION_NOTIFICATION_LISTENER) {
-                if (!notificationListenerGranted(activity))
-                    return false;
-            }
-        }
-        if ((requiredPermissions & PERMISSION_READ_CONTACTS) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, READ_CONTACTS) != PERMISSION_GRANTED)
-                return false;
-        }
-        if ((requiredPermissions & PERMISSION_WRITE_CONTACTS) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, WRITE_CONTACTS) != PERMISSION_GRANTED)
-                return false;
-        }
-        if ((requiredPermissions & PERMISSION_CALL_PHONE) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, CALL_PHONE) != PERMISSION_GRANTED)
-                return false;
-        }
-        if ((requiredPermissions & PERMISSION_WRITE_CALL_LOG) != 0) {
-            if (!BuildConfig.FLAVOR.equals("gPlay"))
-                if (ActivityCompat.checkSelfPermission(activity, WRITE_CALL_LOG) != PERMISSION_GRANTED)
-                    return false;
-        }
-        if ((requiredPermissions & PERMISSION_READ_CALL_LOG) != 0) {
-            if (!BuildConfig.FLAVOR.equals("gPlay"))
-                if (ActivityCompat.checkSelfPermission(activity, READ_CALL_LOG) != PERMISSION_GRANTED)
-                    return false;
-        }
-        if ((requiredPermissions & PERMISSION_READ_PHONE_STATE) != 0) {
-            if (BPrefs.get(activity).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE))
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1)
-                    if (ActivityCompat.checkSelfPermission(activity, READ_PHONE_STATE) != PERMISSION_GRANTED)
-                        return false;
-        }
-        if ((requiredPermissions & PERMISSION_CAMERA) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, CAMERA) != PERMISSION_GRANTED)
-                return false;
-        }
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_READ_PHONE_STATE)
+                && BPrefs.get(activity).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
+                && ActivityCompat.checkSelfPermission(activity, READ_PHONE_STATE) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_CAMERA)
+                && ActivityCompat.checkSelfPermission(activity, CAMERA) != PERMISSION_GRANTED)
+            return false;
         // WRITE_EXTERNAL_STORAGE is a no-op since API 33; media-reading callers use the granular bits.
-        if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_WRITE_EXTERNAL_STORAGE)
                 && Build.VERSION.SDK_INT < 33
                 && ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
             return false;
-        if ((requiredPermissions & (PERMISSION_MEDIA_IMAGES | PERMISSION_MEDIA_VIDEO)) != 0) {
-            if (Build.VERSION.SDK_INT >= 33) {
-                if ((requiredPermissions & PERMISSION_MEDIA_IMAGES) != 0
-                        && !mediaPermissionGranted(activity, READ_MEDIA_IMAGES))
-                    return false;
-                if ((requiredPermissions & PERMISSION_MEDIA_VIDEO) != 0
-                        && !mediaPermissionGranted(activity, READ_MEDIA_VIDEO))
-                    return false;
-            } else if (ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+        if (Build.VERSION.SDK_INT >= 33) {
+            if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_MEDIA_IMAGES)
+                    && !mediaPermissionGranted(activity, READ_MEDIA_IMAGES))
                 return false;
-        }
-        if ((requiredPermissions & PERMISSION_POST_NOTIFICATIONS) != 0) {
-            if (Build.VERSION.SDK_INT >= 33)
-                if (ActivityCompat.checkSelfPermission(activity, POST_NOTIFICATIONS) != PERMISSION_GRANTED)
-                    return false;
-        }
-        if ((requiredPermissions & PERMISSION_SYSTEM_ALERT_WINDOW) != 0) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-                if (!Settings.canDrawOverlays(activity))
-                    return false;
-        }
-        if ((requiredPermissions & PERMISSION_EXACT_ALARM) != 0) {
-            if (!AppUtils.canScheduleExactAlarms((android.app.AlarmManager) activity.getSystemService(Context.ALARM_SERVICE)))
+            if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_MEDIA_VIDEO)
+                    && !mediaPermissionGranted(activity, READ_MEDIA_VIDEO))
                 return false;
-        }
-        if ((requiredPermissions & PERMISSION_REQUEST_INSTALL_PACKAGES) != 0) {
+        } else if ((PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_MEDIA_IMAGES)
+                || PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_MEDIA_VIDEO))
+                && ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_POST_NOTIFICATIONS)
+                && Build.VERSION.SDK_INT >= 33
+                && ActivityCompat.checkSelfPermission(activity, POST_NOTIFICATIONS) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_SYSTEM_ALERT_WINDOW)
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+                && !Settings.canDrawOverlays(activity))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_EXACT_ALARM)
+                && !AppUtils.canScheduleExactAlarms((android.app.AlarmManager) activity.getSystemService(Context.ALARM_SERVICE)))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_REQUEST_INSTALL_PACKAGES)) {
             return
                     Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
                             (!BuildConfig.FLAVOR.equals("baldUpdates")) ||
@@ -234,10 +224,12 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     }
 
     /**
-     * not removing yet, perhaps the issue with google will be solved
+     * Honest role state for the atomic default-dialer bit. Before API 23 there is no
+     * dialer role to grant, so the requirement is vacuously satisfied. Legacy callers
+     * do not carry this atom yet; Wave 3b can opt a flow in explicitly.
      */
     static boolean defaultDialerGranted(BaldActivity activity) {
-        return true;
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || CallManager.isDefaultDialer(activity);
     }
 
     static boolean writeSettingsGranted(BaldActivity activity) {
