@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Circular danger badge for the contact-photo delete action (add/edit contact).
+     Split from call_button_red: that radius-28dp rectangle only looked circular at
+     56dp; this one is a true oval at any size. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="?bald_danger" />
+                </shape>
+            </item>
+            <!-- same 0.8 darkening the BigButton variants apply programmatically -->
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#33000000" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="oval">
+            <solid android:color="?bald_danger" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?bald_text_on_variant" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="?bald_danger" />
+        </shape>
+    </item>
+</selector>

@@ -262,22 +262,15 @@
             android:background="@drawable/bald_button_background"
             android:text="@string/cancel" />
 
-        <com.bald.uriah.baldphone.views.BaldButton
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_submit"
-            style="@style/ButtonsText.Large"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height_large"
             android:layout_marginStart="@dimen/spacing_sm"
             android:layout_weight="1"
-            android:ellipsize="end"
-            android:maxLines="1"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="@dimen/tiny"
-            app:autoSizeMaxTextSize="@dimen/large"
-            android:background="@drawable/call_button_green"
-            android:backgroundTint="?attr/bald_brand"
-            android:text="@string/save"
-            android:textColor="?attr/bald_text_on_variant"
-            android:textStyle="bold" />
+            android:background="@drawable/bald_button_background"
+            app:_size="@dimen/large"
+            app:_text="@string/save"
+            app:variant="brand" />
     </LinearLayout>
 </LinearLayout>

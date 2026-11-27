@@ -34,7 +34,7 @@ import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
 import com.bald.uriah.baldphone.databases.alarms.AlarmsDatabase;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.Const;
-import com.bald.uriah.baldphone.views.BaldButton;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.views.BaldNumberChooser;
 
 import org.joda.time.DateTime;
@@ -48,7 +48,7 @@ public class AddAlarmActivity extends com.bald.uriah.baldphone.activities.BaldAc
     static final String ALARM_KEY_AS_EXTRA_KEY = "alarm";
     private int alarmKeyToEdit = -1;
     private Vibrator vibrator;
-    private BaldButton bt_alarm_submit;
+    private BaldPictureTextButton bt_alarm_submit;
     private EditText alarm_edit_name;
     private BaldNumberChooser chooser_hours, chooser_minutes;
     private CheckBox[] daysCheckBoxes;

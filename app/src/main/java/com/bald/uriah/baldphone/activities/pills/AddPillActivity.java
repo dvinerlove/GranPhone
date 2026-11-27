@@ -38,7 +38,7 @@ import com.bald.uriah.baldphone.databases.reminders.RemindersDatabase;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
-import com.bald.uriah.baldphone.views.BaldButton;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.views.BaldMultipleSelection;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 
@@ -57,7 +57,7 @@ public class AddPillActivity extends BaldActivity {
     };
     private int reminderIdToEdit = -1;
     private Vibrator vibrator;
-    private BaldButton bt_submit;
+    private BaldPictureTextButton bt_submit;
     private BaldTitleBar baldTitleBar;
     private EditText reminder_edit_name;
     private BaldMultipleSelection baldMultipleSelection;

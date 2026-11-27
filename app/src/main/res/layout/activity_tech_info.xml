@@ -61,17 +61,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/bt_clear_data" />
 
-    <com.bald.uriah.baldphone.views.BaldButton
+    <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/bt_clear_data"
-        style="@style/ButtonsText.Large"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/spacing_xl"
         android:layout_marginEnd="@dimen/spacing_xl"
-        android:background="@drawable/call_button_red"
-        android:backgroundTint="?attr/bald_danger"
-        android:text="@string/clear_data"
-        android:textColor="?attr/bald_text_on_variant"
+        android:background="@drawable/bald_button_background"
+        app:_size="@dimen/large"
+        app:_text="@string/clear_data"
+        app:variant="danger"
         app:layout_constraintBottom_toBottomOf="@+id/bt_clear_cache"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintStart_toEndOf="@id/bt_clear_cache"
