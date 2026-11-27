@@ -4,7 +4,7 @@ Launcher for elderly/low-vision users (fork of BaldPhone). Java + XML Views, no 
 
 ## Toolchain
 
-- Gradle 8.13 (wrapper), AGP 8.13.2, compileSdk/targetSdk 35.
+- Gradle 8.13 (wrapper), AGP 8.13.2, compileSdk 36, targetSdk 35.
 - Builds require **JDK 17** — set `JAVA_HOME` to a JDK 17 before every `./gradlew` call if the default `java` is not 17.
 - AGP 8.13's bundled aapt2 handles compileSdk 35; do not use machine-local `android.aapt2FromMavenOverride` entries. The former AGP 7.4.2/JDK 11 rule and the user-home aapt2 workaround are superseded.
 - Flavors (`updating_mechanism` dimension): `baldUpdates`, `fDroid`, `gPlay` (`.gp` suffix, no recents), `gPlayRecentCalls` (`.gprc`, reduced feature set via `${fullApp}` manifest placeholders). Work in `fDroid` unless the task says otherwise.
