@@ -19,13 +19,15 @@
     android:id="@+id/bt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="@dimen/spacing_xs"
+    android:paddingBottom="@dimen/spacing_xs"
     android:orientation="vertical"
     android:visibility="visible">
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="@dimen/icon_md"
-        android:layout_height="@dimen/icon_md"
+        android:layout_width="@dimen/icon_xl"
+        android:layout_height="@dimen/icon_xl"
         android:importantForAccessibility="no"
         android:layout_marginBottom="@dimen/spacing_xs"
         app:layout_constraintBottom_toTopOf="@+id/tv"
@@ -42,7 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_sm"
         android:layout_marginEnd="@dimen/spacing_sm"
-        android:layout_marginBottom="@dimen/spacing_sm"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
