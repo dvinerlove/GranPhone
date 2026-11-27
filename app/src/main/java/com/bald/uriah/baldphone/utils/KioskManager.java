@@ -68,6 +68,7 @@ public final class KioskManager {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_MEDIA_IMAGES,
             Manifest.permission.READ_MEDIA_VIDEO,
+            Manifest.permission.POST_NOTIFICATIONS,
     };
 
     private KioskManager() {
@@ -238,6 +239,9 @@ public final class KioskManager {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             for (final String permission : OWN_RUNTIME_PERMISSIONS) {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+                        && Manifest.permission.POST_NOTIFICATIONS.equals(permission))
+                    continue;
                 try {
                     dpm.setPermissionGrantState(admin, packageName, permission, DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED);
                 } catch (Exception e) {

@@ -60,7 +60,13 @@ public class SystemSettingsActivity extends SettingsPageActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             items.add(
                     new RunnableSettingsItem(R.string.use_granphone_for_calls,
-                            v -> CallManager.requestDefaultDialer(this)
+                            v -> {
+                                if (checkPermissions(this, PERMISSION_CALL_SCREEN))
+                                    CallManager.requestDefaultDialer(this);
+                                else
+                                    startActivity(new Intent(this, PermissionActivity.class)
+                                            .putExtra(PermissionActivity.EXTRA_REQUIRED_PERMISSIONS, PERMISSION_CALL_SCREEN));
+                            }
                             , R.drawable.phone_on_button)
             );
         items.add(new RunnableSettingsItem(R.string.kiosk_mode, v -> showKioskDialog(), R.drawable.blocked_on_button));

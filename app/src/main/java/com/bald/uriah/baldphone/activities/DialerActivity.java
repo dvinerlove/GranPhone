@@ -406,6 +406,6 @@ public class DialerActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_READ_CONTACTS | PERMISSION_CALL_PHONE;
+        return PERMISSION_READ_CONTACTS | PERMISSION_CALL_PHONE | PERMISSION_READ_PHONE_STATE;
     }
 }

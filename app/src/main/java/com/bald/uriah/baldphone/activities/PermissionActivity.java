@@ -147,7 +147,8 @@ public class PermissionActivity extends BaldActivity {
         if (requiredPermissions == PERMISSION_NONE)
             return;
 
-        final boolean defaultDialerRequired = requiresAtom(PermissionContract.PERMISSION_ATOM_DEFAULT_DIALER);
+        final boolean defaultDialerRequired = requiresAtom(PermissionContract.PERMISSION_ATOM_DEFAULT_DIALER)
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
         if (defaultDialerRequired) {
             totalSteps++;
             if (!defaultDialerGranted(this)) {
@@ -158,7 +159,8 @@ public class PermissionActivity extends BaldActivity {
             }
         }
 
-        final boolean writeSettingsRequired = requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_SETTINGS);
+        final boolean writeSettingsRequired = requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_SETTINGS)
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
         if (writeSettingsRequired) {
             totalSteps++;
             if (!writeSettingsGranted(this)) {
@@ -169,8 +171,7 @@ public class PermissionActivity extends BaldActivity {
                                 getString(R.string.change_system_settings_subtext)));
             }
         }
-        if (requiresAtom(PermissionContract.PERMISSION_ATOM_NOTIFICATION_LISTENER)
-                && (!writeSettingsRequired || writeSettingsGranted(this))) {
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_NOTIFICATION_LISTENER)) {
             totalSteps++;
             if (!notificationListenerGranted(this)) {
                 permissionItemList.add(new PermissionItem((v) -> startActivityForResult(new Intent(
@@ -178,49 +179,44 @@ public class PermissionActivity extends BaldActivity {
             }
         }
 
-        // Wave 3a keeps the legacy sequencing seam: once a flow explicitly requires the
-        // dialer role, runtime permission cards wait for it. No current composite carries the atom.
-        if (!defaultDialerRequired || defaultDialerGranted(this)) {
-            if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CONTACTS)) {
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CONTACTS)) {
+            totalSteps++;
+            if (ActivityCompat.checkSelfPermission(this, READ_CONTACTS) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.read_contacts), getString(R.string.contacts_read_subtext), READ_CONTACTS));
+        }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CONTACTS)) {
+            totalSteps++;
+            if (ActivityCompat.checkSelfPermission(this, WRITE_CONTACTS) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.write_contacts), getString(R.string.contacts_subtext), WRITE_CONTACTS));
+        }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_CALL_PHONE)) {
+            totalSteps++;
+            if (ActivityCompat.checkSelfPermission(this, CALL_PHONE) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.calling), getString(R.string.call_subtext), CALL_PHONE));
+        }
+        if ((requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CALL_LOG) || requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CALL_LOG))
+                && !BuildConfig.FLAVOR.equals("gPlay")) {
+            totalSteps++;
+            if (requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CALL_LOG)
+                    && ActivityCompat.checkSelfPermission(this, WRITE_CALL_LOG) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.read_call_log), getString(R.string.write_call_log_subtext), WRITE_CALL_LOG));
+            else if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CALL_LOG)
+                    && ActivityCompat.checkSelfPermission(this, READ_CALL_LOG) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.read_call_log), getString(R.string.read_call_log_subtext), READ_CALL_LOG));
+        }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_PHONE_STATE)) {
+            if (BPrefs.get(this).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)
+                    && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
                 totalSteps++;
-                if (ActivityCompat.checkSelfPermission(this, READ_CONTACTS) != PERMISSION_GRANTED)
+                if (ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) != PERMISSION_GRANTED)
                     permissionItemList.add(
-                            runtimePermissionItem(getString(R.string.read_contacts), getString(R.string.contacts_read_subtext), READ_CONTACTS));
+                            runtimePermissionItem(getString(R.string.read_phone_state), getString(R.string.read_phone_state_subtext), READ_PHONE_STATE));
             }
-            if (requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CONTACTS)) {
-                totalSteps++;
-                if (ActivityCompat.checkSelfPermission(this, WRITE_CONTACTS) != PERMISSION_GRANTED)
-                    permissionItemList.add(
-                            runtimePermissionItem(getString(R.string.write_contacts), getString(R.string.contacts_subtext), WRITE_CONTACTS));
-            }
-            if (requiresAtom(PermissionContract.PERMISSION_ATOM_CALL_PHONE)) {
-                totalSteps++;
-                if (ActivityCompat.checkSelfPermission(this, CALL_PHONE) != PERMISSION_GRANTED)
-                    permissionItemList.add(
-                            runtimePermissionItem(getString(R.string.calling), getString(R.string.call_subtext), CALL_PHONE));
-            }
-            if ((requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CALL_LOG) || requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CALL_LOG))
-                    && !BuildConfig.FLAVOR.equals("gPlay")) {
-                totalSteps++;
-                if (requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CALL_LOG)
-                        && ActivityCompat.checkSelfPermission(this, WRITE_CALL_LOG) != PERMISSION_GRANTED)
-                    permissionItemList.add(
-                            runtimePermissionItem(getString(R.string.read_call_log), getString(R.string.write_call_log_subtext), WRITE_CALL_LOG));
-                else if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CALL_LOG)
-                        && ActivityCompat.checkSelfPermission(this, READ_CALL_LOG) != PERMISSION_GRANTED)
-                    permissionItemList.add(
-                            runtimePermissionItem(getString(R.string.read_call_log), getString(R.string.read_call_log_subtext), READ_CALL_LOG));
-            }
-            if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_PHONE_STATE)) {
-                if (BPrefs.get(this).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)
-                        && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
-                    totalSteps++;
-                    if (ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) != PERMISSION_GRANTED)
-                        permissionItemList.add(
-                                runtimePermissionItem(getString(R.string.read_phone_state), getString(R.string.read_phone_state_subtext), READ_PHONE_STATE));
-                }
-            }
-
         }
         if (requiresAtom(PermissionContract.PERMISSION_ATOM_CAMERA)) {
             totalSteps++;

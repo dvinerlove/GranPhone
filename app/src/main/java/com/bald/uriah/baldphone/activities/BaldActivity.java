@@ -100,6 +100,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
             PERMISSION_EXACT_ALARM = PermissionContract.PERMISSION_EXACT_ALARM,
             PERMISSION_MEDIA_IMAGES = PermissionContract.PERMISSION_MEDIA_IMAGES,
             PERMISSION_MEDIA_VIDEO = PermissionContract.PERMISSION_MEDIA_VIDEO,
+            PERMISSION_CALL_SCREEN = PermissionContract.PERMISSION_CALL_SCREEN,
             PERMISSION_ALL = PermissionContract.PERMISSION_ALL;
 
     public boolean testing = false;
@@ -225,8 +226,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
 
     /**
      * Honest role state for the atomic default-dialer bit. Before API 23 there is no
-     * dialer role to grant, so the requirement is vacuously satisfied. Legacy callers
-     * do not carry this atom yet; Wave 3b can opt a flow in explicitly.
+     * dialer role to grant, so the requirement is vacuously satisfied.
      */
     static boolean defaultDialerGranted(BaldActivity activity) {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || CallManager.isDefaultDialer(activity);

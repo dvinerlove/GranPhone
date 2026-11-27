@@ -61,7 +61,12 @@ public class ConnectionSettingsActivity extends SettingsPageActivity {
 
                 }
             }, R.drawable.nfc_on_button));
-        if (hasMultipleSims())
+        final boolean phoneStateGranted = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
+                && androidx.core.app.ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE)
+                == android.content.pm.PackageManager.PERMISSION_GRANTED;
+        // Without the permission hardware verification is impossible; still expose the preference
+        // so enabling it can make Dialer/SOS request the permission through their existing flow.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && (!phoneStateGranted || hasMultipleSims()))
             items.add(new RunnableSettingsItem(R.string.dual_sim,
                     v -> DialogScreen.select(this, R.string.dual_sim,
                             sharedPreferences.getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE) ? 0 : 1,

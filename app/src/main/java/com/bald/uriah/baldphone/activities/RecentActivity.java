@@ -46,6 +46,6 @@ public class RecentActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_WRITE_CALL_LOG | PERMISSION_READ_CONTACTS;
+        return PERMISSION_WRITE_CALL_LOG | PERMISSION_READ_CALL_LOG | PERMISSION_READ_CONTACTS;
     }
 }

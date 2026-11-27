@@ -325,6 +325,6 @@ public class SOSActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_CALL_PHONE | PERMISSION_READ_CONTACTS;
+        return PERMISSION_CALL_PHONE | PERMISSION_READ_CONTACTS | PERMISSION_READ_PHONE_STATE;
     }
 }
