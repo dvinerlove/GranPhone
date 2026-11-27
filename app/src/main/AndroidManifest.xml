@@ -423,6 +423,14 @@
             </intent-filter>
         </receiver>
         <receiver
+            android:name=".broadcast_receivers.ExactAlarmPermissionReceiver"
+            android:enabled="${fullApp}"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver
             android:name=".broadcast_receivers.AlarmReceiver"
             android:enabled="${fullApp}"
             android:process=":remote" />
