@@ -29,32 +29,47 @@
     android:paddingEnd="@dimen/spacing_md"
     android:paddingBottom="@dimen/spacing_md">
 
-    <TextClock
-        android:id="@+id/textClock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoSizeMinTextSize="48sp"
-        android:autoSizeTextType="uniform"
-        android:textColor="?attr/bald_text_primary"
-        android:textSize="96sp"
-        tools:ignore="SpUsage" />
-
-    <TextView
-        android:id="@+id/alarm_name"
+    <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_lg"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="3"
-        android:textColor="?attr/bald_text_secondary"
-        android:textSize="@dimen/huge"
-        tools:text="Вставать" />
-
-    <Space
-        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <com.bald.uriah.baldphone.views.ModularScrollView
+            android:id="@+id/child"
+            style="@style/ScrollStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextClock
+                    android:id="@+id/textClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeMinTextSize="48sp"
+                    android:autoSizeTextType="uniform"
+                    android:textColor="?attr/bald_text_primary"
+                    android:textSize="96sp"
+                    tools:ignore="SpUsage" />
+
+                <TextView
+                    android:id="@+id/alarm_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_lg"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:textColor="?attr/bald_text_secondary"
+                    android:textSize="@dimen/huge"
+                    tools:text="Вставать" />
+            </LinearLayout>
+        </com.bald.uriah.baldphone.views.ModularScrollView>
+    </com.bald.uriah.baldphone.views.ScrollingHelper>
 
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/snooze"

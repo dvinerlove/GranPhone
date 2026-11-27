@@ -12,30 +12,51 @@
     android:orientation="vertical"
     android:padding="@dimen/spacing_xl">
 
-    <TextView
-        android:id="@+id/tv_pin_title"
+    <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="?bald_text_primary"
-        android:textSize="@dimen/large"
-        tools:text="Helper settings" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/tv_pin_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_sm"
-        android:gravity="center"
-        android:lineSpacingMultiplier="1.2"
-        android:textColor="?bald_text_secondary"
-        android:textSize="@dimen/medium"
-        tools:text="Enter the helper password." />
+        <com.bald.uriah.baldphone.views.ModularScrollView
+            android:id="@+id/child"
+            style="@style/ScrollStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-    <include
-        android:id="@+id/pin_pad"
-        layout="@layout/pin_pad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_lg" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_pin_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="?bald_text_primary"
+                    android:textSize="@dimen/large"
+                    tools:text="Helper settings" />
+
+                <TextView
+                    android:id="@+id/tv_pin_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.2"
+                    android:textColor="?bald_text_secondary"
+                    android:textSize="@dimen/medium"
+                    tools:text="Enter the helper password." />
+
+                <include
+                    android:id="@+id/pin_pad"
+                    layout="@layout/pin_pad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_lg" />
+            </LinearLayout>
+        </com.bald.uriah.baldphone.views.ModularScrollView>
+    </com.bald.uriah.baldphone.views.ScrollingHelper>
 </LinearLayout>

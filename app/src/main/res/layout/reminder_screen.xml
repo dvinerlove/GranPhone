@@ -29,29 +29,44 @@
     android:paddingEnd="@dimen/spacing_md"
     android:paddingBottom="@dimen/spacing_md">
 
-    <ImageView
-        android:id="@+id/iv_pill"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:importantForAccessibility="no"
-        android:src="@drawable/pill" />
-
-    <TextView
-        android:id="@+id/textual_content"
+    <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_lg"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="3"
-        android:textColor="?attr/bald_text_primary"
-        android:textSize="@dimen/huge"
-        tools:text="Принять таблетку" />
-
-    <Space
-        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <com.bald.uriah.baldphone.views.ModularScrollView
+            android:id="@+id/child"
+            style="@style/ScrollStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_pill"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/pill" />
+
+                <TextView
+                    android:id="@+id/textual_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_lg"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:textColor="?attr/bald_text_primary"
+                    android:textSize="@dimen/huge"
+                    tools:text="Принять таблетку" />
+            </LinearLayout>
+        </com.bald.uriah.baldphone.views.ModularScrollView>
+    </com.bald.uriah.baldphone.views.ScrollingHelper>
 
     <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/snooze"
