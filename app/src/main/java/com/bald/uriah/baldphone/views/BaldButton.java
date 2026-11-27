@@ -43,6 +43,7 @@ public class BaldButton extends androidx.appcompat.widget.AppCompatTextView impl
     private final BaldToast longer;
     private OnClickListener onClickListener;
     private BaldButtonTouchListener baldButtonTouchListener;
+    private CharSequence accessibilityClassName;
 
     public BaldButton(Context context) {
         super(context);
@@ -135,10 +136,15 @@ public class BaldButton extends androidx.appcompat.widget.AppCompatTextView impl
             super.setOnTouchListener(l);
     }
 
+    /** Final say over the node role: delegates run before this view's own button default. */
+    public void setAccessibilityClassName(CharSequence accessibilityClassName) {
+        this.accessibilityClassName = accessibilityClassName;
+    }
+
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
-        info.setClassName(android.widget.Button.class.getName());
+        info.setClassName(accessibilityClassName == null ? android.widget.Button.class.getName() : accessibilityClassName);
     }
 
     @Override

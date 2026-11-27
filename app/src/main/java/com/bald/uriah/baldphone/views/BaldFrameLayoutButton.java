@@ -43,6 +43,7 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
     private final BaldToast longer;
     private OnClickListener onClickListener;
     private BaldButtonTouchListener baldButtonTouchListener;
+    private CharSequence accessibilityClassName;
 
     public BaldFrameLayoutButton(Context context) {
         super(context);
@@ -136,10 +137,15 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
             super.setOnTouchListener(l);
     }
 
+    /** Final say over the node role: delegates run before this view's own button default. */
+    public void setAccessibilityClassName(CharSequence accessibilityClassName) {
+        this.accessibilityClassName = accessibilityClassName;
+    }
+
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
-        info.setClassName(android.widget.Button.class.getName());
+        info.setClassName(accessibilityClassName == null ? android.widget.Button.class.getName() : accessibilityClassName);
     }
 
     @Override

@@ -26,6 +26,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
@@ -109,6 +110,7 @@ public class BaldMultipleSelection extends LinearLayout {
             textColorOnSelected = typedArray.getColor(R.styleable.BaldMultipleSelection_selected_text_color, textColorOnSelected);
             typedArray.recycle();
         }
+        setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
 
     }
 
@@ -161,6 +163,15 @@ public class BaldMultipleSelection extends LinearLayout {
         button.setBackground(defaultDrawable.getConstantState().newDrawable());
 
         button.setText(name);
+        button.setAccessibilityClassName(android.widget.RadioButton.class.getName());
+        button.setAccessibilityDelegate(new AccessibilityDelegate() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                info.setCheckable(true);
+                info.setChecked(selection == index);
+            }
+        });
         final float maxPx = pxDimen != -1 ? pxDimen
                 : context.getResources().getDimension(R.dimen.medium);
         button.setTextSize(TypedValue.COMPLEX_UNIT_PX, maxPx);
@@ -229,6 +240,12 @@ public class BaldMultipleSelection extends LinearLayout {
             button.setBackground((state ? defaultDrawableSelected : defaultDrawable).getConstantState().newDrawable());
         }
         button.setTextColor(state ? textColorOnSelected : textColorOnButton);
+    }
+
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName(android.widget.RadioGroup.class.getName());
     }
 
     @FunctionalInterface

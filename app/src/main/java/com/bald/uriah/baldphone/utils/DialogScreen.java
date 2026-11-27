@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -227,10 +228,20 @@ public class DialogScreen extends Dialog {
             final ImageView check = row.findViewById(R.id.dialog_screen_option_check);
             final TextView text = row.findViewById(R.id.dialog_screen_option_text);
             text.setText(options[i]);
+            text.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+            row.setContentDescription(options[i]);
+            row.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+                @Override
+                public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+                    super.onInitializeAccessibilityNodeInfo(host, info);
+                    info.setClassName(android.widget.RadioButton.class.getName());
+                    info.setCheckable(true);
+                    info.setChecked(index == selectedIndex);
+                }
+            });
             if (i == selectedIndex) {
                 check.setVisibility(View.VISIBLE);
                 text.setTextColor(brandColor);
-                row.setSelected(true); // TalkBack announces the selected state
             }
             row.setOnClickListener(v -> {
                 onOptionSelected.onOptionSelected(index);

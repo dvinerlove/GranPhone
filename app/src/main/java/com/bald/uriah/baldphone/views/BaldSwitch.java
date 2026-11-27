@@ -27,6 +27,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.PathInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -99,6 +101,8 @@ public class BaldSwitch extends FrameLayout {
         enabled = (styleAttributesArray.getBoolean(R.styleable.BaldSwitch_enabled, true));
         setEnabled(enabled);
         //Dont change, trust me
+        setFocusable(enabled);
+        setClickable(enabled);
 
         checked = styleAttributesArray.getBoolean(R.styleable.BaldSwitch_checked, false);
         styleAttributesArray.recycle();
@@ -128,27 +132,25 @@ public class BaldSwitch extends FrameLayout {
             inset = getResources().getDimensionPixelSize(R.dimen.spacing_xs) / 2;
 
             thumb = new View(context);
+            thumb.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
             addView(thumb);
 
             row = new LinearLayout(context);
             row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
             addView(row, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
             tv_yes = (TextView) inflater.inflate(R.layout.bald_switch_yes, row, false);
             tv_no = (TextView) inflater.inflate(R.layout.bald_switch_no, row, false);
+            tv_yes.setFocusable(false);
+            tv_no.setFocusable(false);
 
             tv_yes.setText(yes);
             tv_yes.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!enabled)
-                        throw new IllegalStateException("should not be clicked!");
-                    if (checked)
-                        return;
-                    checked = true;
-                    onChangeListener.onChange(checked);
-                    updateView();
-                    announceForAccessibility(yes);
+                    if (setCheckedFromUser(true))
+                        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
                 }
             });
 
@@ -156,15 +158,8 @@ public class BaldSwitch extends FrameLayout {
             tv_no.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!enabled)
-                        throw new IllegalStateException("should not be clicked!");
-                    if (!checked)
-                        return;
-                    checked = false;
-                    onChangeListener.onChange(checked);
-                    updateView();
-                    announceForAccessibility(no);
-                    return;
+                    if (setCheckedFromUser(false))
+                        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
                 }
             });
 
@@ -184,10 +179,6 @@ public class BaldSwitch extends FrameLayout {
 
         tv_yes.setEnabled(enabled);
         tv_no.setEnabled(enabled);
-
-        // no app drawable keys off state_selected — this flag is purely for TalkBack
-        tv_yes.setSelected(checked);
-        tv_no.setSelected(!checked);
 
         if (enabled) {
             setBackground(ContextCompat.getDrawable(context, R.drawable.btn_enabled));
@@ -306,6 +297,36 @@ public class BaldSwitch extends FrameLayout {
                 : textColorOnButton);
     }
 
+    private boolean setCheckedFromUser(boolean newChecked) {
+        if (!enabled)
+            throw new IllegalStateException("should not be clicked!");
+        if (checked == newChecked)
+            return false;
+        checked = newChecked;
+        onChangeListener.onChange(checked);
+        updateView();
+        return true;
+    }
+
+    @Override
+    public boolean performClick() {
+        if (!enabled)
+            return false;
+        setCheckedFromUser(!checked);
+        // super sends the click event after the checked state has changed.
+        super.performClick();
+        return true;
+    }
+
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName(android.widget.Switch.class.getName());
+        info.setCheckable(true);
+        info.setChecked(checked);
+        info.setEnabled(enabled);
+    }
+
     @Override
     public boolean isEnabled() {
         return enabled;
@@ -318,6 +339,8 @@ public class BaldSwitch extends FrameLayout {
 
         this.enabled = enabled;
         super.setEnabled(enabled);
+        setFocusable(enabled);
+        setClickable(enabled);
 //        for(int i=0;i<getChildCount();i++){
 //            getChildAt(i).setEnabled(enabled);
 //        }

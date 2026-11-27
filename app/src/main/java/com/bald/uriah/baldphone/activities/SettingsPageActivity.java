@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.PinPad;
 import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
+import com.bald.uriah.baldphone.views.BaldFrameLayoutButton;
 import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
@@ -267,6 +269,32 @@ public abstract class SettingsPageActivity extends BaldActivity {
                 this.trailing.removeAllViews();
                 settingsItem.bindTrailing(this.trailing);
                 this.itemView.setOnClickListener(settingsItem);
+                bindAccessibility(settingsItem instanceof SwitchSettingsItem ? (SwitchSettingsItem) settingsItem : null);
+            }
+
+            private void bindAccessibility(@Nullable SwitchSettingsItem switchItem) {
+                final boolean switchRow = switchItem != null;
+                final BaldFrameLayoutButton row = (BaldFrameLayoutButton) itemView;
+                textView.setImportantForAccessibility(switchRow ? View.IMPORTANT_FOR_ACCESSIBILITY_NO : View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+                subtitleView.setImportantForAccessibility(switchRow ? View.IMPORTANT_FOR_ACCESSIBILITY_NO : View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+                trailing.setImportantForAccessibility(switchRow ? View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS : View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+                if (!switchRow) {
+                    row.setAccessibilityClassName(null);
+                    itemView.setContentDescription(null);
+                    itemView.setAccessibilityDelegate(null);
+                    return;
+                }
+                row.setAccessibilityClassName(android.widget.Switch.class.getName());
+                itemView.setContentDescription(switchItem.accessibilityLabel());
+                itemView.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+                    @Override
+                    public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+                        super.onInitializeAccessibilityNodeInfo(host, info);
+                        info.setCheckable(true);
+                        info.setChecked(switchItem.baldSwitch == null ? switchItem.readChecked() : switchItem.baldSwitch.isChecked());
+                        info.setContentDescription(switchItem.accessibilityLabel());
+                    }
+                });
             }
         }
     }
@@ -325,13 +353,16 @@ public abstract class SettingsPageActivity extends BaldActivity {
                 baldSwitch.setChecked(readChecked());
         }
 
+        private CharSequence accessibilityLabel() {
+            final CharSequence label = SettingsPageActivity.this.getText(textResId);
+            final CharSequence subtitle = getSubtitle();
+            return subtitle == null ? label : label + "\n" + subtitle;
+        }
+
         @Override
         public void onClick(View v) {
-            if (baldSwitch == null)
-                return;
-            // BaldSwitch.setChecked doesn't fire the change listener — apply manually.
-            baldSwitch.setChecked(!baldSwitch.isChecked());
-            apply(baldSwitch.isChecked());
+            if (baldSwitch != null)
+                baldSwitch.performClick();
         }
 
         @Override
@@ -343,6 +374,8 @@ public abstract class SettingsPageActivity extends BaldActivity {
                     ctx.getResources().getDimensionPixelSize(R.dimen.switch_height)));
             baldSwitch.setChecked(readChecked());
             baldSwitch.setOnChangeListener(this::apply);
+            baldSwitch.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+            baldSwitch.setFocusable(false);
             container.addView(baldSwitch);
         }
     }
