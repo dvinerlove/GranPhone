@@ -187,7 +187,6 @@
     <string name="message">Message</string>
     <string name="messages">Messages</string>
     <string name="minute">Minute</string>
-    <string name="minutes">Minutes</string>
     <string name="missed">Missed</string>
     <string name="missed_alarm">Missed alarm</string>
     <string name="missed_pill">Missed pill</string>
@@ -205,7 +204,6 @@
     <string name="notes">Notes</string>
     <string name="notifications">Notifications</string>
 
-    <string name="of">of</string>
     <string name="off">Off</string>
     <string name="off_short">Off</string>
     <string name="ok">OK</string>
@@ -521,4 +519,29 @@
     <string name="convenience_accessibility">Ease of use &amp; accessibility</string>
     <string name="volume_up">+</string>
     <string name="volume_down">−</string>
+    <plurals name="duration_minutes">
+        <item quantity="one">%1$d minute</item>
+        <item quantity="other">%1$d minutes</item>
+    </plurals>
+    <plurals name="duration_hours">
+        <item quantity="one">%1$d hour</item>
+        <item quantity="other">%1$d hours</item>
+    </plurals>
+    <plurals name="duration_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <plurals name="new_notifications_count">
+        <item quantity="one">%1$d new notification</item>
+        <item quantity="other">%1$d new notifications</item>
+    </plurals>
+    <string name="goes_off_in">Goes off in %1$s</string>
+    <string name="goes_off_in_two_units">Goes off in %1$s %2$s</string>
+    <string name="page_position">%1$s %2$d of %3$d</string>
+    <string name="current_version_value">Current version:\n%1$s</string>
+    <string name="new_version_value">New version:\n%1$s</string>
+    <string name="cd_letters_with_char">Letters: %1$s</string>
+    <string name="battery_level_desc">Battery: %1$d%%</string>
+    <string name="battery_level_desc_charging">Battery: %1$d%%, charging</string>
+    <string name="open_notification">Open notification</string>
 </resources>

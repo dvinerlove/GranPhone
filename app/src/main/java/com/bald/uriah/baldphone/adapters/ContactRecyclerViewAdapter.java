@@ -32,7 +32,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,8 +81,6 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
     private final SparseIntArray letterToPosition;
     private final RecyclerView recyclerView;
     private final int mode;
-    @ColorInt
-    private final int textColorOnGold, textColorOnButton, textColorSecondary;
     private RandomColorMaker randomColorMaker;
     private Cursor cursor;
     private final Map<String, String> numbersCache = new HashMap<>();
@@ -100,13 +97,6 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
         this.letterContactBackground = new ColorDrawable(typedValue.data);
         this.randomColorMaker = new RandomColorMaker(typedValue.data);
         letterToPosition = new SparseIntArray();
-        theme.resolveAttribute(R.attr.bald_text_on_gold, typedValue, true);
-        textColorOnGold = typedValue.data;
-        theme.resolveAttribute(R.attr.bald_text_primary, typedValue, true);
-        textColorOnButton = typedValue.data;
-        theme.resolveAttribute(R.attr.bald_text_secondary, typedValue, true);
-        textColorSecondary = typedValue.data;
-
         applyToCursor();
     }
 
@@ -338,7 +328,7 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             }
             // the letter alone reads as a stray character — tell TalkBack it opens the letter picker
             this.tv_letter.setContentDescription(character == null ? null :
-                    activity.getString(R.string.cd_letters) + ": " + character);
+                    activity.getString(R.string.cd_letters_with_char, character));
         }
 
         public void setFavorite(final boolean f) {
@@ -346,10 +336,6 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
                 return;
             favorite = f;
             ll_contact_only.setSelected(favorite);
-            ll_contact_only.setBackgroundResource(favorite ? R.drawable.style_for_buttons_rectangle_gold : R.drawable.bald_card_background);
-            tv_contact_name.setTextColor(favorite ? textColorOnGold : textColorOnButton);
-            tv_contact_number.setTextColor(favorite ? textColorOnGold : textColorSecondary);
-
         }
 
         @Override

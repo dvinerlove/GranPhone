@@ -13,6 +13,7 @@
         android:id="@+id/tv_pin_dots"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height_default"
+        android:accessibilityLiveRegion="polite"
         android:gravity="center"
         android:letterSpacing="0.15"
         android:textColor="?bald_text_primary"

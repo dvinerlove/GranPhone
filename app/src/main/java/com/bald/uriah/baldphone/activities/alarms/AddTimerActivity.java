@@ -119,7 +119,7 @@ public class AddTimerActivity extends BaldActivity {
     private void updateAccordingToTime() {
         if (timeInMinutes < 1 || timeInMinutes > (Const.DAY / Const.MINUTE))//a day
             timeInMinutes = 1;
-        time.setText(String.format("%d %s", timeInMinutes, getString(R.string.minutes)));
+        time.setText(getResources().getQuantityString(R.plurals.duration_minutes, timeInMinutes, timeInMinutes));
     }
 
     @Override

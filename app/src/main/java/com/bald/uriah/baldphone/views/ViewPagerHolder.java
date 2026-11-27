@@ -40,14 +40,12 @@ import com.bald.uriah.baldphone.utils.Const;
 import com.duolingo.open.rtlviewpager.RtlViewPager;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Locale;
 
 public class ViewPagerHolder extends LinearLayout {
     private static final int HEIGHT = 60;//in dp
     private Context context;
 
     private CharSequence itemType;
-    private String of;
 
     //views
     private View right, left;
@@ -97,7 +95,6 @@ public class ViewPagerHolder extends LinearLayout {
         noArrows = noArrows || typedArray.getBoolean(R.styleable.ViewPagerHolder_no_arrows, false);
 
         typedArray.recycle();
-        of = String.valueOf(context.getText(R.string.of));
         this.setOrientation(VERTICAL);
 
         viewPager = noArrows ? new RtlViewPager(context) : new NonSwipeableViewPager(context);
@@ -182,7 +179,7 @@ public class ViewPagerHolder extends LinearLayout {
 
     private void applyPage_of_() {
         if (!useCircle)
-            page_of_.setText(String.format(Locale.US, "%s %d %s %d", itemType, pageIndex + 1, of, viewPager.getAdapter().getCount()));
+            page_of_.setText(context.getString(R.string.page_position, itemType, pageIndex + 1, viewPager.getAdapter().getCount()));
     }
 
     @SuppressLint("ClickableViewAccessibility")

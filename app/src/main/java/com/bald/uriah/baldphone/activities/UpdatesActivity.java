@@ -150,8 +150,8 @@ public class UpdatesActivity extends BaldActivity {
     public void apply() {
         if (isDestroyed())
             return;
-        tv_new_version.setText(String.format("%s%s", getString(R.string.new_version), baldUpdateObject.versionName));
-        tv_current_version.setText(String.format("%s%s", getString(R.string.current_version), BuildConfig.VERSION_NAME));
+        tv_new_version.setText(getString(R.string.new_version_value, baldUpdateObject.versionName));
+        tv_current_version.setText(getString(R.string.current_version_value, BuildConfig.VERSION_NAME));
         tv_change_log.setText(baldUpdateObject.changeLog);
         final SharedPreferences sharedPreferences = BPrefs.get(this);
         final int downloadedVersion = BPrefs.get(this).getInt(BPrefs.LAST_APK_VERSION_KEY, -1);

@@ -182,7 +182,6 @@
     <string name="message">Сообщение</string>
     <string name="messages">Сообщения</string>
     <string name="minute">Минута</string>
-    <string name="minutes">Минут</string>
     <string name="missed">Пропущенный</string>
     <string name="missed_alarm">Пропущен будильник</string>
     <string name="missed_pill">Пропущена таблетка</string>
@@ -200,7 +199,6 @@
     <string name="notes">Заметки</string>
     <string name="notifications">Уведомления</string>
 
-    <string name="of">из</string>
     <string name="off">Выключить</string>
     <string name="off_short">Выкл</string>
     <string name="ok">OK</string>
@@ -514,4 +512,37 @@ adb shell dpm set-device-owner com.granphone.launcher/com.bald.uriah.baldphone.b
     <string name="convenience_accessibility">Удобство и доступность</string>
     <string name="volume_up">+</string>
     <string name="volume_down">−</string>
+    <plurals name="duration_minutes">
+        <item quantity="one">%1$d минута</item>
+        <item quantity="few">%1$d минуты</item>
+        <item quantity="many">%1$d минут</item>
+        <item quantity="other">%1$d минут</item>
+    </plurals>
+    <plurals name="duration_hours">
+        <item quantity="one">%1$d час</item>
+        <item quantity="few">%1$d часа</item>
+        <item quantity="many">%1$d часов</item>
+        <item quantity="other">%1$d часов</item>
+    </plurals>
+    <plurals name="duration_days">
+        <item quantity="one">%1$d день</item>
+        <item quantity="few">%1$d дня</item>
+        <item quantity="many">%1$d дней</item>
+        <item quantity="other">%1$d дней</item>
+    </plurals>
+    <plurals name="new_notifications_count">
+        <item quantity="one">%1$d новое уведомление</item>
+        <item quantity="few">%1$d новых уведомления</item>
+        <item quantity="many">%1$d новых уведомлений</item>
+        <item quantity="other">%1$d новых уведомлений</item>
+    </plurals>
+    <string name="goes_off_in">Сработает через %1$s</string>
+    <string name="goes_off_in_two_units">Сработает через %1$s %2$s</string>
+    <string name="page_position">%1$s %2$d из %3$d</string>
+    <string name="current_version_value">Текущая версия:\n%1$s</string>
+    <string name="new_version_value">Новая версия:\n%1$s</string>
+    <string name="cd_letters_with_char">Буквы: %1$s</string>
+    <string name="battery_level_desc">Батарея: %1$d%%</string>
+    <string name="battery_level_desc_charging">Батарея: %1$d%%, заряжается</string>
+    <string name="open_notification">Открыть уведомление</string>
 </resources>

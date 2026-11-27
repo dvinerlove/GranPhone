@@ -254,7 +254,7 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                 }
                 appendLabelPart(label, time_stamp.getText());
                 if (pendingIntent != null)
-                    appendLabelPart(label, context.getString(R.string.open));
+                    appendLabelPart(label, context.getString(R.string.open_notification));
             }
             itemView.setContentDescription(label);
         }
