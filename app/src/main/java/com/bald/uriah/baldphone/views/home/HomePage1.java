@@ -155,9 +155,12 @@ public class HomePage1 extends HomeView {
     }
 
     /**
-     * The clock keeps its measured content height; visible peer rows share whatever
-     * viewport remains, but never go below the accessibility floor. If the floor
-     * does not fit, the enclosing ModularScrollView takes over instead of squeezing.
+     * Rows keep a fixed "normal" height (what they would be with the default full
+     * set visible), never below the accessibility floor, and sit at the bottom.
+     * The clock card is the vertical spring: its background absorbs whatever
+     * viewport space the rows don't use, while the clock/date inside it stay
+     * top-anchored and never re-center. If the floor does not fit, the enclosing
+     * ModularScrollView takes over instead of squeezing.
      */
     private static final int FULL_ROW_COUNT = 4;
 
@@ -185,14 +188,18 @@ public class HomePage1 extends HomeView {
         final int available = viewportHeight
                 - content.getPaddingTop() - content.getPaddingBottom()
                 - clockHeight - rowMargins;
-        // cap: rows never stretch beyond what they would be with the default full
-        // set (phone + 3 tiles) visible - fewer rows must not turn into giant blocks
         final int rowHeight = Math.max(Math.max(0, available / Math.max(visibleRows, FULL_ROW_COUNT)), measureTileRowFloor());
         for (final int id : TILE_ROW_IDS) {
             final View row = view.findViewById(id);
             final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
             rowParams.height = rowHeight;
         }
+
+        final LinearLayout.LayoutParams clockParams = (LinearLayout.LayoutParams) clockCard.getLayoutParams();
+        final int slack = available - rowHeight * visibleRows;
+        clockParams.height = slack > 0
+                ? clockCard.getMeasuredHeight() + slack
+                : LinearLayout.LayoutParams.WRAP_CONTENT;
     }
 
     /** Measures the clock as wrap-content at the grid width, including its own margins. */
