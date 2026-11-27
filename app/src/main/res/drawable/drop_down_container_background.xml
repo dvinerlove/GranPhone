@@ -16,12 +16,12 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <corners android:radius="16dp" />
+    <corners android:radius="@dimen/radius_card" />
 
     <solid android:color="?attr/bald_button" />
 
 
     <stroke
-        android:width="2dp"
+        android:width="@dimen/border_width"
         android:color="?attr/bald_stroke_color" />
 </shape>

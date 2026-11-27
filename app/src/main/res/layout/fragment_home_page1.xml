@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
         android:layout_marginTop="@dimen/home_screen_padding"
-        android:background="@drawable/home_item_1"
+        android:background="@drawable/bald_card_tinted_background"
         android:orientation="horizontal">
 
         <com.bald.uriah.baldphone.views.FirstPageAppIcon
@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
         android:layout_marginTop="@dimen/home_screen_padding"
-        android:background="@drawable/home_item_2"
+        android:background="@drawable/bald_card_background"
         android:orientation="horizontal"
         tools:ignore="RtlHardcoded">
 
@@ -157,7 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
         android:layout_marginTop="@dimen/home_screen_padding"
-        android:background="@drawable/home_item_3"
+        android:background="@drawable/bald_card_background"
         android:orientation="horizontal"
         tools:ignore="RtlHardcoded">
 
@@ -202,7 +202,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_tile_row_height"
         android:layout_marginTop="@dimen/home_screen_padding"
-        android:background="@drawable/home_item_4"
+        android:background="@drawable/bald_card_background"
         android:orientation="horizontal"
         android:padding="0dp"
         tools:ignore="RtlHardcoded">

@@ -256,9 +256,6 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        static final int expandedSize = 133;
-        static final int notExpandedSize = 80;
-
         final View line;
         final LinearLayout container, ll_contact_only;
         final TextView tv_contact_name, tv_contact_number, tv_letter, tv_image_letter;
@@ -301,26 +298,12 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
 
         public void setLetter(final @Nullable String character) {
             if (character == null && expanded) {
-                RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) this.container.getLayoutParams();
-                layoutParams.height =
-                        (int) TypedValue.applyDimension(
-                                TypedValue.COMPLEX_UNIT_DIP,
-                                notExpandedSize,
-                                activity.getResources().getDisplayMetrics());
-                this.container.setLayoutParams(layoutParams);
                 this.line.setVisibility(View.GONE);
                 this.tv_letter.setVisibility(View.GONE);
                 expanded = false;
             } else if (character != null && expanded) {
                 this.tv_letter.setText(character);
             } else if (character != null) {
-                final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) this.container.getLayoutParams();
-                layoutParams.height =
-                        (int) TypedValue.applyDimension(
-                                TypedValue.COMPLEX_UNIT_DIP,
-                                expandedSize,
-                                activity.getResources().getDisplayMetrics());
-                this.container.setLayoutParams(layoutParams);
                 this.line.setVisibility(View.VISIBLE);
                 this.tv_letter.setVisibility(View.VISIBLE);
                 this.tv_letter.setText(character);

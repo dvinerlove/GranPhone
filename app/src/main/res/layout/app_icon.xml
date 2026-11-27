@@ -19,7 +19,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/button_height_large"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/list_row_height"
     android:layout_marginStart="@dimen/spacing_md"
     android:layout_marginTop="@dimen/spacing_xs"
     android:layout_marginEnd="@dimen/spacing_md"
@@ -43,10 +44,10 @@
         android:layout_marginEnd="@dimen/spacing_lg"
         android:layout_weight="1"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
         android:textColor="?bald_text_primary"
         android:textSize="@dimen/large"
-        app:autoSizeMinTextSize="@dimen/tiny"
+        app:autoSizeMinTextSize="@dimen/small"
         app:autoSizeTextType="uniform" />
 
     <ImageView

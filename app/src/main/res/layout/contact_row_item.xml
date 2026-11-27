@@ -98,7 +98,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 app:autoSizeTextType="uniform"
-                app:autoSizeMinTextSize="@dimen/tiny"
+                app:autoSizeMinTextSize="@dimen/small"
                 app:autoSizeMaxTextSize="@dimen/large"
                 tools:text="Contact Name"
                 android:textColor="?bald_text_primary"
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xs"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textColor="?bald_text_secondary"
                 android:textSize="@dimen/small"
                 android:visibility="gone" />

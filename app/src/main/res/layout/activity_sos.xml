@@ -122,7 +122,8 @@
                 <LinearLayout
                     android:id="@+id/ec1"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/button_height_large"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/list_row_height"
                     android:background="@drawable/bald_button_background"
                     android:clickable="true"
                     android:focusable="true"
@@ -175,7 +176,8 @@
                 <LinearLayout
                     android:id="@+id/ec2"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/button_height_large"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/list_row_height"
                     android:layout_marginTop="@dimen/spacing_sm"
                     android:background="@drawable/bald_button_background"
                     android:clickable="true"
