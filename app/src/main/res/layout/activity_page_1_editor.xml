@@ -28,24 +28,11 @@
         app:title="@string/edit_home_screen"
         app:show_back="true" />
 
-    <com.bald.uriah.baldphone.views.ScrollingHelper
+    <com.bald.uriah.baldphone.views.home.HomePage1
+        android:id="@+id/home_page_1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/spacing_md"
-        android:layout_weight="1">
-
-        <com.bald.uriah.baldphone.views.ModularScrollView
-            android:id="@+id/child"
-            style="@style/ScrollStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-
-            <com.bald.uriah.baldphone.views.home.HomePage1
-                android:id="@+id/home_page_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.bald.uriah.baldphone.views.ModularScrollView>
-    </com.bald.uriah.baldphone.views.ScrollingHelper>
+        android:layout_weight="1" />
 
 </LinearLayout>

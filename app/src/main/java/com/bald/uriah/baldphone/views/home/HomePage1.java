@@ -145,63 +145,95 @@ public class HomePage1 extends HomeView {
         attachXml();
         genOnClickListeners();
         installClockCardFit();
-        installTileRowHeightCap();
         return view;
     }
 
-    private void installTileRowHeightCap() {
-        view.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> capTileRowHeights());
-        view.post(this::capTileRowHeights);
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        resizeTileRows(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    /** Full population is five equal vertical slots: clock + four tile rows. Hidden rows never raise that ceiling. */
-    private void capTileRowHeights() {
-        int allRowMargins = 0, visibleRowMargins = 0, visibleRows = 0;
-        for (final int id : TILE_ROW_IDS) {
-            final View row = view.findViewById(id);
-            final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
-            final int verticalMargins = rowParams.topMargin + rowParams.bottomMargin;
-            allRowMargins += verticalMargins;
-            if (row.getVisibility() != View.GONE) {
-                visibleRows++;
-                visibleRowMargins += verticalMargins;
-            }
-        }
-        final int innerHeight = view.getHeight() - view.getPaddingTop() - view.getPaddingBottom();
-        final int tileHeight = (innerHeight - allRowMargins) / (TILE_ROW_IDS.length + 1);
-        if (tileHeight <= 0)
+    /**
+     * The clock keeps its measured content height; visible peer rows share whatever
+     * viewport remains, but never go below the accessibility floor. If the floor
+     * does not fit, the enclosing ModularScrollView takes over instead of squeezing.
+     */
+    private void resizeTileRows(final int width, final int viewportHeight) {
+        if (view == null || viewportHeight <= 0)
             return;
+        final View content = view.findViewById(R.id.page1_content);
+        final View clockCard = view.findViewById(R.id.clock_card);
+        if (content == null || clockCard == null)
+            return;
+
+        int visibleRows = 0, rowMargins = 0;
+        for (final int id : TILE_ROW_IDS) {
+            final View row = view.findViewById(id);
+            if (row.getVisibility() == View.GONE)
+                continue;
+            final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
+            visibleRows++;
+            rowMargins += rowParams.topMargin + rowParams.bottomMargin;
+        }
+        if (visibleRows == 0)
+            return;
+
+        final int clockHeight = measureClockCard(clockCard, content, width);
+        final int available = viewportHeight
+                - content.getPaddingTop() - content.getPaddingBottom()
+                - clockHeight - rowMargins;
+        final int rowHeight = Math.max(Math.max(0, available / visibleRows), measureTileRowFloor());
         for (final int id : TILE_ROW_IDS) {
             final View row = view.findViewById(id);
             final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
-            if (rowParams.height != tileHeight) {
-                rowParams.height = tileHeight;
-                row.setLayoutParams(rowParams);
+            rowParams.height = rowHeight;
+        }
+    }
+
+    /** Measures the clock as wrap-content at the grid width, including its own margins. */
+    private int measureClockCard(final View clockCard, final View content, final int gridWidth) {
+        final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) clockCard.getLayoutParams();
+        final int horizontalMargins = params.leftMargin + params.rightMargin;
+        final int cardWidth = gridWidth - content.getPaddingLeft() - content.getPaddingRight() - horizontalMargins;
+        if (cardWidth > 0)
+            clockCard.measure(
+                    MeasureSpec.makeMeasureSpec(cardWidth, MeasureSpec.EXACTLY),
+                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+        return clockCard.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+    }
+
+    /** Floor is the greater of 88dp and the measured icon + max-two-line label at the active fontScale. */
+    private int measureTileRowFloor() {
+        int floor = getResources().getDimensionPixelSize(R.dimen.home_tile_row_min_height);
+        for (final int rowId : TILE_ROW_IDS) {
+            final ViewGroup row = view.findViewById(rowId);
+            if (row.getVisibility() == View.GONE)
+                continue;
+            for (int i = 0; i < row.getChildCount(); i++) {
+                final View child = row.getChildAt(i);
+                if (!(child instanceof FirstPageAppIcon) || child.getVisibility() != View.VISIBLE)
+                    continue;
+                final FirstPageAppIcon tile = (FirstPageAppIcon) child;
+                final ViewGroup.LayoutParams labelParams = tile.textView.getLayoutParams();
+                int labelHeight = tile.textView.getLineHeight() * Math.max(1, tile.textView.getMaxLines());
+                if (labelParams instanceof ViewGroup.MarginLayoutParams) {
+                    final ViewGroup.MarginLayoutParams margins = (ViewGroup.MarginLayoutParams) labelParams;
+                    labelHeight += margins.topMargin + margins.bottomMargin;
+                }
+                final int iconHeight = tile.imageView.getLayoutParams().height > 0
+                        ? tile.imageView.getLayoutParams().height
+                        : getResources().getDimensionPixelSize(R.dimen.icon_md);
+                floor = Math.max(floor, iconHeight + labelHeight);
             }
         }
-        final int clockHeight = visibleRows == TILE_ROW_IDS.length ? tileHeight
-                : innerHeight - visibleRowMargins - visibleRows * tileHeight;
-        final View clockCard = view.findViewById(R.id.clock_card);
-        final LinearLayout.LayoutParams clockParams = (LinearLayout.LayoutParams) clockCard.getLayoutParams();
-        if (clockParams.height != clockHeight || clockParams.weight != 0f) {
-            clockParams.height = clockHeight;
-            clockParams.weight = 0f;
-            clockCard.setLayoutParams(clockParams);
-        }
+        return floor;
     }
 
     /**
      * TextClock has no autosize on minSdk 21 — shrink it manually once the parent's
-     * real width is known, same pattern as {@link com.bald.uriah.baldphone.views.BaldMultipleSelection}.
-     * Only ever shrinks (never grows): at extreme system fontScale the clock/date
-     * stay fully readable instead of ellipsizing into uselessness.
-     */
-    /**
-     * Shrinks clock/date ONLY when the card is squeezed by visible tile rows —
-     * with 1–3 rows the base sizes stay untouched, and hiding rows restores
-     * them, since every pass recomputes from the base size rather than
-     * shrinking further. The clock always yields room for the date, so the
-     * date can never get pushed out of the card.
+     * real width is known. Height is deliberately excluded: the card is wrap-content
+     * and vertical overflow belongs to the scroll fallback, not to smaller clock text.
      */
     private void installClockCardFit() {
         final View card = view.findViewById(R.id.clock_card);
@@ -213,19 +245,17 @@ public class HomePage1 extends HomeView {
         final float dateFloor = getResources().getDimension(R.dimen.tiny);
         card.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
             final float availW = card.getWidth() - card.getPaddingStart() - card.getPaddingEnd();
-            final float availH = card.getHeight() - card.getPaddingTop() - card.getPaddingBottom();
-            if (availW <= 0 || availH <= 0)
+            if (availW <= 0)
                 return;
-            fitText(date, dateBase, availW, availH - clockFloor, dateFloor);
-            fitText(clock, clockBase, availW, availH - date.getHeight(), clockFloor);
+            fitTextWidth(date, dateBase, availW, dateFloor);
+            fitTextWidth(clock, clockBase, availW, clockFloor);
         });
     }
 
-    /** Sizes {@code tv} to the largest size ≤ {@code base} that fits width and height, never below {@code floor}. */
-    private static void fitText(final TextView tv, final float base, final float availW,
-                                final float availH, final float floor) {
+    /** Sizes {@code tv} to the largest size ≤ {@code base} that fits width, never below {@code floor}. */
+    private static void fitTextWidth(final TextView tv, final float base, final float availW, final float floor) {
         final CharSequence text = tv.getText();
-        if (availH <= 0 || text == null || text.length() == 0)
+        if (text == null || text.length() == 0)
             return;
         final android.text.TextPaint paint = tv.getPaint();
         final float prevSize = paint.getTextSize();
@@ -234,9 +264,6 @@ public class HomePage1 extends HomeView {
         final float wantedW = paint.measureText(text.toString());
         if (wantedW > availW)
             scale = availW / wantedW;
-        final float lineH = paint.descent() - paint.ascent();
-        if (lineH > availH)
-            scale = Math.min(scale, availH / lineH);
         paint.setTextSize(prevSize);
         final float target = Math.max(floor, base * scale * 0.98f);
         if (Math.abs(target - tv.getTextSize()) > 1f)
@@ -447,11 +474,9 @@ public class HomePage1 extends HomeView {
                 homeScreen.startActivity(new Intent(HomePage1.this.homeScreen, AppsActivity.class));
         });
         setupButton(BPrefs.CUSTOM_ALARMS_KEY, bt_clock, resolved.get(BPrefs.CUSTOM_ALARMS_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, AlarmsActivity.class)));
-        if (homeScreen != null) {
+        if (homeScreen != null)
             for (int id : TILE_ROW_IDS)
                 hideRowIfEmpty(id);
-            view.post(this::capTileRowHeights);
-        }
     }
 
     private void hideRowIfEmpty(int id) {
@@ -469,6 +494,7 @@ public class HomePage1 extends HomeView {
             row.setVisibility(View.GONE);
             return;
         }
+        row.setVisibility(View.VISIBLE);
         // dividers are plain <View> includes — show one only between two visible icons
         for (int i = 0; i < row.getChildCount(); i++) {
             final View child = row.getChildAt(i);
