@@ -33,23 +33,23 @@ Extend the existing `bald_*` theme-attribute system rather than inventing a new 
 | `bald_surface` | #F2F4F7 | #101418 |
 | `bald_card` | #FFFFFF | #1C2126 |
 | `bald_card_border` | #E2E5E9 | #2E3439 |
-| `bald_brand` | #2E7D32 | #4CAF50 |
+| `bald_brand` | #1C6B30 | #30D158 |
 | `bald_danger` | #D32F2F | #E57373 |
 | `bald_info` | #1565C0 | #64B5F6 |
 | `bald_text_primary` | #14171A | #F2F4F7 |
 | `bald_text_secondary` | #4A5560 | #B0B8C0 |
 
-Contrast target: ≥4.5:1 for all text, ≥3:1 for icons/borders. Radius: cards/buttons 16dp, small chips 28dp. Spacing grid: 8dp.
+Contrast target: ≥4.5:1 for all text. Text on the light brand surface has a WCAG AAA target of ≥7:1; `#1C6B30` is the contract implementation value pending T11's final measurement. Non-text UI — icons, control borders, and focus indicators — must be ≥3:1. Radius: cards/buttons 16dp, small chips 28dp. Spacing grid: 8dp.
 
 ### Typography
 
-All sizes in `sp` (kill every `dp` text size — system font_scale must work). Scale: title 24sp, body 20sp, label 18sp, hero (clock) 64sp+.
+All sizes in `sp` (kill every `dp` text size — system font_scale must work). Scale: display (`giant`) 40sp, title 24sp, body 20sp, label 18sp, hero (clock) 64sp+.
 
 ### Components (built once, reused everywhere)
 
-- **BigButton** — height 72–88dp, icon 28dp + text label 20sp, filled, pressed = 8% darken + optional vibration. Variants: `brand` (call/confirm), `danger` (SOS/hang up/delete), `neutral`, `info`.
-- **Tile** — home grid cell: icon 32dp + label 18sp, `bald_card` background; semantic override only for SOS (danger) and Phone (brand).
-- **TitleBar** — 64dp: title 24sp (marquee/ellipsize-safe, never clipped) + explicit `Назад` text-button; no lone icon affordances.
+- **BigButton** — height 72–88dp, icon 28dp + text label 20sp, filled, pressed = 8% darken + optional vibration. Variants: `brand` (call/confirm), `danger` (SOS/hang up/delete), `neutral`, `info`. Critical-call exception: Answer and Hang-up are 120dp, Decline 96dp, and Speaker 88dp; this fixed 120/96/88dp call-action set is deliberate for time-critical calls, not BigButton scale drift.
+- **Tile** — home grid cell: icon 32dp + label 18sp. This is the restored home-tile contract: no adaptive 14sp exception; the fixed bottom row uses component-default label sizing rather than a down-scaled override. `bald_card` background; semantic override only for SOS (danger) and Phone (brand).
+- **TitleBar** — `title_bar_height` 64dp: title 24sp (marquee/ellipsize-safe, never clipped) + explicit `Назад` text-button; no lone icon affordances. Forced-LTR/handedness placement is intentionally unchanged pending RTL device evidence.
 - **DialogScreen** — single dialog component, three modes:
   - `SELECT`: vertical option list (64dp rows, radio indicator, current selection highlighted), applies instantly on tap, `Назад` button at bottom. No OK/Cancel/X.
   - `CONFIRM`: one verb-labeled action (e.g. «Удалить контакт») + one `Отмена`. Irreversible actions get a hold/double-tap-confirm.
