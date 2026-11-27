@@ -162,8 +162,6 @@ public class HomePage1 extends HomeView {
      * top-anchored and never re-center. If the floor does not fit, the enclosing
      * ModularScrollView takes over instead of squeezing.
      */
-    private static final int FULL_ROW_COUNT = 4;
-
     private void resizeTileRows(final int width, final int viewportHeight) {
         if (view == null || viewportHeight <= 0)
             return;
@@ -184,19 +182,20 @@ public class HomePage1 extends HomeView {
         if (visibleRows == 0)
             return;
 
-        final int clockHeight = measureClockCard(clockCard, content, width);
-        final int available = viewportHeight
-                - content.getPaddingTop() - content.getPaddingBottom()
-                - clockHeight - rowMargins;
-        final int rowHeight = Math.max(Math.max(0, available / Math.max(visibleRows, FULL_ROW_COUNT)), measureTileRowFloor());
+        final int rowHeight = Math.max(
+                getResources().getDimensionPixelSize(R.dimen.home_tile_row_height),
+                measureTileRowFloor());
         for (final int id : TILE_ROW_IDS) {
             final View row = view.findViewById(id);
             final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
             rowParams.height = rowHeight;
         }
 
+        final int clockHeight = measureClockCard(clockCard, content, width);
+        final int slack = viewportHeight
+                - content.getPaddingTop() - content.getPaddingBottom()
+                - clockHeight - rowMargins - rowHeight * visibleRows;
         final LinearLayout.LayoutParams clockParams = (LinearLayout.LayoutParams) clockCard.getLayoutParams();
-        final int slack = available - rowHeight * visibleRows;
         clockParams.height = slack > 0
                 ? clockCard.getMeasuredHeight() + slack
                 : LinearLayout.LayoutParams.WRAP_CONTENT;
