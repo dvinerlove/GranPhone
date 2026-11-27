@@ -86,7 +86,7 @@ public class TechnicalInfoActivity extends BaldActivity {
                 DialogScreen.confirm(this,
                         R.string.clear_cache,
                         R.string.clear_cache_subtext,
-                        R.string.clear,
+                        R.string.delete_temp_files,
                         () -> {
                             deleteCache(this);
                             BPrefs.get(this).edit().remove(BPrefs.CUSTOM_APP_KEY).apply();
@@ -99,15 +99,15 @@ public class TechnicalInfoActivity extends BaldActivity {
                 DialogScreen.confirm(this,
                         R.string.clear_data,
                         R.string.clear_data_subtext,
-                        R.string.clear,
+                        R.string.delete_all_data,
                         () -> DialogScreen.confirm(this,
                                 R.string.clear_data,
                                 R.string.clear_data_subtext2,
-                                R.string.clear,
+                                R.string.delete_all_data,
                                 () -> DialogScreen.confirm(this,
                                         R.string.clear_data,
                                         R.string.clear_data_subtext3,
-                                        R.string.clear,
+                                        R.string.delete_all_data,
                                         () -> ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData()))));
     }
 

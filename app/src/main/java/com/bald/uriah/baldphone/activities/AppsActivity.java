@@ -146,8 +146,8 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
                         viewHolder.text.setText(R.string.uninstall);
                         viewHolder.itemView.setOnClickListener(v1 -> {
                             DialogScreen.confirm(AppsActivity.this,
-                                    String.format("%s %s", getText(R.string.uninstall), app.getLabel()),
-                                    String.format(getString(R.string.uninstall_subtext), app.getLabel(), app.getLabel()),
+                                    getString(R.string.uninstall_app_title, app.getLabel()),
+                                    getString(R.string.uninstall_subtext, app.getLabel()),
                                     R.string.uninstall,
                                     () -> uninstallApp(app));
                             popupWindow.dismiss();

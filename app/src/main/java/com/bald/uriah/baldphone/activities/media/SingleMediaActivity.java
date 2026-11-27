@@ -89,6 +89,9 @@ public abstract class SingleMediaActivity extends BaldActivity {
 
     protected abstract CharSequence title();
 
+    /** action label for the delete confirmation — object-specific per media type */
+    protected abstract int deleteActionRes();
+
     private void attachXml() {
         baldTitleBar = findViewById(R.id.bald_title_bar);
         viewPagerHolder = findViewById(R.id.view_pager_holder);
@@ -178,7 +181,7 @@ public abstract class SingleMediaActivity extends BaldActivity {
                     }
                 }
             } else {
-                AppUtils.showAreYouSureYouWantToDelete(String.valueOf(activity.title()), activity, () -> {
+                AppUtils.showAreYouSureYouWantToDelete(String.valueOf(activity.title()), activity, activity.deleteActionRes(), () -> {
                     cursor.moveToPosition(position);
                     delete(activity);
                     activity.setResult(SHOULD_REFRESH);

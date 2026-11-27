@@ -74,7 +74,7 @@ public class SystemSettingsActivity extends SettingsPageActivity {
             items.add(new RunnableSettingsItem(R.string.remove_device_owner, v -> DialogScreen.confirm(this,
                     R.string.remove_device_owner,
                     R.string.remove_device_owner_subtext,
-                    R.string.delete,
+                    R.string.remove_admin_access,
                     () -> {
                         KioskManager.removeDeviceOwner(this);
                         this.recreate();

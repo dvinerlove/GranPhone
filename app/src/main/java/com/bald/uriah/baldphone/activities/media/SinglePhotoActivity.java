@@ -61,6 +61,11 @@ public class SinglePhotoActivity extends SingleMediaActivity implements Constant
     }
 
     @Override
+    protected int deleteActionRes() {
+        return R.string.delete_photo;
+    }
+
+    @Override
     protected int requiredPermissions() {
         return PERMISSION_MEDIA_IMAGES;
     }

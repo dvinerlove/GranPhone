@@ -57,6 +57,11 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
     }
 
     @Override
+    protected int deleteActionRes() {
+        return R.string.delete_video;
+    }
+
+    @Override
     protected int requiredPermissions() {
         return PERMISSION_MEDIA_VIDEO;
     }

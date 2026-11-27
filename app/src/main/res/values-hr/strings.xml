@@ -228,7 +228,6 @@ svi podaci aplikacije bit će obrisani!</string>
     <string name="took">Uzeto!</string>
     <string name="tuesday">Utorak</string>
     <string name="uninstall">Deinstaliraj</string>
-    <string name="uninstall_subtext">Jeste li sigurni da želite deinstalirati %1$s?\nPodaci aplikacije %2$s će biti zauvijek obrisani!</string>
     <string name="up">Gore</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video Instrukcije</string>

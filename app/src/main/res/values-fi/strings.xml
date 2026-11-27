@@ -236,7 +236,6 @@ kaikki tiedot poistetaan!</string>
     <string name="took">Otettu!</string>
     <string name="tuesday">Tiistai</string>
     <string name="uninstall">Poista asennus</string>
-    <string name="uninstall_subtext">Oletko varma että haluat poistaa %1$s?\n%2$sn tiedot poistuvat lopullisesti!</string>
     <string name="up">Ylös</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video-ohjeet</string>

@@ -227,7 +227,6 @@ Bütün bilgileriniz silinecek!</string>
     <string name="took">Alındı!</string>
     <string name="tuesday">Salı</string>
     <string name="uninstall">Kaldırın</string>
-    <string name="uninstall_subtext">Kaldırmak istediğinize emin misiniz %1$s?\n%2$s\'a ait bilgiler silinecek!</string>
     <string name="up">Yukarı</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video Dersler</string>

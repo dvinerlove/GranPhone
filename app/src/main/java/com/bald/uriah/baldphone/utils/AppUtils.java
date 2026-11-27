@@ -263,11 +263,15 @@ public class AppUtils {
     }
 
     public static void showAreYouSureYouWantToDelete(@NonNull final String what, @NonNull final BaldActivity baldActivity, @NonNull final Runnable deleteRunnable) {
+        showAreYouSureYouWantToDelete(what, baldActivity, R.string.delete, deleteRunnable);
+    }
+
+    public static void showAreYouSureYouWantToDelete(@NonNull final String what, @NonNull final BaldActivity baldActivity, @StringRes final int actionRes, @NonNull final Runnable deleteRunnable) {
         // confirm() auto-dismisses with the activity — DialogScreen.present() handles BaldActivity itself
         DialogScreen.confirm(baldActivity,
                 String.format(baldActivity.getString(R.string.delete___), what),
                 String.format(baldActivity.getString(R.string.are_you_sure_you_want_to_delete___), what),
-                R.string.delete,
+                actionRes,
                 deleteRunnable::run);
     }
 

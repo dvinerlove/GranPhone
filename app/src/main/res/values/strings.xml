@@ -69,7 +69,18 @@
     <string name="and_welcome_to_GranPhone">and welcome to GranPhone</string>
 
     <string name="apps">Apps</string>
-    <string name="are_you_sure_you_want_to_delete___">Are you sure you want to delete %s?</string>
+    <string name="are_you_sure_you_want_to_delete___">%1$s will be permanently deleted. You can\'t undo this.</string>
+    <string name="delete_contact">Delete contact</string>
+    <string name="delete_alarm">Delete alarm</string>
+    <string name="delete_pill">Delete pill</string>
+    <string name="delete_photo">Delete photo</string>
+    <string name="delete_video">Delete video</string>
+    <string name="delete_all_alarms">Delete all alarms</string>
+    <string name="delete_all_notifications">Delete all notifications</string>
+    <string name="delete_temp_files">Delete temporary files</string>
+    <string name="delete_all_data">Delete all data</string>
+    <string name="remove_admin_access">Remove administrator access</string>
+    <string name="uninstall_app_title">Uninstall %1$s?</string>
     <string name="flashlight">Flashlight</string>
     <string name="at_least_one_day_must_be_selected">Choose at least one day.</string>
     <string name="auto_brightness">Auto\nBrightness</string>
@@ -292,7 +303,7 @@
     <string name="tuesday">Tuesday</string>
     <string name="understood">Understood</string>
     <string name="uninstall">Uninstall</string>
-    <string name="uninstall_subtext">Are you sure you want to uninstall %1$s?\n%2$s\'s data will be gone forever.</string>
+    <string name="uninstall_subtext">%1$s will be removed from this phone. Its data will be permanently deleted.</string>
     <string name="up">Up</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video Tutorials</string>

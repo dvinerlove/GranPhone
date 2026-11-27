@@ -77,7 +77,7 @@ public class NotificationsActivity extends BaldActivity {
                 DialogScreen.confirm(this,
                         R.string.clear_all_notifications,
                         R.string.clear_all_notifications_subtext,
-                        R.string.clear,
+                        R.string.delete_all_notifications,
                         () -> {
                             if (notificationRecyclerViewAdapter != null)
                                 notificationRecyclerViewAdapter.clearAll();

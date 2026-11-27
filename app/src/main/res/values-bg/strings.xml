@@ -238,7 +238,6 @@
     <string name="took">Взет!</string>
     <string name="tuesday">Вторник</string>
     <string name="uninstall">Деинсталиране</string>
-    <string name="uninstall_subtext">Сигурни ли сте, че желаете да деинсталирате %1$s?\nданните от %2$s\ ще бъдат изтрити завинаги!</string>
     <string name="up">Нагоре</string>
     <string name="video">Видео</string>
     <string name="video_tutorials">Видео уроци</string>

@@ -411,7 +411,7 @@ public class SingleContactActivity extends BaldActivity {
                 new Intent(this, AddContactActivity.class)
                         .putExtra(CONTACT_LOOKUP_KEY, contact.getLookupKey());
         final View.OnClickListener deleteListener = (v) ->
-                AppUtils.showAreYouSureYouWantToDelete(contact.getName(), this, this::deleteContact);
+                AppUtils.showAreYouSureYouWantToDelete(contact.getName(), this, R.string.delete_contact, this::deleteContact);
         findViewById(R.id.bt_delete).setOnClickListener(deleteListener);
         findViewById(R.id.bt_edit).setOnClickListener(v -> v.getContext().startActivity(editIntent));
 

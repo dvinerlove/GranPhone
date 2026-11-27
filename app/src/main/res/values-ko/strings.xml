@@ -217,7 +217,6 @@
     <string name="took">완료!</string>
     <string name="tuesday">화요일</string>
     <string name="uninstall">제거</string>
-    <string name="uninstall_subtext">정말로 제거하시겠습니까 %1$s? %2$s의 데이터는 영원히 사라집니다!</string>
     <string name="up">위로</string>
     <string name="video">비디오</string>
     <string name="video_tutorials">비디오 튜토리얼</string>
