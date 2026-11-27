@@ -69,6 +69,8 @@ import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.BaldExecutors;
+import com.bald.uriah.baldphone.utils.GenerationGuard;
 import com.bald.uriah.baldphone.views.FirstPageAppIcon;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -117,6 +119,8 @@ public class HomePage1 extends HomeView {
     private FirstPageAppIcon bt_clock, bt_camera, bt_videos, bt_assistant, bt_messages, bt_photos, bt_contacts, bt_dialer, bt_whatsapp, bt_apps, bt_reminders, bt_recent;
     private boolean registered = false;
     private SharedPreferences sharedPreferences;
+    // lazy: HomeView ctor calls onCreateView before subclass field initializers run
+    private GenerationGuard tilesGuard;
 
     public HomePage1(@NonNull Context context) {
         super((context instanceof HomeScreenActivity) ? (HomeScreenActivity) context : null, (Activity) context);
@@ -281,17 +285,73 @@ public class HomePage1 extends HomeView {
     private void genOnClickListeners() {
         sharedPreferences = BPrefs.get(activity);
         seedHiddenTiles();
-        HomeScreenPinHelper.migrateLegacyPins(activity);
-        setupButton(BPrefs.CUSTOM_RECENTS_KEY, bt_recent, v -> homeScreen.startActivity(new Intent(homeScreen, RecentActivity.class)));
-        setupButton(BPrefs.CUSTOM_DIALER_KEY, bt_dialer, v -> homeScreen.startActivity(new Intent(homeScreen, DialerActivity.class)));
-        setupButton(BPrefs.CUSTOM_CONTACTS_KEY, bt_contacts, v -> homeScreen.startActivity(new Intent(homeScreen, ContactsActivity.class)));
-        setupButton(BPrefs.CUSTOM_APP_KEY, bt_whatsapp, v -> homeScreen.startActivity(new Intent(homeScreen, SOSActivity.class)));
-        setupButton(BPrefs.CUSTOM_ASSISTANT_KEY, bt_assistant, v -> {
+        bt_assistant.post(this::updateFlashIcon);
+        if (tilesGuard == null)
+            tilesGuard = new GenerationGuard();
+        final int generation = tilesGuard.next();
+        final Context appContext = activity.getApplicationContext();
+        BaldExecutors.db().execute(() -> {
+            // migration and resolution share the single db thread, so pins migrated
+            // here are always visible to the slot resolution below - no race.
+            HomeScreenPinHelper.migrateLegacyPins(appContext);
+            final ArrayMap<String, SlotData> resolved = new ArrayMap<>();
+            for (final String key : HomeScreenPinHelper.TILE_PREF_KEYS)
+                resolved.put(key, resolveSlot(appContext, key));
+            BaldExecutors.postToMain(() -> {
+                if (!tilesGuard.isCurrent(generation) || view == null || activity.isFinishing() || activity.isDestroyed())
+                    return;
+                viewsToApps.clear();
+                bindTiles(resolved);
+            });
+        });
+    }
+
+    /** Resolves one tile slot's backing data off the main thread; performs the dead-pin prefs cleanup. */
+    private SlotData resolveSlot(Context context, String key) {
+        final SlotData data = new SlotData();
+        data.prefValue = sharedPreferences.getString(key, null);
+        data.hidden = HIDDEN_TILE.equals(data.prefValue);
+        if (data.prefValue != null && data.prefValue.startsWith(HomeScreenPinHelper.CONTACT_TILE_PREFIX)) {
+            data.contactTile = true;
+            data.contact = HomeScreenPinHelper.resolveContact(context,
+                    data.prefValue.substring(HomeScreenPinHelper.CONTACT_TILE_PREFIX.length()));
+            if (data.contact == null)
+                sharedPreferences.edit().putString(key, HIDDEN_TILE).apply();
+            return data;
+        }
+        if (BPrefs.CUSTOM_APP_KEY.equals(key) && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(key)) {
+            data.app = AppsDatabase.getInstance(context).appsDatabaseDao()
+                    .findByFlattenComponentName(baldComponentNameBeginning + Page1EditorActivity.class.getName());
+        } else if (BPrefs.CUSTOM_RECENTS_KEY.equals(key) && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(key)) {
+            data.phone = true;
+        } else if (data.prefValue != null && !data.hidden) {
+            data.app = AppsDatabase.getInstance(context).appsDatabaseDao().findByFlattenComponentName(data.prefValue);
+            if (data.app == null)
+                sharedPreferences.edit().remove(key).apply();
+        }
+        return data;
+    }
+
+    /** Per-bind snapshot of a tile slot, filled on the db thread, read on main. */
+    private static final class SlotData {
+        String prefValue;
+        boolean hidden;
+        boolean contactTile;
+        MiniContact contact;
+        App app;
+        boolean phone;
+    }
+
+    private void bindTiles(ArrayMap<String, SlotData> resolved) {
+        setupButton(BPrefs.CUSTOM_RECENTS_KEY, bt_recent, resolved.get(BPrefs.CUSTOM_RECENTS_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, RecentActivity.class)));
+        setupButton(BPrefs.CUSTOM_DIALER_KEY, bt_dialer, resolved.get(BPrefs.CUSTOM_DIALER_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, DialerActivity.class)));
+        setupButton(BPrefs.CUSTOM_CONTACTS_KEY, bt_contacts, resolved.get(BPrefs.CUSTOM_CONTACTS_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, ContactsActivity.class)));
+        setupButton(BPrefs.CUSTOM_APP_KEY, bt_whatsapp, resolved.get(BPrefs.CUSTOM_APP_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, SOSActivity.class)));
+        setupButton(BPrefs.CUSTOM_ASSISTANT_KEY, bt_assistant, resolved.get(BPrefs.CUSTOM_ASSISTANT_KEY), v -> {
             homeScreen.toggleTorch();
             updateFlashIcon();
         });
-        bt_assistant.post(this::updateFlashIcon);
-        setupButton(BPrefs.CUSTOM_MESSAGES_KEY, bt_messages, v -> {
+        setupButton(BPrefs.CUSTOM_MESSAGES_KEY, bt_messages, resolved.get(BPrefs.CUSTOM_MESSAGES_KEY), v -> {
             try {
                 final String smsPackage = Telephony.Sms.getDefaultSmsPackage(homeScreen);
                 if (smsPackage == null) {
@@ -315,8 +375,8 @@ public class HomePage1 extends HomeView {
                 BaldToast.error(homeScreen, R.string.messages_could_not_open);
             }
         });
-        setupButton(BPrefs.CUSTOM_PHOTOS_KEY, bt_photos, v -> homeScreen.startActivity(new Intent(homeScreen, PhotosActivity.class)));
-        setupButton(BPrefs.CUSTOM_CAMERA_KEY, bt_camera, v -> {
+        setupButton(BPrefs.CUSTOM_PHOTOS_KEY, bt_photos, resolved.get(BPrefs.CUSTOM_PHOTOS_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, PhotosActivity.class)));
+        setupButton(BPrefs.CUSTOM_CAMERA_KEY, bt_camera, resolved.get(BPrefs.CUSTOM_CAMERA_KEY), v -> {
             try {
                 final Intent intent = getCameraIntent();
                 if (intent == null)
@@ -334,15 +394,15 @@ public class HomePage1 extends HomeView {
                 BaldToast.from(homeScreen).setType(BaldToast.TYPE_ERROR).setText(R.string.no_camera_app).show();
             }
         });
-        setupButton(BPrefs.CUSTOM_VIDEOS_KEY, bt_videos, v -> homeScreen.startActivity(new Intent(homeScreen, VideosActivity.class)));
-        setupButton(BPrefs.CUSTOM_PILLS_KEY, bt_reminders, v -> homeScreen.startActivity(new Intent(homeScreen, PillsActivity.class)));
-        setupButton(BPrefs.CUSTOM_APPS_KEY, bt_apps, v -> {
+        setupButton(BPrefs.CUSTOM_VIDEOS_KEY, bt_videos, resolved.get(BPrefs.CUSTOM_VIDEOS_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, VideosActivity.class)));
+        setupButton(BPrefs.CUSTOM_PILLS_KEY, bt_reminders, resolved.get(BPrefs.CUSTOM_PILLS_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, PillsActivity.class)));
+        setupButton(BPrefs.CUSTOM_APPS_KEY, bt_apps, resolved.get(BPrefs.CUSTOM_APPS_KEY), v -> {
             if (!homeScreen.finishedUpdatingApps)
                 homeScreen.launchAppsActivity = true;
             else
                 homeScreen.startActivity(new Intent(HomePage1.this.homeScreen, AppsActivity.class));
         });
-        setupButton(BPrefs.CUSTOM_ALARMS_KEY, bt_clock, v -> homeScreen.startActivity(new Intent(homeScreen, AlarmsActivity.class)));
+        setupButton(BPrefs.CUSTOM_ALARMS_KEY, bt_clock, resolved.get(BPrefs.CUSTOM_ALARMS_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, AlarmsActivity.class)));
         if (homeScreen != null)
             for (int id : new int[]{R.id.phone_container, R.id.messages_container, R.id.media_container, R.id.time_container})
                 hideRowIfEmpty(id);
@@ -383,9 +443,8 @@ public class HomePage1 extends HomeView {
                 : R.drawable.flashlight_off_on_background);
     }
 
-    private void setupButton(String bPrefsKey, FirstPageAppIcon bt, View.OnClickListener onClickListener) {
-        final String prefValue = sharedPreferences.getString(bPrefsKey, null);
-        final boolean hidden = HIDDEN_TILE.equals(prefValue);
+    private void setupButton(String bPrefsKey, FirstPageAppIcon bt, SlotData data, View.OnClickListener onClickListener) {
+        final boolean hidden = data.hidden;
         if (hidden) {
             if (homeScreen != null) {
                 bt.setVisibility(View.GONE);
@@ -393,34 +452,23 @@ public class HomePage1 extends HomeView {
             }
             bt.setAlpha(0.3f);
         }
-        final MiniContact pinContact;
-        if (prefValue != null && prefValue.startsWith(HomeScreenPinHelper.CONTACT_TILE_PREFIX)) {
-            pinContact = HomeScreenPinHelper.resolveContact(activity,
-                    prefValue.substring(HomeScreenPinHelper.CONTACT_TILE_PREFIX.length()));
-            if (pinContact == null) {
-                // contact was deleted — free the slot instead of leaving a dead tile
-                sharedPreferences.edit().putString(bPrefsKey, HIDDEN_TILE).apply();
-                if (homeScreen != null) {
-                    bt.setVisibility(View.GONE);
-                    return;
-                }
+        final MiniContact pinContact = data.contact;
+        if (data.contactTile && pinContact == null) {
+            // contact was deleted - resolve already freed the slot; mirror the dead-tile early-out
+            if (homeScreen != null) {
+                bt.setVisibility(View.GONE);
+                return;
             }
-        } else pinContact = null;
+        }
 
         final App app;
         boolean phone = false;
         if (pinContact != null) {
             app = null;
-        } else if (bt == bt_whatsapp && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(bPrefsKey)) {
-            app = AppsDatabase.getInstance(homeScreen).appsDatabaseDao().findByFlattenComponentName(baldComponentNameBeginning + Page1EditorActivity.class.getName());
-        } else if (bt == bt_recent && BuildConfig.FLAVOR.equals("gPlay") && !sharedPreferences.contains(bPrefsKey)) {
+        } else if (data.phone) {
             app = null;
             phone = true;
-        } else if (prefValue != null && !hidden) {
-            app = AppsDatabase.getInstance(homeScreen).appsDatabaseDao().findByFlattenComponentName(prefValue);
-            if (app == null)
-                sharedPreferences.edit().remove(bPrefsKey).apply();
-        } else app = null;
+        } else app = data.app;
         if (homeScreen != null) {
             bt.setVisibility(View.VISIBLE); // slot may have been GONE from a previous bind
             if (pinContact != null) {
