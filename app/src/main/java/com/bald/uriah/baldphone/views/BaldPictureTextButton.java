@@ -38,11 +38,20 @@ import com.bald.uriah.baldphone.R;
 
 public class BaldPictureTextButton extends BaldLinearLayoutButton {
 
+    // Same values as the XML `variant` enum in attrs.xml — keep in sync.
+    public static final int VARIANT_NEUTRAL = 0;
+    public static final int VARIANT_BRAND = 1;
+    public static final int VARIANT_DANGER = 2;
+    public static final int VARIANT_INFO = 3;
+    public static final int VARIANT_TINTED = 4;
+    public static final int VARIANT_DANGER_OUTLINE = 5;
+
     protected final Context context;
     protected final LayoutInflater layoutInflater;
     protected ImageView imageView;
     protected TextView textView;
     private CharSequence textContentDescription;
+    private ColorStateList defaultTextColors;
 
     public BaldPictureTextButton(Context context) {
         super(context);
@@ -128,8 +137,28 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
             textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         addView(textView);
 
-        if (variant != 0)
+        // captured before any variant ink so setVariant(VARIANT_NEUTRAL) can restore it
+        defaultTextColors = textView.getTextColors();
+        // constructor neutral is a no-op: XML pairing like ghost backgrounds must survive
+        // (single_media_activity); the reset semantics of setVariant are for runtime switches.
+        if (variant != VARIANT_NEUTRAL)
             applyVariant(variant);
+    }
+
+    /**
+     * Applies a BigButton variant at runtime; same values as the XML {@code variant} enum.
+     * {@link #VARIANT_NEUTRAL} fully restores the neutral button look: default stateful
+     * background, original text color, no icon tint.
+     */
+    public void setVariant(int variant) {
+        if (variant == VARIANT_NEUTRAL) {
+            setBackgroundResource(R.drawable.bald_button_background);
+            if (defaultTextColors != null)
+                textView.setTextColor(defaultTextColors);
+            imageView.setImageTintList(null);
+            return;
+        }
+        applyVariant(variant);
     }
 
     /**
@@ -138,8 +167,8 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
      * variant. variant: 1=brand, 2=danger, 3=info, 4=tinted (0=neutral never gets here).
      */
     private void applyVariant(int variant) {
-        if (variant == 5) {
-            // danger_outline: neutral surface (keeps the default button bg), red ink.
+        if (variant == VARIANT_DANGER_OUTLINE) {
+            // danger_outline: neutral surface (keeps the current button bg), red ink.
             // Reserved for secondary destructive actions like Delete.
             final TypedArray c = context.obtainStyledAttributes(new int[]{R.attr.bald_danger, R.attr.bald_text_primary});
             final int danger = c.getColor(0, 0);
@@ -154,13 +183,15 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
         }
         final int variantAttr = variant == 1 ? R.attr.bald_brand : variant == 2 ? R.attr.bald_danger : variant == 3 ? R.attr.bald_info : R.attr.bald_brand_tint;
         final int onAttr = variant == 4 ? R.attr.bald_text_primary : R.attr.bald_text_on_variant;
-        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_disabled, onAttr, R.attr.bald_text_primary, R.attr.bald_decoration_on_background});
+        final TypedArray themeColors = context.obtainStyledAttributes(new int[]{variantAttr, R.attr.bald_button_disabled, onAttr, R.attr.bald_text_primary});
         final int color = themeColors.getColor(0, 0);
         final int disabledColor = themeColors.getColor(1, color);
         final int onColor = themeColors.getColor(2, Color.WHITE);
         final int disabledTextColor = themeColors.getColor(3, onColor);
-        final int focusStrokeColor = themeColors.getColor(4, onColor);
         themeColors.recycle();
+        // focus stroke = the variant's own foreground color, so it contrasts with the
+        // colored fill (bald_decoration_on_background is invisible on brand/danger fills)
+        final int focusStrokeColor = onColor;
 
         // Pressed = darkened variant fill so onColor keeps its contrast (neutral
         // bald_button_clicked gave ~1.4-1.9:1 label flashes on variant buttons).
