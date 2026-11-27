@@ -40,6 +40,7 @@
 
         <TextView
             android:id="@+id/app_name"
+            android:importantForAccessibility="no"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_md"
@@ -51,6 +52,7 @@
 
         <TextView
             android:id="@+id/time_stamp"
+            android:importantForAccessibility="no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_md"
@@ -73,6 +75,7 @@
 
             <TextView
                 android:id="@+id/title"
+                android:importantForAccessibility="no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -83,6 +86,7 @@
 
             <TextView
                 android:id="@+id/text"
+                android:importantForAccessibility="no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_xs"

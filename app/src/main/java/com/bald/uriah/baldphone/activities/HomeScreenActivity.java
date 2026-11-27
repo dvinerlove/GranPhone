@@ -146,6 +146,10 @@ public class HomeScreenActivity extends BaldActivity {
         final int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
         final boolean charged = chargePlug == BatteryManager.BATTERY_PLUGGED_AC || chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS || chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
         batteryView.setLevel(batteryPct, charged);
+        // shortcut: plain label+percent composition drops the charging state and any
+        // locale-specific ordering — upgrade to a battery-level format key with a
+        // charging variant when the strings lane adds one.
+        batteryView.setContentDescription(getString(R.string.battery) + ": " + batteryPct + "%");
         if (lowBatteryAlert)
             getWindow().setStatusBarColor((batteryPct < Const.LOW_BATTERY_LEVEL && !charged) ? ContextCompat.getColor(this, R.color.battery_low) : Const.DEFAULT_STATUS_BAR_COLOR);
     }
@@ -213,6 +217,17 @@ public class HomeScreenActivity extends BaldActivity {
                 notificationsButton.setImageResource(R.drawable.error_on_background);
             }
 
+            // shortcut: count-after-colon composition — upgrade to a notifications-count
+            // plural when the strings lane adds one.
+            final CharSequence notificationsDescription;
+            if (notificationCount > 0)
+                notificationsDescription = getString(R.string.new_notifications) + ": " + notificationCount;
+            else if (notificationCount == 0)
+                notificationsDescription = getString(R.string.no_new_notifications);
+            else
+                notificationsDescription = getString(R.string.notifications);
+            notificationsButton.setContentDescription(notificationsDescription);
+
             handler.removeCallbacks(shakeIt);
             handler.postDelayed(shakeIt, 5 * Const.SECOND);
         }
@@ -279,7 +294,7 @@ public class HomeScreenActivity extends BaldActivity {
                 viewHolder.itemView.setOnClickListener(v1 -> {
                     try {
                         audioManager.setRingerMode(position);
-                        soundButton.setImageResource(SOUND_DRAWABLES[position]);
+                        updateSoundButton(position);
                     } catch (SecurityException e) {
                         startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS));
                     }
@@ -346,7 +361,7 @@ public class HomeScreenActivity extends BaldActivity {
         }
         refreshQuickSettingSubtitles();
 
-        soundButton.setImageResource(SOUND_DRAWABLES[audioManager.getRingerMode()]);
+        updateSoundButton(audioManager.getRingerMode());
         try {
             telephonyManager.listen(signalListener, android.telephony.PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
         } catch (Exception ignore) {
@@ -461,6 +476,12 @@ public class HomeScreenActivity extends BaldActivity {
     protected void onDestroy() {
         recognizerManager.setHomeScreen(null);
         super.onDestroy();
+    }
+
+    /** Icon + spoken state (mute/vibrate/sound) — the mode is visual-only otherwise. */
+    private void updateSoundButton(int ringerMode) {
+        soundButton.setImageResource(SOUND_DRAWABLES[ringerMode]);
+        soundButton.setContentDescription(getString(R.string.sound) + ": " + getString(SOUND_TEXTS[ringerMode]));
     }
 
     /** Re-binds tile slots from preferences (pins/customizations made elsewhere). */

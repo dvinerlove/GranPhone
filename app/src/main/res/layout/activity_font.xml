@@ -70,6 +70,7 @@
             android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="1"
             android:background="@drawable/bald_button_background"
+            android:contentDescription="@string/less"
             android:minHeight="@dimen/touch_min"
             android:text="−" />
 
@@ -80,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:accessibilityLiveRegion="polite"
             android:gravity="center" />
 
         <com.bald.uriah.baldphone.views.BaldButton
@@ -90,6 +92,7 @@
             android:layout_marginStart="@dimen/spacing_sm"
             android:layout_weight="1"
             android:background="@drawable/bald_button_background"
+            android:contentDescription="@string/more"
             android:minHeight="@dimen/touch_min"
             android:text="+" />
     </LinearLayout>

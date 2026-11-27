@@ -110,6 +110,14 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
         notifyDataSetChanged();
     }
 
+    private static void appendLabelPart(StringBuilder label, CharSequence part) {
+        if (part == null || part.length() == 0)
+            return;
+        if (label.length() > 0)
+            label.append(", ");
+        label.append(part);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView small_icon, large_icon;
         final TextView app_name, time_stamp, title, text;
@@ -234,6 +242,21 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                 clear.setVisibility(View.GONE);
             }
 
+            // One spoken label per card; the text children are marked not-important
+            // in the layout so this is the single stop, clickable or not.
+            final StringBuilder label = new StringBuilder();
+            if (!collapsed) {
+                if (first)
+                    appendLabelPart(label, app_name_string);
+                if (!flag_summery) {
+                    appendLabelPart(label, title.getText());
+                    appendLabelPart(label, notification_text);
+                }
+                appendLabelPart(label, time_stamp.getText());
+                if (pendingIntent != null)
+                    appendLabelPart(label, context.getString(R.string.open));
+            }
+            itemView.setContentDescription(label);
         }
 
         private boolean isAlone(int position, final String app_name_string) {

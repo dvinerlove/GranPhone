@@ -127,6 +127,7 @@ public class SettingsActivity extends SettingsPageActivity {
         public final View view;
         private final SharedPreferences prefs;
         private final TextView tvVolume;
+        private final View btVolumeDown, btVolumeUp;
         private final Handler handler = new Handler();
         private Ringtone ringtone;
         private final Runnable closeRingtone = () -> {
@@ -141,7 +142,8 @@ public class SettingsActivity extends SettingsPageActivity {
             prefs = BPrefs.get(context);
             view = LayoutInflater.from(context).inflate(R.layout.volume_buttons, null, false);
             tvVolume = view.findViewById(R.id.tv_volume);
-            refresh();
+            btVolumeDown = view.findViewById(R.id.bt_volume_down);
+            btVolumeUp = view.findViewById(R.id.bt_volume_up);
             final View.OnClickListener step = v -> {
                 final int volume = prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE)
                         + (v.getId() == R.id.bt_volume_up ? 1 : -1);
@@ -156,8 +158,9 @@ public class SettingsActivity extends SettingsPageActivity {
                 handler.postDelayed(closeRingtone, 4 * Const.SECOND);
                 refresh();
             };
-            view.findViewById(R.id.bt_volume_down).setOnClickListener(step);
-            view.findViewById(R.id.bt_volume_up).setOnClickListener(step);
+            btVolumeDown.setOnClickListener(step);
+            btVolumeUp.setOnClickListener(step);
+            refresh();
         }
 
         public void stop() {
@@ -166,6 +169,11 @@ public class SettingsActivity extends SettingsPageActivity {
 
         private void refresh() {
             tvVolume.setText(subtitle(view.getContext()));
+            // Disabled at the boundary instead of a press that silently does nothing —
+            // TalkBack reads the disabled state; same pattern as FontChangerActivity.
+            final int volume = prefs.getInt(BPrefs.ALARM_VOLUME_KEY, BPrefs.ALARM_VOLUME_DEFAULT_VALUE);
+            btVolumeDown.setEnabled(volume > 0);
+            btVolumeUp.setEnabled(volume < VOLUME_MAX);
         }
 
         public static CharSequence subtitle(Context context) {

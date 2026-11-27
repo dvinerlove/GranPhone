@@ -13,6 +13,7 @@
         android:layout_width="@dimen/avatar_lg"
         android:layout_height="@dimen/button_height_default"
         android:background="@drawable/bald_button_background"
+        android:contentDescription="@string/less"
         android:text="@string/volume_down"
         android:textSize="@dimen/giant" />
 
@@ -21,6 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:accessibilityLiveRegion="polite"
         android:gravity="center"
         android:textColor="?bald_text_primary"
         android:textSize="@dimen/giant"
@@ -31,6 +33,7 @@
         android:layout_width="@dimen/avatar_lg"
         android:layout_height="@dimen/button_height_default"
         android:background="@drawable/bald_button_background"
+        android:contentDescription="@string/more"
         android:text="@string/volume_up"
         android:textSize="@dimen/giant" />
 </LinearLayout>
