@@ -159,6 +159,8 @@ public class HomePage1 extends HomeView {
      * viewport remains, but never go below the accessibility floor. If the floor
      * does not fit, the enclosing ModularScrollView takes over instead of squeezing.
      */
+    private static final int FULL_ROW_COUNT = 4;
+
     private void resizeTileRows(final int width, final int viewportHeight) {
         if (view == null || viewportHeight <= 0)
             return;
@@ -183,7 +185,9 @@ public class HomePage1 extends HomeView {
         final int available = viewportHeight
                 - content.getPaddingTop() - content.getPaddingBottom()
                 - clockHeight - rowMargins;
-        final int rowHeight = Math.max(Math.max(0, available / visibleRows), measureTileRowFloor());
+        // cap: rows never stretch beyond what they would be with the default full
+        // set (phone + 3 tiles) visible - fewer rows must not turn into giant blocks
+        final int rowHeight = Math.max(Math.max(0, available / Math.max(visibleRows, FULL_ROW_COUNT)), measureTileRowFloor());
         for (final int id : TILE_ROW_IDS) {
             final View row = view.findViewById(id);
             final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
