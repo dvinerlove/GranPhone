@@ -49,24 +49,33 @@
     <com.bald.uriah.baldphone.views.BaldButton
         android:id="@+id/bt_back"
         style="@style/ButtonsText.Large"
-        android:layout_width="160dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_xl"
+        android:layout_marginEnd="@dimen/spacing_md"
         android:layout_marginBottom="@dimen/spacing_xl"
         android:background="@drawable/bald_button_background"
+        android:maxLines="2"
+        android:minHeight="@dimen/button_height_large"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bt_next"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.bald.uriah.baldphone.views.BaldButton
         android:id="@+id/bt_next"
         style="@style/ButtonsText.Large"
-        android:layout_width="160dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_xl"
         android:layout_marginBottom="@dimen/spacing_xl"
         android:background="@drawable/bald_button_background"
+        android:maxLines="2"
+        android:minHeight="@dimen/button_height_large"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/bt_back" />
 </androidx.constraintlayout.widget.ConstraintLayout>

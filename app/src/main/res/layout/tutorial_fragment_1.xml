@@ -49,10 +49,11 @@
     <com.bald.uriah.baldphone.views.BaldButton
         android:id="@+id/bt_next"
         style="@style/ButtonsText.Large"
-        android:layout_width="220dp"
-        android:layout_height="90dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_xl"
         android:background="@drawable/bald_button_background"
+        android:maxLines="2"
+        android:minHeight="@dimen/button_height_large"
         android:text="@string/next" />
 </LinearLayout>
