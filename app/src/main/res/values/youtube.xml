@@ -64,23 +64,23 @@
 
     <array name="yt_background">
         <!--Share Photo 0 -->
-        <item>@drawable/home_item_3</item>
+        <item>@drawable/bald_card_background</item>
         <!--Share Contact 1 -->
-        <item>@drawable/home_item_1</item>
+        <item>@drawable/bald_card_tinted_background</item>
         <!--DialerActivity 2 -->
-        <item>@drawable/home_item_1</item>
+        <item>@drawable/bald_card_tinted_background</item>
         <!--Recent 3 -->
-        <item>@drawable/home_item_1</item>
+        <item>@drawable/bald_card_tinted_background</item>
         <!--SOS 4 -->
         <item>@drawable/transparent</item>
         <!--Clock 5 -->
-        <item>@drawable/home_item_4</item>
+        <item>@drawable/bald_card_background</item>
         <!--Add Timer 6 -->
-        <item>@drawable/home_item_4</item>
+        <item>@drawable/bald_card_background</item>
         <!--Add Alarm 7 -->
-        <item>@drawable/home_item_4</item>
+        <item>@drawable/bald_card_background</item>
         <!--Photos 8 -->
-        <item>@drawable/home_item_3</item>
+        <item>@drawable/bald_card_background</item>
 
 
     </array>

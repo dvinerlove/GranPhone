@@ -26,6 +26,10 @@ import com.bald.uriah.baldphone.R;
 public class Animations {
 
     public static void makeBiggerAndSmaller(final Context context, final View view, final Runnable runnable) {
+        // honor "remove animations" — and never let a zero-duration chain
+        // ping-pong the runnable (re-vibrate) in a tight loop
+        if (AppUtils.animationsDisabled(context))
+            return;
         final Animation enlarge =
                 AnimationUtils.loadAnimation(context, R.anim.enlarge);
         final Animation ensmall =

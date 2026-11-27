@@ -38,6 +38,9 @@ public class FirstPageAppIcon extends BaldFrameLayoutButton {
     public ImageView imageView;
     public TextView textView;
     public View badge;
+    private Drawable defaultDrawable;
+    private CharSequence defaultText;
+    private CharSequence textContentDescription;
 
     public FirstPageAppIcon(Context context) {
         super(context);
@@ -65,11 +68,16 @@ public class FirstPageAppIcon extends BaldFrameLayoutButton {
         imageView = findViewById(R.id.iv);
         textView = findViewById(R.id.tv);
         badge = findViewById(R.id.notifications_counter);
+        setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+        imageView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+        textView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
 
         if (attributeSet != null) {
             final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.FirstPageAppIcon);
-            setImageDrawable(styleAttributesArray.getDrawable(R.styleable.FirstPageAppIcon___src));
-            setText(styleAttributesArray.getString(R.styleable.FirstPageAppIcon___text));
+            defaultDrawable = styleAttributesArray.getDrawable(R.styleable.FirstPageAppIcon___src);
+            defaultText = styleAttributesArray.getString(R.styleable.FirstPageAppIcon___text);
+            setImageDrawable(defaultDrawable);
+            setText(defaultText);
             styleAttributesArray.recycle();
         }
 
@@ -89,6 +97,8 @@ public class FirstPageAppIcon extends BaldFrameLayoutButton {
 
     public void setBadgeVisibility(boolean visible) {
         badge.setVisibility(visible ? VISIBLE : INVISIBLE);
+        badge.setContentDescription(visible ? context.getString(R.string.new_notifications) : null);
+        badge.setImportantForAccessibility(visible ? IMPORTANT_FOR_ACCESSIBILITY_YES : IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
 
     public CharSequence getText() {
@@ -97,9 +107,23 @@ public class FirstPageAppIcon extends BaldFrameLayoutButton {
 
     public void setText(CharSequence text) {
         textView.setText(text);
+        if (getContentDescription() == null || getContentDescription().equals(textContentDescription)) {
+            textContentDescription = text;
+            setContentDescription(text);
+        }
     }
 
     public void setText(@StringRes int resId) {
-        textView.setText(resId);
+        setText(context.getText(resId));
+    }
+
+    public CharSequence getDefaultText() {
+        return defaultText;
+    }
+
+    /** Restores the icon/label declared in XML — used when a slot reverts from a custom app/contact to its default. */
+    public void resetToDefault() {
+        imageView.setImageDrawable(defaultDrawable);
+        setText(defaultText);
     }
 }

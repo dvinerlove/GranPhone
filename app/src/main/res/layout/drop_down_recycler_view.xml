@@ -18,10 +18,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/drop_down_container_background"
-    android:paddingStart="4dp"
-    android:paddingTop="7dp"
-    android:paddingEnd="4dp"
-    android:paddingBottom="7dp">
+    android:paddingStart="@dimen/spacing_xs"
+    android:paddingTop="@dimen/spacing_sm"
+    android:paddingEnd="@dimen/spacing_xs"
+    android:paddingBottom="@dimen/spacing_sm">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

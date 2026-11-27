@@ -34,9 +34,24 @@ public abstract class TimedBaldActivity extends BaldActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-        new Handler().postDelayed(() -> window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON), screenTimeout());
+        new Handler().postDelayed(() -> {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            // a screen the user already dismissed is finished, not missed
+            if (!isFinishing() && !isDestroyed())
+                onScreenTimeout();
+        }, screenTimeout());
 
     }
 
+    // back is intercepted (snooze), not a plain finish — callback needed on 33+
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
+    }
+
     protected abstract int screenTimeout();
+
+    /** Called once when {@link #screenTimeout()} expires while the screen is still up. */
+    protected void onScreenTimeout() {
+    }
 }

@@ -29,10 +29,13 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,11 +46,10 @@ import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.activities.HomeScreenActivity;
 import com.bald.uriah.baldphone.activities.media.PhotosActivity;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldImageButton;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bumptech.glide.Glide;
@@ -75,6 +77,7 @@ public class AddContactActivity extends BaldActivity {
     private String newPhoto;
     private EditText et_name, et_mobile_number, et_home_number, et_address, et_mail;
     private BaldImageButton iv_image, iv_delete;
+    private TextView tv_name_error;
     private View save;
 
     private static void addFullSizePhoto(int rawContactId, byte[] fullSizedPhotoData, final ContentResolver cr) throws IOException {
@@ -102,6 +105,7 @@ public class AddContactActivity extends BaldActivity {
         final String contactLookupKey = callingIntent.getStringExtra(SingleContactActivity.CONTACT_LOOKUP_KEY);
         if (contactLookupKey != null)
             try {
+                ((BaldTitleBar) findViewById(R.id.bald_title_bar)).setTitle(R.string.edit);
                 fillWithContact(contactLookupKey);
             } catch (IllegalStateException | Contact.ContactNotFoundException e) {
                 // sometimes it may happen, that the lookup key changes during the transition;
@@ -126,31 +130,58 @@ public class AddContactActivity extends BaldActivity {
             v.setVisibility(View.INVISIBLE);
         });
         save.setOnClickListener(v -> save());
-        ((BaldTitleBar) findViewById(R.id.bald_title_bar)).getBt_back().setOnClickListener(v -> {
+        final View.OnClickListener exitListener = v -> {
             if (safeToExit())
                 finish();
             else
                 showExitMessage();
+        };
+        findViewById(R.id.cancel).setOnClickListener(exitListener);
+        ((BaldTitleBar) findViewById(R.id.bald_title_bar)).setBackListener(exitListener);
+        et_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tv_name_error.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 
     private void save() {
         final String name = String.valueOf(et_name.getText());
         if (TextUtils.isEmpty(name.replace(" ", ""))) {
-            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.contact_must_has_name).show();
-        } else if (!(currentContact != null ? update() : insert())) {
-            BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.contact_not_created).show();
+            tv_name_error.setVisibility(View.VISIBLE);
+            tv_name_error.announceForAccessibility(tv_name_error.getText());
+            et_name.requestFocus();
         } else {
-            finishAffinity();
-            SingleContactActivity.newPictureAdded = true;//static vars are simpler and more rational in this case
+            com.bald.uriah.baldphone.utils.BaldExecutors.io().execute(() -> {
+                final boolean ok = currentContact != null ? update() : insert();
+                com.bald.uriah.baldphone.utils.BaldExecutors.postToMain(() -> {
+                    if (isFinishing() || isDestroyed())
+                        return;
+                    if (!ok) {
+                        BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.contact_not_created).show();
+                        return;
+                    }
+                    finishAffinity();
+                    SingleContactActivity.newPictureAdded = true;//static vars are simpler and more rational in this case
 
-            startActivity(new Intent(this, HomeScreenActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            startActivity(new Intent(this, ContactsActivity.class));
-            startActivity(
-                    new Intent(this, SingleContactActivity.class)
-                            .putExtra(SingleContactActivity.CONTACT_ID, String.valueOf(currentContact.getId()))
-                            .putExtra(SingleContactActivity.PIC_URI_EXTRA, newPhoto)
-            );
+                    startActivity(new Intent(this, HomeScreenActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    startActivity(new Intent(this, ContactsActivity.class));
+                    startActivity(
+                            new Intent(this, SingleContactActivity.class)
+                                    .putExtra(SingleContactActivity.CONTACT_ID, String.valueOf(currentContact.getId()))
+                                    .putExtra(SingleContactActivity.PIC_URI_EXTRA, newPhoto)
+                    );
+                });
+            });
         }
     }
 
@@ -163,6 +194,7 @@ public class AddContactActivity extends BaldActivity {
         iv_image = findViewById(R.id.iv_image);
         save = findViewById(R.id.save);
         iv_delete = findViewById(R.id.iv_delete);
+        tv_name_error = findViewById(R.id.tv_name_error);
     }
 
     private void fillWithContact(String contactLookupKey) throws Contact.ContactNotFoundException {
@@ -175,7 +207,7 @@ public class AddContactActivity extends BaldActivity {
         et_mail.setText(currentContact.getMail());
 
         if (currentContact.getPhoto() != null) {
-            if (S.isValidContextForGlide(iv_image.getContext()))
+            if (AppUtils.isValidContextForGlide(iv_image.getContext()))
                 Glide.with(iv_image).load(Uri.parse(currentContact.getPhoto())).into(iv_image);
             iv_delete.setVisibility(View.VISIBLE);
         }
@@ -410,14 +442,14 @@ public class AddContactActivity extends BaldActivity {
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
                 e.printStackTrace();
-                BaldToast.error(this);
+                BaldToast.error(this, R.string.photo_could_not_be_added);
             }
         }
         return true;
     }
 
     private void setImage(Uri uri) {
-        if (S.isValidContextForGlide(iv_image.getContext()))
+        if (AppUtils.isValidContextForGlide(iv_image.getContext()))
             Glide.with(iv_image).load(uri).into(iv_image);
         newPhoto = uri.toString();
         iv_delete.setVisibility(View.VISIBLE);
@@ -436,26 +468,32 @@ public class AddContactActivity extends BaldActivity {
             super.onBackPressed();
         else {
             if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
+                vibrator.vibrate(Const.vibetime);
             showExitMessage();
         }
     }
 
+    // the unsaved-changes guard intercepts back — a callback keeps it on API 33+
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
+    }
+
     private boolean safeToExit() {
-        final String mobile_number = S.str(et_mobile_number.getText().toString());
-        final String home_number = S.str(et_home_number.getText().toString());
-        final String address = S.str(et_address.getText().toString());
-        final String name = S.str(et_name.getText().toString());
-        final String mail = S.str(et_mail.getText().toString());
+        final String mobile_number = AppUtils.str(et_mobile_number.getText().toString());
+        final String home_number = AppUtils.str(et_home_number.getText().toString());
+        final String address = AppUtils.str(et_address.getText().toString());
+        final String name = AppUtils.str(et_name.getText().toString());
+        final String mail = AppUtils.str(et_mail.getText().toString());
 
         if (currentContact == null)
             return mobile_number == home_number && address == name && mail == mobile_number; // check all of them are empty
 
-        final String _mobile_number = S.str(currentContact.getMobilePhone());
-        final String _home_number = S.str(currentContact.getHomePhone());
-        final String _address = S.str(currentContact.getAddress());
-        final String _name = S.str(currentContact.getName());
-        final String _mail = S.str(currentContact.getMail());
+        final String _mobile_number = AppUtils.str(currentContact.getMobilePhone());
+        final String _home_number = AppUtils.str(currentContact.getHomePhone());
+        final String _address = AppUtils.str(currentContact.getAddress());
+        final String _name = AppUtils.str(currentContact.getName());
+        final String _mail = AppUtils.str(currentContact.getMail());
 
         return (et_mobile_number.length() == 0 && et_home_number.length() == 0 && et_address.length() == 0 && et_name.length() == 0 && et_mail.length() == 0)
                 || (Objects.equals(newPhoto, currentContact.getPhoto())
@@ -467,17 +505,15 @@ public class AddContactActivity extends BaldActivity {
     }
 
     private void showExitMessage() {
-        BDB.from(this)
-                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
-                .setSubText(R.string.do_you_want_to_save_your_changes)
-                .setOptions(R.string.save, R.string.discard)
-                .setPositiveButtonListener(params -> {
-                    if (params[0].equals(1))
+        DialogScreen.select(this, R.string.do_you_want_to_save_your_changes,
+                0,
+                index -> {
+                    if (index == 1)
                         finish();
                     else
                         save();
-                    return true;
-                }).show();
+                },
+                R.string.save, R.string.discard);
     }
 
     static class PhotoAdder extends SimpleTarget<Bitmap> {
@@ -509,6 +545,6 @@ public class AddContactActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_WRITE_CONTACTS | PERMISSION_READ_CONTACTS | PERMISSION_WRITE_EXTERNAL_STORAGE;
+        return PERMISSION_WRITE_CONTACTS | PERMISSION_READ_CONTACTS | PERMISSION_MEDIA_IMAGES;
     }
 }

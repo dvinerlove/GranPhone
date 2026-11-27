@@ -15,24 +15,21 @@
   -->
 
 <resources>
-    <string name="about"> Game da</string>
-    <string name="accessibility_settings">Samun dama</string>
-    <string name="acknowledgments">Amincewa</string>
+<string name="accessibility_settings">Samun dama</string>
     <string name="add_alarm">Kara Kararrawa</string>
     <string name="add_emergency_contact">Kara</string>
     <string name="add_pill">Kara Kwaya</string>
     <string name="afternoon">Yamma</string>
     <string name="and_welcome_to_GranPhone">kuma barka da zuwa GranPhone</string>
 
+    <string name="allow">Ƙyale</string>
     <string name="apps">Apps</string>
-    <string name="assistant">Mataimaki</string>
     <string name="at_least_one_day_must_be_selected">Aƙalla rana ɗaya dole ne a zaɓi!</string>
     <string name="backspace">kashin baya</string>
     <string name="GranPhone_bla_allow_permission">Da fatan za a ba da izini masu izini kamar haka:</string>
     <string name="blocked">An toshe</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Haske</string>
-    <string name="brightness_subtext">Canza Haske</string>
     <string name="cache_cleared_successfully">An Cire Cache Da Nasara!</string>
     <string name="call">Kira</string>
     <string name="calling">Kan Kira</string>
@@ -40,7 +37,6 @@
     <string name="camera">Kyamara</string>
     <string name="camera_subtext">Ana buƙatar wannan izinin don kunna walƙiya</string>
     <string name="cancel">Sake</string>
-    <string name="change_pills_time">Canja Lokaci Kwayoyin</string>
     <string name="choose_friday">Jum</string>
     <string name="choose_monday">Lit</string>
     <string name="choose_saturday">Asa</string>
@@ -59,9 +55,10 @@
     <string name="delete">Share</string>
     <string name="done">Anyi</string>
     <string name="down">Kasa</string>
+    <string name="download">Sauke</string>
     <string name="evening">Maraice</string>
     <string name="hide">Boye</string>
-    <string name="remove_from_sos">Cire daga SOS</string>
+    <string name="install">Shigar</string>
     <string name="repeats_every_day">Kowace rana</string>
     <string name="right_handed">Hannun dama</string>
 
@@ -74,10 +71,50 @@
     <string name="small">Karami</string>
     <string name="speak">Yi magana</string>
     <string name="today">Yau</string>
+    <string name="understood">Na fahimta</string>
     <string name="write">Rubuta</string>
     <string name="write_contacts">Rubuta Lambobin Sadarwa</string>
     <string name="yes">Haka ne</string>
     <string name="discard">A watse</string>
     <bool name="is_right_to_left">false</bool>
 
+    <string name="answer_call">Amsa</string>
+    <string name="call_ended">Kira ya ƙare</string>
+    <string name="call_status_calling">Kira…</string>
+    <string name="calls_channel">Kira</string>
+    <string name="confirm_call_title">Kira wannan lambar?</string>
+    <string name="decline_call">Ƙi</string>
+    <string name="hang_up">Kashe kira</string>
+    <string name="helper_pin_create_subtext">Zaɓi lambar lambobi 4. Yana kare saitunan mataimaka.</string>
+    <string name="helper_pin_enter_subtext">Shigar da lambar lambobi 4 don saitunan mataimaka.</string>
+    <string name="helper_pin_mismatch">Lambobin ba su dace ba.\nAn shigar da</string>
+    <string name="helper_pin_repeat_subtext">Shigar da lambar lambobi 4 iri ɗaya kuma.</string>
+    <string name="in_call">A cikin kira</string>
+    <string name="in_call_duration">A cikin kira • %1$s</string>
+    <string name="in_call_with">A cikin kira tare da %1$s</string>
+    <string name="incoming_call">Kira mai shigowa</string>
+    <string name="incoming_call_from">Kira mai shigowa daga %1$s</string>
+    <string name="kiosk_disable_subtext">Shigar da lambar lambobi 4 don kashe yanayin kiosk.</string>
+    <string name="kiosk_disabled">Yanayin Kiosk yana kashe.</string>
+    <string name="kiosk_enable_subtext">Wayar za ta tsaya a cikin GranPhone: babu inuwar sanarwa, babu saitunan Android kuma babu aikace-aikacen cirewa.\nZaɓi lambar lambobi 4 don kashe wannan makullin daga baya.</string>
+    <string name="kiosk_enabled">Yanayin Kiosk yana kunne.</string>
+    <string name="kiosk_pin_too_short">Shigar da lambobi 4 daidai.</string>
+    <string name="kiosk_wrong_pin">Wannan ba shine lambar lambobi 4 da kuka saita ba. Gwada kuma.</string>
+    <string name="on_hold">A riƙe</string>
+    <string name="ongoing_call">Kira yana ci gaba</string>
+    <string name="pin_digits_entered">%1$d na %2$d lambobi</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS - kiran sabis na gaggawa</string>
+    <string name="sos_call_help">Kira sabis na gaggawa</string>
+    <string name="sos_calling_in">Kiran sabis na gaggawa a cikin %d seconds…</string>
+    <string name="sos_confirm_call">Kira sabis na gaggawa yanzu?</string>
+    <string name="sos_hold_explanation">Latsa ka riƙe SOS na tsawon daƙiƙa 5 don kiran sabis na gaggawa.</string>
+    <string name="sos_is_full">Jerin SOS ya cika</string>
+    <string name="sos_is_full_subtext">Jerin SOS yana riƙe da lambobi 2. Cire ɗaya kafin ƙara wani.</string>
+    <string name="speaker_state_off">Kashe kakakin</string>
+    <string name="speaker_state_on">Mai magana a kan</string>
+    <string name="speaker_turn_off">Kashe lasifikar</string>
+    <string name="speaker_turn_on">Kunna lasifika</string>
+    <string name="tap_to_return_to_call">Matsa don komawa ga kiran</string>
+    <string name="unknown_number">Lambar da ba a sani ba</string>
 </resources>

@@ -15,29 +15,19 @@
   -->
 
 <resources>
-    <string name="about">Tentang</string>
-    <string name="about_subtext">Hai!\nNama saya Uriah Shaul Mandel, pengembang piranti lunak ini.\n
-        Saya menghabiskan sebagian besar masa \"dewasa\" saya untuk membuat GranPhone, dan merilisnya secara gratis agar Anda semua bisa menggunakannya.\nAnda bisa menghubungi saya melalui email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Tingkat Aksesibilitas</string>
+
+<string name="accessibility_level">Tingkat Aksesibilitas</string>
     <string name="accessibility_settings">Aksesibilitas</string>
     <string name="accidental_touches">Pencegah Sentuhan Tidak Disengaja</string>
-    <string name="accidental_touches_settings_subtext">Pencegah menjaga telepon Anda dari sentuhan tidak disengaja ketika telepon ditutup.
-        \nJika Anda keberatan dengan hal ini, Anda dapat menonaktifkannya.
-    </string>
-    <string name="accidental_touches_subtext">Sentuhan tidak disengaja terdeteksi\ntekan OK untuk terus menggunakan telepon\nJika
+    <string name="accidental_touches_subtext">Sentuhan tidak disengaja terdeteksi\ntekan \"Mengerti\" untuk terus menggunakan telepon\nJika
         pesan ini terus muncul Anda dapat menonaktifkannya di pengaturan aksesibilitas
     </string>
-    <string name="acknowledgments">Ucapan Terima Kasih</string>
-    <string name="adaptive">Adaptif</string>
     <string name="add_alarm">Tambah Alarm</string>
     <string name="add_alarm_quickly">Tambah Pewaktu</string>
     <string name="add_contact">Tambah Kontak</string>
     <string name="add_emergency_contact">Tambah</string>
     <string name="add_pill">Tambah Pil</string>
-    <string name="add_shortcut">Tambah Pintasan</string>
     <string name="add_to_favorite">Tambah ke Favorit</string>
-    <string name="add_to_home">Tambah ke Beranda</string>
     <string name="add_to_sos">Tambah ke SOS</string>
     <string name="address">Alamat</string>
     <string name="advanced_options">Pilihan Tingkat Lanjut</string>
@@ -57,7 +47,6 @@
 
     <string name="apps">Aplikasi</string>
     <string name="are_you_sure_you_want_to_delete___">Anda yakin ingin menghapus %s?</string>
-    <string name="assistant">Asisten</string>
     <string name="at_least_one_day_must_be_selected">Setidaknya pilih satu hari!</string>
     <string name="auto_brightness">Kecerahan\nOtomatis</string>
     <string name="backspace">menghapus</string>
@@ -65,7 +54,6 @@
     <string name="blocked">Diblokir</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Kecerahan</string>
-    <string name="brightness_subtext">Ubah Kecerahan.</string>
     <string name="cache_cleared_successfully">Cache Berhasil Dibersihkan!</string>
     <string name="call">Panggilan</string>
     <string name="calling">Memanggil</string>
@@ -75,7 +63,6 @@
     <string name="camera">Kamera</string>
     <string name="camera_subtext">Izin ini diperlukan unutk menyalakan lampu senter.</string>
     <string name="cancel">Batal</string>
-    <string name="change_pills_time">Ubah Waktu Pil</string>
     <string name="change_system_settings_subtext">Izinkan GranPhone untuk mengubah pengaturan, seperti memperbesar ukuran huruf dan mengubah kecerahan.</string>
     <string name="choose_friday">Jum</string>
     <string name="choose_monday">sen</string>
@@ -89,7 +76,8 @@
     <string name="clear_data">Hapus Semua Data</string>
     <string name="clear_data_subtext">Apakah Anda yakin ingin menghapus semua data?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">yakin?\nMenekan ya akan menghapus semua data!</string>
+    <string name="clear_data_subtext3">yakin?
+Semua data akan dihapus!</string>
     <string name="clock">Jam</string>
     <string name="coming_soon">Segera Hadir!</string>
     <string name="connection_settings">Sambungan</string>
@@ -104,24 +92,18 @@
     <string name="dark">Gelap</string>
     <string name="delete">Hapus</string>
     <string name="delete___">Hapus %s?</string>
-    <string name="delete_all_alarms">Hapus semua alarm</string>
     <string name="dialer">Pemanggil</string>
     <string name="display_settings">Tampilan</string>
     <string name="done">Selesai</string>
     <string name="down">Turun</string>
     <string name="edit">Sunting</string>
-    <string name="email">Email:</string>
     <string name="enable_notification_access">Aktifkan Akses Pemberitahuan</string>
     <string name="enable_notification_access_subtext">Harap beri GranPhone akses ke pemberitahuan.</string>
     <string name="enter">Enter</string>
-    <string name="enter_contact_or_phone_number">Masukkan nama kontak:</string>
     <string name="evening">Malam</string>
     <string name="example_of_different_text_sizes">Contoh ukuran teks yang berbeda\nSemestinya bisa dibaca dan tidak tumpang-tindih..
     </string>
     <string name="external_storage_subtext">Izin ini diperlukan untuk menyimpan gambar.</string>
-    <string name="feedback">Kirim Umpan Balik</string>
-    <string name="feedback_cannot_be_empty">Umpan balik tidak boleh kosong!</string>
-    <string name="feedback_sent_successfully">Umpan balik berhasil dikirim!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Silakan  pilih tingkat aksesibilitas
     </string>
     <string name="font_size">Ukuran Huruf</string>
@@ -136,7 +118,6 @@
     <string name="home_phone_number">Nomor telepon rumah</string>
     <string name="hour">Jam</string>
     <string name="huge">Sangat Besar</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Dipanggil dalam:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Satu hal
         terakhir:\nSangat disarankan untuk menggunakan layar Beranda GranPhone sebagai peluncur Beranda asali
@@ -147,9 +128,7 @@
     <string name="left_handed">Kidal</string>
     <string name="light">Cahaya</string>
     <string name="location">Lokasi</string>
-    <string name="emergency_services">Layanan Darurat</string>
-    <string name="mail">Surat</string>
-    <string name="maps">Peta</string>
+<string name="mail">Surat</string>
 
 
     <string name="medium">Sedang</string>
@@ -170,8 +149,6 @@
     <string name="nfc">NFC</string>
     <string name="no">Tidak</string>
     <string name="notes">Catatan</string>
-    <string name="notes_settings">Catatan-catatan</string>
-    <string name="notes_settings_subtext">Pilih jika Anda ingin laman Catatan berada di layar Beranda.</string>
     <string name="notifications">Pemberitahuan</string>
 
     <string name="of">dari</string>
@@ -194,6 +171,7 @@
     <string name="pill_added">Pil ditambahkan!</string>
     <string name="pill_name">Nama Pil</string>
     <string name="pills">Pil-pil</string>
+    <string name="pill">Pil</string>
     <string name="press_longer">Tekan Lebih Lama!</string>
     <string name="timer">Pewaktu</string>
     <string name="read_call_log">Baca Riwayat Panggilan</string>
@@ -204,9 +182,6 @@
     <string name="regular_level">Tingkat biasa</string>
 
     <string name="remove_from_favorite">Hapus dari Favorit</string>
-    <string name="remove_from_home">Hapus dari Beranda</string>
-    <string name="remove_from_sos">Hapus dari SOS</string>
-    <string name="remove_shortcut">Hapus pintasan</string>
     <string name="removed_all_alarms">Hapus semua alarm!</string>
     <string name="repeats_every_day">Tiap hari</string>
     <string name="right_handed">Tangan Kanan</string>
@@ -246,24 +221,20 @@
     <string name="speak">Bicara</string>
     <string name="speech_to_text">Ucapan ke Tulisan</string>
     <string name="strong_hand">Tangan Dominan</string>
-    <string name="strong_hand_subtext">Pilih tangan dominan Anda untuk menyesuaikan antarmuka pengguna.</string>
-    <string name="submit">kirim</string>
     <string name="sunday">Minggu</string>
     <string name="technical_information">Informasi Teknis</string>
     <string name="theme_settings">Tema</string>
-    <string name="theme_settings_subtext">Pilih tema</string>
 
     <string name="thursday">Kamis</string>
     <string name="time_changer">Pengubah Waktu Pil</string>
     <string name="tiny">Sangat Kecil</string>
-    <string name="to___days_and___hours_from_now">ke %d hari dan %d jam dari sekarang</string>
-    <string name="to___hours_and___minutes_from_now">ke %d jam dan %d menit dari sekarang</string>
+    <string name="to___days_and___hours_from_now">ke %1$d hari dan %2$d jam dari sekarang</string>
+    <string name="to___hours_and___minutes_from_now">ke %1$d jam dan %2$d menit dari sekarang</string>
     <string name="to___minuets_from_now">ke %d menit dari sekarang</string>
     <string name="today">hari ini</string>
     <string name="took">Ambil!</string>
     <string name="tuesday">Selasa</string>
     <string name="uninstall">Copot pemasangan</string>
-    <string name="uninstall_subtext">Anda yakin ingin mencopot %s?\nData %s akan hilang selamanya!</string>
     <string name="up">Naik</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video Tutorial</string>
@@ -281,21 +252,24 @@
     <string name="yesterday">Kemarin</string>
     <string name="nothing">Tidak Ada</string>
     <string name="no_contacts_found">Kontak Tidak Ditemukan!</string>
-    <string name="no_alarms">Tidak Ada Alarm\nBuat dengan mengklik\n\"Tambah Alarm\"\nAtau\n\"Tambah Pewaktu\"</string>
-    <string name="no_pills">Tidak Ada Pil\nBuat dengan cara mengklik\n\"Tambah Pil\"</string>
+    <string name="no_alarms">Tidak ada alarm.
+Tekan \"Alarm\" atau
+\"Pewaktu\" di bawah.</string>
+    <string name="no_pills">Tidak ada pil.
+Tekan \"+ Pil\" di bawah.</string>
     <string name="clear_all_notifications">Kosongkan Semua Pemberitahuan</string>
     <string name="clear_cache_subtext">Anda yakin ingin menghapus cache?\nAplikasi pintasan juga akan dihapus!
     </string>
     <string name="permissions_calm">Hai, GranPhone membutuhkan perizinan berikut agar bisa berjalan. Beberapa
         mungkin terdengar menakutkan, namun ini satu-satunya cara agar GranPhone bisa menggantikan antarmuka telepon. Tidak ada data yang diambil dan akan menyebabkan
-        masalah. Tekan OK untuk mengizinkan atau TIDAK untuk keluar dari GranPhone.
+        masalah. Lanjutkan untuk mengizinkan atau keluar dari GranPhone.
     </string>
     <string name="pending_update">Pembaruan Tertunda</string>
     <string name="download">Unduh</string>
     <string name="install_updates">Pasang Pembaruan</string>
     <string name="install_updates_subtext">Izin ini diperlukan untuk memperbarui GranPhone</string>
     <string name="a_new_update_is_available">Pembaruan tersedia!\nPembaruan penting untuk untuk menjaga GranPhone berjalan
-        dengan lancar.\nTekan OK untuk mengunduh.
+        dengan lancar.\nLanjutkan untuk mengunduh.
     </string>
     <string name="current_version">Versi Sekarang:\n</string>
     <string name="new_version">Versi Baru:\n</string>
@@ -321,23 +295,15 @@
     <string name="try_now">Coba Sekarang</string>
     <string name="download_progress">Laju Pengunduhan</string>
     <string name="what_do_you_want_to_do_with___">Apa yang ingin Anda lakukan dengan %s?</string>
-    <string name="crash_reports">Laporan Kerusakan</string>
-    <string name="crash_reports_subtext">Laporan kerusakan membantu menjadikan pengalaman menggunakan GranPhone tanpa cela\nLaporan hanya digunakan
-        untuk memperbaiki kutu, dan tidak ada info selain apa yang diperlukan untuk memperbaiki kutu
-    </string>
     <string name="custom_app">Aplikasi Khusus</string>
-    <string name="custom_app_subtext">Pilih aplikasi khusus untuk berada di layar beranda.</string>
-    <string name="no_app_was_found">Tidak ada aplikasi yang cocok ditemukan!</string>
     <string name="alarm">Alarm</string>
     <string name="no_new_notifications">Tidak Ada Pemberitahuan Baru</string>
     <string name="sound">Bunyi</string>
     <string name="mute">Bisu</string>
     <string name="vibrate">Getar</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Telepon Anda tidak terpasang aplikasi asisten.</string>
 
 
     <string name="status_bar_settings">Bilah status</string>
-    <string name="status_bar_settings_subtext">Di mana Anda ingin menampilkan bilah status?</string>
     <string name="only_home_screen">Hanya di Layar Beranda</string>
     <string name="nowhere">Tidak di mana-mana</string>
     <string name="everywhere">Di mana-mana</string>
@@ -348,6 +314,8 @@
     <string name="choose_language_for_keyboard">Pilih Bahasa</string>
     <string name="hebrew">Ibrani</string>
     <string name="english">Inggris</string>
+    <string name="russian">Rusia</string>
+    <string name="understood">Mengerti</string>
 
     <string name="search">Cari</string>
     <string name="next">Berikutnya</string>
@@ -355,39 +323,24 @@
 
 
     <string name="dialer_sounds">Suara Pemanggil</string>
-    <string name="dialer_sounds_subtext">Pilih jika Anda menginginkan Suara Pemanggil.</string>
     <string name="low_battery_alert">Peringatan Baterai Rendah</string>
-    <string name="low_battery_alert_subtext">Pilih jika Anda ingin bilah status menjadi merah di layar beranda ketika baterai di bawah 20%\nPerhatikan ia tidak akan ditampilkan jika bilah status disembunyikan.</string>
 
-    <string name="also_available_at">Juga tersedia di\nGranPhone.contact@gmail.com\nUmpan balik harus dalam bahasa Inggris atau Ibrani!</string>
     <string name="grant_all_permissions">Berikan semua perizinan</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Sumbangan</string>
-    <string name="emergency_button">Tombol Darurat</string>
-    <string name="emergency_settings_subtext">Pilih jika Anda menginginkan tombol darurat di layar beranda.</string>
     <string name="private_number">Nomor Pribadi</string>
     <string name="swipe_left_or_right">Geser ke kiri atau kanan</string>
     <string name="press_next_or_back_buton">Tekan panah berikutnya atau kembali</string>
-    <string name="click_delay">Jeda Klik</string>
-    <string name="no_delay">Tanpa Jeda</string>
-    <string name="scrolling">Menggulung</string>
-    <string name="arrows">Panah</string>
-    <string name="swipe">Geser</string>
-    <string name="_long">Panjang</string>
-    <string name="_short">Pendek</string>
     <string name="do_you_want_to_save_your_changes">Apakah Anda ingin menyimpan perubahan?</string>
     <string name="discard">Buang</string>
     <string name="no_recent_calls">Tidak Ada Panggilan Terbaru</string>
     <string name="apps_sort_method">Metode Pengurutan Aplikasi</string>
-    <string name="apps_sort_method_subtext">Pilih apakah Anda ingin mengurutkan aplikasi dalam satu kotak atau membaginya menjadi beberapa kelompok berbeda berdasar huruf</string>
     <string name="groups">Kelompok</string>
     <string name="one_grid">Satu Kotak</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Do you want to make GranPhone more colorful?</string>
     <string name="edit_home_screen">Edit Home Screen</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>
@@ -400,4 +353,46 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Kembali</string>
+    <string name="exit">Keluar</string>
+    <string name="stay">Tetap</string>
+    <string name="settings_for_user">Untuk pengguna</string>
+    <string name="settings_for_helper">Untuk pendamping</string>
+    <string name="answer_call">Jawab</string>
+    <string name="call_ended">Panggilan berakhir</string>
+    <string name="call_status_calling">Memanggil…</string>
+    <string name="calls_channel">Panggilan</string>
+    <string name="confirm_call_title">Hubungi nomor ini?</string>
+    <string name="decline_call">Tolak</string>
+    <string name="hang_up">Tutup</string>
+    <string name="helper_pin_create_subtext">Pilih kode 4 digit. Ini melindungi pengaturan pembantu.</string>
+    <string name="helper_pin_enter_subtext">Masukkan kode 4 digit untuk pengaturan pembantu.</string>
+    <string name="helper_pin_mismatch">Kode tidak cocok.</string>
+    <string name="helper_pin_repeat_subtext">Masukkan kembali kode 4 digit yang sama.</string>
+    <string name="in_call">Sedang menelepon</string>
+    <string name="in_call_duration">Sedang panggilan • %1$s</string>
+    <string name="in_call_with">Sedang menelepon dengan %1$s</string>
+    <string name="incoming_call">Panggilan masuk</string>
+    <string name="incoming_call_from">Panggilan masuk dari %1$s</string>
+    <string name="kiosk_disable_subtext">Masukkan kode 4 digit untuk mematikan mode kios.</string>
+    <string name="kiosk_disabled">Mode kios tidak aktif.</string>
+    <string name="kiosk_enable_subtext">Ponsel akan tetap berada di dalam GranPhone: tidak ada bayangan notifikasi, tidak ada pengaturan Android, dan tidak ada uninstall aplikasi.\nPilih kode 4 digit untuk mematikan kunci ini nanti.</string>
+    <string name="kiosk_enabled">Mode kios aktif.</string>
+    <string name="kiosk_pin_too_short">Masukkan tepat 4 digit.</string>
+    <string name="kiosk_wrong_pin">Itu bukan kode 4 digit yang Anda tetapkan. Coba lagi.</string>
+    <string name="on_hold">Ditahan</string>
+    <string name="ongoing_call">Panggilan sedang berlangsung</string>
+    <string name="pin_digits_entered">%1$d dari %2$d digit dimasukkan</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — menghubungi layanan darurat</string>
+    <string name="sos_call_help">Hubungi layanan darurat</string>
+    <string name="sos_calling_in">Memanggil layanan darurat dalam %d detik…</string>
+    <string name="sos_confirm_call">Hubungi layanan darurat sekarang?</string>
+    <string name="sos_hold_explanation">Tekan dan tahan SOS selama 5 detik untuk memanggil layanan darurat.</string>
+    <string name="speaker_state_off">Speaker mati</string>
+    <string name="speaker_state_on">Pembicara aktif</string>
+    <string name="speaker_turn_off">Matikan pengeras suara</string>
+    <string name="speaker_turn_on">Nyalakan pengeras suara</string>
+    <string name="tap_to_return_to_call">Ketuk untuk kembali ke panggilan</string>
+    <string name="unknown_number">Nomor tidak dikenal</string>
 </resources>

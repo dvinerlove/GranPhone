@@ -15,28 +15,18 @@
   -->
 
 <resources>
-    <string name="about">About</string>
-    <string name="about_subtext">Hi!\nMy name is Uriah Shaul Mandel, and I\'m the developer of this platform.\n
-        I\'ve spent most of my \"adult\" life making this platform, and I\'ve released it for free, for all to
-        use.\nYou are more than welcome to contact me by email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Erişilebilirlik Seviyesi</string>
+
+<string name="accessibility_level">Erişilebilirlik Seviyesi</string>
     <string name="accessibility_settings">Erişilebilirlik</string>
     <string name="accidental_touches">Istenmeden Dokunma Ayarı</string>
-    <string name="accidental_touches_settings_subtext">But ayar telefonunuz örtülü olduğu zaman, dokunuşlari algılamıyor. Sorun yaşıyorsanız, bu ayarı kapatın.
+    <string name="accidental_touches_subtext">Istenmeden Dokunma algılandı. Telefonu kullanmak için \"Anladım\" düğmesine basınız. Bu mesaj devamıyla gelirse, \"erişilebilirlik ayarları\" altında kapatabilirsiniz.
     </string>
-    <string name="accidental_touches_subtext">Istenmeden Dokunma algılandı. Telefonu kullanmak için tamama basınız. Bu mesaj devamıyla gelirse, \"erişilebilirlik ayarları\" altında kapatabilirsiniz.
-    </string>
-    <string name="acknowledgments">Uyarılar</string>
-    <string name="adaptive">Adaptiv</string>
     <string name="add_alarm">Alarm ekle</string>
     <string name="add_alarm_quickly">Zaman ölçer ekle</string>
     <string name="add_contact">Kişi ekle</string>
     <string name="add_emergency_contact">Acil arama kişisini ekle</string>
     <string name="add_pill">İlaç ekle</string>
-    <string name="add_shortcut">Uygulama kısayolu ekle</string>
     <string name="add_to_favorite">Favorilerine ekle</string>
-    <string name="add_to_home">Ana sayfaya ekle</string>
     <string name="add_to_sos">Acile/SOS\'e ekle</string>
     <string name="address">Adres</string>
     <string name="advanced_options">Geliştirilmiş Ayarlar</string>
@@ -56,7 +46,6 @@
 
     <string name="apps">Uygulamalar</string>
     <string name="are_you_sure_you_want_to_delete___">Bunu silmek istediğinize emin misiniz %s?</string>
-    <string name="assistant">Asistan</string>
     <string name="at_least_one_day_must_be_selected">En az bir gün seçilmek sorunda!</string>
     <string name="auto_brightness">Otomatik\n parlaklık</string>
     <string name="backspace">Geri tuşu</string>
@@ -64,7 +53,6 @@
     <string name="blocked">Bloke edilmiş</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Parlaklık</string>
-    <string name="brightness_subtext">Parlaklık\'i değiştir</string>
     <string name="cache_cleared_successfully">Önbellek başarıyla temizlendi!</string>
     <string name="call">Arama</string>
     <string name="calling">Aranıyor</string>
@@ -74,7 +62,6 @@
     <string name="camera">Kamera</string>
     <string name="camera_subtext">Bu gerekçe, el fenerini kullanmak için gerekli.</string>
     <string name="cancel">Vazgeç</string>
-    <string name="change_pills_time">Hap zamanını değiştir.</string>
     <string name="change_system_settings_subtext">Lütfen GranPhone\'a ayarları değiştirme onayı veriniz, örneğin yazı tipini değiştirmek veya parlaklığı değiştirmek için.
     </string>
     <string name="choose_friday">Cum</string>
@@ -89,7 +76,8 @@
     <string name="clear_data">Tüm hafızayı sil</string>
     <string name="clear_data_subtext">Tüm bilgileri silmek istediğinize emin misiniz?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Emin misiniz?\nBasmak bütün bilgilerinizi siler!</string>
+    <string name="clear_data_subtext3">Emin misiniz?
+Bütün bilgileriniz silinecek!</string>
     <string name="clock">Saat</string>
     <string name="coming_soon">Gelecek/Daha işlemde!</string>
     <string name="connection_settings">Bağlantı</string>
@@ -104,24 +92,18 @@
     <string name="dark">Karanlık</string>
     <string name="delete">Sil</string>
     <string name="delete___"> %s? Silmeye emin misiniz?</string>
-    <string name="delete_all_alarms">Tüm alarmları sil</string>
     <string name="dialer">Arama</string>
     <string name="display_settings">Ekran ayarları</string>
     <string name="done">Bitti</string>
     <string name="down">Aşağı</string>
     <string name="edit">Düzenle</string>
-    <string name="email">E-posta:</string>
     <string name="enable_notification_access">Bildirim erişimine izin veriniz</string>
     <string name="enable_notification_access_subtext">Lütfen GranPhone bildirimlerine izin veriniz.</string>
     <string name="enter">Giriş</string>
-    <string name="enter_contact_or_phone_number">Kişinin ismini giriniz:</string>
     <string name="evening">Akşam</string>
     <string name="example_of_different_text_sizes">Değişik metin büyüklükleri\n Sözlerin kesintisiz okunabilecek olması lazım.
     </string>
     <string name="external_storage_subtext">Bu gerekçe resim ve dosya kaydede bilmeniz için gerekli.</string>
-    <string name="feedback">Geribildirim gönder</string>
-    <string name="feedback_cannot_be_empty">Geribildirim boş olamaz!</string>
-    <string name="feedback_sent_successfully">Geribildirim gönderildi!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Lütfen erişilebilirlik için ayar seçiniz.
     </string>
     <string name="font_size">Metin büyüklüğü</string>
@@ -135,7 +117,6 @@
     <string name="home_phone_number">Ev telefonu numarası</string>
     <string name="hour">Saat</string>
     <string name="huge">Huge</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Çağrıldı:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Son bir şey:\n Baldphon\'un kendi ana sayfayasnini kullanmanızı tavsiye ederiz.
     </string>
@@ -145,9 +126,7 @@
     <string name="left_handed">Solak</string>
     <string name="light">Parlak</string>
     <string name="location">Konum</string>
-    <string name="emergency_services">Acil/SOS servisleri</string>
-    <string name="mail">posta</string>
-    <string name="maps">Haritalar</string>
+<string name="mail">posta</string>
 
 
     <string name="medium">medium</string>
@@ -168,8 +147,6 @@
     <string name="nfc">NFC</string>
     <string name="no">Hayır</string>
     <string name="notes">Notlar</string>
-    <string name="notes_settings">Not ayarları</string>
-    <string name="notes_settings_subtext">Ana sayfada Notlar sayfasını görmek istiyor musunuz?</string>
     <string name="notifications">Bildirimler</string>
 
     <string name="of">of</string>
@@ -192,6 +169,7 @@
     <string name="pill_added">İlaç eklendi!</string>
     <string name="pill_name">İlaç ismi</string>
     <string name="pills">İlaçlar</string>
+    <string name="pill">İlaç</string>
     <string name="press_longer">Daha uzun basınız!</string>
     <string name="timer">Zaman ölçer</string>
     <string name="read_call_log">Arama geçmişi</string>
@@ -202,9 +180,6 @@
     <string name="regular_level">Sıradan seviye</string>
 
     <string name="remove_from_favorite">Favorilerden çıkarın</string>
-    <string name="remove_from_home">Ana sayfadan çıkarın</string>
-    <string name="remove_from_sos">Acil/SOS\'den çıkarın</string>
-    <string name="remove_shortcut">Kısayolu silin</string>
     <string name="removed_all_alarms">Tüm alarmlarınız silindi!</string>
     <string name="repeats_every_day">Her gün tekrarla</string>
     <string name="right_handed">Sağlak</string>
@@ -238,24 +213,20 @@
     <string name="speak">Konuş</string>
     <string name="speech_to_text">Sesten yazıya</string>
     <string name="strong_hand">Hakim el</string>
-    <string name="strong_hand_subtext">Kullanıcı arayüzünü ayarlamak için hakim elinizi seçiniz.</string>
-    <string name="submit">Sunun</string>
     <string name="sunday">Pazar</string>
     <string name="technical_information">Teknik bilgiler</string>
     <string name="theme_settings">Tema ayaralrı</string>
-    <string name="theme_settings_subtext">Tema seçiniz</string>
 
     <string name="thursday">Perşembe</string>
     <string name="time_changer">İlaç zamanını değiştir</string>
     <string name="tiny">Tiny</string>
-    <string name="to___days_and___hours_from_now">şimdiden %d gün ve %d saat sonraya</string>
-    <string name="to___hours_and___minutes_from_now">şimdiden %d saat ve %d dakika sonraya</string>
+    <string name="to___days_and___hours_from_now">şimdiden %1$d gün ve %2$d saat sonraya</string>
+    <string name="to___hours_and___minutes_from_now">şimdiden %1$d saat ve %2$d dakika sonraya</string>
     <string name="to___minuets_from_now">şimdiden %d dakika sonraya</string>
     <string name="today">Bu gün</string>
     <string name="took">Alındı!</string>
     <string name="tuesday">Salı</string>
     <string name="uninstall">Kaldırın</string>
-    <string name="uninstall_subtext">Kaldırmak istediğinize emin misiniz %s?\n%s\'a ait bilgiler silinecek!</string>
     <string name="up">Yukarı</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video Dersler</string>
@@ -273,16 +244,19 @@
     <string name="yesterday">Dün</string>
     <string name="nothing">Hiçbir şey</string>
     <string name="no_contacts_found">Hiçbir kişi bulunamadı!</string>
-    <string name="no_alarms">Alarmınız yok\nŞuraya basarak birini yaratın\n\"Alarm yarat\"\nve ya\n\"Zaman ölçer ekle\"</string>
-    <string name="no_pills">Listede hiç bir ilacınız yok \nŞuraya basarak birini yaratın\n\"İlaç ekle\"</string>
+    <string name="no_alarms">Alarmınız yok.
+Aşağıdaki \"Alarm\" veya
+\"Zaman ölçer\"e basın.</string>
+    <string name="no_pills">Hiç ilacınız yok.
+Aşağıdaki \"+ İlaç\"a basın.</string>
     <string name="clear_all_notifications">Tüm bildirimleri temizle</string>
     <string name="clear_cache_subtext">Önbelleyi temizlemek istediğinize emin misiniz?\nUygulama kısayolları kaldırılacak!</string>
-    <string name="permissions_calm">Merhaba, GranPhone\'un düzgün çalışması için aşağıdakı izinleri vermelisiniz. Bazı izinler korkunç seslene bilir, ama GranPhone\'un telefonunuzun arayüzünün yerini almasının başka bir yolu yok. Bu işlem tamamen zararsızdır ve hiç bir bilginiz ele geçirilmeyecek. Tamama basarak şu izinleri veriniz.</string>
+    <string name="permissions_calm">Merhaba, GranPhone\'un düzgün çalışması için aşağıdakı izinleri vermelisiniz. Bazı izinler korkunç seslene bilir, ama GranPhone\'un telefonunuzun arayüzünün yerini almasının başka bir yolu yok. Bu işlem tamamen zararsızdır ve hiç bir bilginiz ele geçirilmeyecek. İzinleri vermek için devam edin veya GranPhone\'dan çıkın.</string>
     <string name="pending_update">Bekleyen güncelleme</string>
     <string name="download">İndir</string>
     <string name="install_updates">Güncellemeleri kurun</string>
     <string name="install_updates_subtext">GranPhone\'u güncellemek için şu izin gerekli</string>
-    <string name="a_new_update_is_available">Yeni güncelleme hazır!\nGüncellemeler GranPhone\'un hızlı ve pürüzsüz çalışması için önemli.\nTamama basarak indiriniz.</string>
+    <string name="a_new_update_is_available">Yeni güncelleme hazır!\nGüncellemeler GranPhone\'un hızlı ve pürüzsüz çalışması için önemli.\nDevam ederek indiriniz.</string>
     <string name="current_version">Şimdiki sürüm:\n</string>
     <string name="new_version">Yeni sürüm:\n</string>
     <string name="new_updates_are_ready_to_be_downloaded">Yeni güncellemeler indirilmeye hazır.</string>
@@ -305,21 +279,15 @@
     <string name="try_now">Şimdi dene</string>
     <string name="download_progress">İndirme ilerlemesi</string>
     <string name="what_do_you_want_to_do_with___">Şununla ne etmek istiyorsunuz %s?</string>
-    <string name="crash_reports">Kaza şikayetleri</string>
-    <string name="crash_reports_subtext">Kaza şikayetleri GranPhone\'un kullanım tecrübesinin geliştirilmesine yardım ediyorlar.\nOnlar sadece hataların bulunması ve düzeltilmesine yardım ediyorlars, ve size ait hiçbir bilgi elde edilmiyor.</string>
     <string name="custom_app">Özel uygulama</string>
-    <string name="custom_app_subtext">Ana sayfada olacak özel uygulamayı seçiniz.</string>
-    <string name="no_app_was_found">Eşleşen uygulama bulunamadı!</string>
     <string name="alarm">Alarm</string>
     <string name="no_new_notifications">Yeni bildirim yok</string>
     <string name="sound">Ses</string>
     <string name="mute">Sessize al</string>
     <string name="vibrate">Titreşim</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Telefonunuza hiçbir asistan yüklü değil.</string>
 
 
     <string name="status_bar_settings">Durum çubuğu</string>
-    <string name="status_bar_settings_subtext">Durum çubuğunun nerede görünmesini istiyorsunuz?</string>
     <string name="only_home_screen">Yalnız ana sayfada</string>
     <string name="nowhere">Hiçbir yerde</string>
     <string name="everywhere">Her yerde</string>
@@ -330,6 +298,8 @@
     <string name="choose_language_for_keyboard">Dil seçiniz</string>
     <string name="hebrew">İbranice</string>
     <string name="english">İngilizce</string>
+    <string name="russian">Rusça</string>
+    <string name="understood">Anladım</string>
 
     <string name="search">Arama</string>
     <string name="next">Sonraki</string>
@@ -337,39 +307,24 @@
 
 
     <string name="dialer_sounds">Arama sesleri</string>
-    <string name="dialer_sounds_subtext">Arama sesleri istiyorsanız seçiniz.</string>
     <string name="low_battery_alert">Düşük pil alarmı</string>
-    <string name="low_battery_alert_subtext">Eğer pil düşük olduğu zaman durum çubuğunun kırmızıya boyanmasını istiyorsanız seçiniz.\nNot: eğer durum çubuğu gizliyse görünmeyecektir.</string>
 
-    <string name="also_available_at">\nGranPhone.contact@gmail.com\nFeedback\'de de mevcut! Yalnız İngilizce ve İbranice olmalı!</string>
     <string name="grant_all_permissions">Tüm izinleri veriniz</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Bağış yap</string>
-    <string name="emergency_button">Acil durum butonu</string>
-    <string name="emergency_settings_subtext">Acil durum butonunun ekranda olmasını istiyorsanız seçiniz.</string>
     <string name="private_number">Özel numara</string>
     <string name="swipe_left_or_right">Sağa ve ya Sola kaydırın</string>
     <string name="press_next_or_back_buton">İreli ve ya geri okuna basınız</string>
-    <string name="click_delay">Basma gecikmesi</string>
-    <string name="no_delay">Gecikme yok</string>
-    <string name="scrolling">Kaydırma</string>
-    <string name="arrows">Oklar</string>
-    <string name="swipe">Kaydırın</string>
-    <string name="_long">Uzun</string>
-    <string name="_short">Kısa</string>
     <string name="do_you_want_to_save_your_changes">Değişiklikleri kaydetmek istiyor musunuz?</string>
     <string name="discard">Atın</string>
     <string name="no_recent_calls">Yeni çağrı yok</string>
     <string name="apps_sort_method">Uygulamaları dizme yöntemi</string>
-    <string name="apps_sort_method_subtext">Uygulamaları tek bir hanede mi yoksa harflerle farklı gruplara mı ayırmak istediğinizi seçin</string>
     <string name="groups">Gruplar</string>
     <string name="one_grid">Tek hane</string>
     <string name="colorful">Renkli</string>
-    <string name="colorful_subtext">GranPhone\'u daha renkli yapmak ister misiniz?</string>
     <string name="edit_home_screen">Ana sayfayı düzenle</string>
 
 
@@ -384,4 +339,46 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Geri</string>
+    <string name="exit">Çık</string>
+    <string name="stay">Kal</string>
+    <string name="settings_for_user">Kullanıcı için</string>
+    <string name="settings_for_helper">Yardımcı için</string>
+    <string name="answer_call">Yanıtla</string>
+    <string name="call_ended">Çağrı sona erdi</string>
+    <string name="call_status_calling">Arıyor…</string>
+    <string name="calls_channel">Aramalar</string>
+    <string name="confirm_call_title">Bu numarayı aramak ister misiniz?</string>
+    <string name="decline_call">Reddet</string>
+    <string name="hang_up">Kapat</string>
+    <string name="helper_pin_create_subtext">4 haneli bir kod seçin. Yardımcı ayarları korur.</string>
+    <string name="helper_pin_enter_subtext">Yardımcı ayarlar için 4 haneli kodu girin.</string>
+    <string name="helper_pin_mismatch">Kodlar eşleşmiyor.</string>
+    <string name="helper_pin_repeat_subtext">Aynı 4 haneli kodu tekrar girin.</string>
+    <string name="in_call">Çağrı sırasında</string>
+    <string name="in_call_duration">Aramada • %1$s</string>
+    <string name="in_call_with">%1$s ile görüşmede</string>
+    <string name="incoming_call">Gelen arama</string>
+    <string name="incoming_call_from">%1$s\'den gelen çağrı</string>
+    <string name="kiosk_disable_subtext">Kiosk modunu kapatmak için 4 haneli kodu girin.</string>
+    <string name="kiosk_disabled">Kiosk modu kapalı.</string>
+    <string name="kiosk_enable_subtext">Telefon GranPhone\'nin içinde kalacak: bildirim gölgesi yok, Android ayarları yok ve uygulamaların kaldırılması yok.\nBu kilidi daha sonra kapatmak için 4 haneli bir kod seçin.</string>
+    <string name="kiosk_enabled">Kiosk modu açık.</string>
+    <string name="kiosk_pin_too_short">Tam olarak 4 rakam girin.</string>
+    <string name="kiosk_wrong_pin">Bu sizin belirlediğiniz 4 haneli kod değil. Tekrar deneyin.</string>
+    <string name="on_hold">Beklemede</string>
+    <string name="ongoing_call">Arama devam ediyor</string>
+    <string name="pin_digits_entered">%1$d / %2$d hane girildi</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — acil servisleri arayın</string>
+    <string name="sos_call_help">Acil servisleri arayın</string>
+    <string name="sos_calling_in">Acil durum hizmetleri %d saniye içinde aranıyor…</string>
+    <string name="sos_confirm_call">Acil servisleri şimdi arayalım mı?</string>
+    <string name="sos_hold_explanation">Acil servisleri aramak için SOS tuşunu 5 saniye basılı tutun.</string>
+    <string name="speaker_state_off">Hoparlör kapalı</string>
+    <string name="speaker_state_on">Konuşmacı açık</string>
+    <string name="speaker_turn_off">Hoparlörü kapat</string>
+    <string name="speaker_turn_on">Hoparlörü açın</string>
+    <string name="tap_to_return_to_call">Aramaya geri dönmek için dokunun</string>
+    <string name="unknown_number">Bilinmeyen numara</string>
 </resources>

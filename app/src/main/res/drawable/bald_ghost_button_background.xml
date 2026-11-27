@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ghost button: invisible until pressed/focused (icon-only controls,
+     headers, inline actions). Filled variant: bald_button_background. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/transparent" android:state_enabled="false" />
+    <item android:state_pressed="true" android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="?bald_button_clicked" />
+        </shape>
+    </item>
+    <item android:state_focused="true" android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?bald_decoration_on_background" />
+        </shape>
+    </item>
+    <item android:drawable="@android:color/transparent" android:state_enabled="true" />
+</selector>

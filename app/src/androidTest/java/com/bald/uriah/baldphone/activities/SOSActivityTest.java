@@ -16,31 +16,29 @@
 
 package com.bald.uriah.baldphone.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.bald.uriah.baldphone.R;
+import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
+import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.longClick;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.allOf;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -48,32 +46,25 @@ public class SOSActivityTest extends BaseActivityTest {
     @Rule
     public ActivityTestRule<HomeScreenActivity> mActivityTestRule = new ActivityTestRule<>(HomeScreenActivity.class, true, false);
 
-    private static Matcher<View> childAtPosition(final Matcher<View> parentMatcher, final int position) {
-        return new TypeSafeMatcher<View>() {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view) {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
-    }
-
     @Test
     public void sOSActivityTest() {
+        // bt_add_contact hides once 2 contacts are pinned to SOS; clear pins so the path is deterministic
+        getInstrumentation().getTargetContext()
+                .getSharedPreferences(HomeScreenPinHelper.PinnedContactPreferences.KEY, Context.MODE_PRIVATE)
+                .edit()
+                .remove(HomeScreenPinHelper.PinnedContactPreferences.SOS_KEY)
+                .commit();
         mActivityTestRule.launchActivity(new Intent());
-        ViewInteraction baldImageButton2 = onView(allOf(withId(R.id.sos), childAtPosition(allOf(withId(R.id.top_bar), childAtPosition(withId(R.id.container), 0)), 0), isDisplayed()));
+        onView(withId(R.id.bt_home_sos)).perform(longClick());
         sleep();
-        baldImageButton2.perform(longClick());
-        ViewInteraction baldLinearLayoutButton = onView(allOf(withId(R.id.ec1), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
+        // quick tap on the hold-to-call button only asks for confirmation; a long hold would really dial 112
+        onView(withId(R.id.bt_sos)).perform(click());
         sleep();
-        baldLinearLayoutButton.perform(longClick());
+        onView(withId(R.id.dialog_screen_button_primary)).check(matches(isDisplayed()));
+        pressBack();
+        sleep();
+        onView(withId(R.id.bt_add_contact)).perform(scrollTo(), longClick());
+        sleep();
         pressBack();
         pressBack();
         sleep();

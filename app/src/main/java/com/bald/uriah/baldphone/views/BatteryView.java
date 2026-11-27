@@ -23,10 +23,12 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 public class BatteryView extends BaldImageButton {
     public int percentage;
+    @DrawableRes
+    private int shownDrawable = 0;
 
     public BatteryView(Context context) {
         super(context);
@@ -61,7 +63,7 @@ public class BatteryView extends BaldImageButton {
             } else
                 drawableRes = R.drawable.battery_full_on_background;
         } else {
-            if (level < D.LOW_BATTERY_LEVEL) {
+            if (level < Const.LOW_BATTERY_LEVEL) {
                 drawableRes = R.drawable.battery_20_on_background;
             } else if (level < 30) {
                 drawableRes = R.drawable.battery_30_on_background;
@@ -78,6 +80,10 @@ public class BatteryView extends BaldImageButton {
             }
 
         }
-        setImageResource(drawableRes);
+        // Same icon must not reload the drawable — reloading flickers on every redundant broadcast.
+        if (drawableRes != shownDrawable) {
+            shownDrawable = drawableRes;
+            setImageResource(drawableRes);
+        }
     }
 }

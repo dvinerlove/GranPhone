@@ -23,7 +23,7 @@ import androidx.annotation.Nullable;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
-import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
+import com.bald.uriah.baldphone.services.AlarmRecoveryJobService;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.views.BaldMultipleSelection;
 import com.bald.uriah.baldphone.views.BaldNumberChooser;
@@ -58,7 +58,7 @@ public class PillTimeSetterActivity extends BaldActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        ReminderScheduler.reStartReminders(this);
+        AlarmRecoveryJobService.schedule(this);
     }
 
     private void applyChoosers() {
@@ -68,6 +68,6 @@ public class PillTimeSetterActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_SYSTEM_ALERT_WINDOW;
+        return PERMISSION_SYSTEM_ALERT_WINDOW | PERMISSION_EXACT_ALARM;
     }
 }

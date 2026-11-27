@@ -28,6 +28,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -41,7 +43,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,6 +51,7 @@ import java.lang.annotation.RetentionPolicy;
 public class ScrollingHelper extends ConstraintLayout {
 
     private static final String TAG = ScrollingHelper.class.getSimpleName();
+    private final android.view.ViewTreeObserver.OnGlobalLayoutListener arrowsVisibilityListener = this::updateArrowsVisibility;
     public static final int START = -3;
     public static final int RIGHT = 2;
     public static final int END = 3;
@@ -70,11 +73,15 @@ public class ScrollingHelper extends ConstraintLayout {
     private Context context;
     private View child;
     private String empty;
+    private Drawable emptyIcon;
 
     private boolean aViewAdded = false,
             programmerAwareOfUsingNonModularViews = false,
             gone,
+            arrowsVisible = true,
             horizontalScrolling = false;
+    private View upArrow, downArrow;
+    private final android.view.ViewTreeObserver.OnScrollChangedListener scrollChangedListener = this::updateArrowsVisibility;
 
     @IdRes
     private int childId;
@@ -91,8 +98,6 @@ public class ScrollingHelper extends ConstraintLayout {
                 RecyclerView.Adapter<?> adapter = ((RecyclerView) child).getAdapter();
                 if (adapter != null && emptyView != null) {
                     if (adapter.getItemCount() == 0) {
-                        if (!gone)
-                            setArrowsVisibility(false);
                         if (emptyView instanceof TextView) {
                             ((TextView) emptyView).setText(empty);
                         } else
@@ -102,9 +107,9 @@ public class ScrollingHelper extends ConstraintLayout {
                             ((TextView) emptyView).setText("");
                         } else
                             emptyView.setVisibility(INVISIBLE);
-                        if (!gone)
-                            setArrowsVisibility(true);
                     }
+                    if (!gone)
+                        post(ScrollingHelper.this::updateArrowsVisibility);
                 }
             }
 
@@ -132,7 +137,7 @@ public class ScrollingHelper extends ConstraintLayout {
         this.layoutInflater = LayoutInflater.from(context);
 
         //if touch is hard
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         gone = sharedPreferences.getBoolean(BPrefs.TOUCH_NOT_HARD_KEY, false);
 
         SCROLL_CONST = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, SCROLL_CONST_IN_DP, getResources().getDisplayMetrics());
@@ -147,6 +152,12 @@ public class ScrollingHelper extends ConstraintLayout {
             if (this.emptyView != null)
                 removeView(this.emptyView);
             this.emptyView = child;
+            final View icon = child.findViewById(R.id.empty_icon);
+            if (icon instanceof ImageView && emptyIcon != null)
+                ((ImageView) icon).setImageDrawable(emptyIcon);
+            final View text = child.findViewById(R.id.empty_text);
+            if (text instanceof TextView && empty != null)
+                ((TextView) text).setText(empty);
             super.addView(this.emptyView, index, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             return;
         }
@@ -199,6 +210,27 @@ public class ScrollingHelper extends ConstraintLayout {
 
     }
 
+    /**
+     * The arrows are the only scroll mechanism for users who can't swipe —
+     * hide them ONLY when the child can't scroll at all in either direction.
+     */
+    private void updateArrowsVisibility() {
+        if (child == null || gone || whereBar == TOP_AND_BOTTOM)
+            return;
+        final boolean canUp = child.canScrollVertically(-1);
+        final boolean canDown = child.canScrollVertically(1);
+        final boolean show = canUp || canDown;
+        if (show != arrowsVisible) {
+            arrowsVisible = show;
+            setArrowsVisibility(show);
+        }
+        // each arrow dims at its edge — "nothing more this way" is the state users need to see
+        if (upArrow != null)
+            upArrow.setAlpha(canUp ? 1f : 0.5f);
+        if (downArrow != null)
+            downArrow.setAlpha(canDown ? 1f : 0.5f);
+    }
+
     private void setArrowsVisibility(boolean visible) {
         final int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, visible ? verticalScrollerLength : 0, displayMetrics);
 
@@ -238,12 +270,24 @@ public class ScrollingHelper extends ConstraintLayout {
 
     }
 
+    public void setEmptyText(@Nullable CharSequence text) {
+        empty = text != null ? text.toString() : null;
+        if (emptyView instanceof TextView) {
+            ((TextView) emptyView).setText(empty);
+        } else if (emptyView != null) {
+            final View t = emptyView.findViewById(R.id.empty_text);
+            if (t instanceof TextView)
+                ((TextView) t).setText(empty);
+        }
+    }
+
     private void getAttributeSet(@Nullable AttributeSet attributeSet) {
         if (attributeSet == null)
             return;
         final TypedArray styleAttributesArray = context.obtainStyledAttributes(attributeSet, R.styleable.ScrollingHelper);
         horizontalScrolling = styleAttributesArray.getBoolean(R.styleable.ScrollingHelper_horizontal_scrolling, false);
         empty = styleAttributesArray.getString(R.styleable.ScrollingHelper_empty_text);
+        emptyIcon = styleAttributesArray.getDrawable(R.styleable.ScrollingHelper_empty_icon);
         if (empty == null)
             empty = context.getString(R.string.nothing);
         whereBar =
@@ -330,7 +374,9 @@ public class ScrollingHelper extends ConstraintLayout {
                 }
             };
 
-        final OnClickListener onClickListener = D.EMPTY_CLICK_LISTENER;
+        // a11y/dpad activation must actually scroll (was EMPTY_CLICK_LISTENER — a lying control)
+        final OnClickListener upClick = v -> child.scrollBy(0, -child.getHeight() / 2);
+        final OnClickListener downClick = v -> child.scrollBy(0, child.getHeight() / 2);
 
         if (whereBar == RIGHT || whereBar == LEFT) {
             LinearLayout container;
@@ -347,10 +393,12 @@ public class ScrollingHelper extends ConstraintLayout {
             } else {
                 final View up = layoutInflater.inflate(R.layout.scrolling_helper_up, container, false);
                 final View down = layoutInflater.inflate(R.layout.scrolling_helper_down, container, false);
+                upArrow = up;
+                downArrow = down;
                 container.addView(up, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
                 container.addView(down, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
-                up.setOnClickListener(onClickListener);
-                down.setOnClickListener(onClickListener);
+                up.setOnClickListener(upClick);
+                down.setOnClickListener(downClick);
                 up.setOnTouchListener((v, event) -> {
                     if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_HOVER_ENTER) {
                         direction = UP;
@@ -417,8 +465,8 @@ public class ScrollingHelper extends ConstraintLayout {
             constraintSet.connect(downContainerId, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
 
             constraintSet.applyTo(this);
-            upContainer.setOnClickListener(onClickListener);
-            downContainer.setOnClickListener(onClickListener);
+            upContainer.setOnClickListener(upClick);
+            downContainer.setOnClickListener(downClick);
 
             upContainer.setOnTouchListener((v, event) -> {
                 if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_HOVER_ENTER) {
@@ -455,6 +503,15 @@ public class ScrollingHelper extends ConstraintLayout {
             return false;
         });
 
+        getViewTreeObserver().addOnGlobalLayoutListener(arrowsVisibilityListener);
+        getViewTreeObserver().addOnScrollChangedListener(scrollChangedListener);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        getViewTreeObserver().removeOnGlobalLayoutListener(arrowsVisibilityListener);
+        getViewTreeObserver().removeOnScrollChangedListener(scrollChangedListener);
     }
 
     @IntDef({RIGHT, LEFT, UP, DOWN, NO})

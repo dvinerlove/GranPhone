@@ -31,35 +31,39 @@ import android.graphics.Point;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
+import android.provider.Settings;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.viewpager.widget.PagerAdapter;
+
+import com.duolingo.open.rtlviewpager.RtlViewPager;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.adapters.BaldPagerAdapter;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
+import com.bald.uriah.baldphone.services.AlarmRecoveryJobService;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldHomeWatcher;
 import com.bald.uriah.baldphone.utils.BaldPrefsUtils;
@@ -67,18 +71,17 @@ import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.FirstRunDefaults;
 import com.bald.uriah.baldphone.utils.KioskManager;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
-import com.bald.uriah.baldphone.utils.PageTransformers;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.utils.UpdatingUtil;
 import com.bald.uriah.baldphone.views.BaldImageButton;
+import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.BatteryView;
-import com.bald.uriah.baldphone.views.ViewPagerHolder;
 import com.bald.uriah.baldphone.views.home.HomePage1;
 import com.bald.uriah.baldphone.views.home.NotesView;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,6 +101,7 @@ public class HomeScreenActivity extends BaldActivity {
             SOUND_TEXTS = {R.string.mute, R.string.vibrate, R.string.sound};
 
     private static final IntentFilter BATTERY_FILTER = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+    private static final String KEY_HOME_PAGE = "home_page";
     private static final int SPEECH_REQUEST_CODE = 7;
 
     private static int onStartCounter = 0;
@@ -107,14 +111,15 @@ public class HomeScreenActivity extends BaldActivity {
     public final NotesView.RecognizerManager recognizerManager = new NotesView.RecognizerManager();
 
     public boolean finishedUpdatingApps, launchAppsActivity;
-    public BaldPagerAdapter baldPagerAdapter;
 
     private Point screenSize;
     private android.hardware.camera2.CameraManager cameraManager;
     private String torchCameraId;
     private SharedPreferences sharedPreferences;
     private BaldPrefsUtils baldPrefsUtils;
-    private ViewPagerHolder viewPagerHolder;
+    private HomePage1 homePage1;
+    private RtlViewPager homePager;
+    private int restoredHomePage;
     private BatteryView batteryView;
     private boolean lowBatteryAlert;
     /**
@@ -123,28 +128,40 @@ public class HomeScreenActivity extends BaldActivity {
     private final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (batteryView != null) {
-                final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-                final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                final int batteryPct = scale > 0 ? Math.round(level / (float) scale * 100) : -1;
-                final int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
-                final boolean charged = chargePlug == BatteryManager.BATTERY_PLUGGED_AC || chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS || chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
-                batteryView.setLevel(batteryPct, charged);
-                if (lowBatteryAlert)
-                    getWindow().setStatusBarColor((batteryPct < D.LOW_BATTERY_LEVEL && !charged) ? ContextCompat.getColor(context, R.color.battery_low) : D.DEFAULT_STATUS_BAR_COLOR);
-            }
+            applyBatteryIntent(intent);
         }
     };
+
+    private void applyBatteryIntent(@Nullable Intent intent) {
+        if (intent == null || batteryView == null)
+            return;
+        final int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        final int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        if (level < 0 || scale <= 0)
+            return;
+        final int batteryPct = Math.round(level / (float) scale * 100);
+        final int chargePlug = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        final boolean charged = chargePlug == BatteryManager.BATTERY_PLUGGED_AC || chargePlug == BatteryManager.BATTERY_PLUGGED_WIRELESS || chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
+        batteryView.setLevel(batteryPct, charged);
+        batteryView.setContentDescription(getString(
+                charged ? R.string.battery_level_desc_charging : R.string.battery_level_desc, batteryPct));
+        if (lowBatteryAlert)
+            getWindow().setStatusBarColor((batteryPct < Const.LOW_BATTERY_LEVEL && !charged) ? ContextCompat.getColor(this, R.color.battery_low) : Const.DEFAULT_STATUS_BAR_COLOR);
+    }
     private int notificationCount = 0;
     @ColorInt
     private int decorationColorOnBackground;
     private BaldImageButton notificationsButton, soundButton;
     private android.widget.ImageView signalView;
+    private TextView alarmSubtitleView;
+    private TextView brightnessSubtitleView;
+    private TextView fontSubtitleView;
+    private SettingsActivity.AlarmVolumeControl alarmVolume;
     private android.telephony.TelephonyManager telephonyManager;
     private final android.telephony.PhoneStateListener signalListener = new android.telephony.PhoneStateListener() {
         @Override
         public void onSignalStrengthsChanged(android.telephony.SignalStrength signalStrength) {
-            if (signalStrength == null)
+            if (signalStrength == null || signalView == null)
                 return;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
                 signalView.setImageLevel(signalStrength.getLevel());
@@ -164,12 +181,16 @@ public class HomeScreenActivity extends BaldActivity {
     private final Runnable shakeIt = new Runnable() {
         @Override
         public void run() {
+            // Honor the system animator scale: no start, no reschedule — the static
+            // notification-state icon stays as-is.
+            if (AppUtils.animationsDisabled(HomeScreenActivity.this))
+                return;
             final Drawable d = notificationsButton.getDrawable();
             if (d instanceof AnimatedVectorDrawable) {
                 final AnimatedVectorDrawable animatedVectorDrawable = (AnimatedVectorDrawable) d;
                 animatedVectorDrawable.start();
                 final int minusSeconds = Math.min((int) (Math.max((notificationCount - NOTIFICATIONS_ALOT) * 0.5f, 0)), 7);
-                handler.postDelayed(this, (10 - minusSeconds) * D.SECOND);
+                handler.postDelayed(this, (10 - minusSeconds) * Const.SECOND);
             }
         }
     };
@@ -185,7 +206,7 @@ public class HomeScreenActivity extends BaldActivity {
             if (notificationCount >= NOTIFICATIONS_ALOT) {
                 final Drawable drawable = getDrawable(R.drawable.notification_alot_on_background);
                 final float opacity = Math.min(((notificationCount - NOTIFICATIONS_ALOT) / 10.0f), 1.0f);
-                drawable.setTint(S.blendColors(decorationColorOnBackground, getResources().getColor(R.color.battery_low), 1 - opacity));
+                drawable.setTint(AppUtils.blendColors(decorationColorOnBackground, getResources().getColor(R.color.battery_low), 1 - opacity));
                 notificationsButton.setImageDrawable(drawable);
             } else if (notificationCount >= NOTIFICATIONS_SOME) {
                 notificationsButton.setImageResource(R.drawable.notification_some_on_background);
@@ -195,16 +216,30 @@ public class HomeScreenActivity extends BaldActivity {
                 notificationsButton.setImageResource(R.drawable.error_on_background);
             }
 
+            final CharSequence notificationsDescription;
+            if (notificationCount > 0)
+                notificationsDescription = getResources().getQuantityString(
+                        R.plurals.new_notifications_count, notificationCount, notificationCount);
+            else if (notificationCount == 0)
+                notificationsDescription = getString(R.string.no_new_notifications);
+            else
+                notificationsDescription = getString(R.string.notifications);
+            notificationsButton.setContentDescription(notificationsDescription);
+
             handler.removeCallbacks(shakeIt);
-            handler.postDelayed(shakeIt, 5 * D.SECOND);
+            if (!AppUtils.animationsDisabled(context))
+                handler.postDelayed(shakeIt, 5 * Const.SECOND);
         }
     };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        S.logImportant("HomeScreenActivity was started!");
+        AppUtils.logImportant("HomeScreenActivity was started!");
+        AlarmRecoveryJobService.schedule(this);
         sharedPreferences = BPrefs.get(this);
+        if (savedInstanceState != null)
+            restoredHomePage = savedInstanceState.getInt(KEY_HOME_PAGE, 0);
 
         if (!sharedPreferences.getBoolean(BPrefs.AFTER_TUTORIAL_KEY, false) && !testing) {
             startActivity(new Intent(this, TutorialActivity.class));
@@ -214,11 +249,20 @@ public class HomeScreenActivity extends BaldActivity {
         try {
             startService(new Intent(this, NotificationListenerService.class));
         } catch (Exception e) {
-            Log.e(TAG, S.str(e.getMessage()));
+            Log.e(TAG, AppUtils.str(e.getMessage()));
             e.printStackTrace();
             BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(getString(R.string.notification_service_fail)).show();
         }
-        new UpdateApps(this).execute(this.getApplicationContext());
+        AppsDatabaseHelper.updateDBAsync(getApplicationContext(), (success, apps) -> {
+            if (!success)
+                BaldToast.error(getApplicationContext(), R.string.apps_could_not_be_updated);
+            if (isFinishing() || isDestroyed())
+                return;
+            refreshHome();
+            finishedUpdatingApps = true;
+            if (launchAppsActivity)
+                startActivity(new Intent(this, AppsActivity.class));
+        });
         lowBatteryAlert = sharedPreferences.getBoolean(BPrefs.LOW_BATTERY_ALERT_KEY, BPrefs.LOW_BATTERY_ALERT_DEFAULT_VALUE);
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         final Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
@@ -249,9 +293,8 @@ public class HomeScreenActivity extends BaldActivity {
 
         notificationsButton.setOnClickListener((v) -> {
             startActivity(new Intent(this, NotificationsActivity.class));
-            overridePendingTransition(R.anim.slide_in_down, R.anim.nothing);
         });
-        soundButton.setOnClickListener(v -> S.showDropDownPopup(this, getWindow().getDecorView().getWidth(), new DropDownRecyclerViewAdapter.DropDownListener() {
+        soundButton.setOnClickListener(v -> AppUtils.showDropDownPopup(this, getWindow().getDecorView().getWidth(), new DropDownRecyclerViewAdapter.DropDownListener() {
             @SuppressLint("InlinedApi")
             @Override
             public void onUpdate(DropDownRecyclerViewAdapter.ViewHolder viewHolder, final int position, PopupWindow popupWindow) {
@@ -260,7 +303,7 @@ public class HomeScreenActivity extends BaldActivity {
                 viewHolder.itemView.setOnClickListener(v1 -> {
                     try {
                         audioManager.setRingerMode(position);
-                        soundButton.setImageResource(SOUND_DRAWABLES[position]);
+                        updateSoundButton(position);
                     } catch (SecurityException e) {
                         startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS));
                     }
@@ -279,8 +322,7 @@ public class HomeScreenActivity extends BaldActivity {
                 .setType(BaldToast.TYPE_INFORMATIVE)
                 .show());
         baldPrefsUtils = BaldPrefsUtils.newInstance(this);
-        viewPagerHandler();
-        baldHomeWatcher = new BaldHomeWatcher(this, this::updateViewPager);
+        baldHomeWatcher = new BaldHomeWatcher(this, this::refreshHome);
         recognizerManager.setHomeScreen(this);
 
     }
@@ -290,26 +332,22 @@ public class HomeScreenActivity extends BaldActivity {
         super.onStart();
         onStartCounter++;
         if (finishedUpdatingApps)
-            updateViewPager();
+            refreshHome();
         baldHomeWatcher.startWatch();
         if (!testing) { // TODO replace with system env
             final int percent = (int) (Math.random() * 100) + 1;//1 - 100
             if (percent < (100 + (onStartCounter - 20) * 5))
                 if (percent % 3 == 1 && !isActivityDefault()) { // one in 3 chance
                     onStartCounter = 0;
-                    BDB.from(this)
-                            .setTitle(R.string.set_home_screen)
-                            .setSubText(R.string.set_home_screen_subtext)
-                            .addFlag(BDialog.FLAG_OK | BDialog.FLAG_NO)
-                            .setPositiveButtonListener(params -> {
-                                FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this);
-                                return true;
-                            })
-                            .show();
+                    DialogScreen.confirm(this,
+                            R.string.set_home_screen,
+                            R.string.set_home_screen_subtext,
+                            R.string.install,
+                            () -> FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this));
                 } else if (percent > 95) {
                     //noinspection ConstantConditions
                     if (BuildConfig.FLAVOR.equals("baldUpdates"))
-                        if (sharedPreferences.getLong(BPrefs.LAST_UPDATE_ASKED_VERSION_KEY, 0) + 2 * D.DAY < System.currentTimeMillis()) {
+                        if (sharedPreferences.getLong(BPrefs.LAST_UPDATE_ASKED_VERSION_KEY, 0) + 2 * Const.DAY < System.currentTimeMillis()) {
                             UpdatingUtil.checkForUpdates(this, false);
                         }
                 }
@@ -328,11 +366,11 @@ public class HomeScreenActivity extends BaldActivity {
         KioskManager.enterIfNeeded(this);
         FirstRunDefaults.apply(this);
         if (baldPrefsUtils.hasChanged(this)) {
-            viewPagerHolder.getViewPager().removeAllViews();//android auto saves fragments, not good for us in this case
             this.recreate();
         }
+        refreshQuickSettingSubtitles();
 
-        soundButton.setImageResource(SOUND_DRAWABLES[audioManager.getRingerMode()]);
+        updateSoundButton(audioManager.getRingerMode());
         try {
             telephonyManager.listen(signalListener, android.telephony.PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
         } catch (Exception ignore) {
@@ -344,23 +382,28 @@ public class HomeScreenActivity extends BaldActivity {
         handler.postDelayed(() -> LocalBroadcastManager.getInstance(this).
                 sendBroadcast(
                         new Intent(ACTION_REGISTER_ACTIVITY)
-                                .putExtra(KEY_EXTRA_ACTIVITY, NOTIFICATIONS_HOME_SCREEN)), 200 * D.MILLISECOND);
+                                .putExtra(KEY_EXTRA_ACTIVITY, NOTIFICATIONS_HOME_SCREEN)), 200 * Const.MILLISECOND);
 
-        registerReceiver(batteryReceiver, BATTERY_FILTER);
+        if (android.os.Build.VERSION.SDK_INT >= 33)
+            registerReceiver(batteryReceiver, BATTERY_FILTER, Context.RECEIVER_NOT_EXPORTED);
+        else
+            registerReceiver(batteryReceiver, BATTERY_FILTER);
         refreshBatteryView();
     }
 
-    // Sticky broadcast is unreliable on this ROM — read the level directly once per resume.
+    // Bound once at page creation; refresh on resume — brightness lives in system settings, outside hasChanged().
+    private void refreshQuickSettingSubtitles() {
+        if (alarmSubtitleView != null)
+            alarmSubtitleView.setText(SettingsActivity.AlarmVolumeControl.subtitle(this));
+        if (brightnessSubtitleView != null)
+            brightnessSubtitleView.setText(SettingsActivity.brightnessSubtitle(this));
+        if (fontSubtitleView != null)
+            fontSubtitleView.setText(SettingsActivity.fontSizeName(this));
+    }
+
+    // Receiver delivery of the sticky broadcast is unreliable on some ROMs — read it synchronously once per resume.
     private void refreshBatteryView() {
-        if (batteryView == null)
-            return;
-        final android.os.BatteryManager batteryManager =
-                (android.os.BatteryManager) getSystemService(BATTERY_SERVICE);
-        if (batteryManager == null)
-            return;
-        final int level = batteryManager.getIntProperty(android.os.BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        if (level >= 0)
-            batteryView.setLevel(level, batteryManager.isCharging());
+        applyBatteryIntent(registerReceiver(null, BATTERY_FILTER));
     }
 
     // Sticky immersive: nav bar hidden on the home screen; a bottom edge swipe reveals it briefly.
@@ -393,6 +436,18 @@ public class HomeScreenActivity extends BaldActivity {
         }
     }
 
+    public void requestCameraPermission() {
+        startActivity(new Intent(this, PermissionActivity.class)
+                .putExtra(PermissionActivity.EXTRA_REQUIRED_PERMISSIONS, PERMISSION_CAMERA));
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (homePager != null)
+            outState.putInt(KEY_HOME_PAGE, homePager.getCurrentItem());
+    }
+
     @Override
     protected void onPause() {
         //read https://stackoverflow.com/questions/6165070/receiver-not-registered-exception-error
@@ -421,6 +476,8 @@ public class HomeScreenActivity extends BaldActivity {
     @Override
     protected void onStop() {
         baldHomeWatcher.stopWatch();
+        if (alarmVolume != null)
+            alarmVolume.stop();
         super.onStop();
     }
 
@@ -430,29 +487,46 @@ public class HomeScreenActivity extends BaldActivity {
         super.onDestroy();
     }
 
-    /**
-     * Starts the view pager - being called only in {@link #onCreate(Bundle)}
-     */
-    private void viewPagerHandler() {
-        baldPagerAdapter = new BaldPagerAdapter(this);
-        viewPagerHolder.setPageTransformer(false, PageTransformers.pageTransformers[sharedPreferences.getInt(BPrefs.PAGE_TRANSFORMERS_KEY, BPrefs.PAGE_TRANSFORMERS_DEFAULT_VALUE)]);
-        viewPagerHolder.setViewPagerAdapter(baldPagerAdapter);
-        viewPagerHolder.setCurrentItem(baldPagerAdapter.startingPage);
+    /** Icon + spoken state (mute/vibrate/sound) — the mode is visual-only otherwise. */
+    private void updateSoundButton(int ringerMode) {
+        soundButton.setImageResource(SOUND_DRAWABLES[ringerMode]);
+        soundButton.setContentDescription(getString(R.string.sound) + ": " + getString(SOUND_TEXTS[ringerMode]));
     }
 
-    /**
-     * Updates {@link HomeScreenActivity#baldPagerAdapter} apps
-     * Sets the page to {@link BaldPagerAdapter#startingPage}
-     */
-    private void updateViewPager() {
-        baldPagerAdapter.obtainAppList();
-        viewPagerHolder.setCurrentItem(baldPagerAdapter.startingPage);
-        viewPagerHolder.notifyDataChanegd();
+    /** Re-binds tile slots from preferences (pins/customizations made elsewhere). */
+    private void refreshHome() {
+        // BaldHomeWatcher/onStart can fire before attachToXml() binds homePage1.
+        if (homePage1 != null)
+            homePage1.refreshTiles();
     }
 
     private void attachToXml() {
         setContentView(R.layout.home_screen);
-        viewPagerHolder = findViewById(R.id.view_pager_holder);
+        homePager = findViewById(R.id.home_pager);
+        final View mainPage = LayoutInflater.from(this).inflate(R.layout.home_page_main, homePager, false);
+        homePage1 = (HomePage1) mainPage;
+
+        findViewById(R.id.bt_home_sos).setOnClickListener(v -> startActivity(new Intent(this, SOSActivity.class)));
+        findViewById(R.id.bt_home_apps).setOnClickListener(v -> {
+            if (!finishedUpdatingApps)
+                launchAppsActivity = true;
+            else
+                startActivity(new Intent(this, AppsActivity.class));
+        });
+        findViewById(R.id.bt_home_settings).setOnClickListener(v ->
+                startActivity(new Intent(this, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+
+        if (sharedPreferences.getBoolean(BPrefs.HIDE_BOTTOM_ROW_KEY, BPrefs.HIDE_BOTTOM_ROW_DEFAULT_VALUE)) {
+            findViewById(R.id.bottom_row).setVisibility(View.GONE);
+            final View settingsPage = LayoutInflater.from(this).inflate(R.layout.home_settings_page, homePager, false);
+            wireSettingsPage(settingsPage);
+            homePager.setAdapter(new HomePagerAdapter(mainPage, settingsPage));
+        } else {
+            homePager.setAdapter(new HomePagerAdapter(mainPage));
+        }
+        // Land on the page the user left — recreate/process-kill must not dump them back on page 1.
+        if (restoredHomePage > 0)
+            homePager.setCurrentItem(restoredHomePage, false);
 
         final ViewGroup top_bar = findViewById(R.id.top_bar);
         int tmpPadding = Math.min(screenSize.x, screenSize.y) / 45;
@@ -467,14 +541,120 @@ public class HomeScreenActivity extends BaldActivity {
         notificationsButton = top_bar.findViewById(R.id.notifications);
     }
 
+    /** Second home page (only when the bottom row is hidden): nav buttons + quick settings. */
+    private void wireSettingsPage(final View page) {
+        page.findViewById(R.id.bt_page_sos).setOnClickListener(v -> startActivity(new Intent(this, SOSActivity.class)));
+        page.findViewById(R.id.bt_page_apps).setOnClickListener(v -> {
+            if (!finishedUpdatingApps)
+                launchAppsActivity = true;
+            else
+                startActivity(new Intent(this, AppsActivity.class));
+        });
+        page.findViewById(R.id.bt_page_settings).setOnClickListener(v ->
+                startActivity(new Intent(this, HelperSettingsActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+
+        final ViewGroup container = page.findViewById(R.id.quick_settings_container);
+        alarmVolume = new SettingsActivity.AlarmVolumeControl(this);
+        alarmSubtitleView = (TextView) addQuickSetting(container, R.drawable.clock_on_background, R.string.alarm_volume,
+                SettingsActivity.AlarmVolumeControl.subtitle(this),
+                () -> DialogScreen.info(this, R.string.alarm_volume, R.string.alarm_volume_subtext,
+                        alarmVolume.view, R.string.back))
+                .findViewById(R.id.tv_setting_subtitle);
+        brightnessSubtitleView = (TextView) addQuickSetting(container, R.drawable.brightness_on_button, R.string.brightness,
+                SettingsActivity.brightnessSubtitle(this),
+                () -> startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS)))
+                .findViewById(R.id.tv_setting_subtitle);
+        fontSubtitleView = (TextView) addQuickSetting(container, R.drawable.font_on_button, R.string.font_size,
+                SettingsActivity.fontSizeName(this),
+                () -> startActivity(new Intent(this, FontChangerActivity.class)))
+                .findViewById(R.id.tv_setting_subtitle);
+        addQuickSetting(container, R.drawable.brush_on_button, R.string.theme_settings,
+                getText(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE) == BPrefs.Themes.DARK
+                        ? R.string.dark : R.string.light),
+                () -> DialogScreen.select(this, R.string.theme_settings,
+                        Math.max(0, Math.min(sharedPreferences.getInt(BPrefs.THEME_KEY, BPrefs.THEME_DEFAULT_VALUE),
+                                BPrefs.Themes.THEMES.length - 1)) == BPrefs.Themes.DARK ? 1 : 0,
+                        index -> {
+                            sharedPreferences.edit().putInt(BPrefs.THEME_KEY,
+                                    index == 1 ? BPrefs.Themes.DARK : BPrefs.Themes.LIGHT).apply();
+                            this.recreate();
+                        },
+                        R.string.light, R.string.dark));
+        final View vibrateRow = addQuickSetting(container, R.drawable.vibration_on_background, R.string.vibrate, null, null);
+        final BaldSwitch sw = new BaldSwitch(this);
+        sw.setLayoutParams(new ViewGroup.LayoutParams(
+                getResources().getDimensionPixelSize(R.dimen.switch_width),
+                getResources().getDimensionPixelSize(R.dimen.switch_height)));
+        sw.setChecked(sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE));
+        sw.setOnChangeListener(this::applyVibrationPref);
+        ((ViewGroup) vibrateRow.findViewById(R.id.setting_trailing)).addView(sw);
+        vibrateRow.setOnClickListener(v -> {
+            // BaldSwitch.setChecked doesn't fire the change listener — apply manually.
+            sw.setChecked(!sw.isChecked());
+            applyVibrationPref(sw.isChecked());
+        });
+    }
+
+    private void applyVibrationPref(boolean checked) {
+        sharedPreferences.edit().putBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, checked).apply();
+        vibrator = checked ? (Vibrator) getSystemService(VIBRATOR_SERVICE) : null;
+    }
+
+    private View addQuickSetting(final ViewGroup container, final int iconRes, final int titleRes,
+                                 final CharSequence subtitle, final Runnable onClick) {
+        final View row = LayoutInflater.from(this).inflate(R.layout.settings_item, container, false);
+        ((ImageView) row.findViewById(R.id.setting_icon)).setImageResource(iconRes);
+        ((TextView) row.findViewById(R.id.tv_setting_name)).setText(titleRes);
+        if (subtitle != null) {
+            final TextView sub = row.findViewById(R.id.tv_setting_subtitle);
+            sub.setText(subtitle);
+            sub.setVisibility(View.VISIBLE);
+        }
+        if (onClick != null)
+            row.setOnClickListener(v -> onClick.run());
+        container.addView(row);
+        return row;
+    }
+
+    private static class HomePagerAdapter extends PagerAdapter {
+        private final View[] pages;
+
+        HomePagerAdapter(View... pages) {
+            this.pages = pages;
+        }
+
+        @Override
+        public int getCount() {
+            return pages.length;
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            container.addView(pages[position]);
+            return pages[position];
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            container.removeView((View) object);
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
+        }
+    }
+
     @Override
     public void startActivity(Intent intent, @Nullable Bundle options) {
         try {
             super.startActivity(intent, options);
         } catch (Exception e) {
-            Log.e(TAG, S.str(e.getMessage()));
+            Log.e(TAG, AppUtils.str(e.getMessage()));
             e.printStackTrace();
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.app_could_not_open);
         }
     }
 
@@ -498,9 +678,9 @@ public class HomeScreenActivity extends BaldActivity {
                             ),
                     SPEECH_REQUEST_CODE);
         } catch (ActivityNotFoundException e) {
-            Log.e(TAG, S.str(e.getMessage()));
+            Log.e(TAG, AppUtils.str(e.getMessage()));
             e.printStackTrace();
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.voice_input_not_available);
         }
     }
 
@@ -516,39 +696,19 @@ public class HomeScreenActivity extends BaldActivity {
     @Override
     public void onBackPressed() {
         if (vibrator != null)
-            vibrator.vibrate(D.vibetime);
-        updateViewPager();
+            vibrator.vibrate(Const.vibetime);
+        // launcher convention: back on a secondary page slides home to page 0
+        if (homePager != null && homePager.getCurrentItem() > 0) {
+            homePager.setCurrentItem(0);
+            return;
+        }
+        refreshHome();
     }
 
-    static class UpdateApps extends AsyncTask<Context, Void, Void> {
-        final WeakReference<HomeScreenActivity> homeScreenWeakReference;
-
-        UpdateApps(HomeScreenActivity homeScreen) {
-            super();
-            homeScreenWeakReference = new WeakReference<>(homeScreen);
-        }
-
-        @Override
-        protected Void doInBackground(Context... contexts) {
-            try {
-                AppsDatabaseHelper.updateDB(contexts[0]);
-            } catch (Exception e) {
-                BaldToast.from(contexts[0].getApplicationContext()).setType(BaldToast.TYPE_ERROR).setLength(Toast.LENGTH_LONG).setText(e.getMessage());
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            HomeScreenActivity homeScreen = homeScreenWeakReference.get();
-            if (homeScreen != null) {
-                homeScreen.updateViewPager();
-                homeScreen.finishedUpdatingApps = true;
-                if (homeScreen.launchAppsActivity)
-                    homeScreen.startActivity(new Intent(homeScreen, AppsActivity.class));
-            }
-        }
-
+    // launcher consumes back (refreshHome); a callback keeps it on API 33+
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
     }
 
     @Override

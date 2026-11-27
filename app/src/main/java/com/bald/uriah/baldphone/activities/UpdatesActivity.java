@@ -39,12 +39,11 @@ import androidx.annotation.Nullable;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import java.io.File;
 
@@ -54,7 +53,7 @@ import static com.bald.uriah.baldphone.utils.UpdatingUtil.getDownloadedFile;
 
 public class UpdatesActivity extends BaldActivity {
     public static final String EXTRA_BALD_UPDATE_OBJECT = "EXTRA_BALD_UPDATE_OBJECT";
-    private static final int PROGRESS_DELAY = 200 * D.MILLISECOND;
+    private static final int PROGRESS_DELAY = 200 * Const.MILLISECOND;
 
     private BaldUpdateObject baldUpdateObject;
     private DownloadManager manager;
@@ -82,7 +81,7 @@ public class UpdatesActivity extends BaldActivity {
                     downloadFinishedToast.show();
                     stopProgressChecker();
                     apply();
-                }, 50 * D.MILLISECOND);
+                }, 50 * Const.MILLISECOND);
             }
         }
     };
@@ -126,7 +125,10 @@ public class UpdatesActivity extends BaldActivity {
         downloadedFileCouldNotBeDeletedToast = BaldToast.from(this).setType(BaldToast.TYPE_ERROR).setText(R.string.downloaded_update_file_could_not_be_deleted);
         tryNowToast = BaldToast.from(this).setLength(1).setText(R.string.try_now).setBig(true);
 
-        this.registerReceiver(downloadFinishedReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        if (android.os.Build.VERSION.SDK_INT >= 33)
+            this.registerReceiver(downloadFinishedReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), RECEIVER_NOT_EXPORTED);
+        else
+            this.registerReceiver(downloadFinishedReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
     @Override
@@ -148,8 +150,8 @@ public class UpdatesActivity extends BaldActivity {
     public void apply() {
         if (isDestroyed())
             return;
-        tv_new_version.setText(String.format("%s%s", getString(R.string.new_version), baldUpdateObject.versionName));
-        tv_current_version.setText(String.format("%s%s", getString(R.string.current_version), BuildConfig.VERSION_NAME));
+        tv_new_version.setText(getString(R.string.new_version_value, baldUpdateObject.versionName));
+        tv_current_version.setText(getString(R.string.current_version_value, BuildConfig.VERSION_NAME));
         tv_change_log.setText(baldUpdateObject.changeLog);
         final SharedPreferences sharedPreferences = BPrefs.get(this);
         final int downloadedVersion = BPrefs.get(this).getInt(BPrefs.LAST_APK_VERSION_KEY, -1);
@@ -174,7 +176,7 @@ public class UpdatesActivity extends BaldActivity {
             bt.setText(R.string.install);
         } else if (downloading) {
             bt.setText(R.string.downloading);
-            bt.setOnClickListener(D.EMPTY_CLICK_LISTENER);
+            bt.setOnClickListener(Const.EMPTY_CLICK_LISTENER);
             pb.setVisibility(View.VISIBLE);
             tv_download_progress.setVisibility(View.VISIBLE);
             startProgressChecker();
@@ -190,15 +192,11 @@ public class UpdatesActivity extends BaldActivity {
                         if (networkInfo.isConnected()) {
                             onDownloadButtonClick(newVersion);
                         } else {
-                            BDB.from(this)
-                                    .setTitle(R.string.data_warning)
-                                    .setSubText(R.string.data_warning_subtext)
-                                    .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
-                                    .setPositiveButtonListener(params -> {
-                                        onDownloadButtonClick(newVersion);
-                                        return true;
-                                    })
-                                    .show();
+                            DialogScreen.confirm(this,
+                                    R.string.data_warning,
+                                    R.string.data_warning_subtext,
+                                    R.string.download,
+                                    () -> onDownloadButtonClick(newVersion));
                         }
                     } else {
                         notConnectedToast.show();
@@ -293,7 +291,7 @@ public class UpdatesActivity extends BaldActivity {
 
     public void install() {
         final File downloadedFile = getDownloadedFile();
-        final Uri apkUri = S.fileToUriCompat(downloadedFile, this);
+        final Uri apkUri = AppUtils.fileToUriCompat(downloadedFile, this);
         final Intent intent =
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ?
                         new Intent(Intent.ACTION_INSTALL_PACKAGE)

@@ -17,17 +17,22 @@
 package com.bald.uriah.baldphone.activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -42,11 +47,13 @@ import androidx.core.app.ActivityCompat;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
+import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.CallManager;
+import com.bald.uriah.baldphone.utils.PermissionContract;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 
 import java.lang.ref.WeakReference;
@@ -56,7 +63,11 @@ import java.util.List;
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_CALL_LOG;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.READ_MEDIA_IMAGES;
+import static android.Manifest.permission.READ_MEDIA_VIDEO;
+import static android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_CALL_LOG;
 import static android.Manifest.permission.WRITE_CONTACTS;
@@ -69,37 +80,59 @@ import static com.bald.uriah.baldphone.activities.PermissionActivity.EXTRA_INTEN
  */
 public abstract class BaldActivity extends AppCompatActivity implements SensorEventListener {
     private static final String TAG = BaldActivity.class.getSimpleName();
+    // Keep the caller-facing names here; their bit contract lives in PermissionContract.
     protected static final int
-            PERMISSION_NONE = 0,
-            PERMISSION_READ_PHONE_STATE = 0b100000000000,
-            PERMISSION_WRITE_SETTINGS = 0b1,
-            PERMISSION_DEFAULT_PHONE_HANDLER = 0b10,
-            PERMISSION_READ_CONTACTS = 0b100 | PERMISSION_DEFAULT_PHONE_HANDLER,
-            PERMISSION_WRITE_CONTACTS = 0b1000 | PERMISSION_DEFAULT_PHONE_HANDLER,
-            PERMISSION_CALL_PHONE = 0b10000 | PERMISSION_DEFAULT_PHONE_HANDLER | PERMISSION_READ_PHONE_STATE,
-            PERMISSION_READ_CALL_LOG = 0b10000000000 | PERMISSION_DEFAULT_PHONE_HANDLER,
-            PERMISSION_WRITE_CALL_LOG = 0b100000 | PERMISSION_DEFAULT_PHONE_HANDLER | PERMISSION_READ_CALL_LOG,
-            PERMISSION_CAMERA = 0b1000000,
-            PERMISSION_WRITE_EXTERNAL_STORAGE = 0b10000000,
-            PERMISSION_NOTIFICATION_LISTENER = 0b100000000 | PERMISSION_WRITE_SETTINGS,
-            PERMISSION_REQUEST_INSTALL_PACKAGES = 0b1000000000,
-            PERMISSION_SYSTEM_ALERT_WINDOW = 0b1000000000000;
+            PERMISSION_NONE = PermissionContract.PERMISSION_NONE,
+            PERMISSION_READ_PHONE_STATE = PermissionContract.PERMISSION_READ_PHONE_STATE,
+            PERMISSION_WRITE_SETTINGS = PermissionContract.PERMISSION_WRITE_SETTINGS,
+            PERMISSION_DEFAULT_PHONE_HANDLER = PermissionContract.PERMISSION_DEFAULT_PHONE_HANDLER,
+            PERMISSION_READ_CONTACTS = PermissionContract.PERMISSION_READ_CONTACTS,
+            PERMISSION_WRITE_CONTACTS = PermissionContract.PERMISSION_WRITE_CONTACTS,
+            PERMISSION_POST_NOTIFICATIONS = PermissionContract.PERMISSION_POST_NOTIFICATIONS,
+            PERMISSION_CALL_PHONE = PermissionContract.PERMISSION_CALL_PHONE,
+            PERMISSION_READ_CALL_LOG = PermissionContract.PERMISSION_READ_CALL_LOG,
+            PERMISSION_WRITE_CALL_LOG = PermissionContract.PERMISSION_WRITE_CALL_LOG,
+            PERMISSION_CAMERA = PermissionContract.PERMISSION_CAMERA,
+            PERMISSION_WRITE_EXTERNAL_STORAGE = PermissionContract.PERMISSION_WRITE_EXTERNAL_STORAGE,
+            PERMISSION_NOTIFICATION_LISTENER = PermissionContract.PERMISSION_NOTIFICATION_LISTENER,
+            PERMISSION_REQUEST_INSTALL_PACKAGES = PermissionContract.PERMISSION_REQUEST_INSTALL_PACKAGES,
+            PERMISSION_SYSTEM_ALERT_WINDOW = PermissionContract.PERMISSION_SYSTEM_ALERT_WINDOW,
+            PERMISSION_EXACT_ALARM = PermissionContract.PERMISSION_EXACT_ALARM,
+            PERMISSION_MEDIA_IMAGES = PermissionContract.PERMISSION_MEDIA_IMAGES,
+            PERMISSION_MEDIA_VIDEO = PermissionContract.PERMISSION_MEDIA_VIDEO,
+            PERMISSION_CALL_SCREEN = PermissionContract.PERMISSION_CALL_SCREEN,
+            PERMISSION_ALL = PermissionContract.PERMISSION_ALL;
 
     public boolean testing = false;
     public boolean colorful;
     protected Vibrator vibrator;
     @StyleRes
     private int themeIndex;
+    private String appliedLanguage;
     private List<WeakReference<Dialog>> dialogsToClose = new ArrayList<>(1);
     private List<WeakReference<PopupWindow>> popupWindowsToClose = new ArrayList<>(1);
     private SensorManager sensorManager;
     private Sensor proximitySensor;
     private boolean near;
     private int touches;
-    private int accidentalMinTouches = 3, accidentalTime = 3 * D.SECOND;
+    private int accidentalMinTouches = 3, accidentalTime = 3 * Const.SECOND;
     private boolean useAccidentalGuard = true;
     private Handler handler;
     private Runnable touchesDecreaser = () -> touches = (touches -= 1) < 0 ? 0 : touches;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        appliedLanguage = BPrefs.get(newBase).getString(BPrefs.LANGUAGE_KEY, BPrefs.LANGUAGE_DEFAULT_VALUE);
+        if (appliedLanguage.isEmpty()) {
+            super.attachBaseContext(newBase);
+            return;
+        }
+        final java.util.Locale locale = java.util.Locale.forLanguageTag(appliedLanguage);
+        java.util.Locale.setDefault(locale);
+        final Configuration config = new Configuration();
+        config.setLocale(locale);
+        super.attachBaseContext(newBase.createConfigurationContext(config));
+    }
 
     @Override
     public void
@@ -118,63 +151,71 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
      * @return true if all permissions are granted.
      */
     public static boolean checkPermissions(BaldActivity activity, final int requiredPermissions) {
-        if (requiredPermissions == PERMISSION_NONE)
+        final int permissions = PermissionContract.normalizeRequiredPermissions(requiredPermissions);
+        if (permissions == PERMISSION_NONE)
             return true;
-        if ((requiredPermissions & PERMISSION_DEFAULT_PHONE_HANDLER) != 0) {
-            if (!defaultDialerGranted(activity))
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_DEFAULT_DIALER)
+                && !defaultDialerGranted(activity))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_WRITE_SETTINGS)
+                && !writeSettingsGranted(activity))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_NOTIFICATION_LISTENER)
+                && !notificationListenerGranted(activity))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_READ_CONTACTS)
+                && ActivityCompat.checkSelfPermission(activity, READ_CONTACTS) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_WRITE_CONTACTS)
+                && ActivityCompat.checkSelfPermission(activity, WRITE_CONTACTS) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_CALL_PHONE)
+                && ActivityCompat.checkSelfPermission(activity, CALL_PHONE) != PERMISSION_GRANTED)
+            return false;
+        if (!BuildConfig.FLAVOR.equals("gPlay")) {
+            if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_WRITE_CALL_LOG)
+                    && ActivityCompat.checkSelfPermission(activity, WRITE_CALL_LOG) != PERMISSION_GRANTED)
+                return false;
+            if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_READ_CALL_LOG)
+                    && ActivityCompat.checkSelfPermission(activity, READ_CALL_LOG) != PERMISSION_GRANTED)
                 return false;
         }
-
-        if ((requiredPermissions & PERMISSION_WRITE_SETTINGS) != 0) {
-            if (!writeSettingsGranted(activity))
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_READ_PHONE_STATE)
+                && BPrefs.get(activity).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
+                && ActivityCompat.checkSelfPermission(activity, READ_PHONE_STATE) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_CAMERA)
+                && ActivityCompat.checkSelfPermission(activity, CAMERA) != PERMISSION_GRANTED)
+            return false;
+        // WRITE_EXTERNAL_STORAGE is a no-op since API 33; media-reading callers use the granular bits.
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_WRITE_EXTERNAL_STORAGE)
+                && Build.VERSION.SDK_INT < 33
+                && ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+            return false;
+        if (Build.VERSION.SDK_INT >= 33) {
+            if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_MEDIA_IMAGES)
+                    && !mediaPermissionGranted(activity, READ_MEDIA_IMAGES))
                 return false;
-            else if ((requiredPermissions & PERMISSION_NOTIFICATION_LISTENER) == PERMISSION_NOTIFICATION_LISTENER) {
-                if (!notificationListenerGranted(activity))
-                    return false;
-            }
-        }
-        if ((requiredPermissions & PERMISSION_READ_CONTACTS) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, READ_CONTACTS) != PERMISSION_GRANTED)
+            if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_MEDIA_VIDEO)
+                    && !mediaPermissionGranted(activity, READ_MEDIA_VIDEO))
                 return false;
-        }
-        if ((requiredPermissions & PERMISSION_WRITE_CONTACTS) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, WRITE_CONTACTS) != PERMISSION_GRANTED)
-                return false;
-        }
-        if ((requiredPermissions & PERMISSION_CALL_PHONE) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, CALL_PHONE) != PERMISSION_GRANTED)
-                return false;
-        }
-        if ((requiredPermissions & PERMISSION_WRITE_CALL_LOG) != 0) {
-            if (!BuildConfig.FLAVOR.equals("gPlay"))
-                if (ActivityCompat.checkSelfPermission(activity, WRITE_CALL_LOG) != PERMISSION_GRANTED)
-                    return false;
-        }
-        if ((requiredPermissions & PERMISSION_READ_CALL_LOG) != 0) {
-            if (!BuildConfig.FLAVOR.equals("gPlay"))
-                if (ActivityCompat.checkSelfPermission(activity, READ_CALL_LOG) != PERMISSION_GRANTED)
-                    return false;
-        }
-        if ((requiredPermissions & PERMISSION_READ_PHONE_STATE) != 0) {
-            if (BPrefs.get(activity).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE))
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1)
-                    if (ActivityCompat.checkSelfPermission(activity, READ_PHONE_STATE) != PERMISSION_GRANTED)
-                        return false;
-        }
-        if ((requiredPermissions & PERMISSION_CAMERA) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, CAMERA) != PERMISSION_GRANTED)
-                return false;
-        }
-        if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0) {
-            if (ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
-                return false;
-        }
-        if ((requiredPermissions & PERMISSION_SYSTEM_ALERT_WINDOW) != 0) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-                if (!Settings.canDrawOverlays(activity))
-                    return false;
-        }
-        if ((requiredPermissions & PERMISSION_REQUEST_INSTALL_PACKAGES) != 0) {
+        } else if ((PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_MEDIA_IMAGES)
+                || PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_MEDIA_VIDEO))
+                && ActivityCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_POST_NOTIFICATIONS)
+                && Build.VERSION.SDK_INT >= 33
+                && ActivityCompat.checkSelfPermission(activity, POST_NOTIFICATIONS) != PERMISSION_GRANTED)
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_SYSTEM_ALERT_WINDOW)
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+                && !Settings.canDrawOverlays(activity))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_EXACT_ALARM)
+                && !AppUtils.canScheduleExactAlarms((android.app.AlarmManager) activity.getSystemService(Context.ALARM_SERVICE)))
+            return false;
+        if (PermissionContract.hasAtom(permissions, PermissionContract.PERMISSION_ATOM_REQUEST_INSTALL_PACKAGES)) {
             return
                     Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
                             (!BuildConfig.FLAVOR.equals("baldUpdates")) ||
@@ -184,10 +225,11 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     }
 
     /**
-     * not removing yet, perhaps the issue with google will be solved
+     * Honest role state for the atomic default-dialer bit. Before API 23 there is no
+     * dialer role to grant, so the requirement is vacuously satisfied.
      */
     static boolean defaultDialerGranted(BaldActivity activity) {
-        return true;
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || CallManager.isDefaultDialer(activity);
     }
 
     static boolean writeSettingsGranted(BaldActivity activity) {
@@ -202,9 +244,32 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
         return listeners != null && listeners.contains(activity.getApplicationContext().getPackageName());
     }
 
+    static boolean mediaPermissionGranted(BaldActivity activity, String mediaPermission) {
+        if (ActivityCompat.checkSelfPermission(activity, mediaPermission) == PERMISSION_GRANTED)
+            return true;
+        if (Build.VERSION.SDK_INT < 34
+                || ActivityCompat.checkSelfPermission(activity, READ_MEDIA_VISUAL_USER_SELECTED) != PERMISSION_GRANTED)
+            return false;
+        // USER_SELECTED is shared by photos and videos; a visible row is the only type-specific evidence MediaStore exposes.
+        final Uri collection = READ_MEDIA_IMAGES.equals(mediaPermission)
+                ? MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                : MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+        try (Cursor cursor = activity.getContentResolver().query(collection,
+                new String[]{MediaStore.MediaColumns._ID}, null, null, null)) {
+            return cursor != null && cursor.moveToFirst();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // predictive back: intercepted screens get the events; un-intercepted
+        // ones get the system's own predictive animation on Android 15
+        if (backDispatchIntercepted())
+            PredictiveBackHelper.register(this, this::onBackPressed);
         final SharedPreferences sharedPreferences = BPrefs.get(this);
         testing = sharedPreferences.getBoolean(BPrefs.TEST_KEY, BPrefs.TEST_DEFAULT_VALUE);
 
@@ -222,7 +287,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
                 .getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE)
                 ? (Vibrator) getSystemService(VIBRATOR_SERVICE) : null;
         colorful = sharedPreferences.getBoolean(BPrefs.COLORFUL_KEY, BPrefs.COLORFUL_DEFAULT_VALUE);
-        themeIndex = S.getTheme(this);
+        themeIndex = AppUtils.getTheme(this);
         setTheme(themeIndex);
 
         final int statusBar = sharedPreferences.getInt(BPrefs.STATUS_BAR_KEY, BPrefs.STATUS_BAR_DEFAULT_VALUE);
@@ -235,7 +300,7 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
             final Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(D.DEFAULT_STATUS_BAR_COLOR);
+            window.setStatusBarColor(Const.DEFAULT_STATUS_BAR_COLOR);
         }
 
         if (useAccidentalGuard = sharedPreferences.getBoolean(BPrefs.USE_ACCIDENTAL_GUARD_KEY, BPrefs.USE_ACCIDENTAL_GUARD_DEFAULT_VALUE)) {
@@ -251,7 +316,8 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onResume() {
         super.onResume();
-        if (themeIndex != S.getTheme(this))
+        if (themeIndex != AppUtils.getTheme(this) ||
+                !BPrefs.get(this).getString(BPrefs.LANGUAGE_KEY, BPrefs.LANGUAGE_DEFAULT_VALUE).equals(appliedLanguage))
             recreate();
         if (useAccidentalGuard)
             sensorManager.registerListener(this, proximitySensor,
@@ -277,22 +343,37 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
         super.onPause();
     }
 
+    /**
+     * Whether back is intercepted on API 33+ (predictive back): the callback
+     * then receives every back event — default back still goes through
+     * {@link #onBackPressed} which must never reach the dispatcher.
+     */
+    protected boolean backDispatchIntercepted() {
+        return false;
+    }
+
     @Override
     public void onBackPressed() {
         if (vibrator != null)
-            vibrator.vibrate(D.vibetime);
-        super.onBackPressed();
+            vibrator.vibrate(Const.vibetime);
+        // on API 33+ back goes through OnBackInvokedDispatcher — calling super
+        // would re-enter it (registered callbacks invoke this method), so the
+        // chain bottoms out at finish() instead
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            finish();
+        else
+            super.onBackPressed();
     }
 
     public void autoDismiss(Dialog dialog) {
         if (dialogsToClose.size() > 10)
-            dialogsToClose = S.cleanWeakList(dialogsToClose);
+            dialogsToClose = AppUtils.cleanWeakList(dialogsToClose);
         dialogsToClose.add(new WeakReference<>(dialog));
     }
 
     public void autoDismiss(PopupWindow popupWindow) {
         if (popupWindowsToClose.size() > 10)
-            popupWindowsToClose = S.cleanWeakList(popupWindowsToClose);
+            popupWindowsToClose = AppUtils.cleanWeakList(popupWindowsToClose);
         popupWindowsToClose.add(new WeakReference<>(popupWindow));
     }
 
@@ -314,17 +395,16 @@ public abstract class BaldActivity extends AppCompatActivity implements SensorEv
         if (touches > accidentalMinTouches) {
             touches = -1;
             handler.removeCallbacks(touchesDecreaser);
-            BDB.from(this)
-                    .setTitle(R.string.accidental_touches)
-                    .setSubText(R.string.accidental_touches_subtext)
-                    .addFlag(BDialog.FLAG_NOT_CANCELABLE | BDialog.FLAG_OK)
-                    .setPositiveButtonListener(params -> {
-                        touches = 0;
-                        accidentalMinTouches += 2;
-                        accidentalTime /= 2;
-                        return true;
-                    })
-                    .show();
+            // non-cancelable: only «Понятно» dismisses → counters reset on dismissal
+            final DialogScreen dialog = DialogScreen.info(this,
+                    R.string.accidental_touches,
+                    R.string.accidental_touches_subtext);
+            dialog.setCancelable(false);
+            dialog.setOnDismissListener(d -> {
+                touches = 0;
+                accidentalMinTouches += 2;
+                accidentalTime /= 2;
+            });
 
         }
     }

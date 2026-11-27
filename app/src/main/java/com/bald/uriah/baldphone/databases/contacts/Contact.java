@@ -26,7 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bald.uriah.baldphone.utils.Constants;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,27 +73,31 @@ public class Contact implements Constants.ContactConstants {
     }
 
     public static Contact fromId(@NonNull String id, @NonNull ContentResolver contentResolver) throws ContactNotFoundException {
-        final Cursor contactsCursor =
-                contentResolver.query(
-                        ContactsContract.Contacts.CONTENT_URI,
-                        PROJECTION,
-                        ContactsContract.Contacts._ID + " = ?",
-                        new String[]{id},
-                        null);
-        if (!contactsCursor.moveToFirst()) throw new ContactNotFoundException();
-        return readContact(contactsCursor, contentResolver);
+        try (final Cursor contactsCursor =
+                     contentResolver.query(
+                             ContactsContract.Contacts.CONTENT_URI,
+                             PROJECTION,
+                             ContactsContract.Contacts._ID + " = ?",
+                             new String[]{id},
+                             null)) {
+            if (contactsCursor == null || !contactsCursor.moveToFirst())
+                throw new ContactNotFoundException();
+            return readContact(contactsCursor, contentResolver);
+        }
     }
 
     public static Contact fromLookupKey(@NonNull String lookupKey, @NonNull ContentResolver contentResolver) throws ContactNotFoundException {
-        final Cursor contactsCursor =
-                contentResolver.query(
-                        ContactsContract.Contacts.CONTENT_URI,
-                        PROJECTION,
-                        ContactsContract.Contacts.LOOKUP_KEY + " = ?",
-                        new String[]{lookupKey},
-                        null);
-        if (!contactsCursor.moveToFirst()) throw new ContactNotFoundException();
-        return readContact(contactsCursor, contentResolver);
+        try (final Cursor contactsCursor =
+                     contentResolver.query(
+                             ContactsContract.Contacts.CONTENT_URI,
+                             PROJECTION,
+                             ContactsContract.Contacts.LOOKUP_KEY + " = ?",
+                             new String[]{lookupKey},
+                             null)) {
+            if (contactsCursor == null || !contactsCursor.moveToFirst())
+                throw new ContactNotFoundException();
+            return readContact(contactsCursor, contentResolver);
+        }
     }
 
     /**
@@ -118,7 +122,7 @@ public class Contact implements Constants.ContactConstants {
         photo = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI));
 
         try (final Cursor pCur = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, PHONE_PROJECTION, PHONE_SELECTION, new String[]{id}, null)) {
-            while (pCur.moveToNext()) {
+            while (pCur != null && pCur.moveToNext()) {
                 phoneList.add(new Pair<>(
                         pCur.getInt(PHONE_TYPE_INDEX),
                         pCur.getString(PHONE_NUMBER_INDEX)
@@ -127,7 +131,7 @@ public class Contact implements Constants.ContactConstants {
         }
 
         try (final Cursor emailCur = contentResolver.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, EMAIL_PROJECTION, EMAIL_SELECTION, new String[]{id}, null)) {
-            while (emailCur.moveToNext()) {
+            while (emailCur != null && emailCur.moveToNext()) {
                 mailList.add(emailCur.getString(EMAIL_DATA_INDEX));
             }
         }
@@ -138,7 +142,7 @@ public class Contact implements Constants.ContactConstants {
                 ADDRESS_SELECTION,
                 new String[]{id, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE},
                 null)) {
-            while (addrCur.moveToNext()) {
+            while (addrCur != null && addrCur.moveToNext()) {
                 addressList.add(new Pair<>(addrCur.getInt(addrCur.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.TYPE)), new String[]{
                         addrCur.getString(POBOX_INDEX),
                         addrCur.getString(STREET_INDEX),
@@ -167,13 +171,13 @@ public class Contact implements Constants.ContactConstants {
                              ContactsContract.RawContacts.CONTENT_URI,
                              new String[]{ContactsContract.RawContacts._ID},
                              ContactsContract.RawContacts.ACCOUNT_TYPE + "= ? AND " + ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME_PRIMARY + " = ?",
-                             new String[]{D.WHATSAPP_PACKAGE_NAME, contactName},
+                             new String[]{Const.WHATSAPP_PACKAGE_NAME, contactName},
                              null)) {
             String rawContactId, phoneNumber;
-            while (cursor1.moveToNext()) {
+            while (cursor1 != null && cursor1.moveToNext()) {
                 rawContactId = cursor1.getString(cursor1.getColumnIndex(ContactsContract.RawContacts._ID));
                 try (Cursor cursor2 = contentResolver.query(ContactsContract.Data.CONTENT_URI, new String[]{ContactsContract.Data.DATA3}, ContactsContract.Data.MIMETYPE + " = ? AND " + ContactsContract.Data.RAW_CONTACT_ID + " = ? ", new String[]{"vnd.android.cursor.item/vnd.com.whatsapp.profile", rawContactId}, null)) {
-                    while (cursor2.moveToNext()) {
+                    while (cursor2 != null && cursor2.moveToNext()) {
                         phoneNumber = cursor2.getString(0);
                         if (TextUtils.isEmpty(phoneNumber))
                             continue;

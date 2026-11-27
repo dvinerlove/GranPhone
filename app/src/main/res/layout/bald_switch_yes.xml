@@ -20,6 +20,6 @@
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="@drawable/style_for_buttons_no_border"
+    android:background="@drawable/bald_ghost_button_background"
     android:gravity="center_vertical|center_horizontal"
     android:text="@string/yes" />

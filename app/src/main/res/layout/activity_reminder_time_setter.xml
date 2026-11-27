@@ -14,42 +14,66 @@
   ~ limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/bald_background"
+    android:orientation="vertical">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
         android:id="@+id/bald_title_bar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="?bald_brand"
+        app:show_back="true"
         app:title="@string/time_changer" />
 
-    <com.bald.uriah.baldphone.views.BaldMultipleSelection
-        android:id="@+id/multiple_selection"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/hour_and_minute_choosers"
-        android:layout_width="0dp"
+    <com.bald.uriah.baldphone.views.ScrollingHelper
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/multiple_selection"
-        app:layout_constraintDimensionRatio="1.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bald_title_bar" />
+        android:layout_weight="1">
 
+        <com.bald.uriah.baldphone.views.ModularScrollView
+            android:id="@+id/child"
+            style="@style/ScrollStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.bald.uriah.baldphone.views.BaldMultipleSelection
+                    android:id="@+id/multiple_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="@dimen/spacing_md"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:layout_marginEnd="@dimen/spacing_md"
+                    app:is_vertical="true"
+                    app:text_size="@dimen/medium" />
+
+                <!-- fixed height: BaldNumberChooser buttons are 1:1 squares sized from
+                     height, a stretched container makes them overlap each other;
+                     minHeight keeps it scrollable when the viewport is cramped -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:minHeight="300dp"
+                    android:gravity="center">
+
+                    <include
+                        layout="@layout/hour_and_minute_choosers"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginStart="@dimen/spacing_md"
+                        android:layout_marginEnd="@dimen/spacing_md" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.bald.uriah.baldphone.views.ModularScrollView>
+    </com.bald.uriah.baldphone.views.ScrollingHelper>
+</LinearLayout>

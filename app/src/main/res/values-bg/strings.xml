@@ -15,30 +15,19 @@
   -->
 
 <resources>
-    <string name="about">Относно</string>
-    <string name="about_subtext">Здрвейте!\nКазвам се Uriah Shaul Mandel и съм разработчикът на тази платформа.\n
-        Посветих голяма част от зрелия си живот на създаването на тази платформа и я предоставих за безплатно ползване на
-        всички.\nЧувствайте се добре дошли да се свържете с мен на електонната ми поща:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Ниво на достъпност</string>
+
+<string name="accessibility_level">Ниво на достъпност</string>
     <string name="accessibility_settings">Достъпност</string>
     <string name="accidental_touches">Защита срещу случаен допир</string>
-    <string name="accidental_touches_settings_subtext">Защитата предпазва телефонът ви от реакция на случаен допир, когато
-        екранът е покрит\nпри проблем можете да я изключите
-    </string>
-    <string name="accidental_touches_subtext">Беше отбелязан случаен допир\nнатиснете OK за да продължите да ползвате телефона\nако
+    <string name="accidental_touches_subtext">Беше отбелязан случаен допир\nнатиснете \"Разбрано\" за да продължите да ползвате телефона\nако
          съобщението продължава да се появява, можете да го изключите в настройките за достъпност
     </string>
-    <string name="acknowledgments">Благодарности</string>
-    <string name="adaptive">Адаптивен</string>
     <string name="add_alarm">Добавяне на Аларма</string>
     <string name="add_alarm_quickly">Добавяне на Таймер</string>
     <string name="add_contact">Добавяне на Контакт</string>
     <string name="add_emergency_contact">Добавяне на контакт за спешни случаи</string>
     <string name="add_pill">Добавяне на Лекарство</string>
-    <string name="add_shortcut">Добавяне на Пряк път</string>
     <string name="add_to_favorite">Добавяне в Любими</string>
-    <string name="add_to_home">Добавяне към Начален екран</string>
     <string name="add_to_sos">Добавяне към SOS</string>
     <string name="address">Адрес</string>
     <string name="advanced_options">Разширени опции</string>
@@ -58,7 +47,6 @@
 
     <string name="apps">Приложения</string>
     <string name="are_you_sure_you_want_to_delete___">Сигурни ли сте, че желаете да изтриете %s?</string>
-    <string name="assistant">Асистент</string>
     <string name="at_least_one_day_must_be_selected">Трябва да бъде избран поне един ден!</string>
     <string name="auto_brightness">Автоматична\nЯркост</string>
     <string name="backspace">назад</string>
@@ -66,7 +54,6 @@
     <string name="blocked">Блокиран</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Яркост</string>
-    <string name="brightness_subtext">Промяна на яркостта.</string>
     <string name="cache_cleared_successfully">Кеш паметта е почистена успешно!</string>
     <string name="call">Разговор</string>
     <string name="calling">Позвъняване</string>
@@ -76,7 +63,6 @@
     <string name="camera">Камера</string>
     <string name="camera_subtext">Разрешението е необходимо, за да включите светкавицата.</string>
     <string name="cancel">Отказ</string>
-    <string name="change_pills_time">Промяна на времето за прием на лекарства</string>
     <string name="change_system_settings_subtext">Моля, позволете на GranPhone да променя настройките, като например увеличаване
          размера на шрифта и промяна на яркостта.
     </string>
@@ -92,7 +78,8 @@
     <string name="clear_data">Изтриване на всички данни</string>
     <string name="clear_data_subtext">Наистина ли искате да изтриете всички потребителски данни? GranPhone ще се върне в първоначалното си състояние, като след нова инсталация.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Сигурни ли сте?\натискането на ДА ще изтрие всички данни!</string>
+    <string name="clear_data_subtext3">Сигурни ли сте?
+Това ще изтрие всички данни!</string>
     <string name="clock">Часовник</string>
     <string name="coming_soon">Очаквайте скоро!</string>
     <string name="connection_settings">Връзка</string>
@@ -107,25 +94,19 @@
     <string name="dark">Тъмен</string>
     <string name="delete">Изтрий</string>
     <string name="delete___">Изтриване %s?</string>
-    <string name="delete_all_alarms">Изтриване на всички аларми</string>
     <string name="dialer">Набиране</string>
     <string name="display_settings">Екран</string>
     <string name="done">Готово</string>
     <string name="down">Надолу</string>
     <string name="edit">Редактиране</string>
-    <string name="email">Email:</string>
     <string name="enable_notification_access">Активиране на достъп до известията</string>
     <string name="enable_notification_access_subtext">Моля да предоставите на GranPhone достъп до известията.</string>
     <string name="enter">Въвеждане</string>
-    <string name="enter_contact_or_phone_number">Въведете името на контакта:</string>
     <string name="evening">Вечер</string>
     <string name="example_of_different_text_sizes">Пример за различни размери на текста\nТрябва да е четим и без
         препълване.
     </string>
     <string name="external_storage_subtext">Разрешението е необходимо, за да се запазват снимките.</string>
-    <string name="feedback">Изпращане на обратна връзка</string>
-    <string name="feedback_cannot_be_empty">Полето за обратна връзка не може да бъде празно!</string>
-    <string name="feedback_sent_successfully">Обратната връзка е изпратена успешно!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Моля, изберете нивото на достъпност
     </string>
     <string name="font_size">Рзмер на текста</string>
@@ -140,7 +121,6 @@
     <string name="home_phone_number">Домашен телефонен номер</string>
     <string name="hour">Час</string>
     <string name="huge">Огромен</string>
-    <string name="internet">Интернет</string>
     <string name="invoked_in">Извикана в:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Едно последно
         нещо:\nСилно предпоръчително е да използвате началния екран на GranPhone като стартер по подразбиране
@@ -151,9 +131,7 @@
     <string name="left_handed">Използващ лява ръка</string>
     <string name="light">Светлина</string>
     <string name="location">Местоположение</string>
-    <string name="emergency_services">Спешни случаи</string>
-    <string name="mail">Електрона поща</string>
-    <string name="maps">Карти</string>
+<string name="mail">Електрона поща</string>
 
 
     <string name="medium">Среден</string>
@@ -174,8 +152,6 @@
     <string name="nfc">NFC</string>
     <string name="no">Не</string>
     <string name="notes">Бележки</string>
-    <string name="notes_settings">Бележки</string>
-    <string name="notes_settings_subtext">Изберете дали искате да имате Страница с бележки на началния екран.</string>
     <string name="notifications">Известия</string>
 
     <string name="of">на</string>
@@ -198,6 +174,7 @@
     <string name="pill_added">Добавено е лекарство!</string>
     <string name="pill_name">Име на лекарството</string>
     <string name="pills">Лекарства</string>
+    <string name="pill">Лекарство</string>
     <string name="press_longer">Натиснете по-продължително!</string>
     <string name="timer">Таймер</string>
     <string name="read_call_log">Прочетете История на обажданията</string>
@@ -208,9 +185,6 @@
     <string name="regular_level">Обичайно ниво</string>
 
     <string name="remove_from_favorite">Премахвне от Любими</string>
-    <string name="remove_from_home">Премахвне от Начален екран</string>
-    <string name="remove_from_sos">Премахване от SOS</string>
-    <string name="remove_shortcut">Премахвне на Пряк път</string>
     <string name="removed_all_alarms">Всички аларми са изтрити!</string>
     <string name="repeats_every_day">Всеки ден</string>
     <string name="right_handed">Използващ дясна ръка</string>
@@ -250,24 +224,20 @@
     <string name="speak">Говорене</string>
     <string name="speech_to_text">Преобразуване на реч в текст</string>
     <string name="strong_hand">Основно използвана ръка</string>
-    <string name="strong_hand_subtext">Изберете основно използваната от вас ръка, за настройка на интерфейса.</string>
-    <string name="submit">предоставяне</string>
     <string name="sunday">Неделя</string>
     <string name="technical_information">Техническа Информация</string>
     <string name="theme_settings">Тема</string>
-    <string name="theme_settings_subtext">Избор на тема</string>
 
     <string name="thursday">Четвъртък</string>
     <string name="time_changer">Промяна на времето за лекарствата</string>
     <string name="tiny">Дребен</string>
-    <string name="to___days_and___hours_from_now">до %d дни и %d часа от сега</string>
-    <string name="to___hours_and___minutes_from_now">до %d часа и %d минути от сега</string>
+    <string name="to___days_and___hours_from_now">до %1$d дни и %2$d часа от сега</string>
+    <string name="to___hours_and___minutes_from_now">до %1$d часа и %2$d минути от сега</string>
     <string name="to___minuets_from_now">до %d минути от сега</string>
     <string name="today">Днес</string>
     <string name="took">Взет!</string>
     <string name="tuesday">Вторник</string>
     <string name="uninstall">Деинсталиране</string>
-    <string name="uninstall_subtext">Сигурни ли сте, че желаете да деинсталирате %s?\nданните от %s\ ще бъдат изтрити завинаги!</string>
     <string name="up">Нагоре</string>
     <string name="video">Видео</string>
     <string name="video_tutorials">Видео уроци</string>
@@ -285,20 +255,23 @@
     <string name="yesterday">Вчера</string>
     <string name="nothing">Нищо</string>
     <string name="no_contacts_found">Не е намерен контакт!</string>
-    <string name="no_alarms">Няма аларми\nСъздайте нова като натиснете\n\"Добавяне на аларма\"\nили\n\"Добавяне на таймер\"</string>
-    <string name="no_pills">Няма лекрства\nСъздайте ново като натиснете\n\"Добавяне на лекарство\"</string>
+    <string name="no_alarms">Няма аларми.
+Натиснете \"Аларма\" или
+\"Таймер\" по-долу.</string>
+    <string name="no_pills">Няма лекарства.
+Натиснете \"+ Лекарство\" по-долу.</string>
     <string name="clear_all_notifications">Изтриване на всички известия</string>
     <string name="clear_cache_subtext">Сигурни ли сте, че желаете да изтриете съдържанието на кеш паметта? Изтриването на временните файлове може да разреши някои функционални проблеми на GranPhone, но също така ще изтрие от началния екран създадените преки пътища.</string>
     <string name="permissions_calm">Здравейте, за да работи GranPhone трябва да има следните разрешения. Някои
         от тях звучат плашещо, но това е единственият начин GranPhone да замени интерфейса на телефона ви. Той не събира данни и не
-         причинява вреди. Натиснете OK, за да предоставите разрешенията или Не за изход от GranPhone.
+         причинява вреди. Продължете, за да предоставите разрешенията, или излезте от GranPhone.
     </string>
     <string name="pending_update">Предстоящо обновяване</string>
     <string name="download">Изтегляне</string>
     <string name="install_updates">Инсталиране на обновления</string>
     <string name="install_updates_subtext">Разрешението е необходимо, за да се обнови GranPhone</string>
     <string name="a_new_update_is_available">Налично е обновление!\nОбновленията са важни за да може GranPhone да работи
-        гладко.\nНатиснете ОК за да го изтеглите.
+        гладко.\nПродължете, за да го изтеглите.
     </string>
     <string name="current_version">Текуща версия:\n</string>
     <string name="new_version">Нова версия:\n</string>
@@ -324,23 +297,15 @@
     <string name="try_now">Опитайте сега</string>
     <string name="download_progress">Напредък на изтеглянето</string>
     <string name="what_do_you_want_to_do_with___">Какво желаете да направите с %s?</string>
-    <string name="crash_reports">Отчети за сривове</string>
-    <string name="crash_reports_subtext">Отчетите за сривове ни помагат да подобрим GranPhone.\nТе се използват само за
-        отстраняване на грешки и не събират никаква друга информация.
-    </string>
     <string name="custom_app">Персонализирано приложение</string>
-    <string name="custom_app_subtext">Изберете персонализирано приложение, което да бъде на Начален екран.</string>
-    <string name="no_app_was_found">Не беше намерено съответстващо приложение!</string>
     <string name="alarm">Аларма</string>
     <string name="no_new_notifications">Няма нови известия</string>
     <string name="sound">Звук</string>
     <string name="mute">Заглушаване</string>
     <string name="vibrate">Вибрация</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Телефонът ви няма инсталиран асистент.</string>
 
 
     <string name="status_bar_settings">Лента на състоянието</string>
-    <string name="status_bar_settings_subtext">Къде желаете да се покаже лентата на състоянието?</string>
     <string name="only_home_screen">Единствено на Начален екран</string>
     <string name="nowhere">Никъде</string>
     <string name="everywhere">Навсякъде</string>
@@ -351,6 +316,8 @@
     <string name="choose_language_for_keyboard">Избор на език</string>
     <string name="hebrew">Иврит</string>
     <string name="english">Английски</string>
+    <string name="russian">Руски</string>
+    <string name="understood">Разбрано</string>
 
     <string name="search">Търсене</string>
     <string name="next">Следващ</string>
@@ -358,48 +325,31 @@
 
 
     <string name="dialer_sounds">Звуци при набиране</string>
-    <string name="dialer_sounds_subtext">Изберете дали желаете да има звуци при набиране.</string>
     <string name="low_battery_alert">Предупреждение за изтощена батерия</string>
-    <string name="low_battery_alert_subtext">Изберете дали лентата на състоянието да бъде червена на началния екран, когато батерията е под  20%\nЗабележете, че това няма да се вижда, ако лентата на състоянието е скрита.</string>
 
-    <string name="also_available_at">Също достъпно на\nGranPhone.contact@gmail.com\nОбратната връзка трябва да бъде на английски/иврит!</string>
     <string name="grant_all_permissions">Даване на всички разрешения</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Елтроксин 100</string>
     <string name="medication_2">Елтроксин 150</string>
-    <string name="donate">Дарете</string>
-    <string name="emergency_button">Бутон за спешни случаи</string>
-    <string name="emergency_settings_subtext">Изберете дали желаете да имате бутон за спешни случаи на Начален екран.</string>
     <string name="private_number">Личен номер</string>
     <string name="swipe_left_or_right">Плъзване наляво или надясно</string>
     <string name="press_next_or_back_buton">Натиснете стрелката за напред или назад</string>
-    <string name="click_delay">Изчаквне при натискане</string>
-    <string name="no_delay">Без изчакване</string>
-    <string name="scrolling">Скролиране</string>
-    <string name="arrows">Стрелки</string>
-    <string name="swipe">Плъзване</string>
-    <string name="_long">Продължително</string>
-    <string name="_short">Кратко</string>
     <string name="do_you_want_to_save_your_changes">Желаете ли да запазите направените промени?</string>
     <string name="discard">Откажи</string>
     <string name="no_recent_calls">Няма скорошни обаждания</string>
     <string name="apps_sort_method">Метод за подреждане на приложенията</string>
-    <string name="apps_sort_method_subtext">Изберете дали желаете да подредите приложенията в общ списък или да ги разделите в групи по букви</string>
     <string name="groups">Групи</string>
     <string name="one_grid">Общ списък</string>
     <string name="colorful">Цветен</string>
-    <string name="colorful_subtext">Желаете ли да направите GranPhone по-цветен?</string>
     <string name="edit_home_screen">Редактиране на Начален екран</string>
     <string name="dual_sim">Две SIM карти</string>
-    <string name="dual_sim_subtext">Изберете как искате да управлявате двете SIM карти\nЗабележка: Ако изберете Показване на опции, ще трябва да позволите и друго разрешение</string>
     <string name="use_default">Използвай това по подразбиране</string>
     <string name="show_options">Покаване на опции</string>
     <string name="read_phone_state">Прочитане на състоянието на телефона</string>
     <string name="read_phone_state_subtext">Разрешението е необходимо, за да наберете използвайки втората SIM карта</string>
     <string name="choose_sim">Избор на SIM карта</string>
-    <string name="choose_sim_subtext">Изберете SIM картата от която да се проведе разговорът</string>
     <string name="website">WEB сайт</string>
     <string name="appear_on_top">Показване над другите приложения</string>
     <string name="appear_on_top_subtext">Разрешението е необходимо в новите версии на Андроид, за да се показват алармите и напомнянията при заключен екран</string>
@@ -416,4 +366,46 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Назад</string>
+    <string name="exit">Изход</string>
+    <string name="stay">Останете</string>
+    <string name="settings_for_user">За потребителя</string>
+    <string name="settings_for_helper">За помощника</string>
+    <string name="answer_call">Приемане</string>
+    <string name="call_ended">Обаждането приключи</string>
+    <string name="call_status_calling">Обаждане...</string>
+    <string name="calls_channel">Повиквания</string>
+    <string name="confirm_call_title">Обаждане на този номер?</string>
+    <string name="decline_call">Отхвърляне</string>
+    <string name="hang_up">Прекратяване</string>
+    <string name="helper_pin_create_subtext">Изберете 4-цифрен код. Той защитава помощните настройки.</string>
+    <string name="helper_pin_enter_subtext">Въведете 4-цифрения код за помощни настройки.</string>
+    <string name="helper_pin_mismatch">Кодовете не съвпадат.</string>
+    <string name="helper_pin_repeat_subtext">Въведете отново същия 4-цифрен код.</string>
+    <string name="in_call">В разговор</string>
+    <string name="in_call_duration">В разговор • %1$s</string>
+    <string name="in_call_with">В разговор с %1$s</string>
+    <string name="incoming_call">Входящо повикване</string>
+    <string name="incoming_call_from">Входящо повикване от %1$s</string>
+    <string name="kiosk_disable_subtext">Въведете 4-цифрения код, за да изключите павилионния режим.</string>
+    <string name="kiosk_disabled">Режимът Kiosk е изключен.</string>
+    <string name="kiosk_enable_subtext">Телефонът ще остане в GranPhone: без сянка за известия, без настройки на Android и без деинсталиране на приложения.\nИзберете 4-цифрен код, за да изключите това заключване по-късно.</string>
+    <string name="kiosk_enabled">Режимът Kiosk е включен.</string>
+    <string name="kiosk_pin_too_short">Въведете точно 4 цифри.</string>
+    <string name="kiosk_wrong_pin">Това не е 4-цифреният код, който сте задали. Опитайте отново.</string>
+    <string name="on_hold">На изчакване</string>
+    <string name="ongoing_call">Обаждането е в ход</string>
+    <string name="pin_digits_entered">%1$d от %2$d въведени цифри</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — повикване на спешни служби</string>
+    <string name="sos_call_help">Обадете се на службите за спешна помощ</string>
+    <string name="sos_calling_in">Извикване на спешни служби за %d секунди...</string>
+    <string name="sos_confirm_call">Обаждане на спешни служби сега?</string>
+    <string name="sos_hold_explanation">Натиснете и задръжте SOS за 5 секунди, за да се обадите на службите за спешна помощ.</string>
+    <string name="speaker_state_off">Високоговорителят е изключен</string>
+    <string name="speaker_state_on">Говорител включен</string>
+    <string name="speaker_turn_off">Изключете високоговорителя</string>
+    <string name="speaker_turn_on">Включете високоговорителя</string>
+    <string name="tap_to_return_to_call">Докоснете, за да се върнете към разговора</string>
+    <string name="unknown_number">Неизвестно число</string>
 </resources>

@@ -17,6 +17,7 @@
 package com.bald.uriah.baldphone.screenshots;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -29,8 +30,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,7 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 import com.bumptech.glide.Glide;
 
@@ -118,7 +119,6 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
         final ImageView profile_pic, iv_type;
         final TextView tv_type, contact_name, tv_time, image_letter, day;
         final View line;
-        final FrameLayout fl_contact_only;
         final LinearLayout container, ll_contact_only;
         private boolean expanded;
 
@@ -134,7 +134,6 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
             image_letter = container.findViewById(R.id.image_letter);
             line = container.findViewById(R.id.line);
             day = container.findViewById(R.id.day);
-            fl_contact_only = container.findViewById(R.id.fl_contact_only);
             ll_contact_only.setOnClickListener(this);
         }
 
@@ -150,7 +149,7 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
                     image_letter.setVisibility(View.VISIBLE);
                     profile_pic.setImageDrawable(letterContactBackground);
                 } else {
-                    if (S.isValidContextForGlide(profile_pic.getContext()))
+                    if (AppUtils.isValidContextForGlide(profile_pic.getContext()))
                         Glide.with(profile_pic).load(fakeCall.photo).into(profile_pic);
                     image_letter.setVisibility(View.INVISIBLE);
                 }
@@ -171,12 +170,12 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
                     (index == 0 ||
                             new DateTime(callList.get(index - 1).dateTime).getDayOfYear() !=
                                     new DateTime(fakeCall.dateTime).getDayOfYear()) ?
-                            S.stringTimeFromLong(activity, fakeCall.dateTime, false) :
+                            AppUtils.stringTimeFromLong(activity, fakeCall.dateTime, false) :
                             null
             );
 
             final DateTime dateTime = new DateTime(fakeCall.dateTime);
-            tv_time.setText(S.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour()));
+            tv_time.setText(AppUtils.numberToAlarmString(dateTime.getHourOfDay(), dateTime.getMinuteOfHour()));
         }
 
         public void setDay(final @Nullable String day) {
@@ -211,7 +210,7 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
         }
 
         public void setType(int type) {
-            @ColorRes final int colorRes;
+            @AttrRes final int colorAttr;
             @DrawableRes final int drawableRes;
             @StringRes final int stringRes;
             switch (type) {
@@ -219,37 +218,41 @@ public class FakeCallsRecyclerViewAdapter extends ModularRecyclerView.ModularAda
                 case ANSWERED_EXTERNALLY_TYPE:
                     drawableRes = R.drawable.call_received_on_button;
                     stringRes = R.string.received;
-                    colorRes = R.color.received;
+                    colorAttr = R.attr.bald_brand;
                     break;
                 case MISSED_TYPE:
                 case REJECTED_TYPE:
                     drawableRes = R.drawable.call_missed_on_button;
                     stringRes = R.string.missed;
-                    colorRes = R.color.missed;
+                    colorAttr = R.attr.bald_danger;
                     break;
                 case OUTGOING_TYPE:
                     drawableRes = R.drawable.call_made_on_button;
                     stringRes = R.string.outgoing;
-                    colorRes = R.color.outgoing;
+                    colorAttr = R.attr.bald_info;
                     break;
                 case VOICEMAIL_TYPE:
                     drawableRes = R.drawable.voicemail_on_button;
                     stringRes = R.string.voice_mail;
-                    colorRes = R.color.other;
+                    colorAttr = R.attr.bald_text_secondary;
                     break;
                 case BLOCKED_TYPE:
                     drawableRes = R.drawable.blocked_on_button;
                     stringRes = R.string.blocked;
-                    colorRes = R.color.other;
+                    colorAttr = R.attr.bald_text_secondary;
                     break;
                 default:
                     drawableRes = R.drawable.error_on_background;
                     stringRes = R.string.empty;
-                    colorRes = R.color.other;
+                    colorAttr = R.attr.bald_text_secondary;
             }
             tv_type.setText(stringRes);
+            final TypedValue typedValue = new TypedValue();
+            activity.getTheme().resolveAttribute(colorAttr, typedValue, true);
+            final int color = typedValue.data;
+            tv_type.setTextColor(color);
+            iv_type.setImageTintList(ColorStateList.valueOf(color));
             iv_type.setImageResource(drawableRes);
-            this.fl_contact_only.setBackgroundResource(colorRes);
 
         }
 

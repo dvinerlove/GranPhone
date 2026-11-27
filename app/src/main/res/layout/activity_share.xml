@@ -21,14 +21,15 @@
     android:background="?bald_background">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         android:id="@+id/bald_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/share" />
+        app:title="@string/share"
+        app:show_back="true" />
 
 
     <include
@@ -36,7 +37,7 @@
         layout="@layout/contacts_search"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/spacing_sm"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/bald_switch"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +48,7 @@
         android:id="@+id/differently_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/spacing_sm"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/bald_switch"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,11 +67,11 @@
         android:id="@+id/bald_switch"
         style="@style/ButtonsText.Auto"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/style_for_buttons"
-        android:padding="10dp"
+        android:layout_height="@dimen/button_height_large"
+        android:layout_marginStart="@dimen/spacing_xl"
+        android:layout_marginEnd="@dimen/spacing_xl"
+        android:background="@drawable/bald_button_background"
+        android:padding="@dimen/spacing_md"
         android:text="@string/share_differently"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -15,30 +15,19 @@
   -->
 
 <resources>
-    <string name="about">O aplikaciji</string>
-    <string name="about_subtext">Hi!\nMy name is Uriah Shaul Mandel, and I\'m the developer of this platform.\n
-        I\'ve spent most of my \"adult\" life making this platform, and I\'ve released it for free, for all to
-        use.\nYou are more than welcome to contact me by email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Razina pristupačnosti</string>
+
+<string name="accessibility_level">Razina pristupačnosti</string>
     <string name="accessibility_settings">Pristupačnost</string>
     <string name="accidental_touches">Zaštita od slučajnog dodira</string>
-    <string name="accidental_touches_settings_subtext">Ova zaštita štiti od nenamjernog dodira ekrana kad je zaslon prekriven
-    \nukoliko imate problema, možete isključiti ovu opciju.
-    </string>
-    <string name="accidental_touches_subtext">Otkriven slučajni dodir\nodaberite OK za nastavak korištenja uređaja\nukoliko
+    <string name="accidental_touches_subtext">Otkriven slučajni dodir\nodaberite \"Razumijem\" za nastavak korištenja uređaja\nukoliko
     se ova poruka nastavlja prikazivati možete ju isključiti u postavkama pristupačnosti.
     </string>
-    <string name="acknowledgments">Zahvalnice</string>
-    <string name="adaptive">Prilagodljivo</string>
     <string name="add_alarm">Dodaj Alarm</string>
     <string name="add_alarm_quickly">Dodaj Mjerač Vremena</string>
     <string name="add_contact">Dodaj Kontakt</string>
     <string name="add_emergency_contact">Dodaj Novo</string>
     <string name="add_pill">Dodaj Pilulu</string>
-    <string name="add_shortcut">Dodaj Prečac</string>
     <string name="add_to_favorite">Dodaj u Favorite</string>
-    <string name="add_to_home">Dodaj na Početni</string>
     <string name="add_to_sos">Dodaj u SOS</string>
     <string name="address">Adresa</string>
     <string name="advanced_options">Napredne Postavke</string>
@@ -58,7 +47,6 @@
 
     <string name="apps">Apps</string>
     <string name="are_you_sure_you_want_to_delete___">Jeste li sigurni da želite izbrisati %s?</string>
-    <string name="assistant">Asistent</string>
     <string name="at_least_one_day_must_be_selected">Najmanje jedna stavka mora biti označena!</string>
     <string name="auto_brightness">Prilagodljiva\nSvjetlina</string>
     <string name="backspace">Natrag</string>
@@ -66,7 +54,6 @@
     <string name="blocked">Blokirano</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Svjetlina</string>
-    <string name="brightness_subtext">Promijeni Svjetlinu.</string>
     <string name="cache_cleared_successfully">Predmemorija Uspješno Obrisana!</string>
     <string name="call">Poziv</string>
     <string name="calling">Pozivanje</string>
@@ -76,7 +63,6 @@
     <string name="camera">Kamera</string>
     <string name="camera_subtext">Ova Dozvola je potrebna za korištenje svjetiljke</string>
     <string name="cancel">Poništi</string>
-    <string name="change_pills_time">Promijeni termin doziranja pilula</string>
     <string name="change_system_settings_subtext">Molim dopustite aplikaciji  na korištenje postavki, poput promjene veličine teksta i razinu svjetline zaslona.
     </string>
     <string name="choose_friday">Pet</string>
@@ -91,7 +77,8 @@
     <string name="clear_data">Izbriši Pohranu</string>
     <string name="clear_data_subtext">Jeste li sigurni da želite izbrisati sve korisničke postavke? Aplikacija GranPhone će se vratiti na tvorničke postavke, kao da je tek instalirana.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">sigurni?\nklikom na DA brišete sve podatke aplikacije!</string>
+    <string name="clear_data_subtext3">sigurni?
+svi podaci aplikacije bit će obrisani!</string>
     <string name="clock">Sat</string>
     <string name="coming_soon">Dolazi Uskoro!</string>
     <string name="connection_settings">Povezivnost</string>
@@ -106,24 +93,18 @@
     <string name="dark">Tamno</string>
     <string name="delete">Izbriši</string>
     <string name="delete___">Izbrisati %s?</string>
-    <string name="delete_all_alarms">Izbriši sve alarme</string>
     <string name="dialer">Brojčanik</string>
     <string name="display_settings">Zaslon</string>
     <string name="done">Gotovo</string>
     <string name="down">Dolje</string>
     <string name="edit">Uredi</string>
-    <string name="email">Email:</string>
     <string name="enable_notification_access">Pristup obavijestima</string>
     <string name="enable_notification_access_subtext">Molim dopustite aplikaciji GranPhone pristup obavijestima</string>
     <string name="enter">Potvrdi</string>
-    <string name="enter_contact_or_phone_number">Unesi ime kontakta:</string>
     <string name="evening">Večer</string>
     <string name="example_of_different_text_sizes">Primjer različitih veličina teksta\nTrebao bi biti čitljiv i bez prelijevanja teksta.
     </string>
     <string name="external_storage_subtext">Ova Dozvola je potrebna za spremanje slika</string>
-    <string name="feedback">Pošalji Povratne Informacije</string>
-    <string name="feedback_cannot_be_empty">Povratne Informacije ne mogu biti prazne!</string>
-    <string name="feedback_sent_successfully">Povratna Informacija uspješno poslana!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Molim odaberite razinu pristupačnosti</string>
     <string name="font_size">Veličina teksta</string>
     <string name="friday">Petak</string>
@@ -136,7 +117,6 @@
     <string name="home_phone_number">Kućni broj</string>
     <string name="hour">Sat</string>
     <string name="huge">Ogromno</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Prizvan u:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Posljednja stvar:\nJako se preporučuje da koristite GranPhone pokretač kao zadani pokretač.
     </string>
@@ -146,9 +126,7 @@
     <string name="left_handed">Ljevak</string>
     <string name="light">Svjetlo</string>
     <string name="location">Lokacija</string>
-    <string name="emergency_services">Hitne Službe</string>
-    <string name="mail">E-Pošta</string>
-    <string name="maps">Karte</string>
+<string name="mail">E-Pošta</string>
 
 
     <string name="medium">Srednje</string>
@@ -169,8 +147,6 @@
     <string name="nfc">NFC</string>
     <string name="no">Ne</string>
     <string name="notes">Bilješke</string>
-    <string name="notes_settings">Postavke Bilješki</string>
-    <string name="notes_settings_subtext">Odaberite li želite li Bilješku postaviti na početni zaslon.</string>
     <string name="notifications">Obavijesti</string>
 
     <string name="of">od</string>
@@ -193,6 +169,7 @@
     <string name="pill_added">Pilula dodana!</string>
     <string name="pill_name">Ime Pilule</string>
     <string name="pills">Pilule</string>
+    <string name="pill">Pilula</string>
     <string name="press_longer">Klikni Duže!</string>
     <string name="timer">Kronometar</string>
     <string name="read_call_log">Čitaj Popis Poziva</string>
@@ -203,9 +180,6 @@
     <string name="regular_level">Regularna razina</string>
 
     <string name="remove_from_favorite">Ukloni iz Favorita</string>
-    <string name="remove_from_home">Ukloni sa Početnog Zaslona</string>
-    <string name="remove_from_sos">Ukloni iz SOS popisa</string>
-    <string name="remove_shortcut">Ukloni prečac</string>
     <string name="removed_all_alarms">Ukloni sve Alarme!</string>
     <string name="repeats_every_day">Svaki dan</string>
     <string name="right_handed">Dešnjak</string>
@@ -240,24 +214,20 @@
     <string name="speak">Pričaj</string>
     <string name="speech_to_text">Govor u Text</string>
     <string name="strong_hand">Dominantna Ruka</string>
-    <string name="strong_hand_subtext">Odaberite dominantnu ruku u cilju prilagodbe sučelja.</string>
-    <string name="submit">podnesi</string>
     <string name="sunday">Nedjelja</string>
     <string name="technical_information">Tehničke Informacije</string>
     <string name="theme_settings">Teme</string>
-    <string name="theme_settings_subtext">Odaberite temu</string>
 
     <string name="thursday">Četvrtak</string>
     <string name="time_changer">Promjena Termina Pilula</string>
     <string name="tiny">Sitno</string>
-    <string name="to___days_and___hours_from_now">na %d dan/a i %d sat/i od sada</string>
-    <string name="to___hours_and___minutes_from_now">na %d sat/i i %d minute/a od sada</string>
+    <string name="to___days_and___hours_from_now">na %1$d dan/a i %2$d sat/i od sada</string>
+    <string name="to___hours_and___minutes_from_now">na %1$d sat/i i %2$d minute/a od sada</string>
     <string name="to___minuets_from_now">na %d minute/a od sada</string>
     <string name="today">Danaas</string>
     <string name="took">Uzeto!</string>
     <string name="tuesday">Utorak</string>
     <string name="uninstall">Deinstaliraj</string>
-    <string name="uninstall_subtext">Jeste li sigurni da želite deinstalirati %s?\nPodaci aplikacije %s će biti zauvijek obrisani!</string>
     <string name="up">Gore</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video Instrukcije</string>
@@ -275,17 +245,20 @@
     <string name="yesterday">Jučer</string>
     <string name="nothing">Ništa</string>
     <string name="no_contacts_found">Nije pronađen nijedan kontakt!</string>
-    <string name="no_alarms">Nema Alarma\nDodajte klikom na\n\"Dodaj Alarm\"\nIli\n\"Dodaj Mjerač Vremena\"</string>
-    <string name="no_pills">Nema Pilula\nDodajte klikom na\n\"Dodaj Pilulu\"</string>
+    <string name="no_alarms">Nema alarma.
+Pritisnite \"Alarm\" ili
+\"Kronometar\" ispod.</string>
+    <string name="no_pills">Nema pilula.
+Pritisnite \"+ Pilula\" ispod.</string>
     <string name="clear_all_notifications">Ukloni Sve Obavijesti</string>
     <string name="clear_cache_subtext">Jeste li sigurni da želiste izbrisati podatke predmemorije? Brisanjem privremenih datoteka može popraviti greške aplikacije GranPhone, no briše i sve prečace stvorene na Početnom Zaslonu.</string>
-    <string name="permissions_calm">Bok, GranPhone mora imati slijedeće dozvole za pokretanje. Poneke mogu zvučati strašno no to je jedini način da GranPhone zamijeni trenutno sučelje uređaja. Nikakvi podaci se ne sakupljaju na taj način niti se šteti Vama ili uređaju. Kliknite OK za odobravanje dozvola ili Ne za izlazak iz aplikacije GranPhone.
+    <string name="permissions_calm">Bok, GranPhone mora imati slijedeće dozvole za pokretanje. Poneke mogu zvučati strašno no to je jedini način da GranPhone zamijeni trenutno sučelje uređaja. Nikakvi podaci se ne sakupljaju na taj način niti se šteti Vama ili uređaju. Nastavite za odobravanje dozvola ili izađite iz GranPhonea.
     </string>
     <string name="pending_update">Čekanje Ažuriranja</string>
     <string name="download">Preuzimanje</string>
     <string name="install_updates">Instaliraj Ažuriranja</string>
     <string name="install_updates_subtext">Ovo Dopuštenje je Ključno za Ažuriranje Aplikacije GranPhone</string>
-    <string name="a_new_update_is_available">Novo Ažuriranje je dostupno!\nAžuriranja su važna da GranPhone radi kako treba.\nKliknite OK za Preuzimanje.
+    <string name="a_new_update_is_available">Novo Ažuriranje je dostupno!\nAžuriranja su važna da GranPhone radi kako treba.\nNastavite za preuzimanje.
     </string>
     <string name="current_version">Trenutna Verzija:\n</string>
     <string name="new_version">Nova Verzija:\n</string>
@@ -309,21 +282,15 @@
     <string name="try_now">Probajte sada</string>
     <string name="download_progress">Napredak Preuzimanja</string>
     <string name="what_do_you_want_to_do_with___">Što želite napraviti sa %s?</string>
-    <string name="crash_reports">Izvještaji o Pogreškama</string>
-    <string name="crash_reports_subtext">Izvještaji o pogreškama pomažu učiniti korištenje aplikacije GranPhone besprijekornim.\nIzvještaji se koriste samo za ispravljanje pogrešaka i nikakve dodatne informacije osim najosnovnijih se ne prikupljaju.</string>
     <string name="custom_app">Prilagođena Aplikacija</string>
-    <string name="custom_app_subtext">Odaberite prilagođenu aplikaciju za početni zaslon.</string>
-    <string name="no_app_was_found">Podudarna aplikacija nije pronađena!</string>
     <string name="alarm">Alarm</string>
     <string name="no_new_notifications">Nema novih obavijesti</string>
     <string name="sound">Zvuk</string>
     <string name="mute">Utišaj</string>
     <string name="vibrate">Vibracija</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Vaš uređaj nema instaliranog asistenta.</string>
 
 
     <string name="status_bar_settings">Statusna Traka</string>
-    <string name="status_bar_settings_subtext">Gdje želite da se prikazuje Statusna Traka?</string>
     <string name="only_home_screen">Samo Početni Zaslon</string>
     <string name="nowhere">Nigdje</string>
     <string name="everywhere">Svugdje</string>
@@ -334,6 +301,8 @@
     <string name="choose_language_for_keyboard">Odaberi Jezik</string>
     <string name="hebrew">Hebrejski</string>
     <string name="english">Engleski</string>
+    <string name="russian">Ruski</string>
+    <string name="understood">Razumijem</string>
 
     <string name="search">Pretraživanje</string>
     <string name="next">Dalje</string>
@@ -341,48 +310,31 @@
 
 
     <string name="dialer_sounds">Zvukovi Brojčanika</string>
-    <string name="dialer_sounds_subtext">Odaberite ukoliko želite Zvukove Brojčanika.</string>
     <string name="low_battery_alert">Upozorenje baterije pri kraju</string>
-    <string name="low_battery_alert_subtext">Odaberite ukoliko želite da Statusna Traka pocrveni kada je stanje baterije ispod 20%\nUpozorenje neće biti prikazano ukoliko je Statusna Traka sakrivena.</string>
 
-    <string name="also_available_at">Dostupan na\nGranPhone.contact@gmail.com\nPovratna Informacija mora biti na Engleskom!</string>
     <string name="grant_all_permissions">Dopusti Sve Dozvole</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donirajte</string>
-    <string name="emergency_button">Gumb za Hitnoće</string>
-    <string name="emergency_settings_subtext">Odaberite želite li Gumb za Hitnoće na Početnom Zaslonu.</string>
     <string name="private_number">Privatni Broj</string>
     <string name="swipe_left_or_right">Prijeđite prstom lijevo ili desno</string>
     <string name="press_next_or_back_buton">Kliknite strelicu za Dalje ili Natrag</string>
-    <string name="click_delay">Duljina Klika</string>
-    <string name="no_delay">Bez Odgode</string>
-    <string name="scrolling">Pomicanje</string>
-    <string name="arrows">Bočne strelice</string>
-    <string name="swipe">Prijelaz prstom</string>
-    <string name="_long">Dugo</string>
-    <string name="_short">Kratko</string>
     <string name="do_you_want_to_save_your_changes">Želite li spremiti promjene?</string>
     <string name="discard">Odbaci</string>
     <string name="no_recent_calls">Nema Nedavnih Poziva</string>
     <string name="apps_sort_method">Metoda Sortiranja Aplikacija</string>
-    <string name="apps_sort_method_subtext">Odaberite želite sortirati aplikacije u jednu rešetku ili da su sortirane u grupama bazirano na prvom slovu imena aplikacije</string>
     <string name="groups">Grupe</string>
     <string name="one_grid">Rešetka</string>
     <string name="colorful">U više boja</string>
-    <string name="colorful_subtext">Želite li učiniti da GranPhone bude u više boja?</string>
     <string name="edit_home_screen">Uredi Početni Zaslon</string>
     <string name="dual_sim">Dual Sim</string>
-    <string name="dual_sim_subtext">Odaberite kako će se upravljati Dual SIM\nBilješka: ukoliko odaberete Prikaži Postavke, morati ćete dopustiti jednu dozvolu</string>
     <string name="use_default">Koristi Zadano</string>
     <string name="show_options">Prikaži Postavke</string>
     <string name="read_phone_state">Čitanje Stanja Telefona</string>
     <string name="read_phone_state_subtext">Ova postavka je potrebna za pozivanje sa sekundarne SIM kartice</string>
     <string name="choose_sim">Odaberi SIM karticu</string>
-    <string name="choose_sim_subtext">Odaberi SIM karticu za pozivanje</string>
     <string name="website">Web stranica</string>
     <string name="appear_on_top">Prikaži na vrhu</string>
     <string name="appear_on_top_subtext">Ova dovola je potrebna na novijoj verziji Androida da se prikažu alarmi i podsjetnici kad je zaslon ugašen</string>
@@ -399,4 +351,46 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Natrag</string>
+    <string name="exit">Izađi</string>
+    <string name="stay">Ostani</string>
+    <string name="settings_for_user">Za korisnika</string>
+    <string name="settings_for_helper">Za pomagača</string>
+    <string name="answer_call">Odgovori</string>
+    <string name="call_ended">Poziv završen</string>
+    <string name="call_status_calling">Pozivanje…</string>
+    <string name="calls_channel">Pozivi</string>
+    <string name="confirm_call_title">Nazvati ovaj broj?</string>
+    <string name="decline_call">Odbij</string>
+    <string name="hang_up">Prekini</string>
+    <string name="helper_pin_create_subtext">Odaberite 4-znamenkasti kod. Štiti pomoćne postavke.</string>
+    <string name="helper_pin_enter_subtext">Unesite 4-znamenkasti kod za pomoćne postavke.</string>
+    <string name="helper_pin_mismatch">Kodovi se ne podudaraju.</string>
+    <string name="helper_pin_repeat_subtext">Ponovno unesite isti 4-znamenkasti kod.</string>
+    <string name="in_call">U pozivu</string>
+    <string name="in_call_duration">U pozivu • %1$s</string>
+    <string name="in_call_with">U razgovoru s %1$s</string>
+    <string name="incoming_call">Dolazni poziv</string>
+    <string name="incoming_call_from">Dolazni poziv od %1$s</string>
+    <string name="kiosk_disable_subtext">Unesite 4-znamenkasti kod za isključivanje kiosk načina rada.</string>
+    <string name="kiosk_disabled">Način rada kioska je isključen.</string>
+    <string name="kiosk_enable_subtext">Telefon će ostati unutar GranPhone: bez zaslona s obavijestima, bez Android postavki i bez deinstaliranja aplikacija.\nOdaberite 4-znamenkasti kod da biste kasnije isključili ovo zaključavanje.</string>
+    <string name="kiosk_enabled">Kiosk mod je uključen.</string>
+    <string name="kiosk_pin_too_short">Unesite točno 4 znamenke.</string>
+    <string name="kiosk_wrong_pin">To nije 4-znamenkasti kod koji ste postavili. Pokušajte ponovno.</string>
+    <string name="on_hold">Na čekanju</string>
+    <string name="ongoing_call">Poziv u tijeku</string>
+    <string name="pin_digits_entered">Uneseno %1$d od %2$d znamenki</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — poziv hitnim službama</string>
+    <string name="sos_call_help">Nazovite hitnu pomoć</string>
+    <string name="sos_calling_in">Pozivanje hitnih službi za %d sekundi...</string>
+    <string name="sos_confirm_call">Sada nazvati hitnu pomoć?</string>
+    <string name="sos_hold_explanation">Pritisnite i držite SOS 5 sekundi za pozivanje hitne službe.</string>
+    <string name="speaker_state_off">Zvučnik isključen</string>
+    <string name="speaker_state_on">Govornik uključen</string>
+    <string name="speaker_turn_off">Isključite zvučnik</string>
+    <string name="speaker_turn_on">Uključite zvučnik</string>
+    <string name="tap_to_return_to_call">Dodirnite za povratak na poziv</string>
+    <string name="unknown_number">Nepoznati broj</string>
 </resources>

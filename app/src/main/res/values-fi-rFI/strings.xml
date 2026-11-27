@@ -15,30 +15,19 @@
   -->
 
 <resources>
-    <string name="about">Tietoja</string>
-    <string name="about_subtext">Hei!\nNimeni on Uriah Shaul Mandel, ja olen tämän alustan kehittäjä.\n
-        Olen käyttänyt valtaosan \"aikuisikääni\" alustan tekemiseen ja julkaisen sen ilmeiseksi, kaikkien
-        käyttöön.\nVoit mielihyvin ottaa minuun yhteyttä sähköpostilla:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Esteettömyys-taso</string>
+
+<string name="accessibility_level">Esteettömyys-taso</string>
     <string name="accessibility_settings">Esteettömyys</string>
     <string name="accidental_touches">Tahattoman kosketuksen suoja</string>
-    <string name="accidental_touches_settings_subtext">Suojaus estää puhelimen kosketuskäytön, kun puhelin on
-        peitettynä\nJos sen kanssa on ongelmia, voit kytkeä sen pois
-    </string>
-    <string name="accidental_touches_subtext">Tahaton kosketus havaittiin\nPaina OK jatkaaksesi puhelimen käyttöä\nJos
+    <string name="accidental_touches_subtext">Tahaton kosketus havaittiin\nPaina \"Ymmärretty\" jatkaaksesi puhelimen käyttöä\nJos
         ilmoitus tulee toistuvasti, voit poistaa sen käytöstä esteettömyysasetuksista
     </string>
-    <string name="acknowledgments">Kiitollisuudenosoitukset</string>
-    <string name="adaptive">Mukautuva</string>
     <string name="add_alarm">Lisää hälytys</string>
     <string name="add_alarm_quickly">Lisää ajastin</string>
     <string name="add_contact">Lisää yhteystieto</string>
     <string name="add_emergency_contact">Lisää</string>
     <string name="add_pill">Lisää lääke</string>
-    <string name="add_shortcut">Lisää pikakuvake</string>
     <string name="add_to_favorite">Lisää suosikkeihin</string>
-    <string name="add_to_home">Lisää kotisivulle</string>
     <string name="add_to_sos">Lisää SOS:iin</string>
     <string name="address">Osoite</string>
     <string name="advanced_options">Edistyneet asetukset</string>
@@ -58,7 +47,6 @@
 
     <string name="apps">Sovellukset</string>
     <string name="are_you_sure_you_want_to_delete___">Oletko varma että haluat poistaa %s?</string>
-    <string name="assistant">Avustaja</string>
     <string name="at_least_one_day_must_be_selected">Vähintään yksi päivä tulee valita</string>
     <string name="auto_brightness">Automaattinen kirkkaus</string>
     <string name="backspace">askelpalautin</string>
@@ -66,7 +54,6 @@
     <string name="blocked">Estetty</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Kirkkaus</string>
-    <string name="brightness_subtext">Muuta kirkkautta</string>
     <string name="cache_cleared_successfully">Välimuisti tyhjennetty onnistuneesti!</string>
     <string name="call">Puhelu</string>
     <string name="calling">Puhelu</string>
@@ -76,7 +63,6 @@
     <string name="camera">Kamera</string>
     <string name="camera_subtext">Tämä lupa tarvitaan taskulampun sytyttämiseksi</string>
     <string name="cancel">Peruuta</string>
-    <string name="change_pills_time">Muuta lääkitysaikaa</string>
     <string name="change_system_settings_subtext">Anna GranPhonen muuttaa asetuksia, kuten isontaa kirjasinkokoa
 ja muuttaa kirkkautta.</string>
     <string name="choose_friday">Pe</string>
@@ -91,7 +77,8 @@ ja muuttaa kirkkautta.</string>
     <string name="clear_data">Tyhjää kaikki tiedot</string>
     <string name="clear_data_subtext">Haluatko varmasti poistaa kaikki käyttäjätiedot? GranPhone-sovellus palaa tuoreeseen, juuri asennettuun tilaan.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">varma?\nvalitsemalla kyllä kaikki tiedot poistetaan!</string>
+    <string name="clear_data_subtext3">varma?
+kaikki tiedot poistetaan!</string>
     <string name="clock">Kello</string>
     <string name="coming_soon">Tulossa pian!</string>
     <string name="connection_settings">Yhteys</string>
@@ -106,25 +93,19 @@ ja muuttaa kirkkautta.</string>
     <string name="dark">Tumma</string>
     <string name="delete">Poista</string>
     <string name="delete___">Poistetaanko %s?</string>
-    <string name="delete_all_alarms">Poista hälytykset</string>
     <string name="dialer">Puhelin</string>
     <string name="display_settings">Näyttö</string>
     <string name="done">Tehty</string>
     <string name="down">Alas</string>
     <string name="edit">Muuta</string>
-    <string name="email">Sähköposti:</string>
     <string name="enable_notification_access">Ota käyttöön ilmoitusten käyttö</string>
     <string name="enable_notification_access_subtext">Anna GranPhonelle käyttöoikeus ilmoituksiin.</string>
     <string name="enter">Syötä</string>
-    <string name="enter_contact_or_phone_number">Syötä yhteyshenkilön nimi</string>
     <string name="evening">Ilta</string>
     <string name="example_of_different_text_sizes">Esimerkki eri tekstikoista\nPitäisi olla luettava ja ei
         ylivuotoa.
     </string>
     <string name="external_storage_subtext">Tämä oikeus tarvitaan kuvien tallentamiseksi</string>
-    <string name="feedback">Lähetä palautetta</string>
-    <string name="feedback_cannot_be_empty">Palaute ei voi olla tyhjä!</string>
-    <string name="feedback_sent_successfully">Palaute lähetetty onnistuneesti!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Valitse esteettömyystaso</string>
     <string name="font_size">Kirjasinkoko</string>
     <string name="friday">Perjantai</string>
@@ -138,7 +119,6 @@ ja muuttaa kirkkautta.</string>
     <string name="home_phone_number">Kotipuhelinnumero</string>
     <string name="hour">Tunti</string>
     <string name="huge">Valtava</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Käynnistetty:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Vielä yksi
         asia:\nOn suositeltavaa käyttää GranPhonen kotinäkymää oletuksena käynnistysnäkymänä
@@ -149,9 +129,7 @@ ja muuttaa kirkkautta.</string>
     <string name="left_handed">Vasenkätinen</string>
     <string name="light">Kevyt</string>
     <string name="location">Sijainti</string>
-    <string name="emergency_services">Hätäpalvelut</string>
-    <string name="mail">Posti</string>
-    <string name="maps">Kartat</string>
+<string name="mail">Posti</string>
 
 
     <string name="medium">Keskitato</string>
@@ -172,8 +150,6 @@ ja muuttaa kirkkautta.</string>
     <string name="nfc">NFC</string>
     <string name="no">Ei</string>
     <string name="notes">Muistio</string>
-    <string name="notes_settings">Muistiot</string>
-    <string name="notes_settings_subtext">Valitse jos haluat Muistio-sivun kotinäytölle</string>
     <string name="notifications">Huomautukset</string>
 
     <string name="of">/</string>
@@ -196,6 +172,7 @@ ja muuttaa kirkkautta.</string>
     <string name="pill_added">Lääkitys lisätty!</string>
     <string name="pill_name">Lääkenimi</string>
     <string name="pills">Lääkkeet</string>
+    <string name="pill">Lääke</string>
     <string name="press_longer">Paina pidempään!</string>
     <string name="timer">Ajastin</string>
     <string name="read_call_log">Lue puheluhistoria</string>
@@ -206,9 +183,6 @@ ja muuttaa kirkkautta.</string>
     <string name="regular_level">Tavallinen taso</string>
 
     <string name="remove_from_favorite">Poista suosikeista</string>
-    <string name="remove_from_home">Poista kotinäkymästä</string>
-    <string name="remove_from_sos">Poista SOS:sta</string>
-    <string name="remove_shortcut">Poista pikakuvake</string>
     <string name="removed_all_alarms">Poista hälytykset</string>
     <string name="repeats_every_day">Joka päivä</string>
     <string name="right_handed">Oikeakätinen</string>
@@ -248,24 +222,20 @@ ja muuttaa kirkkautta.</string>
     <string name="speak">Puhu</string>
     <string name="speech_to_text">Puhe tekstiksi</string>
     <string name="strong_hand">Kätisyys</string>
-    <string name="strong_hand_subtext">Valitse kätisyytesi käyttöliittymän säätämiseksi.</string>
-    <string name="submit">lähetä</string>
     <string name="sunday">Sunnuntai</string>
     <string name="technical_information">Tekninen informaatio</string>
     <string name="theme_settings">Teema</string>
-    <string name="theme_settings_subtext">Valitse teema</string>
 
     <string name="thursday">Torstai</string>
     <string name="time_changer">Lääkitysajan vaihtaja</string>
     <string name="tiny">Pikkanen</string>
-    <string name="to___days_and___hours_from_now"> %d päivää ja %d tuntia tästä alkaen</string>
-    <string name="to___hours_and___minutes_from_now"> %d tuntia ja %d minuuttia tästä alkaen</string>
+    <string name="to___days_and___hours_from_now"> %1$d päivää ja %2$d tuntia tästä alkaen</string>
+    <string name="to___hours_and___minutes_from_now"> %1$d tuntia ja %2$d minuuttia tästä alkaen</string>
     <string name="to___minuets_from_now"> %d minuuttia tästä alkaen</string>
     <string name="today">Tänään</string>
     <string name="took">Otettu!</string>
     <string name="tuesday">Tiistai</string>
     <string name="uninstall">Poista asennus</string>
-    <string name="uninstall_subtext">Oletko varma että haluat poistaa %s?\n%sn tiedot poistuvat lopullisesti!</string>
     <string name="up">Ylös</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Video-ohjeet</string>
@@ -283,20 +253,23 @@ ja muuttaa kirkkautta.</string>
     <string name="yesterday">Eilen</string>
     <string name="nothing">Ei mitään</string>
     <string name="no_contacts_found">Yhteystietoja ei löydy!</string>
-    <string name="no_alarms">Ei hälytyksiä\nLuo uusi painamalla\n\"Lisää hälytys\"\ntai\n\"Lisää ajastin\"</string>
-    <string name="no_pills">Ei lääkityksiä\nLisää uusi painamalla\n\"Lisää lääkitys\"</string>
+    <string name="no_alarms">Ei hälytyksiä.
+Paina \"Hälytys\" tai
+\"Ajastin\" alla.</string>
+    <string name="no_pills">Ei lääkityksiä.
+Paina \"+ Lääke\" alla.</string>
     <string name="clear_all_notifications">Poista kaikki muistutukset</string>
     <string name="clear_cache_subtext">Haluatko varmasti poistaa välimuistin sisällön? Väliaikaistiedostojen poistaminen voi ratkaista joitain GranPhone-sovelluksen toimintahäiriöitä, mutta myös aloitusnäytölle luodut pikakuvakkeet poistetaan.</string>
     <string name="permissions_calm">Hei, GranPhone tarvitsee seuraavat oikeudet toimiakseen. Osa voi kuulostaa
         pelottavalta, mutta vain niin GranPhone voi korvata käyttöliittymän. Tietoja ei oteta eikä se aiheuta haittaa
-        Paina OK antaaksesi oikeudet tai Ei poistuaksesi GranPhonesta.
+        Jatka antaaksesi oikeudet tai poistu GranPhonesta.
     </string>
     <string name="pending_update">Odottava päivitys</string>
     <string name="download">Lataa</string>
     <string name="install_updates">Asenna päivitykset</string>
     <string name="install_updates_subtext">Tämä lupa tarvitaan GranPhonen päivityksen asentamiseksi</string>
     <string name="a_new_update_is_available">Uusi päivitys on saatavana!\nPäivitykset ovat tärkeitä, jotta GranPhone toimii
-        sujuvasti.\nPaina OK ladataksesi.
+        sujuvasti.\nJatka ladataksesi.
     </string>
     <string name="current_version">Nykyinen versio \n</string>
     <string name="new_version">Uusi versio \n</string>
@@ -322,23 +295,15 @@ ja muuttaa kirkkautta.</string>
     <string name="try_now">Kokeile nyt</string>
     <string name="download_progress">Latauksen edistyminen</string>
     <string name="what_do_you_want_to_do_with___">Mitä haluat tehdä: %s?</string>
-    <string name="crash_reports">Kaatumisraportit</string>
-    <string name="crash_reports_subtext">Kaatumisraporteilla parannetaan GranPhonen käyttöä sujuvaksi\nNiitä käytetään vain
-        virhekorjaukseen ja vain virheen korjaamiseen välttämättömiä tietoja otetaan
-    </string>
     <string name="custom_app">Mukautettu sovellus</string>
-    <string name="custom_app_subtext">Valitse mukautettu sovellus aloitusnäytölle.</string>
-    <string name="no_app_was_found">Vastaavaa sovellusta ei löytynyt!</string>
     <string name="alarm">Hälytys</string>
     <string name="no_new_notifications">Ei uusia ilmoituksia</string>
     <string name="sound">Ääni</string>
     <string name="mute">Äänetön</string>
     <string name="vibrate">Värinä</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Puhelimeesi ei ole asennettu avustajaa.</string>
 
 
     <string name="status_bar_settings">Tilarivi</string>
-    <string name="status_bar_settings_subtext">Missä haluat näyttää tilarivin?</string>
     <string name="only_home_screen">Vain kotinäyttö</string>
     <string name="nowhere">Ei missään</string>
     <string name="everywhere">Kaikkialla</string>
@@ -349,6 +314,8 @@ ja muuttaa kirkkautta.</string>
     <string name="choose_language_for_keyboard">Valitse kieli</string>
     <string name="hebrew">Heprea</string>
     <string name="english">Englanti</string>
+    <string name="russian">Venäjä</string>
+    <string name="understood">Ymmärretty</string>
 
     <string name="search">Hae</string>
     <string name="next">Seuraava</string>
@@ -356,48 +323,31 @@ ja muuttaa kirkkautta.</string>
 
 
     <string name="dialer_sounds">Soittajan äänet</string>
-    <string name="dialer_sounds_subtext">Valitse, haluatko käyttää Soittajan ääniä.</string>
     <string name="low_battery_alert">Akku vähissä hälytys</string>
-    <string name="low_battery_alert_subtext">Valitse, haluatko tilarivin olevan punainen aloitusnäytössä, kun akun varaus on alle 20%\nHuomaa, Sitä ei näytetä, jos järjestelmän tilarivi on piilotettu.</string>
 
-    <string name="also_available_at">Myös saatavilla\nGranPhone.contact@gmail.com\nPalaute oltava englanniksi / hepreaksi!</string>
     <string name="grant_all_permissions">Myönnä kaikki käyttöoikeudet</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Lahjoita</string>
-    <string name="emergency_button">Hätäpainike</string>
-    <string name="emergency_settings_subtext">Valitse, haluatko hätäpainikkeen aloitusnäytölle.</string>
     <string name="private_number">Yksityinen numero</string>
     <string name="swipe_left_or_right">Pyyhkäise vasemmalle tai oikealle</string>
     <string name="press_next_or_back_buton">Paina seuraava / takaisin nuolta</string>
-    <string name="click_delay">Napsautusviive</string>
-    <string name="no_delay">Ei viivettä</string>
-    <string name="scrolling">Vieritys</string>
-    <string name="arrows">Nuolet</string>
-    <string name="swipe">Pyyhkäie</string>
-    <string name="_long">Pitkä</string>
-    <string name="_short">Lyhyt</string>
     <string name="do_you_want_to_save_your_changes">Haluatko tallentaa muutokset?</string>
     <string name="discard">Hylkää</string>
     <string name="no_recent_calls">Ei viime puheluita</string>
     <string name="apps_sort_method">Sovellusten lajittelutapa</string>
-    <string name="apps_sort_method_subtext">Valitse, haluatko lajitella sovellukset yhteen ruudukkoon vai jakaa ne eri ryhmiin kirjaimilla</string>
     <string name="groups">Ryhmät</string>
     <string name="one_grid">Yksi ruudukko</string>
     <string name="colorful">Värikäs</string>
-    <string name="colorful_subtext">Haluatko tehdä GranPhonen värikkäämmäksi?</string>
     <string name="edit_home_screen">Muokkaa aloitusnäyttöä</string>
     <string name="dual_sim">Kaksois-SIM</string>
-    <string name="dual_sim_subtext">Valitse, kuinka haluat hallita kaksois-SIM:ä\nHuomaa: Jos valitset Näytä vaihtoehdot, sinun on annettava uusi käyttöoikeus</string>
     <string name="use_default">Käytä oletusta</string>
     <string name="show_options">Näytä valinnat</string>
     <string name="read_phone_state">Lue puhelimen tila</string>
     <string name="read_phone_state_subtext">Tämä lupa tarvitaan, jotta toisella SIM:llä voi soittaa</string>
     <string name="choose_sim">Valitse SIM-kortti</string>
-    <string name="choose_sim_subtext">Valitse SIM, jolla haluat soittaa puhelun</string>
     <string name="website">Verkkosivusto</string>
     <string name="appear_on_top">Näkyy ylhäällä</string>
     <string name="appear_on_top_subtext">Tätä lupaa tarvitaan uudelle Android-versiolle, jotta hälytykset ja muistutukset voidaan näyttää, kun näyttö on suljettu</string>
@@ -414,4 +364,46 @@ ja muuttaa kirkkautta.</string>
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Takaisin</string>
+    <string name="exit">Poistu</string>
+    <string name="stay">Jää</string>
+    <string name="settings_for_user">Käyttäjälle</string>
+    <string name="settings_for_helper">Avustajalle</string>
+    <string name="answer_call">Vastaa</string>
+    <string name="call_ended">Puhelu päättyi</string>
+    <string name="call_status_calling">Soitetaan…</string>
+    <string name="calls_channel">Puhelut</string>
+    <string name="confirm_call_title">Soitetaanko tähän numeroon?</string>
+    <string name="decline_call">Hylkää</string>
+    <string name="hang_up">Lopeta puhelu</string>
+    <string name="helper_pin_create_subtext">Valitse 4-numeroinen koodi. Se suojaa apuohjelman asetuksia.</string>
+    <string name="helper_pin_enter_subtext">Syötä 4-numeroinen koodi avustajan asetuksille.</string>
+    <string name="helper_pin_mismatch">Koodit eivät täsmää.</string>
+    <string name="helper_pin_repeat_subtext">Syötä sama 4-numeroinen koodi uudelleen.</string>
+    <string name="in_call">Puhelussa</string>
+    <string name="in_call_duration">Puhelussa • %1$s</string>
+    <string name="in_call_with">Puhelussa %1$s:n kanssa</string>
+    <string name="incoming_call">Saapuva puhelu</string>
+    <string name="incoming_call_from">Saapuva puhelu %1$s</string>
+    <string name="kiosk_disable_subtext">Syötä 4-numeroinen koodi kytkeäksesi kioskitilan pois päältä.</string>
+    <string name="kiosk_disabled">Kioskitila on pois päältä.</string>
+    <string name="kiosk_enable_subtext">Puhelin pysyy GranPhone:ssä: ei ilmoitusaluetta, ei Android-asetuksia eikä sovellusten poistamista.\nValitse 4-numeroinen koodi, jos haluat poistaa tämän lukon käytöstä myöhemmin.</string>
+    <string name="kiosk_enabled">Kioskitila on päällä.</string>
+    <string name="kiosk_pin_too_short">Syötä täsmälleen 4 numeroa.</string>
+    <string name="kiosk_wrong_pin">Se ei ole asettamasi 4-numeroinen koodi. Yritä uudelleen.</string>
+    <string name="on_hold">Odotustilassa</string>
+    <string name="ongoing_call">Puhelu käynnissä</string>
+    <string name="pin_digits_entered">%1$d/%2$d numeroa syötetty</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — soita hätäkeskukseen</string>
+    <string name="sos_call_help">Soita hätäkeskukseen</string>
+    <string name="sos_calling_in">Hätäpalveluihin soittaminen %d sekunnissa…</string>
+    <string name="sos_confirm_call">Soitatko hätäkeskukseen nyt?</string>
+    <string name="sos_hold_explanation">Pidä SOS painettuna 5 sekuntia soittaaksesi hätäpalveluihin.</string>
+    <string name="speaker_state_off">Kaiutin pois päältä</string>
+    <string name="speaker_state_on">Kaiutin päällä</string>
+    <string name="speaker_turn_off">Sammuta kaiutin</string>
+    <string name="speaker_turn_on">Kytke kaiutin päälle</string>
+    <string name="tap_to_return_to_call">Napauta palataksesi puheluun</string>
+    <string name="unknown_number">Tuntematon numero</string>
 </resources>

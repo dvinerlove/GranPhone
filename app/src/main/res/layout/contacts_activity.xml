@@ -14,63 +14,74 @@
   ~ limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?bald_background">
+    android:background="?bald_background"
+    android:orientation="vertical">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
         android:id="@+id/bald_title_bar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="?bald_brand"
+        app:show_back="true"
         app:title="@string/contacts" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_marginEnd="@dimen/spacing_md"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.bald.uriah.baldphone.views.BaldEditText
+            android:id="@+id/et_search"
+            style="@style/BackgroundText.Large"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/touch_min"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            android:layout_weight="1"
+            android:background="@drawable/bald_button_background"
+            android:drawableStart="@drawable/search_on_button"
+            android:drawablePadding="@dimen/spacing_sm"
+            android:hint="@string/search"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="@dimen/spacing_lg"
+            android:paddingEnd="@dimen/spacing_lg"
+            android:textColorHint="?bald_hint_on_background" />
+
+        <ImageView
+            android:id="@+id/bt_favorite"
+            android:layout_width="@dimen/touch_min"
+            android:layout_height="@dimen/touch_min"
+            android:background="@drawable/bald_button_background"
+            android:contentDescription="@string/add_to_favorite"
+            android:focusable="true"
+            android:padding="@dimen/spacing_md"
+            android:src="@drawable/star_gold" />
+    </LinearLayout>
 
     <include
         android:id="@+id/include"
         layout="@layout/contacts_search"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bt_add_contact" />
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_weight="1" />
 
-    <include
+    <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/bt_add_contact"
-        layout="@layout/add_contact"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/style_for_buttons"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@id/bt_favorite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bald_title_bar" />
-
-    <ImageView
-        android:id="@+id/bt_favorite"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/style_for_buttons"
-        android:contentDescription="@string/add_to_favorite"
-        android:padding="16dp"
-        android:src="@drawable/star_gold"
-        app:layout_constraintBottom_toBottomOf="@id/bt_add_contact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/bt_add_contact" />
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height_large"
+        android:layout_margin="@dimen/spacing_md"
+        android:background="@drawable/bald_button_background"
+        app:_src="@drawable/add_on_button"
+        app:_text="@string/add_contact"
+        app:variant="brand" />
+</LinearLayout>

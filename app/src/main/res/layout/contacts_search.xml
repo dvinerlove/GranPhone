@@ -19,14 +19,23 @@
     android:id="@+id/scrollingHelper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:empty_icon="@drawable/human_on_background"
     app:empty_text="@string/no_contacts_found"
     app:horizontal_scrolling="false">
 
+    <!-- ModularRecyclerView must stay the first child (ScrollingHelper contract);
+         empty_view is picked up by id and shown when the adapter is empty. -->
     <com.bald.uriah.baldphone.views.ModularRecyclerView
         android:id="@+id/contacts_recycler_view"
         style="@style/ScrollStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <include
+        android:id="@+id/empty_view"
+        layout="@layout/bald_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </com.bald.uriah.baldphone.views.ScrollingHelper>

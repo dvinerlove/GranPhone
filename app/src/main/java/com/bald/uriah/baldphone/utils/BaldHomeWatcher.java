@@ -41,8 +41,14 @@ public class BaldHomeWatcher {
     }
 
     public void startWatch() {
-        if (receiver != null)
-            context.registerReceiver(receiver, filter);
+        if (receiver != null) {
+            // target 34+: runtime receivers need an export flag; this broadcast is system-only,
+            // so NOT_EXPORTED is both correct and sufficient (it stopped firing on Android 12+ anyway)
+            if (android.os.Build.VERSION.SDK_INT >= 33)
+                context.registerReceiver(receiver, filter, android.content.Context.RECEIVER_NOT_EXPORTED);
+            else
+                context.registerReceiver(receiver, filter);
+        }
     }
 
     public void stopWatch() {

@@ -20,6 +20,7 @@
     <attr name="bald_background_transparent" format="reference|color" />
     <attr name="bald_button" format="reference|color" />
     <attr name="bald_button_gold" format="reference|color" />
+    <attr name="bald_gold" format="reference|color" />
     <attr name="bald_text_on_gold" format="reference|color" />
     <attr name="bald_button_clicked" format="reference|color" />
     <attr name="bald_button_corners_radius" format="reference|dimension" />
@@ -32,19 +33,40 @@
     <attr name="bald_hint_on_button" format="reference|color" />
     <attr name="bald_keyboard_key_background" format="reference|color" />
     <attr name="bald_keyboard_key_pressed_background" format="reference|color" />
-    <attr name="bald_selected_on_background" format="reference|color" />
-    <attr name="bald_text_on_selected" format="reference|color" />
     <attr name="bald_stroke_color" format="reference|color" />
     <attr name="bald_stroke_size" format="reference|dimension" />
-    <attr name="bald_text_on_background" format="reference|color" />
-    <attr name="bald_text_on_button" format="reference|color" />
     <attr name="bald_text_on_key" format="reference|color" />
+
+    <attr name="bald_surface" format="reference|color" />
+    <attr name="bald_card" format="reference|color" />
+    <attr name="bald_card_border" format="reference|color" />
+    <attr name="bald_brand" format="reference|color" />
+    <attr name="bald_brand_pressed" format="reference|color" />
+    <attr name="bald_brand_tint" format="reference|color" />
+    <attr name="bald_danger" format="reference|color" />
+    <attr name="bald_info" format="reference|color" />
+    <attr name="bald_text_primary" format="reference|color" />
+    <attr name="bald_text_secondary" format="reference|color" />
+    <attr name="bald_text_on_variant" format="reference|color" />
 
 
     <declare-styleable name="BaldPictureTextButton">
         <attr name="_src" format="reference" />
         <attr name="_text" format="string" />
         <attr name="_size" format="dimension" />
+        <attr name="variant" format="enum">
+            <enum name="neutral" value="0" />
+            <enum name="brand" value="1" />
+            <enum name="danger" value="2" />
+            <enum name="info" value="3" />
+            <enum name="tinted" value="4" />
+            <enum name="danger_outline" value="5" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="BaldScreen">
+        <attr name="title" />
+        <attr name="show_back" />
     </declare-styleable>
 
 
@@ -66,11 +88,13 @@
         <attr name="where_bar" format="integer" />
         <attr name="im_aware_this_inner_view_isnt_modular" format="boolean" />
         <attr name="empty_text" format="string" />
+        <attr name="empty_icon" format="reference" />
 
     </declare-styleable>
 
     <declare-styleable name="BaldTitleBar">
         <attr name="title" format="string" />
+        <attr name="show_back" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="BaldNumberChooser">
@@ -85,6 +109,7 @@
         <attr name="use_circles" format="boolean" />
         <attr name="hide_indicator" format="boolean" />
         <attr name="show_hints" format="boolean" />
+        <attr name="no_arrows" format="boolean" />
 
     </declare-styleable>
 

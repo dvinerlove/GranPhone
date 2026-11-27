@@ -44,7 +44,7 @@ public class BaldUncaughtExceptionHandler implements Thread.UncaughtExceptionHan
             return;
         }
         baldPrefs.edit().putLong(BPrefs.LAST_CRASH_KEY, currentTime).commit(); // commit and not apply because of System.exit(2)
-        S.logImportant("GranPhone CRASHED!");
+        AppUtils.logImportant("GranPhone CRASHED!");
 
         final PendingIntent pendingIntent =
                 PendingIntent.getActivity(
@@ -54,11 +54,11 @@ public class BaldUncaughtExceptionHandler implements Thread.UncaughtExceptionHan
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                                         | Intent.FLAG_ACTIVITY_CLEAR_TASK
                                         | Intent.FLAG_ACTIVITY_NEW_TASK),
-                        PendingIntent.FLAG_ONE_SHOT
+                        PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE
                 );
 
         final AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 300 * D.MILLISECOND, pendingIntent);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 300 * Const.MILLISECOND, pendingIntent);
 
         Runtime.getRuntime().exit(2);
     }

@@ -19,13 +19,16 @@ package com.bald.uriah.baldphone.activities.media;
 import android.app.Activity;
 import android.app.RecoverableSecurityException;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -38,9 +41,13 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.adapters.BaldViewAdapter;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ViewPagerHolder;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Parent activity for {@link SinglePhotoActivity} and {@link SingleVideoActivity}.
@@ -77,13 +84,16 @@ public abstract class SingleMediaActivity extends BaldActivity {
         final int mediaKey = getIntent().getIntExtra(MEDIA_KEY, -1);
         if (mediaKey == -1)
             throw new AssertionError(TAG + " must have a media key!");
-        viewPagerHolder.setCurrentItem(mediaKey);
+        mediaPagerAdapter.loadAsync(() -> viewPagerHolder.setCurrentItem(mediaKey));
 
     }
 
     protected abstract MediaPagerAdapter mediaPagerAdapter();
 
     protected abstract CharSequence title();
+
+    /** action label for the delete confirmation — object-specific per media type */
+    protected abstract int deleteActionRes();
 
     private void attachXml() {
         baldTitleBar = findViewById(R.id.bald_title_bar);
@@ -98,7 +108,7 @@ public abstract class SingleMediaActivity extends BaldActivity {
         delete.setOnClickListener((v) ->
                 mediaPagerAdapter.delete(viewPagerHolder.getPageIndex()));
         share.setOnClickListener((v) ->
-                S.share(this, mediaPagerAdapter.share(viewPagerHolder.getPageIndex())));
+                AppUtils.share(this, mediaPagerAdapter.share(viewPagerHolder.getPageIndex())));
         more.setOnClickListener((more) -> {
             more.setVisibility(View.GONE);
             optionsBar.setVisibility(View.VISIBLE);
@@ -110,7 +120,8 @@ public abstract class SingleMediaActivity extends BaldActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ALLOW_PHOTO_CODE && resultCode == RESULT_OK) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                mediaPagerAdapter.deletePost29(this);
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q)
+                    mediaPagerAdapter.deletePost29(this);
                 this.setResult(SHOULD_REFRESH);
                 this.finish();
             }
@@ -118,29 +129,93 @@ public abstract class SingleMediaActivity extends BaldActivity {
     }
 
     public abstract static class MediaPagerAdapter extends BaldViewAdapter {
+        protected static final class MediaRow {
+            final long id;
+            final String data;
+
+            MediaRow(long id, String data) {
+                this.id = id;
+                this.data = data;
+            }
+        }
+
         private final SingleMediaActivity activity;
-        protected final Cursor cursor;
+        private List<MediaRow> rows = Collections.emptyList();
         private final Pools.SimplePool<View> pool = new Pools.SimplePool<>(4);
+        private Uri pendingDeleteUri;
+        private String pendingDeleteData;
 
         public MediaPagerAdapter(SingleMediaActivity activity) {
             this.activity = activity;
-            this.cursor = cursor(activity);
         }
 
-        protected abstract void delete(Activity activity);
+        /**
+         * walks the subclass cursor into immutable rows on the io executor (cursor is
+         * closed there), then swaps them in and re-applies the starting page on main
+         */
+        public void loadAsync(final Runnable onLoaded) {
+            final Context appContext = activity.getApplicationContext();
+            com.bald.uriah.baldphone.utils.BaldExecutors.io().execute(() -> {
+                final List<MediaRow> loaded = new ArrayList<>();
+                try (Cursor cursor = cursor(appContext)) {
+                    if (cursor != null) {
+                        final int idIdx = cursor.getColumnIndex(MediaStore.MediaColumns._ID);
+                        final int dataIdx = cursor.getColumnIndex(MediaStore.MediaColumns.DATA);
+                        while (cursor.moveToNext())
+                            loaded.add(new MediaRow(
+                                    cursor.getLong(idIdx),
+                                    dataIdx >= 0 ? cursor.getString(dataIdx) : null));
+                    }
+                }
+                com.bald.uriah.baldphone.utils.BaldExecutors.postToMain(() -> {
+                    if (activity.isFinishing() || activity.isDestroyed())
+                        return;
+                    rows = loaded;
+                    notifyDataSetChanged();
+                    if (onLoaded != null)
+                        onLoaded.run();
+                });
+            });
+        }
+
+        protected abstract Uri contentUri();
+
+        /** mime type for the share intent, e.g. image star */
+        protected abstract String mimeType();
+
+        protected Uri uriAt(int position) {
+            return ContentUris.withAppendedId(contentUri(), rows.get(position).id);
+        }
 
         @RequiresApi(api = Build.VERSION_CODES.Q)
-        protected abstract void deletePost29(Activity activity) throws SecurityException;
+        protected void deletePost29(Activity activity) throws SecurityException {
+            activity.getContentResolver().delete(pendingDeleteUri, null, null);
+        }
 
         private void delete(int position) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                cursor.moveToPosition(position);
+            pendingDeleteUri = uriAt(position);
+            pendingDeleteData = rows.get(position).data;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                try {
+                    activity.startIntentSenderForResult(
+                            MediaStore.createTrashRequest(getContentResolver(), Collections.singletonList(pendingDeleteUri), true).getIntentSender(),
+                            ALLOW_PHOTO_CODE,
+                            null,
+                            0,
+                            0,
+                            0);
+                } catch (IntentSender.SendIntentException | SecurityException | IllegalArgumentException e) {
+                    Log.e(TAG, AppUtils.str(e.getMessage()));
+                    e.printStackTrace();
+                    BaldToast.error(activity, R.string.media_could_not_be_deleted);
+                }
+            } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
                 try {
                     deletePost29(activity);
                     activity.setResult(SHOULD_REFRESH);
                     activity.finish();
                 } catch (RecoverableSecurityException e) {
-                    Log.e(TAG, S.str(e.getMessage()));
+                    Log.e(TAG, AppUtils.str(e.getMessage()));
                     e.printStackTrace();
                     try {
                         activity.startIntentSenderForResult(
@@ -151,15 +226,17 @@ public abstract class SingleMediaActivity extends BaldActivity {
                                 0,
                                 0);
                     } catch (IntentSender.SendIntentException ex) {
-                        Log.e(TAG, S.str(ex.getMessage()));
+                        Log.e(TAG, AppUtils.str(ex.getMessage()));
                         ex.printStackTrace();
-                        BaldToast.error(activity);
+                        BaldToast.error(activity, R.string.media_could_not_be_deleted);
                     }
                 }
             } else {
-                S.showAreYouSureYouWantToDelete(String.valueOf(activity.title()), activity, () -> {
-                    cursor.moveToPosition(position);
-                    delete(activity);
+                AppUtils.showAreYouSureYouWantToDelete(String.valueOf(activity.title()), activity, activity.deleteActionRes(), () -> {
+                    activity.getContentResolver().delete(
+                            MediaStore.Files.getContentUri("external"),
+                            MediaStore.MediaColumns.DATA + "=?",
+                            new String[]{pendingDeleteData});
                     activity.setResult(SHOULD_REFRESH);
                     activity.finish();
                 });
@@ -168,16 +245,15 @@ public abstract class SingleMediaActivity extends BaldActivity {
 
         }
 
-        protected abstract Intent share(Activity activity, Cursor cursor);
-
         private Intent share(int position) {
-            cursor.moveToPosition(position);
-            return share(activity, cursor);
+            return new Intent(Intent.ACTION_SEND)
+                    .setTypeAndNormalize(mimeType())
+                    .putExtra(Intent.EXTRA_STREAM, uriAt(position));
         }
 
         protected abstract Cursor cursor(Context context);
 
-        protected abstract void bindView(View view, Cursor cursor, Context context);
+        protected abstract void bindView(View view, Uri uri, Context context);
 
         protected abstract View getView(Context context);
 
@@ -190,14 +266,13 @@ public abstract class SingleMediaActivity extends BaldActivity {
             View v = pool.acquire();
             if (v == null)
                 v = getView(activity);
-            cursor.moveToPosition(position);
-            bindView(v, cursor, activity);
+            bindView(v, uriAt(position), activity);
             return v;
         }
 
         @Override
         public int getCount() {
-            return cursor.getCount();
+            return rows.size();
         }
 
         @Override
@@ -210,8 +285,4 @@ public abstract class SingleMediaActivity extends BaldActivity {
         }
     }
 
-    @Override
-    protected int requiredPermissions() {
-        return PERMISSION_WRITE_EXTERNAL_STORAGE;
-    }
 }

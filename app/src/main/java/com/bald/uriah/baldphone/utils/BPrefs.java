@@ -45,6 +45,7 @@ public final class BPrefs {
     public static final String CUSTOM_PILLS_KEY = "CUSTOM_PILLS_KEY";
     public static final String CUSTOM_APPS_KEY = "CUSTOM_APPS_KEY";
     public static final String CUSTOM_ALARMS_KEY = "CUSTOM_ALARMS_KEY";
+    public static final String CUSTOM_SETTINGS_KEY = "CUSTOM_SETTINGS_KEY";
 
     public static final String LONG_PRESSES_KEY = "LONG_PRESSES_KEY";
     public static final boolean LONG_PRESSES_DEFAULT_VALUE = false; // GranPhone: a simple tap opens things (the accidental-touch guard stays on)
@@ -97,10 +98,16 @@ public final class BPrefs {
     public static final boolean APPS_ONE_GRID_DEFAULT_VALUE = false;
 
     public static final String COLORFUL_KEY = "COLORFUL_KEY";
-    public static final boolean COLORFUL_DEFAULT_VALUE = false;
+    public static final boolean COLORFUL_DEFAULT_VALUE = true;
+
+    public static final String HIDE_BOTTOM_ROW_KEY = "HIDE_BOTTOM_ROW_KEY";
+    public static final boolean HIDE_BOTTOM_ROW_DEFAULT_VALUE = false;
+
+    public static final String LANGUAGE_KEY = "LANGUAGE_KEY";
+    public static final String LANGUAGE_DEFAULT_VALUE = "";
 
     public static final String LAST_CRASH_KEY = "LAST_CRASH_KEY";
-    public static final long LAST_CRASH_TIME_OK = 12 * D.SECOND;
+    public static final long LAST_CRASH_TIME_OK = 12 * Const.SECOND;
 
     public static final String LAST_APK_VERSION_KEY = "LAST_APK_VERSION_KEY";
 
@@ -111,11 +118,19 @@ public final class BPrefs {
     public static final String LAST_DOWNLOAD_MANAGER_REQUEST_ID = "LAST_DOWNLOAD_MANAGER_REQUEST_ID";
     public static final String LAST_DOWNLOAD_MANAGER_REQUEST_VERSION_NUMBER = "LAST_DOWNLOAD_MANAGER_REQUEST_VERSION_NUMBER";
 
+    public static final String HELPER_PIN_KEY = "HELPER_PIN_KEY";
+
     public static final String HOUR_KEY_ = "HOUR_KEY_";
     public static final String MINUTE_KEY_ = "MINUTE_KEY_";
 
     public static final String ALARM_VOLUME_KEY = "ALARM_VOLUME_KEY";
     public static final int ALARM_VOLUME_DEFAULT_VALUE = 4;
+
+    public static final String BLOCK_UNKNOWN_CALLERS_KEY = "BLOCK_UNKNOWN_CALLERS_KEY";
+    public static final boolean BLOCK_UNKNOWN_CALLERS_DEFAULT_VALUE = false;
+
+    public static final String CONFIRM_OUTGOING_CALLS_KEY = "CONFIRM_OUTGOING_CALLS_KEY";
+    public static final boolean CONFIRM_OUTGOING_CALLS_DEFAULT_VALUE = false;
     public static final SparseIntArray PILLS_HOUR_DEFAULTS = new SparseIntArray(3);
     public static final SparseIntArray PILLS_MINUTE_DEFAULTS = new SparseIntArray(3);
 
@@ -160,6 +175,6 @@ public final class BPrefs {
         public static final int ADAPTIVE = 1;
         public static final int DARK = 2;
         @StyleRes
-        public static final int[] THEMES = new int[]{R.style.bald_light, -1, R.style.bald_dark, R.style.bald_skin};
+        public static final int[] THEMES = new int[]{R.style.bald_light, R.style.bald_light, R.style.bald_dark};
     }
 }

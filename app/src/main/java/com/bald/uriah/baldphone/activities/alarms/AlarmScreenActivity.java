@@ -24,10 +24,8 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -40,23 +38,24 @@ import com.bald.uriah.baldphone.databases.alarms.AlarmsDatabase;
 import com.bald.uriah.baldphone.utils.Animations;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.MissedNotifications;
 
 /**
  * Alarm screen, will be called from {@link com.bald.uriah.baldphone.broadcast_receivers.AlarmReceiver}
  */
 public class AlarmScreenActivity extends TimedBaldActivity {
     private static final String TAG = AlarmScreenActivity.class.getSimpleName();
-    private static final int TIME_DELAYED_SCHEDULE = 100;
+    private static final String MISSED_NOTIFICATION_TAG = "missed_alarm";
     private static final AudioAttributes alarmAttributes =
             new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_ALARM)
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                     .build();
 
-    private TextView tv_name, snooze;
-    private ImageView cancel;
+    private TextView tv_name;
+    private View snooze, cancel;
     private Ringtone ringtone;
     private Alarm alarm;
 
@@ -83,7 +82,7 @@ public class AlarmScreenActivity extends TimedBaldActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        S.logImportant("alarmScreen was called!");
+        AppUtils.logImportant("alarmScreen was called!");
         setContentView(R.layout.alarm_screen);
 
         attachXml();
@@ -94,49 +93,43 @@ public class AlarmScreenActivity extends TimedBaldActivity {
         if (key == -1) throw new AssertionError();
         alarm = AlarmsDatabase.getInstance(this).alarmsDatabaseDao().getByKey(key);
         if (alarm == null) {
-            S.logImportant("alarm == null!, returning");
+            AppUtils.logImportant("alarm == null!, finishing");
+            finish(); // don't leave a dead ring screen with live buttons
             return;
         }
+        if (!intent.getBooleanExtra(AlarmScheduler.ALARM_IS_SNOOZE_VIA_INTENTS, false))
+            AlarmScheduler.rescheduleAfterFired(key, this);
 
         final String name = alarm.getName();
         if (name == null) tv_name.setVisibility(View.GONE);
         else tv_name.setText(name);
 
+        // BaldPictureTextButton maps long-press onto the click listener itself
+        // (long-press mode is an app setting), so one listener covers both.
         cancel.setOnClickListener(v -> {
             if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
-            if (getString(R.string.timer).equals(alarm.getName()))
+                vibrator.vibrate(Const.vibetime);
+            if (getString(R.string.timer).equals(alarm.getName())) {
                 AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
+                AlarmScheduler.cancelAlarm(alarm.getKey(), this);
+            }
             finish();
-        });
-        cancel.setOnLongClickListener(v -> {
-            if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
-            if (getString(R.string.timer).equals(alarm.getName()))
-                AlarmsDatabase.getInstance(this).alarmsDatabaseDao().delete(alarm);
-            finish();
-            return true;
         });
 
         snooze.setOnClickListener((v) -> snooze());
-        snooze.setOnLongClickListener((v) -> {
-            snooze();
-            return true;
-        });
 
         ringtone = getRingtone(this);
         try {
             ringtone.play();
         } catch (Exception e) {
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.sound_could_not_play);
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
 
         Animations.makeBiggerAndSmaller(this, cancel, () -> {
-            if (vibrator != null) vibrator.vibrate(D.vibetime);
+            if (vibrator != null) vibrator.vibrate(Const.vibetime);
         });
-        scheduleNextAlarm();
     }
 
     @Override
@@ -168,24 +161,13 @@ public class AlarmScreenActivity extends TimedBaldActivity {
 
     private void snooze() {
         if (vibrator != null)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
         AlarmScheduler.scheduleSnooze(alarm, this);
+        // back-press also lands here — always confirm the snooze happened
+        BaldToast.simple(this, R.string.snooze);
         finish();
     }
 
-    private void scheduleNextAlarm() {
-        AlarmScheduler.cancelAlarm(alarm.getKey(), this);
-        new Handler().postDelayed(() -> {
-            if (alarm.isEnabled()) {
-                if (alarm.getDays() == -1) {
-                    AlarmsDatabase.getInstance(this)
-                            .alarmsDatabaseDao().update(alarm.getKey(), false);
-                } else {
-                    AlarmScheduler.scheduleAlarm(alarm, this);
-                }
-            }
-        }, TIME_DELAYED_SCHEDULE);
-    }
 
     @Override
     public void onBackPressed() {
@@ -195,7 +177,14 @@ public class AlarmScreenActivity extends TimedBaldActivity {
 
     @Override
     protected int screenTimeout() {
-        return D.MINUTE * 5;
+        return Const.MINUTE * 5;
+    }
+
+    @Override
+    protected void onScreenTimeout() {
+        // the alarm rang itself out unacknowledged — leave a trace for whoever slept through it
+        MissedNotifications.post(this, MISSED_NOTIFICATION_TAG, alarm.getKey(),
+                R.string.missed_alarm, alarm.getName(), R.drawable.clock_on_background, AlarmsActivity.class);
     }
 
     @Override

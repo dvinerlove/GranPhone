@@ -19,14 +19,14 @@ package com.bald.uriah.baldphone;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.bald.uriah.baldphone.activities.UpdatesActivity;
-import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
-import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.BaldUncaughtExceptionHandler;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -36,11 +36,14 @@ public class BaldPhone extends Application {
 
     @Override
     public void onCreate() {
-        S.logImportant("GranPhone was started!");
+        AppUtils.logImportant("GranPhone was started!");
         super.onCreate();
+        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= 35)
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectUnsafeIntentLaunch()
+                    .penaltyLog()
+                    .build());
         JodaTimeAndroid.init(this);
-        AlarmScheduler.reStartAlarms(this);
-        ReminderScheduler.reStartReminders(this);
         if (BuildConfig.FLAVOR.equals("baldUpdates")) {
             UpdatesActivity.removeUpdatesInfo(this);
         }

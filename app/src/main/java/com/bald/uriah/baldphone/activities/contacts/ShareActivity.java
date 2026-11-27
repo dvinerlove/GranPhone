@@ -32,11 +32,10 @@ import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.adapters.IntentAdapter;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
-import androidx.recyclerview.widget.DividerItemDecoration;
 
 import java.util.Collections;
 import java.util.List;
@@ -90,16 +89,13 @@ public class ShareActivity extends BaseContactsActivity {
         recyclerView.setAdapter(new IntentAdapter(this, resolveInfoList, (resolveInfo, context) -> context.startActivity(shareIntent.setPackage(resolveInfo.activityInfo.packageName))));
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(10);//In Order to cover up the shitiness of loading resolve infos icons and texts
-        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(getDrawable(R.drawable.settings_divider));
-        recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.getAdapter().notifyDataSetChanged();
 
         bald_switch.setOnChangeListener(isChecked -> {
             differently_container.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
             whatsapp_container.setVisibility(isChecked ? View.INVISIBLE : View.VISIBLE);
             if (isChecked)
-                S.hideKeyboard(this);
+                AppUtils.hideKeyboard(this);
         });
 
     }
@@ -123,7 +119,7 @@ public class ShareActivity extends BaseContactsActivity {
         final String[] args = {"com.whatsapp", "%" + filter + "%"};
         try {
             return contentResolver.query(ContactsContract.Data.CONTENT_URI,
-                    ContactRecyclerViewAdapter.PROJECTION,
+                    ContactRecyclerViewAdapter.PROJECTION_WITH_CONTACT_ID,
                     SELECTION_NAME + (favorite ? (STAR_SELECTION) : ("")),
                     args,
                     SORT_ORDER);
@@ -140,13 +136,13 @@ public class ShareActivity extends BaseContactsActivity {
         try {
             contact = Contact.fromLookupKey(lookupKey, contentResolver);
         } catch (Contact.ContactNotFoundException e) {
-            Log.e(TAG, S.str(e.getMessage()));
+            Log.e(TAG, AppUtils.str(e.getMessage()));
             e.printStackTrace();
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.contact_could_not_be_shared);
             finish();
             return;
         }
-        shareIntent.setPackage(D.WHATSAPP_PACKAGE_NAME);
+        shareIntent.setPackage(Const.WHATSAPP_PACKAGE_NAME);
         String smsNumber = PhoneNumberUtils.stripSeparators(contact.getWhatsappNumbers().get(0)).replace("+", "").replace(" ", "");
         shareIntent.putExtra("jid", smsNumber + "@s.whatsapp.net"); //phone number without "+" prefix
         startActivity(shareIntent);

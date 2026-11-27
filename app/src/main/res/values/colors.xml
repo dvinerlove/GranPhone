@@ -25,20 +25,8 @@
 
     <color name="gold">#ffcf40</color>
     <color name="on_gold">#000000</color>
-    <color name="toast_background_default">#c0ca33</color>
-    <color name="toast_background_error">#b71c1c</color>
-    <color name="toast_background_informative">#388ba3</color>
-    <color name="toast_foreground_default">#000000</color>
-    <color name="toast_foreground_error">#FFFFFF</color>
-    <color name="toast_foreground_informative">#000000</color>
 
     <color name="battery_low">#d50000</color>
-
-
-    <color name="outgoing">#BBDEFB</color>
-    <color name="received">#A5D6A7</color>
-    <color name="missed">#EF9A9A</color>
-    <color name="other">#E0E0E0</color>
 
 
     <color name="color_1">#5064ef5b</color>

@@ -57,6 +57,16 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
     }
 
     @Override
+    protected int deleteActionRes() {
+        return R.string.delete_video;
+    }
+
+    @Override
+    protected int requiredPermissions() {
+        return PERMISSION_MEDIA_VIDEO;
+    }
+
+    @Override
     protected void genListeners() {
         super.genListeners();
         viewPagerHolder.getViewPager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -76,7 +86,6 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
     }
 
     private static class VideoPagerAdapter extends MediaPagerAdapter {
-        private static final Uri EXTERNAL = MediaStore.Files.getContentUri("external");
         SparseArray<VideoViewWrapper> availableViews = new SparseArray<>();
 
         public VideoPagerAdapter(SingleMediaActivity activity) {
@@ -84,35 +93,13 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
         }
 
         @Override
-        protected void delete(Activity activity) {
-            final int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri deleteUri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
-            activity.getContentResolver().delete(
-                    EXTERNAL,
-                    MediaStore.MediaColumns.DATA + "=?",
-                    new String[]{getPath(deleteUri)});
-
+        protected Uri contentUri() {
+            return MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
         }
 
         @Override
-        protected void deletePost29(Activity activity) throws SecurityException {
-            final int id =
-                    cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri deleteUri =
-                    ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
-
-            activity.getContentResolver().delete(
-                    deleteUri,
-                    null,
-                    null);
-        }
-
-        private String getPath(Uri uri) {
-            try (Cursor cursor = getContentResolver().query(uri, PROJECTION, null, null, null)) {
-                final int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-                cursor.moveToFirst();
-                return cursor.getString(column_index);
-            }
+        protected String mimeType() {
+            return "video/*";
         }
 
         @NonNull
@@ -127,15 +114,6 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             availableViews.remove(position);
             super.destroyItem(container, position, object);
-        }
-
-        @Override
-        protected Intent share(Activity activity, Cursor cursor) {
-            final int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
-            final Uri uri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
-            return new Intent(Intent.ACTION_SEND)
-                    .setTypeAndNormalize("image/*")
-                    .putExtra(Intent.EXTRA_STREAM, uri);
         }
 
         @Override
@@ -155,7 +133,7 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
         }
 
         @Override
-        protected void bindView(View v, Cursor cursor, Context context) {
+        protected void bindView(View v, Uri uri, Context context) {
             final VideoView videoView = v.findViewById(R.id.vid);
             final ImageView play_stop = v.findViewById(R.id.play_stop);
 
@@ -167,9 +145,6 @@ public class SingleVideoActivity extends SingleMediaActivity implements Constant
 
             });
 
-            final int fieldIndex = cursor.getColumnIndex(MediaStore.Video.Media._ID);
-            final long id = cursor.getLong(fieldIndex);
-            final Uri uri = ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id);
             videoView.setVideoURI(uri);
             videoView.requestFocus();
             videoView.seekTo(1);

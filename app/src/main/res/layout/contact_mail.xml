@@ -13,62 +13,49 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mail"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="8dp"
-    android:background="@drawable/list_shape">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_sm"
+    android:background="@drawable/bald_card_background"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/list_row_height"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/spacing_lg"
+    android:paddingTop="@dimen/spacing_sm"
+    android:paddingEnd="@dimen/spacing_lg"
+    android:paddingBottom="@dimen/spacing_sm">
 
-    <TextView
-        android:id="@+id/tv_type"
-        style="@style/BackgroundText.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:gravity="center"
-        android:text="@string/email"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_value"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_value" />
-
-    <TextView
-        android:id="@+id/tv_value"
-        style="@style/BackgroundText.Medium"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toTopOf="@id/mail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_type"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <com.bald.uriah.baldphone.views.BaldPictureTextButton
-        android:id="@+id/mail"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/style_for_buttons"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:_src="@drawable/mail_on_button"
-        app:_text="@string/mail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mail"
+            android:textColor="?bald_text_secondary"
+            android:textSize="@dimen/small" />
 
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="?bald_text_primary"
+            android:textSize="@dimen/large" />
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:importantForAccessibility="no"
+        android:layout_width="@dimen/icon_md"
+        android:layout_height="@dimen/icon_md"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:src="@drawable/mail_on_button"
+        android:tint="?bald_text_secondary" />
+</LinearLayout>

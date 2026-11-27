@@ -37,14 +37,33 @@ public interface BaldButtonInterface {
 
     void vibrate();
 
+    /**
+     * Shorter-long-press mode installs an EMPTY click listener so a finger tap can't
+     * fire — but TalkBack/Switch/D-pad also reach the button only through
+     * {@link View#performClick()}. Route non-touch performClick to the real action;
+     * calls arriving inside a touch sequence (anti-tremor gate) stay ignored.
+     */
+    static boolean performClick(BaldButtonInterface self, BaldButtonTouchListener touchListener) {
+        if (!touchListener.inTouchSequence()) {
+            self.vibrate();
+            self.baldPerformClick();
+        }
+        return true;
+    }
+
     class BaldButtonTouchListener implements View.OnTouchListener {
         private final BaldButtonInterface v;
         private final Handler longPressHandler;
         private final List<View.OnTouchListener> otherListeners = new ArrayList<>();
         private boolean isLongPressHandlerActivated = false;
         private boolean isActionMoveEventStored = false;
+        private boolean inTouchSequence = false;
         private float lastActionMoveEventBeforeUpX;
         private float lastActionMoveEventBeforeUpY;
+
+        boolean inTouchSequence() {
+            return inTouchSequence;
+        }
         private Runnable longPressedRunnable = new Runnable() {
             public void run() {
                 v.baldPerformClick();
@@ -76,6 +95,7 @@ public interface BaldButtonInterface {
         public boolean onTouch(final View v, final MotionEvent event) {
 
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                inTouchSequence = true;
                 longPressHandler.postDelayed(longPressedRunnable, MEDIUM_PRESS_TIMEOUT);
             } else if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_HOVER_MOVE) {
                 if (!isActionMoveEventStored) {
@@ -93,7 +113,9 @@ public interface BaldButtonInterface {
                         longPressHandler.removeCallbacks(longPressedRunnable);
                     }
                 }
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                // keep the flag until after the framework's performClick dispatch
+                v.post(() -> inTouchSequence = false);
                 isActionMoveEventStored = false;
                 longPressHandler.removeCallbacks(longPressedRunnable);
                 if (isLongPressHandlerActivated) {

@@ -42,7 +42,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.services.NotificationListenerService;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 
@@ -90,12 +90,12 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
 
     @Override
     public int getItemCount() {
-        return bundles.length;
+        return bundles == null ? 0 : bundles.length;
     }
 
     public void clearAll() {
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(context);
-        for (int i = 0; i < bundles.length; i++) {
+        for (int i = 0; i < getItemCount(); i++) {
             localBroadcastManager.sendBroadcast(
                     new Intent(NotificationListenerService.ACTION_CLEAR)
                             .putExtra(NotificationListenerService.KEY_EXTRA_KEY, bundles[i].getString(NotificationListenerService.KEY_EXTRA_KEY))
@@ -108,6 +108,14 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
     public void changeNotifications(Bundle[] bundles) {
         this.bundles = bundles;
         notifyDataSetChanged();
+    }
+
+    private static void appendLabelPart(StringBuilder label, CharSequence part) {
+        if (part == null || part.length() == 0)
+            return;
+        if (label.length() > 0)
+            label.append(", ");
+        label.append(part);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -131,10 +139,18 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
             final Bundle item = bundles[position];
             final CharSequence app_name_string = item.getCharSequence("app_name");
             final boolean first = position == 0 || !bundles[position - 1].getCharSequence("app_name").equals(app_name_string);
+            final boolean clearable = item.getBoolean("clearable");
+            boolean flag_summery = item.getBoolean("summery");
+            if (flag_summery)
+                if (isAlone(position, String.valueOf(app_name_string)))
+                    flag_summery = false;
+            // a non-first summary row has every field hidden — collapse it instead
+            // of leaving an empty card stub behind.
+            final boolean collapsed = !first && flag_summery;
             {
                 final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
                 layoutParams.topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                        first ? 10 : 0,
+                        collapsed ? 0 : (first ? 12 : 6),
                         displayMetrics);
                 itemView.setLayoutParams(layoutParams);
             }
@@ -154,7 +170,6 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                     } catch (PackageManager.NameNotFoundException e) {
                         Log.e(TAG, e.getMessage());
                         e.printStackTrace();
-                        throw new RuntimeException(e);
                     }
                 }
                 app_name.setText(app_name_string);
@@ -177,7 +192,7 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
             if (timeStamp == 0L) {
                 time_stamp.setText("");
             } else {
-                time_stamp.setText(S.stringTimeFromLong(context, timeStamp, true));
+                time_stamp.setText(AppUtils.stringTimeFromLong(context, timeStamp, true));
             }
             final PendingIntent pendingIntent = item.getParcelable("content_intent");
             if (pendingIntent != null) {
@@ -185,18 +200,13 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                     try {
                         pendingIntent.send();
                     } catch (Exception e) {
-                        BaldToast.from(context).setText(R.string.an_error_has_occurred).setType(BaldToast.TYPE_ERROR).show();
-                        Log.e(TAG, S.str(e.getMessage()));
+                        BaldToast.from(context).setText(R.string.could_not_open_notification).setType(BaldToast.TYPE_ERROR).show();
+                        Log.e(TAG, AppUtils.str(e.getMessage()));
                         e.printStackTrace();
                     }
                 });
             } else
                 itemView.setOnClickListener(null);
-            final boolean clearable = item.getBoolean("clearable");
-            boolean flag_summery = item.getBoolean("summery");
-            if (flag_summery)
-                if (isAlone(position, String.valueOf(app_name_string)))
-                    flag_summery = false;
             if (this.first != first || this.summery != flag_summery) {
                 if (this.summery != flag_summery) {
                     final int summeryVisibility = flag_summery ? View.GONE : View.VISIBLE;
@@ -209,16 +219,16 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                 this.first = first;
                 this.summery = flag_summery;
                 final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) itemView.getLayoutParams();
-                layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                        first ? flag_summery ? 60 : 160 : 130,
-                        displayMetrics);
+                layoutParams.height = collapsed ? 0 : ViewGroup.LayoutParams.WRAP_CONTENT;
                 itemView.setLayoutParams(layoutParams);
                 final int firstVisibility = first ? View.VISIBLE : View.GONE;
                 app_name.setVisibility(firstVisibility);
                 small_icon.setVisibility(firstVisibility);
             }
 
-            if (clearable) {
+            // summary rows render header-only (or collapse entirely) — a lone
+            // clear button on an otherwise empty card reads as a stray control.
+            if (clearable && !flag_summery) {
                 clear.setVisibility(View.VISIBLE);
                 clear.setOnClickListener((v) -> {
                     LocalBroadcastManager.getInstance(context)
@@ -232,6 +242,21 @@ public class NotificationRecyclerViewAdapter extends ModularRecyclerView.Modular
                 clear.setVisibility(View.GONE);
             }
 
+            // One spoken label per card; the text children are marked not-important
+            // in the layout so this is the single stop, clickable or not.
+            final StringBuilder label = new StringBuilder();
+            if (!collapsed) {
+                if (first)
+                    appendLabelPart(label, app_name_string);
+                if (!flag_summery) {
+                    appendLabelPart(label, title.getText());
+                    appendLabelPart(label, notification_text);
+                }
+                appendLabelPart(label, time_stamp.getText());
+                if (pendingIntent != null)
+                    appendLabelPart(label, context.getString(R.string.open_notification));
+            }
+            itemView.setContentDescription(label);
         }
 
         private boolean isAlone(int position, final String app_name_string) {

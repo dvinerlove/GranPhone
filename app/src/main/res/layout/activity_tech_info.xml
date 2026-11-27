@@ -22,58 +22,59 @@
     android:background="?bald_background">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         android:id="@+id/bald_title_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/technical_information" />
+        app:title="@string/technical_information"
+        app:show_back="true" />
 
     <TextView
         android:id="@+id/tv_info"
         style="@style/BackgroundText.Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="@dimen/spacing_xl"
+        android:layout_marginEnd="@dimen/spacing_xl"
+        android:layout_marginTop="@dimen/spacing_xl"
         android:text="@string/api_level"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bald_title_bar"
-        tools:ignore="RtlHardcoded" />
+ />
 
     <com.bald.uriah.baldphone.views.BaldButton
         android:id="@+id/bt_clear_cache"
         style="@style/ButtonsText.Large"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/style_for_buttons"
+        android:layout_marginStart="@dimen/spacing_xl"
+        android:layout_marginEnd="@dimen/spacing_xl"
+        android:layout_marginBottom="@dimen/spacing_xl"
+        android:background="@drawable/bald_button_background"
         android:text="@string/clear_cache"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/bt_clear_data" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_clear_data" />
 
-    <com.bald.uriah.baldphone.views.BaldButton
+    <com.bald.uriah.baldphone.views.BaldPictureTextButton
         android:id="@+id/bt_clear_data"
-        style="@style/ButtonsText.Large"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:background="@drawable/call_button_red"
-        android:text="@string/clear_data"
-        android:textColor="#FFFFFF"
+        android:layout_marginStart="@dimen/spacing_xl"
+        android:layout_marginEnd="@dimen/spacing_xl"
+        android:background="@drawable/bald_button_background"
+        app:_size="@dimen/large"
+        app:_text="@string/clear_data"
+        app:variant="danger"
         app:layout_constraintBottom_toBottomOf="@+id/bt_clear_cache"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintLeft_toRightOf="@id/bt_clear_cache"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bt_clear_cache"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bt_clear_cache" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

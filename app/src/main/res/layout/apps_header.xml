@@ -16,11 +16,12 @@
 
 <com.bald.uriah.baldphone.views.BaldButton xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tv_letter"
-    style="@style/ButtonsText.Medium"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
+    android:layout_height="@dimen/button_height_default"
     android:background="@android:color/transparent"
     android:gravity="center_vertical|start"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
+    android:paddingStart="@dimen/spacing_lg"
+    android:paddingEnd="@dimen/spacing_lg"
+    android:textColor="?bald_text_secondary"
+    android:textSize="@dimen/huge"
     android:textStyle="bold" />

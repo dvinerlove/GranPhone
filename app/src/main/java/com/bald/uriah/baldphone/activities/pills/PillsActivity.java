@@ -17,7 +17,6 @@
 package com.bald.uriah.baldphone.activities.pills;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -39,10 +38,9 @@ import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.databases.reminders.Reminder;
 import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.databases.reminders.RemindersDatabase;
-import com.bald.uriah.baldphone.utils.BaldGridItemDecoration;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 
 import java.util.ArrayList;
@@ -69,12 +67,6 @@ public class PillsActivity extends BaldActivity {
         int numberOfAppsInARow = screenOrientation ? 2 : 1;
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfAppsInARow);
         recyclerView.setLayoutManager(gridLayoutManager);
-        Resources r = getResources();
-        recyclerView.addItemDecoration(
-                new BaldGridItemDecoration(r.getDimensionPixelSize(R.dimen.divider),
-                        numberOfAppsInARow,
-                        getDrawable(R.drawable.ll_divider),
-                        r.getDimensionPixelSize(R.dimen.padding_dividers)));
 
         recyclerView.setAdapter(new PillsRecyclerViewAdapter());
 
@@ -96,19 +88,6 @@ public class PillsActivity extends BaldActivity {
     private void genOnClickListeners() {
         bt_add.setOnClickListener(v -> startActivityForResult(new Intent(this, AddPillActivity.class), ADD_REMINDER_REQUEST_CODE));
         bt_time_changer.setOnClickListener(v -> startActivity(new Intent(this, PillTimeSetterActivity.class)));
-    }
-
-    private void cancelAllAlarms() {
-        final RemindersDatabase remindersDatabase = RemindersDatabase.getInstance(this);
-        final List<Reminder> reminderList =
-                remindersDatabase.remindersDatabaseDao()
-                        .getAllRemindersOrderedByTime();
-        for (Reminder reminder : reminderList)
-            ReminderScheduler.cancelReminder(reminder.getId(), this);
-        remindersDatabase.remindersDatabaseDao().deleteAll();
-
-        refreshViews();
-        BaldToast.from(this).setText(R.string.removed_all_alarms).show();
     }
 
     public void refreshViews() {
@@ -169,16 +148,16 @@ public class PillsActivity extends BaldActivity {
             public void update(Reminder reminder) {
                 final CharSequence message;
 
-                if (reminder.getDays() == (D.Days.ALL))
+                if (reminder.getDays() == (Const.Days.ALL))
                     message = PillsActivity.this.getString(R.string.repeats_every_day);
                 else {
 
                     StringBuilder stringBuilder = new StringBuilder(20);
 //                    stringBuilder.append(PillsActivity.this.getText(R.string.reminder_repeats_every));
 //                    stringBuilder.append(' ');
-                    for (int day : D.Days.ARRAY_ALL)
+                    for (int day : Const.Days.ARRAY_ALL)
                         if ((reminder.getDays() & day) == day) {
-                            stringBuilder.append(PillsActivity.this.getString(S.balddayToStringId(day)));
+                            stringBuilder.append(PillsActivity.this.getString(AppUtils.balddayToStringId(day)));
                             stringBuilder.append(", ");
                         }
                     stringBuilder.setLength(stringBuilder.length() - 2);
@@ -199,8 +178,11 @@ public class PillsActivity extends BaldActivity {
                         )
                 );
                 bt_delete.setOnClickListener((v) ->
-                        S.showAreYouSureYouWantToDelete(reminder.getTextualContent(), PillsActivity.this, () -> {
+                        AppUtils.showAreYouSureYouWantToDelete(
+                                reminder.getTextualContent() == null ? getString(R.string.pill) : reminder.getTextualContent(),
+                                PillsActivity.this, R.string.delete_pill, () -> {
                             RemindersDatabase.getInstance(PillsActivity.this).remindersDatabaseDao().removeReminders(reminder.getId());
+                            ReminderScheduler.cancelReminder(reminder.getId(), PillsActivity.this);
                             list.remove(reminder);
                             notifyDataSetChanged();
                         }));
@@ -220,6 +202,6 @@ public class PillsActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_SYSTEM_ALERT_WINDOW;
+        return PERMISSION_SYSTEM_ALERT_WINDOW | PERMISSION_EXACT_ALARM;
     }
 }

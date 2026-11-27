@@ -16,16 +16,27 @@
 
 package com.bald.uriah.baldphone.activities;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.ContactsContract;
+import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -35,7 +46,10 @@ import com.bald.uriah.baldphone.activities.contacts.ContactsActivity;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
 import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
-import com.bald.uriah.baldphone.views.BaldLinearLayoutButton;
+import com.bald.uriah.baldphone.utils.BaldToast;
+import com.bald.uriah.baldphone.utils.DialogScreen;
+import com.bald.uriah.baldphone.utils.RandomColorMaker;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,54 +61,205 @@ import static com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinH
 
 public class SOSActivity extends BaldActivity {
     private static final int MAX_PINNED_CONTACTS = 2;
-    private BaldLinearLayoutButton[] ec;
-    private BaldLinearLayoutButton ecReal;
+    private static final long HOLD_TO_CALL_MS = 5 * 1000;
+    private static final long HOLD_TICK_MS = 50;
 
-    private static void setupEC(BaldLinearLayoutButton baldLinearLayoutButton, MiniContact miniContact) {
-        if (miniContact.photo != null)
-            ((ImageView) baldLinearLayoutButton.getChildAt(0)).setImageURI(Uri.parse(miniContact.photo));
-        else
-            ((ImageView) baldLinearLayoutButton.getChildAt(0)).setImageResource(R.drawable.face_on_button);
+    private View btSos;
+    private TextView sosSubtitle;
+    private ProgressBar sosProgress;
+    private View[] cards;
+    private ImageView[] avatars;
+    private TextView[] letters, names;
+    private BaldPictureTextButton btAddContact;
 
-        ((TextView) baldLinearLayoutButton.getChildAt(1)).setText(miniContact.name);
-        baldLinearLayoutButton.setOnClickListener(v -> DialerActivity.call(miniContact, v.getContext()));
-    }
+    private int backgroundColor;
+    private RandomColorMaker randomColorMaker;
+    private long holdStartedAt = -1;
+    private int holdSecondsShown = -1;
 
+    private final Runnable holdTicker = new Runnable() {
+        @Override
+        public void run() {
+            if (holdStartedAt < 0)
+                return;
+            final long elapsed = SystemClock.uptimeMillis() - holdStartedAt;
+            if (elapsed >= HOLD_TO_CALL_MS) {
+                resetHoldUi();
+                callEmergencyNumber();
+            } else {
+                sosProgress.setProgress((int) elapsed);
+                final int secondsLeft = (int) (HOLD_TO_CALL_MS - elapsed + 999) / 1000;
+                if (secondsLeft != holdSecondsShown) {
+                    holdSecondsShown = secondsLeft;
+                    sosSubtitle.setText(getString(R.string.sos_calling_in, secondsLeft));
+                }
+                btSos.postDelayed(this, HOLD_TICK_MS);
+            }
+        }
+    };
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!checkPermissions(this, requiredPermissions()))
             return;
         setContentView(R.layout.activity_sos);
-        ec = new BaldLinearLayoutButton[]{findViewById(R.id.ec1), findViewById(R.id.ec2)};
-        ecReal = findViewById(R.id.ec_real);
+
+        final TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.bald_background, typedValue, true);
+        backgroundColor = typedValue.data;
+        randomColorMaker = new RandomColorMaker(backgroundColor);
+
+        btSos = findViewById(R.id.bt_sos);
+        sosSubtitle = findViewById(R.id.sos_subtitle);
+        sosProgress = findViewById(R.id.sos_progress);
+        tintSosButton();
+
+        cards = new View[]{findViewById(R.id.ec1), findViewById(R.id.ec2)};
+        avatars = new ImageView[]{findViewById(R.id.ec1_avatar), findViewById(R.id.ec2_avatar)};
+        letters = new TextView[]{findViewById(R.id.ec1_letter), findViewById(R.id.ec2_letter)};
+        names = new TextView[]{findViewById(R.id.ec1_name), findViewById(R.id.ec2_name)};
+        // a pinned contact can be named by its number — keep digits LTR in RTL locales
+        for (final TextView name : names)
+            name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
+        btAddContact = findViewById(R.id.bt_add_contact);
+
+        btSos.setOnTouchListener((v, event) -> {
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    startHold();
+                    return true;
+                case MotionEvent.ACTION_UP:
+                    // a quick touch is a tap -> accessible confirm dialog; a release
+                    // after a real hold started is a cancel (safe direction)
+                    final boolean wasTap = holdStartedAt >= 0 &&
+                            SystemClock.uptimeMillis() - holdStartedAt < ViewConfiguration.getLongPressTimeout();
+                    cancelHold(!wasTap);
+                    if (wasTap)
+                        v.performClick();
+                    return true;
+                case MotionEvent.ACTION_CANCEL:
+                    cancelHold(false);
+                    return true;
+                default:
+                    return true;
+            }
+        });
+        // reached via performClick — quick taps routed above, TalkBack/switch-access/DPAD directly
+        btSos.setOnClickListener(v -> DialogScreen.confirm(this,
+                R.string.sos, R.string.sos_confirm_call, R.string.sos_call_help, this::callEmergencyNumber));
         setupYoutube(4);
+    }
+
+    /**
+     * Explicit shapes, same as {@link com.bald.uriah.baldphone.views.BaldPictureTextButton}'s
+     * variants: on API 23 tinting the shared selector composites through a rectangular
+     * saveLayer because its stroke is translucent. Pressed state is 25% darker bald_danger.
+     */
+    private void tintSosButton() {
+        final TypedArray themeColors = obtainStyledAttributes(new int[]{R.attr.bald_danger, R.attr.bald_text_on_variant});
+        final int danger = themeColors.getColor(0, Color.RED);
+        final int focusStrokeColor = themeColors.getColor(1, Color.WHITE);
+        themeColors.recycle();
+        final float[] hsv = new float[3];
+        Color.colorToHSV(danger, hsv);
+        hsv[2] *= 0.75f;
+
+        final float radius = getResources().getDimension(R.dimen.radius_button);
+        final StateListDrawable background = new StateListDrawable();
+        background.addState(new int[]{android.R.attr.state_pressed},
+                sosButtonShape(Color.HSVToColor(hsv), radius, 0, 0));
+        background.addState(new int[]{android.R.attr.state_focused},
+                sosButtonShape(danger, radius,
+                        getResources().getDimensionPixelSize(R.dimen.border_width_selected), focusStrokeColor));
+        background.addState(new int[]{}, sosButtonShape(danger, radius, 0, 0));
+        btSos.setBackground(background);
+    }
+
+    private static GradientDrawable sosButtonShape(int color, float radius, int strokeWidth, int strokeColor) {
+        final GradientDrawable shape = new GradientDrawable();
+        shape.setCornerRadius(radius);
+        shape.setColor(color);
+        if (strokeWidth > 0)
+            shape.setStroke(strokeWidth, strokeColor);
+        return shape;
+    }
+
+    private void startHold() {
+        holdStartedAt = SystemClock.uptimeMillis();
+        btSos.setPressed(true);
+        sosProgress.setProgress(0);
+        sosProgress.setVisibility(View.VISIBLE);
+        btSos.post(holdTicker);
+    }
+
+    private void cancelHold(boolean released) {
+        if (holdStartedAt < 0)
+            return;
+        final boolean earlyRelease = released &&
+                SystemClock.uptimeMillis() - holdStartedAt < HOLD_TO_CALL_MS;
+        holdStartedAt = -1;
+        btSos.removeCallbacks(holdTicker);
+        resetHoldUi();
+        if (earlyRelease)
+            BaldToast.longer(this);
+    }
+
+    private void resetHoldUi() {
+        holdStartedAt = -1;
+        holdSecondsShown = -1;
+        btSos.setPressed(false);
+        sosProgress.setVisibility(View.GONE);
+        sosSubtitle.setText(R.string.sos_call_help);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        final View.OnClickListener addContactListener = v -> startActivity(new Intent(v.getContext().getApplicationContext(), ContactsActivity.class).putExtra(ContactsActivity.INTENT_EXTRA_CONTACT_ADAPTER_MODE, ContactRecyclerViewAdapter.MODE_SOS));
+        resetHoldUi();
         final List<MiniContact> miniContacts = PinHelper.getAllPinnedContacts(this);
         final int size = miniContacts == null ? 0 : miniContacts.size();
-        for (int i = 0; i < MAX_PINNED_CONTACTS; i++) {
-            if (size > i)
-                setupEC(ec[i], miniContacts.get(i));
-            else
-                ec[i].setOnClickListener(addContactListener);
-        }
+        for (int i = 0; i < MAX_PINNED_CONTACTS; i++)
+            bindCard(i, size > i ? miniContacts.get(i) : null);
 
-        ecReal.setOnClickListener((v) -> callEmergencyNumber());
+        btAddContact.setVisibility(size < MAX_PINNED_CONTACTS ? View.VISIBLE : View.GONE);
+        btAddContact.setOnClickListener(v -> startActivity(new Intent(v.getContext().getApplicationContext(), ContactsActivity.class)
+                .putExtra(ContactsActivity.INTENT_EXTRA_CONTACT_ADAPTER_MODE, ContactRecyclerViewAdapter.MODE_SOS)));
+    }
+
+    @Override
+    protected void onStop() {
+        cancelHold(false);//don't let a queued tick fire the call while paused
+        super.onStop();
+    }
+
+    /**
+     * photo card for one pinned SOS contact; initials on a hash-colored circle
+     * when the contact has no photo, same trick as {@link ContactRecyclerViewAdapter}
+     */
+    private void bindCard(int i, @Nullable MiniContact miniContact) {
+        if (miniContact == null) {
+            cards[i].setVisibility(View.GONE);
+            return;
+        }
+        cards[i].setVisibility(View.VISIBLE);
+        names[i].setText(miniContact.name);
+        if (miniContact.photo != null) {
+            avatars[i].setImageURI(Uri.parse(miniContact.photo));
+            letters[i].setVisibility(View.GONE);
+        } else {
+            letters[i].setText(ContactRecyclerViewAdapter.initials(miniContact.name));
+            letters[i].setVisibility(View.VISIBLE);
+            avatars[i].setImageDrawable(new ColorDrawable(colorful ?
+                    randomColorMaker.generateColor(miniContact.lookupKey == null ? 0 : miniContact.lookupKey.hashCode()) :
+                    backgroundColor));
+        }
+        cards[i].setOnClickListener(v -> DialerActivity.call(miniContact, v.getContext()));
     }
 
     private void callEmergencyNumber() {
         DialerActivity.call("112", this, true);//should work 99.99% of the times
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.nothing, R.anim.slide_out_up);
     }
 
     public static class PinHelper {
@@ -177,6 +342,6 @@ public class SOSActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_CALL_PHONE | PERMISSION_READ_CONTACTS;
+        return PERMISSION_CALL_PHONE | PERMISSION_READ_CONTACTS | PERMISSION_READ_PHONE_STATE;
     }
 }

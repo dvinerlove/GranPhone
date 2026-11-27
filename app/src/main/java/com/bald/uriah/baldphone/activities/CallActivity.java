@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,9 +35,9 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,12 +45,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
+import com.bald.uriah.baldphone.utils.DialogScreen;
+import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.CallManager;
 import com.bald.uriah.baldphone.utils.FirstRunDefaults;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import java.util.List;
 import java.util.Locale;
@@ -63,18 +66,24 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     private static final int FINISH_DELAY_MS = 1500;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private ImageView iv_photo;
-    private TextView tv_name, tv_number, tv_status;
+    private TextView tv_initial, tv_name, tv_number, tv_status;
+    private Drawable noPhotoDrawable;
     private View incomingButtons, ongoingButtons;
-    private Button bt_speaker;
+    private BaldPictureTextButton bt_speaker;
     @Nullable
     private PowerManager.WakeLock proximityWakeLock;
     @Nullable
     private String shownNumber;
+    @Nullable
+    private String contactName;
     private boolean finishScheduled;
     @Nullable
     private Call simChooserShownFor;
     @Nullable
     private Call volumeRaisedFor;
+    @Nullable
+    private Call lastAnnouncedCall;
+    private int lastAnnouncedState = -1;
     private final Runnable ticker = new Runnable() {
         @Override
         public void run() {
@@ -91,8 +100,10 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setTheme(S.getTheme(this));
+        setTheme(AppUtils.getTheme(this));
         super.onCreate(savedInstanceState);
+        // keep the in-call back block on API 33+, where onBackPressed is bypassed
+        PredictiveBackHelper.register(this, this::onBackPressed);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
             setTurnScreenOn(true);
@@ -101,12 +112,20 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         }
         setContentView(R.layout.activity_call);
         iv_photo = findViewById(R.id.iv_photo);
+        tv_initial = findViewById(R.id.tv_initial);
         tv_name = findViewById(R.id.tv_name);
         tv_number = findViewById(R.id.tv_number);
         tv_status = findViewById(R.id.tv_status);
+        // caller name/number can be raw digits — keep them LTR in RTL locales
+        tv_name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
+        tv_number.setTextDirection(View.TEXT_DIRECTION_LTR);
         incomingButtons = findViewById(R.id.incoming_buttons);
         ongoingButtons = findViewById(R.id.ongoing_buttons);
         bt_speaker = findViewById(R.id.bt_speaker);
+
+        final TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.bald_decoration_on_background, typedValue, true);
+        noPhotoDrawable = new ColorDrawable(typedValue.data);
 
         findViewById(R.id.bt_answer).setOnClickListener(v -> {
             final Call call = CallManager.getPrimaryCall();
@@ -120,7 +139,11 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         };
         findViewById(R.id.bt_decline).setOnClickListener(hangUp);
         findViewById(R.id.bt_hangup).setOnClickListener(hangUp);
-        bt_speaker.setOnClickListener(v -> CallManager.setSpeaker(!CallManager.isSpeakerOn()));
+        bt_speaker.setOnClickListener(v -> {
+            final boolean speakerOn = !CallManager.isSpeakerOn();
+            CallManager.setSpeaker(speakerOn);
+            bt_speaker.announceForAccessibility(getString(speakerOn ? R.string.speaker_state_on : R.string.speaker_state_off));
+        });
 
         final PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         if (powerManager != null && powerManager.isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK))
@@ -131,12 +154,17 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     protected void onStart() {
         super.onStart();
         CallManager.addListener(this);
+        CallManager.setCallScreenVisible(true);
+        // re-post the call notification: no heads-up once the screen is actually showing
+        CallManager.notifyListeners();
         handler.post(ticker);
     }
 
     @Override
     protected void onStop() {
+        CallManager.setCallScreenVisible(false);
         CallManager.removeListener(this);
+        CallManager.notifyListeners();
         handler.removeCallbacks(ticker);
         setProximityScreenOff(false);
         super.onStop();
@@ -150,8 +178,13 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     @Override
     public void onBackPressed() {
         // Do not leave the call screen by mistake while a call is going on.
-        if (!CallManager.hasOngoingCall())
-            super.onBackPressed();
+        if (!CallManager.hasOngoingCall()) {
+            // on API 33+ the dispatcher would loop back into our registered callback
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                finish();
+            else
+                super.onBackPressed();
+        }
     }
 
     private void updateUi() {
@@ -178,7 +211,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
                 final Call.Details activeDetails = call.getDetails();
                 final long connectTime = activeDetails == null ? 0 : activeDetails.getConnectTimeMillis();
                 tv_status.setText(connectTime > 0
-                        ? getString(R.string.in_call) + "  " + formatDuration(System.currentTimeMillis() - connectTime)
+                        ? getString(R.string.in_call_duration, formatDuration(System.currentTimeMillis() - connectTime))
                         : getString(R.string.in_call));
                 showButtons(false, true);
                 setProximityScreenOff(true);
@@ -207,6 +240,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
                 setProximityScreenOff(true);
                 break;
         }
+        announceCallState(call, state);
         if (keepScreenOn)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         else
@@ -214,7 +248,35 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
 
         final boolean speakerOn = CallManager.isSpeakerOn();
         bt_speaker.setText(speakerOn ? R.string.speaker_turn_off : R.string.speaker_turn_on);
-        bt_speaker.setBackgroundResource(speakerOn ? R.drawable.call_button_blue : R.drawable.call_button_gray);
+        bt_speaker.setVariant(speakerOn ? BaldPictureTextButton.VARIANT_INFO : BaldPictureTextButton.VARIANT_NEUTRAL);
+    }
+
+    private void announceCallState(Call call, int state) {
+        // DISCONNECTING and DISCONNECTED are one user-visible state; don't announce it twice.
+        final int announcementState = state == Call.STATE_DISCONNECTING ? Call.STATE_DISCONNECTED : state;
+        if (call == lastAnnouncedCall && announcementState == lastAnnouncedState)
+            return;
+        final CharSequence announcement;
+        switch (state) {
+            case Call.STATE_RINGING:
+                announcement = getString(R.string.incoming_call_from, tv_name.getText());
+                break;
+            case Call.STATE_ACTIVE:
+                announcement = getString(R.string.in_call_with, tv_name.getText());
+                break;
+            case Call.STATE_HOLDING:
+                announcement = getString(R.string.on_hold);
+                break;
+            case Call.STATE_DISCONNECTING:
+            case Call.STATE_DISCONNECTED:
+                announcement = getString(R.string.call_ended);
+                break;
+            default:
+                return;
+        }
+        lastAnnouncedCall = call;
+        lastAnnouncedState = announcementState;
+        tv_status.announceForAccessibility(announcement);
     }
 
     @SuppressWarnings("deprecation")
@@ -236,7 +298,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
             }
         }
         if (handles == null || handles.isEmpty()) {
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.call_could_not_be_placed);
             call.disconnect();
             return;
         }
@@ -248,22 +310,15 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         final CharSequence[] names = new CharSequence[handles.size()];
         for (int i = 0; i < handles.size(); i++) {
             final PhoneAccount account = telecomManager == null ? null : telecomManager.getPhoneAccount(handles.get(i));
-            names[i] = account != null && !TextUtils.isEmpty(account.getLabel()) ? account.getLabel() : "SIM " + (i + 1);
+            names[i] = account != null && !TextUtils.isEmpty(account.getLabel()) ? account.getLabel() : getString(R.string.sim_fallback, i + 1);
         }
-        BDB.from(this)
-                .setTitle(R.string.choose_sim)
-                .setSubText(R.string.choose_sim_subtext)
-                .setOptions(names)
-                .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL | BDialog.FLAG_NOT_CANCELABLE)
-                .setPositiveButtonListener(params -> {
-                    call.phoneAccountSelected(finalHandles.get((Integer) params[0]), false);
-                    return true;
-                })
-                .setNegativeButtonListener(params -> {
-                    call.disconnect();
-                    return true;
-                })
-                .show();
+        // «Назад» (and only it) cancels the dialog → hangs up; picking a SIM dismisses without cancelling
+        final DialogScreen simPicker = DialogScreen.select(this, R.string.choose_sim,
+                0,
+                index -> call.phoneAccountSelected(finalHandles.get(index), false),
+                names);
+        simPicker.setCancelable(false);
+        simPicker.setOnCancelListener(d -> call.disconnect());
     }
 
     private void showButtons(boolean incoming, boolean ongoing) {
@@ -290,27 +345,38 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
         final Call.Details details = call.getDetails(); // documented nullable during state transitions
         final Uri handle = details == null ? null : details.getHandle();
         final String number = handle == null ? "" : handle.getSchemeSpecificPart();
-        if (number.equals(shownNumber))
-            return;
-        shownNumber = number;
-
-        String name = null, photo = null;
-        if (!number.isEmpty() && checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            final Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
-            try (Cursor cursor = getContentResolver().query(uri,
-                    new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup.PHOTO_URI},
-                    null, null, null)) {
-                if (cursor != null && cursor.moveToFirst()) {
-                    name = cursor.getString(0);
-                    photo = cursor.getString(1);
+        if (!number.equals(shownNumber)) {
+            shownNumber = number;
+            contactName = null;
+            String photo = null;
+            if (!number.isEmpty() && checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+                final Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+                try (Cursor cursor = getContentResolver().query(uri,
+                        new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup.PHOTO_URI},
+                        null, null, null)) {
+                    if (cursor != null && cursor.moveToFirst()) {
+                        contactName = cursor.getString(0);
+                        photo = cursor.getString(1);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "contact lookup failed", e);
                 }
-            } catch (Exception e) {
-                Log.e(TAG, "contact lookup failed", e);
+            }
+            if (photo != null) {
+                iv_photo.setImageURI(Uri.parse(photo));
+                tv_initial.setVisibility(View.GONE);
+            } else {
+                iv_photo.setImageDrawable(noPhotoDrawable);
+                tv_initial.setVisibility(View.VISIBLE);
             }
         }
-        if (TextUtils.isEmpty(name))
+
+        String name = contactName;
+        // getCallerDisplayName exists only on API 29+ and may arrive late via onDetailsChanged
+        if (TextUtils.isEmpty(name) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             name = details == null ? null : details.getCallerDisplayName();
 
+        tv_initial.setText(AppUtils.firstGlyph(name));
         if (TextUtils.isEmpty(name)) {
             tv_name.setText(number.isEmpty() ? getString(R.string.unknown_number) : number);
             tv_number.setVisibility(View.GONE);
@@ -318,12 +384,6 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
             tv_name.setText(name);
             tv_number.setText(number);
             tv_number.setVisibility(number.isEmpty() ? View.GONE : View.VISIBLE);
-        }
-        if (photo != null) {
-            iv_photo.setImageURI(Uri.parse(photo));
-            iv_photo.setVisibility(View.VISIBLE);
-        } else {
-            iv_photo.setVisibility(View.GONE);
         }
     }
 

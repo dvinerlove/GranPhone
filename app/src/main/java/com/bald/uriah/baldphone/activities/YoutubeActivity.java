@@ -29,8 +29,8 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.FirstPageAppIcon;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
@@ -42,7 +42,7 @@ public class YoutubeActivity extends BaldActivity {
     public static final String EXTRA_ID = "EXTRA_ID";
     private static final float VERTICAL_BIAS_AFTER = 0.8f;
     private static final float VERTICAL_BIAS_BEFORE = 1f;
-    private final static long ANIMATION_DURATION = D.MILLISECOND * 800;
+    private final static long ANIMATION_DURATION = Const.MILLISECOND * 300;
 
     private Space bottom;
     private String url;
@@ -62,10 +62,10 @@ public class YoutubeActivity extends BaldActivity {
         url = resources.getStringArray(R.array.yt_links)[index];
 
         final int[]
-                related = S.intArrFromString(resources.getStringArray(R.array.yt_related)[index]),
-                otherTexts = S.typedArrayToResArray(resources, R.array.yt_texts),
-                otherLogos = S.typedArrayToResArray(resources, R.array.yt_logos),
-                otherBackground = S.typedArrayToResArray(resources, R.array.yt_background);
+                related = AppUtils.intArrFromString(resources.getStringArray(R.array.yt_related)[index]),
+                otherTexts = AppUtils.typedArrayToResArray(resources, R.array.yt_texts),
+                otherLogos = AppUtils.typedArrayToResArray(resources, R.array.yt_logos),
+                otherBackground = AppUtils.typedArrayToResArray(resources, R.array.yt_background);
 
         final View[] bt_colors = new View[]{
                 findViewById(R.id.bt_left_color),

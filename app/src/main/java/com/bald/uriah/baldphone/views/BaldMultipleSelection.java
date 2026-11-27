@@ -24,7 +24,9 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
@@ -35,7 +37,7 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 import java.util.ArrayList;
 
@@ -47,11 +49,12 @@ public class BaldMultipleSelection extends LinearLayout {
     private OnItemClickListener onItemClickListener = (v) -> {
     };
     private Drawable defaultDrawableSelected, defaultDrawable;
+    private boolean hasSelectedDrawable;
     private Context context;
     private LayoutInflater layoutInflater;
     private int selection = -1;
     private int size = 0;
-    private float pxDimen;
+    private float pxDimen = -1;
     private ArrayList<BaldButton> buttons = new ArrayList<>(5);
 
     public BaldMultipleSelection(Context context) {
@@ -82,30 +85,32 @@ public class BaldMultipleSelection extends LinearLayout {
 
         final TypedValue typedValue = new TypedValue();
         Resources.Theme theme = context.getTheme();
-        theme.resolveAttribute(R.attr.bald_text_on_selected, typedValue, true);
-        textColorOnSelected = typedValue.data;
-        theme.resolveAttribute(R.attr.bald_text_on_button, typedValue, true);
+        theme.resolveAttribute(R.attr.bald_text_primary, typedValue, true);
         textColorOnButton = typedValue.data;
+        textColorOnSelected = textColorOnButton;
 
         if (attrs == null) {
-            defaultDrawable = ContextCompat.getDrawable(context, R.drawable.style_for_buttons);
-            defaultDrawableSelected = ContextCompat.getDrawable(context, R.drawable.btn_selected);
+            defaultDrawable = ContextCompat.getDrawable(context, R.drawable.bald_button_background);
+            defaultDrawableSelected = defaultDrawable;
             setOrientation(HORIZONTAL);
         } else {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaldMultipleSelection);
             setOrientation((typedArray.getBoolean(R.styleable.BaldMultipleSelection_is_vertical, false)) ? VERTICAL : HORIZONTAL);
             Drawable drawable = typedArray.getDrawable(R.styleable.BaldMultipleSelection_background_default);
-            defaultDrawable = drawable != null ? drawable : ContextCompat.getDrawable(context, R.drawable.style_for_buttons);
+            defaultDrawable = drawable != null ? drawable : ContextCompat.getDrawable(context, R.drawable.bald_button_background);
             Drawable drawableSelected = typedArray.getDrawable(R.styleable.BaldMultipleSelection_background_selected);
-            if (drawableSelected != null)
+            if (drawableSelected != null) {
                 defaultDrawableSelected = drawableSelected;
-            else
-                defaultDrawableSelected = ContextCompat.getDrawable(context, R.drawable.btn_selected);
+                hasSelectedDrawable = true;
+            } else {
+                defaultDrawableSelected = defaultDrawable;
+            }
             pxDimen = typedArray.getDimension(R.styleable.BaldMultipleSelection_text_size, -1);
             textColorOnButton = typedArray.getColor(R.styleable.BaldMultipleSelection_text_color, textColorOnButton);
             textColorOnSelected = typedArray.getColor(R.styleable.BaldMultipleSelection_selected_text_color, textColorOnSelected);
             typedArray.recycle();
         }
+        setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
 
     }
 
@@ -158,18 +163,43 @@ public class BaldMultipleSelection extends LinearLayout {
         button.setBackground(defaultDrawable.getConstantState().newDrawable());
 
         button.setText(name);
-        if (pxDimen != -1)
-            button.setTextSize(TypedValue.COMPLEX_UNIT_PX, pxDimen);
-        else
-            button.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.medium));
-        this.addView(button);
+        button.setAccessibilityClassName(android.widget.RadioButton.class.getName());
+        button.setAccessibilityDelegate(new AccessibilityDelegate() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                info.setCheckable(true);
+                info.setChecked(selection == index);
+            }
+        });
+        final float maxPx = pxDimen != -1 ? pxDimen
+                : context.getResources().getDimension(R.dimen.medium);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_PX, maxPx);
+        // setTextSize clears autosize — re-enable so long labels shrink instead of clipping
+        // shortcut: autosize can't see weighted widths on this appcompat — shrink once after layout
+        button.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int l, int t, int r, int b, int ol, int ot, int or2, int ob) {
+                final float avail = button.getWidth() - button.getPaddingLeft() - button.getPaddingRight();
+                if (avail <= 0) return;   // keep the listener — first pass can be 0-width
+                v.removeOnLayoutChangeListener(this);
+                final android.graphics.Paint paint = new android.graphics.Paint(button.getPaint());
+                paint.setTextSize(maxPx);
+                final float wanted = paint.measureText(button.getText().toString());
+                if (wanted > avail) {
+                    final float minPx = 12 * getResources().getDisplayMetrics().scaledDensity;
+                    button.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            Math.max(minPx, maxPx * avail / wanted * 0.95f));
+                }
+            }
+        });
         buttons.add(button);
         final LayoutParams layoutParams = new LayoutParams(getOrientation() == VERTICAL ? ViewGroup.LayoutParams.MATCH_PARENT : 0, getOrientation() != VERTICAL ? ViewGroup.LayoutParams.MATCH_PARENT : 0);
-        int inPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, context.getResources().getDisplayMetrics());
+        int inPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, context.getResources().getDisplayMetrics());
         layoutParams.setMargins(getOrientation() == VERTICAL ? 0 : inPx, getOrientation() != VERTICAL ? 0 : inPx, getOrientation() == VERTICAL ? 0 : inPx, getOrientation() != VERTICAL ? 0 : inPx);
         layoutParams.weight = 1f;
-        button.setLayoutParams(layoutParams);
-        button.setOnClickListener(D.longer);
+        this.addView(button, layoutParams);
+        button.setOnClickListener(Const.longer);
         button.setTextColor(textColorOnButton);
         button.setOnClickListener(v -> {
             if (selection == index)
@@ -178,6 +208,7 @@ public class BaldMultipleSelection extends LinearLayout {
                 setClicked(buttons.get(selection), false);
             selection = index;
             setClicked(buttons.get(selection), true);
+            button.announceForAccessibility(button.getText());
             onItemClickListener.onItemClick(getSelection());
         });
         if (selection == -1) {
@@ -203,15 +234,18 @@ public class BaldMultipleSelection extends LinearLayout {
     }
 
     private void setClicked(BaldButton button, boolean state) {
-        if (state) {
-            button.setBackground(defaultDrawableSelected.getConstantState().newDrawable());
-            button.setTextColor(textColorOnSelected);
-        } else {
-            button.setBackground(defaultDrawable.getConstantState().newDrawable());
-            button.setTextColor(textColorOnButton);
-
+        button.setSelected(state);
+        // The default background is stateful; only an explicit background_selected needs swapping.
+        if (hasSelectedDrawable) {
+            button.setBackground((state ? defaultDrawableSelected : defaultDrawable).getConstantState().newDrawable());
         }
+        button.setTextColor(state ? textColorOnSelected : textColorOnButton);
+    }
 
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName(android.widget.RadioGroup.class.getName());
     }
 
     @FunctionalInterface

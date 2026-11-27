@@ -21,7 +21,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.telecom.TelecomManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,26 +29,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.BuildConfig;
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.CallManager;
+import com.bald.uriah.baldphone.utils.PermissionContract;
+import com.bald.uriah.baldphone.utils.PermissionRecovery;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
 import static android.Manifest.permission.READ_CALL_LOG;
 import static android.Manifest.permission.READ_CONTACTS;
+import static android.Manifest.permission.READ_MEDIA_IMAGES;
+import static android.Manifest.permission.READ_MEDIA_VIDEO;
+import static android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_CALL_LOG;
 import static android.Manifest.permission.WRITE_CONTACTS;
@@ -61,11 +65,15 @@ public class PermissionActivity extends BaldActivity {
     public static final String
             EXTRA_REQUIRED_PERMISSIONS = "EXTRA_REQUIRED_PERMISSIONS",
             EXTRA_INTENT = "EXTRA_INTENT";
-    public static final int[] REQUEST_CODES = {789, 788, 787, 786};
+    public static final int[] REQUEST_CODES = {789, 788, 787, 786, 785};
+    private static final int REQUEST_CODE_APP_SETTINGS = 785;
 
+    private final PermissionRecovery permissionRecovery = new PermissionRecovery();
     private List<PermissionItem> permissionItemList = new ArrayList<>();
     private RecyclerView recyclerView;
+    private TextView progress;
     private int requiredPermissions;
+    private int totalSteps;
     private Intent ancestorCallingIntent;
 
     @Override
@@ -73,17 +81,15 @@ public class PermissionActivity extends BaldActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
         final Intent callingIntent = getIntent();
-        requiredPermissions = callingIntent.getIntExtra(EXTRA_REQUIRED_PERMISSIONS, -1);
+        requiredPermissions = PermissionContract.normalizeRequiredPermissions(
+                callingIntent.getIntExtra(EXTRA_REQUIRED_PERMISSIONS, PERMISSION_ALL));
         ancestorCallingIntent = callingIntent.getParcelableExtra(EXTRA_INTENT);
 
         recyclerView = findViewById(R.id.child);
-        final DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(Objects.requireNonNull(getDrawable(R.drawable.ll_divider)));
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        progress = findViewById(R.id.progress);
         recyclerView.setAdapter(new PermissionRecyclerViewAdapter());
         BaldTitleBar baldTitleBar = findViewById(R.id.bald_title_bar);
-        baldTitleBar.getBt_back().setOnClickListener(v -> calmyBDB());
+        baldTitleBar.setBackListener(v -> calmyBDB());
 
     }
 
@@ -95,16 +101,15 @@ public class PermissionActivity extends BaldActivity {
 
     private void calmyBDB() {
         if (isTaskRoot()) {
-            BDB.from(this)
-                    .setTitle(R.string.permissions_part)
-                    .setSubText(R.string.permissions_calm)
-                    .addFlag(BDialog.FLAG_OK | BDialog.FLAG_NO)
-                    .setPositiveButtonListener(params -> true)
-                    .setNegativeButtonListener(params -> {
-                        FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this);
-                        return true;
-                    })
-                    .show();
+            DialogScreen.select(this,
+                    R.string.permissions_part,
+                    R.string.permissions_calm,
+                    -1,
+                    index -> {
+                        if (index == 1)
+                            FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(this);
+                    },
+                    getText(R.string.stay), getText(R.string.exit));
         } else
             finish();
     }
@@ -116,89 +121,156 @@ public class PermissionActivity extends BaldActivity {
             finish();
             return;
         }
+        progress.setText(getString(R.string.permission_step, totalSteps - permissionItemList.size() + 1, totalSteps));
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
+    private boolean requiresAtom(final int atom) {
+        return PermissionContract.hasAtom(requiredPermissions, atom);
+    }
+
+    private PermissionItem runtimePermissionItem(final String title, final String explanation, final String... permissions) {
+        if (permissionRecovery.shouldOpenAppSettings(this, permissions))
+            return new PermissionItem(
+                    v -> startActivityForResult(PermissionRecovery.appSettingsIntent(this), REQUEST_CODE_APP_SETTINGS),
+                    title,
+                    getString(R.string.permission_permanently_denied_subtext),
+                    R.string.open_app_settings);
+        return new SimplePermissionItem(title, explanation, permissions);
+    }
+
+    // totalSteps counts every permission card the flow can show, granted or not,
+    // so the «Шаг N из M» header reflects real progress.
     private void obtainPermissionList() {
         permissionItemList.clear();
+        totalSteps = 0;
         if (requiredPermissions == PERMISSION_NONE)
             return;
 
-        if ((requiredPermissions & PERMISSION_DEFAULT_PHONE_HANDLER) != 0) {
+        final boolean defaultDialerRequired = requiresAtom(PermissionContract.PERMISSION_ATOM_DEFAULT_DIALER)
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+        if (defaultDialerRequired) {
+            totalSteps++;
             if (!defaultDialerGranted(this)) {
                 permissionItemList.add(
-                        new PermissionItem(v -> startActivityForResult(new Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
-                                .putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, getPackageName()), REQUEST_CODES[1]), getString(R.string.set_default_dialer), getString(R.string.set_default_dialer_subtext)));
+                        new PermissionItem(v -> CallManager.requestDefaultDialer(this),
+                                getString(R.string.set_default_dialer),
+                                getString(R.string.set_default_dialer_subtext)));
             }
         }
-        if ((requiredPermissions & PERMISSION_WRITE_SETTINGS) != 0) {
+
+        final boolean writeSettingsRequired = requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_SETTINGS)
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+        if (writeSettingsRequired) {
+            totalSteps++;
             if (!writeSettingsGranted(this)) {
                 permissionItemList.add(
                         new PermissionItem(v -> PermissionActivity.this.startActivityForResult(new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
                                 .setData(Uri.parse("package:" + PermissionActivity.this.getPackageName())), 798),
                                 getString(R.string.settings_permission),
                                 getString(R.string.change_system_settings_subtext)));
-            } else if ((requiredPermissions & PERMISSION_NOTIFICATION_LISTENER) == PERMISSION_NOTIFICATION_LISTENER) {
-                if (!notificationListenerGranted(this)) {
-                    permissionItemList.add(new PermissionItem((v) -> startActivityForResult(new Intent(
-                            "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"), REQUEST_CODES[0]), getString(R.string.enable_notification_access), getString(R.string.enable_notification_access_subtext)));
-                }
             }
         }
-        if (defaultDialerGranted(this)) {
-            if ((requiredPermissions & PERMISSION_READ_CONTACTS) != 0) {
-                if (ActivityCompat.checkSelfPermission(this, READ_CONTACTS) != PERMISSION_GRANTED)
-                    permissionItemList.add(
-                            new SimplePermissionItem(READ_CONTACTS, getString(R.string.read_contacts), getString(R.string.contacts_read_subtext)));
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_NOTIFICATION_LISTENER)) {
+            totalSteps++;
+            if (!notificationListenerGranted(this)) {
+                permissionItemList.add(new PermissionItem((v) -> startActivityForResult(new Intent(
+                        "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"), REQUEST_CODES[0]), getString(R.string.enable_notification_access), getString(R.string.enable_notification_access_subtext)));
             }
-            if ((requiredPermissions & PERMISSION_WRITE_CONTACTS) != 0) {
-                if (ActivityCompat.checkSelfPermission(this, WRITE_CONTACTS) != PERMISSION_GRANTED)
-                    permissionItemList.add(
-                            new SimplePermissionItem(WRITE_CONTACTS, getString(R.string.write_contacts), getString(R.string.contacts_subtext)));
-            }
-            if ((requiredPermissions & PERMISSION_CALL_PHONE) != 0) {
-                if (ActivityCompat.checkSelfPermission(this, CALL_PHONE) != PERMISSION_GRANTED)
-                    permissionItemList.add(
-                            new SimplePermissionItem(CALL_PHONE, getString(R.string.calling), getString(R.string.call_subtext)));
-            }
-            if ((requiredPermissions & PERMISSION_WRITE_CALL_LOG) != 0 || (requiredPermissions & PERMISSION_READ_CALL_LOG) != 0) {
-                if (!BuildConfig.FLAVOR.equals("gPlay"))
-                    if (ActivityCompat.checkSelfPermission(this, WRITE_CALL_LOG) != PERMISSION_GRANTED)
-                        permissionItemList.add(
-                                new SimplePermissionItem(WRITE_CALL_LOG, getString(R.string.read_call_log), getString(R.string.read_call_log_subtext)));
-                    else if (ActivityCompat.checkSelfPermission(this, READ_CALL_LOG) != PERMISSION_GRANTED)
-                        permissionItemList.add(
-                                new SimplePermissionItem(READ_CALL_LOG, getString(R.string.read_call_log), getString(R.string.read_call_log_subtext)));
-            }
-            if ((requiredPermissions & PERMISSION_READ_PHONE_STATE) != 0) {
-                if (BPrefs.get(this).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE))
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1)
-                        if (ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) != PERMISSION_GRANTED)
-                            permissionItemList.add(
-                                    new SimplePermissionItem(READ_PHONE_STATE, getString(R.string.read_phone_state), getString(R.string.read_phone_state_subtext)));
-            }
+        }
 
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CONTACTS)) {
+            totalSteps++;
+            if (ActivityCompat.checkSelfPermission(this, READ_CONTACTS) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.read_contacts), getString(R.string.contacts_read_subtext), READ_CONTACTS));
         }
-        if ((requiredPermissions & PERMISSION_CAMERA) != 0) {
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CONTACTS)) {
+            totalSteps++;
+            if (ActivityCompat.checkSelfPermission(this, WRITE_CONTACTS) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.write_contacts), getString(R.string.contacts_subtext), WRITE_CONTACTS));
+        }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_CALL_PHONE)) {
+            totalSteps++;
+            if (ActivityCompat.checkSelfPermission(this, CALL_PHONE) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.calling), getString(R.string.call_subtext), CALL_PHONE));
+        }
+        if ((requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CALL_LOG) || requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CALL_LOG))
+                && !BuildConfig.FLAVOR.equals("gPlay")) {
+            totalSteps++;
+            if (requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_CALL_LOG)
+                    && ActivityCompat.checkSelfPermission(this, WRITE_CALL_LOG) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.read_call_log), getString(R.string.write_call_log_subtext), WRITE_CALL_LOG));
+            else if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_CALL_LOG)
+                    && ActivityCompat.checkSelfPermission(this, READ_CALL_LOG) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.read_call_log), getString(R.string.read_call_log_subtext), READ_CALL_LOG));
+        }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_READ_PHONE_STATE)) {
+            if (BPrefs.get(this).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)
+                    && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
+                totalSteps++;
+                if (ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) != PERMISSION_GRANTED)
+                    permissionItemList.add(
+                            runtimePermissionItem(getString(R.string.read_phone_state), getString(R.string.read_phone_state_subtext), READ_PHONE_STATE));
+            }
+        }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_CAMERA)) {
+            totalSteps++;
             if (ActivityCompat.checkSelfPermission(this, CAMERA) != PERMISSION_GRANTED)
                 permissionItemList.add(
-                        new SimplePermissionItem(CAMERA, getString(R.string.camera), getString(R.string.camera_subtext)));
+                        runtimePermissionItem(getString(R.string.camera), getString(R.string.camera_subtext), CAMERA));
         }
-        if ((requiredPermissions & PERMISSION_REQUEST_INSTALL_PACKAGES) != 0) {
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_REQUEST_INSTALL_PACKAGES)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && BuildConfig.FLAVOR.equals("baldUpdates")) {
+                totalSteps++;
                 if (!getPackageManager().canRequestPackageInstalls())
                     permissionItemList.add(
                             new PermissionItem(v -> startActivityForResult(new Intent(
                                     ACTION_MANAGE_UNKNOWN_APP_SOURCES).setData(Uri.parse(String.format("package:%s", getPackageName()))), REQUEST_CODES[2]), getString(R.string.install_updates), getString(R.string.install_updates_subtext)));
             }
         }
-        if ((requiredPermissions & PERMISSION_WRITE_EXTERNAL_STORAGE) != 0) {
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_WRITE_EXTERNAL_STORAGE)
+                && Build.VERSION.SDK_INT < 33) {
+            totalSteps++;
             if (ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
                 permissionItemList.add(
-                        new SimplePermissionItem(WRITE_EXTERNAL_STORAGE, getString(R.string.write_external_storage), getString(R.string.external_storage_subtext)));
+                        runtimePermissionItem(getString(R.string.write_external_storage), getString(R.string.external_storage_subtext), WRITE_EXTERNAL_STORAGE));
         }
-        if ((requiredPermissions & PERMISSION_SYSTEM_ALERT_WINDOW) != 0) {
+        final boolean mediaImagesRequired = requiresAtom(PermissionContract.PERMISSION_ATOM_MEDIA_IMAGES);
+        final boolean mediaVideoRequired = requiresAtom(PermissionContract.PERMISSION_ATOM_MEDIA_VIDEO);
+        if (mediaImagesRequired || mediaVideoRequired) {
+            totalSteps++;
+            if (Build.VERSION.SDK_INT >= 33) {
+                final List<String> permissions = new ArrayList<>(2);
+                if (mediaImagesRequired && !mediaPermissionGranted(this, READ_MEDIA_IMAGES))
+                    permissions.add(READ_MEDIA_IMAGES);
+                if (mediaVideoRequired && !mediaPermissionGranted(this, READ_MEDIA_VIDEO))
+                    permissions.add(READ_MEDIA_VIDEO);
+                if (!permissions.isEmpty()) {
+                    if (Build.VERSION.SDK_INT >= 34)
+                        permissions.add(READ_MEDIA_VISUAL_USER_SELECTED);
+                    permissionItemList.add(
+                            runtimePermissionItem(getString(R.string.allow_media_access), getString(R.string.allow_media_access_subtext), permissions.toArray(new String[0])));
+                }
+            } else if (ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED)
+                permissionItemList.add(
+                        runtimePermissionItem(getString(R.string.write_external_storage), getString(R.string.external_storage_subtext), WRITE_EXTERNAL_STORAGE));
+        }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_POST_NOTIFICATIONS)) {
+            if (Build.VERSION.SDK_INT >= 33) {
+                totalSteps++;
+                if (ActivityCompat.checkSelfPermission(this, POST_NOTIFICATIONS) != PERMISSION_GRANTED)
+                    permissionItemList.add(
+                            runtimePermissionItem(getString(R.string.allow_notifications), getString(R.string.allow_notifications_subtext), POST_NOTIFICATIONS));
+            }
+        }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_SYSTEM_ALERT_WINDOW)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                totalSteps++;
                 if (!Settings.canDrawOverlays(this)) {
                     final Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                             Uri.parse("package:" + getPackageName()));
@@ -207,17 +279,38 @@ public class PermissionActivity extends BaldActivity {
                 }
             }
         }
+        if (requiresAtom(PermissionContract.PERMISSION_ATOM_EXACT_ALARM)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                totalSteps++;
+                final android.app.AlarmManager alarmManager = (android.app.AlarmManager) getSystemService(ALARM_SERVICE);
+                if (!alarmManager.canScheduleExactAlarms()) {
+                    final Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,
+                            Uri.parse("package:" + getPackageName()));
+                    permissionItemList.add(
+                            new PermissionItem(v -> startActivityForResult(intent, REQUEST_CODES[3]), getString(R.string.allow_exact_alarms), getString(R.string.allow_exact_alarms_subtext)));
+                }
+            }
+        }
 
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (S.intArrayContains(REQUEST_CODES, requestCode))
+        if (AppUtils.intArrayContains(REQUEST_CODES, requestCode)) {
+            permissionRecovery.onRequestPermissionsResult(this, permissions, grantResults);
             refreshPermissions();
+        }
     }
 
     @Override
     public void onBackPressed() {
+        calmyBDB();
+    }
+
+    // same exit flow as the title-bar Back button, so keep the callback on API 33+
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
     }
 
     private class PermissionRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<PermissionRecyclerViewAdapter.ViewHolder> {
@@ -244,11 +337,13 @@ public class PermissionActivity extends BaldActivity {
             final PermissionItem permissionItem = permissionItemList.get(position);
             holder.title.setText(permissionItem.title);
             holder.explanation.setText(permissionItem.explanation);
+            ((BaldPictureTextButton) holder.allow).setText(permissionItem.actionTextRes);
             holder.allow.setOnClickListener(permissionItem.onClickListener);
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView title, explanation, allow;
+            final TextView title, explanation;
+            final View allow;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -262,17 +357,23 @@ public class PermissionActivity extends BaldActivity {
     private class PermissionItem {
         final View.OnClickListener onClickListener;
         final String title, explanation;
+        final int actionTextRes;
 
         PermissionItem(View.OnClickListener onClickListener, String title, String explanation) {
+            this(onClickListener, title, explanation, R.string.allow);
+        }
+
+        PermissionItem(View.OnClickListener onClickListener, String title, String explanation, int actionTextRes) {
             this.onClickListener = onClickListener;
             this.title = title;
             this.explanation = explanation;
+            this.actionTextRes = actionTextRes;
         }
     }
 
     private class SimplePermissionItem extends PermissionItem {
-        SimplePermissionItem(String permission, String title, String explanation) {
-            super((v) -> ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{permission}, 789),
+        SimplePermissionItem(String title, String explanation, String... permissions) {
+            super((v) -> ActivityCompat.requestPermissions(PermissionActivity.this, permissions, 789),
                     title,
                     explanation);
         }

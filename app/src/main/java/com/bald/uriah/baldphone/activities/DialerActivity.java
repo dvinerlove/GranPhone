@@ -26,14 +26,16 @@ import android.database.Cursor;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,11 +48,15 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.contacts.Contact;
 import com.bald.uriah.baldphone.databases.contacts.MiniContact;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.utils.BaldExecutors;
+import com.bald.uriah.baldphone.utils.CallManager;
+import com.bald.uriah.baldphone.utils.GenerationGuard;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
+import com.bald.uriah.baldphone.views.ScrollingHelper;
 
 import java.util.List;
 
@@ -61,81 +67,193 @@ public class DialerActivity extends BaldActivity {
     public static final String SORT_ORDER =
             "upper(" + ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + ") ASC";
     private final static String[] PROJECTION =
-            {ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.PHOTO_URI, ContactsContract.Data.LOOKUP_KEY, ContactsContract.Data.STARRED};
+            {ContactsContract.Data.DISPLAY_NAME, ContactsContract.Data._ID, ContactsContract.Contacts.PHOTO_URI, ContactsContract.Data.LOOKUP_KEY, ContactsContract.Data.STARRED, ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.Data.CONTACT_ID};
     private static final String NUMBER_STATE = "NUMBER_STATE";
-    private static final int TONE_DURATION = 300 * D.MILLISECOND;
+    private static final int TONE_DURATION = 300 * Const.MILLISECOND;
     private static final int TONE_VOLUME = 75; // 0-100
 
     private ToneGenerator dtmfGenerator;
     private ContentResolver contentResolver;
     private ContactRecyclerViewAdapter contactRecyclerViewAdapter;
     private RecyclerView recyclerView;
-    private TextView tv_number;
+    private TextView tv_number, t9_chip;
     private View b_call, b_clear, b_hash, b_sulamit, b_backspace;
     private View[] numpad;
     private StringBuilder number = new StringBuilder();
+    private final GenerationGuard contactsGuard = new GenerationGuard();
+    private final android.os.Handler contactSearchHandler = new android.os.Handler(android.os.Looper.getMainLooper());
+    private Runnable pendingContactSearch;
     private boolean playDialSounds;
 
+    // the actual transport: placeCall when default dialer, ACTION_CALL only for non-emergency
+    // numbers otherwise (a non-default dialer can't ACTION_CALL emergency numbers — those fall
+    // back to a prefilled system dialer). EXTRA_PHONE_ACCOUNT_HANDLE rides along only when the
+    // user explicitly picked a SIM.
     @SuppressLint("NewApi")
-    public static void call(final CharSequence number, final Context context, SubscriptionInfo subscriptionInfo) {
+    private static void call(final CharSequence number, final Context context, @Nullable SubscriptionInfo subscriptionInfo) {
+        final Uri uri = telUri(number);
         try {
-            if (subscriptionInfo == null) {
-                context.startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(("tel:" + number).replace("#", Uri.encode("#")))));
-            } else {
-                final TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-                final List<PhoneAccountHandle> list = telecomManager.getCallCapablePhoneAccounts();
-                for (final PhoneAccountHandle phoneAccountHandle : list) {
-                    if (phoneAccountHandle.getId().contains(subscriptionInfo.getIccId())) {
-                        context.startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(("tel:" + number).replace("#", Uri.encode("#"))))
-                                .putExtra("android.telecom.extra.PHONE_ACCOUNT_HANDLE", (Parcelable) phoneAccountHandle));
-                        return;
-                    }
+            PhoneAccountHandle accountHandle = null;
+            if (subscriptionInfo != null) {
+                accountHandle = resolveAccountHandle(context, subscriptionInfo);
+                // fail closed: the user explicitly picked a SIM — silently calling on the wrong one is worse than not calling
+                if (accountHandle == null) {
+                    BaldToast.error(context, R.string.call_could_not_be_placed);
+                    return;
                 }
-                BaldToast.error(context);
-
+            }
+            if (CallManager.isDefaultDialer(context)) {
+                final TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+                final Bundle extras = new Bundle();
+                if (accountHandle != null)
+                    extras.putParcelable(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, accountHandle);
+                telecomManager.placeCall(uri, extras);
+            } else if (!isEmergencyNumber(number)) {
+                final Intent intent = new Intent(Intent.ACTION_CALL).setData(uri);
+                if (accountHandle != null)
+                    intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, accountHandle);
+                context.startActivity(intent);
+            } else {
+                context.startActivity(new Intent(Intent.ACTION_DIAL).setData(uri));
             }
         } catch (SecurityException e) {
+            // e.g. the default-dialer role was revoked between check and placeCall — crashing the launcher mid-call-attempt helps no one
             Log.e(TAG, e.getMessage());
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            BaldToast.error(context, R.string.call_could_not_be_placed);
         }
 
     }
 
     public static void call(final CharSequence number, final Context context, final boolean directly) {
+        if (!isDialable(number)) {
+            DialogScreen.info(context, R.string.phone, R.string.enter_phone_number);
+            return;
+        }
+        // the optional confirmation never gates emergency numbers or directly=true (SOS);
+        // a snapshot — the dialer's StringBuilder keeps mutating underneath the dialog
+        if (!directly && !isEmergencyNumber(number)
+                && BPrefs.get(context).getBoolean(BPrefs.CONFIRM_OUTGOING_CALLS_KEY, BPrefs.CONFIRM_OUTGOING_CALLS_DEFAULT_VALUE)) {
+            final String snapshot = number.toString();
+            DialogScreen.confirm(context, context.getText(R.string.confirm_call_title), snapshot,
+                    R.string.call, () -> startCall(snapshot, context, false));
+            return;
+        }
+        startCall(number, context, directly);
+    }
+
+    // confirmation (if any) is already behind us here: dual-SIM picker first, actual call after
+    private static void startCall(final CharSequence number, final Context context, final boolean directly) {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1 && !directly && BPrefs.get(context).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)) {
+            // the custom picker needs API 23+ (getCallCapablePhoneAccounts) and READ_PHONE_STATE to
+            // enumerate subscriptions/accounts at all — without either, fall back to a plain call
+            // with no explicit account rather than crashing or fake-offering a choice
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M && !directly
+                    && BPrefs.get(context).getBoolean(BPrefs.DUAL_SIM_KEY, BPrefs.DUAL_SIM_DEFAULT_VALUE)
+                    && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
                 final SubscriptionManager subscriptionManager = (SubscriptionManager) context
                         .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-                final List<SubscriptionInfo> activeSubscriptionInfoList = subscriptionManager.getActiveSubscriptionInfoList();
-                if (activeSubscriptionInfoList != null && (activeSubscriptionInfoList.size() > 1)) {
+                final List<SubscriptionInfo> activeSubscriptionInfoList;
+                try {
+                    activeSubscriptionInfoList = subscriptionManager.getActiveSubscriptionInfoList();
+                } catch (SecurityException e) {
+                    // permission revoked between check and use — degrade to a plain call, no picker
+                    call(number, context, null);
+                    return;
+                }
+                if (activeSubscriptionInfoList != null && (activeSubscriptionInfoList.size() > 1) && subscriptionsResolvable(activeSubscriptionInfoList)) {
                     final CharSequence[] simNames = new CharSequence[activeSubscriptionInfoList.size()];
                     for (int i = 0; i < activeSubscriptionInfoList.size(); i++) {
                         simNames[i] = activeSubscriptionInfoList.get(i).getDisplayName();
                     }
-                    BDB.from(context)
-                            .addFlag(BDialog.FLAG_OK | BDialog.FLAG_CANCEL)
-                            .setTitle(R.string.choose_sim)
-                            .setSubText(R.string.choose_sim_subtext)
-                            .setOptions(simNames)
-                            .setPositiveButtonListener(params -> {
-                                call(number, context, activeSubscriptionInfoList.get((Integer) params[0]));
-                                return true;
-                            }).show();
+                    DialogScreen.select(context, R.string.choose_sim,
+                            0,
+                            index -> call(number, context, activeSubscriptionInfoList.get(index)),
+                            simNames);
                 } else
                     call(number, context, null);
             } else
                 call(number, context, null);
         } else
-            BaldToast.error(context);
+            // no direct-call permission at all — hand the prefilled number to the system dialer
+            context.startActivity(new Intent(Intent.ACTION_DIAL).setData(telUri(number)));
 
+    }
+
+    /**
+     * Whether a picked {@link SubscriptionInfo} can be mapped back to a {@link PhoneAccountHandle}
+     * on this build. API 30+ has {@code TelephonyManager.getSubscriptionId(handle)}; below that the
+     * ICCID match is the only mapping, and since API 29 SPL 2021-04-05 {@code getIccId()} is redacted
+     * to "" for unprivileged apps — and {@code contains("")} matches the first account, i.e. silently
+     * the wrong SIM. On patched API 29 there is no reliable public mapping at all: no picker.
+     */
+    private static boolean subscriptionsResolvable(final List<SubscriptionInfo> subscriptionInfoList) {
+        if (android.os.Build.VERSION.SDK_INT != android.os.Build.VERSION_CODES.Q)
+            return true;
+        for (final SubscriptionInfo subscriptionInfo : subscriptionInfoList) {
+            final String iccId = subscriptionInfo.getIccId();
+            if (iccId == null || iccId.isEmpty())
+                return false;
+        }
+        return true;
+    }
+
+    // maps the picked subscription to its phone account; null when unmappable — callers must fail
+    // closed, never default to the first account. READ_PHONE_STATE is guaranteed by the picker gate;
+    // a race is caught by the caller's SecurityException handler.
+    @Nullable
+    @SuppressLint("NewApi")
+    private static PhoneAccountHandle resolveAccountHandle(final Context context, final SubscriptionInfo subscriptionInfo) {
+        final TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
+        final List<PhoneAccountHandle> list = telecomManager.getCallCapablePhoneAccounts();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            final TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (telephonyManager != null) {
+                for (final PhoneAccountHandle phoneAccountHandle : list) {
+                    if (telephonyManager.getSubscriptionId(phoneAccountHandle) == subscriptionInfo.getSubscriptionId())
+                        return phoneAccountHandle;
+                }
+            }
+        }
+        // legacy mapping, only meaningful with a visible ICCID — an empty one would contains()-match the first account
+        final String iccId = subscriptionInfo.getIccId();
+        if (iccId != null && !iccId.isEmpty()) {
+            for (final PhoneAccountHandle phoneAccountHandle : list) {
+                if (phoneAccountHandle.getId().contains(iccId))
+                    return phoneAccountHandle;
+            }
+        }
+        return null;
+    }
+
+    private static Uri telUri(final CharSequence number) {
+        return Uri.parse(("tel:" + number).replace("#", Uri.encode("#")));
+    }
+
+    @SuppressWarnings("deprecation") // TelephonyManager.isEmergencyNumber needs API 29+; this one still delegates to the same radio/network check on every version
+    private static boolean isEmergencyNumber(final CharSequence number) {
+        return PhoneNumberUtils.isEmergencyNumber(number.toString());
+    }
+
+    // blocks empty/too-short input and MMI codes ('#', '*') that would surface a foreign system dialog
+    private static boolean isDialable(final CharSequence number) {
+        if (number == null)
+            return false;
+        int digits = 0;
+        for (int i = 0; i < number.length(); i++) {
+            final char c = number.charAt(i);
+            if (c == '#' || c == '*')
+                return false;
+            if (Character.isDigit(c))
+                digits++;
+        }
+        return digits >= 2;
     }
 
     public static void call(final MiniContact miniContact, final Context context) {
         try {
             call(Contact.fromLookupKey(miniContact.lookupKey, context.getContentResolver()).getPhoneList().get(0).second, context, false);
         } catch (Exception e) {
-            BaldToast.error(context);
+            BaldToast.error(context, R.string.call_could_not_be_placed);
         }
     }
 
@@ -176,15 +294,59 @@ public class DialerActivity extends BaldActivity {
     }
 
     private void getContactsByNumberFilter() {
-        final Uri uri = number.length() == 0 ?
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI :
-                Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(number.toString()));
-        final Cursor contactsCursor = contentResolver.query(uri, PROJECTION, null, null, SORT_ORDER);
-        if (contactRecyclerViewAdapter != null) {
-            contactRecyclerViewAdapter.changeCursor(contactsCursor);
-        } else {
-            contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(this, contactsCursor, recyclerView, ContactRecyclerViewAdapter.MODE_DEFAULT);
+        final View sh = findViewById(R.id.scrolling_helper);
+        if (sh instanceof ScrollingHelper) {
+            ((ScrollingHelper) sh).setEmptyText(getString(number.length() == 0
+                    ? R.string.no_contacts : R.string.no_contacts_found));
+        }
+        if (contactRecyclerViewAdapter == null) {
+            contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(this,
+                    java.util.Collections.<ContactRecyclerViewAdapter.ContactRow>emptyList(),
+                    recyclerView, ContactRecyclerViewAdapter.MODE_DEFAULT);
             recyclerView.setAdapter(contactRecyclerViewAdapter);
+        }
+        final String numberSnapshot = number.toString();
+        final int generation = contactsGuard.next();
+        BaldExecutors.io().execute(() -> {
+            final Uri uri = numberSnapshot.length() == 0 ?
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI :
+                    Uri.withAppendedPath(ContactsContract.CommonDataKinds.Phone.CONTENT_FILTER_URI, Uri.encode(numberSnapshot));
+            java.util.List<ContactRecyclerViewAdapter.ContactRow> rows;
+            try {
+                rows = ContactRecyclerViewAdapter.loadRows(
+                        contentResolver.query(uri, PROJECTION, null, null, SORT_ORDER), contentResolver);
+            } catch (Exception e) {
+                rows = java.util.Collections.emptyList();
+            }
+            final java.util.List<ContactRecyclerViewAdapter.ContactRow> result = rows;
+            BaldExecutors.postToMain(() -> {
+                if (!contactsGuard.isCurrent(generation) || isFinishing() || isDestroyed())
+                    return;
+                contactRecyclerViewAdapter.submitList(result);
+                updateT9Chip(result);
+            });
+        });
+    }
+
+    // surfaces the first contact match as an «Имя — номер» chip under the number field
+    private void updateT9Chip(final java.util.List<ContactRecyclerViewAdapter.ContactRow> rows) {
+        if (number.length() > 0 && !rows.isEmpty()) {
+            final ContactRecyclerViewAdapter.ContactRow first = rows.get(0);
+            final String name = first.name;
+            final String contactNumber = first.number;
+            // name == contactNumber (nameless contacts) adds nothing over tv_number -> hide
+            final String text = name == null ? contactNumber
+                    : contactNumber == null ? name
+                    : name.equals(contactNumber) ? null
+                    : name + " \u2014 " + contactNumber;
+            if (text == null) {
+                t9_chip.setVisibility(View.GONE);
+            } else {
+                t9_chip.setText(text);
+                t9_chip.setVisibility(View.VISIBLE);
+            }
+        } else {
+            t9_chip.setVisibility(View.GONE);
         }
     }
 
@@ -195,6 +357,9 @@ public class DialerActivity extends BaldActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         tv_number = findViewById(R.id.tv_number);
+        // typed digits always read LTR
+        tv_number.setTextDirection(View.TEXT_DIRECTION_LTR);
+        t9_chip = findViewById(R.id.t9_chip);
         numpad = new View[]{
                 findViewById(R.id.b_0),
                 findViewById(R.id.b_1),
@@ -212,6 +377,14 @@ public class DialerActivity extends BaldActivity {
         b_backspace = findViewById(R.id.b_backspace);
         b_sulamit = findViewById(R.id.b_sulamit);
         b_hash = findViewById(R.id.b_hash);
+
+        // The action row is shorter than a regular BigButton; keep the 20sp labels intact
+        // by compacting only these icons and insets instead of shrinking the text.
+        final int iconSize = getResources().getDimensionPixelSize(R.dimen.icon_sm);
+        for (final View action : new View[]{b_clear, b_call, b_backspace}) {
+            action.setPadding(action.getPaddingLeft(), 0, action.getPaddingRight(), 0);
+            ((BaldPictureTextButton) action).getImageView().setLayoutParams(new LinearLayout.LayoutParams(iconSize, iconSize));
+        }
     }
 
     private void setOnClickListeners() {
@@ -234,7 +407,10 @@ public class DialerActivity extends BaldActivity {
     }
 
     private void searchForContact() {
-        getContactsByNumberFilter();
+        if (pendingContactSearch != null)
+            contactSearchHandler.removeCallbacks(pendingContactSearch);
+        pendingContactSearch = this::getContactsByNumberFilter;
+        contactSearchHandler.postDelayed(pendingContactSearch, 200);
     }
 
     public void setNumber(@NonNull CharSequence charSequence) {
@@ -265,6 +441,6 @@ public class DialerActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_READ_CONTACTS | PERMISSION_CALL_PHONE;
+        return PERMISSION_READ_CONTACTS | PERMISSION_CALL_PHONE | PERMISSION_READ_PHONE_STATE;
     }
 }

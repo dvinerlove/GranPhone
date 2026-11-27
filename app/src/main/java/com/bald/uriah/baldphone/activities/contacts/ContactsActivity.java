@@ -20,9 +20,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
@@ -36,6 +39,7 @@ public class ContactsActivity extends BaseContactsActivity {
     private static final String STAR_SELECTION = ContactsContract.Data.STARRED + " = 1";
     private static final String SORT_ORDER = "upper(" + ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + ") ASC";
     private View add_contact;
+    private EditText et_search;
 
     @Override
     protected int layout() {
@@ -46,12 +50,28 @@ public class ContactsActivity extends BaseContactsActivity {
     protected void viewsInit() {
         super.viewsInit();
         add_contact.setOnClickListener(v -> startActivity(new Intent(this, AddContactActivity.class)));
+
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setFilter(String.valueOf(s));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
     @Override
     protected void attachXml() {
         super.attachXml();
         add_contact = findViewById(R.id.bt_add_contact);
+        et_search = findViewById(R.id.et_search);
     }
 
     @Override
@@ -96,7 +116,7 @@ public class ContactsActivity extends BaseContactsActivity {
         try {
             return contentResolver.query(
                     uri,
-                    ContactRecyclerViewAdapter.PROJECTION,
+                    ContactRecyclerViewAdapter.PROJECTION_WITH_CONTACT_ID,
                     favorite ? STAR_SELECTION : null,
                     null,
                     SORT_ORDER);

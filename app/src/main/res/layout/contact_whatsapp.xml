@@ -13,34 +13,29 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/whatsapp"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="8dp"
-    android:background="@drawable/list_shape"
-    android:padding="0dp">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_sm"
+    android:background="@drawable/bald_card_background"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/list_row_height"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/spacing_lg"
+    android:paddingEnd="@dimen/spacing_lg">
 
-    <com.bald.uriah.baldphone.views.BaldPictureTextButton
-        android:id="@+id/whatsapp"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/style_for_buttons"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:_src="@drawable/whatsapp_on_button"
-        app:_text="@string/whatsapp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:importantForAccessibility="no"
+        android:layout_width="@dimen/icon_md"
+        android:layout_height="@dimen/icon_md"
+        android:src="@drawable/whatsapp_on_background" />
 
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_lg"
+        android:text="@string/whatsapp"
+        android:textColor="?bald_text_primary"
+        android:textSize="@dimen/medium" />
+</LinearLayout>

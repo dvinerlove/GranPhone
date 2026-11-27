@@ -25,7 +25,6 @@ import java.util.Random;
 
 public class RandomColorMaker {
     private SparseIntArray hashsToColors = new SparseIntArray();
-    private Random random = new Random();
     private boolean bright;
 
     public RandomColorMaker(int backgroundColor) {
@@ -43,7 +42,8 @@ public class RandomColorMaker {
         @ColorInt int color;
         color = hashsToColors.get(hash, -1);
         if (color == -1) {
-            color = Color.HSVToColor(new float[]{random.nextFloat() * 360, 0.65f, bright ? 0.3f * random.nextFloat() : 0.9f - 0.3f * random.nextFloat()});
+            final Random seeded = new Random(hash); // deterministic: same hash -> same color everywhere
+            color = Color.HSVToColor(new float[]{seeded.nextFloat() * 360, 0.65f, bright ? 0.3f * seeded.nextFloat() : 0.9f - 0.3f * seeded.nextFloat()});
             hashsToColors.append(hash, color);
         }
         return color;

@@ -21,12 +21,27 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActionBar">true</item>
         <item name="android:windowFullscreen">false</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">?bald_background</item>
         <item name="bald_button_gold">@color/gold</item>
         <item name="bald_text_on_gold">@color/on_gold</item>
         <item name="android:actionBarStyle">@style/BaldActionBar</item>
-        <item name="colorAccent">#fff</item>
+        <item name="colorAccent">?attr/bald_brand</item>
+    </style>
+
+    <style name="Theme.AppCompat.NoActionBar.FullScreen" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActionBar">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">?bald_background</item>
+        <item name="bald_button_gold">@color/gold</item>
+        <item name="bald_text_on_gold">@color/on_gold</item>
+        <item name="android:actionBarStyle">@style/BaldActionBar</item>
+        <item name="colorAccent">?attr/bald_brand</item>
     </style>
 
 
@@ -36,7 +51,7 @@
         <item name="bald_background_transparent">@color/bald_background_transparent_light</item>
         <item name="bald_button">@color/bald_button_light</item>
         <item name="bald_button_clicked">@color/bald_button_clicked_light</item>
-        <item name="bald_button_corners_radius">@dimen/bald_button_corners_radius_light</item>
+        <item name="bald_button_corners_radius">@dimen/radius_button</item>
         <item name="bald_button_disabled">@color/bald_button_disabled_light</item>
         <item name="bald_button_pill_corners_radius">@dimen/bald_button_pill_corners_radius_light
         </item>
@@ -45,53 +60,34 @@
         <item name="bald_decoration_on_key">@color/bald_decoration_on_key_light</item>
         <item name="bald_hint_on_background">@color/bald_hint_on_background_light</item>
         <item name="bald_hint_on_button">@color/bald_hint_on_button_light</item>
-        <item name="bald_selected_on_background">@color/bald_selected_on_background_light</item>
-        <item name="bald_text_on_selected">@color/bald_text_on_selected_light</item>
         <item name="bald_stroke_color">@color/bald_stroke_color_light</item>
         <item name="bald_keyboard_key_background">@color/bald_keyboard_key_background_light</item>
         <item name="bald_keyboard_key_pressed_background">
             @color/bald_keyboard_key_pressed_background_light
         </item>
-        <item name="bald_stroke_size">@dimen/bald_stroke_size_light</item>
-        <item name="bald_text_on_background">@color/bald_text_on_background_light</item>
-        <item name="bald_text_on_button">@color/bald_text_on_button_light</item>
+        <item name="bald_stroke_size">@dimen/border_width</item>
         <item name="bald_text_on_key">@color/bald_text_on_key_light</item>
+        <item name="bald_surface">@color/bald_surface_light</item>
+        <item name="bald_card">@color/bald_card_light</item>
+        <item name="bald_card_border">@color/bald_card_border_light</item>
+        <item name="bald_brand">@color/bald_brand_light</item>
+        <item name="bald_brand_pressed">@color/bald_brand_pressed_light</item>
+        <item name="bald_brand_tint">@color/bald_brand_tint_light</item>
+        <item name="bald_danger">@color/bald_danger_light</item>
+        <item name="bald_info">@color/bald_info_light</item>
+        <item name="bald_text_primary">@color/bald_text_primary_light</item>
+        <item name="bald_text_secondary">@color/bald_text_secondary_light</item>
+        <item name="bald_text_on_variant">@color/bald_text_on_variant_light</item>
+        <item name="bald_gold">@color/bald_gold_light</item>
     </style>
 
-    <!--Another Theme to add in the future, right now it looks bad.-->
-    <style name="bald_skin" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <item name="bald_key_margin">@dimen/bald_key_margin</item>
-        <item name="bald_background">@color/bald_background_skin</item>
-        <item name="bald_background_transparent">@color/bald_background_transparent_skin</item>
-        <item name="bald_button">@color/bald_button_skin</item>
-        <item name="bald_button_clicked">@color/bald_button_clicked_skin</item>
-        <item name="bald_button_corners_radius">@dimen/bald_button_corners_radius_skin</item>
-        <item name="bald_button_disabled">@color/bald_button_disabled_skin</item>
-        <item name="bald_button_pill_corners_radius">@dimen/bald_button_pill_corners_radius_skin
-        </item>
-        <item name="bald_decoration_on_background">@color/bald_decoration_on_background_skin</item>
-        <item name="bald_decoration_on_button">@color/bald_decoration_on_button_skin</item>
-        <item name="bald_decoration_on_key">@color/bald_decoration_on_key_skin</item>
-        <item name="bald_hint_on_background">@color/bald_hint_on_background_skin</item>
-        <item name="bald_hint_on_button">@color/bald_hint_on_button_skin</item>
-        <item name="bald_selected_on_background">@color/bald_selected_on_background_skin</item>
-        <item name="bald_text_on_selected">@color/bald_text_on_selected_skin</item>
-        <item name="bald_stroke_color">@color/bald_stroke_color_skin</item>
-        <item name="bald_keyboard_key_background">@color/bald_keyboard_key_background_skin</item>
-        <item name="bald_stroke_size">@dimen/bald_stroke_size_skin</item>
-        <item name="bald_text_on_background">@color/bald_text_on_background_skin</item>
-        <item name="bald_text_on_button">@color/bald_text_on_button_skin</item>
-        <item name="bald_text_on_key">@color/bald_text_on_key_skin</item>
-    </style>
-
-
-    <style name="bald_dark" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
+    <style name="bald_dark" parent="Theme.AppCompat.NoActionBar.FullScreen">
         <item name="bald_key_margin">@dimen/bald_key_margin</item>
         <item name="bald_background">@color/bald_background_dark</item>
         <item name="bald_background_transparent">@color/bald_background_transparent_dark</item>
         <item name="bald_button">@color/bald_button_dark</item>
         <item name="bald_button_clicked">@color/bald_button_clicked_dark</item>
-        <item name="bald_button_corners_radius">@dimen/bald_button_corners_radius_dark</item>
+        <item name="bald_button_corners_radius">@dimen/radius_button</item>
         <item name="bald_button_disabled">@color/bald_button_disabled_dark</item>
         <item name="bald_button_pill_corners_radius">@dimen/bald_button_pill_corners_radius_dark
         </item>
@@ -100,17 +96,25 @@
         <item name="bald_decoration_on_key">@color/bald_decoration_on_key_dark</item>
         <item name="bald_hint_on_background">@color/bald_hint_on_background_dark</item>
         <item name="bald_hint_on_button">@color/bald_hint_on_button_dark</item>
-        <item name="bald_selected_on_background">@color/bald_selected_on_background_dark</item>
-        <item name="bald_text_on_selected">@color/bald_text_on_selected_dark</item>
         <item name="bald_keyboard_key_pressed_background">
             @color/bald_keyboard_key_pressed_background_dark
         </item>
         <item name="bald_stroke_color">@color/bald_stroke_color_dark</item>
         <item name="bald_keyboard_key_background">@color/bald_keyboard_key_background_dark</item>
-        <item name="bald_stroke_size">@dimen/bald_stroke_size_dark</item>
-        <item name="bald_text_on_background">@color/bald_text_on_background_dark</item>
-        <item name="bald_text_on_button">@color/bald_text_on_button_dark</item>
+        <item name="bald_stroke_size">@dimen/border_width</item>
         <item name="bald_text_on_key">@color/bald_text_on_key_dark</item>
+        <item name="bald_surface">@color/bald_surface_dark</item>
+        <item name="bald_card">@color/bald_card_dark</item>
+        <item name="bald_card_border">@color/bald_card_border_dark</item>
+        <item name="bald_brand">@color/bald_brand_dark</item>
+        <item name="bald_brand_pressed">@color/bald_brand_pressed_dark</item>
+        <item name="bald_brand_tint">@color/bald_brand_tint_dark</item>
+        <item name="bald_danger">@color/bald_danger_dark</item>
+        <item name="bald_info">@color/bald_info_dark</item>
+        <item name="bald_text_primary">@color/bald_text_primary_dark</item>
+        <item name="bald_text_secondary">@color/bald_text_secondary_dark</item>
+        <item name="bald_text_on_variant">@color/bald_text_on_variant_dark</item>
+        <item name="bald_gold">@color/bald_gold_dark</item>
     </style>
 
 
@@ -125,7 +129,7 @@
 
     <style name="BackgroundText">
         <item name="android:textSize">@dimen/small</item>
-        <item name="android:textColor">?attr/bald_text_on_background</item>
+        <item name="android:textColor">?attr/bald_text_primary</item>
     </style>
 
     <style name="BackgroundText.Medium">
@@ -150,7 +154,7 @@
 
     <style name="ButtonsText">
         <item name="android:textSize">@dimen/small</item>
-        <item name="android:textColor">?attr/bald_text_on_button</item>
+        <item name="android:textColor">?attr/bald_text_primary</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -174,20 +178,22 @@
         <item name="autoSizeTextType">uniform</item>
     </style>
 
+    <!-- Card-style dialer keys (dial_pad.xml): bald_card fill, 16dp corners, 28sp digit -->
+    <style name="DialerKey">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">@dimen/spacing_sm</item>
+        <item name="android:background">@drawable/dialer_key_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">?attr/bald_text_primary</item>
+        <item name="android:textSize">@dimen/huge</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/tiny</item>
+    </style>
+
     <style name="BaldActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">?attr/bald_background</item>
     </style>
 
-    <!-- Very large buttons used on the call screen (activity_call.xml) -->
-    <style name="CallButton">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:drawablePadding">16dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingStart">32dp</item>
-        <item name="android:paddingEnd">32dp</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">36sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 </resources>

@@ -15,32 +15,20 @@
   -->
 
 <resources>
-    <string name="about">Sobre</string>
-    <string name="about_subtext">Hola!\nEl meu nom és Uriah Shaul Mandel i sóc el desenvolupador d\'aquesta plataforma.\n
-	He passat la major part de la meva vida "adulta" fent aquesta plataforma, i l\'he llançat gratis, perquè tots la usin.\n
-	Són benvinguts a contactar-me per correu electrònic:\n
-	GranPhone.contact@gmail.com
-</string>
-    <string name="accessibility_level">Nivell d\'Accessibilitat</string>
+
+<string name="accessibility_level">Nivell d\'Accessibilitat</string>
     <string name="accessibility_settings">Accessibilitat</string>
     <string name="accidental_touches">Protecció de toc accidental</string>
-    <string name="accidental_touches_settings_subtext">El protector bloqueja el seu telèfon d\'entrada tàctil quan el
-	telèfon està cobert\nSi té problemes amb ell, pot desactivar-lo
-</string>
     <string name="accidental_touches_subtext">Toc accidental detectat\n
-	Premi OK per a continuar usant el telèfon\n
+	Premi \"Entès\" per a continuar usant el telèfon\n
 	Si aquest missatge continua apareixent pot desactivar-lo en les opcions d\'accessibilitat
 </string>
-    <string name="acknowledgments">Agraïments</string>
-    <string name="adaptive">Adaptatiu</string>
     <string name="add_alarm">Afegir Alarma</string>
     <string name="add_alarm_quickly">Afegir Temporitzador</string>
     <string name="add_contact">Afegir Contacte</string>
     <string name="add_emergency_contact">Afegir</string>
     <string name="add_pill">Afegir Pastilla</string>
-    <string name="add_shortcut">Afegir accés directe</string>
     <string name="add_to_favorite">Afegir a Preferits</string>
-    <string name="add_to_home">Afegir a Inici</string>
     <string name="add_to_sos">Afegir a SOS</string>
     <string name="address">Adreça</string>
     <string name="advanced_options">Opcions Avançades</string>
@@ -61,7 +49,6 @@
 
     <string name="apps">Aplicacions</string>
     <string name="are_you_sure_you_want_to_delete___">Està segur de voler eliminar %s?</string>
-    <string name="assistant">Assistent</string>
     <string name="at_least_one_day_must_be_selected">Ha de seleccionar-se almenys un dia!</string>
     <string name="auto_brightness">Brillantor\nAutomàtic</string>
     <string name="backspace">retrocés</string>
@@ -69,7 +56,6 @@
     <string name="blocked">Bloquejat</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Brillantor</string>
-    <string name="brightness_subtext">Canviar Brillantor.</string>
     <string name="cache_cleared_successfully">Cache netejada correctament!</string>
     <string name="call">Trucar</string>
     <string name="calling">Trucada</string>
@@ -79,7 +65,6 @@
     <string name="camera">Càmera</string>
     <string name="camera_subtext">Aquest permís és necessari per a activar la llanterna.</string>
     <string name="cancel">Cancel·lar</string>
-    <string name="change_pills_time">Canviar Hora Pastilles</string>
     <string name="change_system_settings_subtext">Si us plau, permeti a GranPhone canviar els ajustos,
 com augmentar la grandària de font o canviar la lluentor.
 </string>
@@ -95,7 +80,8 @@ com augmentar la grandària de font o canviar la lluentor.
     <string name="clear_data">Netejar totes les Dades</string>
     <string name="clear_data_subtext">Està segur de voler ESBORRAR totes les Dades?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">segur?\nPrémer Si esborrarà totes les dades.</string>
+    <string name="clear_data_subtext3">segur?
+Això esborrarà totes les dades.</string>
     <string name="clock">Rellotge</string>
     <string name="coming_soon">Pròximament!</string>
     <string name="connection_settings">Connexió</string>
@@ -110,25 +96,19 @@ com augmentar la grandària de font o canviar la lluentor.
     <string name="dark">Fosc</string>
     <string name="delete">Esborrar</string>
     <string name="delete___">Esborrar %s?</string>
-    <string name="delete_all_alarms">Esborrar totes les Alarmes</string>
     <string name="dialer">Teclat</string>
     <string name="display_settings">Pantalla</string>
     <string name="done">Fet</string>
     <string name="down">Baixar</string>
     <string name="edit">Editar</string>
-    <string name="email">Correu:</string>
     <string name="enable_notification_access">Habilitar accés a Notificacions</string>
     <string name="enable_notification_access_subtext">Si us plau, concedeixi a GranPhone accés a les notificacions.</string>
     <string name="enter">Enter</string>
-    <string name="enter_contact_or_phone_number">Introdueixi el nom del contacte:</string>
     <string name="evening">A la Nit</string>
     <string name="example_of_different_text_sizes">Exemple de diferents grandàries de text\n
 	Ha de ser llegible i no sortir-se.
 </string>
     <string name="external_storage_subtext">Aquest permís és necessari per a guardar Fotos.</string>
-    <string name="feedback">Enviar Comentaris</string>
-    <string name="feedback_cannot_be_empty">Els comentaris no poden estar buits!</string>
-    <string name="feedback_sent_successfully">Comentaris enviats satisfactòriament!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Si us plau, seleccioni el nivell d\'accessibilitat
 </string>
     <string name="font_size">Font</string>
@@ -143,7 +123,6 @@ el teclat? Useu el teclat de GranPhone en el seu lloc!
     <string name="home_phone_number">Número de casa</string>
     <string name="hour">Hora</string>
     <string name="huge">Enorme</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Invocat en:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">
 Una última cosa:\n
@@ -155,9 +134,7 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="left_handed">Esquerrà</string>
     <string name="light">Llum</string>
     <string name="location">Ubicació</string>
-    <string name="emergency_services">Serveis d\'Emergència</string>
-    <string name="mail">Bústia</string>
-    <string name="maps">Mapa</string>
+<string name="mail">Bústia</string>
 
 
     <string name="medium">Mig</string>
@@ -178,8 +155,6 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="nfc">NFC</string>
     <string name="no">No</string>
     <string name="notes">Notes</string>
-    <string name="notes_settings">Notes</string>
-    <string name="notes_settings_subtext">Triï si desitja tenir una pàgina de Notes en la pantalla principal.</string>
     <string name="notifications">Notificacions</string>
 
     <string name="of">de</string>
@@ -202,6 +177,7 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="pill_added">Pastilla afegida!</string>
     <string name="pill_name">Nom Pastilla</string>
     <string name="pills">Pastilles</string>
+    <string name="pill">Pastilla</string>
     <string name="press_longer">Pressioni més temps!</string>
     <string name="timer">Temporitzador</string>
     <string name="read_call_log">Llegir historial de Trucades</string>
@@ -212,9 +188,6 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="regular_level">Nivell Normal</string>
 
     <string name="remove_from_favorite">Treure de Favorits</string>
-    <string name="remove_from_home">Treure d\'Inici</string>
-    <string name="remove_from_sos">Treure de SOS</string>
-    <string name="remove_shortcut">Treure accés directe</string>
     <string name="removed_all_alarms">Eliminades totes les alarmes!</string>
     <string name="repeats_every_day">Tots els dies</string>
     <string name="right_handed">Destre</string>
@@ -258,24 +231,20 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="speak">Parlar</string>
     <string name="speech_to_text">Veu a Text</string>
     <string name="strong_hand">Mà dominant</string>
-    <string name="strong_hand_subtext">Triï la seva mà dominant per a ajustar la interfície.</string>
-    <string name="submit">enviar</string>
     <string name="sunday">Diumenge</string>
     <string name="technical_information">Información Tècnica</string>
     <string name="theme_settings">Aparença</string>
-    <string name="theme_settings_subtext">Triï una Aparença</string>
 
     <string name="thursday">Dijous</string>
     <string name="time_changer">Canviar hora Pastilles</string>
     <string name="tiny">Diminut</string>
-    <string name="to___days_and___hours_from_now">a %d dies i %d hores des d\'ara</string>
-    <string name="to___hours_and___minutes_from_now">a %d hores i %d minuts des d\'ara</string>
+    <string name="to___days_and___hours_from_now">a %1$d dies i %2$d hores des d\'ara</string>
+    <string name="to___hours_and___minutes_from_now">a %1$d hores i %2$d minuts des d\'ara</string>
     <string name="to___minuets_from_now">a %d minuts des d\'ara</string>
     <string name="today">Avui</string>
     <string name="took">Presa!</string>
     <string name="tuesday">Dimarts</string>
     <string name="uninstall">Desinstal·lar</string>
-    <string name="uninstall_subtext">Està segur de voler desinstal·lar %s\nLes dades de %s es perdran per sempre!</string>
     <string name="up">A dalt</string>
     <string name="video">Vídeo</string>
     <string name="video_tutorials">Vídeo Tutorials</string>
@@ -293,8 +262,11 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
     <string name="yesterday">Ahir</string>
     <string name="nothing">Res</string>
     <string name="no_contacts_found">No s\'han trobat contactes!</string>
-    <string name="no_alarms">Sense Alarmes\nCrea una prement\n\"Afegir Alarma\"\no\n\"Afegir Temporitzador\"</string>
-    <string name="no_pills">Sense Pastilles\nCrea una prement\n\"Afegir Pastilla\"</string>
+    <string name="no_alarms">Sense alarmes.
+Premeu \"Alarma\" o
+\"Temporitzador\" a sota.</string>
+    <string name="no_pills">Sense pastilles.
+Premeu \"+ Pastilla\" a sota.</string>
     <string name="clear_all_notifications">Treure totes les Notificacions</string>
     <string name="clear_cache_subtext">De veritat voleu esborrar per complet la caché?\nEls enllaços directes també s\'esborraran!
 </string>
@@ -302,7 +274,7 @@ Es recomana encaridament usar \"GranPhone\'s home screen\" com el Llançador pri
 Hola, GranPhone ha de tenir els següents permisos per a executar-se. Alguns
 poden espantar, però és l\'única forma en què GranPhone pot reemplaçar la interfície del telèfon.
 GranPhone no usarà les seves dades personals ni danyarà el seu telèfon.
-Pressioni OK per a atorgar els permisos o No per a sortir de GranPhone.
+Continui per a atorgar els permisos o surti de GranPhone.
 </string>
     <string name="pending_update">Actualització pendent</string>
     <string name="download">Descarregar</string>
@@ -310,7 +282,7 @@ Pressioni OK per a atorgar els permisos o No per a sortir de GranPhone.
     <string name="install_updates_subtext">Aquest permís és necessari per a poder actualitzar GranPhone</string>
     <string name="a_new_update_is_available">Nova actualiación disponible!\n
 Les actualitzacions són importants per a millorar l\'App.\n
-Premi OK per a descarregar-la.
+Continui per a descarregar-la.
 </string>
     <string name="current_version">Versió actual:
 </string>
@@ -340,24 +312,15 @@ Premi OK per a descarregar-la.
     <string name="try_now">Provar ara</string>
     <string name="download_progress">Progrés de descàrrega</string>
     <string name="what_do_you_want_to_do_with___">Quina vol fer amb %s?</string>
-    <string name="crash_reports">Reportar errors</string>
-    <string name="crash_reports_subtext">
-	Els informes d\'errors ajuden a fer que l\'experiència de GranPhone sigui perfecta.\n
-	S\'usen únicament per a corregir errors, i no es pren més informació que la necessària per a corregir l\'error.
-</string>
     <string name="custom_app">App personalitzada</string>
-    <string name="custom_app_subtext">Triï una altra App com a Pantalla d\'Inici.</string>
-    <string name="no_app_was_found">Cerca d\'App sense resultats</string>
     <string name="alarm">Alarma</string>
     <string name="no_new_notifications">No hi ha noves Notificationes</string>
     <string name="sound">So</string>
     <string name="mute">Silenci</string>
     <string name="vibrate">Vibració</string>
-    <string name="your_phone_doesnt_have_assistant_installed">El seu telèfon no té un assistent instal·lat.</string>
 
 
     <string name="status_bar_settings">Barra d\'estat</string>
-    <string name="status_bar_settings_subtext">On voleu mostrar la bara d\'estat?</string>
     <string name="only_home_screen">Només en la Pantalla d\'Inici</string>
     <string name="nowhere">Oculta</string>
     <string name="everywhere">Totes parts</string>
@@ -368,6 +331,8 @@ Premi OK per a descarregar-la.
     <string name="choose_language_for_keyboard">Trieu un Idioma</string>
     <string name="hebrew">Hebreu</string>
     <string name="english">Anglès</string>
+    <string name="russian">Rus</string>
+    <string name="understood">Entès</string>
 
     <string name="search">Buscar</string>
     <string name="next">Següent</string>
@@ -375,50 +340,31 @@ Premi OK per a descarregar-la.
 
 
     <string name="dialer_sounds">To de trucada</string>
-    <string name="dialer_sounds_subtext">Triï si desitja tenir to de trucada.</string>
     <string name="low_battery_alert">Alerta de bateria baixa</string>
-    <string name="low_battery_alert_subtext">Marqui si vol que la barra d\'estat es posi vermella si la bateria està per sota del 20%\n
-No es veuran canvis si la barra d\'estat està oculta.
-</string>
 
-    <string name="also_available_at">També disponible a\nGranPhone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
     <string name="grant_all_permissions">Donar tots els Permisos</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donació</string>
-    <string name="emergency_button">Botó emergència</string>
-    <string name="emergency_settings_subtext">Trieu si voleu tenir un botó emergència a la pantalla inici.</string>
     <string name="private_number">Número privat</string>
     <string name="swipe_left_or_right">Swipe esquerra o dreta</string>
     <string name="press_next_or_back_buton">Premeu la tecla següent o de retrocés</string>
-    <string name="click_delay">Demora del clic</string>
-    <string name="no_delay">Sense demora</string>
-    <string name="scrolling">Desplaçament</string>
-    <string name="arrows">Fletxes</string>
-    <string name="swipe">Swipe</string>
-    <string name="_long">Llarg</string>
-    <string name="_short">Curt</string>
     <string name="do_you_want_to_save_your_changes">Voleu guardar els canvis?</string>
     <string name="discard">Descartar</string>
     <string name="no_recent_calls">Sense trucades recents</string>
     <string name="apps_sort_method">Mètode ordenació Apps</string>
-    <string name="apps_sort_method_subtext">Trieu si voleu ordenar les apps en una columna o dividits en grups mitjançant lletres</string>
     <string name="groups">Grups</string>
     <string name="one_grid">Una Columna</string>
     <string name="colorful">Colorful</string>
-    <string name="colorful_subtext">Voleu que GranPhone habiliti Colorful?</string>
     <string name="edit_home_screen">Edita Pàgina Inici</string>
     <string name="dual_sim">SIM Dual</string>
-    <string name="dual_sim_subtext">Trieu com voleu gestionar la doble SIM\*nNota: Si trieu Mostrar Opcions, haureu d\'acceptar un altre permís</string>
     <string name="use_default">Usar predeterminat</string>
     <string name="show_options">Mostrar Opcions</string>
     <string name="read_phone_state">Consultar estat del telèfon</string>
     <string name="read_phone_state_subtext">Aquest permís és necessari per a poder trucar des de la segona SIM</string>
     <string name="choose_sim">Trieu SIM</string>
-    <string name="choose_sim_subtext">Trieu la SIM des de la qual vulgueu realitzar la trucada</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>
         <item>Abraham Lincoln</item>
@@ -430,4 +376,46 @@ No es veuran canvis si la barra d\'estat està oculta.
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Enrere</string>
+    <string name="exit">Surt</string>
+    <string name="stay">Romandre</string>
+    <string name="settings_for_user">Per a l’usuari</string>
+    <string name="settings_for_helper">Per a l’ajudant</string>
+    <string name="answer_call">Respon</string>
+    <string name="call_ended">Trucada finalitzada</string>
+    <string name="call_status_calling">S\'està trucant...</string>
+    <string name="calls_channel">Convocatòries</string>
+    <string name="confirm_call_title">Trucar a aquest número?</string>
+    <string name="decline_call">Rebutja</string>
+    <string name="hang_up">Penja</string>
+    <string name="helper_pin_create_subtext">Trieu un codi de 4 dígits. Protegeix la configuració de l\'ajudant.</string>
+    <string name="helper_pin_enter_subtext">Introduïu el codi de 4 dígits per a la configuració de l\'ajudant.</string>
+    <string name="helper_pin_mismatch">Els codis no coincideixen.</string>
+    <string name="helper_pin_repeat_subtext">Introduïu de nou el mateix codi de 4 dígits.</string>
+    <string name="in_call">En convocatòria</string>
+    <string name="in_call_duration">En trucada • %1$s</string>
+    <string name="in_call_with">En trucada amb %1$s</string>
+    <string name="incoming_call">Trucada entrant</string>
+    <string name="incoming_call_from">Trucada entrant de %1$s</string>
+    <string name="kiosk_disable_subtext">Introduïu el codi de 4 dígits per desactivar el mode quiosc.</string>
+    <string name="kiosk_disabled">El mode quiosc està desactivat.</string>
+    <string name="kiosk_enable_subtext">El telèfon romandrà dins del GranPhone: sense ombra de notificació, sense configuració d\'Android i sense desinstal·lació d\'aplicacions.\nTria un codi de 4 dígits per desactivar aquest bloqueig més tard.</string>
+    <string name="kiosk_enabled">El mode quiosc està activat.</string>
+    <string name="kiosk_pin_too_short">Introduïu exactament 4 dígits.</string>
+    <string name="kiosk_wrong_pin">Aquest no és el codi de 4 dígits que heu establert. Torna-ho a provar.</string>
+    <string name="on_hold">En espera</string>
+    <string name="ongoing_call">Trucada en curs</string>
+    <string name="pin_digits_entered">%1$d de %2$d dígits introduïts</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — trucar als serveis d\'emergència</string>
+    <string name="sos_call_help">Trucar als serveis d\'emergència</string>
+    <string name="sos_calling_in">Trucant als serveis d\'emergència en %d segons...</string>
+    <string name="sos_confirm_call">Truqueu ara als serveis d\'emergència?</string>
+    <string name="sos_hold_explanation">Manteniu premut SOS durant 5 segons per trucar als serveis d\'emergència.</string>
+    <string name="speaker_state_off">Altaveu apagat</string>
+    <string name="speaker_state_on">Ponent activat</string>
+    <string name="speaker_turn_off">Apagueu l\'altaveu</string>
+    <string name="speaker_turn_on">Activa l\'altaveu</string>
+    <string name="tap_to_return_to_call">Toqueu per tornar a la trucada</string>
+    <string name="unknown_number">Número desconegut</string>
 </resources>

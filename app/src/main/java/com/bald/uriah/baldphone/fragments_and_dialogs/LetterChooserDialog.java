@@ -97,8 +97,8 @@ public class LetterChooserDialog extends Dialog {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             super.onBindViewHolder(holder, position);
-            final char c = (char) lettersToValues.keyAt(position);
-            holder.textView.setText(String.valueOf(c));
+            // keys are unicode code points (emoji-safe), not chars
+            holder.textView.setText(new String(Character.toChars(lettersToValues.keyAt(position))));
             holder.textView.setOnClickListener((v) -> {
                 onChooseLetterListener.onChooseLetter(lettersToValues.valueAt(position));
                 cancel();

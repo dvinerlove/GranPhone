@@ -18,28 +18,25 @@ package com.bald.uriah.baldphone.activities;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.adapters.AppsRecyclerViewAdapter;
 import com.bald.uriah.baldphone.databases.apps.App;
-import com.bald.uriah.baldphone.databases.apps.AppsDatabase;
 import com.bald.uriah.baldphone.databases.apps.AppsDatabaseHelper;
-import com.bald.uriah.baldphone.utils.BDB;
-import com.bald.uriah.baldphone.utils.BDialog;
+import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.DropDownRecyclerViewAdapter;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.GenerationGuard;
 
-import java.util.List;
+import java.util.Collections;
 import java.util.Objects;
 
 import static com.bald.uriah.baldphone.adapters.AppsRecyclerViewAdapter.TYPE_HEADER;
@@ -52,66 +49,66 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
     public static final int UNINSTALL_REQUEST_CODE = 52;
     private static final String SELECTED_APP_INDEX = "SELECTED_APP_INDEX";
 
-    private AppsDatabase appsDatabase;
-    private int numberOfAppsInARow;
-
     private RecyclerView recyclerView;
 
     private AppsRecyclerViewAdapter appsRecyclerViewAdapter;
     private String chooseKey;
+    private final GenerationGuard appsLoadGuard = new GenerationGuard();
+    private int restoredIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apps);
 
-        AppsDatabaseHelper.updateDB(this);
-
-        appsDatabase = AppsDatabase.getInstance(AppsActivity.this);
-        final List<App> appList = appsDatabase.appsDatabaseDao().getAllOrderedByABC();
         recyclerView = findViewById(R.id.rc_apps);
         chooseKey = getIntent().getStringExtra(CHOOSE_MODE);
-        appsRecyclerViewAdapter = new AppsRecyclerViewAdapter(appList, this, chooseKey != null ? this::appChosen : this::showDropDown, recyclerView);
+        if (chooseKey != null)
+            ((com.bald.uriah.baldphone.views.BaldTitleBar) findViewById(R.id.bald_title_bar)).setTitle(R.string.choose_another_app);
+        loadApps();
+    }
 
-        final WindowManager windowManager = getWindowManager();
-        final Point point = new Point();
-        windowManager.getDefaultDisplay().getSize(point);
-        final boolean screenOrientation = (point.x / point.y) != 0;
-        numberOfAppsInARow = screenOrientation ? 6 : 3;
-        final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfAppsInARow);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                switch (appsRecyclerViewAdapter.getItemViewType(position)) {
-                    case TYPE_HEADER:
-                        return numberOfAppsInARow;
-                    case AppsRecyclerViewAdapter.TYPE_ITEM:
-                        return 1;
-                    default:
-                        return 1;
-                }
-            }
+    private void loadApps() {
+        final int generation = appsLoadGuard.next();
+        AppsDatabaseHelper.updateDBAsync(this, (success, apps) -> {
+            if (!appsLoadGuard.isCurrent(generation) || isFinishing() || isDestroyed())
+                return;
+            appsRecyclerViewAdapter = new AppsRecyclerViewAdapter(
+                    apps != null ? apps : Collections.<App>emptyList(), this,
+                    chooseKey != null ? this::appChosen : this::showDropDown, recyclerView);
+            recyclerView.setAdapter(appsRecyclerViewAdapter);
+            restoreIndex(restoredIndex);
         });
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(appsRecyclerViewAdapter);
+    }
+
+    private void restoreIndex(int index) {
+        final AppsRecyclerViewAdapter adapter = appsRecyclerViewAdapter;
+        if (adapter == null || index <= 0 || index >= adapter.dataList.size() || adapter.dataList.get(index).type() == TYPE_HEADER)
+            return;
+        restoredIndex = -1;
+        adapter.index = index;
+        recyclerView.getLayoutManager().scrollToPosition(index);
+        recyclerView.post(() -> showDropDown(index));
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_APP_INDEX, ((AppsRecyclerViewAdapter) recyclerView.getAdapter()).index);
+        if (appsRecyclerViewAdapter != null)
+            outState.putInt(SELECTED_APP_INDEX, appsRecyclerViewAdapter.index);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        final int index = savedInstanceState.getInt(SELECTED_APP_INDEX);
-        final AppsRecyclerViewAdapter adapter = ((AppsRecyclerViewAdapter) recyclerView.getAdapter());
-        if (index < adapter.dataList.size() && index > 0 && adapter.dataList.get(index).type() != TYPE_HEADER) {
-            adapter.index = index;
-            recyclerView.getLayoutManager().scrollToPosition(index);
-            recyclerView.post(() -> showDropDown(index));
-        }
+        restoredIndex = savedInstanceState.getInt(SELECTED_APP_INDEX);
+        restoreIndex(restoredIndex);
+    }
+
+    @Override
+    protected void onDestroy() {
+        appsLoadGuard.invalidate();
+        super.onDestroy();
     }
 
     private void uninstallApp(App app) {
@@ -137,33 +134,29 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
         final View view = Objects.requireNonNull(recyclerView.getLayoutManager()).findViewByPosition(index);
         if (view == null)
             return;
-        S.showDropDownPopup(this, recyclerView.getWidth(), new DropDownRecyclerViewAdapter.DropDownListener() {
+        AppUtils.showDropDownPopup(this, recyclerView.getWidth(), new DropDownRecyclerViewAdapter.DropDownListener() {
             @Override
             public void onUpdate(DropDownRecyclerViewAdapter.ViewHolder viewHolder, int position, PopupWindow popupWindow) {
                 switch (position) {
                     case 0:
-                        if (S.isValidContextForGlide(viewHolder.pic.getContext()))
+                        if (AppUtils.isValidContextForGlide(viewHolder.pic.getContext()))
                             AppsDatabaseHelper.loadPic(app, viewHolder.pic);
                         viewHolder.text.setText(R.string.open);
                         viewHolder.itemView.setOnClickListener(v1 -> {
                             final ComponentName componentName = ComponentName.unflattenFromString(app.getFlattenComponentName());
-                            S.startComponentName(AppsActivity.this, componentName);
+                            AppUtils.startComponentName(AppsActivity.this, componentName);
                             popupWindow.dismiss();
                         });
                         break;
                     case 1:
-                        viewHolder.pic.setImageResource(app.isPinned() ? R.drawable.remove_on_button : R.drawable.add_on_button);
-                        viewHolder.text.setText(app.isPinned() ? R.string.remove_shortcut : R.string.add_shortcut);
+                        final boolean pinned = HomeScreenPinHelper.isAppPinned(AppsActivity.this, app.getFlattenComponentName());
+                        viewHolder.pic.setImageResource(pinned ? R.drawable.remove_on_button : R.drawable.pin_on_button);
+                        viewHolder.text.setText(pinned ? R.string.unpin_from_home : R.string.pin_to_home);
                         viewHolder.itemView.setOnClickListener(v1 -> {
-                            if (app.isPinned()) {
-                                appsDatabase.appsDatabaseDao().update(app.getId(), false);
-                                app.setPinned(false);
-                                appsRecyclerViewAdapter.notifyItemChanged(appsRecyclerViewAdapter.index);
-                            } else {
-                                appsDatabase.appsDatabaseDao().update(app.getId(), true);
-                                app.setPinned(true);
-                                appsRecyclerViewAdapter.notifyItemChanged(appsRecyclerViewAdapter.index);
-                            }
+                            if (pinned)
+                                HomeScreenPinHelper.unpinApp(AppsActivity.this, app.getFlattenComponentName());
+                            else if (!HomeScreenPinHelper.pinApp(AppsActivity.this, app.getFlattenComponentName()))
+                                DialogScreen.info(AppsActivity.this, R.string.home_screen_is_full, R.string.home_screen_is_full_subtext);
                             popupWindow.dismiss();
                             showDropDown(index);
                         });
@@ -172,15 +165,11 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
                         viewHolder.pic.setImageResource(R.drawable.delete_on_button);
                         viewHolder.text.setText(R.string.uninstall);
                         viewHolder.itemView.setOnClickListener(v1 -> {
-                            BDB.from(AppsActivity.this)
-                                    .setTitle(String.format("%s %s", getText(R.string.uninstall), app.getLabel()))
-                                    .setSubText(String.format(getString(R.string.uninstall_subtext), app.getLabel(), app.getLabel()))
-                                    .addFlag(BDialog.FLAG_YES | BDialog.FLAG_CANCEL)
-                                    .setPositiveButtonListener(params -> {
-                                        uninstallApp(app);
-                                        return true;
-                                    })
-                                    .show();
+                            DialogScreen.confirm(AppsActivity.this,
+                                    getString(R.string.uninstall_app_title, app.getLabel()),
+                                    getString(R.string.uninstall_subtext, app.getLabel()),
+                                    R.string.uninstall,
+                                    () -> uninstallApp(app));
                             popupWindow.dismiss();
                         });
                         break;
@@ -202,8 +191,7 @@ public class AppsActivity extends com.bald.uriah.baldphone.activities.BaldActivi
             }
         }, view);
 
-        if (index + numberOfAppsInARow >= appsRecyclerViewAdapter.dataList.size())
-            recyclerView.scrollToPosition(index);
+        recyclerView.scrollToPosition(index);
 
     }
 

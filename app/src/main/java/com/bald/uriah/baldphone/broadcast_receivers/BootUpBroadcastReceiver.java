@@ -21,14 +21,17 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.bald.uriah.baldphone.BaldPhone;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.services.AlarmRecoveryJobService;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 /**
- * guarantees that {@link BaldPhone#onCreate()} will be called
+ * guarantees that {@link BaldPhone#onCreate()} will be called and explicitly starts
+ * system-tracked alarm recovery after boot
  */
 public class BootUpBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        S.logImportant("GranPhone OnBoot called");
+        AppUtils.logImportant("GranPhone OnBoot called");
+        AlarmRecoveryJobService.schedule(context);
     }
 }

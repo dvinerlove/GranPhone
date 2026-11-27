@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -65,6 +66,9 @@ public final class KioskManager {
             Manifest.permission.WRITE_CALL_LOG,
             Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_VIDEO,
+            Manifest.permission.POST_NOTIFICATIONS,
     };
 
     private KioskManager() {
@@ -88,8 +92,13 @@ public final class KioskManager {
         return isDeviceOwner(context) && BPrefs.get(context).getBoolean(KIOSK_KEY, false);
     }
 
+    @Nullable
+    public static String savedPin(Context context) {
+        return BPrefs.get(context).getString(KIOSK_PIN_KEY, null);
+    }
+
     public static boolean checkPin(Context context, CharSequence pin) {
-        final String saved = BPrefs.get(context).getString(KIOSK_PIN_KEY, null);
+        final String saved = savedPin(context);
         return saved != null && saved.equals(String.valueOf(pin));
     }
 
@@ -113,7 +122,9 @@ public final class KioskManager {
      * @param activity an activity of the locked task, if available, to stop lock task right away.
      */
     public static void disable(Context context, @Nullable Activity activity) {
-        BPrefs.get(context).edit().putBoolean(KIOSK_KEY, false).apply();
+        // drop the PIN too: a leftover PIN would shadow the helper PIN in settings,
+        // and enable() always writes a fresh one anyway
+        BPrefs.get(context).edit().putBoolean(KIOSK_KEY, false).remove(KIOSK_PIN_KEY).apply();
         if (activity != null) {
             try {
                 activity.stopLockTask();
@@ -228,6 +239,9 @@ public final class KioskManager {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             for (final String permission : OWN_RUNTIME_PERMISSIONS) {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+                        && Manifest.permission.POST_NOTIFICATIONS.equals(permission))
+                    continue;
                 try {
                     dpm.setPermissionGrantState(admin, packageName, permission, DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED);
                 } catch (Exception e) {
@@ -252,6 +266,14 @@ public final class KioskManager {
         allowed.addAll(packagesHandling(pm, new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)));
         allowed.addAll(packagesHandling(pm, new Intent(MediaStore.ACTION_IMAGE_CAPTURE)));
         allowed.addAll(packagesHandling(pm, new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)));
+        allowed.addAll(packagesHandling(pm, new Intent(MediaStore.ACTION_VIDEO_CAPTURE)));
+        final ProviderInfo mediaProvider = pm.resolveContentProvider(MediaStore.AUTHORITY, 0);
+        if (mediaProvider != null)
+            allowed.add(mediaProvider.packageName);
+        else {
+            allowed.add("com.android.providers.media");
+            allowed.add("com.google.android.providers.media");
+        }
         allowed.addAll(packagesHandling(pm, new Intent("android.content.pm.action.REQUEST_PERMISSIONS")));
         final String smsPackage = Telephony.Sms.getDefaultSmsPackage(context);
         if (smsPackage != null)

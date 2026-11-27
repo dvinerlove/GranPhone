@@ -24,9 +24,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.bald.uriah.baldphone.adapters.AppsRecyclerViewAdapter;
-import com.bald.uriah.baldphone.databases.home_screen_pins.HomeScreenPinHelper;
-import com.bald.uriah.baldphone.utils.S;
-import com.bald.uriah.baldphone.views.HomeScreenAppView;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -39,7 +36,7 @@ import java.util.Objects;
  * see {@link Entity}
  */
 @Entity
-public class App implements AppsRecyclerViewAdapter.InAppsRecyclerView, HomeScreenPinHelper.HomeScreenPinnable {
+public class App implements AppsRecyclerViewAdapter.InAppsRecyclerView {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -121,12 +118,4 @@ public class App implements AppsRecyclerViewAdapter.InAppsRecyclerView, HomeScre
         return result;
     }
 
-    @Ignore
-    @Override
-    public void applyToHomeScreenAppView(HomeScreenAppView homeScreenAppView) {
-        homeScreenAppView.setText(getLabel());
-        if (S.isValidContextForGlide(homeScreenAppView.iv_icon.getContext()))
-            AppsDatabaseHelper.loadPic(this, homeScreenAppView.iv_icon);
-        homeScreenAppView.setIntent(ComponentName.unflattenFromString(getFlattenComponentName()));
-    }
 }

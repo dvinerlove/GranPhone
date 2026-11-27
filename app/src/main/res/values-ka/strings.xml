@@ -15,27 +15,18 @@
   -->
 
 <resources>
-    <string name="about">აპლიკაციის შესახებ</string>
-    <string name="about_subtext">სალამი!\nმე მქვია ურია შეულ მენდელი და მე ვარ ამ პლატფორმის GranPhone(მელოტი ტელეფონის) დეველოპერი.\n
-        მე მთელი ჩემი (ზრდასრული) ცხოვრება ამ პლატფორმას ვაკეთებდი და გადავწყვიტე გამეზიარებინა ყველასთვის,სრულიად უფასოდ.\nმოხარული ვიქნები თუ დამიკავშირდებით :\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">წვდომის დონე</string>
+
+<string name="accessibility_level">წვდომის დონე</string>
     <string name="accessibility_settings">სპეციალური შესაძლებლობები</string>
     <string name="accidental_touches">შემთხვევითი შეხების გუშაგი</string>
-    <string name="accidental_touches_settings_subtext">შემთხვევითი შეხების გუშაგი ახდენს ბლოკირებას,როდესაც ტელეფონი დაფარულია.\nთუ თქვენ მასთან პრობლემა შეგექმნათ შეგიძლიათ გათიშოთ.
+    <string name="accidental_touches_subtext">აღმოჩენილია შემთხვევითი შეხება.\nდააჭირეთ \"გავიგე\"-ს ტელეფონის გამოყენების გასაგრძელებლად.\nთუ ეს შეტყობინება გამოდის ხშირად, თქვენ შეგიძლიათ გათიშოთ სპეციალური შესაძლებლობებიდან(accessibility settings).
     </string>
-    <string name="accidental_touches_subtext">აღმოჩენილია შემთხვევითი შეხება.\დააჭირეთ დიახ-ს ტელეფონის გამოყენების გასაგრძელებლად.\nთუ ეს შეტყობინება გამოდის ხშირად, თქვენ შეგიძლიათ გათიშოთ სპეციალური შესაძლებლობებიდან(accessibility settings).
-    </string>
-    <string name="acknowledgments">მადლიერებები</string>
-    <string name="adaptive">ადაპტიური</string>
     <string name="add_alarm">მაღვიძარას დამატება</string>
     <string name="add_alarm_quickly">ტაიმერის დამატება</string>
     <string name="add_contact">კონტაქტის დამატება</string>
     <string name="add_emergency_contact">დამატება</string>
     <string name="add_pill">აბის დამატება</string>
-    <string name="add_shortcut">მალსახმობის დამატება</string>
     <string name="add_to_favorite">დავამატოთ რჩეულებს</string>
-    <string name="add_to_home">დავამატოთ მთავარ ეკრანს-ს</string>
     <string name="add_to_sos">დავამატოთ SOS</string>
     <string name="address">მისამართი</string>
     <string name="advanced_options">დამატებითი პარამეტრები</string>
@@ -55,7 +46,6 @@
 
     <string name="apps">აპლიკაციები</string>
     <string name="are_you_sure_you_want_to_delete___">დარწმუნებული ხართ რომ გსურთ წაშალოთ %s?</string>
-    <string name="assistant">ასისტენტი</string>
     <string name="at_least_one_day_must_be_selected">ერთი დღე მაინც უნდა იყოს მონიშნული!</string>
     <string name="auto_brightness">ავტო\nსიკაშკაშე</string>
     <string name="backspace">backspace</string>
@@ -63,7 +53,6 @@
     <string name="blocked">ბლოკირებულია</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">სიკაშკაშე</string>
-    <string name="brightness_subtext">სიკაშკაშის შეცვლა.</string>
     <string name="cache_cleared_successfully">ქეში გასუფთავდა წარმატებით!</string>
     <string name="call">დარეკვა</string>
     <string name="calling">რეკავს</string>
@@ -73,7 +62,6 @@
     <string name="camera">კამერა</string>
     <string name="camera_subtext">ეს ნებართვა აუცილებელია ფარნის ჩასართავად.</string>
     <string name="cancel">უარი</string>
-    <string name="change_pills_time">აბის დროის შეცვლა</string>
     <string name="change_system_settings_subtext">გთხოვთ ნება დართოთ GranPhone-ს რომ შეცვალოს პარამეტრები,როგორებიცაა შრიფტის ზომის და სიკაშკაშის შეცვლა.
     </string>
     <string name="choose_friday">პარ</string>
@@ -88,7 +76,8 @@
     <string name="clear_data">ყველა მონაცემის წაშლა</string>
     <string name="clear_data_subtext">დარწმუნებული ხართ რომ გსურთ წაშალოთ ყველა სამომხმარებლო მონაცემი? GranPhone დაუბრუნდება ახლად დაინსტალირებულ მდგომარეობას, თითქოს ის ახალახანს დაყენდა.</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">დარწმუნებული ხართ?\nდაჭერისას წაიშლება ყველა თქვენი მონაცემი!</string>
+    <string name="clear_data_subtext3">დარწმუნებული ხართ?
+წაიშლება ყველა თქვენი მონაცემი!</string>
     <string name="clock">საათი</string>
     <string name="coming_soon">მალე!</string>
     <string name="connection_settings">კავშირი</string>
@@ -103,24 +92,18 @@
     <string name="dark">ბნელი</string>
     <string name="delete">წაშლა</string>
     <string name="delete___">წავშალო %s?</string>
-    <string name="delete_all_alarms">ყველა მაღვიძარას წაშლა</string>
     <string name="dialer">ნომრების ამკრეფი</string>
     <string name="display_settings">ეკრანი</string>
     <string name="done">დამთავრებულია.</string>
     <string name="down">დაბლა</string>
     <string name="edit">რედაქტირება</string>
-    <string name="email">ელ-ფოსტა:</string>
     <string name="enable_notification_access">გაფრთხილებებზე წვდომის მინიჭება</string>
     <string name="enable_notification_access_subtext"> GranPhone-ს წვდომა გაფრთხილებებზე.</string>
     <string name="enter">შეყვანა</string>
-    <string name="enter_contact_or_phone_number">შეიყვანეთ კონტაქტის სახელი:</string>
     <string name="evening">საღამო</string>
     <string name="example_of_different_text_sizes">განსხვავებული ტექსტების ზომების მაგალითები\nუნდა იყოს წაკითხვადი და არა დიდი.
     </string>
     <string name="external_storage_subtext">ეს ნებართვა საჭიროა სურათების შესანახად.</string>
-    <string name="feedback">უკუკავშირის გაგზავნა</string>
-    <string name="feedback_cannot_be_empty">უკუკავშირი არ შეიძლება იყოს ცარიელი!</string>
-    <string name="feedback_sent_successfully">უკუკავშირი წარმატებით გაიგზავნა!</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">გთხოვთ აირჩიოთ წვდომის დონე
     </string>
     <string name="font_size">შრიფტის ზომა</string>
@@ -134,7 +117,6 @@
     <string name="home_phone_number">სახლის ტელეფონის ნომერი</string>
     <string name="hour">საათი</string>
     <string name="huge">დიდი</string>
-    <string name="internet">ინტერნეტი</string>
     <string name="invoked_in">გაშვება:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">და ბოლოს:\nრეკომენდირებულია გამოიყენოთ GranPhone-ს მთავარი ეკრანი, როგორც ძირითადი გამშვები(launcher)
     </string>
@@ -144,9 +126,7 @@
     <string name="left_handed">ცაცია</string>
     <string name="light">სინათლე</string>
     <string name="location">მდებარეობა</string>
-    <string name="emergency_services">სასწრაფო დახმარება</string>
-    <string name="mail">ელფოსტა</string>
-    <string name="maps">რუკები</string>
+<string name="mail">ელფოსტა</string>
 
 
     <string name="medium">საშუალო</string>
@@ -167,8 +147,6 @@
     <string name="nfc">NFC</string>
     <string name="no">არა</string>
     <string name="notes">ჩანაწერები</string>
-    <string name="notes_settings">ჩანაწერები</string>
-    <string name="notes_settings_subtext">აირჩიეთ თუ გსურთ ჩანაწერების დამატება მთვარ ეკრანზე.</string>
     <string name="notifications">გაფრთხილებები</string>
 
     <string name="of">თან</string>
@@ -191,6 +169,7 @@
     <string name="pill_added">აბი დამატებულია!</string>
     <string name="pill_name">აბის სახელი</string>
     <string name="pills">აბები</string>
+    <string name="pill">აბი</string>
     <string name="press_longer">დიდხანს დააჭირეთ!</string>
     <string name="timer">ტაიმერი</string>
     <string name="read_call_log">ზარების ისტორიის წაკითხვა</string>
@@ -201,9 +180,6 @@
     <string name="regular_level">რეგულარული დონის</string>
 
     <string name="remove_from_favorite">რჩეულებიდან წაშლა</string>
-    <string name="remove_from_home">მთავარი ეკრანიდან წაშლა</string>
-    <string name="remove_from_sos">SOS-დან წაშლა</string>
-    <string name="remove_shortcut">მალსახმობის წაშლა</string>
     <string name="removed_all_alarms">ყველა მაღვიძარა წაშლილია!</string>
     <string name="repeats_every_day">ყოველდღე</string>
     <string name="right_handed">მემარჯვენე</string>
@@ -239,24 +215,20 @@
     <string name="speak">ისაუბრეთ</string>
     <string name="speech_to_text">საუბარი ტექსტად</string>
     <string name="strong_hand">დომინანტი ხელი</string>
-    <string name="strong_hand_subtext">აირჩიეთ თქვენი დომინანტი ხელი მომხმარებლის ინტერფეისის დასაყენებლად.</string>
-    <string name="submit">დადასტურება</string>
     <string name="sunday">კვირა</string>
     <string name="technical_information">ტექნიკური ინფორმაცია</string>
     <string name="theme_settings">თემა</string>
-    <string name="theme_settings_subtext">აირჩიეთ თემა</string>
 
     <string name="thursday">ხუთშაბათი</string>
     <string name="time_changer">აბების დროის შემცვლელი</string>
     <string name="tiny">პატარა</string>
-    <string name="to___days_and___hours_from_now"> %d დღე და %d საათი მიმდინარე მომენტიდან</string>
-    <string name="to___hours_and___minutes_from_now"> %d საათი და წუთი %d მიმდინარე მომენტიდან</string>
+    <string name="to___days_and___hours_from_now"> %1$d დღე და %2$d საათი მიმდინარე მომენტიდან</string>
+    <string name="to___hours_and___minutes_from_now"> %1$d საათი და წუთი %2$d მიმდინარე მომენტიდან</string>
     <string name="to___minuets_from_now">%d წუთი მიმდინარე მომენტიდან</string>
     <string name="today">დღეს</string>
     <string name="took">ავიღე!</string>
     <string name="tuesday">სამშაბათი</string>
     <string name="uninstall">წაშლა</string>
-    <string name="uninstall_subtext">დარწმუნებული ხართ რომ გსურთ წაშალოთ %s?\n%s მონაცემები გაქრება სამუდამოდ!</string>
     <string name="up">მაღლა</string>
     <string name="video">ვიდეო</string>
     <string name="video_tutorials">ვიდეო გაკვეთილები</string>
@@ -274,17 +246,20 @@
     <string name="yesterday">გუშინ</string>
     <string name="nothing">არაფერი</string>
     <string name="no_contacts_found">კონტაქტები ნაპოვნი არაა!</string>
-    <string name="no_alarms">მაღვიძარები არაა.\შექმენით დაჭერით \n\"მაღვიძარას დამატება\"\nან\n\"ტაიმერის დამატება\"</string>
-    <string name="no_pills">აბები არაა\nშექმენით დაჭერით\n\"აბის დამატება\"</string>
+    <string name="no_alarms">მაღვიძარები არაა.
+დააჭირეთ \"მაღვიძარა\" ან
+\"ტაიმერი\" ქვემოთ.</string>
+    <string name="no_pills">აბები არაა.
+დააჭირეთ \"+ აბი\" ქვემოთ.</string>
     <string name="clear_all_notifications">ყველა გაფრთხილების წაშლა</string>
     <string name="clear_cache_subtext">დარწმუნებული ხართ რომ გსურთ წაშალოთ ქეშის კონტენტი? დროებითი ფაილების წაშლამ შესაძლოა გამოასწოროს ზოგიერთი შეცდომა,მაგრამ მთავარ ეკრანზე შექმნილი მალსახმობები წაიშლება.</string>
-    <string name="permissions_calm">სალამი,GranPhone-ს სჭირდება შემდეგი ნებართვები გასაშვებად. ზოგიერთი საშიშად მოგეჩვენებათ,მაგრამ ეს ერთადერთი გზაა ტელეფონის ინტერფეისის შესაცვლელად.თქვენი მონაცემები არ იქნება მოპარული და არ მოგადგებათ ზიანი. დააჭირეთ OK ნებართვის მისაცემად ან უარს(no) რომ გამოხვიდეთ GranPhone-დან.
+    <string name="permissions_calm">სალამი,GranPhone-ს სჭირდება შემდეგი ნებართვები გასაშვებად. ზოგიერთი საშიშად მოგეჩვენებათ,მაგრამ ეს ერთადერთი გზაა ტელეფონის ინტერფეისის შესაცვლელად.თქვენი მონაცემები არ იქნება მოპარული და არ მოგადგებათ ზიანი. გააგრძელეთ ნებართვების მისაცემად ან გამოდით GranPhone-დან.
     </string>
     <string name="pending_update">მიმდინარეობს განახლება</string>
     <string name="download">გადმოწერა</string>
     <string name="install_updates">განახლებების ინსტალაცია</string>
     <string name="install_updates_subtext">ეს ნებართვა საჭიროა GranPhone-ს განსაახლებლად</string>
-    <string name="a_new_update_is_available">განახლება ხელმისაწვდომია!\nგანახლებები აუცილებელია ტელეფონის მუშაობისთვის.\nდააჭირეთ დიახ-ს გადმოსაწერად.
+    <string name="a_new_update_is_available">განახლება ხელმისაწვდომია!\nგანახლებები აუცილებელია ტელეფონის მუშაობისთვის.\nგააგრძელეთ გადმოსაწერად.
     </string>
     <string name="current_version">ამჟამინდელი ვერსია:\n</string>
     <string name="new_version">ახალი ვერსია:\n</string>
@@ -309,22 +284,15 @@
     <string name="try_now">სცადეთ ახლა</string>
     <string name="download_progress">გადმოწერის პროგრესი</string>
     <string name="what_do_you_want_to_do_with___">რისი მოქმედება გსურთ %s?</string>
-    <string name="crash_reports">ავარიული შეცდომების შეტყობინება</string>
-    <string name="crash_reports_subtext">ავარიული შეცდომების შეტყობინება გეხმარებათ გახადოს აპლიკაციის გამოცდილება სრულყოფილი.\nისინი გამოიყენება მხოლოდ შეცდომების გასასწორებლად,არანაირი სხვა ინფორმაცია აუცილებლის გარდა არ მიგვაქვს.
-    </string>
     <string name="custom_app">შეარჩიეთ აპი</string>
-    <string name="custom_app_subtext">მონიშნეთ შერჩევითი აპლიკაცია მთავარ ეკრანზე დასაყენებლად.</string>
-    <string name="no_app_was_found">შესაბამისი აპი არ იქნა ნაპოვნი!</string>
     <string name="alarm">მაღვიძარა</string>
     <string name="no_new_notifications">ახალი გაფრთხილებები არაა</string>
     <string name="sound">ხმა</string>
     <string name="mute">უხმო</string>
     <string name="vibrate">ვიბრაცია</string>
-    <string name="your_phone_doesnt_have_assistant_installed">თქვენს ტელეფონში ასისტენტი ინსტალირებული არაა.</string>
 
 
     <string name="status_bar_settings">სტატუს ბარი</string>
-    <string name="status_bar_settings_subtext">სად გსურთ სტატუს ბარის ჩვენება?</string>
     <string name="only_home_screen">მთავარი ეკრანი</string>
     <string name="nowhere">არსად</string>
     <string name="everywhere">ყველგან</string>
@@ -334,52 +302,37 @@
 
     <string name="choose_language_for_keyboard">ენის არჩევა</string>
     <string name="hebrew">ებრაული</string>
+    <string name="russian">რუსული</string>
+    <string name="understood">გავიგე</string>
     <string name="go">მიდი</string>
 
 
     <string name="dialer_sounds">ნომრების ამკრეფი-</string>
-    <string name="dialer_sounds_subtext">აირჩიეთ თუ გსურთ გქონდეთ ნომრების  ამკრეფის ხმად.</string>
     <string name="low_battery_alert">გაფრთხილება ტელეფონის ელემენტის დაბალი დონის შესახებ</string>
-    <string name="low_battery_alert_subtext">აირჩიეთ თუ გსურთ რომ სტატუსბარი იყოს წითელი, როდესაც თქვენი ტელეფონის ელემენტის მუხტი ნაკლებია 20%\nშენიშვნა: არ იქნება ნაჩვენები თუ სტატუს ბარი დამალულია.</string>
 
-    <string name="also_available_at">აგრეთვე ხელმისაწვდომია ამ მისამართზე\nGranPhone.contact@gmail.com\nუკუკავშირი უნდა იყოს ივრითზე ან ინგლისურად!</string>
     <string name="grant_all_permissions">ყველა ნებართვის მინიჭება</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">ანალგინი 100</string>
     <string name="medication_2">ანალგინი 150</string>
-    <string name="donate">შემოწირულობები</string>
-    <string name="emergency_button">სასწრაფო ღილაკი</string>
-    <string name="emergency_settings_subtext">აირჩიეთ თუ გინდა გქონდეთ სასწრაფოს ღილაკი მთავარ ეკრანზე.</string>
     <string name="private_number">კერძო ნომერი</string>
     <string name="swipe_left_or_right">გაუსვით მარცხნივ ან მარჯვნივ</string>
     <string name="press_next_or_back_buton">დააჭირეთ შემდეგს ან უკანა ისარს</string>
-    <string name="click_delay">დააჭირეთ დასაყოვნებლად</string>
-    <string name="no_delay">დაყოვნებების გარეშე</string>
-    <string name="scrolling">დასქროლვა</string>
-    <string name="arrows">ისრები</string>
-    <string name="swipe">შეხება</string>
-    <string name="_long">გრძელი</string>
-    <string name="_short">მოკლე</string>
     <string name="do_you_want_to_save_your_changes">გსურთ ცვლილებების შენახვა?</string>
     <string name="discard">უარყოფა</string>
     <string name="no_recent_calls">ახალი ზარები არაა</string>
     <string name="apps_sort_method">აპების დახარისხების მეთოდი</string>
-    <string name="apps_sort_method_subtext">გსურთ დაახარისხოთ აპლიკაციები ერთ ბადეში თუ დაყოფთ სხვადასხვა ჯგუფებში ასოების მიხედვით </string>
     <string name="groups">ჯგუფები</string>
     <string name="one_grid">ერთი ბადე</string>
     <string name="colorful">ფერადი</string>
-    <string name="colorful_subtext">გსურთ გახადოთ GranPhone მეტად ფერადი?</string>
     <string name="edit_home_screen">მთავარი ეკრანის რედაქტირება</string>
     <string name="dual_sim">ორმაგი სიმ ბარათი</string>
-    <string name="dual_sim_subtext">აირჩიეთ როგორ გსურთ ორმაგი სიმ ბარათის განკარგვა.\nშენიშვნა: თუ თქბვენ აირჩევთ პარამეტრების ჩვენებას, თქვენ დაგჭირდებათ კიდევ ერთი ნებართვის მიცემა.</string>
     <string name="use_default">ნაგულისხმევების გამოყენება</string>
     <string name="show_options">პარამეტრების ჩვენება</string>
     <string name="read_phone_state">ტელეფონის მდგომარეობის წაკითხვა</string>
     <string name="read_phone_state_subtext">ეს ნებართვა საჭიროა მეორე სიმ ბარათიდან დასარეკად</string>
     <string name="choose_sim">აირჩიეთ სიმ ბარათი</string>
-    <string name="choose_sim_subtext">აირჩიეთ სიმ ბარათი,რომლიდანაც გსურთ დარეკვა</string>
     <string name="website">ვებსაიტი</string>
     <string-array name="names_for_screenshots">
         <item>რიჩარდ მეთიუ სტოლმანი</item>
@@ -392,4 +345,46 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">უკან</string>
+    <string name="exit">გამოსვლა</string>
+    <string name="stay">დარჩი</string>
+    <string name="settings_for_user">მომხმარებლისთვის</string>
+    <string name="settings_for_helper">დამხმარისთვის</string>
+    <string name="answer_call">პასუხი</string>
+    <string name="call_ended">ზარი დასრულდა</string>
+    <string name="call_status_calling">დარეკვა…</string>
+    <string name="calls_channel">ზარები</string>
+    <string name="confirm_call_title">დარეკეთ ამ ნომერზე?</string>
+    <string name="decline_call">უარყოფა</string>
+    <string name="hang_up">გათიშვა</string>
+    <string name="helper_pin_create_subtext">აირჩიეთ 4-ნიშნა კოდი. ის იცავს დამხმარე პარამეტრებს.</string>
+    <string name="helper_pin_enter_subtext">შეიყვანეთ 4-ნიშნა კოდი დამხმარე პარამეტრებისთვის.</string>
+    <string name="helper_pin_mismatch">კოდები არ ემთხვევა.</string>
+    <string name="helper_pin_repeat_subtext">ისევ შეიყვანეთ იგივე 4-ნიშნა კოდი.</string>
+    <string name="in_call">გამოძახებით</string>
+    <string name="in_call_duration">ზარი • %1$s</string>
+    <string name="in_call_with">ზარი %1$s-თან</string>
+    <string name="incoming_call">შემომავალი ზარი</string>
+    <string name="incoming_call_from">შემომავალი ზარი %1$s-დან</string>
+    <string name="kiosk_disable_subtext">შეიყვანეთ 4-ნიშნა კოდი კიოსკის რეჟიმის გამორთვისთვის.</string>
+    <string name="kiosk_disabled">კიოსკის რეჟიმი გამორთულია.</string>
+    <string name="kiosk_enable_subtext">ტელეფონი დარჩება GranPhone-ში: არ არის შეტყობინებების ჩრდილი, არ არის Android პარამეტრები და არ არის აპების დეინსტალაცია.\nაირჩიეთ 4-ნიშნა კოდი, რომ მოგვიანებით გამორთოთ ეს საკეტი.</string>
+    <string name="kiosk_enabled">კიოსკის რეჟიმი ჩართულია.</string>
+    <string name="kiosk_pin_too_short">შეიყვანეთ ზუსტად 4 ციფრი.</string>
+    <string name="kiosk_wrong_pin">ეს არ არის თქვენს მიერ დაყენებული 4-ნიშნა კოდი. სცადეთ ხელახლა.</string>
+    <string name="on_hold">მოლოდინში</string>
+    <string name="ongoing_call">ზარი მიმდინარეობს</string>
+    <string name="pin_digits_entered">%1$d შეყვანილი %2$d ციფრიდან</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — გამოიძახეთ სასწრაფო დახმარება</string>
+    <string name="sos_call_help">გამოიძახეთ სასწრაფო დახმარება</string>
+    <string name="sos_calling_in">სასწრაფო დახმარების სერვისების გამოძახება %d წამში…</string>
+    <string name="sos_confirm_call">გამოიძახეთ სასწრაფო დახმარება ახლა?</string>
+    <string name="sos_hold_explanation">დააჭირეთ და ხანგრძლივად გააჩერეთ SOS 5 წამის განმავლობაში სასწრაფო დახმარების სამსახურის გამოსაძახებლად.</string>
+    <string name="speaker_state_off">სპიკერი გამორთულია</string>
+    <string name="speaker_state_on">სპიკერი ჩართულია</string>
+    <string name="speaker_turn_off">გამორთეთ დინამიკი</string>
+    <string name="speaker_turn_on">ჩართეთ დინამიკი</string>
+    <string name="tap_to_return_to_call">შეეხეთ ზარზე დასაბრუნებლად</string>
+    <string name="unknown_number">უცნობი ნომერი</string>
 </resources>

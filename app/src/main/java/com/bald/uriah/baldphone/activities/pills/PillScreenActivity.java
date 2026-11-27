@@ -23,7 +23,6 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,15 +37,17 @@ import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.databases.reminders.RemindersDatabase;
 import com.bald.uriah.baldphone.utils.Animations;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.MissedNotifications;
 
 public class PillScreenActivity extends TimedBaldActivity {
     private static final String TAG = PillScreenActivity.class.getSimpleName();
 
-    private static final int TIME_DELAYED_SCHEDULE = 100;
+    private static final String MISSED_NOTIFICATION_TAG = "missed_pill";
 
-    private TextView tv_textual_content, snooze, took;
+    private TextView tv_textual_content;
+    private View snooze, took;
     private ImageView iv_pill;
     private Ringtone ringtone;
     private Reminder reminder;
@@ -54,7 +55,7 @@ public class PillScreenActivity extends TimedBaldActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        S.logImportant("reminderScreen was called!");
+        AppUtils.logImportant("reminderScreen was called!");
         setContentView(R.layout.reminder_screen);
 
         attachXml();
@@ -65,9 +66,12 @@ public class PillScreenActivity extends TimedBaldActivity {
         if (key == -1) throw new AssertionError();
         reminder = RemindersDatabase.getInstance(this).remindersDatabaseDao().getById(key);
         if (reminder == null) {
-            S.logImportant("reminder == null!, returning");
+            AppUtils.logImportant("reminder == null!, finishing");
+            finish(); // don't leave a dead ring screen with live buttons
             return;
         }
+        if (!intent.getBooleanExtra(ReminderScheduler.REMINDER_IS_SNOOZE_VIA_INTENTS, false))
+            ReminderScheduler.rescheduleAfterFired(key, this);
 
         final String textual_content = reminder.getTextualContent();
         if (textual_content == null) tv_textual_content.setVisibility(View.GONE);
@@ -80,35 +84,26 @@ public class PillScreenActivity extends TimedBaldActivity {
 
         }
 
+        // BaldPictureTextButton maps long-press onto the click listener itself
+        // (long-press mode is an app setting), so one listener covers both.
         took.setOnClickListener(v -> {
             if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
+                vibrator.vibrate(Const.vibetime);
             finish();
-        });
-        took.setOnLongClickListener(v -> {
-            if (vibrator != null)
-                vibrator.vibrate(D.vibetime);
-            finish();
-            return true;
         });
 
         snooze.setOnClickListener((v) -> snooze());
-        snooze.setOnLongClickListener((v) -> {
-            snooze();
-            return true;
-        });
 
         try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
         } catch (Exception e) {
-            BaldToast.error(this);
+            BaldToast.error(this, R.string.sound_could_not_play);
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
 
         Animations.makeBiggerAndSmaller(this, iv_pill, null);
-        scheduleNextReminder();
     }
 
     @Override
@@ -142,14 +137,13 @@ public class PillScreenActivity extends TimedBaldActivity {
 
     private void snooze() {
         if (vibrator != null)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
         ReminderScheduler.scheduleSnooze(reminder, this);
+        // back-press also lands here — always confirm the snooze happened
+        BaldToast.simple(this, R.string.snooze);
         finish();
     }
 
-    private void scheduleNextReminder() {
-        new Handler().postDelayed(() -> ReminderScheduler.scheduleReminder(reminder, this), TIME_DELAYED_SCHEDULE);
-    }
 
     @Override
     public void onBackPressed() {
@@ -159,11 +153,18 @@ public class PillScreenActivity extends TimedBaldActivity {
 
     @Override
     protected int screenTimeout() {
-        return D.MINUTE * 2;
+        return Const.MINUTE * 2;
+    }
+
+    @Override
+    protected void onScreenTimeout() {
+        // the reminder rang itself out unacknowledged — leave a trace
+        MissedNotifications.post(this, MISSED_NOTIFICATION_TAG, reminder.getId(),
+                R.string.missed_pill, reminder.getTextualContent(), R.drawable.pill, PillsActivity.class);
     }
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_SYSTEM_ALERT_WINDOW;
+        return PERMISSION_SYSTEM_ALERT_WINDOW | PERMISSION_EXACT_ALARM;
     }
 }

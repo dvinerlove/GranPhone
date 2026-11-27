@@ -20,7 +20,7 @@ Forked from [BaldPhone](https://github.com/UriahShaulMandel/BaldPhone) (Apache 2
 - Optional kiosk mode (device owner) to lock the phone down to the essentials
 - Immersive full screen, dark and light themes, system font scaling
 - No ads, no accounts, no telemetry — works fully offline
-- Runs on old hardware — developed and tested on Android 6 / 1 GB RAM (`minSdk 21`, `targetSdk 29`)
+- Runs on old hardware — developed and tested on Android 6 / 1 GB RAM (`minSdk 21`, `targetSdk 35`)
 
 ## Install
 
@@ -31,7 +31,7 @@ Short version: install the APK from [Releases](https://github.com/dvinerlove/Gra
 ## Build
 
 ```
-./gradlew assembleFDroidDebug   # JDK 11, Android SDK 31
+./gradlew assembleFDroidDebug   # JDK 17, Android SDK 35
 ```
 
 Output: `app/build/outputs/apk/fDroid/debug/app-fDroid-debug.apk`

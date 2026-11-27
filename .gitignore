@@ -33,3 +33,6 @@ run.bat
 app/baldUpdates/release/app-baldUpdates-release.apk
 app/baldUpdates/release/app-release.apk
 app/baldUpdates/release/output.json
+t-*.png
+tour/
+hs_err_pid*.log

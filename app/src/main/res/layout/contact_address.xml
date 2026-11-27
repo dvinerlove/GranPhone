@@ -13,40 +13,47 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/address_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="8dp"
-    android:background="@drawable/list_shape"
-    android:orientation="vertical">
+    android:layout_marginTop="@dimen/spacing_sm"
+    android:background="@drawable/bald_card_background"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/list_row_height"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/spacing_lg"
+    android:paddingTop="@dimen/spacing_sm"
+    android:paddingEnd="@dimen/spacing_lg"
+    android:paddingBottom="@dimen/spacing_sm">
 
-    <TextView
-        android:id="@+id/tv_address"
-        style="@style/BackgroundText.Medium"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <com.bald.uriah.baldphone.views.BaldPictureTextButton
-        android:id="@+id/address_button"
-        style="@style/BackgroundText.Medium"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?bald_text_secondary"
+            android:textSize="@dimen/small" />
 
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:textColor="?bald_text_primary"
+            android:textSize="@dimen/large" />
+    </LinearLayout>
 
-        android:background="@drawable/style_for_buttons"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:_src="@drawable/location_on_button">
-
-    </com.bald.uriah.baldphone.views.BaldPictureTextButton>
-
+    <ImageView
+        android:importantForAccessibility="no"
+        android:layout_width="@dimen/icon_md"
+        android:layout_height="@dimen/icon_md"
+        android:layout_marginStart="@dimen/spacing_md"
+        android:src="@drawable/location_on_button"
+        android:tint="?bald_text_secondary" />
 </LinearLayout>

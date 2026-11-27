@@ -17,6 +17,9 @@
 package com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.FakeLauncherActivity;
@@ -33,10 +36,24 @@ public class TutorialFragment4 extends TutorialFragment {
 
     @Override
     protected void actualSetup() {
+        setupNavButtons();
         bt_home.setOnClickListener(v -> {
-            FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(v.getContext());
-            v.getContext().getSharedPreferences(BPrefs.KEY, Context.MODE_PRIVATE).edit().putBoolean(BPrefs.AFTER_TUTORIAL_KEY, true).apply();
+            final Context context = v.getContext();
+            context.getSharedPreferences(BPrefs.KEY, Context.MODE_PRIVATE).edit().putBoolean(BPrefs.AFTER_TUTORIAL_KEY, true).apply();
+            // resetPreferredLauncherAndOpenChooser clears the default home app to
+            // force the system chooser; when we already are default just go home.
+            if (isDefaultLauncher(context))
+                context.startActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            else
+                FakeLauncherActivity.resetPreferredLauncherAndOpenChooser(context);
         });
+    }
+
+    private boolean isDefaultLauncher(Context context) {
+        final ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(
+                new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME),
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return resolveInfo != null && context.getPackageName().equals(resolveInfo.activityInfo.packageName);
     }
 
     @Override

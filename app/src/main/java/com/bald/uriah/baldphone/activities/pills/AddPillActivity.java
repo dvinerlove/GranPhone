@@ -37,8 +37,8 @@ import com.bald.uriah.baldphone.databases.reminders.ReminderScheduler;
 import com.bald.uriah.baldphone.databases.reminders.RemindersDatabase;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.views.BaldButton;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.views.BaldMultipleSelection;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 
@@ -57,7 +57,7 @@ public class AddPillActivity extends BaldActivity {
     };
     private int reminderIdToEdit = -1;
     private Vibrator vibrator;
-    private BaldButton bt_submit;
+    private BaldPictureTextButton bt_submit;
     private BaldTitleBar baldTitleBar;
     private EditText reminder_edit_name;
     private BaldMultipleSelection baldMultipleSelection;
@@ -81,6 +81,7 @@ public class AddPillActivity extends BaldActivity {
                 throw new IllegalArgumentException("REMINDER_KEY_AS_EXTRA_KEY cannot be -1!!");
             final Reminder reminder = RemindersDatabase.getInstance(this).remindersDatabaseDao().getById(remindersIndex);
             reminderIdToEdit = reminder.getId();
+            baldTitleBar.setTitle(getString(R.string.edit_pill));
 
             baldMultipleSelection.setSelection(reminder.getStartingTime());
 
@@ -89,20 +90,20 @@ public class AddPillActivity extends BaldActivity {
                 colors[INDEX_CUSTOM].setVisibility(View.VISIBLE);
                 colors[INDEX_CUSTOM].setImageTintList(ColorStateList.valueOf(Color.rgb(customColor[0] & 0xFF, customColor[1] & 0xFF, customColor[2] & 0xFF)));
 
-                colors[selectedColor].setBackgroundResource(R.drawable.style_for_buttons_transparent);
+                colors[selectedColor].setSelected(false);
                 selectedColor = INDEX_CUSTOM;
-                colors[selectedColor].setBackgroundResource(R.drawable.btn_selected);
+                colors[selectedColor].setSelected(true);
             }
 
             if (reminder.getTextualContent() != null)
                 reminder_edit_name.setText(reminder.getTextualContent());
 
             final int alarmDays = reminder.getDays();
-            if (alarmDays == D.Days.ALL)
+            if (alarmDays == Const.Days.ALL)
                 every_day.setChecked(true);
             else {
                 for (int i = 0; i < daysCheckBoxes.length; i++) {
-                    daysCheckBoxes[i].setChecked((alarmDays | (D.Days.SUNDAY << i)) == alarmDays);
+                    daysCheckBoxes[i].setChecked((alarmDays | (Const.Days.SUNDAY << i)) == alarmDays);
                 }
             }
 
@@ -125,7 +126,7 @@ public class AddPillActivity extends BaldActivity {
                 findViewById(R.id.friday),
                 findViewById(R.id.saturday)
         };
-        every_day = findViewById(R.id.rb_once);
+        every_day = findViewById(R.id.rb_every_day);
         colors = new ImageView[]{
                 findViewById(R.id.blue),
                 findViewById(R.id.red),
@@ -136,6 +137,7 @@ public class AddPillActivity extends BaldActivity {
         };
 
         every_day.setChecked(true);
+        colors[selectedColor].setSelected(true);
 
     }
 
@@ -146,9 +148,9 @@ public class AddPillActivity extends BaldActivity {
 
         if (!every_day.isChecked()) {
             for (int i = 0; i < daysCheckBoxes.length; i++)
-                sum |= daysCheckBoxes[i].isChecked() ? D.Days.SUNDAY << i : 0;
+                sum |= daysCheckBoxes[i].isChecked() ? Const.Days.SUNDAY << i : 0;
         } else
-            sum = D.Days.ALL;
+            sum = Const.Days.ALL;
 
         if (sum == 0) {
             BaldToast.from(this).setType(TYPE_ERROR).setText(R.string.at_least_one_day_must_be_selected).show();
@@ -175,7 +177,7 @@ public class AddPillActivity extends BaldActivity {
         } else {
             reminder.setId(reminderIdToEdit);
             RemindersDatabase.getInstance(this).remindersDatabaseDao().replace(reminder);
-            ReminderScheduler.scheduleReminder(reminder, this);
+            ReminderScheduler.cancelSnooze(reminderIdToEdit, this);
         }
         ReminderScheduler.scheduleReminder(reminder, this);
 
@@ -187,9 +189,10 @@ public class AddPillActivity extends BaldActivity {
 
     private void genOnClickListeners() {
         bt_submit.setOnClickListener((v) -> submit2());
+        findViewById(R.id.bt_cancel).setOnClickListener(v -> finish());
 
         every_day.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (vibrator != null) vibrator.vibrate(D.vibetime);
+            if (vibrator != null) vibrator.vibrate(Const.vibetime);
             if (isChecked) {
                 for (CheckBox checkBox : daysCheckBoxes) {
                     checkBox.setChecked(false);
@@ -206,7 +209,7 @@ public class AddPillActivity extends BaldActivity {
 
         for (final CheckBox checkBox : daysCheckBoxes) {
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (vibrator != null) vibrator.vibrate(D.vibetime);
+                if (vibrator != null) vibrator.vibrate(Const.vibetime);
                 if (isChecked)
                     every_day.setChecked(false);
                 else {
@@ -225,7 +228,7 @@ public class AddPillActivity extends BaldActivity {
                 }
             });
             checkBox.setOnLongClickListener(v -> {
-                if (vibrator != null) vibrator.vibrate(D.vibetime);
+                if (vibrator != null) vibrator.vibrate(Const.vibetime);
                 checkBox.setChecked(!checkBox.isChecked());
                 return true;
             });
@@ -235,9 +238,9 @@ public class AddPillActivity extends BaldActivity {
             int finalI = i;
             colors[i].setOnClickListener(v -> {
                 if (selectedColor != finalI) {
-                    colors[selectedColor].setBackgroundResource(R.drawable.style_for_buttons_transparent);
+                    colors[selectedColor].setSelected(false);
                     selectedColor = finalI;
-                    colors[selectedColor].setBackgroundResource(R.drawable.btn_selected);
+                    colors[selectedColor].setSelected(true);
                 }
             });
         }
@@ -246,6 +249,6 @@ public class AddPillActivity extends BaldActivity {
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_SYSTEM_ALERT_WINDOW;
+        return PERMISSION_SYSTEM_ALERT_WINDOW | PERMISSION_EXACT_ALARM;
     }
 }

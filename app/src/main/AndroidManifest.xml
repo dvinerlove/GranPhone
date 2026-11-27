@@ -15,8 +15,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.bald.uriah.baldphone">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -27,7 +26,14 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -48,9 +54,61 @@
 
     <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.HOME" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.VIDEO_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="image/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="video/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND_MULTIPLE" />
+            <data android:mimeType="image/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND_MULTIPLE" />
+            <data android:mimeType="video/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="smsto" />
+        </intent>
+        <intent>
+            <action android:name="android.settings.SETTINGS" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="market" android:host="details" />
+        </intent>
+        <intent>
+            <action android:name="android.content.pm.action.REQUEST_PERMISSIONS" />
+        </intent>
+        <provider android:authorities="media" />
+    </queries>
+
     <application
         android:name=".BaldPhone"
         android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -62,6 +120,7 @@
         <activity
             android:name=".activities.HomeScreenActivity"
             android:enabled="${fullApp}"
+            android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,6 +134,7 @@
             android:name=".activities.DialerActivity"
 
             android:enabled="${fullApp}"
+            android:exported="true"
             android:label="@string/dialer">
             <!-- Both DIAL filters are required to be selectable as the default phone app -->
             <intent-filter>
@@ -145,9 +205,28 @@
 
         <activity
             android:name=".activities.SettingsActivity"
-
             android:enabled="${fullApp}"
             android:label="@string/settings" />
+        <activity
+            android:name=".activities.HelperSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/helper_settings" />
+        <activity
+            android:name=".activities.ScreenSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/screen_and_appearance" />
+        <activity
+            android:name=".activities.ConvenienceSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/convenience_accessibility" />
+        <activity
+            android:name=".activities.ConnectionSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/connection_settings" />
+        <activity
+            android:name=".activities.SystemSettingsActivity"
+            android:enabled="${fullApp}"
+            android:label="@string/system_settings" />
         <activity
             android:name=".activities.NotificationsActivity"
 
@@ -155,7 +234,9 @@
             android:label="@string/notifications" />
         <activity
             android:name=".activities.FakeLauncherActivity"
-            android:enabled="false">
+            android:enabled="false"
+            android:exported="true"
+            android:label="@string/fake_launcher_label">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -177,6 +258,7 @@
             android:name=".activities.media.VideosActivity"
 
             android:enabled="${fullApp}"
+            android:exported="true"
             android:label="@string/videos">
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT" />
@@ -248,18 +330,10 @@
             android:name=".activities.pills.PillTimeSetterActivity"
             android:enabled="${fullApp}" />
         <activity
-            android:name=".activities.PhoneActivity"
-
-            android:enabled="${fullApp}"
-            android:label="@string/phone" />
-        <activity
             android:name=".activities.TechnicalInfoActivity"
 
             android:enabled="${fullApp}"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.FeedbackActivity"
-            android:enabled="${fullApp}" />
         <activity
             android:name=".activities.UpdatesActivity"
             android:enabled="${fullApp}" />
@@ -273,6 +347,7 @@
         <service
             android:name=".keyboard.BaldInputMethodService"
             android:enabled="${fullApp}"
+            android:exported="true"
             android:permission="android.permission.BIND_INPUT_METHOD"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateHidden">
@@ -301,12 +376,18 @@
         <service
             android:name=".services.NotificationListenerService"
             android:enabled="${fullApp}"
+            android:exported="true"
             android:label="@string/notification_service"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
+        <service
+            android:name=".services.AlarmRecoveryJobService"
+            android:enabled="${fullApp}"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
 
         <receiver
@@ -332,16 +413,26 @@
         </receiver>
         <receiver
             android:name=".broadcast_receivers.BootUpBroadcastReceiver"
-            android:enabled="${fullApp}">
+            android:enabled="${fullApp}"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <receiver
             android:name=".broadcast_receivers.LocalChangedReceiver"
-            android:enabled="${fullApp}">
+            android:enabled="${fullApp}"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".broadcast_receivers.ExactAlarmPermissionReceiver"
+            android:enabled="${fullApp}"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
             </intent-filter>
         </receiver>
         <receiver
@@ -354,7 +445,8 @@
             android:process=":remote" />
         <receiver
             android:name=".broadcast_receivers.DownloadManagerReceiver"
-            android:enabled="${fullApp}">
+            android:enabled="${fullApp}"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>

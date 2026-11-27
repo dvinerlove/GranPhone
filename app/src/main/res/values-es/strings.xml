@@ -15,29 +15,18 @@
   -->
 
 <resources>
-    <string name="about">Acerca de</string>
-    <string name="about_subtext">
-        ¡Hola, buenos días!\n
-        Me llamo Uriah Shaul Mandel y soy el desarrollador de esta plataforma. He pasado la mayor parte de mi vida «adulta» desarrollando esta plataforma, y la he lanzado gratis para beneficio de todos. Si tienes alguna duda o sugerencia he aquí mi correo electrónico:\n
-        GranPhone.contact@gmail.com (si me escribes, mejor en inglés)
-    </string>
-    <string name="accessibility_level">Nivel de accesibilidad</string>
+
+<string name="accessibility_level">Nivel de accesibilidad</string>
     <string name="accessibility_settings">Accesibilidad</string>
     <string name="accidental_touches">Protección de toque accidental</string>
-    <string name="accidental_touches_settings_subtext">El protector bloquea la pantalla táctil al cubrir el teléfono. Si te causa problemas puedes desactivarlo, no pasa nada.
+    <string name="accidental_touches_subtext">Parece que hemos detectado un toque accidental. No pasa nada, pulsa «Entendido» para continuar usando el teléfono. Si este mensaje sigue apareciendo puedes desactivarlo en las opciones de accesibilidad.
     </string>
-    <string name="accidental_touches_subtext">Parece que hemos detectado un toque accidental. No pasa nada, pulsa «aceptar» para continuar usando el teléfono. Si este mensaje sigue apareciendo puedes desactivarlo en las opciones de accesibilidad.
-    </string>
-    <string name="acknowledgments">Agradecimientos</string>
-    <string name="adaptive">Adaptable</string>
     <string name="add_alarm">Añadir alarma</string>
     <string name="add_alarm_quickly">Añadir temporizador</string>
     <string name="add_contact">Añadir contacto</string>
     <string name="add_emergency_contact">Añadir</string>
     <string name="add_pill">Añadir pastilla</string>
-    <string name="add_shortcut">Añadir acceso directo</string>
     <string name="add_to_favorite">Añadir a favoritos</string>
-    <string name="add_to_home">Añadir a inicio</string>
     <string name="add_to_sos">Añadir a SOS</string>
     <string name="address">Dirección</string>
     <string name="advanced_options">Opciones avanzadas</string>
@@ -57,7 +46,6 @@
 
     <string name="apps">Aplicaciones</string>
     <string name="are_you_sure_you_want_to_delete___">¿Seguro que quieres borrar el elemento «%s»?</string>
-    <string name="assistant">Asistente voz</string>
     <string name="at_least_one_day_must_be_selected">Hay que elegir al menos un día.</string>
     <string name="auto_brightness">Brillo\nautomático</string>
     <string name="backspace">retroceso</string>
@@ -65,7 +53,6 @@
     <string name="blocked">Bloqueado</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Brillo</string>
-    <string name="brightness_subtext">Cambiar brillo.</string>
     <string name="cache_cleared_successfully">Se ha vaciado la memoria caché correctamente.</string>
     <string name="call">Llamar</string>
     <string name="calling">Llamadas telefónicas</string>
@@ -75,7 +62,6 @@
     <string name="camera">Cámara</string>
     <string name="camera_subtext">Se necesita este permiso para encender la linterna.</string>
     <string name="cancel">Cancelar</string>
-    <string name="change_pills_time">Cambiar la hora de tomar pastillas</string>
     <string name="change_system_settings_subtext">Para que GranPhone funcione correctamente necesita poder cambiar los ajustes, como aumentar el tamaño del texto o cambiar el brillo.
 </string>
     <string name="choose_friday">Vie.</string>
@@ -90,7 +76,7 @@
     <string name="clear_data">Borrar todos los datos</string>
     <string name="clear_data_subtext">¿Seguro que quieres borrar todos los datos del usuario? La aplicación de GranPhone volverá al estado inicial, como si la acabaras de instalar.</string>
     <string name="clear_data_subtext2">¿Seguro, seguro?</string>
-    <string name="clear_data_subtext3">¿Estás seguro? Pulsar «sí» borrará todos los datos.</string>
+    <string name="clear_data_subtext3">¿Estás seguro? Se borrarán todos los datos.</string>
     <string name="clock">Reloj</string>
     <string name="coming_soon">Esta función todavía no está disponible.</string>
     <string name="connection_settings">Conexiones de red</string>
@@ -105,25 +91,19 @@
     <string name="dark">Oscuro</string>
     <string name="delete">Borrar</string>
     <string name="delete___">¿Quieres borrar %s?</string>
-    <string name="delete_all_alarms">Borrar todas las alarmas</string>
     <string name="dialer">Teléfono</string>
     <string name="display_settings">Pantalla</string>
     <string name="done">Hecho</string>
     <string name="down">Bajar</string>
     <string name="edit">Editar</string>
-    <string name="email">Correo:</string>
     <string name="enable_notification_access">Permitir ver las notificaciones</string>
     <string name="enable_notification_access_subtext">Para que GranPhone acceda a las notificaciones tienes que conceder permisos adicionales.</string>
     <string name="enter">Guardar y aceptar</string>
-    <string name="enter_contact_or_phone_number">Introduce el nombre del contacto:</string>
     <string name="evening">Por la noche</string>
     <string name="example_of_different_text_sizes">Ejemplo de diferentes tamaños de texto\n
         Las letras deben ser legibles y no salirse.
     </string>
     <string name="external_storage_subtext">Este permiso es necesario para guardar Fotos.</string>
-    <string name="feedback">Enviar comentarios y opiniones</string>
-    <string name="feedback_cannot_be_empty">Para enviar comentarios primero hay que escribir algo.</string>
-    <string name="feedback_sent_successfully">El comentario se ha enviado correctamente.</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Elige un nivel de accesibilidad</string>
     <string name="font_size">Tamaño del texto</string>
     <string name="friday">viernes</string>
@@ -136,7 +116,6 @@
     <string name="home_phone_number">Número fijo de casa</string>
     <string name="hour">Hora</string>
     <string name="huge">Enorme</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Avisar en:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Ya casi estamos; se recomienda encarecidamente usar la pantalla de inicio de GranPhone como el lanzador principal del teléfono.</string>
     <string name="language">idioma</string>
@@ -145,9 +124,7 @@
     <string name="left_handed">Zurdo</string>
     <string name="light">Claro</string>
     <string name="location">Ubicación</string>
-    <string name="emergency_services">Servicios de emergencia</string>
-    <string name="mail">Correo electrónico</string>
-    <string name="maps">Mapas</string>
+<string name="mail">Correo electrónico</string>
 
 
     <string name="medium">Intermedio</string>
@@ -168,8 +145,6 @@
     <string name="nfc">Comunicación de campo cercano (NFC)</string>
     <string name="no">No</string>
     <string name="notes">Notas</string>
-    <string name="notes_settings">Notas</string>
-    <string name="notes_settings_subtext">Elige si quieres ver la página de «notas» en la pantalla de inicio.</string>
     <string name="notifications">Notificaciones</string>
 
     <string name="of">de</string>
@@ -192,6 +167,7 @@
     <string name="pill_added">La pastilla se ha añadido correctamente.</string>
     <string name="pill_name">Nombre de la pastilla</string>
     <string name="pills">Pastillas</string>
+    <string name="pill">Pastilla</string>
     <string name="press_longer">Mantén pulsado el botón un poco más…</string>
     <string name="timer">Temporizador</string>
     <string name="read_call_log">Leer el historial de llamadas</string>
@@ -202,9 +178,6 @@
     <string name="regular_level">Normal</string>
 
     <string name="remove_from_favorite">Quitar de favoritos</string>
-    <string name="remove_from_home">Quitar de inicio</string>
-    <string name="remove_from_sos">Quitar de SOS</string>
-    <string name="remove_shortcut">Quitar acceso directo</string>
     <string name="removed_all_alarms">Se han borrado todas las alarmas.</string>
     <string name="repeats_every_day">A diario</string>
     <string name="right_handed">Diestro</string>
@@ -240,24 +213,20 @@
     <string name="speak">Hablar</string>
     <string name="speech_to_text">Voz a texto</string>
     <string name="strong_hand">Mano dominante</string>
-    <string name="strong_hand_subtext">Elige tu mano dominante para acomodar mejor los botones de la interfaz.</string>
-    <string name="submit">Confirmar</string>
     <string name="sunday">domingo</string>
     <string name="technical_information">Información técnica</string>
     <string name="theme_settings">Apariencia</string>
-    <string name="theme_settings_subtext">Elige un estilo visual</string>
 
     <string name="thursday">jueves</string>
     <string name="time_changer">Cambiar el horario de las pastillas</string>
     <string name="tiny">Diminuto</string>
-    <string name="to___days_and___hours_from_now">sonará en %d días y %d horas</string>
-    <string name="to___hours_and___minutes_from_now">sonará en %d horas y %d minutos</string>
+    <string name="to___days_and___hours_from_now">sonará en %1$d días y %2$d horas</string>
+    <string name="to___hours_and___minutes_from_now">sonará en %1$d horas y %2$d minutos</string>
     <string name="to___minuets_from_now">sonará en %d minutos</string>
     <string name="today">Hoy</string>
     <string name="took">Pastilla tomada.</string>
     <string name="tuesday">martes</string>
     <string name="uninstall">Desinstalar</string>
-    <string name="uninstall_subtext">¿Seguro que quieres desinstalar «%s»? Los datos de «%s» se perderán para siempre.</string>
     <string name="up">Arriba</string>
     <string name="video">Vídeo</string>
     <string name="video_tutorials">Guías en formato vídeo</string>
@@ -275,15 +244,18 @@
     <string name="yesterday">Ayer</string>
     <string name="nothing">Nada</string>
     <string name="no_contacts_found">No se ha encontrado ningún contacto.</string>
-    <string name="no_alarms">Parece que todavía no hay ninguna alarma, puedes crear una pulsando «añadir alarma» o «añadir temporizador».</string>
-    <string name="no_pills">Parece que todavía no hay ninguna pastilla registrada, añade alguna pulsando el botón de «añadir pastilla».</string>
+    <string name="no_alarms">No hay alarmas.
+Pulsa «Alarma» o
+«Temporizador» abajo.</string>
+    <string name="no_pills">No hay pastillas.
+Pulsa «+ Pastilla» abajo.</string>
     <string name="clear_all_notifications">Quitar todas las notificaciones</string>
     <string name="clear_cache_subtext">¿Seguro que quieres borrar del todo la memoria caché de GranPhone? Puede que borrar los archivos temporales solucione algunos problemas, pero los enlaces directos de la pantalla de inicio también desaparecerán.
     </string>
     <string name="permissions_calm">
 		Hola, GranPhone debe tener los siguientes permisos para ejecutarse. Algunos pueden parecer demasiado, pero es la única forma de que GranPhone pueda reemplazar la interfaz del teléfono.
 		GranPhone no hará nada raro con tus datos personales ni dañará tu teléfono.
-		Presiona el botón de «Aceptar» para otorgar los permisos o «No» para salir de GranPhone.
+		Continúa para otorgar los permisos o sal de GranPhone.
     </string>
     <string name="pending_update">Hay una actualización pendiente</string>
     <string name="download">Descargar</string>
@@ -291,7 +263,7 @@
     <string name="install_updates_subtext">Este permiso es necesario para poder actualizar GranPhone</string>
     <string name="a_new_update_is_available">Hay una versión nueva de la aplicación\n
 		Las actualizaciones son importantes para que GranPhone siga funcionando bien y corregir pequeños defectos.\n
-		Pulsa el botón «Aceptar» para descargarla.
+		Continúa para descargarla.
     </string>
     <string name="current_version">Versión actual:\n</string>
     <string name="new_version">Versión nueva:\n</string>
@@ -319,22 +291,15 @@
     <string name="try_now">Intentar de nuevo</string>
     <string name="download_progress">Descargando</string>
     <string name="what_do_you_want_to_do_with___">¿Qué quieres hacer con %s?</string>
-    <string name="crash_reports">Enviar informes de fallos</string>
-    <string name="crash_reports_subtext">El envío por Internet de estos informes automáticos de fallos ayuda a que la experiencia de GranPhone mejore de forma sustancial. Estos informes solo se usan para arreglar cosas, y contienen la información mínima para poder entender el problema.
-    </string>
     <string name="custom_app">Aplicación personalizada</string>
-    <string name="custom_app_subtext">Elige otra aplicación como pantalla de inicio.</string>
-    <string name="no_app_was_found">No se ha encontrado ninguna aplicación que coincida con lo buscado.</string>
     <string name="alarm">Alarma</string>
     <string name="no_new_notifications">No hay ninguna notificación nueva</string>
     <string name="sound">Sonido</string>
     <string name="mute">Modo silencio</string>
     <string name="vibrate">Vibración</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Tu teléfono no tiene ningún asistente instalado.</string>
 
 
     <string name="status_bar_settings">Barra de estado</string>
-    <string name="status_bar_settings_subtext">¿Dónde quieres ver la barra de estado?</string>
     <string name="only_home_screen">Pantalla de inicio</string>
     <string name="nowhere">En ningún sitio</string>
     <string name="everywhere">En todas partes</string>
@@ -345,6 +310,7 @@
     <string name="choose_language_for_keyboard">Elige un idioma</string>
     <string name="hebrew">Hebreo</string>
     <string name="english">Inglés</string>
+    <string name="russian">Ruso</string>
 
     <string name="search">Buscar</string>
     <string name="next">Siguiente</string>
@@ -352,49 +318,31 @@
 
 
     <string name="dialer_sounds">Tono de llamada</string>
-    <string name="dialer_sounds_subtext">Elige los posibles tonos de llamada.</string>
     <string name="low_battery_alert">Alerta de batería baja</string>
-    <string name="low_battery_alert_subtext">Elige si quieres que la barra de estado se ponga roja en la pantalla de inicio cuando la batería baje del 20%. Ten en cuenta que esta opción no sirve de nada si la barra de estado está oculta.
-    </string>
 
-    <string name="also_available_at">También estoy disponible a través de\nGranPhone.contact@gmail.com\nLos comentarios deben de escribirse en inglés o hebreo para que yo los entienda.</string>
     <string name="grant_all_permissions">Conceder todos los permisos</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donar</string>
-    <string name="emergency_button">Botón de emergencia</string>
-    <string name="emergency_settings_subtext">Elige si quieres tener un botón de emergencia en la pantalla principal.</string>
     <string name="private_number">Número privado</string>
     <string name="swipe_left_or_right">Desliza el dedo hacia la izquierda o a la derecha</string>
     <string name="press_next_or_back_buton">Presiona la flecha de avanzar o retroceso</string>
-    <string name="click_delay">Retardo al pulsar</string>
-    <string name="no_delay">Sin retardo</string>
-    <string name="scrolling">Desplazamiento vertical</string>
-    <string name="arrows">Con\nflechas</string>
-    <string name="swipe">Deslizando con el dedo</string>
-    <string name="_long">Largo</string>
-    <string name="_short">Corto</string>
     <string name="do_you_want_to_save_your_changes">¿Quieres guardar los cambios?</string>
     <string name="discard">No, descartar</string>
     <string name="no_recent_calls">Sin llamadas recientes</string>
     <string name="apps_sort_method">Ordenar lista de aplicaciones</string>
-    <string name="apps_sort_method_subtext">Elige si quieres ordenar las aplicaciones en una sola tabla o separarlas en varios grupos, alfabéticamente, por letras.</string>
     <string name="groups">Por grupos</string>
     <string name="one_grid">En una tabla</string>
     <string name="colorful">Colorido</string>
-    <string name="colorful_subtext">¿Quieres que GranPhone tenga más colorines?</string>
     <string name="edit_home_screen">Cambiar pantalla de inicio</string>
     <string name="dual_sim">SIM dual</string>
-    <string name="dual_sim_subtext">Elige cómo quieres gestionar las tarjetas SIM dobles. Nota: Si eliges «ver opciones», tendrás que aceptar otro permiso.</string>
     <string name="use_default">Usar predeterminado</string>
     <string name="show_options">Ver opciones</string>
     <string name="read_phone_state">Consultar el estado del teléfono</string>
     <string name="read_phone_state_subtext">Este permiso es necesario para poder llamar desde la segunda tarjeta SIM</string>
     <string name="choose_sim">Elige una tarjeta SIM</string>
-    <string name="choose_sim_subtext">Elige la tarjeta SIM con la que quieras llamar</string>
     <string name="website">Página Web</string>
     <string name="appear_on_top">Mostrar sobre otras aplicaciones</string>
     <string name="appear_on_top_subtext">Este permiso es necesario en versiones nuevas de Android para poder mostrar alarmas y recordatorios al apagar la pantalla.</string>
@@ -410,5 +358,64 @@
     </string-array>
 
     <bool name="is_right_to_left">false</bool>
+    <string name="understood">Entendido</string>
 
+    <string name="back">Atrás</string>
+    <string name="exit">Salir</string>
+    <string name="stay">Quedarse</string>
+    <string name="settings_for_user">Para el usuario</string>
+    <string name="settings_for_helper">Para el asistente</string>
+    <string name="pin_to_home">Anclar a inicio</string>
+    <string name="unpin_from_home">Desanclar de inicio</string>
+    <string name="write_call_log_subtext">Este permiso es necesario para ver y gestionar el historial de llamadas.</string>
+    <string name="cd_previous_page">Página anterior</string>
+    <string name="cd_next_page">Página siguiente</string>
+    <string name="cd_space">Espacio</string>
+    <string name="cd_numbers">Números</string>
+    <string name="cd_letters">Letras</string>
+    <string name="cd_play_pause">Reproducir o pausar</string>
+    <string name="cd_media_item">Foto o video</string>
+    <string name="cd_pill_blue">Azul</string>
+    <string name="cd_pill_red">Rojo</string>
+    <string name="cd_pill_gray">Gris</string>
+    <string name="cd_pill_yellow">Amarillo</string>
+    <string name="cd_pill_green">Verde</string>
+    <string name="cd_pill_custom">Color personalizado</string>
+    <string name="answer_call">Responder</string>
+    <string name="call_ended">Llamada finalizada</string>
+    <string name="call_status_calling">Llamando…</string>
+    <string name="calls_channel">Llamadas</string>
+    <string name="confirm_call_title">¿Llamar a este número?</string>
+    <string name="decline_call">Rechazar</string>
+    <string name="hang_up">Colgar</string>
+    <string name="helper_pin_create_subtext">Elige un código de 4 dígitos. Protege los ajustes del ayudante.</string>
+    <string name="helper_pin_enter_subtext">Introduce el código de 4 dígitos de los ajustes del ayudante.</string>
+    <string name="helper_pin_mismatch">Los códigos no coinciden.</string>
+    <string name="helper_pin_repeat_subtext">Introduce el mismo código de 4 dígitos otra vez.</string>
+    <string name="in_call">En llamada</string>
+    <string name="in_call_duration">En llamada • %1$s</string>
+    <string name="in_call_with">En llamada con %1$s</string>
+    <string name="incoming_call">Llamada entrante</string>
+    <string name="incoming_call_from">Llamada entrante de %1$s</string>
+    <string name="kiosk_disable_subtext">Introduce el código de 4 dígitos para desactivar el modo quiosco.</string>
+    <string name="kiosk_disabled">El modo quiosco está desactivado.</string>
+    <string name="kiosk_enable_subtext">El teléfono se quedará dentro de GranPhone: sin barra de notificaciones, sin ajustes de Android y sin desinstalar aplicaciones.\nElige un código de 4 dígitos para desactivar este bloqueo más tarde.</string>
+    <string name="kiosk_enabled">El modo quiosco está activado.</string>
+    <string name="kiosk_pin_too_short">Introduce exactamente 4 dígitos.</string>
+    <string name="kiosk_wrong_pin">Ese no es el código de 4 dígitos que estableciste. Inténtalo de nuevo.</string>
+    <string name="on_hold">En espera</string>
+    <string name="ongoing_call">Llamada en curso</string>
+    <string name="pin_digits_entered">%1$d de %2$d dígitos introducidos</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — llamar a los servicios de emergencia</string>
+    <string name="sos_call_help">Llamar a los servicios de emergencia</string>
+    <string name="sos_calling_in">Llamando en %d…</string>
+    <string name="sos_confirm_call">¿Llamar a los servicios de emergencia ahora?</string>
+    <string name="sos_hold_explanation">Mantén pulsado SOS durante 5 segundos para llamar a los servicios de emergencia.</string>
+    <string name="speaker_state_off">Altavoz desactivado</string>
+    <string name="speaker_state_on">Altavoz activado</string>
+    <string name="speaker_turn_off">Desactivar altavoz</string>
+    <string name="speaker_turn_on">Activar altavoz</string>
+    <string name="tap_to_return_to_call">Toca para volver a la llamada</string>
+    <string name="unknown_number">Número desconocido</string>
 </resources>

@@ -19,7 +19,6 @@ package com.bald.uriah.baldphone.activities;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bald.uriah.baldphone.R;
@@ -38,18 +37,22 @@ public class RecentActivity extends BaldActivity {
         setContentView(R.layout.activity_recent);
 
         recyclerView = findViewById(R.id.recycler_view);
-        final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(getDrawable(R.drawable.ll_divider));
-        recyclerView.addItemDecoration(dividerItemDecoration);
-        final CallsRecyclerViewAdapter callsRecyclerViewAdapter = new CallsRecyclerViewAdapter(CallLogsHelper.getAllCalls(getContentResolver()), this);
-        CallLogsHelper.markAllAsRead(getContentResolver());
-        recyclerView.setAdapter(callsRecyclerViewAdapter);
+        final android.content.ContentResolver resolver = getContentResolver();
+        com.bald.uriah.baldphone.utils.BaldExecutors.io().execute(() -> {
+            final java.util.List<com.bald.uriah.baldphone.databases.calls.Call> calls = CallLogsHelper.getAllCalls(resolver);
+            CallLogsHelper.markAllAsRead(resolver);
+            com.bald.uriah.baldphone.utils.BaldExecutors.postToMain(() -> {
+                if (isFinishing() || isDestroyed())
+                    return;
+                recyclerView.setAdapter(new CallsRecyclerViewAdapter(calls, this));
+            });
+        });
 
         setupYoutube(3);
     }
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_WRITE_CALL_LOG | PERMISSION_READ_CONTACTS;
+        return PERMISSION_WRITE_CALL_LOG | PERMISSION_READ_CALL_LOG | PERMISSION_READ_CONTACTS;
     }
 }

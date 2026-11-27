@@ -15,29 +15,18 @@
   -->
 
 <resources>
-    <string name="about">Despre</string>
-    <string name="about_subtext">Hi!\nMy name is Uriah Shaul Mandel, and I\'m the developer of this platform.\n
-        I\'ve spent most of my \"adult\" life making this platform, and I\'ve released it for free, for all to
-        use.\nYou are more than welcome to contact me by email:\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">Nivel accesibilitate</string>
+
+<string name="accessibility_level">Nivel accesibilitate</string>
     <string name="accessibility_settings">Accesibilitate</string>
     <string name="accidental_touches">Protecție atingere aleatorie</string>
-    <string name="accidental_touches_settings_subtext">Această protecție blochează atingerile atunci când telefonul este acoperit\n
-      Poate fi dezactivată dacă întâmpinați dificultăți.
+    <string name="accidental_touches_subtext">O atingere accidentală a fost detectată\nApăsați \"Am înțeles\" pentru a continua\nDacă acest mesaj apare în continuare îl puteți dezactiva în setările de accesibilitate.
     </string>
-    <string name="accidental_touches_subtext">O atingere accidentală a fost detectată\nApăsați OK pentru a continua\nDacă acest mesaj apare în continuare îl puteți dezactiva în setările de accesibilitate.
-    </string>
-    <string name="acknowledgments">Recunoașteri</string>
-    <string name="adaptive">Adaptiv</string>
     <string name="add_alarm">Adaugă alarmă</string>
     <string name="add_alarm_quickly">Adaugă temporizator </string>
     <string name="add_contact">Adaugă contact</string>
     <string name="add_emergency_contact">Adaugă</string>
     <string name="add_pill">Adaugă medicant</string>
-    <string name="add_shortcut">Adaugă scurtătură </string>
     <string name="add_to_favorite">Adaugă la favorite</string>
-    <string name="add_to_home">Adaugă la pagină principală</string>
     <string name="add_to_sos">Adaugă la SOS</string>
     <string name="address">Adresă</string>
     <string name="advanced_options">Opțiuni avansate</string>
@@ -57,7 +46,6 @@
 
     <string name="apps">Aplicații</string>
     <string name="are_you_sure_you_want_to_delete___">Sunteți sigur că vreți să ștergeți %s?</string>
-    <string name="assistant">Asistent</string>
     <string name="at_least_one_day_must_be_selected">Cel puțin o zi trebuie selectată!</string>
     <string name="auto_brightness">Luminiozitate\auto</string>
     <string name="backspace">Șterge</string>
@@ -65,7 +53,6 @@
     <string name="blocked">Blocat</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="brightness">Luminiozitate</string>
-    <string name="brightness_subtext">Schimbă luminiozitate.</string>
     <string name="cache_cleared_successfully">Datele cache au fost șterse cu sucess!</string>
     <string name="call">Apeleaza</string>
     <string name="calling">Se apelează</string>
@@ -75,7 +62,6 @@
     <string name="camera">Cameră</string>
     <string name="camera_subtext">Această permisiune este necesară pentru a porni lanterna</string>
     <string name="cancel">Anuleaza</string>
-    <string name="change_pills_time">Schimbă orele medicamentelor</string>
     <string name="change_system_settings_subtext">Va rugăm să permiteți schimbarea setărilor, cum ar fi creșterea textului sau schimbarea luminiozității.
     </string>
     <string name="choose_friday">Vin</string>
@@ -90,7 +76,8 @@
     <string name="clear_data">Ștergeti toate datele</string>
     <string name="clear_data_subtext">Sunteți sigur că doriți ștergerea tuturor datelor?</string>
     <string name="clear_data_subtext2">100%?</string>
-    <string name="clear_data_subtext3">Sigur?\nVeți șterge toate datele apasând \'Yes\'</string>
+    <string name="clear_data_subtext3">Sigur?
+Toate datele vor fi șterse</string>
     <string name="clock">Ceas</string>
     <string name="coming_soon">În curând</string>
     <string name="connection_settings">Conexiune</string>
@@ -105,24 +92,18 @@
     <string name="dark">Întuneric</string>
     <string name="delete">Șterge</string>
     <string name="delete___">Ștergeți %s?</string>
-    <string name="delete_all_alarms">Ștergeți toate alarmele</string>
     <string name="dialer">Telefon</string>
     <string name="display_settings">Ecran</string>
     <string name="done">Gata</string>
     <string name="down">Jos</string>
     <string name="edit">Edit</string>
-    <string name="email">Email:</string>
     <string name="enable_notification_access">Permiteți accesul la notificări</string>
     <string name="enable_notification_access_subtext">Vă rugam permiteti accesul la notificări</string>
     <string name="enter">Introdu</string>
-    <string name="enter_contact_or_phone_number">Introduceți numele contactului:</string>
     <string name="evening">Seară</string>
     <string name="example_of_different_text_sizes">Exemple de diferite dimensiuni ale textului\nAr trebui sa fie lizibil și să nu treacă peste margini
     </string>
     <string name="external_storage_subtext">Această permisiune este necesară pentru a salva poze</string>
-    <string name="feedback">Trimite feedback </string>
-    <string name="feedback_cannot_be_empty">Feedback-ul nu poate fii gol!</string>
-    <string name="feedback_sent_successfully">Feedback trimis cu succes</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">Vă rugam selectați nivelul de accesibilitate
     </string>
     <string name="font_size">Dimensiune text</string>
@@ -136,7 +117,6 @@
     <string name="home_phone_number">Număr de telefon fix</string>
     <string name="hour">Oră</string>
     <string name="huge">Imens</string>
-    <string name="internet">Internet</string>
     <string name="invoked_in">Invocat în:</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">Încă un lucru:\n este recomandat să setați GranPhone ca lansator implicit
     </string>
@@ -146,9 +126,7 @@
     <string name="left_handed">Stângaci</string>
     <string name="light">Luminos</string>
     <string name="location">Locație</string>
-    <string name="emergency_services">Servicii de urgență</string>
-    <string name="mail">Mail</string>
-    <string name="maps">Hărți</string>
+<string name="mail">Mail</string>
 
 
     <string name="medium">Mediu</string>
@@ -169,8 +147,6 @@
     <string name="nfc">NFC</string>
     <string name="no">Nu</string>
     <string name="notes">Notițe</string>
-    <string name="notes_settings">Notițe</string>
-    <string name="notes_settings_subtext">Alegeți dacă doriți o filă pentru notițe pe pagina principală  </string>
     <string name="notifications">Notificări</string>
 
     <string name="off">Off</string>
@@ -192,6 +168,7 @@
     <string name="pill_added">Medicament adăugat!</string>
     <string name="pill_name">Nume medicament</string>
     <string name="pills">Medicamente</string>
+    <string name="pill">Medicament</string>
     <string name="press_longer">Ține apăsat!</string>
     <string name="timer">Temporizator</string>
     <string name="read_call_log">Citește istoric apeluriy</string>
@@ -202,9 +179,6 @@
     <string name="regular_level">Nivel normal</string>
 
     <string name="remove_from_favorite">Șterge de la favorite</string>
-    <string name="remove_from_home">Șterge de pe pagina principală</string>
-    <string name="remove_from_sos">Șterge de la SOS</string>
-    <string name="remove_shortcut">Șterga scurtăturăt</string>
     <string name="removed_all_alarms">Toate alarmele au fost șterse!</string>
     <string name="repeats_every_day">În fiecare zi!</string>
     <string name="right_handed">Dreptaci</string>
@@ -243,24 +217,20 @@
     <string name="speak">Vorbiți</string>
     <string name="speech_to_text">Vorbire-text</string>
     <string name="strong_hand">Mână dominantă</string>
-    <string name="strong_hand_subtext">Alegeți mâna dominanta.</string>
-    <string name="submit">Trimiteți</string>
     <string name="sunday">Duminică</string>
     <string name="technical_information">Informații tehnice.</string>
     <string name="theme_settings">Temă</string>
-    <string name="theme_settings_subtext">Alegeți o temă</string>
 
     <string name="thursday">Joi</string>
     <string name="time_changer">Schimbare timp medicamente</string>
     <string name="tiny">Mic</string>
-    <string name="to___days_and___hours_from_now">la %d zile și %d ore de acum</string>
-    <string name="to___hours_and___minutes_from_now">la %d ore și %d minute de acum</string>
+    <string name="to___days_and___hours_from_now">la %1$d zile și %2$d ore de acum</string>
+    <string name="to___hours_and___minutes_from_now">la %1$d ore și %2$d minute de acum</string>
     <string name="to___minuets_from_now">la %d minute de acum</string>
     <string name="today">Asțazi</string>
     <string name="took">Luat!</string>
     <string name="tuesday">Marți</string>
     <string name="uninstall">Dezinstalare</string>
-    <string name="uninstall_subtext">Sunteți sigur că vreți să dezinstalați %s?\n Datele %s vor fii șterse pentru totdeauna!</string>
     <string name="up">Sus</string>
     <string name="video">Video</string>
     <string name="video_tutorials">Tutoriale video</string>
@@ -278,18 +248,21 @@
     <string name="yesterday">Ieri</string>
     <string name="nothing">Nimic</string>
     <string name="no_contacts_found">Nici un conctact nu a fost găsit!</string>
-    <string name="no_alarms">Nici o alarmă\nCreați una apasând pe\n\"Adaugă alarmă\"\nsau\n\"Adaugă temporizator\"</string>
-    <string name="no_pills">Nici un medicament\nAdaugă unul apasând pe\n\"Adaugă medicament\"</string>
+    <string name="no_alarms">Nicio alarmă.
+Apăsați \"Alarmă\" sau
+\"Temporizator\" mai jos.</string>
+    <string name="no_pills">Niciun medicament.
+Apăsați \"+ Medicament\" mai jos.</string>
     <string name="clear_all_notifications">Stergeți toate notificările</string>
     <string name="clear_cache_subtext">Sunteți sigur că vreți să stergeți datele cache?\nScurtăturilor vor fi de asemenea șterse!
     </string>
     <string name="permissions_calm">Hei, GranPhone are nevoie de urmatoarele permisuni pentru a funcțion\n
-        Unele pot suna înspăimântător dar altfel nu îti vom putea înlocui interfața telefonului\nNu îți vom gestiona datele.  Apasă OK pentru a permite sau No pentru a inchide GranPhone</string>
+        Unele pot suna înspăimântător dar altfel nu îti vom putea înlocui interfața telefonului\nNu îți vom gestiona datele.  Continuă pentru a permite sau închide GranPhone</string>
     <string name="pending_update">Actualizare în așteptare</string>
     <string name="download">Download</string>
     <string name="install_updates">Actualizează</string>
     <string name="install_updates_subtext">Această permisiune este necesară pentru a actualiza GranPhone</string>
-    <string name="a_new_update_is_available">A aparut o nouă actualizare! Apasă OK pentru a actualiza GranPhone!
+    <string name="a_new_update_is_available">A aparut o nouă actualizare! Continuă pentru a actualiza GranPhone!
     </string>
     <string name="current_version">Versiune curentă:\n</string>
     <string name="new_version">Versiune nouă:\n</string>
@@ -314,22 +287,15 @@
     <string name="try_now">Încearca acum</string>
     <string name="download_progress">Progres descărcare</string>
     <string name="what_do_you_want_to_do_with___">Ce doriți să faceți cu %s?</string>
-    <string name="crash_reports">Report erori</string>
-    <string name="crash_reports_subtext">Aceste reporturi ajuta la dezvoltarea aplicației. Sunt împartășite doar date aferente erorii.
-    </string>
     <string name="custom_app">Aplicație personalizată</string>
-    <string name="custom_app_subtext">Alegeți o aplicație pentru a fii prezentată pe pagina principală</string>
-    <string name="no_app_was_found">Nici o aplicație de genul nu a fost găsită!</string>
     <string name="alarm">Alarmă</string>
     <string name="no_new_notifications">Nici o notificare nouă</string>
     <string name="sound">Sunet</string>
     <string name="mute">Silențios</string>
     <string name="vibrate">Vibrații</string>
-    <string name="your_phone_doesnt_have_assistant_installed">Telefonl dvs. nu are instalat un asistent.</string>
 
 
     <string name="status_bar_settings">Bară status</string>
-    <string name="status_bar_settings_subtext">Unde doriți sa fie afișată bara de status?</string>
     <string name="only_home_screen">Doar pe pagina principală</string>
     <string name="nowhere">Nicăieri</string>
     <string name="everywhere">Peste tot</string>
@@ -340,6 +306,8 @@
     <string name="choose_language_for_keyboard">Alegeți limba</string>
     <string name="hebrew">Hebrew</string>
     <string name="english">English</string>
+    <string name="russian">Rusă</string>
+    <string name="understood">Am înțeles</string>
 
     <string name="search">Căutați</string>
     <string name="next">Urmatorul</string>
@@ -347,39 +315,24 @@
 
 
     <string name="dialer_sounds">Sunete butoane telefon</string>
-    <string name="dialer_sounds_subtext">Alegeți dacă doriți sunete</string>
     <string name="low_battery_alert">Alertă nivel scăzut baterie</string>
-    <string name="low_battery_alert_subtext">Alegeți dacă doriți ca bara de status sa apară roșie atunci când bateria scade sub 20%.</string>
 
-    <string name="also_available_at">Also available at\nGranPhone.contact@gmail.com\nFeedback must be in English/Hebrew!</string>
     <string name="grant_all_permissions">Acordați toate permisiunile</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">Eltroxin 100</string>
     <string name="medication_2">Eltroxin 150</string>
-    <string name="donate">Donati</string>
-    <string name="emergency_button">Buton urgența</string>
-    <string name="emergency_settings_subtext">Alegeți dacă doriți un buton de urgență pe pagina principală.</string>
     <string name="private_number">Număr privat</string>
     <string name="swipe_left_or_right">Trageți în stânga sau în dreaptat</string>
     <string name="press_next_or_back_buton">Apăsați următorul sau înapoi</string>
-    <string name="click_delay">Întarziere atingere</string>
-    <string name="no_delay">Fară așteptare</string>
-    <string name="scrolling">Defilare</string>
-    <string name="arrows">Săgeți</string>
-    <string name="swipe">Trageți</string>
-    <string name="_long">Lung</string>
-    <string name="_short">Scurt</string>
     <string name="do_you_want_to_save_your_changes">Doriți să salvați schimbările?</string>
     <string name="discard">Înlaturați</string>
     <string name="no_recent_calls">Nici un apel recent</string>
     <string name="apps_sort_method">Metodă sortare aplicații</string>
-    <string name="apps_sort_method_subtext">Alegeți dacă vreți ca aplicațiile sa fie sortate in grupe sau alfabetic.</string>
     <string name="groups">Grupe</string>
     <string name="one_grid">Alfabetic</string>
     <string name="colorful">Colorat</string>
-    <string name="colorful_subtext">Doriți să faceți aplicația mai colorată?</string>
     <string name="edit_home_screen">Editați Ecranul Acasă</string>
     <string-array name="names_for_screenshots">
         <item>The Godfather</item>
@@ -392,4 +345,46 @@
 
     <bool name="is_right_to_left">false</bool>
 
+    <string name="back">Înapoi</string>
+    <string name="exit">Ieși</string>
+    <string name="stay">Rămâi</string>
+    <string name="settings_for_user">Pentru utilizator</string>
+    <string name="settings_for_helper">Pentru ajutor</string>
+    <string name="answer_call">Răspunde</string>
+    <string name="call_ended">Apel încheiat</string>
+    <string name="call_status_calling">Se apelează...</string>
+    <string name="calls_channel">Apeluri</string>
+    <string name="confirm_call_title">Apelați acest număr?</string>
+    <string name="decline_call">Respinge</string>
+    <string name="hang_up">Încheie</string>
+    <string name="helper_pin_create_subtext">Alegeți un cod din 4 cifre. Protejează setările de ajutor.</string>
+    <string name="helper_pin_enter_subtext">Introduceți codul din 4 cifre pentru setările de ajutor.</string>
+    <string name="helper_pin_mismatch">Codurile nu se potrivesc.</string>
+    <string name="helper_pin_repeat_subtext">Introduceți din nou același cod din 4 cifre.</string>
+    <string name="in_call">În apel</string>
+    <string name="in_call_duration">În apel • %1$s</string>
+    <string name="in_call_with">În apel cu %1$s</string>
+    <string name="incoming_call">Apel primit</string>
+    <string name="incoming_call_from">Apel primit de la %1$s</string>
+    <string name="kiosk_disable_subtext">Introduceți codul din 4 cifre pentru a dezactiva modul chioșc.</string>
+    <string name="kiosk_disabled">Modul chioșc este dezactivat.</string>
+    <string name="kiosk_enable_subtext">Telefonul va rămâne în GranPhone: fără umbră de notificare, fără setări Android și fără aplicații de dezinstalare.\nAlegeți un cod din 4 cifre pentru a dezactiva această blocare mai târziu.</string>
+    <string name="kiosk_enabled">Modul chioșc este activat.</string>
+    <string name="kiosk_pin_too_short">Introduceți exact 4 cifre.</string>
+    <string name="kiosk_wrong_pin">Acesta nu este codul din 4 cifre pe care l-ați setat. Încearcă din nou.</string>
+    <string name="on_hold">În așteptare</string>
+    <string name="ongoing_call">Apel în curs</string>
+    <string name="pin_digits_entered">%1$d din %2$d cifre introduse</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — apelați serviciile de urgență</string>
+    <string name="sos_call_help">Apelați serviciile de urgență</string>
+    <string name="sos_calling_in">Apelarea serviciilor de urgență în %d secunde...</string>
+    <string name="sos_confirm_call">Apelați acum serviciile de urgență?</string>
+    <string name="sos_hold_explanation">Apăsați și mențineți apăsat SOS timp de 5 secunde pentru a apela serviciile de urgență.</string>
+    <string name="speaker_state_off">Difuzor oprit</string>
+    <string name="speaker_state_on">Difuzor activat</string>
+    <string name="speaker_turn_off">Opriți difuzorul</string>
+    <string name="speaker_turn_on">Porniți difuzorul</string>
+    <string name="tap_to_return_to_call">Atingeți pentru a reveni la apel</string>
+    <string name="unknown_number">Număr necunoscut</string>
 </resources>

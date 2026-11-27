@@ -32,7 +32,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,9 +45,16 @@ import com.bald.uriah.baldphone.activities.SOSActivity;
 import com.bald.uriah.baldphone.activities.contacts.ShareActivity;
 import com.bald.uriah.baldphone.activities.contacts.SingleContactActivity;
 import com.bald.uriah.baldphone.fragments_and_dialogs.LetterChooserDialog;
+import com.bald.uriah.baldphone.utils.AppUtils;
+import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.RandomColorMaker;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 import com.bumptech.glide.Glide;
+
+import android.content.ContentResolver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<ContactRecyclerViewAdapter.ViewHolder> {
     public final static String[] PROJECTION = {
@@ -57,25 +63,119 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             ContactsContract.Contacts.PHOTO_URI,
             ContactsContract.Data.LOOKUP_KEY,
             ContactsContract.Data.STARRED};
+    /**
+     * For queries against {@code Data}/{@code Phone} URIs only — {@code contact_id} is
+     * NOT a valid projection on {@code Contacts.CONTENT_URI}.
+     */
+    public final static String[] PROJECTION_WITH_CONTACT_ID = {
+            ContactsContract.Data.DISPLAY_NAME,
+            ContactsContract.Data._ID,
+            ContactsContract.Contacts.PHOTO_URI,
+            ContactsContract.Data.LOOKUP_KEY,
+            ContactsContract.Data.STARRED,
+            ContactsContract.Data.CONTACT_ID};
     public static final int MODE_DEFAULT = 0;
     public static final int MODE_SOS = 1;
     public static final int MODE_SHARE = 2;
+    /** Immutable snapshot of one contact row - built on a background thread, bound on main. */
+    public static final class ContactRow {
+        public final String lookupKey;
+        public final String contactId;
+        public final String name;
+        public final String photoUri;
+        public final boolean starred;
+        public final String number;
+        public final String letter;
+        public final boolean showLetter;
+
+        private ContactRow(String lookupKey, String contactId, String name, String photoUri,
+                           boolean starred, String number, String letter, boolean showLetter) {
+            this.lookupKey = lookupKey;
+            this.contactId = contactId;
+            this.name = name;
+            this.photoUri = photoUri;
+            this.starred = starred;
+            this.number = number;
+            this.letter = letter;
+            this.showLetter = showLetter;
+        }
+    }
+
+    /**
+     * Walks the contacts cursor once and snapshots every row, including the first-letter
+     * grouping flags. Phone numbers come from the cursor itself when it has a NUMBER column
+     * and fall back to one lookup per contact otherwise.
+     * shortcut: the fallback is N small queries instead of one batch join - fine on a
+     * background thread at elderly-user contact counts; upgrade to a WHERE IN batch if
+     * phones with thousands of contacts ever matter.
+     * Must be called off the main thread.
+     */
+    public static List<ContactRow> loadRows(Cursor cursor, ContentResolver contentResolver) {
+        final List<ContactRow> rows = new ArrayList<>();
+        if (cursor == null)
+            return rows;
+        try {
+            final int nameIdx = cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME);
+            final int idIdx = cursor.getColumnIndex(ContactsContract.Data._ID);
+            final int photoIdx = cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI);
+            final int lookupIdx = cursor.getColumnIndex(ContactsContract.Data.LOOKUP_KEY);
+            final int starredIdx = cursor.getColumnIndex(ContactsContract.Data.STARRED);
+            final int numberIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+            final int contactIdIdx = cursor.getColumnIndex(ContactsContract.Data.CONTACT_ID);
+            String previousLetter = null;
+            for (int i = 0; i < cursor.getCount(); i++) {
+                if (!cursor.moveToPosition(i))
+                    break;
+                final String name = cursor.getString(nameIdx);
+                final String contactId = contactIdIdx >= 0 ? cursor.getString(contactIdIdx) : cursor.getString(idIdx);
+                final String number = numberIdx >= 0 ? cursor.getString(numberIdx) : lookupNumber(contentResolver, contactId);
+                final String letter = groupLetter(name);
+                final boolean showLetter = !letter.equals(previousLetter);
+                previousLetter = letter;
+                rows.add(new ContactRow(
+                        lookupIdx >= 0 ? cursor.getString(lookupIdx) : null,
+                        contactId, name,
+                        photoIdx >= 0 ? cursor.getString(photoIdx) : null,
+                        starredIdx >= 0 && cursor.getInt(starredIdx) == 1,
+                        number, letter, showLetter));
+            }
+        } finally {
+            cursor.close();
+        }
+        return rows;
+    }
+
+    private static String lookupNumber(ContentResolver contentResolver, String contactId) {
+        if (contactId == null)
+            return null;
+        try (final Cursor phones = contentResolver.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER},
+                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                new String[]{contactId},
+                null)) {
+            if (phones != null && phones.moveToFirst())
+                return phones.getString(0);
+        } catch (Exception e) {
+            // a failed lookup just leaves the second line empty
+        }
+        return null;
+    }
+
     private final BaldActivity activity;
     private final LayoutInflater layoutInflater;
     private final Drawable letterContactBackground;
     private final SparseIntArray letterToPosition;
     private final RecyclerView recyclerView;
     private final int mode;
-    @ColorInt
-    private final int textColorOnGold, textColorOnButton;
     private RandomColorMaker randomColorMaker;
-    private Cursor cursor;
+    private List<ContactRow> rows;
 
-    public ContactRecyclerViewAdapter(BaldActivity activity, Cursor cursor, RecyclerView recyclerView, @IntRange(from = MODE_DEFAULT, to = MODE_SHARE) int mode) {
+    public ContactRecyclerViewAdapter(BaldActivity activity, List<ContactRow> rows, RecyclerView recyclerView, @IntRange(from = MODE_DEFAULT, to = MODE_SHARE) int mode) {
         this.mode = mode;
         this.activity = activity;
         this.layoutInflater = LayoutInflater.from(activity);
-        this.cursor = cursor;
+        this.rows = rows;
         this.recyclerView = recyclerView;
         final TypedValue typedValue = new TypedValue();
         final Resources.Theme theme = activity.getTheme();
@@ -83,35 +183,19 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
         this.letterContactBackground = new ColorDrawable(typedValue.data);
         this.randomColorMaker = new RandomColorMaker(typedValue.data);
         letterToPosition = new SparseIntArray();
-        theme.resolveAttribute(R.attr.bald_text_on_gold, typedValue, true);
-        textColorOnGold = typedValue.data;
-        theme.resolveAttribute(R.attr.bald_text_on_button, typedValue, true);
-        textColorOnButton = typedValue.data;
-
-        applyToCursor();
+        applyToRows();
     }
 
-    private void applyToCursor() {
+    private void applyToRows() {
         letterToPosition.clear();
-        if (cursor == null || !cursor.moveToFirst())
-            return;
-        String previousFirstLetter = null;
-        String tmpThis;
-
-        for (int i = 0; i < cursor.getCount(); i++) {
-            cursor.moveToPosition(i);
-            final String displayName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-            tmpThis = (displayName == null || displayName.isEmpty()) ? " " : displayName.substring(0, 1).toUpperCase();
-            if (!tmpThis.equals(previousFirstLetter)) {
-                letterToPosition.append(tmpThis.charAt(0), i);
-            }
-            previousFirstLetter = tmpThis;
-        }
+        for (int i = 0; i < rows.size(); i++)
+            if (rows.get(i).showLetter)
+                letterToPosition.append(rows.get(i).letter.codePointAt(0), i);
     }
 
-    public void changeCursor(@NonNull Cursor cursor) {
-        this.cursor = cursor;
-        applyToCursor();
+    public void submitList(List<ContactRow> rows) {
+        this.rows = rows;
+        applyToRows();
         notifyDataSetChanged();
 
         if (getItemCount() > 0) {
@@ -139,42 +223,58 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
     @Override
     public void onBindViewHolder(final @NonNull ViewHolder holder, final int position) {
         super.onBindViewHolder(holder, position);
-        cursor.moveToPosition(position);
+        final ContactRow row = rows.get(position);
 
-        holder.lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.LOOKUP_KEY));
-        final String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-        final String letter = (name == null || name.isEmpty()) ? "?" : name.substring(0, 1).toUpperCase();
-        holder.setFavorite(cursor.getInt(cursor.getColumnIndex(ContactsContract.Data.STARRED)) == 1);
-        holder.tv_contact_name.setText(name);
+        holder.lookupKey = row.lookupKey;
+        holder.setFavorite(row.starred);
+        holder.tv_contact_name.setText(row.name);
 
-        if (position == 0) {
-            holder.setLetter(letter);
+        if (row.number == null) {
+            holder.tv_contact_number.setVisibility(View.GONE);
         } else {
-            final boolean moved = cursor.moveToPosition(position - 1);
-            if (moved) {
-                final String prevName = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
-                final String prevNameFirstLetter = (prevName == null || prevName.isEmpty()) ? "?" : prevName.substring(0, 1).toUpperCase();
-                if (!prevNameFirstLetter.equals(letter)) {
-                    holder.setLetter(letter);
-                } else
-                    holder.setLetter(null);
-            } else {
-                holder.setLetter(null);
-            }
-            cursor.moveToPosition(position);
+            holder.tv_contact_number.setText(row.number);
+            holder.tv_contact_number.setVisibility(View.VISIBLE);
         }
-        if (cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI)) != null) {
-            holder.iv_contact_pic.setImageURI(Uri.parse(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))));
+
+        holder.setLetter(row.showLetter ? row.letter : null);
+
+        if (row.photoUri != null) {
+            Glide.with(holder.iv_contact_pic).load(Uri.parse(row.photoUri)).into(holder.iv_contact_pic);
             holder.tv_image_letter.setVisibility(View.GONE);
         } else {
-            drawText(holder, letter, holder.lookupKey == null ? 0 : holder.lookupKey.hashCode());
+            drawText(holder, initials(row.name), holder.lookupKey == null ? 0 : holder.lookupKey.hashCode());
         }
 
     }
 
+    /**
+     * Gutter letter for {@code name}: digit-leading names share one "#" group
+     * instead of a separate header per first digit.
+     */
+    private static String groupLetter(@Nullable String name) {
+        final String glyph = AppUtils.firstGlyph(name);
+        return Character.isDigit(glyph.codePointAt(0)) ? "#" : glyph;
+    }
+
+    /**
+     * first letters of the first two words, e.g. "John Smith" -> "JS"
+     */
+    public static String initials(@Nullable String name) {
+        if (name == null)
+            return "?";
+        final String[] words = name.trim().split("\\s+");
+        final StringBuilder ret = new StringBuilder(2);
+        for (final String word : words) {
+            if (word.isEmpty() || ret.length() >= 2)
+                break;
+            ret.append(AppUtils.firstGlyph(word));
+        }
+        return ret.length() == 0 ? "?" : ret.toString();
+    }
+
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        return rows.size();
     }
 
     private void drawText(ViewHolder viewHolder, String chr, int hash) {
@@ -188,12 +288,9 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        static final int expandedSize = 150;
-        static final int notExpandedSize = 100;
-
         final View line;
         final LinearLayout container, ll_contact_only;
-        final TextView tv_contact_name, tv_letter, tv_image_letter;
+        final TextView tv_contact_name, tv_contact_number, tv_letter, tv_image_letter;
         final ImageView iv_contact_pic;
 
         String lookupKey;
@@ -205,11 +302,16 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
             this.container = (LinearLayout) itemView;
             this.ll_contact_only = container.findViewById(R.id.ll_contact_only);
             this.tv_contact_name = container.findViewById(R.id.contact_name);
+            this.tv_contact_number = container.findViewById(R.id.contact_number);
             this.iv_contact_pic = container.findViewById(R.id.profile_pic);
             this.tv_letter = container.findViewById(R.id.letter);
             this.ll_contact_only.setOnClickListener(this);
             this.line = container.findViewById(R.id.line);
             this.tv_image_letter = container.findViewById(R.id.image_letter);
+
+            // phone numbers read digit-by-digit LTR even in RTL locales
+            this.tv_contact_name.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
+            this.tv_contact_number.setTextDirection(View.TEXT_DIRECTION_LTR);
 
             this.tv_letter.setOnClickListener((v) -> {
                 final LetterChooserDialog letterChooserDialog =
@@ -228,40 +330,27 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
 
         public void setLetter(final @Nullable String character) {
             if (character == null && expanded) {
-                RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) this.container.getLayoutParams();
-                layoutParams.height =
-                        (int) TypedValue.applyDimension(
-                                TypedValue.COMPLEX_UNIT_DIP,
-                                notExpandedSize,
-                                activity.getResources().getDisplayMetrics());
-                this.container.setLayoutParams(layoutParams);
                 this.line.setVisibility(View.GONE);
                 this.tv_letter.setVisibility(View.GONE);
                 expanded = false;
             } else if (character != null && expanded) {
                 this.tv_letter.setText(character);
             } else if (character != null) {
-                final RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) this.container.getLayoutParams();
-                layoutParams.height =
-                        (int) TypedValue.applyDimension(
-                                TypedValue.COMPLEX_UNIT_DIP,
-                                expandedSize,
-                                activity.getResources().getDisplayMetrics());
-                this.container.setLayoutParams(layoutParams);
                 this.line.setVisibility(View.VISIBLE);
                 this.tv_letter.setVisibility(View.VISIBLE);
                 this.tv_letter.setText(character);
                 expanded = true;
             }
+            // the letter alone reads as a stray character — tell TalkBack it opens the letter picker
+            this.tv_letter.setContentDescription(character == null ? null :
+                    activity.getString(R.string.cd_letters_with_char, character));
         }
 
         public void setFavorite(final boolean f) {
             if (f == favorite)
                 return;
             favorite = f;
-            ll_contact_only.setBackgroundResource(favorite ? R.drawable.style_for_buttons_rectangle_gold : R.drawable.style_for_buttons_rectangle);
-            tv_contact_name.setTextColor(favorite ? textColorOnGold : textColorOnButton);
-
+            ll_contact_only.setSelected(favorite);
         }
 
         @Override
@@ -275,8 +364,10 @@ public class ContactRecyclerViewAdapter extends ModularRecyclerView.ModularAdapt
                     activity.startActivityForResult(intent, SingleContactActivity.REQUEST_CHECK_CHANGE);
                     break;
                 case MODE_SOS:
-                    SOSActivity.PinHelper.pinContact(v.getContext(), lookupKey);
-                    activity.finish();
+                    if (SOSActivity.PinHelper.pinContact(v.getContext(), lookupKey))
+                        activity.finish();
+                    else
+                        DialogScreen.info(activity, R.string.sos_is_full, R.string.sos_is_full_subtext);
                     break;
                 case MODE_SHARE:
                     ((ShareActivity) activity).whatsappShare(lookupKey);

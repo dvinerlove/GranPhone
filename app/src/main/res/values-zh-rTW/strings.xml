@@ -15,27 +15,18 @@
   -->
 
 <resources>
-    <string name="about">關於</string>
-    <string name="about_subtext">你好！\n我的名字是 Uriah Shaul Mandel，是這個平台的開發者。\n
-        我成年後大部份時間都在製作這個平台，我把它免費發布，供每個人使用。\n歡迎你以電子郵件聯絡我：\nGranPhone.contact@gmail.com
-    </string>
-    <string name="accessibility_level">輔助功能程度</string>
+
+<string name="accessibility_level">輔助功能程度</string>
     <string name="accessibility_settings">輔助功能設定</string>
     <string name="accidental_touches">防誤觸功能</string>
-    <string name="accidental_touches_settings_subtext">此功能可以在你電話蓋上時阻止任何輸入\n如果正常使用時有問題的話，可以把這個功能關上
+    <string name="accidental_touches_subtext">防誤觸功能已啟動\n按「瞭解」以繼續使用電話\n如果常常看到這個訊息，你可以到輔助功能設定關掉它
     </string>
-    <string name="accidental_touches_subtext">防誤觸功能已啟動\n按確定以繼續使用電話\n如果常常看到這個訊息，你可以到輔助功能設定關掉它
-    </string>
-    <string name="acknowledgments">鳴謝</string>
-    <string name="adaptive">自動轉換</string>
     <string name="add_alarm">新增鬧鐘</string>
     <string name="add_alarm_quickly">新增倒數計時器</string>
     <string name="add_contact">新增聯絡人</string>
     <string name="add_emergency_contact">新增</string>
     <string name="add_pill">新增藥物</string>
-    <string name="add_shortcut">新增捷徑</string>
     <string name="add_to_favorite">加至我的最愛</string>
-    <string name="add_to_home">加至主頁</string>
     <string name="add_to_sos">加至緊急聯絡</string>
     <string name="address">地址</string>
     <string name="advanced_options">進階功能</string>
@@ -55,7 +46,6 @@
 
     <string name="apps">程式</string>
     <string name="are_you_sure_you_want_to_delete___">你肯定要移除 %s？</string>
-    <string name="assistant">智能助手</string>
     <string name="at_least_one_day_must_be_selected">最少要選擇一日！</string>
     <string name="auto_brightness">自動調校亮度</string>
     <string name="backspace">退格鍵</string>
@@ -63,7 +53,6 @@
     <string name="blocked">已封鎖</string>
     <string name="bluetooth">藍牙</string>
     <string name="brightness">亮度</string>
-    <string name="brightness_subtext">改變亮度。</string>
     <string name="cache_cleared_successfully">成功清除暫存！</string>
     <string name="call">致電</string>
     <string name="calling">致電</string>
@@ -73,7 +62,6 @@
     <string name="camera">相機</string>
     <string name="camera_subtext">需要以下權限才可開啟閃光燈。</string>
     <string name="cancel">取消</string>
-    <string name="change_pills_time">更改服藥時間</string>
     <string name="change_system_settings_subtext">請允許清風電話更改系統設定，包括放大字體及改變亮度。
     </string>
     <string name="choose_friday">周五</string>
@@ -88,7 +76,8 @@
     <string name="clear_data">清除所有資料</string>
     <string name="clear_data_subtext">你肯定要移除所有資料？</string>
     <string name="clear_data_subtext2">百分百肯定要刪除所有資料？</string>
-    <string name="clear_data_subtext3">肯定嗎？\n按確定之後真的會移除所有資料！</string>
+    <string name="clear_data_subtext3">肯定嗎？
+真的會移除所有資料！</string>
     <string name="clock">時鐘</string>
     <string name="coming_soon">即將推出！</string>
     <string name="connection_settings">連接</string>
@@ -103,24 +92,18 @@
     <string name="dark">暗色</string>
     <string name="delete">移除</string>
     <string name="delete___">移除 %s？</string>
-    <string name="delete_all_alarms">移除所有鬧鐘</string>
     <string name="dialer">電話撥號盤</string>
     <string name="display_settings">顯示</string>
     <string name="done">完成</string>
     <string name="down">向下</string>
     <string name="edit">編輯</string>
-    <string name="email">電郵：</string>
     <string name="enable_notification_access">開啟通知存取</string>
     <string name="enable_notification_access_subtext">請給予清風電話通知存取。</string>
     <string name="enter">確定</string>
-    <string name="enter_contact_or_phone_number">輸入聯絡人名稱：</string>
     <string name="evening">晚上</string>
     <string name="example_of_different_text_sizes">不同字體示範\n應該看得見，又不出界。
     </string>
     <string name="external_storage_subtext">需要以下權限才可儲存照片。</string>
-    <string name="feedback">傳送回饋</string>
-    <string name="feedback_cannot_be_empty">不能傳送空白回饋！</string>
-    <string name="feedback_sent_successfully">成功傳送回饋！</string>
     <string name="first_please_select_how_you_want_to_interact_with_buttons">請選擇輔助功能程度
     </string>
     <string name="font_size">字型</string>
@@ -134,7 +117,6 @@
     <string name="home_phone_number">家居電話號碼</string>
     <string name="hour">時</string>
     <string name="huge">巨大</string>
-    <string name="internet">互聯網</string>
     <string name="invoked_in">倒數計時：</string>
     <string name="it_s_highly_recommended_to_use_GranPhone_s_home_screen_as_the_default_home_launcher">最後：\n我們強烈建議你使用清風電話為預設主螢幕
     </string>
@@ -144,9 +126,7 @@
     <string name="left_handed">左手</string>
     <string name="light">淺色</string>
     <string name="location">位置</string>
-    <string name="emergency_services">緊急服務</string>
-    <string name="mail">電郵</string>
-    <string name="maps">地圖</string>
+<string name="mail">電郵</string>
 
 
     <string name="medium">普通</string>
@@ -167,8 +147,6 @@
     <string name="nfc">NFC</string>
     <string name="no">否</string>
     <string name="notes">筆記</string>
-    <string name="notes_settings">筆記</string>
-    <string name="notes_settings_subtext">選擇要否放筆記頁到主頁。</string>
     <string name="notifications">通知</string>
 
     <string name="of">總共</string>
@@ -191,6 +169,7 @@
     <string name="pill_added">藥物已添加！</string>
     <string name="pill_name">藥名</string>
     <string name="pills">藥物</string>
+    <string name="pill">藥物</string>
     <string name="press_longer">按久一點！</string>
     <string name="timer">倒數計時器</string>
     <string name="read_call_log">查看通話記錄</string>
@@ -201,9 +180,6 @@
     <string name="regular_level">普通</string>
 
     <string name="remove_from_favorite">從我的最愛移除</string>
-    <string name="remove_from_home">從桌面移除</string>
-    <string name="remove_from_sos">從緊急聯絡移除</string>
-    <string name="remove_shortcut">移除捷徑</string>
     <string name="removed_all_alarms">已移除所有鬧鐘！</string>
     <string name="repeats_every_day">每日</string>
     <string name="right_handed">右手寫字</string>
@@ -239,24 +215,20 @@
     <string name="speak">錄音轉文字</string>
     <string name="speech_to_text">語音轉文字</string>
     <string name="strong_hand">常用寫字手</string>
-    <string name="strong_hand_subtext">選擇你最常用的一邊手，界面會因而調整。</string>
-    <string name="submit">開始</string>
     <string name="sunday">星期日</string>
     <string name="technical_information">詳細技術資料</string>
     <string name="theme_settings">佈景主題</string>
-    <string name="theme_settings_subtext">選擇主題</string>
 
     <string name="thursday">星期四</string>
     <string name="time_changer">更改服藥時間</string>
     <string name="tiny">最小</string>
-    <string name="to___days_and___hours_from_now">%d 天 %d 小時之後</string>
-    <string name="to___hours_and___minutes_from_now">%d 小時 %d 分鐘之後</string>
+    <string name="to___days_and___hours_from_now">%1$d 天 %2$d 小時之後</string>
+    <string name="to___hours_and___minutes_from_now">%1$d 小時 %2$d 分鐘之後</string>
     <string name="to___minuets_from_now">%d 分鐘之後</string>
     <string name="today">今天</string>
     <string name="took">已服食！</string>
     <string name="tuesday">星期二</string>
     <string name="uninstall">移除</string>
-    <string name="uninstall_subtext">你肯定要移除 %s？\n%s 的所有資料將會刪除！</string>
     <string name="up">上</string>
     <string name="video">影片</string>
     <string name="video_tutorials">影片教學</string>
@@ -274,18 +246,21 @@
     <string name="yesterday">昨天</string>
     <string name="nothing">無</string>
     <string name="no_contacts_found">找不到聯絡人！</string>
-    <string name="no_alarms">無任何鬧鐘\n按一下\n「新增鬧鐘」\n或者\n「新增倒數計時器」\n新增鬧鐘</string>
-    <string name="no_pills">無藥物\n按一下\n「新增藥物」新增記錄</string>
+    <string name="no_alarms">無任何鬧鐘。
+按一下下方「鬧鐘」
+或「倒數計時器」。</string>
+    <string name="no_pills">無藥物。
+按一下下方「+ 藥物」。</string>
     <string name="clear_all_notifications">清除所有通知</string>
     <string name="clear_cache_subtext">你肯定要清除緩存？\n所有捷徑也會移除！
     </string>
-    <string name="permissions_calm">你好，清風電話需要以下權限才可運作。有部分聽起來很嚴重，但清風電話需要它們才可以正常運作。清風電話不會偷取資料或者損害你的電話。按確定以給予清風電話這些權限，或按否退出清風電話。
+    <string name="permissions_calm">你好，清風電話需要以下權限才可運作。有部分聽起來很嚴重，但清風電話需要它們才可以正常運作。清風電話不會偷取資料或者損害你的電話。繼續以給予清風電話這些權限，或退出清風電話。
     </string>
     <string name="pending_update">等待更新</string>
     <string name="download">下載</string>
     <string name="install_updates">下載更新</string>
     <string name="install_updates_subtext">需要以下權限才可更新清風電話。</string>
-    <string name="a_new_update_is_available">有更新可用！\n更新以確保清風電話運作暢順。\n按確定以下載。
+    <string name="a_new_update_is_available">有更新可用！\n更新以確保清風電話運作暢順。\n繼續以下載。
     </string>
     <string name="current_version">目前版本：\n</string>
     <string name="new_version">新版本：\n</string>
@@ -311,22 +286,15 @@
     <string name="try_now">現在嘗試</string>
     <string name="download_progress">下載進度</string>
     <string name="what_do_you_want_to_do_with___">你想拿 %s 做什麽？</string>
-    <string name="crash_reports">當機報告</string>
-    <string name="crash_reports_subtext">當機報告幫助清風電話更加穩定\n他們只用作移除程式問題，而不會包括其他無關資料。
-    </string>
     <string name="custom_app">自訂程式</string>
-    <string name="custom_app_subtext">選擇自訂程式以顯示到桌面。</string>
-    <string name="no_app_was_found">無符合的程式！</string>
     <string name="alarm">鬧鐘</string>
     <string name="no_new_notifications">無新通知</string>
     <string name="sound">發聲</string>
     <string name="mute">無聲</string>
     <string name="vibrate">震動</string>
-    <string name="your_phone_doesnt_have_assistant_installed">你的電話沒有安裝智能助手。</string>
 
 
     <string name="status_bar_settings">狀態列</string>
-    <string name="status_bar_settings_subtext">你想在哪裏顯示狀態列?</string>
     <string name="only_home_screen">只在主頁</string>
     <string name="nowhere">不顯示</string>
     <string name="everywhere">所有頁面</string>
@@ -337,6 +305,7 @@
     <string name="choose_language_for_keyboard">選擇語言</string>
     <string name="hebrew">希伯來文</string>
     <string name="english">英文</string>
+    <string name="russian">俄語</string>
 
     <string name="search">搜尋</string>
     <string name="next">下頁</string>
@@ -344,39 +313,24 @@
 
 
     <string name="dialer_sounds">鈴聲</string>
-    <string name="dialer_sounds_subtext">選擇你的鈴聲。</string>
     <string name="low_battery_alert">低電量警告</string>
-    <string name="low_battery_alert_subtext">你可以選擇電量低於 20% 時，讓狀態列轉紅\n注意，如果狀態列不顯示時，紅色效果也不會顯示。</string>
 
-    <string name="also_available_at">也可聯絡\nGranPhone.contact@gmail.com\n反饋需以英文或希伯來文寫成。</string>
     <string name="grant_all_permissions">允許所有權限</string>
 
 
     <!--For Tests:-->
     <string name="medication_1">昂特欣錠 100微克</string>
     <string name="medication_2">昂特欣錠 150微克</string>
-    <string name="donate">贊助</string>
-    <string name="emergency_button">緊急按鈕</string>
-    <string name="emergency_settings_subtext">你可以選擇添加緊急按鈕到桌面。</string>
     <string name="private_number">私人號碼</string>
     <string name="swipe_left_or_right">撥動向左或向右</string>
     <string name="press_next_or_back_buton">按一下左方或右方箭頭</string>
-    <string name="click_delay">點按延遲</string>
-    <string name="no_delay">無延遲</string>
-    <string name="scrolling">捲動</string>
-    <string name="arrows">箭頭</string>
-    <string name="swipe">觸控</string>
-    <string name="_long">長</string>
-    <string name="_short">短</string>
     <string name="do_you_want_to_save_your_changes">你想儲存你所作的變更嗎？</string>
     <string name="discard">捨棄</string>
     <string name="no_recent_calls">無最近通話</string>
     <string name="apps_sort_method">程式排序方式</string>
-    <string name="apps_sort_method_subtext">你想以單一網格排序程式，還是按字母分組顯示</string>
     <string name="groups">分組</string>
     <string name="one_grid">網格</string>
     <string name="colorful">色彩</string>
-    <string name="colorful_subtext">你想讓清風電話更富色彩嗎？</string>
     <string name="edit_home_screen">編輯主螢幕</string>
 
 
@@ -391,5 +345,48 @@
     </string-array>
 
     <bool name="is_right_to_left">false</bool>
+    <string name="understood">瞭解</string>
 
+    <string name="back">返回</string>
+    <string name="exit">退出</string>
+    <string name="stay">留下</string>
+    <string name="settings_for_user">使用者設定</string>
+    <string name="settings_for_helper">協助者設定</string>
+    <string name="answer_call">接聽</string>
+    <string name="call_ended">通話結束</string>
+    <string name="call_status_calling">呼叫...</string>
+    <string name="calls_channel">通話</string>
+    <string name="confirm_call_title">撥打這個號碼？</string>
+    <string name="decline_call">拒接</string>
+    <string name="hang_up">掛斷</string>
+    <string name="helper_pin_create_subtext">選擇 4 位代碼。它保護助手設定。</string>
+    <string name="helper_pin_enter_subtext">輸入幫助程式設定的 4 位數代碼。</string>
+    <string name="helper_pin_mismatch">代碼不符。\n輸入了</string>
+    <string name="helper_pin_repeat_subtext">再次輸入相同的 4 位數代碼。</string>
+    <string name="in_call">通話中</string>
+    <string name="in_call_duration">通話中 • %1$s</string>
+    <string name="in_call_with">正在與 %1$s 通話</string>
+    <string name="incoming_call">來電</string>
+    <string name="incoming_call_from">來自 %1$s 的來電</string>
+    <string name="kiosk_disable_subtext">輸入 4 位代碼以關閉資訊亭模式。</string>
+    <string name="kiosk_disabled">Kiosk 模式已關閉。</string>
+    <string name="kiosk_enable_subtext">手機將保留在 GranPhone 中：沒有通知欄，沒有 Android 設置，也沒有卸載應用程式。\n選擇一個 4 位元代碼以便稍後關閉此鎖定。</string>
+    <string name="kiosk_enabled">Kiosk 模式已開啟。</string>
+    <string name="kiosk_pin_too_short">準確輸入 4 位數字。</string>
+    <string name="kiosk_wrong_pin">這不是您設定的 4 位代碼。再試一次。</string>
+    <string name="on_hold">保留</string>
+    <string name="ongoing_call">通話正在進行中</string>
+    <string name="pin_digits_entered">%1$d 個數字，共 %2$d 個數字</string>
+    <string name="sim_fallback">SIM %1$d</string>
+    <string name="sos_button_description">SOS — 呼叫緊急服務</string>
+    <string name="sos_call_help">撥打緊急服務電話</string>
+    <string name="sos_calling_in">在 %d 秒內呼叫緊急服務…</string>
+    <string name="sos_confirm_call">現在撥打緊急服務電話嗎？</string>
+    <string name="sos_hold_explanation">按住 SOS 5 秒可呼叫緊急服務。</string>
+    <string name="speaker_state_off">揚聲器關閉</string>
+    <string name="speaker_state_on">揚聲器打開</string>
+    <string name="speaker_turn_off">關閉揚聲器</string>
+    <string name="speaker_turn_on">開啟揚聲器</string>
+    <string name="tap_to_return_to_call">點擊返回通話</string>
+    <string name="unknown_number">未知號碼</string>
 </resources>

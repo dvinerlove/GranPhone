@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2019 Uriah Shaul Mandel
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?bald_background"
+    android:layoutDirection="ltr">
+
+    <Space
+        android:id="@+id/spc"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/keyboard_height"
+        tools:ignore="MissingConstraints" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/bald_key_end_margin"
+        android:layout_marginTop="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="й"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ц"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_1"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="у"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_2"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="к"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_3"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="е"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_4"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="н"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_5"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="г"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_6"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ш"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_7"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="щ"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_10"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_8"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="з"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_11"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_9"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_11"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="х"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toStartOf="@+id/r1_12"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_10"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r1_12"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:layout_marginEnd="@dimen/bald_key_end_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ъ"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r1_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r1_11"
+        app:layout_constraintTop_toTopOf="@id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/bald_key_end_margin"
+        android:layout_marginTop="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ф"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/r1_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ы"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_1"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="в"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_2"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="а"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_3"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="п"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_4"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="р"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_5"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="о"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_6"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="л"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_7"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="д"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_10"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_8"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ж"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toStartOf="@+id/r2_11"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_9"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r2_11"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:layout_marginEnd="@dimen/bald_key_end_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="э"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r2_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r2_10"
+        app:layout_constraintTop_toTopOf="@id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldConstraintLayoutButton
+        android:id="@+id/shift"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/bald_key_end_margin"
+        android:background="@drawable/key_background"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r3_1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/r3_1">
+
+        <ImageView
+            android:id="@+id/iv_shift"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/spacing_xl"
+            android:src="@drawable/keyboard_shift"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_shift"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/shift"
+            android:textColor="?bald_text_on_key"
+            android:textSize="@dimen/tiny"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_shift"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/iv_shift"
+            app:layout_constraintTop_toBottomOf="@+id/iv_shift" />
+    </com.bald.uriah.baldphone.views.BaldConstraintLayoutButton>
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:layout_marginTop="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="я"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/numbers"
+        app:layout_constraintEnd_toStartOf="@+id/r3_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/shift"
+        app:layout_constraintTop_toBottomOf="@+id/r2_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ч"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r3_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_1"
+        app:layout_constraintTop_toTopOf="@id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="с"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r3_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_2"
+        app:layout_constraintTop_toTopOf="@id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="м"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r3_5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_3"
+        app:layout_constraintTop_toTopOf="@id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="и"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r3_6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_4"
+        app:layout_constraintTop_toTopOf="@id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="т"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r3_7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_5"
+        app:layout_constraintTop_toTopOf="@id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ь"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r3_8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_6"
+        app:layout_constraintTop_toTopOf="@id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="б"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/r3_9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_7"
+        app:layout_constraintTop_toTopOf="@id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/r3_9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:padding="@dimen/key_padding"
+        android:text="ю"
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toStartOf="@+id/backspace"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_8"
+        app:layout_constraintTop_toTopOf="@id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldConstraintLayoutButton
+        android:id="@+id/backspace"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:layout_marginEnd="@dimen/bald_key_end_margin"
+        android:background="@drawable/key_background"
+        app:layout_constraintBottom_toBottomOf="@+id/r3_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/r3_9"
+        app:layout_constraintTop_toTopOf="@+id/shift">
+
+        <ImageView
+            android:id="@+id/iv_backspace"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/spacing_xl"
+            android:padding="?bald_key_margin"
+            android:src="@drawable/backspace_on_key"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_backspace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/backspace"
+            android:textColor="?bald_text_on_key"
+            android:textSize="@dimen/tiny"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_backspace" />
+    </com.bald.uriah.baldphone.views.BaldConstraintLayoutButton>
+
+    <com.bald.uriah.baldphone.views.BaldImageButton
+        android:id="@+id/numbers"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/bald_key_end_margin"
+        android:layout_marginTop="?bald_key_margin"
+        android:layout_marginBottom="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:padding="@dimen/spacing_xs"
+        android:contentDescription="@string/cd_numbers"
+        android:focusable="true"
+        android:src="@drawable/key_numbers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/language"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/r3_1" />
+
+    <com.bald.uriah.baldphone.views.BaldConstraintLayoutButton
+        android:id="@+id/language"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        app:layout_constraintBottom_toBottomOf="@id/numbers"
+        app:layout_constraintEnd_toStartOf="@+id/speech_to_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/numbers"
+        app:layout_constraintTop_toTopOf="@id/numbers">
+
+        <ImageView
+            android:id="@+id/iv_language"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/spacing_xl"
+            android:padding="@dimen/spacing_xs"
+            android:src="@drawable/keyboard_language"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/language"
+            android:textColor="?bald_text_on_key"
+            android:textSize="@dimen/tiny"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_language"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/iv_language"
+            app:layout_constraintTop_toBottomOf="@+id/iv_language" />
+    </com.bald.uriah.baldphone.views.BaldConstraintLayoutButton>
+
+    <com.bald.uriah.baldphone.views.BaldConstraintLayoutButton
+        android:id="@+id/speech_to_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        app:layout_constraintBottom_toBottomOf="@id/numbers"
+        app:layout_constraintEnd_toStartOf="@+id/space"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/language"
+        app:layout_constraintTop_toTopOf="@id/numbers">
+
+        <ImageView
+            android:id="@+id/iv_speech_to_text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/spacing_xl"
+            android:padding="@dimen/spacing_xs"
+            android:src="@drawable/voice_on_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_speech_to_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/speech_to_text"
+            android:textColor="?bald_text_on_key"
+            android:textSize="@dimen/tiny"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_language"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/iv_language"
+            app:layout_constraintTop_toBottomOf="@+id/iv_language" />
+    </com.bald.uriah.baldphone.views.BaldConstraintLayoutButton>
+
+    <com.bald.uriah.baldphone.views.BaldImageButton
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:contentDescription="@string/cd_space"
+        android:focusable="true"
+        android:src="@drawable/keyboard_space_bar"
+        app:layout_constraintBottom_toBottomOf="@id/numbers"
+        app:layout_constraintEnd_toStartOf="@+id/done"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintStart_toEndOf="@+id/speech_to_text"
+        app:layout_constraintTop_toTopOf="@id/numbers" />
+
+    <com.bald.uriah.baldphone.views.BaldConstraintLayoutButton
+        android:id="@+id/done"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        app:layout_constraintBottom_toBottomOf="@id/numbers"
+        app:layout_constraintEnd_toStartOf="@id/dot"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toTopOf="@id/numbers">
+
+        <ImageView
+            android:id="@+id/iv_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            android:padding="@dimen/spacing_xs"
+            android:src="@drawable/keyboard_hide_on_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/hide"
+            android:textColor="?bald_text_on_key"
+            android:textSize="@dimen/tiny"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/iv_done"
+            app:layout_constraintStart_toStartOf="@id/iv_done"
+            app:layout_constraintTop_toBottomOf="@id/iv_done" />
+    </com.bald.uriah.baldphone.views.BaldConstraintLayoutButton>
+
+    <com.bald.uriah.baldphone.views.BaldButton
+        android:id="@+id/dot"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:background="@drawable/key_background"
+        android:gravity="center"
+        android:text="."
+        android:textColor="?bald_text_on_key"
+        android:textSize="@dimen/key_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/numbers"
+        app:layout_constraintEnd_toStartOf="@+id/enter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/done"
+        app:layout_constraintTop_toTopOf="@id/numbers" />
+
+    <com.bald.uriah.baldphone.views.BaldConstraintLayoutButton
+        android:id="@+id/enter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="?bald_key_margin"
+        android:layout_marginEnd="@dimen/bald_key_end_margin"
+        android:background="@drawable/key_background"
+        app:layout_constraintBottom_toBottomOf="@id/numbers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/dot"
+        app:layout_constraintTop_toTopOf="@id/numbers">
+
+        <ImageView
+            android:id="@+id/iv_enter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_lg"
+            android:src="@drawable/enter_on_keyboard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/enter"
+            android:textColor="?bald_text_on_key"
+            android:textSize="@dimen/tiny"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/iv_enter"
+            app:layout_constraintStart_toStartOf="@id/iv_enter"
+            app:layout_constraintTop_toBottomOf="@id/iv_enter" />
+    </com.bald.uriah.baldphone.views.BaldConstraintLayoutButton>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Alarm.class}, version = 1, exportSchema = false)
+@Database(entities = {Alarm.class}, version = 1, exportSchema = true)
 
 public abstract class AlarmsDatabase extends RoomDatabase {
     private static final Object LOCK = new Object();

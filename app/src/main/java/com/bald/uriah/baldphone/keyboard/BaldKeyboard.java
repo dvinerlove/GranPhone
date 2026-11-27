@@ -33,7 +33,7 @@ import androidx.annotation.LayoutRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bald.uriah.baldphone.R;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.AppUtils;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_GO;
@@ -69,7 +69,7 @@ public abstract class BaldKeyboard extends FrameLayout {
         super(context);
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         this.backspaceRunnable = backspaceRunnable;
-        final ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, S.getTheme(context));
+        final ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, AppUtils.getTheme(context));
         keyboard = (ConstraintLayout) LayoutInflater.from(contextThemeWrapper).inflate(layout(), this, false);
         children = new View[keyboard.getChildCount()];
         final char[] codes = codes();
@@ -94,10 +94,12 @@ public abstract class BaldKeyboard extends FrameLayout {
                 return new HebrewKeyboard(context, onClickListener, backspaceRunnable, imeOptions);
             case EnglishKeyboard.LANGUAGE_ID:
                 return new EnglishKeyboard(context, onClickListener, backspaceRunnable, imeOptions);
+            case RussianKeyboard.LANGUAGE_ID:
+                return new RussianKeyboard(context, onClickListener, backspaceRunnable, imeOptions);
             case NumberKeyboard.LANGUAGE_ID:
                 return new NumberKeyboard(context, onClickListener, backspaceRunnable, imeOptions);
             default:
-                throw new IllegalArgumentException("language must be 0/1/2, it is currently:" + language);
+                throw new IllegalArgumentException("language must be 0/1/2/3, it is currently:" + language);
         }
 
     }
@@ -176,12 +178,13 @@ public abstract class BaldKeyboard extends FrameLayout {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    backspaceThread = new Thread(backspaceRunnable);
-                    backspaceThread.start();
+                    if (backspaceThread == null || !backspaceThread.isAlive()) {
+                        backspaceThread = new Thread(backspaceRunnable);
+                        backspaceThread.start();
+                    }
+                } else if (backspaceThread != null) {
+                    backspaceThread.interrupt();
                 }
-                if (event.getAction() == MotionEvent.ACTION_UP)
-                    if (BaldKeyboard.this.backspaceRunnable != null)
-                        backspaceThread.interrupt();
                 return false;
             }
         };

@@ -19,6 +19,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?bald_background"
+    android:contentDescription="@string/cd_media_item"
+    android:focusable="true"
     android:padding="1dp">
 
     <ImageView

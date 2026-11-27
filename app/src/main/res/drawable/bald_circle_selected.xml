@@ -4,5 +4,5 @@
     <size
         android:width="10dp"
         android:height="10dp" />
-    <solid android:color="?bald_selected_on_background" />
+    <solid android:color="?bald_brand" />
 </shape>

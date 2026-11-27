@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2019 Uriah Shaul Mandel
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<com.bald.uriah.baldphone.views.DialogMaxHeightLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_xl"
+    android:background="@drawable/bald_dialog_background"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_xl">
+
+    <TextView
+        android:id="@+id/dialog_screen_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="3"
+        android:textColor="?bald_text_primary"
+        android:textSize="@dimen/large" />
+
+    <ScrollView
+        android:id="@+id/dialog_screen_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dialog_screen_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.2"
+                android:textColor="?bald_text_secondary"
+                android:textSize="@dimen/medium" />
+
+            <LinearLayout
+                android:id="@+id/dialog_screen_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- interactive payloads stay pinned below the scroll — they are the point
+         of the dialog and must never scroll out of reach -->
+    <FrameLayout
+        android:id="@+id/dialog_screen_extra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:orientation="horizontal">
+
+        <com.bald.uriah.baldphone.views.BaldButton
+            android:id="@+id/dialog_screen_button_secondary"
+            style="@style/ButtonsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            android:layout_weight="1"
+            android:background="@drawable/bald_button_background"
+            android:minHeight="@dimen/dialog_button_height"
+            android:maxLines="2" />
+
+        <com.bald.uriah.baldphone.views.BaldButton
+            android:id="@+id/dialog_screen_button_primary"
+            style="@style/ButtonsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:layout_weight="1"
+            android:background="@drawable/bald_button_background"
+            android:minHeight="@dimen/dialog_button_height"
+            android:maxLines="2" />
+    </LinearLayout>
+</com.bald.uriah.baldphone.views.DialogMaxHeightLayout>

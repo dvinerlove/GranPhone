@@ -28,7 +28,8 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragment1;
 import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragment2;
 import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragment4;
-import com.bald.uriah.baldphone.utils.BPrefs;
+import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragmentBattery;
+import com.bald.uriah.baldphone.fragments_and_dialogs.tutorial_fragments.TutorialFragmentHelper;
 import com.bald.uriah.baldphone.views.ViewPagerHolder;
 
 public class TutorialActivity extends BaldActivity {
@@ -37,9 +38,17 @@ public class TutorialActivity extends BaldActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutorial_activity);
-        getSharedPreferences(BPrefs.KEY, MODE_PRIVATE).edit().putBoolean(BPrefs.AFTER_TUTORIAL_KEY, true).apply();
-        ViewPagerHolder viewPagerHolder = findViewById(R.id.view_pager_holder);
+        // AFTER_TUTORIAL_KEY is written by TutorialFragment4's home button — setting it
+        // here would let a force-quit mid-tutorial skip it permanently.
+        viewPagerHolder = findViewById(R.id.view_pager_holder);
         viewPagerHolder.setViewPagerAdapter(new Adapter(getSupportFragmentManager()));
+    }
+
+    private ViewPagerHolder viewPagerHolder;
+
+    public void advancePage() {
+        if (viewPagerHolder.getPageIndex() + 1 < viewPagerHolder.getCount())
+            viewPagerHolder.setCurrentItem(viewPagerHolder.getPageIndex() + 1);
     }
 
     private static class Adapter extends FragmentPagerAdapter {
@@ -54,8 +63,15 @@ public class TutorialActivity extends BaldActivity {
                 case 0:
                     return new TutorialFragment1();
                 case 1:
-                    return new TutorialFragment2();
-                case 2:
+                    return new TutorialFragmentHelper();
+                case 2: {
+                    final TutorialFragment2 f = new TutorialFragment2();
+                    f.setRecreateActivityOnSelect(false);
+                    return f;
+                }
+                case 3:
+                    return new TutorialFragmentBattery();
+                case 4:
                     return new TutorialFragment4();
                 default:
                     return null;
@@ -64,7 +80,7 @@ public class TutorialActivity extends BaldActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 5;
         }
 
     }

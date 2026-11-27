@@ -13,10 +13,12 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <com.bald.uriah.baldphone.views.BaldButton xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ButtonsText"
+    style="@style/ButtonsText.Medium"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp" />
+    android:layout_marginTop="@dimen/spacing_xs"
+    android:layout_marginBottom="@dimen/spacing_xs"
+    android:maxLines="1"
+    android:paddingStart="@dimen/spacing_sm"
+    android:paddingEnd="@dimen/spacing_sm" />

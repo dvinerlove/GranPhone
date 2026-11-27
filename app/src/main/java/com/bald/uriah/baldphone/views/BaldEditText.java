@@ -26,7 +26,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 /**
  * This class isn't the same as {@link BaldButton} so be careful
@@ -38,7 +38,7 @@ public class BaldEditText extends AppCompatEditText implements View.OnLongClickL
 
     public BaldEditText(Context context) {
         super(context);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
         this.vibrator = this.vibrationFeedback ? (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE) : null;
         super.setOnLongClickListener(this);
@@ -46,7 +46,7 @@ public class BaldEditText extends AppCompatEditText implements View.OnLongClickL
 
     public BaldEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
         this.vibrator = this.vibrationFeedback ? (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE) : null;
         super.setOnLongClickListener(this);
@@ -54,7 +54,7 @@ public class BaldEditText extends AppCompatEditText implements View.OnLongClickL
 
     public BaldEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
         this.vibrator = this.vibrationFeedback ? (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE) : null;
         super.setOnLongClickListener(this);
@@ -63,7 +63,7 @@ public class BaldEditText extends AppCompatEditText implements View.OnLongClickL
     @Override
     public boolean onLongClick(View v) {
         if (vibrationFeedback)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
 
         if (requestFocus()) {
             final CharSequence charSequence = getText();

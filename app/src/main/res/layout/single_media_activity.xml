@@ -25,10 +25,11 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:show_back="true" />
 
     <com.bald.uriah.baldphone.views.ViewPagerHolder
         android:id="@+id/view_pager_holder"
@@ -54,75 +55,48 @@
             android:orientation="horizontal"
             android:visibility="gone">
 
-            <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
+            <com.bald.uriah.baldphone.views.BaldPictureTextButton
                 android:id="@+id/share"
+                android:focusable="true"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/button_height_default"
                 android:layout_weight="1"
-                android:background="@drawable/style_for_buttons_transparent"
-                android:orientation="vertical">
+                android:background="@drawable/bald_ghost_button_background"
+                android:orientation="vertical"
+                app:_src="@drawable/share_on_background"
+                app:_text="@string/share" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2"
-                    app:srcCompat="@drawable/share_on_background" />
-
-                <TextView
-                    style="@style/BackgroundText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="@string/share"
-                    app:autoSizeTextType="uniform" />
-
-            </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
-
-            <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
+            <com.bald.uriah.baldphone.views.BaldPictureTextButton
                 android:id="@+id/delete"
+                android:focusable="true"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/button_height_default"
                 android:layout_weight="1"
-                android:background="@drawable/style_for_buttons_transparent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2"
-                    app:srcCompat="@drawable/delete_on_background" />
-
-                <TextView
-                    style="@style/BackgroundText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="@string/delete"
-                    app:autoSizeTextType="uniform" />
-
-
-            </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
+                android:background="@drawable/bald_ghost_button_background"
+                android:orientation="vertical"
+                app:_src="@drawable/delete_on_background"
+                app:_text="@string/delete"
+                app:variant="danger_outline" />
         </LinearLayout>
 
         <com.bald.uriah.baldphone.views.BaldFrameLayoutButton
             android:id="@+id/more"
+                android:focusable="true"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="@dimen/button_height_large"
             android:layout_gravity="start"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/style_for_buttons"
-            android:padding="5dp">
+            android:layout_marginStart="@dimen/spacing_md"
+            android:background="@drawable/bald_button_background"
+            android:padding="@dimen/spacing_xs">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="2"
-                android:paddingBottom="5dp"
+                android:paddingBottom="@dimen/spacing_xs"
                 android:src="@drawable/more_on_button" />
 
             <TextView
@@ -130,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:layout_weight="1"
                 android:includeFontPadding="false"
                 android:text="@string/more" />

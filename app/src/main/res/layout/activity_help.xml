@@ -21,14 +21,15 @@
     android:background="?bald_background">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
-        android:backgroundTint="@color/color_1"
+        android:backgroundTint="?bald_brand"
         android:id="@+id/bald_title_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/video_tutorials" />
+        app:title="@string/video_tutorials"
+        app:show_back="true" />
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:layout_width="0dp"

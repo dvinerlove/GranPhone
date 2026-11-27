@@ -46,6 +46,8 @@ public class ReminderReceiver extends BroadcastReceiver {
         final Context appContext = context.getApplicationContext();
         appContext.startActivity(new Intent(appContext, PillScreenActivity.class)
                 .putExtra(Reminder.REMINDER_KEY_VIA_INTENTS, id)
+                .putExtra(ReminderScheduler.REMINDER_IS_SNOOZE_VIA_INTENTS,
+                        intent.getBooleanExtra(ReminderScheduler.REMINDER_IS_SNOOZE_VIA_INTENTS, false))
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         );
     }

@@ -24,7 +24,7 @@ import androidx.annotation.Nullable;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 public class CrashActivity extends BaldActivity {
 
@@ -42,12 +42,18 @@ public class CrashActivity extends BaldActivity {
                     startActivity(new Intent(this, HomeScreenActivity.class));
                     finish();
                 },
-                4 * D.SECOND);
+                4 * Const.SECOND);
     }
 
     @Override
     public void onBackPressed() {
         //Nope
+    }
+
+    // blocked back must stay blocked on API 33+ too — a callback keeps the events
+    @Override
+    protected boolean backDispatchIntercepted() {
+        return true;
     }
 
     @Override

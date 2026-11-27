@@ -19,7 +19,7 @@
     style="@style/BackgroundText.Large"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="5dp"
+    android:elevation="@dimen/elevation_low"
     android:gravity="center"
-    android:translationZ="5dp"
+    android:translationZ="@dimen/elevation_low"
     android:visibility="invisible" />

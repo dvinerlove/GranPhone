@@ -14,11 +14,16 @@
 
 package com.bald.uriah.baldphone.services;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
@@ -28,6 +33,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.CallActivity;
+import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.CallManager;
 
 /**
@@ -38,7 +44,9 @@ import com.bald.uriah.baldphone.utils.CallManager;
 @TargetApi(Build.VERSION_CODES.M)
 public class BaldInCallService extends InCallService {
     private static final String TAG = BaldInCallService.class.getSimpleName();
-    private static final String CHANNEL_ID = "granphone_calls";
+    private static final String CHANNEL_RINGING = "granphone_calls";
+    // low importance: an ongoing-call heads-up would cover the caller block on our own call screen
+    private static final String CHANNEL_ONGOING = "granphone_calls_ongoing";
     private static final int NOTIFICATION_ID = 4210;
     private final CallManager.Listener listener = this::updateNotification;
 
@@ -60,12 +68,36 @@ public class BaldInCallService extends InCallService {
     @Override
     public void onCallAdded(Call call) {
         super.onCallAdded(call);
+        if (shouldBlock(call)) {
+            // reject() (not disconnect()) marks the call declined in telecom, so the
+            // system logs it as a rejected/missed call — visible in Recent
+            call.reject(false, null);
+            return;
+        }
         CallManager.addCall(call);
         try {
             // InCallService is allowed to start activities from the background.
             startActivity(CallActivity.newIntent(this));
         } catch (Exception e) {
             Log.e(TAG, "could not open the call screen", e);
+        }
+    }
+
+    /** Contacts-only mode: a ringing call from a number not in contacts gets declined. */
+    private boolean shouldBlock(Call call) {
+        if (!BPrefs.get(this).getBoolean(BPrefs.BLOCK_UNKNOWN_CALLERS_KEY, BPrefs.BLOCK_UNKNOWN_CALLERS_DEFAULT_VALUE))
+            return false;
+        if (call.getState() != Call.STATE_RINGING)
+            return false;
+        if (checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)
+            return false; // can't verify who calls — better let it ring than block everyone
+        final Uri handle = call.getDetails().getHandle();
+        // hidden/private numbers aren't in anyone's contacts — still blocked
+        final String number = handle == null ? "" : handle.getSchemeSpecificPart();
+        try (Cursor cursor = getContentResolver().query(
+                Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number)),
+                new String[]{ContactsContract.PhoneLookup._ID}, null, null, null)) {
+            return cursor == null || !cursor.moveToFirst();
         }
     }
 
@@ -100,8 +132,14 @@ public class BaldInCallService extends InCallService {
             notificationManager.cancel(NOTIFICATION_ID);
             return;
         }
+        final boolean ringing = CallManager.getState(call) == Call.STATE_RINGING;
+        // a heads-up over our own call screen would cover the caller block; the loud
+        // version is only the fallback for when the activity could not be started
+        final boolean headsUp = ringing && !CallManager.isCallScreenVisible();
+        final String channelId = headsUp ? CHANNEL_RINGING : CHANNEL_ONGOING;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            final NotificationChannel channel = new NotificationChannel(CHANNEL_ID, getString(R.string.calls_channel), NotificationManager.IMPORTANCE_HIGH);
+            final NotificationChannel channel = new NotificationChannel(channelId, getString(R.string.calls_channel),
+                    headsUp ? NotificationManager.IMPORTANCE_HIGH : NotificationManager.IMPORTANCE_LOW);
             channel.setSound(null, null); // the system already rings
             notificationManager.createNotificationChannel(channel);
         }
@@ -110,18 +148,17 @@ public class BaldInCallService extends InCallService {
                 0,
                 CallActivity.newIntent(this),
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        final boolean ringing = CallManager.getState(call) == Call.STATE_RINGING;
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.ic_call_white)
                 .setContentTitle(getString(ringing ? R.string.incoming_call : R.string.ongoing_call))
                 .setContentText(getString(R.string.tap_to_return_to_call))
                 .setCategory(NotificationCompat.CATEGORY_CALL)
-                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setPriority(headsUp ? NotificationCompat.PRIORITY_MAX : NotificationCompat.PRIORITY_LOW)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pendingIntent);
-        if (ringing)
+        if (headsUp)
             builder.setFullScreenIntent(pendingIntent, true);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }

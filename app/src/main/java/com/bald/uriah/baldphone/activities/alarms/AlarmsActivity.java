@@ -17,7 +17,6 @@
 package com.bald.uriah.baldphone.activities.alarms;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,10 +36,9 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.databases.alarms.Alarm;
 import com.bald.uriah.baldphone.databases.alarms.AlarmScheduler;
 import com.bald.uriah.baldphone.databases.alarms.AlarmsDatabase;
-import com.bald.uriah.baldphone.utils.BaldGridItemDecoration;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
-import com.bald.uriah.baldphone.utils.S;
+import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.utils.AppUtils;
 import com.bald.uriah.baldphone.views.BaldSwitch;
 import com.bald.uriah.baldphone.views.ModularRecyclerView;
 
@@ -74,8 +72,6 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
         int numberOfAppsInARow = screenOrientation ? 2 : 1;
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfAppsInARow);
         recyclerView.setLayoutManager(gridLayoutManager);
-        Resources r = getResources();
-        recyclerView.addItemDecoration(new BaldGridItemDecoration(r.getDimensionPixelSize(R.dimen.divider), numberOfAppsInARow, getDrawable(R.drawable.ll_divider), r.getDimensionPixelSize(R.dimen.padding_dividers)));
 
         recyclerView.setAdapter(adapter);
 
@@ -101,6 +97,8 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
     public void refreshViews() {
         alarmList = AlarmsDatabase.getInstance(this).alarmsDatabaseDao().getAllSortedByTime();
         adapter.notifyDataSetChanged();
+        if (bt_cancel_all_alarms != null)
+            bt_cancel_all_alarms.setVisibility(alarmList.isEmpty() ? View.GONE : View.VISIBLE);
     }
 
     private void attachXml() {
@@ -111,7 +109,7 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
     }
 
     private void genOnClickListeners() {
-        bt_cancel_all_alarms.setOnClickListener(v -> S.showAreYouSureYouWantToDelete(getString(R.string.all_alarms), this, this::cancelAllAlarms));
+        bt_cancel_all_alarms.setOnClickListener(v -> AppUtils.showAreYouSureYouWantToDelete(getString(R.string.all_alarms), this, R.string.delete_all_alarms, this::cancelAllAlarms));
         bt_add_alarm.setOnClickListener(v ->
                 startActivityForResult(
                         new Intent(AlarmsActivity.this, AddAlarmActivity.class), ADD_ALARM_ACTIVITY_REQUEST_CODE)
@@ -125,14 +123,21 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
     private void cancelAllAlarms() {
         final AlarmsDatabase alarmsDatabase = AlarmsDatabase.getInstance(this);
         final List<Alarm> alarmList = alarmsDatabase
-                .alarmsDatabaseDao().getAllEnabled();
+                .alarmsDatabaseDao().getAll();
+        alarmsDatabase.alarmsDatabaseDao().deleteAll();
         for (Alarm alarm : alarmList)
             AlarmScheduler.cancelAlarm(alarm.getKey(), this);
 
-        alarmsDatabase.alarmsDatabaseDao().deleteAll();
-
         refreshViews();
         BaldToast.from(this).setText(R.string.removed_all_alarms).show();
+    }
+
+    private String goesOffIn(int major, int minor, int majorPlural, int minorPlural) {
+        final String majorText = getResources().getQuantityString(majorPlural, major, major);
+        return minor == 0
+                ? getString(R.string.goes_off_in, majorText)
+                : getString(R.string.goes_off_in_two_units, majorText,
+                        getResources().getQuantityString(minorPlural, minor, minor));
     }
 
     @Override
@@ -150,16 +155,22 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
 
                 final Alarm newAlarm = AlarmsDatabase.getInstance(this).alarmsDatabaseDao().getByKey(key);
                 final String name = newAlarm.getName();
-                final String message = String.format(getString(R.string.new_alarm___was_created), name == null || name.equals("") ? "" : getString(R.string.named__) + " " + name);
+                final String message = String.format(getString(R.string.new_alarm___was_created), name == null || name.equals("") ? "" : " " + String.format(getString(R.string.named__), name));
                 BaldToast.from(this).setText(message).setType(BaldToast.TYPE_INFORMATIVE).show();
                 final long nextTimeAlarmWillWork = AlarmScheduler.nextTimeAlarmWillWorkInMsFromNow(newAlarm);
                 final String message2;
-                if (nextTimeAlarmWillWork < D.HOUR)
-                    message2 = String.format(getString(R.string.to___minuets_from_now), nextTimeAlarmWillWork / D.MINUTE);
-                else if (nextTimeAlarmWillWork < D.DAY)
-                    message2 = String.format(getString(R.string.to___hours_and___minutes_from_now), nextTimeAlarmWillWork / D.HOUR, (nextTimeAlarmWillWork % D.HOUR) / D.MINUTE);
+                if (nextTimeAlarmWillWork < Const.HOUR) {
+                    final int mins = (int) (nextTimeAlarmWillWork / Const.MINUTE);
+                    message2 = getString(R.string.goes_off_in,
+                            getResources().getQuantityString(R.plurals.duration_minutes, mins, mins));
+                } else if (nextTimeAlarmWillWork < Const.DAY)
+                    message2 = goesOffIn((int) (nextTimeAlarmWillWork / Const.HOUR),
+                            (int) ((nextTimeAlarmWillWork % Const.HOUR) / Const.MINUTE),
+                            R.plurals.duration_hours, R.plurals.duration_minutes);
                 else
-                    message2 = String.format(getString(R.string.to___days_and___hours_from_now), nextTimeAlarmWillWork / D.DAY, (nextTimeAlarmWillWork % D.DAY) / D.HOUR);
+                    message2 = goesOffIn((int) (nextTimeAlarmWillWork / Const.DAY),
+                            (int) ((nextTimeAlarmWillWork % Const.DAY) / Const.HOUR),
+                            R.plurals.duration_days, R.plurals.duration_hours);
 
                 BaldToast.from(this).setText(message2).setType(BaldToast.TYPE_INFORMATIVE).show();
             }
@@ -209,16 +220,16 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
                 final CharSequence message;
                 if (alarm.getDays() == -1)
                     message = AlarmsActivity.this.getString(R.string.will_repeat_only_once);
-                else if (alarm.getDays() == (D.Days.ALL))
+                else if (alarm.getDays() == (Const.Days.ALL))
                     message = AlarmsActivity.this.getString(R.string.repeats_every_day);
                 else {
 
                     StringBuilder stringBuilder = new StringBuilder(40);
                     stringBuilder.append(AlarmsActivity.this.getText(R.string.alarms_repeats_every));
                     stringBuilder.append(' ');
-                    for (int day : D.Days.ARRAY_ALL)
+                    for (int day : Const.Days.ARRAY_ALL)
                         if ((alarm.getDays() & day) == day) {
-                            stringBuilder.append(AlarmsActivity.this.getString(S.balddayToStringId(day)));
+                            stringBuilder.append(AlarmsActivity.this.getString(AppUtils.balddayToStringId(day)));
                             stringBuilder.append(", ");
                         }
                     stringBuilder.setLength(stringBuilder.length() - 2);
@@ -228,7 +239,7 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
 
                 repeating_days.setText(message);
 
-                alarm_time.setText(S.numberToAlarmString(alarm.getHour(), alarm.getMinute()));
+                alarm_time.setText(AppUtils.numberToAlarmString(alarm.getHour(), alarm.getMinute()));
                 alarm_name.setText(alarm.getName());
                 alarm_switch.setChecked(alarm.isEnabled());
                 alarm_switch.setOnChangeListener(isChecked -> {
@@ -250,9 +261,10 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
                         )
                 );
                 bt_delete.setOnClickListener((v) ->
-                        S.showAreYouSureYouWantToDelete(alarm.getName(), AlarmsActivity.this, () -> {
+                        AppUtils.showAreYouSureYouWantToDelete(alarm.getName(), AlarmsActivity.this, R.string.delete_alarm, () -> {
                             AlarmsDatabase.getInstance(AlarmsActivity.this)
                                     .alarmsDatabaseDao().deleteByIds(alarm.getKey());
+                            AlarmScheduler.cancelAlarm(alarm.getKey(), AlarmsActivity.this);
                             AlarmsActivity.this.refreshViews();
                         }));
             }
@@ -261,6 +273,6 @@ public class AlarmsActivity extends com.bald.uriah.baldphone.activities.BaldActi
 
     @Override
     protected int requiredPermissions() {
-        return PERMISSION_SYSTEM_ALERT_WINDOW;
+        return PERMISSION_SYSTEM_ALERT_WINDOW | PERMISSION_EXACT_ALARM;
     }
 }

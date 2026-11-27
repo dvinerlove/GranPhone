@@ -17,13 +17,9 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="48dp"
     android:height="48dp"
-    android:viewportWidth="24.0"
-    android:viewportHeight="24.0">
-    <path
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+        <path
         android:fillColor="?bald_decoration_on_key"
-        android:pathData="M4,12l1.41,1.41L11,7.83V23h2V7.83l5.58,5.59L20,12l-8,-8 -8,8z" />
+        android:pathData="M320,800L320,520L204,520Q178,520 167.5,497.5Q157,475 173,455L449,118Q461,103 480,103Q499,103 511,118L787,455Q803,475 792.5,497.5Q782,520 756,520L640,520L640,800Q640,817 628.5,828.5Q617,840 600,840L360,840Q343,840 331.5,828.5Q320,817 320,800Z" />
 </vector>
-
-    <!--7.83V24h2V7
-    24 is the height!
-    -->

@@ -15,17 +15,13 @@
   -->
 
 <resources>
-    <string name="about">مقدمة</string>
-    <string name="accidental_touches">حماية من اللمس غير المقصود</string>
-    <string name="adaptive">تلقائي</string>
+<string name="accidental_touches">حماية من اللمس غير المقصود</string>
     <string name="add_alarm">إضافة منبه</string>
     <string name="add_alarm_quickly">إضافة مؤقت</string>
     <string name="add_contact">إضافة جهة اتصال</string>
     <string name="add_emergency_contact">إضافة</string>
     <string name="add_pill">إضافة دواء</string>
-    <string name="add_shortcut">إضافة إختصار</string>
     <string name="add_to_favorite">إضافة إلي المفضلة</string>
-    <string name="add_to_home">إضافة إلي الرئيسية</string>
     <string name="add_to_sos">إضافة إلي الطوارئ</string>
     <string name="address">عنوان</string>
     <string name="advanced_options">الاعدادات المتقدمة</string>
@@ -44,14 +40,12 @@
     <string name="an_error_has_occurred">حدث خطأ</string>
     <string name="apps">التطبيقات</string>
     <string name="are_you_sure_you_want_to_delete___">هل انت متأكد انك تريد حذف ‍%s ؟</string>
-    <string name="assistant">المساعد</string>
     <string name="at_least_one_day_must_be_selected">يجب ان تحدد يوم واحد علي اللأقل</string>
     <string name="auto_brightness">مستوي إضائة تلقائي</string>
     <string name="GranPhone_bla_allow_permission">من فضلك السماح للصلاحيات الأتية:</string>
     <string name="blocked">محظور</string>
     <string name="bluetooth">بلوتوث</string>
     <string name="brightness">مستوي السطوع</string>
-    <string name="brightness_subtext">تغيير مستوي السطوع</string>
     <string name="cache_cleared_successfully">تم تنظيف الذاكرة المؤقتة بنجاح!</string>
     <string name="call">إتصل</string>
     <string name="calling">يتم الإتصال</string>
@@ -61,7 +55,7 @@
     <string name="camera">الكاميرا</string>
     <string name="camera_subtext">هذا الإذن مطلوب لتشغيل الفلاش</string>
     <string name="cancel">إلغاء</string>
-    <string name="change_pills_time">تغيير ميعاد الدواء</string>
+    <string name="clear">مسح</string>
     <string name="clear_cache">مسح الذاكرة المؤقتة</string>
     <string name="clock">الساعة</string>
     <string name="connection_settings">الإتصال</string>
@@ -71,16 +65,11 @@
     <string name="current_time">الوقت الحالي</string>
     <string name="delete">حذف</string>
     <string name="delete___">حذف %s ؟</string>
-    <string name="delete_all_alarms">حذف كل المنبهات؟</string>
     <string name="dialer">إتصال برقم</string>
     <string name="display_settings">الشاشة</string>
     <string name="done">تم</string>
     <string name="edit">تعديل</string>
-    <string name="enter_contact_or_phone_number">إدخل اسم جهة الإتصال</string>
     <string name="evening">مساء</string>
-    <string name="feedback">إرسال تعليق</string>
-    <string name="feedback_cannot_be_empty">التعليق لايمكن ان يكون فارغ!</string>
-    <string name="feedback_sent_successfully">تم إرسال التعليق بنجاح!</string>
     <string name="font_size">حجم الخط</string>
     <string name="friday">الجمعة</string>
     <string name="hello">مرحبا</string>
@@ -88,12 +77,10 @@
     <string name="hide">إخفاء</string>
     <string name="home_phone_number">رقم هاتف المنزل</string>
     <string name="hour">ساعة</string>
-    <string name="internet">الإنترنت</string>
+    <string name="install">تثبيت</string>
     <string name="language">لغة</string>
     <string name="language_settings">اللغة</string>
     <string name="location">الموقع</string>
-    <string name="emergency_services">خدمات الطوارئ</string>
-    <string name="maps">الخرائط</string>
 
 
     <string name="medium">متوسط</string>
@@ -108,7 +95,6 @@
     <string name="new_alarm___was_created">منبه جديد %s تم إنشائه!</string>
     <string name="no">لا</string>
     <string name="notes">الملاحظات</string>
-    <string name="notes_settings">الملاحظات</string>
     <string name="notifications">الإشعارات</string>
 
     <string name="only_once">مرة واحدة فقط</string>
@@ -121,13 +107,12 @@
     <string name="pill_added">تم إضافة دواء!</string>
     <string name="pill_name">إسم الدواء</string>
     <string name="pills">الأدوية</string>
+    <string name="pill">دواء</string>
     <string name="press_longer">إضغط مدة أطول</string>
     <string name="timer">مؤقت</string>
     <string name="received">مستلمة</string>
     <string name="recent">جديد</string>
     <string name="remove_from_favorite">حذف من المفضلة</string>
-    <string name="remove_from_home">حذف من الرئيسية</string>
-    <string name="remove_from_sos">حذف من الطوارئ</string>
     <string name="removed_all_alarms">تم حذف كل المنبهات!</string>
     <string name="repeats_every_day">كل يوم</string>
     <string name="saturday">السبت</string>
@@ -156,14 +141,57 @@
     <string name="choose_language_for_keyboard">اختر لغة</string>
     <string name="search">بحث</string>
     <string name="next">التالي</string>
-    <string name="donate">تبرع</string>
-    <string name="emergency_button">زر الطوارئ</string>
     <string name="do_you_want_to_save_your_changes">هل تريد حفظ التغييرات؟</string>
     <string name="discard">إلغاء</string>
     <string name="no_recent_calls">لا توجد مكالمات جديدة</string>
     <string name="dual_sim">خطين</string>
     <string name="choose_sim">اختر خط</string>
-    <string name="choose_sim_subtext">أختر الخط الذي تريد الأتصال منه</string>
     <bool name="is_right_to_left">true</bool>
 
+    <string name="russian">الروسية</string>
+    <string name="understood">فهمت</string>
+    <string name="back">رجوع</string>
+    <string name="exit">خروج</string>
+    <string name="stay">البقاء</string>
+    <string name="settings_for_user">للمستخدم</string>
+    <string name="settings_for_helper">للمساعد</string>
+    <string name="answer_call">الرد</string>
+    <string name="call_ended">انتهت المكالمة</string>
+    <string name="call_status_calling">الاتصال…</string>
+    <string name="calls_channel">المكالمات</string>
+    <string name="confirm_call_title">اتصل بهذا الرقم؟</string>
+    <string name="decline_call">رفض</string>
+    <string name="hang_up">إنهاء المكالمة</string>
+    <string name="helper_pin_create_subtext">اختر رمزًا مكونًا من 4 أرقام. أنه يحمي إعدادات المساعد.</string>
+    <string name="helper_pin_enter_subtext">أدخل الرمز المكون من 4 أرقام لإعدادات المساعد.</string>
+    <string name="helper_pin_mismatch">الرموز غير متطابقة.</string>
+    <string name="helper_pin_repeat_subtext">أدخل نفس الرمز المكون من 4 أرقام مرة أخرى.</string>
+    <string name="in_call">في المكالمة</string>
+    <string name="in_call_duration">في المكالمة • %1$s</string>
+    <string name="in_call_with">في مكالمة مع %1$s</string>
+    <string name="incoming_call">مكالمة واردة</string>
+    <string name="incoming_call_from">مكالمة واردة من %1$s</string>
+    <string name="kiosk_disable_subtext">أدخل الرمز المكون من 4 أرقام لإيقاف تشغيل وضع الكشك.</string>
+    <string name="kiosk_disabled">وضع الكشك متوقف.</string>
+    <string name="kiosk_enable_subtext">سيبقى الهاتف داخل GranPhone: لا يوجد مركز للإشعارات، ولا إعدادات Android ولا إلغاء تثبيت التطبيقات.\nاختر رمزًا مكونًا من 4 أرقام لإيقاف تشغيل هذا القفل لاحقًا.</string>
+    <string name="kiosk_enabled">وضع الكشك قيد التشغيل.</string>
+    <string name="kiosk_pin_too_short">أدخل 4 أرقام بالضبط.</string>
+    <string name="kiosk_wrong_pin">هذا ليس الرمز المكون من 4 أرقام الذي قمت بتعيينه. حاول ثانية.</string>
+    <string name="on_hold">في الانتظار</string>
+    <string name="ongoing_call">المكالمة جارية</string>
+    <string name="pin_digits_entered">تم إدخال %1$d من %2$d رقم</string>
+    <string name="sim_fallback">شريحة الاتصال %1$d</string>
+    <string name="sos_button_description">SOS — اتصل بخدمات الطوارئ</string>
+    <string name="sos_call_help">اتصل بخدمات الطوارئ</string>
+    <string name="sos_calling_in">الاتصال بخدمات الطوارئ خلال %d ثانية...</string>
+    <string name="sos_confirm_call">اتصل بخدمات الطوارئ الآن؟</string>
+    <string name="sos_hold_explanation">اضغط مع الاستمرار على SOS لمدة 5 ثوانٍ للاتصال بخدمات الطوارئ.</string>
+    <string name="sos_is_full">قائمة SOS ممتلئة</string>
+    <string name="sos_is_full_subtext">تحتوي قائمة SOS على جهتي اتصال. قم بإزالة واحدة قبل إضافة أخرى.</string>
+    <string name="speaker_state_off">مكبر الصوت مغلق</string>
+    <string name="speaker_state_on">المتحدث قيد التشغيل</string>
+    <string name="speaker_turn_off">قم بإيقاف تشغيل مكبر الصوت</string>
+    <string name="speaker_turn_on">تشغيل مكبر الصوت</string>
+    <string name="tap_to_return_to_call">اضغط للعودة إلى المكالمة</string>
+    <string name="unknown_number">رقم غير معروف</string>
 </resources>

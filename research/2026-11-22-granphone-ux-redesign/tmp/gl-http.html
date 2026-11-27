@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta name="robots" content="index, follow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Easy smartphone for seniors and people with disabilities. This is an Android overlay that makes smartphone use easy for everyone.">
+    <meta name="author" content="CUPLESOFT Mariusz Bednarczyk">
+    <title>Grand Launcher - Android launcher for seniors</title>
+		<link rel="canonical" href="http://grandlauncher.cuplesoft.com/">
+		<link rel="alternate" href="http://grandlauncher.cuplesoft.com/?lng=pl" hreflang="pl">
+	<link rel="alternate" href="http://grandlauncher.cuplesoft.com/?lng=en" hreflang="en">
+	<link rel="alternate" href="http://grandlauncher.cuplesoft.com/polski" hreflang="pl">
+	<link rel="alternate" href="http://grandlauncher.cuplesoft.com/english" hreflang="en">
+	<link rel="alternate" href="http://grandlauncher.cuplesoft.com/pomoc" hreflang="pl">
+	<link rel="alternate" href="http://grandlauncher.cuplesoft.com/help" hreflang="en">
+	<link rel="alternate" href="http://grandlauncher.cuplesoft.com/pobierz" hreflang="pl">
+	<link rel="alternate" href="http://grandlauncher.cuplesoft.com/startbuy">
+	
+		<link href="http://grandlauncher.cuplesoft.com/favicon.ico" rel="shortcut icon">
+	<link href="http://grandlauncher.cuplesoft.com/css/bootstrap-4.6.2.min.css?v=3.0.92" rel="stylesheet">
+	<link href="http://grandlauncher.cuplesoft.com/css/style.css?v=3.0.92" rel="stylesheet">
+	<link href="http://grandlauncher.cuplesoft.com/vendor/font-awesome/css/font-awesome.min.css?v=3.0.92" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&v=3.0.92" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&v=3.0.92" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="http://grandlauncher.cuplesoft.com/css/tempusdominus-bootstrap-4.min.css?v=3.0.92">
+	<style>
+		.carousel-inner > .item > img,
+		.carousel-inner > .item > a > img {
+			width: 100%;
+			margin: auto;
+		}
+	</style>
+	<script src="http://grandlauncher.cuplesoft.com/js/modernizr.js?v=3.0.92"></script>
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn\'t work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script>
+		var isVideo = false;
+		if (Modernizr.video.h264) {
+			isVideo = true;
+		}
+		const TXT_ENTER_VALID_EMAIL="Enter valid email";
+		const TXT_EMAIL_INVALID="Incorrect e-mail address";
+		const TXT_EMAIL_NOT_MATCH="E-mail addresses are different";
+		const TXT_ENTER_VALID_VALUE="Enter valid value";
+	</script>
+	<script>
+	var topPageOffset = 80;
+		var arrayLinksSections = {"about":0, "download":1, "contact":2, "help" : 3};
+	</script>
+<script src="http://grandlauncher.cuplesoft.com/js/jquery-3.4.1.min.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/base64.min.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/fontawesome-5.12.1.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/html5-qrcode.min.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/qrcodereader.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/popper-2.4.0.min.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/bootstrap-4.6.2.min.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/jquery.easing-1.4.1.min.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/jqBootstrapValidation.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/contact_me.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/crc8.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/sha1.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/core.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/jquery.bcSwipe.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/moment-with-locales.min.js?v=3.0.92"></script>
+<script src="http://grandlauncher.cuplesoft.com/js/tempusdominus-bootstrap-4.min.js?v=3.0.92"></script>
+<!-- <script src="http://grandlauncher.cuplesoft.com/js/bootstrap-input-spinner.js?v=3.0.92"></script> -->
+
+<script>
+const URL_HOME_PAGE = 'http://grandlauncher.cuplesoft.com';
+$(function() {
+	$('#face-slider').hover(
+			function(){ $('#face-slider').stop().animate({'right': '0'}, 1000); },
+			function(){ $('#face-slider').stop().animate({'right': '-287px'}, 1000); }
+	);
+});
+initDotsNav();
+initGoToTopPage();
+$(function() { 
+	$('input,select,textarea').not('[type=submit]').jqBootstrapValidation();
+	}
+);
+		
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-50789140-10', 'auto');
+	  ga('send', 'pageview');
+	  
+			function onClickDownloadAmazon(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na pobierz z AMAZON'
+				});
+			}
+			
+			function onClickDownloadGoogle(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na pobierz z Google'
+				});
+			}			
+	  
+			function onClickInstall(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na INSTALUJ'
+				});
+			}
+			
+			function onClickInstallBeta(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na INSTALUJ WERSJĘ BETA'
+				});
+			}	
+
+			function onClickInstallOld(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na INSTALUJ STARĄ WERSJĘ'
+				});
+			}				
+			
+			function onClickBuyNow(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na KUP TERAZ'
+				});
+			}		
+			
+			function onClickBuyBitcoins(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie KUP ZA BITCOINY'
+				});
+			}			
+			
+			function onClickBuyAllegro(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na KUP ALLEGRO.PL'
+				});
+			}
+
+			function onClickBuyErli(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na KUP ERLI.PL'
+				});
+			}			
+			
+			function onClickHelp(event) {
+			  	ga('send', 'event', {
+			    eventCategory: 'Klikniecia',
+			    eventAction: 'click',
+			    eventLabel: 'Klikniecie na POMOC'
+				});
+			}			
+
+</script></head>
+<body id="page-top" class="index">
+<nav class="row navbar navbar-expand-lg text-uppercase fixed-top navbar-custom navbar-shrink" id="mainNav">
+	<div class="col d-none d-md-block text-center">
+			<a href='http://grandlauncher.cuplesoft.com'>
+				<img class='img-responsive img-logo ml-lg-4 ml-0 p-1-lg' src="http://grandlauncher.cuplesoft.com/img/grand_launcher.png" alt="Grand Launcher">
+			</a>
+    	</div>    	
+		<div class="col-8 col-lg-4 text-center">
+    		<a href="http://grandlauncher.cuplesoft.com" style="text-decoration:none">
+				    			<span class="d-lg-none text-light h4 font-weight-bold">Grand Launcher</span>
+				<span class="d-none d-lg-block text-light h3 font-weight-bold">
+				Grand Launcher				</span>
+				    		</a>
+    	</div>		
+		<div class="col-4 col-sm d-lg-none d-block text-right">
+			<button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded navbar-toggle p-3" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+		</div>		
+		<div class="col collapse navbar-collapse rounded" id="navbarResponsive" role="navigation">
+					    <ul id="list-nav" class="navbar-nav ml-auto text-center">
+								<li id="li0" class="nav-item mx-0 mx-lg-1 active">
+					<a class="nav-item nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://grandlauncher.cuplesoft.com/#about">ABOUT					</a>
+				</li>
+								<li id="li1" class="nav-item mx-0 mx-lg-1 ">
+					<a class="nav-item nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://grandlauncher.cuplesoft.com/#download">DOWNLOAD					</a>
+				</li>
+								<li id="li2" class="nav-item mx-0 mx-lg-1 ">
+					<a class="nav-item nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://grandlauncher.cuplesoft.com/#contact">CONTACT					</a>
+				</li>
+								<li id="li3" class="nav-item mx-0 mx-lg-1 ">
+					<a class="nav-item nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="http://grandlauncher.cuplesoft.com/#help">HELP					</a>
+				</li>
+								<li class="nav-item mx-0 mx-lg-1 my-auto pt-2 pt-lg-0">
+		    				    		
+					<a href="http://grandlauncher.cuplesoft.com/polski"><img class="border border-white" src='http://grandlauncher.cuplesoft.com/img/flag-pl.png' title="POLSKI"></a>
+       						    	</li>				
+		    </ul>
+		</div>
+</nav><div class="row mt-5"></div>
+<section class="text-center" id="about" style="background-color: white;">
+	<div class="container mt-4">
+				<div class="row text-center">
+			<div class="col">
+			
+				<h1 class="font-weight-bold">Grand Launcher - Android launcher for seniors</h1>
+				<br><p><b>Grand Launcher</b> is software created by the company <a target="_blank" href="http://cuplesoft.pl">CUPLESOFT</a>, which allows you to transform almost any smartphone with Android into a simple, fast and useful phone.
+				</p>
+				<p>
+				Often, a traditional phone for older people is not enough because the screen, font or buttons are too small.
+				<br><b>Grand Launcher</b> solves these problems because it has large, readable buttons and fonts.
+				In addition, it allows you to use in an accessible and easy way with all the possibilities offered by a modern smartphone.
+				</p>
+				<p>
+				The advantages of the software significantly reduce the barriers faced by digitally excluded older people, disabled people or children.
+				</p>
+				<p></p>
+					</div>
+			<div class="col-12 col-lg">
+				<img src="img/sds-call.png"
+			alt="Grand Launcher - incoming calls"
+			title="Grand Launcher - incoming calls"
+			class="img-responsive img-centered"
+			style="width: 60%; height:auto; text-align: center; margin: 0 auto;">
+			</div>
+		</div>
+				<div class="row text-center mt-5">
+			<div class="col-12 col-lg-6">
+							<div id="carouselScreens" class="mx-2 bg-light carousel slide" data-ride="carousel">
+				<div class="carousel-inner">
+										<div class="carousel-item active">
+					<img src="img/sds-call.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - incoming calls" title="Grand Launcher - incoming calls">
+					</div>
+										<div class="carousel-item">
+					<img src="img/sds-call-accepted.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - incoming calls - menu" title="Grand Launcher - incoming calls - menu">
+					</div>
+										<div class="carousel-item">
+					<img src="img/sds-call-menu.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - incoming calls - menu" title="Grand Launcher - incoming calls - menu">
+					</div>
+										<div class="carousel-item">
+					<img src="img/sds-main-menu-notifications.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - main menu - notifications" title="Grand Launcher - main menu - notifications">
+					</div>
+										<div class="carousel-item">
+					<img src="img/sds-main-menu.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - main menu" title="Grand Launcher - main menu">
+					</div>
+										<div class="carousel-item">
+					<img src="img/sds-lockscreen-notifications.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - lock screen - notifications" title="Grand Launcher - lock screen - notifications">
+					</div>
+										<div class="carousel-item">
+					<img src="img/sds-lockscreen.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - lock screen" title="Grand Launcher - lock screen">
+					</div>
+										<div class="carousel-item">
+					<img src="img/sds-dialpad.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - dialpad" title="Grand Launcher - dialpad">
+					</div>
+										<div class="carousel-item">
+					<img src="img/sds-sms.png" style="max-width: 50%; height: auto;" class="m-3 d-block mx-auto img-fluid" alt="Grand Launcher - creating sms message" title="Grand Launcher - creating sms message">
+					</div>
+									</div>
+				<a class="carousel-control-prev" href="#carouselScreens" role="button" data-slide="prev">
+					<i class="fa fa-2x font-weight-bold fa-chevron-left carousel-indicators-left-right" aria-hidden="true"></i>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselScreens" role="button" data-slide="next">
+					<i class="fa fa-2x font-weight-bold fa-chevron-right carousel-indicators-left-right"></i>
+					<span class="sr-only">Next</span>
+				</a>
+				<ol class="carousel-indicators carousel-indicators-bottom m-2">
+										<li data-target="#carouselScreens" data-slide-to="0" class="active"></li>
+										<li data-target="#carouselScreens" data-slide-to="1" ></li>
+										<li data-target="#carouselScreens" data-slide-to="2" ></li>
+										<li data-target="#carouselScreens" data-slide-to="3" ></li>
+										<li data-target="#carouselScreens" data-slide-to="4" ></li>
+										<li data-target="#carouselScreens" data-slide-to="5" ></li>
+										<li data-target="#carouselScreens" data-slide-to="6" ></li>
+										<li data-target="#carouselScreens" data-slide-to="7" ></li>
+										<li data-target="#carouselScreens" data-slide-to="8" ></li>
+									</ol>
+				</div>
+			</div>
+			<div class="col">
+				<h2>Main advantages</h2>
+				<ul class="ul-main">
+					
+              		<li>Simplified but functional interface</li>
+					<li>The main menu buttons can be edited</li>
+	              	<li>Big buttons and fonts</li>
+	              	<li>Built-in contact support</li>
+	              	<li>Shortcuts for contacts in the main menu</li>
+	              	<li>An innovative and fast contact search engine</li>
+	              	<li>Built-in messaging service</li>
+	              	<li>Easy receiving and sending of MMS messages</li>
+	              	<li>Keyboard with letters in alphabetical order</li>
+					<li>Built-in photo gallery and camera support</li>
+					<li>Intuitive screen lock</li>
+	              	<li>Easy and quick phone mute</li>
+	              	<li>Large and clear indicator of battery and GSM signal</li>
+	              	<li>Password for application options and other system functions</li>
+					<li>Voice assistant for the blind</li>
+					<li>Built-in editor for modify colors of user interface</li>
+					<li>Built-in editor for modify language of application</li>
+					<li>Many useful functions like: flashlight, application shortcuts, SOS mode, silent mode and much more</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="download" style="background-color: #7fd4fb;">
+	<div class="container">
+	<div class="row text-center">
+		<div class="col">
+			<h2>download</h2>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col">
+            				
+			<p class="mt-4">Download from Google Play : </p>
+			<p>
+			<a target="_blank" onclick='onClickDownloadGoogle();' href='https://play.google.com/store/apps/details?id=com.cuplesoft.launcher.grandlauncher'>
+				<img class=".img-fluid img-centered" style="max-width: 100%;height: auto;" alt='Download from Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' />
+			</a>
+			</p>
+												
+				</div>
+	</div>
+	</div>
+</section>
+<script>
+	function showDialogChangelogs() {
+		let callbackSuccess = function(response) {
+			if (response.result == 1) {
+				let html = '';
+				for (let i = 0; i < response.data.length; i++) {
+					html += '<b>Wersja: ' + response.data[i].version + '</b>';
+					html += '<br><b>Data: ' + response.data[i].timeUpdate + '</b>';
+					html += '<ol class="text-left">';
+					let len = response.data[i].changes.length;
+					for (let j = 0; j < len; j++) {
+						html += '<li>' + response.data[i].changes[j] + '</li>';
+					}
+					html += '</ol>';
+				}
+				showDialog('Historia zmian', html);
+			} else {
+				showDialogInfo('Historia zmian jest tymczasowo niedostępna.');
+			}
+		};
+		get(URL_HOME_PAGE + '?action=api&value=getchangelogs', callbackSuccess);
+	}
+</script><section class="text-center" id="contact" style="background-color: #7fd4fb;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>CONTACT</h2>
+                <p>If you have any questions or problems regarding the application - write:</p>
+            </div>
+        </div>
+                <h4 class="mt-4"><a href="#" id="contact-link" style="font-variant: small-caps; text-decoration: none;color:black;">Ładowanie adresu...</a></h4>
+        <script>
+            const user = "support";
+            const domain = "cuplesoft.com";
+            const subject = "Grand Launcher";
+            const link = document.getElementById('contact-link');
+            const fullEmail = user + "@" + domain;
+            // Ustawienie atrybutów po załadowaniu strony
+            link.href = "mailto:" + fullEmail + "?subject=" + encodeURIComponent(subject);
+            link.innerText = fullEmail;
+        </script>
+            </div>
+</section><section id="help" style="background-color: white;">
+    <div class="container text-center my-5">
+        <div class="row text-center">
+            <div class="col">
+                <h2>HELP</h2>
+                <p class="my-3"><b>Grand Launcher</b> it is very easy to use.. After all, a few tips will be useful.</p>
+            </div>
+        </div>
+        <div class="row text-center my-4">
+            <div class="col">
+                <a class="btn btn-success btn-lg p-3 mb-3"
+                    href="http://grandlauncher.cuplesoft.com/manual" role="button"
+                    title="User manual">USER MANUAL                </a>
+            </div>
+        </div>
+            </div>    
+</section><div class="modal fade" id="dialog" tabindex="-1" style="z-index: 9999;" role="dialog" data-backdrop="static" data-keyboard="false"
+	aria-labelledby="dialogLabel" aria-hidden="true">
+	<div id="dialogScrollable" class="modal-dialog modal-dialog-scrollable" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="dialogLabel">Informacja</h4>
+				<button id="dialogClose" type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>				
+			</div>
+			<div class="modal-body">
+				<div id="dialogMessage"></div>
+			</div>
+			<div class="modal-footer">
+				<button id="dialogBtnOK" type="button" class="btn btn-primary btn-lg"
+					data-dismiss="modal">&nbsp;OK&nbsp;</button>
+        <button id="dialogBtnClose" type="button" class="btn btn-primary btn-lg"
+        data-dismiss="modal">Zamknij</button>          
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="dialogInfo" tabindex="-1" style="z-index: 9999;" role="dialog" data-backdrop="static" data-keyboard="false"
+	aria-labelledby="dialogInfoLabel" aria-hidden="true">
+	<div id="dialogInfoModal" class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="dialogInfoLabel">Informacja</h4>
+				<button id="dialogInfoClose" type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>				
+			</div>
+			<div class="modal-body">
+				<div id="dialogInfoMessage"></div>
+			</div>
+			<div class="modal-footer">
+				<button id="dialogInfoOK" type="button" class="btn btn-primary btn-lg"
+					data-dismiss="modal">&nbsp;OK&nbsp;</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="dialogList" tabindex="-1" style="z-index: 9999;" role="dialog"
+	aria-labelledby="dialogListLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="dialogListLabel">Informacja</h4>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>				
+			</div>
+			<div id="dialogListContent" class="modal-body"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btn-lg"
+					data-dismiss="modal">&nbsp;ANULUJ&nbsp;</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="divToast" class="position-fixed bottom-3 mt-5 right-2 p-5 d-none" style="z-index: 99999; right: 0; bottom: 0;">
+  <div id="toast" class="toast hide bg-primary" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+    <div class="toast-header">
+      <strong id="toastTitle" class="mr-auto"></strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div id="toastMessage" class="toast-body mx-3 text-white">      
+    </div>
+  </div>
+</div><a id="back-to-top" href="#page-top" class="btn btn-primary btn-lg back-to-top scroll-to-top js-scroll-trigger" role="button" title="Back to top" data-toggle="tooltip" data-placement="left"><i class="fa fa-chevron-up"></i></a>
+<script>
+    $('#page-top').on('click',function() {
+	  $('.navbar-collapse').collapse('hide');
+	});
+</script>
+    <!-- Footer -->
+    <footer class="mx-auto text-center ">
+    		
+        <div class="footer-above pb-4">		
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col">
+                        <a target="_blank" href="http://grandlauncher.cuplesoft.com/privacypolicy">
+                            PRIVACY POLICY AND TERMS OF USE                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3>Social media</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                                            <a href="https://www.youtube.com/playlist?list=PLI2s4Wr-Tb4FhiY_MLn4YceP8RG1HmiIM" title="Youtube" target="_blank" class="btn-social btn-outline"><i class="fab fa-youtube"></i></a>
+                                                <a href="https://facebook.com/grandlauncher/" title="Facebook" target="_blank" class="btn-social btn-outline"><i class="fab fa-fw fa-facebook"></i></a>
+                                                <a href="https://x.com/cuplesoft" title="X" target="_blank" class="btn-social btn-outline"><i class="fab fa-fw fa-twitter"></i></a>
+                                                <a href="https://www.linkedin.com/in/mariuszbednarczyk" title="LinkedIn" target="_blank" class="btn-social btn-outline"><i class="fab fa-fw fa-linkedin"></i></a>
+                                            </div>                
+                </div>
+            </div>
+        </div>
+	
+        <div class="footer-below">
+                &copy; <a href="https://cuplesoft.pl">CUPLESOFT</a> 2026        </div>
+    </footer><script src="http://grandlauncher.cuplesoft.com/js/freelancer.min.js"></script>
+<script>
+	const TXT_EMAIL_SENT = 'Message was sent successfully';
+	const TXT_PLEASE_WAIT = 'Please wait..';
+</script>
+</body>
+</html>

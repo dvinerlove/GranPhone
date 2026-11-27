@@ -36,18 +36,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.BPrefs;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 import com.duolingo.open.rtlviewpager.RtlViewPager;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Locale;
 
 public class ViewPagerHolder extends LinearLayout {
     private static final int HEIGHT = 60;//in dp
     private Context context;
 
     private CharSequence itemType;
-    private String of;
 
     //views
     private View right, left;
@@ -85,7 +83,7 @@ public class ViewPagerHolder extends LinearLayout {
 
     private void init(Context context, @Nullable AttributeSet attributeSet) {
         this.context = context;
-        final SharedPreferences sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         noArrows = sharedPreferences.getBoolean(BPrefs.TOUCH_NOT_HARD_KEY, false);
         final TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ViewPagerHolder);
         itemType = typedArray.getString(R.styleable.ViewPagerHolder_item_type);
@@ -94,9 +92,9 @@ public class ViewPagerHolder extends LinearLayout {
         useCircle = typedArray.getBoolean(R.styleable.ViewPagerHolder_use_circles, false);
         hideIndicator = typedArray.getBoolean(R.styleable.ViewPagerHolder_hide_indicator, false);
         showHints = typedArray.getBoolean(R.styleable.ViewPagerHolder_show_hints, false);
+        noArrows = noArrows || typedArray.getBoolean(R.styleable.ViewPagerHolder_no_arrows, false);
 
         typedArray.recycle();
-        of = String.valueOf(context.getText(R.string.of));
         this.setOrientation(VERTICAL);
 
         viewPager = noArrows ? new RtlViewPager(context) : new NonSwipeableViewPager(context);
@@ -138,7 +136,7 @@ public class ViewPagerHolder extends LinearLayout {
             final View arrowHolder = layoutInflater.inflate(R.layout.view_pager_holder_arrows, this, false);
             right = arrowHolder.findViewById(R.id.right_arrow);
             left = arrowHolder.findViewById(R.id.left_arrow);
-            right.setOnClickListener(D.longer);
+            right.setOnClickListener(Const.longer);
             right.setOnClickListener(v -> {
                 final int currentItem = viewPager.getCurrentItem();
                 final PagerAdapter pagerAdapter = viewPager.getAdapter();
@@ -181,12 +179,18 @@ public class ViewPagerHolder extends LinearLayout {
 
     private void applyPage_of_() {
         if (!useCircle)
-            page_of_.setText(String.format(Locale.US, "%s %d %s %d", itemType, pageIndex + 1, of, viewPager.getAdapter().getCount()));
+            page_of_.setText(context.getString(R.string.page_position, itemType, pageIndex + 1, viewPager.getAdapter().getCount()));
     }
 
     @SuppressLint("ClickableViewAccessibility")
     public void setViewPagerAdapter(PagerAdapter pagerAdapter) {
         viewPager.setAdapter(pagerAdapter);
+        pagerAdapter.registerDataSetObserver(new android.database.DataSetObserver() {
+            @Override
+            public void onChanged() {
+                pageChangeHandler(viewPager.getCurrentItem());
+            }
+        });
         applyPage_of_();
         pageChangeHandler(viewPager.getCurrentItem());
 

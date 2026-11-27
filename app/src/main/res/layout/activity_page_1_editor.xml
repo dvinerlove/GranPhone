@@ -24,14 +24,15 @@
         android:id="@+id/bald_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
-        app:title="@string/edit_home_screen" />
+        android:backgroundTint="?bald_brand"
+        app:title="@string/edit_home_screen"
+        app:show_back="true" />
 
     <com.bald.uriah.baldphone.views.home.HomePage1
         android:id="@+id/home_page_1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/spacing_md"
         android:layout_weight="1" />
 
 </LinearLayout>

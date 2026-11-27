@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -29,7 +30,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
-import com.bald.uriah.baldphone.utils.D;
+import com.bald.uriah.baldphone.utils.Const;
 
 /**
  * Simple Button, extends {@link ConstraintLayout}; adapted to App settings.
@@ -47,7 +48,7 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
     @SuppressLint("ClickableViewAccessibility")
     public BaldConstraintLayoutButton(Context context) {
         super(context);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.longPresses = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE);
         this.longPressesShorter = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
@@ -57,20 +58,22 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
             if (longPressesShorter) {
                 baldButtonTouchListener = new BaldButtonTouchListener(this);
                 super.setOnTouchListener(baldButtonTouchListener);
-                super.setOnClickListener(D.EMPTY_CLICK_LISTENER);
+                super.setOnClickListener(Const.EMPTY_CLICK_LISTENER);
             } else {
                 super.setOnLongClickListener(this);
                 super.setOnClickListener(this);
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
 
     }
 
     @SuppressLint("ClickableViewAccessibility")
     public BaldConstraintLayoutButton(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.longPresses = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE);
         this.longPressesShorter = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
@@ -80,19 +83,21 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
             if (longPressesShorter) {
                 baldButtonTouchListener = new BaldButtonTouchListener(this);
                 super.setOnTouchListener(baldButtonTouchListener);
-                super.setOnClickListener(D.EMPTY_CLICK_LISTENER);
+                super.setOnClickListener(Const.EMPTY_CLICK_LISTENER);
             } else {
                 super.setOnLongClickListener(this);
                 super.setOnClickListener(this);
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     public BaldConstraintLayoutButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.sharedPreferences = context.getSharedPreferences(D.BALD_PREFS, Context.MODE_PRIVATE);
+        this.sharedPreferences = context.getSharedPreferences(Const.BALD_PREFS, Context.MODE_PRIVATE);
         this.longPresses = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_KEY, BPrefs.LONG_PRESSES_DEFAULT_VALUE);
         this.longPressesShorter = sharedPreferences.getBoolean(BPrefs.LONG_PRESSES_SHORTER_KEY, BPrefs.LONG_PRESSES_SHORTER_DEFAULT_VALUE);
         this.vibrationFeedback = sharedPreferences.getBoolean(BPrefs.VIBRATION_FEEDBACK_KEY, BPrefs.VIBRATION_FEEDBACK_DEFAULT_VALUE);
@@ -102,13 +107,15 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
             if (longPressesShorter) {
                 baldButtonTouchListener = new BaldButtonTouchListener(this);
                 super.setOnTouchListener(baldButtonTouchListener);
-                super.setOnClickListener(D.EMPTY_CLICK_LISTENER);
+                super.setOnClickListener(Const.EMPTY_CLICK_LISTENER);
             } else {
                 super.setOnLongClickListener(this);
                 super.setOnClickListener(this);
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     @Override
@@ -128,10 +135,16 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void setOnTouchListener(OnTouchListener l) {
-        if (longPressesShorter)
+        if (baldButtonTouchListener != null)
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);
+    }
+
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName(android.widget.Button.class.getName());
     }
 
     @Override
@@ -159,6 +172,13 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
     }
 
     @Override
+    public boolean performClick() {
+        return baldButtonTouchListener != null
+                ? BaldButtonInterface.performClick(this, baldButtonTouchListener)
+                : super.performClick();
+    }
+
+    @Override
     public void baldPerformClick() {
         if (onClickListener != null)
             onClickListener.onClick(this);
@@ -167,6 +187,6 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
     @Override
     public void vibrate() {
         if (vibrationFeedback)
-            vibrator.vibrate(D.vibetime);
+            vibrator.vibrate(Const.vibetime);
     }
 }

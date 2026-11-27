@@ -14,109 +14,71 @@
   ~ limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?bald_background">
+    android:background="?attr/bald_background"
+    android:orientation="vertical">
 
     <com.bald.uriah.baldphone.views.BaldTitleBar
         android:id="@+id/bald_title_bar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/color_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="?bald_brand"
+        app:show_back="true"
         app:title="@string/pills" />
-
-
-    <LinearLayout
-        android:id="@+id/options_bar"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:background="?bald_background_transparent"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
-            android:id="@+id/bt_add"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/pill"
-                android:tint="?bald_decoration_on_background" />
-
-            <TextView
-                style="@style/ButtonsText.Auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/add_pill" />
-
-
-        </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
-
-        <com.bald.uriah.baldphone.views.BaldLinearLayoutButton
-            android:id="@+id/bt_time_changer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/style_for_buttons_transparent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/time_on_background"
-                android:tint="?bald_decoration_on_background" />
-
-            <TextView
-                style="@style/ButtonsText.Auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/change_pills_time" />
-
-        </com.bald.uriah.baldphone.views.BaldLinearLayoutButton>
-    </LinearLayout>
-
 
     <com.bald.uriah.baldphone.views.ScrollingHelper
         android:id="@+id/scrolling_helper"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
+        app:empty_icon="@drawable/pill"
         app:empty_text="@string/no_pills"
-        app:horizontal_scrolling="false"
-        app:layout_constraintBottom_toTopOf="@id/options_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bald_title_bar"
+        app:horizontal_scrolling="false">
 
-        >
-
+        <!-- ModularRecyclerView must stay the first child (ScrollingHelper contract);
+             empty_view is picked up by id and shown when the adapter is empty. -->
         <com.bald.uriah.baldphone.views.ModularRecyclerView
             android:id="@+id/recycler_view"
             style="@style/ScrollStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <include
+            android:id="@+id/empty_view"
+            layout="@layout/bald_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </com.bald.uriah.baldphone.views.ScrollingHelper>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_md">
+
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
+            android:id="@+id/bt_add"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_weight="1.3"
+            android:background="@drawable/bald_button_background"
+            app:_size="@dimen/medium"
+            app:_src="@drawable/add_on_button"
+            app:_text="@string/pill"
+            app:variant="brand" />
+
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
+            android:id="@+id/bt_time_changer"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:layout_weight="1"
+            android:background="@drawable/bald_button_background"
+            app:_size="@dimen/medium"
+            app:_src="@drawable/time_on_background"
+            app:_text="@string/pill_time" />
+    </LinearLayout>
+</LinearLayout>
