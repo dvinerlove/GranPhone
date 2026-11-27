@@ -20,7 +20,7 @@ apply plugin: "com.android.application"
 
 android {
     namespace 'com.bald.uriah.baldphone'
-    compileSdk 35
+    compileSdk 36
     buildFeatures {
         viewBinding true
         buildConfig true
