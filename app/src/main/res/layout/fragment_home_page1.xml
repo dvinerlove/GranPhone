@@ -45,8 +45,8 @@
         android:background="@drawable/bald_card_background"
         android:gravity="top|center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="@dimen/spacing_lg"
-        android:paddingBottom="@dimen/spacing_sm">
+        android:paddingTop="@dimen/spacing_xs"
+        android:paddingBottom="@dimen/spacing_md">
 
         <TextClock
             android:id="@+id/clock"
