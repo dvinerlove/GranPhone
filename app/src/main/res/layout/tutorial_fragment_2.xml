@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="@dimen/spacing_lg"
+        android:padding="@dimen/spacing_md"
         android:text="@string/first_please_select_how_you_want_to_interact_with_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                 android:id="@+id/long_presses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_md"
+                android:layout_margin="@dimen/spacing_sm"
                 android:background="@drawable/bald_card_background"
                 android:minHeight="96dp">
 
@@ -62,7 +62,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_md">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -103,7 +103,7 @@
                 android:id="@+id/medium_presses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_md"
+                android:layout_margin="@dimen/spacing_sm"
                 android:background="@drawable/bald_card_background"
                 android:minHeight="96dp">
 
@@ -113,7 +113,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_md">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -154,7 +154,7 @@
                 android:id="@+id/short_presses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_md"
+                android:layout_margin="@dimen/spacing_sm"
                 android:background="@drawable/bald_card_background"
                 android:minHeight="96dp">
 
@@ -164,7 +164,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_md">
 
                     <LinearLayout
                         android:layout_width="0dp"
