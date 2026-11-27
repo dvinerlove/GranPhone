@@ -162,6 +162,10 @@ public class HomePage1 extends HomeView {
      * top-anchored and never re-center. If the floor does not fit, the enclosing
      * ModularScrollView takes over instead of squeezing.
      */
+    /** Height-driven clock scale: 1 when space is plentiful, <1 when rows would overflow. */
+    private static final float CLOCK_MIN_SCALE = 0.4f;
+    private float clockHeightScale = 1f;
+
     private void resizeTileRows(final int width, final int viewportHeight) {
         if (view == null || viewportHeight <= 0)
             return;
@@ -182,23 +186,57 @@ public class HomePage1 extends HomeView {
         if (visibleRows == 0)
             return;
 
-        final int rowHeight = Math.max(
+        final int rowFloor = measureTileRowFloor();
+        int rowHeight = Math.max(
                 getResources().getDimensionPixelSize(R.dimen.home_tile_row_height),
-                measureTileRowFloor());
+                rowFloor);
+
+        measureClockCard(clockCard, content, width);
+        final LinearLayout.LayoutParams clockParams = (LinearLayout.LayoutParams) clockCard.getLayoutParams();
+        final int cardPaddingV = clockCard.getPaddingTop() + clockCard.getPaddingBottom();
+        final int marginsV = clockParams.topMargin + clockParams.bottomMargin;
+        final float measuredContent = Math.max(1, clockCard.getMeasuredHeight() - cardPaddingV);
+        final float naturalContent = measuredContent / clockHeightScale;
+        final int chromeV = content.getPaddingTop() + content.getPaddingBottom()
+                + cardPaddingV + marginsV + rowMargins;
+
+        // cascade, scrolling forbidden: fixed rows + full-size clock first;
+        // then the clock shrinks down to CLOCK_MIN_SCALE; only past that floor
+        // do rows compress toward their own floor; scroll is the impossible last resort
+        float availClock = viewportHeight - chromeV - rowHeight * visibleRows;
+        float newScale;
+        if (availClock >= naturalContent) {
+            newScale = 1f;
+        } else if (availClock >= naturalContent * CLOCK_MIN_SCALE) {
+            newScale = availClock / naturalContent;
+        } else {
+            newScale = CLOCK_MIN_SCALE;
+            final int rowsBudget = (int) (viewportHeight - chromeV - naturalContent * CLOCK_MIN_SCALE);
+            // hard floor is lower than the accessibility floor: scrolling is forbidden,
+            // so in the impossible case rows compress below it and only scroll
+            // when even the hard floor does not fit
+            final int hardFloor = getResources().getDimensionPixelSize(R.dimen.home_tile_row_min_height);
+            rowHeight = Math.max(hardFloor, rowsBudget / visibleRows);
+            // last resort: rows clamped at the hard floor can still overflow by a few px;
+            // scrolling is forbidden, so the clock gives up the remainder below MIN_SCALE
+            final float clockShare = viewportHeight - chromeV - (float) rowHeight * visibleRows;
+            if (clockShare < naturalContent * CLOCK_MIN_SCALE)
+                newScale = Math.max(0.15f, clockShare / naturalContent);
+        }
+        clockHeightScale = newScale;
+
         for (final int id : TILE_ROW_IDS) {
             final View row = view.findViewById(id);
             final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
             rowParams.height = rowHeight;
         }
 
-        final int clockHeight = measureClockCard(clockCard, content, width);
-        final int slack = viewportHeight
-                - content.getPaddingTop() - content.getPaddingBottom()
-                - clockHeight - rowMargins - rowHeight * visibleRows;
-        final LinearLayout.LayoutParams clockParams = (LinearLayout.LayoutParams) clockCard.getLayoutParams();
-        clockParams.height = slack > 0
-                ? clockCard.getMeasuredHeight() + slack
-                : LinearLayout.LayoutParams.WRAP_CONTENT;
+        if (clockHeightScale >= 1f) {
+            clockParams.height = (int) (availClock + cardPaddingV);
+        } else {
+            clockParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        }
+        fitClockCardText();
     }
 
     /** Measures the clock as wrap-content at the grid width, including its own margins. */
@@ -242,24 +280,36 @@ public class HomePage1 extends HomeView {
 
     /**
      * TextClock has no autosize on minSdk 21 — shrink it manually once the parent's
-     * real width is known. Height is deliberately excluded: the card is wrap-content
-     * and vertical overflow belongs to the scroll fallback, not to smaller clock text.
+     * real width is known. Vertical fit is height-driven via {@link #clockHeightScale}:
+     * scrolling is forbidden, so the clock shrinks when rows don't leave room.
      */
     private void installClockCardFit() {
         final View card = view.findViewById(R.id.clock_card);
         final TextView clock = card.findViewById(R.id.clock);
         final TextView date = card.findViewById(R.id.date);
-        final float clockBase = clock.getTextSize();
-        final float dateBase = date.getTextSize();
-        final float clockFloor = getResources().getDimension(R.dimen.huge);
-        final float dateFloor = getResources().getDimension(R.dimen.tiny);
-        card.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> {
-            final float availW = card.getWidth() - card.getPaddingStart() - card.getPaddingEnd();
-            if (availW <= 0)
-                return;
-            fitTextWidth(date, dateBase, availW, dateFloor);
-            fitTextWidth(clock, clockBase, availW, clockFloor);
-        });
+        clockBaseSize = clock.getTextSize();
+        dateBaseSize = date.getTextSize();
+        clockFloorSize = getResources().getDimension(R.dimen.huge);
+        dateFloorSize = getResources().getDimension(R.dimen.tiny);
+        card.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> fitClockCardText());
+    }
+
+    private float clockBaseSize, dateBaseSize, clockFloorSize, dateFloorSize;
+
+    /**
+     * Effective text size is the smaller of the width fit and the height-driven
+     * {@link #clockHeightScale} cap - scrolling is forbidden, so when the fixed
+     * rows don't leave room for the full-size clock, the clock itself shrinks.
+     */
+    private void fitClockCardText() {
+        final View card = view.findViewById(R.id.clock_card);
+        if (card == null || clockBaseSize == 0)
+            return;
+        final float availW = card.getWidth() - card.getPaddingStart() - card.getPaddingEnd();
+        if (availW <= 0)
+            return;
+        fitTextWidth((TextView) card.findViewById(R.id.date), dateBaseSize * clockHeightScale, availW, dateFloorSize);
+        fitTextWidth((TextView) card.findViewById(R.id.clock), clockBaseSize * clockHeightScale, availW, clockFloorSize * clockHeightScale);
     }
 
     /** Sizes {@code tv} to the largest size ≤ {@code base} that fits width, never below {@code floor}. */
