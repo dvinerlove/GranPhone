@@ -37,6 +37,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -90,6 +91,7 @@ public class HomePage1 extends HomeView {
     private final static String WHATSAPP_PACKAGE_NAME = "com.whatsapp";
     private final static String HIDDEN_TILE = HomeScreenPinHelper.HIDDEN_TILE;
     private final static String TILES_SEEDED_KEY = "HOME_TILES_SEEDED";
+    private final static int[] TILE_ROW_IDS = {R.id.phone_container, R.id.messages_container, R.id.media_container, R.id.time_container};
     private final static ComponentName WHATSAPP_COMPONENT_NAME =
             new ComponentName(WHATSAPP_PACKAGE_NAME, WHATSAPP_PACKAGE_NAME + ".Main");
     public Map<App, FirstPageAppIcon> viewsToApps;
@@ -143,7 +145,49 @@ public class HomePage1 extends HomeView {
         attachXml();
         genOnClickListeners();
         installClockCardFit();
+        installTileRowHeightCap();
         return view;
+    }
+
+    private void installTileRowHeightCap() {
+        view.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) -> capTileRowHeights());
+        view.post(this::capTileRowHeights);
+    }
+
+    /** Full population is five equal vertical slots: clock + four tile rows. Hidden rows never raise that ceiling. */
+    private void capTileRowHeights() {
+        int allRowMargins = 0, visibleRowMargins = 0, visibleRows = 0;
+        for (final int id : TILE_ROW_IDS) {
+            final View row = view.findViewById(id);
+            final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
+            final int verticalMargins = rowParams.topMargin + rowParams.bottomMargin;
+            allRowMargins += verticalMargins;
+            if (row.getVisibility() != View.GONE) {
+                visibleRows++;
+                visibleRowMargins += verticalMargins;
+            }
+        }
+        final int innerHeight = view.getHeight() - view.getPaddingTop() - view.getPaddingBottom();
+        final int tileHeight = (innerHeight - allRowMargins) / (TILE_ROW_IDS.length + 1);
+        if (tileHeight <= 0)
+            return;
+        for (final int id : TILE_ROW_IDS) {
+            final View row = view.findViewById(id);
+            final LinearLayout.LayoutParams rowParams = (LinearLayout.LayoutParams) row.getLayoutParams();
+            if (rowParams.height != tileHeight) {
+                rowParams.height = tileHeight;
+                row.setLayoutParams(rowParams);
+            }
+        }
+        final int clockHeight = visibleRows == TILE_ROW_IDS.length ? tileHeight
+                : innerHeight - visibleRowMargins - visibleRows * tileHeight;
+        final View clockCard = view.findViewById(R.id.clock_card);
+        final LinearLayout.LayoutParams clockParams = (LinearLayout.LayoutParams) clockCard.getLayoutParams();
+        if (clockParams.height != clockHeight || clockParams.weight != 0f) {
+            clockParams.height = clockHeight;
+            clockParams.weight = 0f;
+            clockCard.setLayoutParams(clockParams);
+        }
     }
 
     /**
@@ -403,9 +447,11 @@ public class HomePage1 extends HomeView {
                 homeScreen.startActivity(new Intent(HomePage1.this.homeScreen, AppsActivity.class));
         });
         setupButton(BPrefs.CUSTOM_ALARMS_KEY, bt_clock, resolved.get(BPrefs.CUSTOM_ALARMS_KEY), v -> homeScreen.startActivity(new Intent(homeScreen, AlarmsActivity.class)));
-        if (homeScreen != null)
-            for (int id : new int[]{R.id.phone_container, R.id.messages_container, R.id.media_container, R.id.time_container})
+        if (homeScreen != null) {
+            for (int id : TILE_ROW_IDS)
                 hideRowIfEmpty(id);
+            view.post(this::capTileRowHeights);
+        }
     }
 
     private void hideRowIfEmpty(int id) {
