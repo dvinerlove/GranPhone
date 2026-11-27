@@ -107,26 +107,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
+        <!-- heights 120/96/88dp are the deliberate critical-call exception (DESIGN.md) -->
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_answer"
-            style="@style/CallButton"
+            android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:background="@drawable/call_button_green"
-            android:drawableStart="@drawable/ic_call_white"
-            android:maxLines="1"
-            android:text="@string/answer_call"
-            app:autoSizeTextType="uniform" />
+            android:background="@drawable/bald_button_background"
+            app:_size="@dimen/giant"
+            app:_src="@drawable/ic_call_white"
+            app:_text="@string/answer_call"
+            app:variant="brand" />
 
-        <Button
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_decline"
-            style="@style/CallButton"
+            android:layout_width="match_parent"
             android:layout_height="96dp"
             android:layout_marginTop="@dimen/spacing_sm"
-            android:background="@drawable/call_button_red"
-            android:drawableStart="@drawable/ic_call_end_white"
-            android:maxLines="1"
-            android:text="@string/decline_call"
-            app:autoSizeTextType="uniform" />
+            android:background="@drawable/bald_button_background"
+            app:_size="@dimen/huge"
+            app:_src="@drawable/ic_call_end_white"
+            app:_text="@string/decline_call"
+            app:variant="danger" />
     </LinearLayout>
 
     <LinearLayout
@@ -136,27 +137,25 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <Button
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_speaker"
-            style="@style/CallButton"
+            android:layout_width="match_parent"
             android:layout_height="88dp"
-            android:background="@drawable/call_button_gray"
-            android:drawableStart="@drawable/ic_volume_up_white"
-            android:maxLines="1"
-            android:text="@string/speaker_turn_on"
-            android:textSize="@dimen/huge"
-            app:autoSizeTextType="uniform" />
+            android:background="@drawable/bald_button_background"
+            app:_size="@dimen/huge"
+            app:_src="@drawable/ic_volume_up"
+            app:_text="@string/speaker_turn_on" />
 
-        <Button
+        <com.bald.uriah.baldphone.views.BaldPictureTextButton
             android:id="@+id/bt_hangup"
-            style="@style/CallButton"
+            android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginTop="@dimen/spacing_sm"
-            android:background="@drawable/call_button_red"
-            android:drawableStart="@drawable/ic_call_end_white"
-            android:maxLines="1"
-            android:text="@string/hang_up"
-            app:autoSizeTextType="uniform" />
+            android:background="@drawable/bald_button_background"
+            app:_size="@dimen/giant"
+            app:_src="@drawable/ic_call_end_white"
+            app:_text="@string/hang_up"
+            app:variant="danger" />
     </LinearLayout>
 
 </LinearLayout>

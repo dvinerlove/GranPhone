@@ -38,7 +38,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +45,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bald.uriah.baldphone.R;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.PredictiveBackHelper;
 import com.bald.uriah.baldphone.utils.BaldToast;
@@ -69,7 +69,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
     private TextView tv_initial, tv_name, tv_number, tv_status;
     private Drawable noPhotoDrawable;
     private View incomingButtons, ongoingButtons;
-    private Button bt_speaker;
+    private BaldPictureTextButton bt_speaker;
     @Nullable
     private PowerManager.WakeLock proximityWakeLock;
     @Nullable
@@ -240,7 +240,7 @@ public class CallActivity extends AppCompatActivity implements CallManager.Liste
 
         final boolean speakerOn = CallManager.isSpeakerOn();
         bt_speaker.setText(speakerOn ? R.string.speaker_turn_off : R.string.speaker_turn_on);
-        bt_speaker.setBackgroundResource(speakerOn ? R.drawable.call_button_blue : R.drawable.call_button_gray);
+        bt_speaker.setVariant(speakerOn ? BaldPictureTextButton.VARIANT_INFO : BaldPictureTextButton.VARIANT_NEUTRAL);
     }
 
     @SuppressWarnings("deprecation")
