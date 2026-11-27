@@ -36,7 +36,7 @@
         android:layout_marginStart="@dimen/spacing_sm"
         android:layout_marginEnd="@dimen/spacing_sm"
         android:layout_marginBottom="@dimen/spacing_sm"
-        android:background="@drawable/style_for_buttons_half_transparent"
+        android:background="@drawable/bald_ghost_button_background"
         android:contentDescription="@string/cd_play_pause"
         android:focusable="true"
         android:src="@drawable/play_on_background"

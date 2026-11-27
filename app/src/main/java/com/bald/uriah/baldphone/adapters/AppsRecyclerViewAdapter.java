@@ -16,19 +16,14 @@
 
 package com.bald.uriah.baldphone.adapters;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.util.SparseIntArray;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,11 +43,7 @@ import java.util.List;
 public class AppsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<RecyclerView.ViewHolder> {
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_ITEM = 1;
-    public final float elevation;
     public final List<InAppsRecyclerView> dataList;
-    @ColorInt
-    private final int textColorOnSelected, textColorOnBackground;
-    private final Drawable selectedDrawable;
     private final AppsActivity.ChangeAppListener changeAppListener;
     private final RecyclerView caller;
     private final BaldActivity activity;
@@ -66,12 +57,6 @@ public class AppsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<
         this.caller = caller;
         this.activity = activity;
         this.layoutInflater = LayoutInflater.from(activity);
-        selectedDrawable = ContextCompat.getDrawable(activity, R.drawable.btn_selected);
-        elevation =
-                TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        16,
-                        activity.getResources().getDisplayMetrics());
         this.changeAppListener = changeAppListener;
         this.appsOneGrid = BPrefs.get(activity).getBoolean(BPrefs.APPS_ONE_GRID_KEY, BPrefs.APPS_ONE_GRID_DEFAULT_VALUE);
         letterToPosition = new SparseIntArray();
@@ -88,12 +73,6 @@ public class AppsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<
             lastChar = disChar;
         }
 
-        final TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = activity.getTheme();
-        theme.resolveAttribute(R.attr.bald_text_on_selected, typedValue, true);
-        textColorOnSelected = typedValue.data;
-        theme.resolveAttribute(R.attr.bald_text_on_background, typedValue, true);
-        textColorOnBackground = typedValue.data;
     }
 
     @NonNull
@@ -222,16 +201,7 @@ public class AppsRecyclerViewAdapter extends ModularRecyclerView.ModularAdapter<
 
         public void setClicked(boolean clicked) {
             this.clicked = clicked;
-            if (clicked) {
-                container.setElevation(elevation);
-                container.setBackground(selectedDrawable);
-                app_name.setTextColor(textColorOnSelected);
-            } else {
-                container.setElevation(0);
-                container.setBackgroundResource(R.drawable.style_for_buttons_rectangle);
-                app_name.setTextColor(textColorOnBackground);
-
-            }
+            container.setSelected(clicked);
         }
 
         void setPinned(boolean pinned) {

@@ -48,6 +48,7 @@ public class BaldMultipleSelection extends LinearLayout {
     private OnItemClickListener onItemClickListener = (v) -> {
     };
     private Drawable defaultDrawableSelected, defaultDrawable;
+    private boolean hasSelectedDrawable;
     private Context context;
     private LayoutInflater layoutInflater;
     private int selection = -1;
@@ -83,14 +84,13 @@ public class BaldMultipleSelection extends LinearLayout {
 
         final TypedValue typedValue = new TypedValue();
         Resources.Theme theme = context.getTheme();
-        theme.resolveAttribute(R.attr.bald_text_on_selected, typedValue, true);
-        textColorOnSelected = typedValue.data;
         theme.resolveAttribute(R.attr.bald_text_on_button, typedValue, true);
         textColorOnButton = typedValue.data;
+        textColorOnSelected = textColorOnButton;
 
         if (attrs == null) {
             defaultDrawable = ContextCompat.getDrawable(context, R.drawable.bald_button_background);
-            defaultDrawableSelected = ContextCompat.getDrawable(context, R.drawable.btn_selected);
+            defaultDrawableSelected = defaultDrawable;
             setOrientation(HORIZONTAL);
         } else {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaldMultipleSelection);
@@ -98,10 +98,12 @@ public class BaldMultipleSelection extends LinearLayout {
             Drawable drawable = typedArray.getDrawable(R.styleable.BaldMultipleSelection_background_default);
             defaultDrawable = drawable != null ? drawable : ContextCompat.getDrawable(context, R.drawable.bald_button_background);
             Drawable drawableSelected = typedArray.getDrawable(R.styleable.BaldMultipleSelection_background_selected);
-            if (drawableSelected != null)
+            if (drawableSelected != null) {
                 defaultDrawableSelected = drawableSelected;
-            else
-                defaultDrawableSelected = ContextCompat.getDrawable(context, R.drawable.btn_selected);
+                hasSelectedDrawable = true;
+            } else {
+                defaultDrawableSelected = defaultDrawable;
+            }
             pxDimen = typedArray.getDimension(R.styleable.BaldMultipleSelection_text_size, -1);
             textColorOnButton = typedArray.getColor(R.styleable.BaldMultipleSelection_text_color, textColorOnButton);
             textColorOnSelected = typedArray.getColor(R.styleable.BaldMultipleSelection_selected_text_color, textColorOnSelected);
@@ -221,17 +223,12 @@ public class BaldMultipleSelection extends LinearLayout {
     }
 
     private void setClicked(BaldButton button, boolean state) {
-        // no app drawable keys off state_selected — this flag is purely for TalkBack
         button.setSelected(state);
-        if (state) {
-            button.setBackground(defaultDrawableSelected.getConstantState().newDrawable());
-            button.setTextColor(textColorOnSelected);
-        } else {
-            button.setBackground(defaultDrawable.getConstantState().newDrawable());
-            button.setTextColor(textColorOnButton);
-
+        // The default background is stateful; only an explicit background_selected needs swapping.
+        if (hasSelectedDrawable) {
+            button.setBackground((state ? defaultDrawableSelected : defaultDrawable).getConstantState().newDrawable());
         }
-
+        button.setTextColor(state ? textColorOnSelected : textColorOnButton);
     }
 
     @FunctionalInterface

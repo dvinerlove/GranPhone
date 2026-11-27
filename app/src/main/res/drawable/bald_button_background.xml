@@ -29,6 +29,15 @@
                 android:color="?bald_decoration_on_background" />
         </shape>
     </item>
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_button" />
+            <solid android:color="?bald_button" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?bald_brand" />
+        </shape>
+    </item>
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/radius_button" />
