@@ -57,7 +57,7 @@
         android:minHeight="@dimen/list_row_height"
         android:paddingTop="@dimen/spacing_sm"
         android:paddingBottom="@dimen/spacing_sm"
-        android:background="@drawable/bald_card_background"
+        android:background="@drawable/bald_card_gold_background"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

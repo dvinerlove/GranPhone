@@ -180,18 +180,10 @@ public class BaldSwitch extends FrameLayout {
         tv_yes.setEnabled(enabled);
         tv_no.setEnabled(enabled);
 
-        if (enabled) {
-            setBackground(ContextCompat.getDrawable(context, R.drawable.btn_enabled));
-            tv_yes.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_transparent));
-            tv_no.setBackground(ContextCompat.getDrawable(context, R.drawable.style_for_buttons_transparent));
-        } else {
-            setBackground(ContextCompat.getDrawable(context, R.drawable.btn_disabled));
-            tv_yes.setBackground(null);
-            tv_no.setBackground(null);
-        }
+        setBackground(ContextCompat.getDrawable(context, R.drawable.bald_button_background));
 
         final boolean animate = getWidth() > 0;
-        syncThumbBackground(checked ? R.drawable.btn_selected_no_border : R.drawable.btn_disabled_no_border, animate);
+        syncThumbBackground(checked ? R.drawable.bald_switch_thumb_on : R.drawable.bald_switch_thumb_off, animate);
         syncThumb(animate);
     }
 
@@ -334,9 +326,6 @@ public class BaldSwitch extends FrameLayout {
 
     @Override
     public void setEnabled(boolean enabled) {
-        if (this.enabled == enabled)
-            return;
-
         this.enabled = enabled;
         super.setEnabled(enabled);
         setFocusable(enabled);

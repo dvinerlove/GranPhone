@@ -20,7 +20,6 @@
     android:layout_width="0dp"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="@drawable/btn_clicked_no_border"
+    android:background="@drawable/bald_ghost_button_background"
     android:gravity="center_vertical|center_horizontal"
-    android:text="@string/no"
-    android:textColor="?bald_text_primary" />
+    android:text="@string/no" />

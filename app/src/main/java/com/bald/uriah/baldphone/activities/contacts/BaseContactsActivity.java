@@ -31,7 +31,6 @@ import com.bald.uriah.baldphone.R;
 import com.bald.uriah.baldphone.activities.BaldActivity;
 import com.bald.uriah.baldphone.adapters.ContactRecyclerViewAdapter;
 import com.bald.uriah.baldphone.utils.SoftInputAssist;
-import com.bald.uriah.baldphone.utils.Toggeler;
 import com.bald.uriah.baldphone.views.BaldTitleBar;
 import com.bald.uriah.baldphone.views.ScrollingHelper;
 
@@ -112,7 +111,7 @@ abstract class BaseContactsActivity extends BaldActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        favorite = savedInstanceState.getBoolean(FAVORITE_STATE);
+        setFavorite(savedInstanceState.getBoolean(FAVORITE_STATE));
     }
 
     @LayoutRes
@@ -130,23 +129,20 @@ abstract class BaseContactsActivity extends BaldActivity {
     }
 
     protected void viewsInit() {
+        if (bt_favorite != null) {
+            bt_favorite.setSelected(favorite);
+            bt_favorite.setOnClickListener(v -> setFavorite(!favorite));
+        }
+    }
+
+    private void setFavorite(boolean favorite) {
+        this.favorite = favorite;
         if (bt_favorite != null)
-            Toggeler.newBackgroundToggeler(bt_favorite, bt_favorite, new int[]{
-                    R.drawable.btn_selected, R.drawable.bald_button_background
-            }, new android.view.View.OnClickListener[]{
-                    v -> {
-                        favorite = true;
-                        if (baldTitleBar != null)
-                            baldTitleBar.setGold(true);
-                        applyFilter();
-                    },
-                    v -> {
-                        favorite = false;
-                        if (baldTitleBar != null)
-                            baldTitleBar.setGold(false);
-                        applyFilter();
-                    }
-            });
+            bt_favorite.setSelected(favorite);
+        if (baldTitleBar != null)
+            baldTitleBar.setGold(favorite);
+        if (contentResolver != null)
+            applyFilter();
     }
 
     protected void setFilter(String filter) {

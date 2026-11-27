@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Contact-row card whose selected state means "favorite": card fill with a gold border. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_card" />
+            <solid android:color="?attr/bald_card" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?attr/bald_gold" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_card" />
+            <solid android:color="?attr/bald_button_clicked" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="?attr/bald_card_border" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_card" />
+            <solid android:color="?attr/bald_card" />
+            <stroke
+                android:width="@dimen/border_width_selected"
+                android:color="?attr/bald_decoration_on_background" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_card" />
+            <solid android:color="?attr/bald_card" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="?attr/bald_card_border" />
+        </shape>
+    </item>
+</selector>
