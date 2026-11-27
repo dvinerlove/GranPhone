@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -64,6 +65,8 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
 
     }
 
@@ -87,6 +90,8 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -109,6 +114,8 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     @Override
@@ -132,6 +139,12 @@ public class BaldConstraintLayoutButton extends ConstraintLayout implements Bald
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);
+    }
+
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName(android.widget.Button.class.getName());
     }
 
     @Override

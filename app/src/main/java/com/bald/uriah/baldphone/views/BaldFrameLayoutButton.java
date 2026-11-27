@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
@@ -62,6 +63,8 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
 
     }
 
@@ -84,6 +87,8 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     public BaldFrameLayoutButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -105,6 +110,8 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     @Override
@@ -127,6 +134,12 @@ public class BaldFrameLayoutButton extends FrameLayout implements BaldButtonInte
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);
+    }
+
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName(android.widget.Button.class.getName());
     }
 
     @Override

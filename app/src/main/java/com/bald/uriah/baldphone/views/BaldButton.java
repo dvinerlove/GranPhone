@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import androidx.annotation.Nullable;
 
@@ -62,6 +63,8 @@ public class BaldButton extends androidx.appcompat.widget.AppCompatTextView impl
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     public BaldButton(Context context, @Nullable AttributeSet attrs) {
@@ -83,6 +86,8 @@ public class BaldButton extends androidx.appcompat.widget.AppCompatTextView impl
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     public BaldButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -104,6 +109,8 @@ public class BaldButton extends androidx.appcompat.widget.AppCompatTextView impl
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     @Override
@@ -126,6 +133,12 @@ public class BaldButton extends androidx.appcompat.widget.AppCompatTextView impl
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);
+    }
+
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName(android.widget.Button.class.getName());
     }
 
     @Override

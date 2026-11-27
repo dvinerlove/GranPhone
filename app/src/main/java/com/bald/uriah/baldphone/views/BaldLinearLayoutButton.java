@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
@@ -62,6 +63,8 @@ public class BaldLinearLayoutButton extends LinearLayout implements BaldButtonIn
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
 
     }
 
@@ -84,6 +87,8 @@ public class BaldLinearLayoutButton extends LinearLayout implements BaldButtonIn
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     public BaldLinearLayoutButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -105,6 +110,8 @@ public class BaldLinearLayoutButton extends LinearLayout implements BaldButtonIn
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     public BaldLinearLayoutButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -126,6 +133,8 @@ public class BaldLinearLayoutButton extends LinearLayout implements BaldButtonIn
             }
         else
             super.setOnClickListener(this);
+        if (isClickable())
+            setFocusable(true);
     }
 
     @Override
@@ -148,6 +157,12 @@ public class BaldLinearLayoutButton extends LinearLayout implements BaldButtonIn
             baldButtonTouchListener.addListener(l);
         else
             super.setOnTouchListener(l);
+    }
+
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        info.setClassName(android.widget.Button.class.getName());
     }
 
     @Override

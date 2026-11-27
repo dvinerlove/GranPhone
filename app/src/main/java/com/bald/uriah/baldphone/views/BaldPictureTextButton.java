@@ -42,6 +42,7 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
     protected final LayoutInflater layoutInflater;
     protected ImageView imageView;
     protected TextView textView;
+    private CharSequence textContentDescription;
 
     public BaldPictureTextButton(Context context) {
         super(context);
@@ -77,6 +78,7 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
                 attributeSet.getAttributeIntValue("http://schemas.android.com/apk/res/android", "orientation", HORIZONTAL);
         setOrientation(orientation);
         setGravity(Gravity.CENTER);
+        setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
         // Uniform vertical inset for every button instance — keeps icon+label centered
         // and identical across rows. Horizontal padding stays caller-controlled.
         final int padV = getResources().getDimensionPixelSize(R.dimen.spacing_sm);
@@ -89,12 +91,14 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
         styleAttributesArray.recycle();
 
         imageView = (ImageView) layoutInflater.inflate(R.layout.bald_picture_text_button_picture, this, false);
+        imageView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         setImageDrawable(pic);
         if (orientation == VERTICAL)
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
         addView(imageView);
 
         textView = (TextView) layoutInflater.inflate(R.layout.bald_picture_text_button_text, this, false);
+        textView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         setText(text);
         if (orientation == HORIZONTAL)
             // Icon+label must center as one group — weight-1 text centers only itself.
@@ -193,6 +197,10 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
     public void setText(CharSequence text) {
         textView.setText(text);
         textView.setVisibility(text == null || text.length() == 0 ? GONE : VISIBLE);
+        if (getContentDescription() == null || getContentDescription().equals(textContentDescription)) {
+            textContentDescription = text;
+            setContentDescription(text);
+        }
     }
 
     public void setText(@StringRes int resId) {
