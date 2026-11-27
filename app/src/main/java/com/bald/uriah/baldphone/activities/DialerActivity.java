@@ -35,6 +35,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,7 @@ import com.bald.uriah.baldphone.utils.DialogScreen;
 import com.bald.uriah.baldphone.utils.BPrefs;
 import com.bald.uriah.baldphone.utils.BaldToast;
 import com.bald.uriah.baldphone.utils.Const;
+import com.bald.uriah.baldphone.views.BaldPictureTextButton;
 import com.bald.uriah.baldphone.views.ScrollingHelper;
 
 import java.util.List;
@@ -375,6 +377,14 @@ public class DialerActivity extends BaldActivity {
         b_backspace = findViewById(R.id.b_backspace);
         b_sulamit = findViewById(R.id.b_sulamit);
         b_hash = findViewById(R.id.b_hash);
+
+        // The action row is shorter than a regular BigButton; keep the 20sp labels intact
+        // by compacting only these icons and insets instead of shrinking the text.
+        final int iconSize = getResources().getDimensionPixelSize(R.dimen.icon_sm);
+        for (final View action : new View[]{b_clear, b_call, b_backspace}) {
+            action.setPadding(action.getPaddingLeft(), 0, action.getPaddingRight(), 0);
+            ((BaldPictureTextButton) action).getImageView().setLayoutParams(new LinearLayout.LayoutParams(iconSize, iconSize));
+        }
     }
 
     private void setOnClickListeners() {
