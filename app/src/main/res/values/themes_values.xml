@@ -38,14 +38,14 @@
     </color>
     <color name="bald_selected_on_background_light">@color/bald_brand_light</color>
     <color name="bald_text_on_selected_light">#fff</color>
-    <color name="bald_stroke_color_light">#667085</color>
+    <color name="bald_stroke_color_light">#24000000</color>
     <dimen name="bald_stroke_size_light">1dp</dimen>
     <color name="bald_text_on_background_light">#000</color>
     <color name="bald_text_on_button_light">#000</color>
     <color name="bald_text_on_key_light">@color/bald_text_on_background_light</color>
     <color name="bald_surface_light">#F2F4F7</color>
     <color name="bald_card_light">#FFFFFF</color>
-    <color name="bald_card_border_light">#667085</color>
+    <color name="bald_card_border_light">#33000000</color>
     <color name="bald_brand_light">#19632D</color>
     <color name="bald_brand_pressed_light">#145224</color>
     <color name="bald_brand_tint_light">#D8ECDD</color>
@@ -76,14 +76,14 @@
     <color name="bald_keyboard_key_pressed_background_dark">#8A4200</color>
     <color name="bald_selected_on_background_dark">@color/bald_brand_dark</color>
     <color name="bald_text_on_selected_dark">#000</color>
-    <color name="bald_stroke_color_dark">#9AA4B2</color>
+    <color name="bald_stroke_color_dark">#3Dcdd4db</color>
     <dimen name="bald_stroke_size_dark">1dp</dimen>
     <color name="bald_text_on_background_dark">#cdd4db</color>
     <color name="bald_text_on_button_dark">#cdd4db</color>
     <color name="bald_text_on_key_dark">#cdd4db</color>
     <color name="bald_surface_dark">#101418</color>
     <color name="bald_card_dark">#1C2126</color>
-    <color name="bald_card_border_dark">#9AA4B2</color>
+    <color name="bald_card_border_dark">#4Dcdd4db</color>
     <color name="bald_brand_dark">#30D158</color>
     <color name="bald_brand_pressed_dark">#27B04C</color>
     <color name="bald_brand_tint_dark">#173421</color>
