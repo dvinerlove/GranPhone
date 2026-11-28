@@ -129,9 +129,13 @@ public class BaldPictureTextButton extends BaldLinearLayoutButton {
             for (String word : s.toString().split("\\s+"))
                 wanted = Math.max(wanted, textView.getPaint().measureText(word));
             final float floor = 8 * getResources().getDisplayMetrics().scaledDensity;
-            if (wanted > avail && textView.getTextSize() > floor)
+            // Headroom: a word filling the button edge-to-edge reads as broken,
+            // so the budget is 85% of the width — long single-word labels (ru/de)
+            // shrink earlier and keep visible side padding.
+            final float budget = avail * 0.85f;
+            if (wanted > budget && textView.getTextSize() > floor)
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                        Math.max(floor, textView.getTextSize() * (avail / wanted) * 0.95f));
+                        Math.max(floor, textView.getTextSize() * (budget / wanted)));
         });
         if (orientation == VERTICAL)
             textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
